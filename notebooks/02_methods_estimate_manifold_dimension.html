@@ -51,7 +51,7 @@
     <link rel="prev" title="Synthetic Neural Manifolds" href="01_methods_create_synthetic_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Apr 7, 2024, 5:05:39 PM"/>
+    <meta name="docbuild:last-update" content="Apr 7, 2024, 6:56:27 PM"/>
   </head>
   
   
@@ -285,6 +285,24 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="10_application_rnns_grid_cells.html">Analyze Representations in Path-Integrating Recurrent Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_application_synthetic_v1.html">Synthetic V1: Klein bottle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="20_neurometry_ai.html">Analyze Representations in Path-Integrating Recurrent Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LDDMM.html">Setup</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="hyperbolic.html">Imports &amp; Setup</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="warp.html">Imports &amp; setup</a></li>
+
+
+
+
+
 </ul>
 </div>
 </nav></div>
@@ -361,17 +379,17 @@ document.write(`
 <span class="o">%</span><span class="k">autoreload</span> 2
 <span class="o">%</span><span class="k">load_ext</span> jupyter_black
 
-<span class="kn">import</span> <span class="nn">neurometry.datasets.synthetic</span> <span class="k">as</span> <span class="nn">synthetic</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">skdim</span>
 
-<span class="kn">from</span> <span class="nn">neurometry.dimension.dimension</span> <span class="kn">import</span> <span class="n">skdim_dimension_estimation</span>
-<span class="kn">from</span> <span class="nn">neurometry.dimension.dimension</span> <span class="kn">import</span> <span class="n">plot_dimension_experiments</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">neurometry.datasets.synthetic</span> <span class="k">as</span> <span class="nn">synthetic</span>
+<span class="kn">from</span> <span class="nn">neurometry.dimension.dimension</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">plot_dimension_experiments</span><span class="p">,</span>
+    <span class="n">skdim_dimension_estimation</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GEOMSTATS_BACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
 <span class="kn">import</span> <span class="nn">geomstats.backend</span> <span class="k">as</span> <span class="nn">gs</span>
@@ -614,12 +632,12 @@ tensor(2.)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [48]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.cross_decomposition</span> <span class="kn">import</span> <span class="n">PLSRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.multioutput</span> <span class="kn">import</span> <span class="n">MultiOutputRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.multioutput</span> <span class="kn">import</span> <span class="n">MultiOutputRegressor</span>
 
 
 <span class="k">def</span> <span class="nf">evaluate_pls_with_different_K</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">K_values</span><span class="p">):</span>
@@ -725,12 +743,8 @@ tensor(2.)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [65]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
-<span class="kn">from</span> <span class="nn">sklearn.multioutput</span> <span class="kn">import</span> <span class="n">MultiOutputRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
 <span class="k">def</span> <span class="nf">evaluate_PCA_with_different_K_cv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">K_values</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
@@ -785,12 +799,7 @@ tensor(2.)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [66]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
-<span class="kn">from</span> <span class="nn">sklearn.cross_decomposition</span> <span class="kn">import</span> <span class="n">PLSRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.multioutput</span> <span class="kn">import</span> <span class="n">MultiOutputRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
 <span class="k">def</span> <span class="nf">evaluate_pls_with_different_K_cv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">K_values</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
@@ -1096,7 +1105,7 @@ if (outputEl) {{
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [77]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gtda.diagrams</span> <span class="kn">import</span> <span class="n">Scaler</span><span class="p">,</span> <span class="n">Filtering</span><span class="p">,</span> <span class="n">BettiCurve</span><span class="p">,</span> <span class="n">PersistenceEntropy</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gtda.diagrams</span> <span class="kn">import</span> <span class="n">BettiCurve</span><span class="p">,</span> <span class="n">Scaler</span>
 
 
 <span class="k">def</span> <span class="nf">max_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -1168,7 +1177,6 @@ if (outputEl) {{
 <span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca_transformed_X</span><span class="p">[</span><span class="n">n_components</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
 
 <span class="kn">from</span> <span class="nn">gtda.homology</span> <span class="kn">import</span> <span class="n">WeakAlphaPersistence</span>
-
 
 <span class="n">wa_pers</span> <span class="o">=</span> <span class="n">WeakAlphaPersistence</span><span class="p">(</span><span class="n">homology_dimensions</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 

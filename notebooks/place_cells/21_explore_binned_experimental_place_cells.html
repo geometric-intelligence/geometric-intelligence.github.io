@@ -49,7 +49,7 @@
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Apr 7, 2024, 5:05:39 PM"/>
+    <meta name="docbuild:last-update" content="Apr 7, 2024, 6:56:27 PM"/>
   </head>
   
   
@@ -3362,9 +3362,7 @@ INFO: # - Found file at /Users/facosta/Desktop/code/neurometry/neurometry/data/b
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">expt_to_ntimes_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="n">expt_to_ntimes_dict</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">one_result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">expt_id</span><span class="p">,</span> <span class="n">ntimes</span> <span class="ow">in</span> <span class="n">one_result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">expt_to_ntimes_dict</span><span class="p">[</span><span class="s2">&quot;expt&quot;</span> <span class="o">+</span> <span class="n">expt_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">ntimes</span>
@@ -3631,7 +3629,7 @@ Cell <span class="ansi-green-fg">In[46], line 1</span>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;data/expt_to_first_second_gains.csv&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;data/expt_to_first_second_gains.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving the values of the two gains for each expt to: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 <span class="n">expt_to_first_second_gains</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </pre></div>
@@ -3693,7 +3691,7 @@ Saving the values of the two gains for each expt to: /home/nmiolane/code/neurome
         <span class="n">encangles_other_gain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="n">a</span>
-                <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">encangles</span><span class="p">,</span> <span class="n">gains</span><span class="p">)</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">encangles</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">other_gain</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
             <span class="p">]</span>
         <span class="p">)</span>
@@ -3994,7 +3992,7 @@ Expt 9_hd: Only one gain!
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;data/expt_to_n_laps.csv&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;data/expt_to_n_laps.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">&quot;Saving the number of laps (total and per gain) by the rat for each expt to: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">.&quot;</span>
 <span class="p">)</span>
@@ -8213,7 +8211,7 @@ run_cb1896a1_experimental_34_other_gain.json
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CONFIG_DIR</span><span class="p">,</span> <span class="s2">&quot;run_1e6107ad_experimental_41_gain_1.json&quot;</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CONFIG_DIR</span><span class="p">,</span> <span class="s2">&quot;run_1e6107ad_experimental_41_gain_1.json&quot;</span><span class="p">)</span>
 <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">config_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
@@ -8522,7 +8520,7 @@ tensor([[0.1953, 0.3093, 0.1953, 0.0000, 0.0345, 0.3838, 0.1953, 0.1953, 0.1953,
 
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
         <span class="n">sorted_place_cells</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="n">sorted_place_cells</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">10</span>
-    <span class="p">);</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -9931,7 +9929,7 @@ Loading experiment 9_hd...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [39]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;data/datasets_summary.csv&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;data/datasets_summary.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving the summary statistics into a master csv file at: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 <span class="n">final_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </pre></div>
