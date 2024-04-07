@@ -1,0 +1,1201 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Train FFNN decocoder to predict location of animal from CA1 Hippocampus data &#8212; neurometry latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/place_cells/16_decode_ca1_hippocampus_data';</script>
+    <link rel="canonical" href="geometric-intelligence.github.io/notebooks/place_cells/16_decode_ca1_hippocampus_data.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Apr 7, 2024, 5:05:39 PM"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">neurometry latest documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Train FFNN...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="admonition note">
+  <p>Notebook source code:
+    <a class="reference external" href="https://github.com/geometric-intelligence/neurometry/blob/main/notebooks/place_cells/16_decode_ca1_hippocampus_data.ipynb">notebooks/place_cells/16_decode_ca1_hippocampus_data.ipynb</a>
+  </p>
+</div><section id="Train-FFNN-decocoder-to-predict-location-of-animal-from-CA1-Hippocampus-data">
+<h1>Train FFNN decocoder to predict location of animal from CA1 Hippocampus data<a class="headerlink" href="#Train-FFNN-decocoder-to-predict-location-of-animal-from-CA1-Hippocampus-data" title="Link to this heading">#</a></h1>
+<section id="Set-up-environment-paths">
+<h2>Set up environment paths<a class="headerlink" href="#Set-up-environment-paths" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [88]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">setup</span>
+
+<span class="n">setup</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Working directory:  /Users/facosta/Desktop/code/neurometry/neurometry
+Directory added to path:  /Users/facosta/Desktop/code/neurometry
+Directory added to path:  /Users/facosta/Desktop/code/neurometry/neurometry
+The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div></div>
+</div>
+</section>
+<section id="Imports">
+<h2>Imports<a class="headerlink" href="#Imports" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [89]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
+
+<span class="kn">import</span> <span class="nn">neurometry.datasets.experimental</span> <span class="k">as</span> <span class="nn">experimental</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Load-neural-activity-&amp;-labels">
+<h2>Load neural activity &amp; labels<a class="headerlink" href="#Load-neural-activity-&-labels" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [87]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expt_id</span> <span class="o">=</span> <span class="s2">&quot;34&quot;</span>
+<span class="n">timestep_microsec</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">2e5</span><span class="p">)</span>
+<span class="n">vel_threshold</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">neural_activity</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">experimental</span><span class="o">.</span><span class="n">load_neural_activity</span><span class="p">(</span>
+    <span class="n">expt_id</span><span class="o">=</span><span class="n">expt_id</span><span class="p">,</span> <span class="n">vel_threshold</span><span class="o">=</span><span class="n">vel_threshold</span><span class="p">,</span> <span class="n">timestep_microsec</span><span class="o">=</span><span class="n">timestep_microsec</span>
+<span class="p">)</span>
+
+<span class="n">times_in_seconds</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="s2">&quot;times&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-6</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="s2">&quot;angles&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">neural_activity</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> neurons binned over </span><span class="si">{</span><span class="n">neural_activity</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> timesteps&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: # - Found file at /Users/facosta/Desktop/code/neurometry/neurometry/data/binned/expt34_times_timestep200000_velthreshold_10.txt! Loading...
+INFO: # - Found file at /Users/facosta/Desktop/code/neurometry/neurometry/data/binned/expt34_neural_activity_timestep200000_velthreshold_10.npy! Loading...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: # - Found file at /Users/facosta/Desktop/code/neurometry/neurometry/data/binned/expt34_labels_timestep200000_velthreshold_10.txt! Loading...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+There are 40 neurons binned over 2794 timesteps
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [73]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set a fixed random seed for reproducibility</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="n">input_dim</span> <span class="o">=</span> <span class="n">neural_activity</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="c1"># Define a simple feedforward neural network</span>
+<span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc_skip</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>  <span class="c1"># First hidden layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>  <span class="c1"># Second hidden layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc4</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc_out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x_skip</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc_skip</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># Apply ReLU activation function after first layer</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># Apply ReLU activation function after second layer</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc4</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fc_out</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_skip</span>
+        <span class="p">)</span>  <span class="c1"># No activation function after final layer (for regression task)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [74]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span>
+    <span class="s2">&quot;cuda&quot;</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+    <span class="k">else</span> <span class="s2">&quot;mps&quot;</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+    <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using device: </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create an instance of the network</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Use mean squared error loss for regression</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+
+<span class="c1"># use adam optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">decoder</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">CosineAnnealingLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">T_max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using device: mps
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [75]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">angles_radians</span> <span class="o">=</span> <span class="n">angles</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
+<span class="n">cos_sin_angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angles_radians</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angles_radians</span><span class="p">)))</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [77]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assume we have some training data in input_data (100-dimensional input) and target_data (2-dimensional output)</span>
+<span class="n">input_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">neural_activity</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">target_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">cos_sin_angles</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Split data into training and validation sets (80-20 split)</span>
+<span class="n">train_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_data</span><span class="p">))</span>
+<span class="n">val_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span> <span class="o">-</span> <span class="n">train_size</span>
+
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">input_data</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">target_data</span><span class="p">[:</span><span class="n">train_size</span><span class="p">])</span>
+<span class="n">val_data</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">input_data</span><span class="p">[</span><span class="n">train_size</span><span class="p">:],</span> <span class="n">target_data</span><span class="p">[</span><span class="n">train_size</span><span class="p">:])</span>
+
+<span class="c1"># Create DataLoaders from your datasets</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">val_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [78]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">150</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="c1"># Arrays to keep track of losses</span>
+<span class="n">train_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">val_losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">lowest_val_loss</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="c1"># Train the network</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>  <span class="c1"># Loop over the dataset multiple times</span>
+    <span class="c1"># Training phase</span>
+    <span class="n">decoder</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="c1"># Zero the parameter gradients</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c1"># Forward pass</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+
+        <span class="c1"># Compute loss</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+
+        <span class="c1"># Backward pass and optimization</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="n">epoch_train_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
+    <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_train_loss</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, Training Loss: </span><span class="si">{</span><span class="n">epoch_train_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Validation phase</span>
+    <span class="n">decoder</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+            <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="n">epoch_val_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_loader</span><span class="p">)</span>
+        <span class="n">val_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_val_loss</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, Validation Loss: </span><span class="si">{</span><span class="n">epoch_val_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">epoch_val_loss</span> <span class="o">&lt;</span> <span class="n">lowest_val_loss</span><span class="p">:</span>
+            <span class="n">lowest_val_loss</span> <span class="o">=</span> <span class="n">epoch_val_loss</span>
+            <span class="n">best_model</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">decoder</span><span class="p">)</span>
+    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished Training&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Epoch 1, Training Loss: 0.22401070275477
+Epoch 1, Validation Loss: 0.2023737629254659
+Epoch 2, Training Loss: 0.08336301477892058
+Epoch 2, Validation Loss: 0.1639416217803955
+Epoch 3, Training Loss: 0.06474006058914321
+Epoch 3, Validation Loss: 0.15393091241518655
+Epoch 4, Training Loss: 0.054829552876097816
+Epoch 4, Validation Loss: 0.16894966198338401
+Epoch 5, Training Loss: 0.05206234763775553
+Epoch 5, Validation Loss: 0.13917478919029236
+Epoch 6, Training Loss: 0.045386929863265583
+Epoch 6, Validation Loss: 0.13652707636356354
+Epoch 7, Training Loss: 0.04023012625319617
+Epoch 7, Validation Loss: 0.13786159538560444
+Epoch 8, Training Loss: 0.037251912536365644
+Epoch 8, Validation Loss: 0.1397169770465957
+Epoch 9, Training Loss: 0.034720211529306
+Epoch 9, Validation Loss: 0.13535428626669777
+Epoch 10, Training Loss: 0.033476796107632774
+Epoch 10, Validation Loss: 0.1403060265713268
+Epoch 11, Training Loss: 0.03297266374741282
+Epoch 11, Validation Loss: 0.1417232801516851
+Epoch 12, Training Loss: 0.03309892485184329
+Epoch 12, Validation Loss: 0.14195592121945488
+Epoch 13, Training Loss: 0.033300421653049334
+Epoch 13, Validation Loss: 0.1461191177368164
+Epoch 14, Training Loss: 0.03490127170724528
+Epoch 14, Validation Loss: 0.14694663799471325
+Epoch 15, Training Loss: 0.03549968930227416
+Epoch 15, Validation Loss: 0.15973597764968872
+Epoch 16, Training Loss: 0.03717412118400846
+Epoch 16, Validation Loss: 0.13984349701139662
+Epoch 17, Training Loss: 0.04318442600114005
+Epoch 17, Validation Loss: 0.15063536994987065
+Epoch 18, Training Loss: 0.047870880578245435
+Epoch 18, Validation Loss: 0.15828821394178602
+Epoch 19, Training Loss: 0.04663847205894334
+Epoch 19, Validation Loss: 0.14072414570384556
+Epoch 20, Training Loss: 0.046034925377794675
+Epoch 20, Validation Loss: 0.14104492300086552
+Epoch 21, Training Loss: 0.04377615856272834
+Epoch 21, Validation Loss: 0.15400166975127327
+Epoch 22, Training Loss: 0.04419745153614453
+Epoch 22, Validation Loss: 0.1689470104045338
+Epoch 23, Training Loss: 0.04276631282908576
+Epoch 23, Validation Loss: 0.17169245166911018
+Epoch 24, Training Loss: 0.03792171691145216
+Epoch 24, Validation Loss: 0.15637335512373182
+Epoch 25, Training Loss: 0.03426802041275161
+Epoch 25, Validation Loss: 0.14838335083590615
+Epoch 26, Training Loss: 0.03009168936737946
+Epoch 26, Validation Loss: 0.16247577302985722
+Epoch 27, Training Loss: 0.028439354577234812
+Epoch 27, Validation Loss: 0.1528448694282108
+Epoch 28, Training Loss: 0.025989445245691706
+Epoch 28, Validation Loss: 0.15267844167020586
+Epoch 29, Training Loss: 0.024219614693096705
+Epoch 29, Validation Loss: 0.15201804207430947
+Epoch 30, Training Loss: 0.02340855162058558
+Epoch 30, Validation Loss: 0.15394013457828098
+Epoch 31, Training Loss: 0.023172203451395035
+Epoch 31, Validation Loss: 0.15205651852819654
+Epoch 32, Training Loss: 0.023327776709837572
+Epoch 32, Validation Loss: 0.1557798691921764
+Epoch 33, Training Loss: 0.0235178747347423
+Epoch 33, Validation Loss: 0.15093157274855507
+Epoch 34, Training Loss: 0.023946401263986315
+Epoch 34, Validation Loss: 0.15200291574001312
+Epoch 35, Training Loss: 0.024645816135619367
+Epoch 35, Validation Loss: 0.15145204961299896
+Epoch 36, Training Loss: 0.026382808493716377
+Epoch 36, Validation Loss: 0.14674594004948935
+Epoch 37, Training Loss: 0.030560853279062678
+Epoch 37, Validation Loss: 0.14492399328284794
+Epoch 38, Training Loss: 0.03130302189716271
+Epoch 38, Validation Loss: 0.15312493509716457
+Epoch 39, Training Loss: 0.03542570812361581
+Epoch 39, Validation Loss: 0.13822917391856512
+Epoch 40, Training Loss: 0.037085091482315743
+Epoch 40, Validation Loss: 0.1313175931572914
+Epoch 41, Training Loss: 0.03764245967779841
+Epoch 41, Validation Loss: 0.15689551168017918
+Epoch 42, Training Loss: 0.03764173521527222
+Epoch 42, Validation Loss: 0.15498409999741447
+Epoch 43, Training Loss: 0.034317318722605704
+Epoch 43, Validation Loss: 0.17676146659586164
+Epoch 44, Training Loss: 0.030462449629391944
+Epoch 44, Validation Loss: 0.16496525539292228
+Epoch 45, Training Loss: 0.027872053480574064
+Epoch 45, Validation Loss: 0.18551827801598442
+Epoch 46, Training Loss: 0.024734464048274927
+Epoch 46, Validation Loss: 0.16824205385314095
+Epoch 47, Training Loss: 0.02284918203949928
+Epoch 47, Validation Loss: 0.15284982406430775
+Epoch 48, Training Loss: 0.021037841561649527
+Epoch 48, Validation Loss: 0.16395737727483115
+Epoch 49, Training Loss: 0.019974393716880253
+Epoch 49, Validation Loss: 0.16846315231588152
+Epoch 50, Training Loss: 0.019337634103638784
+Epoch 50, Validation Loss: 0.1684109080168936
+Epoch 51, Training Loss: 0.019130662748856202
+Epoch 51, Validation Loss: 0.16763148456811905
+Epoch 52, Training Loss: 0.019290524534881115
+Epoch 52, Validation Loss: 0.16737595034970176
+Epoch 53, Training Loss: 0.019437410602612153
+Epoch 53, Validation Loss: 0.1652118894788954
+Epoch 54, Training Loss: 0.019851864049477235
+Epoch 54, Validation Loss: 0.16686521718899408
+Epoch 55, Training Loss: 0.020366590044328146
+Epoch 55, Validation Loss: 0.1642896400557624
+Epoch 56, Training Loss: 0.021945196549807276
+Epoch 56, Validation Loss: 0.15539108713467917
+Epoch 57, Training Loss: 0.024179565720260143
+Epoch 57, Validation Loss: 0.15203657746315002
+Epoch 58, Training Loss: 0.02479731323463576
+Epoch 58, Validation Loss: 0.16663543383280435
+Epoch 59, Training Loss: 0.028157888379480158
+Epoch 59, Validation Loss: 0.15269801351759169
+Epoch 60, Training Loss: 0.030835972540080546
+Epoch 60, Validation Loss: 0.14774651411506864
+Epoch 61, Training Loss: 0.03479736987501383
+Epoch 61, Validation Loss: 0.16440846936570275
+Epoch 62, Training Loss: 0.034607490098902155
+Epoch 62, Validation Loss: 0.16037067191468346
+Epoch 63, Training Loss: 0.031544297773923195
+Epoch 63, Validation Loss: 0.1527121141552925
+Epoch 64, Training Loss: 0.028823884576559065
+Epoch 64, Validation Loss: 0.16549906300173867
+Epoch 65, Training Loss: 0.027333895729056427
+Epoch 65, Validation Loss: 0.14038489179478753
+Epoch 66, Training Loss: 0.0230023698082992
+Epoch 66, Validation Loss: 0.15891285240650177
+Epoch 67, Training Loss: 0.020854484130229268
+Epoch 67, Validation Loss: 0.15761649856964746
+Epoch 68, Training Loss: 0.019298381145511356
+Epoch 68, Validation Loss: 0.15869042691257265
+Epoch 69, Training Loss: 0.018183033620672567
+Epoch 69, Validation Loss: 0.15941591229703692
+Epoch 70, Training Loss: 0.01774269842675754
+Epoch 70, Validation Loss: 0.15708289792140326
+Epoch 71, Training Loss: 0.017578059142189368
+Epoch 71, Validation Loss: 0.15760518444908989
+Epoch 72, Training Loss: 0.017678058240562677
+Epoch 72, Validation Loss: 0.15672972136073643
+Epoch 73, Training Loss: 0.01781454440206289
+Epoch 73, Validation Loss: 0.15955555107858446
+Epoch 74, Training Loss: 0.01809462101331779
+Epoch 74, Validation Loss: 0.1574086836642689
+Epoch 75, Training Loss: 0.018805872994874205
+Epoch 75, Validation Loss: 0.15811963048246172
+Epoch 76, Training Loss: 0.01889026506936976
+Epoch 76, Validation Loss: 0.16150745418336657
+Epoch 77, Training Loss: 0.02083676962980202
+Epoch 77, Validation Loss: 0.1708107954925961
+Epoch 78, Training Loss: 0.02285511227590697
+Epoch 78, Validation Loss: 0.14530079066753387
+Epoch 79, Training Loss: 0.027772506033735617
+Epoch 79, Validation Loss: 0.15493457516034445
+Epoch 80, Training Loss: 0.035297013659562386
+Epoch 80, Validation Loss: 0.15809843440850577
+Epoch 81, Training Loss: 0.03765660763851234
+Epoch 81, Validation Loss: 0.15926759276125166
+Epoch 82, Training Loss: 0.0373457174215998
+Epoch 82, Validation Loss: 0.15705501205391353
+Epoch 83, Training Loss: 0.03251980058848858
+Epoch 83, Validation Loss: 0.1754541214969423
+Epoch 84, Training Loss: 0.027966379108173508
+Epoch 84, Validation Loss: 0.1821356647544437
+Epoch 85, Training Loss: 0.02525499364627259
+Epoch 85, Validation Loss: 0.1613854087061352
+Epoch 86, Training Loss: 0.022780334097998484
+Epoch 86, Validation Loss: 0.16178821523984274
+Epoch 87, Training Loss: 0.02070985630686794
+Epoch 87, Validation Loss: 0.16180703540643057
+Epoch 88, Training Loss: 0.019652233006698744
+Epoch 88, Validation Loss: 0.16298816601435342
+Epoch 89, Training Loss: 0.01845103350601026
+Epoch 89, Validation Loss: 0.16592950291103786
+Epoch 90, Training Loss: 0.01786589872624193
+Epoch 90, Validation Loss: 0.16207771417167452
+Epoch 91, Training Loss: 0.01768419070701514
+Epoch 91, Validation Loss: 0.16376832044786876
+Epoch 92, Training Loss: 0.017756441408502206
+Epoch 92, Validation Loss: 0.1630148341258367
+Epoch 93, Training Loss: 0.01789739608232464
+Epoch 93, Validation Loss: 0.1655809266699685
+Epoch 94, Training Loss: 0.018228427919426134
+Epoch 94, Validation Loss: 0.168331954214308
+Epoch 95, Training Loss: 0.01848217203680958
+Epoch 95, Validation Loss: 0.16578653620349038
+Epoch 96, Training Loss: 0.019367409337844168
+Epoch 96, Validation Loss: 0.16418648097250196
+Epoch 97, Training Loss: 0.02007955259510449
+Epoch 97, Validation Loss: 0.14965361522303688
+Epoch 98, Training Loss: 0.021731541598481792
+Epoch 98, Validation Loss: 0.15350322756502363
+Epoch 99, Training Loss: 0.025725428121430534
+Epoch 99, Validation Loss: 0.16607088761197197
+Epoch 100, Training Loss: 0.0281196657036032
+Epoch 100, Validation Loss: 0.1508554071187973
+Epoch 101, Training Loss: 0.03302595641996179
+Epoch 101, Validation Loss: 0.16268665260738796
+Epoch 102, Training Loss: 0.031606361057077134
+Epoch 102, Validation Loss: 0.17217778911193213
+Epoch 103, Training Loss: 0.028823555686644145
+Epoch 103, Validation Loss: 0.1880183435148663
+Epoch 104, Training Loss: 0.0283395277602332
+Epoch 104, Validation Loss: 0.16264711982674068
+Epoch 105, Training Loss: 0.02560823035559484
+Epoch 105, Validation Loss: 0.17247912453280556
+Epoch 106, Training Loss: 0.021979084664157458
+Epoch 106, Validation Loss: 0.16175974988275105
+Epoch 107, Training Loss: 0.019698716833123138
+Epoch 107, Validation Loss: 0.16211906572182974
+Epoch 108, Training Loss: 0.018586742345775877
+Epoch 108, Validation Loss: 0.1583929103281763
+Epoch 109, Training Loss: 0.017609531485608645
+Epoch 109, Validation Loss: 0.16197743018468222
+Epoch 110, Training Loss: 0.017125506060464042
+Epoch 110, Validation Loss: 0.16310587773720422
+Epoch 111, Training Loss: 0.016946300252207686
+Epoch 111, Validation Loss: 0.16275512178738913
+Epoch 112, Training Loss: 0.017057667805680205
+Epoch 112, Validation Loss: 0.1642911798424191
+Epoch 113, Training Loss: 0.01708920413096036
+Epoch 113, Validation Loss: 0.16261367665396798
+Epoch 114, Training Loss: 0.017231501372797147
+Epoch 114, Validation Loss: 0.16288813948631287
+Epoch 115, Training Loss: 0.017584034481218883
+Epoch 115, Validation Loss: 0.16177201684978273
+Epoch 116, Training Loss: 0.018624486694378512
+Epoch 116, Validation Loss: 0.15860436028904384
+Epoch 117, Training Loss: 0.0197813035388078
+Epoch 117, Validation Loss: 0.17226500146918827
+Epoch 118, Training Loss: 0.020460388463522706
+Epoch 118, Validation Loss: 0.16966015100479126
+Epoch 119, Training Loss: 0.0218112246000341
+Epoch 119, Validation Loss: 0.1688912966185146
+Epoch 120, Training Loss: 0.023028909281960556
+Epoch 120, Validation Loss: 0.1678593067659272
+Epoch 121, Training Loss: 0.024559301084705762
+Epoch 121, Validation Loss: 0.1728393617603514
+Epoch 122, Training Loss: 0.024362914583512713
+Epoch 122, Validation Loss: 0.16933939771519768
+Epoch 123, Training Loss: 0.023915593326091767
+Epoch 123, Validation Loss: 0.16287854644987318
+Epoch 124, Training Loss: 0.024051398278347083
+Epoch 124, Validation Loss: 0.15494704080952537
+Epoch 125, Training Loss: 0.021350791438349656
+Epoch 125, Validation Loss: 0.1521697317560514
+Epoch 126, Training Loss: 0.019372407599751437
+Epoch 126, Validation Loss: 0.15162112646632725
+Epoch 127, Training Loss: 0.0177778246147292
+Epoch 127, Validation Loss: 0.1620736320813497
+Epoch 128, Training Loss: 0.016718879767826624
+Epoch 128, Validation Loss: 0.16100424196985033
+Epoch 129, Training Loss: 0.016065986667360577
+Epoch 129, Validation Loss: 0.1597307307852639
+Epoch 130, Training Loss: 0.015568081489098924
+Epoch 130, Validation Loss: 0.1612416919734743
+Epoch 131, Training Loss: 0.015440574887075594
+Epoch 131, Validation Loss: 0.1607631113794115
+Epoch 132, Training Loss: 0.015559661228741918
+Epoch 132, Validation Loss: 0.1613612042533027
+Epoch 133, Training Loss: 0.01565015624676432
+Epoch 133, Validation Loss: 0.1598455309867859
+Epoch 134, Training Loss: 0.015825350183461394
+Epoch 134, Validation Loss: 0.1597877542177836
+Epoch 135, Training Loss: 0.01649785504809448
+Epoch 135, Validation Loss: 0.1668134323424763
+Epoch 136, Training Loss: 0.017639398787702834
+Epoch 136, Validation Loss: 0.1610955057872666
+Epoch 137, Training Loss: 0.018144292517432145
+Epoch 137, Validation Loss: 0.1567461093266805
+Epoch 138, Training Loss: 0.02041050818349634
+Epoch 138, Validation Loss: 0.17499692903624642
+Epoch 139, Training Loss: 0.022037075513175557
+Epoch 139, Validation Loss: 0.17287583814726937
+Epoch 140, Training Loss: 0.023300750447171076
+Epoch 140, Validation Loss: 0.18220424817668068
+Epoch 141, Training Loss: 0.026040718092450073
+Epoch 141, Validation Loss: 0.19583795964717865
+Epoch 142, Training Loss: 0.026479276030191352
+Epoch 142, Validation Loss: 0.18195764223734537
+Epoch 143, Training Loss: 0.024888524067189013
+Epoch 143, Validation Loss: 0.17701557775338492
+Epoch 144, Training Loss: 0.023827450908720495
+Epoch 144, Validation Loss: 0.18376940157678393
+Epoch 145, Training Loss: 0.02093512269535235
+Epoch 145, Validation Loss: 0.18241768247551388
+Epoch 146, Training Loss: 0.019496187195181848
+Epoch 146, Validation Loss: 0.17670887543095481
+Epoch 147, Training Loss: 0.017699280753731728
+Epoch 147, Validation Loss: 0.17218313780095842
+Epoch 148, Training Loss: 0.016409225163183043
+Epoch 148, Validation Loss: 0.17835410767131382
+Epoch 149, Training Loss: 0.015835209962512767
+Epoch 149, Validation Loss: 0.17233987732066047
+Epoch 150, Training Loss: 0.015326521918177604
+Epoch 150, Validation Loss: 0.17576335701677534
+Finished Training
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [79]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot training and validation losses</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">val_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_12_0.png" src="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_12_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [80]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_neural_activity</span> <span class="o">=</span> <span class="n">input_data</span><span class="p">[</span><span class="n">train_size</span><span class="p">:]</span>
+<span class="n">val_angles</span> <span class="o">=</span> <span class="n">target_data</span><span class="p">[</span><span class="n">train_size</span><span class="p">:]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">decoder</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">decoded_angles</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">val_neural_activity</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [81]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">val_angles</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">decoded_angles</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;cos(angle)&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_14_0.png" src="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_14_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [82]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">val_angles</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">decoded_angles</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;sin(angle)&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_15_0.png" src="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_15_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dec_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">decoded_angles</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">decoded_angles</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">val_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">val_angles</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">val_angles</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [85]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dec_theta</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">neural_activity</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">RuntimeError</span>                              Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[85], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> dec_theta = decoder(torch.tensor(neural_activity).float()).detach().cpu().numpy()
+
+File <span class="ansi-green-fg">~/miniconda3/envs/neurometry/lib/python3.8/site-packages/torch/nn/modules/module.py:1501</span>, in <span class="ansi-cyan-fg">Module._call_impl</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1496</span> # If we don&#39;t have any hooks, we want to skip the rest of the logic in
+<span class="ansi-green-intense-fg ansi-bold">   1497</span> # this function, and just call forward.
+<span class="ansi-green-intense-fg ansi-bold">   1498</span> if not (self._backward_hooks or self._backward_pre_hooks or self._forward_hooks or self._forward_pre_hooks
+<span class="ansi-green-intense-fg ansi-bold">   1499</span>         or _global_backward_pre_hooks or _global_backward_hooks
+<span class="ansi-green-intense-fg ansi-bold">   1500</span>         or _global_forward_hooks or _global_forward_pre_hooks):
+<span class="ansi-green-fg">-&gt; 1501</span>     return forward_call(*args, **kwargs)
+<span class="ansi-green-intense-fg ansi-bold">   1502</span> # Do not call functions when jit is used
+<span class="ansi-green-intense-fg ansi-bold">   1503</span> full_backward_hooks, non_full_backward_hooks = [], []
+
+Cell <span class="ansi-green-fg">In[73], line 19</span>, in <span class="ansi-cyan-fg">Decoder.forward</span><span class="ansi-blue-fg">(self, x)</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span> def forward(self, x):
+<span class="ansi-green-fg">---&gt; 19</span>     x_skip = F.relu(self.fc_skip(x))
+<span class="ansi-green-intense-fg ansi-bold">     20</span>     x = x.float()
+<span class="ansi-green-intense-fg ansi-bold">     21</span>     x = F.relu(self.fc1(x))  # Apply ReLU activation function after first layer
+
+File <span class="ansi-green-fg">~/miniconda3/envs/neurometry/lib/python3.8/site-packages/torch/nn/modules/module.py:1501</span>, in <span class="ansi-cyan-fg">Module._call_impl</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1496</span> # If we don&#39;t have any hooks, we want to skip the rest of the logic in
+<span class="ansi-green-intense-fg ansi-bold">   1497</span> # this function, and just call forward.
+<span class="ansi-green-intense-fg ansi-bold">   1498</span> if not (self._backward_hooks or self._backward_pre_hooks or self._forward_hooks or self._forward_pre_hooks
+<span class="ansi-green-intense-fg ansi-bold">   1499</span>         or _global_backward_pre_hooks or _global_backward_hooks
+<span class="ansi-green-intense-fg ansi-bold">   1500</span>         or _global_forward_hooks or _global_forward_pre_hooks):
+<span class="ansi-green-fg">-&gt; 1501</span>     return forward_call(*args, **kwargs)
+<span class="ansi-green-intense-fg ansi-bold">   1502</span> # Do not call functions when jit is used
+<span class="ansi-green-intense-fg ansi-bold">   1503</span> full_backward_hooks, non_full_backward_hooks = [], []
+
+File <span class="ansi-green-fg">~/miniconda3/envs/neurometry/lib/python3.8/site-packages/torch/nn/modules/linear.py:114</span>, in <span class="ansi-cyan-fg">Linear.forward</span><span class="ansi-blue-fg">(self, input)</span>
+<span class="ansi-green-intense-fg ansi-bold">    113</span> def forward(self, input: Tensor) -&gt; Tensor:
+<span class="ansi-green-fg">--&gt; 114</span>     return F.linear(input, self.weight, self.bias)
+
+<span class="ansi-red-fg">RuntimeError</span>: Placeholder storage has not been allocated on MPS device!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dec_theta</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [57]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x14ef37100&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_18_1.png" src="../../_images/notebooks_place_cells_16_decode_ca1_hippocampus_data_18_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Bayesian-Decoder-(GPT4)----Fix">
+<h2>Bayesian Decoder (GPT4) – Fix<a class="headerlink" href="#Bayesian-Decoder-(GPT4)----Fix" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
+
+<span class="c1"># Simulated data</span>
+<span class="n">num_neurons</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">num_bins</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">num_positions</span> <span class="o">=</span> <span class="mi">360</span>  <span class="c1"># 360 degrees</span>
+<span class="n">spike_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="n">num_neurons</span><span class="p">,</span> <span class="n">num_bins</span><span class="p">))</span>
+<span class="n">actual_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_positions</span><span class="p">,</span> <span class="n">num_bins</span><span class="p">)</span>
+<span class="n">place_fields</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_neurons</span><span class="p">,</span> <span class="n">num_positions</span><span class="p">)</span>
+
+<span class="c1"># Prior probability</span>
+<span class="n">prior</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_positions</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_positions</span>
+
+<span class="c1"># Bayesian decoding</span>
+<span class="n">decoded_positions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_bins</span><span class="p">):</span>
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">spike_counts</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="n">place_fields</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_neurons</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">posterior</span> <span class="o">=</span> <span class="n">likelihood</span> <span class="o">*</span> <span class="n">prior</span>
+    <span class="n">posterior</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">posterior</span><span class="p">)</span>
+    <span class="n">decoded_position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">posterior</span><span class="p">)</span>
+    <span class="n">decoded_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decoded_position</span><span class="p">)</span>
+
+<span class="c1"># Evaluation</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">decoded_positions</span><span class="p">)</span> <span class="o">-</span> <span class="n">actual_positions</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Mean Squared Error: 18631.91
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-up-environment-paths">Set up environment paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-neural-activity-&amp;-labels">Load neural activity &amp; labels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Bayesian-Decoder-(GPT4)----Fix">Bayesian Decoder (GPT4) – Fix</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/notebooks/place_cells/16_decode_ca1_hippocampus_data.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, Geometric Intelligence Lab..
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
