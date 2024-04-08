@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Set Up + Imports &#8212; neurometry latest documentation</title>
+    <title>Estimate Neural Topology &#8212; neurometry latest documentation</title>
   
   
   
@@ -47,11 +47,11 @@
     <link rel="canonical" href="geometric-intelligence.github.io/notebooks/03_methods_estimate_manifold_topology.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Analyze Representations in Path-Integrating Recurrent Neural Networks" href="10_application_rnns_grid_cells.html" />
-    <link rel="prev" title="Neural Dimensionality Estimation" href="02_methods_estimate_manifold_dimension.html" />
+    <link rel="next" title="Explore Hyperbolic Geometry" href="04_explore_hyperbolic_geometry.html" />
+    <link rel="prev" title="Estimate Neural Dimensions" href="02_methods_estimate_manifold_dimension.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Apr 7, 2024, 6:56:27 PM"/>
+    <meta name="docbuild:last-update" content="Apr 8, 2024, 2:14:00 AM"/>
   </head>
   
   
@@ -275,34 +275,17 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_methods_create_synthetic_data.html">Synthetic Neural Manifolds</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_methods_estimate_manifold_dimension.html">Neural Dimensionality Estimation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Set Up + Imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_methods_create_synthetic_data.html">Create Synthetic Neural Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_methods_estimate_manifold_dimension.html">Estimate Neural Dimensions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimate Neural Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_explore_hyperbolic_geometry.html">Explore Hyperbolic Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_explore_diffeomorphisms_of_space.html">Explore Diffeomorphisms of Space</a></li>
 
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="10_application_rnns_grid_cells.html">Analyze Representations in Path-Integrating Recurrent Neural Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_application_synthetic_v1.html">Synthetic V1: Klein bottle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="20_neurometry_ai.html">Analyze Representations in Path-Integrating Recurrent Neural Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LDDMM.html">Setup</a></li>
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="hyperbolic.html">Imports &amp; Setup</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="warp.html">Imports &amp; setup</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="06_application_synthetic_v1.html">Synthetic V1: Klein bottle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_application_rnns_grid_cells.html">Analyze Path-Integrating Recurrent Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_applications_synthetic_grid_cells.html">Analyze Synthetic Grid Cells: Warping</a></li>
 </ul>
 </div>
 </nav></div>
@@ -343,7 +326,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Set Up + Imports</li>
+    <li class="breadcrumb-item active" aria-current="page">Estimate...</li>
   </ul>
 </nav>
 </div>
@@ -364,8 +347,10 @@ document.write(`
   <p>Notebook source code:
     <a class="reference external" href="https://github.com/geometric-intelligence/neurometry/blob/main/notebooks/03_methods_estimate_manifold_topology.ipynb">notebooks/03_methods_estimate_manifold_topology.ipynb</a>
   </p>
-</div><section id="Set-Up-+-Imports">
-<h1>Set Up + Imports<a class="headerlink" href="#Set-Up-+-Imports" title="Link to this heading">#</a></h1>
+</div><section id="Estimate-Neural-Topology">
+<h1>Estimate Neural Topology<a class="headerlink" href="#Estimate-Neural-Topology" title="Link to this heading">#</a></h1>
+<section id="Set-Up-+-Imports">
+<h2>Set Up + Imports<a class="headerlink" href="#Set-Up-+-Imports" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [43]:
 </pre></div>
@@ -410,9 +395,10 @@ The jupyter_black extension is already loaded. To reload it, use:
   %reload_ext jupyter_black
 </pre></div></div>
 </div>
-</section>
 <section id="Persistence-homology-for-synthetic-sphere,-torus-point-clouds">
-<h1>Persistence homology for synthetic sphere, torus point clouds<a class="headerlink" href="#Persistence-homology-for-synthetic-sphere,-torus-point-clouds" title="Link to this heading">#</a></h1>
+<h3>Persistence homology for synthetic sphere, torus point clouds<a class="headerlink" href="#Persistence-homology-for-synthetic-sphere,-torus-point-clouds" title="Link to this heading">#</a></h3>
+</section>
+</section>
 <section id="Generate-point-clouds">
 <h2>Generate point clouds<a class="headerlink" href="#Generate-point-clouds" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
@@ -596,13 +582,11 @@ The jupyter_black extension is already loaded. To reload it, use:
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_12_0.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_12_0.png" />
+<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_13_0.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_13_0.png" />
 </div>
 </div>
-</section>
-</section>
 <section id="Compute-Bottleneck-Distance-between-Persistence-Diagrams">
-<h1>Compute Bottleneck Distance between Persistence Diagrams<a class="headerlink" href="#Compute-Bottleneck-Distance-between-Persistence-Diagrams" title="Link to this heading">#</a></h1>
+<h3>Compute Bottleneck Distance between Persistence Diagrams<a class="headerlink" href="#Compute-Bottleneck-Distance-between-Persistence-Diagrams" title="Link to this heading">#</a></h3>
 <p>Create torus point clouds with varying levels of noise</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [136]:
@@ -675,7 +659,7 @@ The jupyter_black extension is already loaded. To reload it, use:
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_18_0.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_18_0.png" />
+<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_19_0.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_19_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -720,7 +704,9 @@ The jupyter_black extension is already loaded. To reload it, use:
 </div>
 </section>
 <section id="Persistence-homology-for-place-cell-data">
-<h1>Persistence homology for place cell data<a class="headerlink" href="#Persistence-homology-for-place-cell-data" title="Link to this heading">#</a></h1>
+<h3>Persistence homology for place cell data<a class="headerlink" href="#Persistence-homology-for-place-cell-data" title="Link to this heading">#</a></h3>
+</section>
+</section>
 <section id="Load-place-cell-data">
 <h2>Load place cell data<a class="headerlink" href="#Load-place-cell-data" title="Link to this heading">#</a></h2>
 <p>From Ravikrishnan P Jayakumar, Manu S Madhav, Francesco Savelli, Hugh T Blair, Noah J Cowan, and James J Knierim. Recalibration of path integration in hippocampal place cells. Nature, 566(7745):533–537, 2019.</p>
@@ -784,13 +770,13 @@ Function &#39;compute_persistence_diagrams&#39; executed in 1.6295s
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_25_1.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_25_1.png" />
+<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_26_1.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_26_1.png" />
 </div>
 </div>
-</section>
-</section>
 <section id="Synthetic-Grid-cell-data">
-<h1>Synthetic Grid cell data<a class="headerlink" href="#Synthetic-Grid-cell-data" title="Link to this heading">#</a></h1>
+<h3>Synthetic Grid cell data<a class="headerlink" href="#Synthetic-Grid-cell-data" title="Link to this heading">#</a></h3>
+</section>
+</section>
 <section id="Generate-synthetic-grid-cell-data-+-compute-persistence-diagrams">
 <h2>Generate synthetic grid cell data + compute persistence diagrams<a class="headerlink" href="#Generate-synthetic-grid-cell-data-+-compute-persistence-diagrams" title="Link to this heading">#</a></h2>
 <p>Orientation variability = 0</p>
@@ -849,11 +835,9 @@ Function &#39;compute_persistence_diagrams&#39; executed in 4809.5422s
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_30_1.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_30_1.png" />
+<img alt="../_images/notebooks_03_methods_estimate_manifold_topology_31_1.png" src="../_images/notebooks_03_methods_estimate_manifold_topology_31_1.png" />
 </div>
 </div>
-<section id="Orientation-variability-&gt;-0">
-<h3>Orientation variability &gt; 0<a class="headerlink" href="#Orientation-variability->-0" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [5]:
 </pre></div>
@@ -890,7 +874,6 @@ shape of neural activity matrix: (2500, 256)
 </div>
 </section>
 </section>
-</section>
 
 
                 </article>
@@ -908,15 +891,15 @@ shape of neural activity matrix: (2500, 256)
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Neural Dimensionality Estimation</p>
+        <p class="prev-next-title">Estimate Neural Dimensions</p>
       </div>
     </a>
     <a class="right-next"
-       href="10_application_rnns_grid_cells.html"
+       href="04_explore_hyperbolic_geometry.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Analyze Representations in Path-Integrating Recurrent Neural Networks</p>
+        <p class="prev-next-title">Explore Hyperbolic Geometry</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -938,28 +921,24 @@ shape of neural activity matrix: (2500, 256)
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Set Up + Imports</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-homology-for-synthetic-sphere,-torus-point-clouds">Persistence homology for synthetic sphere, torus point clouds</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-Up-+-Imports">Set Up + Imports</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-homology-for-synthetic-sphere,-torus-point-clouds">Persistence homology for synthetic sphere, torus point clouds</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-point-clouds">Generate point clouds</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Plot-point-clouds">Plot point clouds</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-diagrams-for-synthetic-2-torus">Persistence diagrams for synthetic 2-torus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-diagrams-for-synthetic-2-torus">Persistence diagrams for synthetic 2-torus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Compute-Bottleneck-Distance-between-Persistence-Diagrams">Compute Bottleneck Distance between Persistence Diagrams</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-homology-for-place-cell-data">Persistence homology for place cell data</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Compute-Bottleneck-Distance-between-Persistence-Diagrams">Compute Bottleneck Distance between Persistence Diagrams</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-homology-for-place-cell-data">Persistence homology for place cell data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-place-cell-data">Load place cell data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-diagrams-for-place-cell-data">Persistence diagrams for place cell data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Persistence-diagrams-for-place-cell-data">Persistence diagrams for place cell data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Synthetic-Grid-cell-data">Synthetic Grid cell data</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Synthetic-Grid-cell-data">Synthetic Grid cell data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-synthetic-grid-cell-data-+-compute-persistence-diagrams">Generate synthetic grid cell data + compute persistence diagrams</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Orientation-variability-&gt;-0">Orientation variability &gt; 0</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-synthetic-grid-cell-data-+-compute-persistence-diagrams">Generate synthetic grid cell data + compute persistence diagrams</a></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
   <div class="sidebar-secondary-item">
