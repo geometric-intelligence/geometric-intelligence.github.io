@@ -1,0 +1,929 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Estimate Neural Manifold Curvature &#8212; neurometry latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/10_methods_estimate_manifold_curvature';</script>
+    <link rel="canonical" href="geometric-intelligence.github.io/notebooks/10_methods_estimate_manifold_curvature.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Analyze Representations in Path-Integrating RNN" href="09_application_rnns_grid_cells_xu.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="May 24, 2024, 4:11:28 AM"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">neurometry latest documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_methods_create_synthetic_data.html">Create Synthetic Neural Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_methods_estimate_manifold_dimension.html">Estimate Neural Dimensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_methods_estimate_manifold_topology.html">Estimate Neural Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_explore_hyperbolic_geometry.html">Explore Hyperbolic Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_explore_diffeomorphisms_of_space.html">Explore Diffeomorphisms of Space</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="06_application_synthetic_v1.html">Synthetic V1: Klein bottle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="071_application_dual_agent_rnns.html">Set Up + Imports</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="07_application_rnns_grid_cells.html">Analyze Path-Integrating Recurrent Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_applications_synthetic_grid_cells.html">Analyze Synthetic Grid Cells: Warping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_application_rnns_grid_cells_xu.html">Analyze Representations in Path-Integrating RNN</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimate Neural Manifold Curvature</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Estimate...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="admonition note">
+  <p>Notebook source code:
+    <a class="reference external" href="https://github.com/geometric-intelligence/neurometry/blob/main/notebooks/10_methods_estimate_manifold_curvature.ipynb">notebooks/10_methods_estimate_manifold_curvature.ipynb</a>
+  </p>
+</div><section id="Estimate-Neural-Manifold-Curvature">
+<h1>Estimate Neural Manifold Curvature<a class="headerlink" href="#Estimate-Neural-Manifold-Curvature" title="Link to this heading">#</a></h1>
+<section id="Set-up-+-Imports">
+<h2>Set-up + Imports<a class="headerlink" href="#Set-up-+-Imports" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">setup</span>
+
+<span class="n">setup</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">load_ext</span> jupyter_black
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GEOMSTATS_BACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
+<span class="kn">import</span> <span class="nn">geomstats.backend</span> <span class="k">as</span> <span class="nn">gs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Working directory:  /home/facosta/neurometry/neurometry
+Directory added to path:  /home/facosta/neurometry
+Directory added to path:  /home/facosta/neurometry/neurometry
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<script type="application/javascript" id="jupyter_black">
+(function() {
+    if (window.IPython === undefined) {
+        return
+    }
+    var msg = "WARNING: it looks like you might have loaded " +
+        "jupyter_black in a non-lab notebook with " +
+        "`is_lab=True`. Please double check, and if " +
+        "loading with `%load_ext` please review the README!"
+    console.log(msg)
+    alert(msg)
+})()
+</script></div>
+</div>
+<section id="Load-config-&amp;-model">
+<h3>Load config &amp; model<a class="headerlink" href="#Load-config-&-model" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [89]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_name</span> <span class="o">=</span> <span class="s2">&quot;run_6rixqmzt_t2_synthetic_noise_var_1e-05_embedding_dim_3&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [92]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;curvature/results&quot;</span><span class="p">)</span>
+<span class="n">models_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="s2">&quot;trained_models&quot;</span><span class="p">)</span>
+<span class="n">configs_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">)</span>
+
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">model_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">models_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2">_model.pt&quot;</span><span class="p">)</span>
+<span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">configs_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">config_dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; object has no attribute &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+            <span class="p">)</span>
+
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">config_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [94]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">neurometry.curvature.models.toroidal_vae</span> <span class="k">as</span> <span class="nn">toroidal_vae</span>
+
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">toroidal_vae</span><span class="o">.</span><span class="n">ToroidalVAE</span><span class="p">(</span>
+    <span class="n">data_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">data_dim</span><span class="p">,</span>
+    <span class="n">latent_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">latent_dim</span><span class="p">,</span>
+    <span class="n">sftbeta</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">sftbeta</span><span class="p">,</span>
+    <span class="n">encoder_width</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">encoder_width</span><span class="p">,</span>
+    <span class="n">encoder_depth</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">encoder_depth</span><span class="p">,</span>
+    <span class="n">decoder_width</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">decoder_width</span><span class="p">,</span>
+    <span class="n">decoder_depth</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">decoder_depth</span><span class="p">,</span>
+    <span class="n">posterior_type</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">posterior_type</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+
+<span class="c1"># model.load_state_dict(torch.load(model_file))</span>
+<span class="c1"># model.eval();</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Compute-extrinsic-curvature">
+<h3>Compute extrinsic curvature<a class="headerlink" href="#Compute-extrinsic-curvature" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [95]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">neurometry.curvature.evaluate</span> <span class="k">as</span> <span class="nn">evaluate</span>
+
+<span class="n">z_grid</span><span class="p">,</span> <span class="n">geodesic_dist</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">curv_norms_learned</span> <span class="o">=</span> <span class="n">evaluate</span><span class="o">.</span><span class="n">compute_curvature_learned</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+    <span class="n">embedding_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">embedding_dim</span><span class="p">,</span>
+    <span class="n">n_grid_points</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">n_grid_points</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([100, 2])
+An error occurred for i=0: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=1: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=2: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=3: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=4: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=5: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=6: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=7: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=8: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=9: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=10: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=11: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=12: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=13: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=14: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=15: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=16: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=17: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=18: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=19: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.3398, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=20: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=21: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=22: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=23: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=24: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=25: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=26: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=27: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=28: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=29: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[2.8585, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=30: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=31: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=32: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=33: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=34: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=35: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=36: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=37: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=38: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=39: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[9.6676, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=40: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=41: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=42: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=43: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=44: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=45: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=46: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=47: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=48: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=49: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[10.4394,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=50: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=51: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=52: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=53: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=54: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=55: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=56: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=57: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=58: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=59: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[24.1509,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=60: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=61: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=62: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=63: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=64: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=65: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=66: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=67: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=68: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=69: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[14.2595,  0.0000],
+        [ 0.0000,  0.0000]])
+An error occurred for i=70: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=71: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=72: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=73: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=74: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=75: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=76: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=77: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=78: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=79: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.6733, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=80: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=81: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=82: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=83: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=84: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=85: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=86: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=87: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=88: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=89: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[6.9866, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=90: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=91: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=92: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=93: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=94: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=95: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=96: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=97: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=98: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+An error occurred for i=99: linalg.inv: The diagonal element 2 is zero, the inversion could not be completed because the input matrix is singular.
+tensor([[3.5656, 0.0000],
+        [0.0000, 0.0000]])
+Computation time: 1.080 seconds.
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_application_rnns_grid_cells_xu.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analyze Representations in Path-Integrating RNN</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-up-+-Imports">Set-up + Imports</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-config-&amp;-model">Load config &amp; model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Compute-extrinsic-curvature">Compute extrinsic curvature</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/10_methods_estimate_manifold_curvature.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, Geometric Intelligence Lab..
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
