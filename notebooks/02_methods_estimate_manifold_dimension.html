@@ -51,7 +51,7 @@
     <link rel="prev" title="Create Synthetic Neural Manifolds" href="01_methods_create_synthetic_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="May 24, 2024, 4:37:56 AM"/>
+    <meta name="docbuild:last-update" content="May 24, 2024, 7:20:56 PM"/>
   </head>
   
   
@@ -354,6 +354,8 @@ document.write(`
   </p>
 </div><section id="Estimate-Neural-Dimensions">
 <h1>Estimate Neural Dimensions<a class="headerlink" href="#Estimate-Neural-Dimensions" title="Link to this heading">#</a></h1>
+<p>This notebook explains how to use the module <code class="docutils literal notranslate"><span class="pre">dimension</span></code> to estimate the dimension (extrinsic or intrinsic) of the neural manifold embedded in neural state space <span class="math notranslate nohighlight">\(\mathbb{R}^N\)</span>.</p>
+<p>In particular, this notebook tests several existing methods of dimension estimation on the synthetic manifolds from the module <code class="docutils literal notranslate"><span class="pre">datasets.synthetic</span></code> to evaluate their performance.</p>
 <section id="Set-up-+-Imports">
 <h2>Set-up + Imports<a class="headerlink" href="#Set-up-+-Imports" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
@@ -379,6 +381,7 @@ document.write(`
     <span class="n">skdim_dimension_estimation</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="kn">import</span> <span class="nn">torch</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GEOMSTATS_BACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
 <span class="kn">import</span> <span class="nn">geomstats.backend</span> <span class="k">as</span> <span class="nn">gs</span>
 </pre></div>
@@ -1158,17 +1161,17 @@ if (outputEl) {{
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [100]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">4</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># n_components = 4</span>
 
-<span class="n">X_pls</span> <span class="o">=</span> <span class="n">pls_transformed_X</span><span class="p">[</span><span class="n">n_components</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># X_pls = pls_transformed_X[n_components - 1]</span>
 
-<span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca_transformed_X</span><span class="p">[</span><span class="n">n_components</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># X_pca = pca_transformed_X[n_components - 1]</span>
 
-<span class="kn">from</span> <span class="nn">gtda.homology</span> <span class="kn">import</span> <span class="n">WeakAlphaPersistence</span>
+<span class="c1"># from gtda.homology import WeakAlphaPersistence</span>
 
-<span class="n">wa_pers</span> <span class="o">=</span> <span class="n">WeakAlphaPersistence</span><span class="p">(</span><span class="n">homology_dimensions</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="c1"># wa_pers = WeakAlphaPersistence(homology_dimensions=(0, 1, 2))</span>
 
-<span class="n">diagrams_wa_pers</span> <span class="o">=</span> <span class="n">wa_pers</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X_pca</span><span class="p">,</span> <span class="n">X_pls</span><span class="p">])</span>
+<span class="c1"># diagrams_wa_pers = wa_pers.fit_transform([X_pca, X_pls])</span>
 </pre></div>
 </div>
 </div>

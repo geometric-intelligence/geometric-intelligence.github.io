@@ -51,7 +51,7 @@
     <link rel="prev" title="Tutorials" href="../tutorials/index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="May 24, 2024, 4:37:56 AM"/>
+    <meta name="docbuild:last-update" content="May 24, 2024, 7:20:56 PM"/>
   </head>
   
   
@@ -354,8 +354,9 @@ document.write(`
   </p>
 </div><section id="Create-Synthetic-Neural-Manifolds">
 <h1>Create Synthetic Neural Manifolds<a class="headerlink" href="#Create-Synthetic-Neural-Manifolds" title="Link to this heading">#</a></h1>
-<section id="Set-up-+-Imports">
-<h2>Set-up + Imports<a class="headerlink" href="#Set-up-+-Imports" title="Link to this heading">#</a></h2>
+<p>This notebook explains how to use the module <code class="docutils literal notranslate"><span class="pre">synthetic</span></code> to generate points on neural manifolds in neural state space.</p>
+<section id="Set-up">
+<h2>Set-up<a class="headerlink" href="#Set-up" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [1]:
 </pre></div>
@@ -430,10 +431,10 @@ INFO:root:Using pytorch backend
 </pre></div>
 </div>
 </div>
-</section>
-<section id="Plot-circle-\mathcal{S}^1-and-N=3-encoding-vectors">
-<h2>Plot circle <span class="math notranslate nohighlight">\(\mathcal{S}^1\)</span> and <span class="math notranslate nohighlight">\(N=3\)</span> encoding vectors<a class="headerlink" href="#Plot-circle-\mathcal{S}^1-and-N=3-encoding-vectors" title="Link to this heading">#</a></h2>
-<p>We will project latent manifold <span class="math notranslate nohighlight">\(\mathcal{S}^1\)</span> (minimal embedding dimension <span class="math notranslate nohighlight">\(d=2\)</span>) into <span class="math notranslate nohighlight">\(N\)</span>-dimensional neural state space (<span class="math notranslate nohighlight">\(N=3\)</span>) with a <span class="math notranslate nohighlight">\(d\times N\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>. The entries of <span class="math notranslate nohighlight">\(A\)</span> are randomly sampled from a uniform distribution <span class="math notranslate nohighlight">\(U[-1,1]\)</span> and its columns are random encoding vectors.</p>
+<section id="Ring-\mathcal{S}^1-in-Neural-State-Space-\mathbb{R}^3">
+<h3>Ring <span class="math notranslate nohighlight">\(\mathcal{S}^1\)</span> in Neural State Space <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span><a class="headerlink" href="#Ring-\mathcal{S}^1-in-Neural-State-Space-\mathbb{R}^3" title="Link to this heading">#</a></h3>
+<p>We use <span class="math notranslate nohighlight">\(N=3\)</span> encoding vectors to represent the recording of <span class="math notranslate nohighlight">\(N=3\)</span> neurons.</p>
+<p>We will project the latent manifold <span class="math notranslate nohighlight">\(\mathcal{S}^1\)</span> (minimal embedding dimension <span class="math notranslate nohighlight">\(d=2\)</span>) into <span class="math notranslate nohighlight">\(N\)</span>-dimensional neural state space (<span class="math notranslate nohighlight">\(N=3\)</span>) with a <span class="math notranslate nohighlight">\(d\times N\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>. The entries of <span class="math notranslate nohighlight">\(A\)</span> are randomly sampled from a uniform distribution <span class="math notranslate nohighlight">\(U[-1,1]\)</span> and its columns are random encoding vectors.</p>
 <p>Generate points on task manifold (<code class="docutils literal notranslate"><span class="pre">task_points</span></code>) and neural manifold points (<code class="docutils literal notranslate"><span class="pre">noisy_points</span></code>, <code class="docutils literal notranslate"><span class="pre">manifold_points</span></code>):</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [24]:
@@ -638,8 +639,8 @@ mean firing rate: 100.17 Hz
 </div>
 </div>
 </section>
-<section id="Visualize-cylinder-(\mathcal{S}^1-\times-[0,1])">
-<h2>Visualize cylinder (<span class="math notranslate nohighlight">\(\mathcal{S}^1 \times [0,1]\)</span>)<a class="headerlink" href="#Visualize-cylinder-(\mathcal{S}^1-\times-[0,1])" title="Link to this heading">#</a></h2>
+<section id="Cylinder-(\mathcal{S}^1-\times-[0,1])-in-Neural-State-Space-\mathbb{R}^3">
+<h3>Cylinder (<span class="math notranslate nohighlight">\(\mathcal{S}^1 \times [0,1]\)</span>) in Neural State Space <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span><a class="headerlink" href="#Cylinder-(\mathcal{S}^1-\times-[0,1])-in-Neural-State-Space-\mathbb{R}^3" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [423]:
 </pre></div>
@@ -687,8 +688,9 @@ mean firing rate: 100.17 Hz
 </div>
 </div>
 </section>
-<section id="Encode-2-dim-Flat-torus-in-N-dimensional-neural-state-space-(N=3).">
-<h2>Encode 2-dim Flat torus in <span class="math notranslate nohighlight">\(N\)</span>-dimensional neural state space (N=3).<a class="headerlink" href="#Encode-2-dim-Flat-torus-in-N-dimensional-neural-state-space-(N=3)." title="Link to this heading">#</a></h2>
+<section id="Flat-torus-\mathcal{T}^2-in-Neural-State-Space-\mathbb{R}^3">
+<h3>Flat torus <span class="math notranslate nohighlight">\(\mathcal{T}^2\)</span> in Neural State Space <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span><a class="headerlink" href="#Flat-torus-\mathcal{T}^2-in-Neural-State-Space-\mathbb{R}^3" title="Link to this heading">#</a></h3>
+<p>We propose to encode the 2-dimensional flat torus in <span class="math notranslate nohighlight">\(N\)</span>-dimensional neural state space, where <span class="math notranslate nohighlight">\(N = 3\)</span> neurons.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [469]:
 </pre></div>
@@ -749,8 +751,11 @@ mean firing rate: 100.17 Hz
 </div>
 </div>
 </div>
-<section id="Extrinsic-dimension-of-curved-low-dim-manifold">
-<h3>Extrinsic dimension of curved low-dim manifold<a class="headerlink" href="#Extrinsic-dimension-of-curved-low-dim-manifold" title="Link to this heading">#</a></h3>
+</section>
+<section id="Estimate-Extrinsic-Dimension-of-Neural-Manifold">
+<h3>Estimate Extrinsic Dimension of Neural Manifold<a class="headerlink" href="#Estimate-Extrinsic-Dimension-of-Neural-Manifold" title="Link to this heading">#</a></h3>
+<p>Here, we use <code class="docutils literal notranslate"><span class="pre">skdim</span></code> to estimate the extrinsic dimension of a ring (circle) manifold embedded in neural state space <span class="math notranslate nohighlight">\(\mathbb{R}^N\)</span> where the number of neurons <span class="math notranslate nohighlight">\(N\)</span> can vary.</p>
+<p>We observe whether the estimated extrinsic dimension varies with <span class="math notranslate nohighlight">\(N\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [93]:
 </pre></div>
@@ -859,7 +864,7 @@ Text(0.5, 1.0, &#39;Estimated Dimension vs. Number of Neurons&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_01_methods_create_synthetic_data_17_2.png" src="../_images/notebooks_01_methods_create_synthetic_data_17_2.png" />
+<img alt="../_images/notebooks_01_methods_create_synthetic_data_19_2.png" src="../_images/notebooks_01_methods_create_synthetic_data_19_2.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -880,8 +885,8 @@ Text(0.5, 1.0, &#39;Estimated Dimension vs. Number of Neurons&#39;)
 </pre></div></div>
 </div>
 </section>
-<section id="Synthetic-neural-activity-encoding-Van-der-Pol-Oscillator">
-<h3>Synthetic neural activity encoding Van der Pol Oscillator<a class="headerlink" href="#Synthetic-neural-activity-encoding-Van-der-Pol-Oscillator" title="Link to this heading">#</a></h3>
+<section id="Synthetic-Neural-Activity-Encoding:-Van-der-Pol-Oscillator">
+<h3>Synthetic Neural Activity Encoding: Van der Pol Oscillator<a class="headerlink" href="#Synthetic-Neural-Activity-Encoding:-Van-der-Pol-Oscillator" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [10]:
 </pre></div>
@@ -987,7 +992,7 @@ WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note t
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_01_methods_create_synthetic_data_22_1.png" src="../_images/notebooks_01_methods_create_synthetic_data_22_1.png" />
+<img alt="../_images/notebooks_01_methods_create_synthetic_data_24_1.png" src="../_images/notebooks_01_methods_create_synthetic_data_24_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -1299,12 +1304,12 @@ if (outputEl) {{
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-up-+-Imports">Set-up + Imports</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Plot-circle-\mathcal{S}^1-and-N=3-encoding-vectors">Plot circle <span class="math notranslate nohighlight">\(\mathcal{S}^1\)</span> and <span class="math notranslate nohighlight">\(N=3\)</span> encoding vectors</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualize-cylinder-(\mathcal{S}^1-\times-[0,1])">Visualize cylinder (<span class="math notranslate nohighlight">\(\mathcal{S}^1 \times [0,1]\)</span>)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Encode-2-dim-Flat-torus-in-N-dimensional-neural-state-space-(N=3).">Encode 2-dim Flat torus in <span class="math notranslate nohighlight">\(N\)</span>-dimensional neural state space (N=3).</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Extrinsic-dimension-of-curved-low-dim-manifold">Extrinsic dimension of curved low-dim manifold</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Synthetic-neural-activity-encoding-Van-der-Pol-Oscillator">Synthetic neural activity encoding Van der Pol Oscillator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-up">Set-up</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Ring-\mathcal{S}^1-in-Neural-State-Space-\mathbb{R}^3">Ring <span class="math notranslate nohighlight">\(\mathcal{S}^1\)</span> in Neural State Space <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Cylinder-(\mathcal{S}^1-\times-[0,1])-in-Neural-State-Space-\mathbb{R}^3">Cylinder (<span class="math notranslate nohighlight">\(\mathcal{S}^1 \times [0,1]\)</span>) in Neural State Space <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Flat-torus-\mathcal{T}^2-in-Neural-State-Space-\mathbb{R}^3">Flat torus <span class="math notranslate nohighlight">\(\mathcal{T}^2\)</span> in Neural State Space <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Estimate-Extrinsic-Dimension-of-Neural-Manifold">Estimate Extrinsic Dimension of Neural Manifold</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Synthetic-Neural-Activity-Encoding:-Van-der-Pol-Oscillator">Synthetic Neural Activity Encoding: Van der Pol Oscillator</a></li>
 </ul>
 </li>
 </ul>
