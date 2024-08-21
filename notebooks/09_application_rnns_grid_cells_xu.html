@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -51,7 +51,7 @@
     <link rel="prev" title="Analyze Synthetic Grid Cells: Warping" href="08_applications_synthetic_grid_cells.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Aug 1, 2024, 11:03:09 PM"/>
+    <meta name="docbuild:last-update" content="Aug 21, 2024, 5:08:56 AM"/>
   </head>
   
   
@@ -297,6 +297,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="08_applications_synthetic_grid_cells.html">Analyze Synthetic Grid Cells: Warping</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analyze Representations in Path-Integrating RNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_methods_estimate_manifold_curvature.html">Estimate Neural Manifold Curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_visualize_rnn.html">Set up + Imports</a></li>
 </ul>
 </div>
 </nav></div>
@@ -2232,11 +2233,184 @@ tensor([[ 1.0000e+00, -2.2031e-17],
         [-2.2031e-17,  7.9376e-01]])
 </pre></div></div>
 </div>
+</section>
+<section id="Compute-scores,-scales,-orientation-of-rate-maps-(TODO:-clean!)">
+<h3>Compute scores, scales, orientation of rate maps (TODO: clean!)<a class="headerlink" href="#Compute-scores,-scales,-orientation-of-rate-maps-(TODO:-clean!)" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">model</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">utils</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">scores</span> <span class="kn">import</span> <span class="n">GridScorer</span>
+<span class="kn">from</span> <span class="nn">source</span> <span class="kn">import</span> <span class="n">gridnessScore</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="c1"># 1-step RNN</span>
+<span class="c1"># parser.add_argument(&#39;--f_in&#39;, type=str, default=&#39;../logs/01_isometry/20220727-223216-num_neurons=1800-005-1-positive_v=True-num_steps_train=200000-batch_size=10000-006-gpu=0/ckpt/weights.npy&#39;, help=&#39;Checkpoint path to load&#39;)</span>
+<span class="c1"># parser.add_argument(&#39;--f_in&#39;, type=str, default=&#39;../logs/04_rnn_isometry/20220827-234250-rnn_step=1-batch_size=8000-gpu=0/ckpt/checkpoint-step100000.pth&#39;, help=&#39;Checkpoint path to load&#39;)</span>
+
+<span class="c1"># 5-step RNN</span>
+<span class="c1"># parser.add_argument(&#39;--f_in&#39;, type=str, default=&#39;../logs/04_rnn_isometry/20220828-165259-rnn_step=1-adaptive_dr=True-reg_decay_until=20000-batch_size=8000-gpu=0/ckpt/weights.npy&#39;, help=&#39;Checkpoint path to load&#39;)</span>
+
+
+<span class="c1"># 10-step RNN</span>
+<span class="c1"># parser.add_argument(&#39;--f_in&#39;, type=str, default=&#39;../logs/01_isometry_rnn/20220802-215231-num_steps_train=200000-gpu=1/ckpt/weights.npy&#39;, help=&#39;Checkpoint path to load&#39;)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s2">&quot;--f_in&quot;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;../logs/04_rnn_isometry/20220915-223938-rnn_step=10-block_size=12-005-1-adaptive_dr=True-reg_decay_until=15000-batch_size=8000-num_steps_train=100000-gpu=0/ckpt/checkpoint-step100000.pth&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Checkpoint path to load&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># parser.add_argument(&#39;--f_in&#39;, type=str, default=&#39;/home/gmm/Documents/workingspace/grid_cell_00/output/main_100_00_new_loss_small_area/2021-05-24-17-49-02--num_group=1--block_size=96--num_data=20000--weight_reg_u=6/syn/weights_7999.npy&#39;, help=&#39;Checkpoint path to load&#39;)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s2">&quot;--dir_out&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Checkpoint path to load&quot;</span>
+<span class="p">)</span>
+<span class="n">FLAGS</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="c1"># read ckpt</span>
+<span class="n">ckpt_path</span> <span class="o">=</span> <span class="n">FLAGS</span><span class="o">.</span><span class="n">f_in</span>
+<span class="n">ckpt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">)</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">ckpt</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># config.b_scalar = True</span>
+
+<span class="n">model_config</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">GridCellConfig</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">GridCell</span><span class="p">(</span><span class="n">model_config</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">ckpt</span><span class="p">[</span><span class="s2">&quot;state_dict&quot;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># np.save(&#39;../logs/04_rnn_isometry/20220828-165259-rnn_step=1-adaptive_dr=True-reg_decay_until=20000-batch_size=8000-gpu=0/ckpt/weights.npy&#39;, \</span>
+<span class="c1">#         model.encoder.v.data.cpu().numpy())</span>
+
+<span class="n">dir_out</span> <span class="o">=</span> <span class="s2">&quot;./output/test_gridness&quot;</span>
+<span class="n">log_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;log.txt&quot;</span><span class="p">)</span>
+
+<span class="n">dir_out</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="n">FLAGS</span><span class="o">.</span><span class="n">dir_out</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_out</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_out</span><span class="p">)</span>
+<span class="n">num_interval</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">block_size</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">num_block</span> <span class="o">=</span> <span class="mi">150</span>
+
+<span class="n">starts</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span>
+<span class="n">ends</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># starts = [0.2] * 10</span>
+<span class="c1"># ends = np.linspace(0.4, 1.6, num=20)</span>
+
+<span class="c1"># starts = [0.1] * 30 + [0.2] * 30</span>
+<span class="c1"># ends = np.concatenate([np.linspace(0.2, 1.5, num=30), np.linspace(0.3, 1.5, num=30)])</span>
+
+
+<span class="n">masks_parameters</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># weights_file = FLAGS.f_in</span>
+<span class="c1"># weights = np.load(weights_file)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">v</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="c1"># weights = np.transpose(weights, axes=[2, 0, 1])</span>
+<span class="n">ncol</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">num_block</span>
+
+<span class="n">scorer</span> <span class="o">=</span> <span class="n">GridScorer</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">masks_parameters</span><span class="p">)</span>
+
+<span class="n">score_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">scale_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">orientation_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">sac_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ncol</span> <span class="o">*</span> <span class="mf">1.6</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">nrow</span> <span class="o">*</span> <span class="mf">1.6</span><span class="p">)))</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)):</span>
+    <span class="n">rate_map</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">rate_map</span> <span class="o">=</span> <span class="p">(</span><span class="n">rate_map</span> <span class="o">-</span> <span class="n">rate_map</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">rate_map</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">rate_map</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="n">score</span><span class="p">,</span> <span class="n">autocorr_ori</span><span class="p">,</span> <span class="n">autocorr</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">peaks</span> <span class="o">=</span> <span class="n">gridnessScore</span><span class="p">(</span>
+        <span class="n">rateMap</span><span class="o">=</span><span class="n">rate_map</span><span class="p">,</span> <span class="n">arenaDiam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_interval</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">corr_cutRmin</span><span class="o">=</span><span class="mf">0.3</span>
+    <span class="p">)</span>
+
+    <span class="c1"># if (</span>
+    <span class="c1">#     (i &gt; 64 and i &lt; 74)</span>
+    <span class="c1">#     or (i &gt; 74 and i &lt; 77)</span>
+    <span class="c1">#     or (i &gt; 77 and i &lt; 89)</span>
+    <span class="c1">#     or (i &gt; 89 and i &lt; 92)</span>
+    <span class="c1">#     or (i &gt; 92 and i &lt; 96)</span>
+    <span class="c1"># ):</span>
+    <span class="c1">#     peaks = peaks0</span>
+    <span class="c1"># else:</span>
+    <span class="c1">#     peaks0 = peaks</span>
+
+    <span class="n">score_60</span><span class="p">,</span> <span class="n">score_90</span><span class="p">,</span> <span class="n">max_60_mask</span><span class="p">,</span> <span class="n">max_90_mask</span><span class="p">,</span> <span class="n">sac</span> <span class="o">=</span> <span class="n">scorer</span><span class="o">.</span><span class="n">get_scores</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">sac_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sac</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  scorer.plot_sac(autocorr,</span>
+<span class="sd">                  ax=plt.subplot(nrow, ncol, i + 1),</span>
+<span class="sd">                  title=&quot;%.2f&quot; % (score_60),</span>
+<span class="sd">                  # title=&quot;%.2f, %.2f, %.2f&quot; % (score_60, scale, orientation),</span>
+<span class="sd">                  cmap=&#39;jet&#39;)</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+    <span class="n">scorer</span><span class="o">.</span><span class="n">plot_sac</span><span class="p">(</span>
+        <span class="n">sac</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="c1"># title=&quot;%.2f&quot; % (score_60),</span>
+        <span class="c1"># title=&quot;%.2f, %.2f, %.2f&quot; % (score_60, scale, orientation),</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  scorer.plot_sac(sac,</span>
+<span class="sd">                  ax=plt.subplot(nrow, ncol, i + 1),</span>
+<span class="sd">                  title=&quot;%.2f&quot; % (max_60_mask[1]),</span>
+<span class="sd">                  # title=&quot;%.2f, %.2f, %.2f&quot; % (score_60, scale, orientation),</span>
+<span class="sd">                  cmap=&#39;jet&#39;)</span>
+<span class="sd">                  &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">score_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">score_60</span>
+    <span class="c1"># scale_list[i] = scale</span>
+    <span class="c1"># print(max_60_mask)</span>
+    <span class="n">scale_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_60_mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">orientation_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">orientation</span>
+<span class="c1"># plt.savefig(os.path.join(dir_out, &#39;autocorr.png&#39;), bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;autocorr_score_noscore.png&quot;</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="c1"># plt.savefig(os.path.join(dir_out, &#39;polar.png&#39;))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">sac_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sac_list</span><span class="p">)</span>
+
+<span class="c1"># with open(os.path.join(dir_out, &#39;stats.pkl&#39;), &quot;wb&quot;) as f:</span>
+<span class="c1">#   pickle.dump([sac_list, score_list, scale_list, orientation_list], f)</span>
+<span class="c1"># np.set_printoptions(threshold=np.nan)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;score_list.npy&quot;</span><span class="p">),</span> <span class="n">score_list</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;scale_list.npy&quot;</span><span class="p">),</span> <span class="n">scale_list</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;orientation_list.npy&quot;</span><span class="p">),</span> <span class="n">orientation_list</span><span class="p">)</span>
+
+<span class="n">scale_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;scale_list.npy&quot;</span><span class="p">))</span>
+<span class="n">score_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;score_list.npy&quot;</span><span class="p">))</span>
+<span class="n">orientation_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;orientation_list.npy&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">score_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">score_list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">score_list</span><span class="p">)]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">score_list</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">score_list</span><span class="p">)]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scale_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scale_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scale_list</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">score_list</span> <span class="o">&gt;</span> <span class="mf">0.37</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">score_list</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">orientation_list</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">orientation_list</span><span class="p">[</span><span class="n">score_list</span> <span class="o">&gt;</span> <span class="mf">0.37</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># with open(os.path.join(dir_out, &#39;stats.pkl&#39;), &quot;rb&quot;) as f:</span>
+<span class="c1">#   sac_list, score_list, scale_list, orientation_list = pickle.load(f)</span>
 </pre></div>
 </div>
 </div>
@@ -2304,6 +2478,7 @@ tensor([[ 1.0000e+00, -2.2031e-17],
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#RNN-module-torus-cohomological-coordinates">RNN module torus cohomological coordinates</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Dimensionality-Estimation">Dimensionality Estimation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Curvature-computation">Curvature computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Compute-scores,-scales,-orientation-of-rate-maps-(TODO:-clean!)">Compute scores, scales, orientation of rate maps (TODO: clean!)</a></li>
 </ul>
 </li>
 </ul>
