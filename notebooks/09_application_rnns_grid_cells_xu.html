@@ -51,7 +51,7 @@
     <link rel="prev" title="Analyze Synthetic Grid Cells: Warping" href="08_applications_synthetic_grid_cells.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Aug 29, 2024, 6:31:44 PM"/>
+    <meta name="docbuild:last-update" content="Aug 31, 2024, 11:41:36 PM"/>
   </head>
   
   
@@ -1029,7 +1029,9 @@ Cluster 9 has 18 units
 
     <span class="c1"># Calculate the squared differences, scaled by respective sigma values</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="n">x_grid</span> <span class="o">-</span> <span class="n">x_saliency</span>
-    <span class="n">scaled_diff_sq</span> <span class="o">=</span> <span class="p">(</span><span class="n">diff</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">sigma_saliency</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">diff</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">sigma_saliency</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">scaled_diff_sq</span> <span class="o">=</span> <span class="p">(</span><span class="n">diff</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">sigma_saliency</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>
+        <span class="n">diff</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">sigma_saliency</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">)</span>
 
     <span class="c1"># Compute the Gaussian function</span>
     <span class="n">normalization_factor</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sigma_saliency</span> <span class="o">*</span> <span class="n">sigma_saliency</span>
@@ -1490,7 +1492,7 @@ if (outputEl) {{
     <span class="n">evaluate_pls_with_different_K</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">K_values</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">20</span><span class="p">)]</span>
+<span class="n">K_values</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">)]</span>
 <span class="c1"># K_values = [*range(1,10),*range(10,30,5)]</span>
 
 <span class="n">pca_r2_scores</span><span class="p">,</span> <span class="n">pca_transformed_X</span> <span class="o">=</span> <span class="n">evaluate_PCA_with_different_K</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">K_values</span><span class="p">)</span>
@@ -2109,11 +2111,12 @@ torch.Size([961])
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GEOMSTATS_BACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
 <span class="kn">import</span> <span class="nn">geomstats.backend</span> <span class="k">as</span> <span class="nn">gs</span>  <span class="c1"># noqa: E402</span>
 <span class="kn">from</span> <span class="nn">geomstats.geometry.base</span> <span class="kn">import</span> <span class="n">ImmersedSet</span>  <span class="c1"># noqa: E402</span>
 <span class="kn">from</span> <span class="nn">geomstats.geometry.pullback_metric</span> <span class="kn">import</span> <span class="n">PullbackMetric</span>  <span class="c1"># noqa: E402</span>
-<span class="kn">from</span> <span class="nn">geomstats.geometry.euclidean</span> <span class="kn">import</span> <span class="n">Euclidean</span> <span class="c1"># noqa: E402</span>
+<span class="kn">from</span> <span class="nn">geomstats.geometry.euclidean</span> <span class="kn">import</span> <span class="n">Euclidean</span>  <span class="c1"># noqa: E402</span>
 
 
 <span class="k">class</span> <span class="nc">NeuralManifoldIntrinsic</span><span class="p">(</span><span class="n">ImmersedSet</span><span class="p">):</span>
@@ -2121,7 +2124,7 @@ torch.Size([961])
         <span class="bp">self</span><span class="o">.</span><span class="n">neural_embedding_dim</span> <span class="o">=</span> <span class="n">neural_embedding_dim</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">equip</span><span class="o">=</span><span class="n">equip</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neural_immersion</span> <span class="o">=</span> <span class="n">neural_immersion</span>
-        <span class="c1">#self.neural_embedding_dim = neural_embedding_dim</span>
+        <span class="c1"># self.neural_embedding_dim = neural_embedding_dim</span>
 
     <span class="k">def</span> <span class="nf">immersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">neural_immersion</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
@@ -2137,18 +2140,23 @@ torch.Size([961])
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">major_radius</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">minor_radius</span> <span class="o">=</span> <span class="mi">1</span>
+
+
 <span class="k">def</span> <span class="nf">neural_immersion</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="n">phi</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">major_radius</span> <span class="o">-</span> <span class="n">minor_radius</span> <span class="o">*</span> <span class="n">gs</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">*</span> <span class="n">gs</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">major_radius</span> <span class="o">-</span> <span class="n">minor_radius</span> <span class="o">*</span> <span class="n">gs</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">*</span> <span class="n">gs</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">minor_radius</span> <span class="o">*</span> <span class="n">gs</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">gs</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">],</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gs</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
 
 <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">neural_embedding_dim</span> <span class="o">=</span> <span class="mi">3</span>
 
-<span class="n">neural_manifold</span> <span class="o">=</span> <span class="n">NeuralManifoldIntrinsic</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">neural_embedding_dim</span><span class="p">,</span> <span class="n">neural_immersion</span><span class="p">,</span> <span class="n">equip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">neural_manifold</span> <span class="o">=</span> <span class="n">NeuralManifoldIntrinsic</span><span class="p">(</span>
+    <span class="n">dim</span><span class="p">,</span> <span class="n">neural_embedding_dim</span><span class="p">,</span> <span class="n">neural_immersion</span><span class="p">,</span> <span class="n">equip</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
 <span class="n">neural_manifold</span><span class="o">.</span><span class="n">equip_with_metric</span><span class="p">(</span><span class="n">PullbackMetric</span><span class="p">);</span>
 </pre></div>
 </div>
