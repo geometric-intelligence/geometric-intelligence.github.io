@@ -1,0 +1,1288 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Group Homophily &#8212; TopoBenchmark latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/homophily_tutorial';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/topobenchmark/notebooks/homophily_tutorial.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="📚 Adding a Custom Dataset Tutorial" href="tutorial_add_custom_dataset.html" />
+    <link rel="prev" title="Tutorials" href="../tutorials/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+    <meta name="docbuild:last-update" content="Nov 26, 2024, 8:45:15 PM"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">TopoBenchmark latest documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing/index.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing/index.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Group Homophily</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="tutorial_add_custom_dataset.html">📚 Adding a Custom Dataset Tutorial</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tutorial_dataset.html">Using a new dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_lifting.html">Implementing your own lifting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_model.html">Implementing your own model</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Group Homophily</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rootutils</span>
+
+<span class="n">rootutils</span><span class="o">.</span><span class="n">setup_root</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="n">indicator</span><span class="o">=</span><span class="s2">&quot;.project-root&quot;</span><span class="p">,</span> <span class="n">pythonpath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">hydra</span>
+<span class="kn">from</span> <span class="nn">topobenchmarkx.data.loaders.graph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">topobenchmarkx.data.loaders.hypergraph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">topobenchmarkx.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
+<span class="kn">from</span> <span class="nn">topobenchmarkx.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_default_transform</span><span class="p">,</span>
+    <span class="n">get_monitor_metric</span><span class="p">,</span>
+    <span class="n">get_monitor_mode</span><span class="p">,</span>
+    <span class="n">infer_in_channels</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+
+<span class="n">hydra</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../configs&quot;</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="s2">&quot;job&quot;</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_1117779/40423503.py:21: UserWarning:
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  hydra.initialize(config_path=&#34;../configs&#34;, job_name=&#34;job&#34;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [1]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+hydra.initialize()
+</pre></div></div>
+</div>
+<section id="Group-Homophily">
+<h1>Group Homophily<a class="headerlink" href="#Group-Homophily" title="Link to this heading">#</a></h1>
+<section id="Loade-the-data-and-calculate-the-group-homophily">
+<h2>Loade the data and calculate the group homophily<a class="headerlink" href="#Loade-the-data-and-calculate-the-group-homophily" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;run.yaml&quot;</span><span class="p">,</span> <span class="n">overrides</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;model=hypergraph/unignn2&quot;</span><span class="p">,</span> <span class="s2">&quot;dataset=hypergraph/coauthorship_cora&quot;</span><span class="p">],</span> <span class="n">return_hydra_config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">loader</span><span class="p">)</span>
+
+<span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="c1"># Apply transform</span>
+
+<span class="n">transform_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;group_homophily&quot;</span> <span class="p">:</span>
+    <span class="p">{</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;GroupCombinatorialHomophily&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;top_k&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">processed_dataset</span> <span class="o">=</span> <span class="n">PreProcessor</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">,</span> <span class="n">transform_config</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">processed_dataset</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Download complete.
+Transform parameters are the same, using existing data_dir: /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coauthorship_cora/group_homophily/1048349801
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coauthorship_cora/raw/coauthorship_cora.zip
+/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torch_geometric/data/in_memory_dataset.py:300: UserWarning: It is not recommended to directly access the internal storage format `data` of an &#39;InMemoryDataset&#39;. If you are absolutely certain what you are doing, access the internal storage via `InMemoryDataset._data` instead to suppress this warning. Alternatively, you can access stacked individual attributes of every graph via `dataset.{attr_name}`.
+  warnings.warn(msg)
+</pre></div></div>
+</div>
+</section>
+<section id="Define-plotting-function">
+<h2>Define plotting function<a class="headerlink" href="#Define-plotting-function" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span> <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="s1">&#39;#9467bd&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#8c564b&#39;</span><span class="p">,</span> <span class="s1">&#39;#e377c2&#39;</span><span class="p">,</span> <span class="s1">&#39;#7f7f7f&#39;</span><span class="p">,</span> <span class="s1">&#39;#bcbd22&#39;</span><span class="p">,</span> <span class="s1">&#39;#17becf&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#aec7e8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffbb78&#39;</span><span class="p">,</span> <span class="s1">&#39;#98df8a&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9896&#39;</span><span class="p">,</span> <span class="s1">&#39;#c5b0d5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#c49c94&#39;</span><span class="p">,</span> <span class="s1">&#39;#f7b6d2&#39;</span><span class="p">,</span> <span class="s1">&#39;#c7c7c7&#39;</span><span class="p">,</span> <span class="s1">&#39;#dbdb8d&#39;</span><span class="p">,</span> <span class="s1">&#39;#9edae5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#393b79&#39;</span><span class="p">,</span> <span class="s1">&#39;#637939&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#843c39&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#d1e5f0&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7ba52&#39;</span><span class="p">,</span> <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#ad494a&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7969c&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span> <span class="s1">&#39;#aec7e8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9896&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#98df8a&#39;</span><span class="p">,</span> <span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffbb78&#39;</span><span class="p">,</span> <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#9467bd&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c564b&#39;</span><span class="p">,</span> <span class="s1">&#39;#e377c2&#39;</span><span class="p">,</span> <span class="s1">&#39;#7f7f7f&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#bcbd22&#39;</span><span class="p">,</span> <span class="s1">&#39;#17becf&#39;</span><span class="p">,</span> <span class="s1">&#39;#c5b0d5&#39;</span><span class="p">,</span> <span class="s1">&#39;#c49c94&#39;</span><span class="p">,</span> <span class="s1">&#39;#f7b6d2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#393b79&#39;</span><span class="p">,</span> <span class="s1">&#39;#637939&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#843c39&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#d1e5f0&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7ba52&#39;</span><span class="p">,</span> <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#ad494a&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7969c&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span> <span class="s1">&#39;#aec7e8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9896&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#98df8a&#39;</span><span class="p">,</span> <span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffbb78&#39;</span><span class="p">,</span> <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#9467bd&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c564b&#39;</span><span class="p">,</span> <span class="s1">&#39;#e377c2&#39;</span><span class="p">,</span> <span class="s1">&#39;#7f7f7f&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#bcbd22&#39;</span><span class="p">,</span> <span class="s1">&#39;#17becf&#39;</span><span class="p">,</span> <span class="s1">&#39;#c5b0d5&#39;</span><span class="p">,</span> <span class="s1">&#39;#c49c94&#39;</span><span class="p">,</span> <span class="s1">&#39;#f7b6d2&#39;</span>
+<span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">normalised_bias</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">def</span> <span class="nf">make_plot</span><span class="p">(</span><span class="n">Dt</span><span class="p">,</span> <span class="n">Bt</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">number_of_he</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot_tyitle</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">rmdefault}</span><span class="si">{ptm}</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">sfdefault}</span><span class="si">{phv}</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.399186938124422</span><span class="p">),</span>
+      <span class="s1">&#39;figure.constrained_layout.use&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+      <span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;legend.fontsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;axes.titlesize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">}</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc_context</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;normalised&#39;</span><span class="p">:</span>
+            <span class="n">h_t</span> <span class="o">=</span> <span class="n">normalised_bias</span><span class="p">(</span><span class="n">Dt</span><span class="p">,</span> <span class="n">Bt</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;affinity/baseline&#39;</span><span class="p">:</span>
+            <span class="n">h_t</span> <span class="o">=</span> <span class="n">Dt</span><span class="o">/</span><span class="n">Bt</span>
+
+        <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;affinity&#39;</span><span class="p">:</span>
+            <span class="n">h_t</span> <span class="o">=</span> <span class="n">Dt</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;plot_type must be one of: normalised, affinity/baseline, affinity&#39;</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">max_k</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="c1"># Plot h_t lines with different colors corresponting to each row</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h_t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>  <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x_values_to_visualize</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># Visualise only non-zero values, x indices have to correspont to position of non zero values</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="c1"># Get non-zero values</span>
+                <span class="k">if</span> <span class="n">plot_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;affinity&#39;</span><span class="p">,</span> <span class="s1">&#39;affinity/baseline&#39;</span><span class="p">]:</span>
+                    <span class="n">non_zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">h_t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="c1">#print(non_zero)</span>
+                <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;normalised&#39;</span><span class="p">:</span>
+                    <span class="c1"># do not take the ones which are equal to 0</span>
+
+                    <span class="n">non_zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">h_t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mf">0.99</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">h_t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1"># Plot non-zero values and make sure when several values have same y value they are not plotted on top of each other</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">non_zero</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h_t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">non_zero</span><span class="p">],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="c1"># Add x values to the list of x values to visualise</span>
+                <span class="n">x_values_to_visualize</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">non_zero</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))))</span>
+
+
+        <span class="c1"># Manually put axis x values and five size of the ticks</span>
+        <span class="k">if</span> <span class="n">max_k</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">h_t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">h_t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_values_to_visualize</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_values_to_visualize</span><span class="p">])</span>
+
+        <span class="c1"># Size of the ticks</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Add title and labels</span>
+        <span class="k">if</span> <span class="n">plot_tyitle</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">max_k</span><span class="si">}</span><span class="s1">-uniform hypergraph, number of hyperedges: </span><span class="si">{</span><span class="n">number_of_he</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="c1"># Add grid to the plot</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;normalised&#39;</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Normalised bias&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="c1"># Put a line perpendicular axis x in values 1, make it thin and black</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="c1"># Make y scale be between 0 and 1</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+            <span class="c1">#plt.ylim(bottom=-1.2)</span>
+
+        <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;affinity/baseline&#39;</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Affinity/Baseline&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span> <span class="p">)</span>
+            <span class="c1"># Make y axis logarithmic with 10 as base</span>
+            <span class="c1"># Make y axis logarithmic but manually</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;symlog&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Put a line perpendicular axis x in values 1, make it thin and black</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="s1">&#39;affinity&#39;</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Affinity&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;plot_type must be one of: normalised, affinity-t, affinity&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Plotting">
+<h2>Plotting<a class="headerlink" href="#Plotting" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">figures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">group_combinatorial_homophily</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">max_k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;he_card=&#39;</span><span class="p">))</span>
+    <span class="n">Dt</span><span class="p">,</span> <span class="n">Bt</span><span class="p">,</span> <span class="n">number_of_he</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">group_combinatorial_homophily</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Dt&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">group_combinatorial_homophily</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;Bt&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">group_combinatorial_homophily</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;num_hyperedges&#39;</span><span class="p">]</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">rmdefault}</span><span class="si">{ptm}</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">sfdefault}</span><span class="si">{phv}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                <span class="s1">&#39;figure.constrained_layout.use&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+                <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+                <span class="s1">&#39;legend.fontsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+                <span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+                <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+                <span class="s1">&#39;axes.titlesize&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+    <span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc_context</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+        <span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">make_plot</span><span class="p">(</span><span class="n">Dt</span><span class="p">,</span> <span class="n">Bt</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;affinity&#39;</span><span class="p">))</span>
+        <span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">make_plot</span><span class="p">(</span><span class="n">Dt</span><span class="p">,</span> <span class="n">Bt</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;affinity/baseline&#39;</span><span class="p">,</span> <span class="n">plot_tyitle</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">make_plot</span><span class="p">(</span><span class="n">Dt</span><span class="p">,</span> <span class="n">Bt</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">max_k</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;normalised&#39;</span><span class="p">))</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">Dt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">4</span> <span class="ow">and</span> <span class="n">Dt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Class </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">))],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+                    <span class="n">ncol</span><span class="o">=</span><span class="n">Dt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">.0</span><span class="p">))</span>
+
+
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">)</span><span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Class </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">))],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+                    <span class="n">ncol</span><span class="o">=</span><span class="n">Dt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">.0</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_97245/14240756.py:24: UserWarning: The figure layout has changed to tight
+  f.tight_layout()
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_homophily_tutorial_7_1.png" src="../_images/notebooks_homophily_tutorial_7_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_97245/14240756.py:24: UserWarning: The figure layout has changed to tight
+  f.tight_layout()
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_homophily_tutorial_7_3.png" src="../_images/notebooks_homophily_tutorial_7_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_97245/14240756.py:24: UserWarning: The figure layout has changed to tight
+  f.tight_layout()
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_homophily_tutorial_7_5.png" src="../_images/notebooks_homophily_tutorial_7_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_97245/14240756.py:24: UserWarning: The figure layout has changed to tight
+  f.tight_layout()
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_homophily_tutorial_7_7.png" src="../_images/notebooks_homophily_tutorial_7_7.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Message-Passing-Homophily">
+<h1>Message-Passing Homophily<a class="headerlink" href="#Message-Passing-Homophily" title="Link to this heading">#</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;run.yaml&quot;</span><span class="p">,</span> <span class="n">overrides</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;model=hypergraph/unignn2&quot;</span><span class="p">,</span><span class="s2">&quot;dataset=hypergraph/coauthorship_cora&quot;</span><span class="p">],</span> <span class="n">return_hydra_config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">loader</span><span class="p">)</span>
+<span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># Create transform config</span>
+<span class="n">transform_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mp_homophily&quot;</span> <span class="p">:</span>
+    <span class="p">{</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;MessagePassingHomophily&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;num_steps&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;incidence_field&#39;</span><span class="p">:</span> <span class="s2">&quot;incidence_hyperedges&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Apply transform</span>
+<span class="n">processed_dataset</span> <span class="o">=</span> <span class="n">PreProcessor</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">,</span> <span class="n">transform_config</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">processed_dataset</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Download complete.
+Transform parameters are the same, using existing data_dir: /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coauthorship_cora/mp_homophily/2005719047
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coauthorship_cora/raw/coauthorship_cora.zip
+/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torch_geometric/data/in_memory_dataset.py:300: UserWarning: It is not recommended to directly access the internal storage format `data` of an &#39;InMemoryDataset&#39;. If you are absolutely certain what you are doing, access the internal storage via `InMemoryDataset._data` instead to suppress this warning. Alternatively, you can access stacked individual attributes of every graph via `dataset.{attr_name}`.
+  warnings.warn(msg)
+</pre></div></div>
+</div>
+<section id="id1">
+<h2>Plotting<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_homophily_scatter</span><span class="p">(</span><span class="n">avr_class_type1</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">non_isolated_nodes</span><span class="p">,</span> <span class="n">type1</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">save_to</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span> <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="s1">&#39;#9467bd&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#8c564b&#39;</span><span class="p">,</span> <span class="s1">&#39;#e377c2&#39;</span><span class="p">,</span> <span class="s1">&#39;#7f7f7f&#39;</span><span class="p">,</span> <span class="s1">&#39;#bcbd22&#39;</span><span class="p">,</span> <span class="s1">&#39;#17becf&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#aec7e8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffbb78&#39;</span><span class="p">,</span> <span class="s1">&#39;#98df8a&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9896&#39;</span><span class="p">,</span> <span class="s1">&#39;#c5b0d5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#c49c94&#39;</span><span class="p">,</span> <span class="s1">&#39;#f7b6d2&#39;</span><span class="p">,</span> <span class="s1">&#39;#c7c7c7&#39;</span><span class="p">,</span> <span class="s1">&#39;#dbdb8d&#39;</span><span class="p">,</span> <span class="s1">&#39;#9edae5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#393b79&#39;</span><span class="p">,</span> <span class="s1">&#39;#637939&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#843c39&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#d1e5f0&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7ba52&#39;</span><span class="p">,</span> <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#ad494a&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7969c&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span> <span class="s1">&#39;#aec7e8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9896&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#98df8a&#39;</span><span class="p">,</span> <span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffbb78&#39;</span><span class="p">,</span> <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#9467bd&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c564b&#39;</span><span class="p">,</span> <span class="s1">&#39;#e377c2&#39;</span><span class="p">,</span> <span class="s1">&#39;#7f7f7f&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#bcbd22&#39;</span><span class="p">,</span> <span class="s1">&#39;#17becf&#39;</span><span class="p">,</span> <span class="s1">&#39;#c5b0d5&#39;</span><span class="p">,</span> <span class="s1">&#39;#c49c94&#39;</span><span class="p">,</span> <span class="s1">&#39;#f7b6d2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#393b79&#39;</span><span class="p">,</span> <span class="s1">&#39;#637939&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#843c39&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#d1e5f0&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7ba52&#39;</span><span class="p">,</span> <span class="s1">&#39;#d6616b&#39;</span><span class="p">,</span> <span class="s1">&#39;#ad494a&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#8c6d31&#39;</span><span class="p">,</span> <span class="s1">&#39;#e7969c&#39;</span><span class="p">,</span> <span class="s1">&#39;#7b4173&#39;</span><span class="p">,</span> <span class="s1">&#39;#aec7e8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9896&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#98df8a&#39;</span><span class="p">,</span> <span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffbb78&#39;</span><span class="p">,</span> <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#9467bd&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c564b&#39;</span><span class="p">,</span> <span class="s1">&#39;#e377c2&#39;</span><span class="p">,</span> <span class="s1">&#39;#7f7f7f&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#bcbd22&#39;</span><span class="p">,</span> <span class="s1">&#39;#17becf&#39;</span><span class="p">,</span> <span class="s1">&#39;#c5b0d5&#39;</span><span class="p">,</span> <span class="s1">&#39;#c49c94&#39;</span><span class="p">,</span> <span class="s1">&#39;#f7b6d2&#39;</span>
+<span class="p">])</span>
+    <span class="n">right_shift_points</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="n">shift</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1">#+ int(np.std(np.unique(labels, return_counts=True)[1]) * 0.1)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">avr_class_type1</span><span class="p">)):</span>
+        <span class="n">x_left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">right_shift_points</span>
+        <span class="n">x_right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">right_shift_points</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_left</span><span class="p">,</span> <span class="n">x_right</span><span class="p">],</span>
+                 <span class="p">[</span><span class="n">avr_class_type1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">avr_class_type1</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span>
+                 <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                 <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labelbottom</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">x_left</span><span class="p">,</span> <span class="n">x_right</span><span class="p">],</span>
+                   <span class="n">ymin</span><span class="o">=</span><span class="p">[</span><span class="n">avr_class_type1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">avr_class_type1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mf">0.01</span><span class="p">],</span>
+                   <span class="n">ymax</span><span class="o">=</span><span class="p">[</span><span class="n">avr_class_type1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">avr_class_type1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mf">0.01</span><span class="p">],</span>
+                   <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">text_fontsize</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">text_fontsize</span> <span class="o">=</span> <span class="mi">10</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_left</span> <span class="o">+</span> <span class="p">(</span><span class="n">x_right</span> <span class="o">-</span> <span class="n">x_left</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">avr_class_type1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                 <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                 <span class="n">fontsize</span><span class="o">=</span><span class="n">text_fontsize</span><span class="p">)</span>
+
+        <span class="n">right_shift_points</span> <span class="o">+=</span> <span class="n">shift</span>
+
+    <span class="c1"># if len(np.unique(labels))&lt; 20:</span>
+    <span class="c1">#     leg = [mlines.Line2D([], [], color=colors[i], label=f&#39;Class {i}&#39;) for i in range(len(avr_class_type1))]</span>
+
+    <span class="c1">#     plt.legend(handles=leg, loc=&#39;upper center&#39;, bbox_to_anchor=(0.5, -0.0), ncol=len(avr_class_type1), fontsize=10)</span>
+
+    <span class="n">right_shift_points</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">type1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">avr_class_type1</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">right_shift_points</span><span class="p">,</span> <span class="n">type1</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
+                    <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Class </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+
+        <span class="n">most_right_point</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">right_shift_points</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">most_right_point</span><span class="p">]</span> <span class="o">*</span> <span class="n">shift</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">shift</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">shift</span><span class="p">,</span>
+                    <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.0</span><span class="p">)</span>
+
+
+        <span class="n">right_shift_points</span> <span class="o">+=</span> <span class="n">shift</span>
+
+
+    <span class="k">if</span> <span class="n">step</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># get rid of y ticks</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Homophily&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+
+    <span class="k">if</span> <span class="n">save_to</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_to</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">incidence_hyperedges</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">n_steps</span><span class="o">=</span><span class="mi">11</span>
+<span class="n">Ep</span><span class="p">,</span> <span class="n">Np</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;Ep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;Np&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="n">transform_config</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;num_steps&#39;</span><span class="p">]</span>
+
+
+<span class="n">isolated_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Get non-isolated nodes</span>
+<span class="n">non_isolated_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">isolated_nodes</span><span class="p">)))</span>
+
+<span class="c1"># Sort non-isolated nodes by their class node</span>
+<span class="n">non_isolated_nodes</span> <span class="o">=</span> <span class="n">non_isolated_nodes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">])]</span>
+
+<span class="c1"># Extract the class node probability distribution for non-isolated nodes</span>
+<span class="n">sorted_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span>
+<span class="n">avr_class_homophily_types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">Np</span><span class="p">[</span><span class="n">step</span><span class="p">,</span> <span class="n">non_isolated_nodes</span><span class="p">,</span> <span class="n">sorted_labels</span><span class="p">]</span>
+
+    <span class="c1"># Within every class, sort the nodes by their class node probability distribution</span>
+    <span class="n">avr_class_type</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sorted_labels</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sorted_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">])]</span>
+        <span class="n">avr_class_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+
+    <span class="n">avr_class_homophily_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avr_class_type</span><span class="p">)</span>
+    <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+
+
+<span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">rmdefault}</span><span class="si">{ptm}</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">sfdefault}</span><span class="si">{phv}</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.399186938124422</span><span class="p">),</span>
+      <span class="s1">&#39;figure.constrained_layout.use&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+      <span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;legend.fontsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;axes.titlesize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">}</span>
+
+<span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc_context</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_homophily_scatter</span><span class="p">(</span><span class="n">avr_class_homophily_types</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">non_isolated_nodes</span><span class="p">,</span> <span class="n">types</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">save_to</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">fig</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_homophily_tutorial_12_0.png" src="../_images/notebooks_homophily_tutorial_12_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="MP-Homophily-for-cell-complex">
+<h1>MP Homophily for cell-complex<a class="headerlink" href="#MP-Homophily-for-cell-complex" title="Link to this heading">#</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span><span class="p">,</span> <span class="n">open_dict</span>
+<span class="c1"># Recompose config with additional override of model equivalent to &quot;&quot;model=cell/cwn&quot;&quot; which will force to load approriate tranforms</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;run.yaml&quot;</span><span class="p">,</span> <span class="n">overrides</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dataset=graph/cocitation_cora&quot;</span><span class="p">,</span> <span class="s2">&quot;model=cell/cwn&quot;</span><span class="p">],</span> <span class="n">return_hydra_config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">loader</span><span class="p">)</span>
+<span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># Create transform config</span>
+
+<span class="c1"># Add one more transform into Omegaconf dict</span>
+
+<span class="n">new_transform</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;MessagePassingHomophily&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;num_steps&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;incidence_field&#39;</span><span class="p">:</span> <span class="s2">&quot;incidence_1&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="c1"># Use open_dict to temporarily disable struct mode</span>
+<span class="k">with</span> <span class="n">open_dict</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">transforms</span><span class="p">):</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">transforms</span><span class="p">[</span><span class="s2">&quot;mp_homophily&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">new_transform</span><span class="p">)</span>
+
+<span class="c1"># Apply transform</span>
+<span class="n">processed_dataset</span> <span class="o">=</span> <span class="n">PreProcessor</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">transforms</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">processed_dataset</span><span class="o">.</span><span class="n">data</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Transform parameters are the same, using existing data_dir: /home/lev/projects/TopoBenchmark/datasets/graph/cocitation/Cora/graph2cell_lifting_mp_homophily/1963906553
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torch_geometric/data/in_memory_dataset.py:300: UserWarning: It is not recommended to directly access the internal storage format `data` of an &#39;InMemoryDataset&#39;. If you are absolutely certain what you are doing, access the internal storage via `InMemoryDataset._data` instead to suppress this warning. Alternatively, you can access stacked individual attributes of every graph via `dataset.{attr_name}`.
+  warnings.warn(msg)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">incidence_1</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">n_steps</span><span class="o">=</span><span class="mi">11</span>
+<span class="n">Ep</span><span class="p">,</span> <span class="n">Np</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;Ep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;Np&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="n">transform_config</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;num_steps&#39;</span><span class="p">]</span>
+
+
+<span class="n">isolated_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Get non-isolated nodes</span>
+<span class="n">non_isolated_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">isolated_nodes</span><span class="p">)))</span>
+
+<span class="c1"># Sort non-isolated nodes by their class node</span>
+<span class="n">non_isolated_nodes</span> <span class="o">=</span> <span class="n">non_isolated_nodes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">])]</span>
+
+<span class="c1"># Extract the class node probability distribution for non-isolated nodes</span>
+<span class="n">sorted_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span>
+<span class="n">avr_class_homophily_types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">Np</span><span class="p">[</span><span class="n">step</span><span class="p">,</span> <span class="n">non_isolated_nodes</span><span class="p">,</span> <span class="n">sorted_labels</span><span class="p">]</span>
+
+    <span class="c1"># Within every class, sort the nodes by their class node probability distribution</span>
+    <span class="n">avr_class_type</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sorted_labels</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sorted_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">])]</span>
+        <span class="n">avr_class_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+
+    <span class="n">avr_class_homophily_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avr_class_type</span><span class="p">)</span>
+    <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+
+
+<span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">rmdefault}</span><span class="si">{ptm}</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">sfdefault}</span><span class="si">{phv}</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.399186938124422</span><span class="p">),</span>
+      <span class="s1">&#39;figure.constrained_layout.use&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+      <span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;legend.fontsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;axes.titlesize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">}</span>
+
+<span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc_context</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_homophily_scatter</span><span class="p">(</span><span class="n">avr_class_homophily_types</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">non_isolated_nodes</span><span class="p">,</span> <span class="n">types</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">save_to</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">fig</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_homophily_tutorial_15_0.png" src="../_images/notebooks_homophily_tutorial_15_0.png" />
+</div>
+</div>
+<section id="Hypergraph">
+<h2>Hypergraph<a class="headerlink" href="#Hypergraph" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span><span class="p">,</span> <span class="n">open_dict</span>
+<span class="c1"># Recompose config with additional override of model equivalent to &quot;&quot;model=hypergraph/unignn2&quot;&quot; which will force to load approriate tranforms</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;run.yaml&quot;</span><span class="p">,</span> <span class="n">overrides</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dataset=graph/cocitation_cora&quot;</span><span class="p">,</span> <span class="s2">&quot;model=hypergraph/unignn2&quot;</span><span class="p">],</span> <span class="n">return_hydra_config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">loader</span><span class="p">)</span>
+<span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># Create transform config</span>
+
+<span class="c1"># Add one more transform into Omegaconf dict</span>
+
+<span class="n">new_transform</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;MessagePassingHomophily&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;num_steps&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;incidence_field&#39;</span><span class="p">:</span> <span class="s2">&quot;incidence_hyperedges&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<span class="c1"># Use open_dict to temporarily disable struct mode</span>
+<span class="k">with</span> <span class="n">open_dict</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">transforms</span><span class="p">):</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">transforms</span><span class="p">[</span><span class="s2">&quot;mp_homophily&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">new_transform</span><span class="p">)</span>
+
+<span class="c1"># # Apply transform</span>
+<span class="n">processed_dataset</span> <span class="o">=</span> <span class="n">PreProcessor</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">transforms</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">processed_dataset</span><span class="o">.</span><span class="n">data</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Transform parameters are the same, using existing data_dir: /home/lev/projects/TopoBenchmark/datasets/graph/cocitation/Cora/graph2hypergraph_lifting_mp_homophily/1975368801
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torch_geometric/data/in_memory_dataset.py:300: UserWarning: It is not recommended to directly access the internal storage format `data` of an &#39;InMemoryDataset&#39;. If you are absolutely certain what you are doing, access the internal storage via `InMemoryDataset._data` instead to suppress this warning. Alternatively, you can access stacked individual attributes of every graph via `dataset.{attr_name}`.
+  warnings.warn(msg)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">incidence_hyperedges</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">n_steps</span><span class="o">=</span><span class="mi">11</span>
+<span class="n">Ep</span><span class="p">,</span> <span class="n">Np</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;Ep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;Np&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="n">transform_config</span><span class="p">[</span><span class="s1">&#39;mp_homophily&#39;</span><span class="p">][</span><span class="s1">&#39;num_steps&#39;</span><span class="p">]</span>
+
+
+<span class="n">isolated_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Get non-isolated nodes</span>
+<span class="n">non_isolated_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">isolated_nodes</span><span class="p">)))</span>
+
+<span class="c1"># Sort non-isolated nodes by their class node</span>
+<span class="n">non_isolated_nodes</span> <span class="o">=</span> <span class="n">non_isolated_nodes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">])]</span>
+
+<span class="c1"># Extract the class node probability distribution for non-isolated nodes</span>
+<span class="n">sorted_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">non_isolated_nodes</span><span class="p">]</span>
+<span class="n">avr_class_homophily_types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">Np</span><span class="p">[</span><span class="n">step</span><span class="p">,</span> <span class="n">non_isolated_nodes</span><span class="p">,</span> <span class="n">sorted_labels</span><span class="p">]</span>
+
+    <span class="c1"># Within every class, sort the nodes by their class node probability distribution</span>
+    <span class="n">avr_class_type</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sorted_labels</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sorted_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">])]</span>
+        <span class="n">avr_class_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">type</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+
+    <span class="n">avr_class_homophily_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avr_class_type</span><span class="p">)</span>
+    <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+
+
+<span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">rmdefault}</span><span class="si">{ptm}</span><span class="se">\\</span><span class="s1">renewcommand{</span><span class="se">\\</span><span class="s1">sfdefault}</span><span class="si">{phv}</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.399186938124422</span><span class="p">),</span>
+      <span class="s1">&#39;figure.constrained_layout.use&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+      <span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;legend.fontsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;axes.titlesize&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">}</span>
+
+<span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc_context</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_homophily_scatter</span><span class="p">(</span><span class="n">avr_class_homophily_types</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">non_isolated_nodes</span><span class="p">,</span> <span class="n">types</span><span class="p">[</span><span class="n">step</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">save_to</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_homophily_tutorial_18_0.png" src="../_images/notebooks_homophily_tutorial_18_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../tutorials/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tutorials</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_add_custom_dataset.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">📚 Adding a Custom Dataset Tutorial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Group Homophily</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loade-the-data-and-calculate-the-group-homophily">Loade the data and calculate the group homophily</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-plotting-function">Define plotting function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Plotting">Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Message-Passing-Homophily">Message-Passing Homophily</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#MP-Homophily-for-cell-complex">MP Homophily for cell-complex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Hypergraph">Hypergraph</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/homophily_tutorial.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2022-2023, PyT-Team, Inc..
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
