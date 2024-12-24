@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Group Homophily &#8212; TopoBenchmark latest documentation</title>
+    <title>Homophily Tutorial &#8212; TopoBenchmark latest documentation</title>
   
   
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Nov 28, 2024, 2:15:49 AM"/>
+    <meta name="docbuild:last-update" content="Dec 24, 2024, 1:18:53 AM"/>
   </head>
   
   
@@ -272,7 +272,8 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Group Homophily</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Homophily Tutorial</a></li>
+
 
 
 <li class="toctree-l1"><a class="reference internal" href="tutorial_add_custom_dataset.html">📚 Adding a Custom Dataset Tutorial</a></li>
@@ -292,9 +293,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -323,7 +329,7 @@
     
     <li class="breadcrumb-item"><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Group Homophily</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Homophily Tutorial</span></li>
   </ul>
 </nav>
 </div>
@@ -340,8 +346,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [1]:
+  <section id="Homophily-Tutorial">
+<h1>Homophily Tutorial<a class="headerlink" href="#Homophily-Tutorial" title="Link to this heading">#</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rootutils</span>
@@ -350,10 +358,10 @@
 
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">hydra</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.data.loaders.graph</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.data.loaders.hypergraph</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.data.loaders.graph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.data.loaders.hypergraph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_default_transform</span><span class="p">,</span>
     <span class="n">get_monitor_metric</span><span class="p">,</span>
     <span class="n">get_monitor_mode</span><span class="p">,</span>
@@ -365,30 +373,10 @@
 <span class="o">%</span><span class="k">autoreload</span> 2
 
 <span class="n">hydra</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../configs&quot;</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="s2">&quot;job&quot;</span><span class="p">)</span>
-<br/><br/></pre></div>
+<br/></pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/tmp/ipykernel_1117779/40423503.py:21: UserWarning:
-The version_base parameter is not specified.
-Please specify a compatability version level, or None.
-Will assume defaults for version 1.1
-  hydra.initialize(config_path=&#34;../configs&#34;, job_name=&#34;job&#34;)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [1]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-hydra.initialize()
-</pre></div></div>
-</div>
+</section>
 <section id="Group-Homophily">
 <h1>Group Homophily<a class="headerlink" href="#Group-Homophily" title="Link to this heading">#</a></h1>
 <section id="Loade-the-data-and-calculate-the-group-homophily">
@@ -406,7 +394,7 @@ hydra.initialize()
 
 <span class="n">transform_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;group_homophily&quot;</span> <span class="p">:</span>
     <span class="p">{</span>
-    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmark.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;GroupCombinatorialHomophily&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
     <span class="s1">&#39;top_k&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -635,7 +623,7 @@ Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coa
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_homophily_tutorial_7_1.png" src="../_images/notebooks_homophily_tutorial_7_1.png" />
+<img alt="../_images/notebooks_homophily_tutorial_8_1.png" src="../_images/notebooks_homophily_tutorial_8_1.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -651,7 +639,7 @@ Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coa
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_homophily_tutorial_7_3.png" src="../_images/notebooks_homophily_tutorial_7_3.png" />
+<img alt="../_images/notebooks_homophily_tutorial_8_3.png" src="../_images/notebooks_homophily_tutorial_8_3.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -667,7 +655,7 @@ Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coa
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_homophily_tutorial_7_5.png" src="../_images/notebooks_homophily_tutorial_7_5.png" />
+<img alt="../_images/notebooks_homophily_tutorial_8_5.png" src="../_images/notebooks_homophily_tutorial_8_5.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -683,7 +671,7 @@ Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coa
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_homophily_tutorial_7_7.png" src="../_images/notebooks_homophily_tutorial_7_7.png" />
+<img alt="../_images/notebooks_homophily_tutorial_8_7.png" src="../_images/notebooks_homophily_tutorial_8_7.png" />
 </div>
 </div>
 </section>
@@ -703,7 +691,7 @@ Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coa
 <span class="c1"># Create transform config</span>
 <span class="n">transform_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mp_homophily&quot;</span> <span class="p">:</span>
     <span class="p">{</span>
-    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmark.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;MessagePassingHomophily&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
     <span class="s1">&#39;num_steps&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -908,7 +896,7 @@ Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coa
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_homophily_tutorial_12_0.png" src="../_images/notebooks_homophily_tutorial_12_0.png" />
+<img alt="../_images/notebooks_homophily_tutorial_13_0.png" src="../_images/notebooks_homophily_tutorial_13_0.png" />
 </div>
 </div>
 </section>
@@ -932,7 +920,7 @@ Extracting /home/lev/projects/TopoBenchmark/datasets/hypergraph/coauthorship/coa
 <span class="c1"># Add one more transform into Omegaconf dict</span>
 
 <span class="n">new_transform</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmark.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;MessagePassingHomophily&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
     <span class="s1">&#39;num_steps&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -1029,7 +1017,7 @@ Transform parameters are the same, using existing data_dir: /home/lev/projects/T
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_homophily_tutorial_15_0.png" src="../_images/notebooks_homophily_tutorial_15_0.png" />
+<img alt="../_images/notebooks_homophily_tutorial_16_0.png" src="../_images/notebooks_homophily_tutorial_16_0.png" />
 </div>
 </div>
 <section id="Hypergraph">
@@ -1051,7 +1039,7 @@ Transform parameters are the same, using existing data_dir: /home/lev/projects/T
 <span class="c1"># Add one more transform into Omegaconf dict</span>
 
 <span class="n">new_transform</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_target_&#39;</span><span class="p">:</span> <span class="s1">&#39;topobenchmark.transforms.data_transform.DataTransform&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_name&#39;</span><span class="p">:</span> <span class="s1">&#39;MessagePassingHomophily&#39;</span><span class="p">,</span>
     <span class="s1">&#39;transform_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data manipulation&#39;</span><span class="p">,</span>
     <span class="s1">&#39;num_steps&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -1149,7 +1137,7 @@ Transform parameters are the same, using existing data_dir: /home/lev/projects/T
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_homophily_tutorial_18_0.png" src="../_images/notebooks_homophily_tutorial_18_0.png" />
+<img alt="../_images/notebooks_homophily_tutorial_19_0.png" src="../_images/notebooks_homophily_tutorial_19_0.png" />
 </div>
 </div>
 </section>
@@ -1202,7 +1190,8 @@ Transform parameters are the same, using existing data_dir: /home/lev/projects/T
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Group Homophily</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Homophily Tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Group-Homophily">Group Homophily</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loade-the-data-and-calculate-the-group-homophily">Loade the data and calculate the group homophily</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-plotting-function">Define plotting function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Plotting">Plotting</a></li>
@@ -1221,13 +1210,13 @@ Transform parameters are the same, using existing data_dir: /home/lev/projects/T
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/notebooks/homophily_tutorial.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/notebooks/homophily_tutorial.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -1242,8 +1231,8 @@ Transform parameters are the same, using existing data_dir: /home/lev/projects/T
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1276,7 +1265,8 @@ Transform parameters are the same, using existing data_dir: /home/lev/projects/T
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

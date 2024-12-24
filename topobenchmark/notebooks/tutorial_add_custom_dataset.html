@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -51,11 +51,11 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using a new dataset" href="tutorial_dataset.html" />
-    <link rel="prev" title="Group Homophily" href="homophily_tutorial.html" />
+    <link rel="prev" title="Homophily Tutorial" href="homophily_tutorial.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Nov 28, 2024, 2:15:49 AM"/>
+    <meta name="docbuild:last-update" content="Dec 24, 2024, 1:18:53 AM"/>
   </head>
   
   
@@ -272,7 +272,8 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="homophily_tutorial.html">Group Homophily</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homophily_tutorial.html">Homophily Tutorial</a></li>
+
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">📚 Adding a Custom Dataset Tutorial</a></li>
@@ -292,9 +293,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -405,7 +411,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">process()</span></code>: Manages data preprocessing</p></li>
 </ul>
 <blockquote>
-<div><p>💡 <strong>Reference Implementation</strong>: For a complete example, check <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/datasets/language_dataset.py</span></code></p>
+<div><p>💡 <strong>Reference Implementation</strong>: For a complete example, check <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/datasets/language_dataset.py</span></code></p>
 </div></blockquote>
 <section id="Deep-Dive:-The-Download-Method">
 <h3>Deep Dive: The Download Method<a class="headerlink" href="#Deep-Dive:-The-Download-Method" title="Link to this heading">#</a></h3>
@@ -484,7 +490,7 @@ shutil.rmtree(osp.join(folder, self.name))
 <h1>Step 2: Integrate with Dataset APIs 🔄<a class="headerlink" href="#Step-2:-Integrate-with-Dataset-APIs-🔄" title="Link to this heading">#</a></h1>
 <p>Now that we have created a dataset class, we need to integrate it with the library. In this section we describe where to add the dataset files and how to make it available through data loaders.</p>
 <p>Here’s how to structure your files, the files highlighted with ** are going to be updated:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">topobenchmarkx/</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">topobenchmark/</span>
 <span class="l l-Scalar l-Scalar-Plain">├── data/</span>
 <span class="l l-Scalar l-Scalar-Plain">│   ├── datasets/</span>
 <span class="l l-Scalar l-Scalar-Plain">│   │   ├── **init.py**</span>
@@ -502,11 +508,11 @@ shutil.rmtree(osp.join(folder, self.name))
 </pre></div>
 </div>
 <p>To make your dataset available to library:</p>
-<p>The file <code class="docutils literal notranslate"><span class="pre">&lt;dataset_name&gt;.py</span></code> has been created during the previous steps (<code class="docutils literal notranslate"><span class="pre">us_county_demos_dataset.py</span></code> in our case) and should be placed in the <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/datasets/</span></code> directory.</p>
-<p>The registry <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/datasets/__init__.py</span></code> discovers the files in <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/datasets</span></code> and updates <code class="docutils literal notranslate"><span class="pre">__all__</span></code> variable of <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/datasets/__init__.py</span></code> automatically. Hence there is no need to update the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file manually to allow your dataset to be loaded by the library. Simply creare a file <code class="docutils literal notranslate"><span class="pre">&lt;dataset_name&gt;.py</span></code> and place it in the <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/datasets/</span></code> directory.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">&lt;dataset_name&gt;.py</span></code> has been created during the previous steps (<code class="docutils literal notranslate"><span class="pre">us_county_demos_dataset.py</span></code> in our case) and should be placed in the <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/datasets/</span></code> directory.</p>
+<p>The registry <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/datasets/__init__.py</span></code> discovers the files in <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/datasets</span></code> and updates <code class="docutils literal notranslate"><span class="pre">__all__</span></code> variable of <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/datasets/__init__.py</span></code> automatically. Hence there is no need to update the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file manually to allow your dataset to be loaded by the library. Simply creare a file <code class="docutils literal notranslate"><span class="pre">&lt;dataset_name&gt;.py</span></code> and place it in the <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/datasets/</span></code> directory.</p>
 <hr class="docutils" />
-<p>Next it is required to update the data loader system. Modify the loader file (<code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/loaders/loaders.py</span></code>:) to include your custom dataset:</p>
-<p>For the the example dataset we add the following into the file <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/data/loaders/graph/us_county_demos_dataset_loader.py</span></code> which consist of the following:</p>
+<p>Next it is required to update the data loader system. Modify the loader file (<code class="docutils literal notranslate"><span class="pre">topobenchmark/data/loaders/loaders.py</span></code>:) to include your custom dataset:</p>
+<p>For the the example dataset we add the following into the file <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/loaders/graph/us_county_demos_dataset_loader.py</span></code> which consist of the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">USCountyDemosDatasetLoader</span><span class="p">(</span><span class="n">AbstractLoader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load US County Demos dataset with configurable year and task variable.</span>
 
@@ -586,11 +592,11 @@ shutil.rmtree(osp.join(folder, self.name))
 <section id="While-creating-a-configuration-file,-you-will-need-to-specify:">
 <h3>While creating a configuration file, you will need to specify:<a class="headerlink" href="#While-creating-a-configuration-file,-you-will-need-to-specify:" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Loader class (<code class="docutils literal notranslate"><span class="pre">topobenchmarkx.data.loaders.USCountyDemosDatasetLoader</span></code>) for automatic instantialization inside the provided pipeline and the parameters for the loader.</p></li>
+<li><p>Loader class (<code class="docutils literal notranslate"><span class="pre">topobenchmark.data.loaders.USCountyDemosDatasetLoader</span></code>) for automatic instantialization inside the provided pipeline and the parameters for the loader.</p></li>
 </ol>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dataset loader config</span>
 <span class="nt">loader</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topobenchmarkx.data.loaders.USCountyDemosDatasetLoader</span>
+<span class="w">  </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topobenchmark.data.loaders.USCountyDemosDatasetLoader</span>
 <span class="w">  </span><span class="nt">parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">data_domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">graph</span><span class="w">             </span><span class="c1"># Primary data domain. Options: [&#39;graph&#39;, &#39;hypergrpah&#39;, &#39;cell, &#39;simplicial&#39;]</span>
 <span class="w">    </span><span class="nt">data_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cornel</span><span class="w">              </span><span class="c1"># Data type. String emphasizing from where dataset come from.</span>
@@ -649,11 +655,11 @@ shutil.rmtree(osp.join(folder, self.name))
 </section>
 <section id="Preparing-to-Load-the-Custom-Dataset:-Understanding-Configuration-Imports">
 <h2>Preparing to Load the Custom Dataset: Understanding Configuration Imports<a class="headerlink" href="#Preparing-to-Load-the-Custom-Dataset:-Understanding-Configuration-Imports" title="Link to this heading">#</a></h2>
-<p>Before loading our dataset, it’s crucial to understand the configuration imports, particularly those from the <code class="docutils literal notranslate"><span class="pre">topobenchmarkx.utils.config_resolvers</span></code> module. These utility functions play a key role in dynamically configuring your machine learning pipeline.</p>
+<p>Before loading our dataset, it’s crucial to understand the configuration imports, particularly those from the <code class="docutils literal notranslate"><span class="pre">topobenchmark.utils.config_resolvers</span></code> module. These utility functions play a key role in dynamically configuring your machine learning pipeline.</p>
 <section id="Key-Imports-for-Dynamic-Configuration">
 <h3>Key Imports for Dynamic Configuration<a class="headerlink" href="#Key-Imports-for-Dynamic-Configuration" title="Link to this heading">#</a></h3>
 <p>Let’s import the essential configuration resolver functions:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmarkx.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmark.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_default_transform</span><span class="p">,</span>
     <span class="n">get_monitor_metric</span><span class="p">,</span>
     <span class="n">get_monitor_mode</span><span class="p">,</span>
@@ -688,7 +694,7 @@ shutil.rmtree(osp.join(folder, self.name))
 
 
 
-<span class="kn">from</span> <span class="nn">topobenchmarkx.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_default_transform</span><span class="p">,</span>
     <span class="n">get_monitor_metric</span><span class="p">,</span>
     <span class="n">get_monitor_mode</span><span class="p">,</span>
@@ -795,7 +801,7 @@ Data(x=[3224, 6], edge_index=[2, 18966], y=[3224])
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Transform name: dict_keys([&#39;graph2hypergraph_lifting&#39;])
-Transform parameters: {&#39;_target_&#39;: &#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;, &#39;transform_type&#39;: &#39;lifting&#39;, &#39;transform_name&#39;: &#39;HypergraphKHopLifting&#39;, &#39;k_value&#39;: 1, &#39;feature_lifting&#39;: &#39;ProjectionSum&#39;, &#39;neighborhoods&#39;: &#39;${oc.select:model.backbone.neighborhoods,null}&#39;}
+Transform parameters: {&#39;_target_&#39;: &#39;topobenchmark.transforms.data_transform.DataTransform&#39;, &#39;transform_type&#39;: &#39;lifting&#39;, &#39;transform_name&#39;: &#39;HypergraphKHopLifting&#39;, &#39;k_value&#39;: 1, &#39;feature_lifting&#39;: &#39;ProjectionSum&#39;, &#39;neighborhoods&#39;: &#39;${oc.select:model.backbone.neighborhoods,null}&#39;}
 </pre></div></div>
 </div>
 <p>Some datasets require might require default transforms which are applied whenever it is nedded to model the data.</p>
@@ -862,14 +868,14 @@ Data(edge_index=[2, 480], y=[1], num_nodes=218)
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Transform name: dict_keys([&#39;equal_gaus_features&#39;, &#39;graph2hypergraph_lifting&#39;])
-Transform parameters: {&#39;_target_&#39;: &#39;topobenchmarkx.transforms.data_transform.DataTransform&#39;, &#39;transform_name&#39;: &#39;EqualGausFeatures&#39;, &#39;transform_type&#39;: &#39;data manipulation&#39;, &#39;mean&#39;: 0, &#39;std&#39;: 0.1, &#39;num_features&#39;: &#39;${dataset.parameters.num_features}&#39;}
+Transform parameters: {&#39;_target_&#39;: &#39;topobenchmark.transforms.data_transform.DataTransform&#39;, &#39;transform_name&#39;: &#39;EqualGausFeatures&#39;, &#39;transform_type&#39;: &#39;data manipulation&#39;, &#39;mean&#39;: 0, &#39;std&#39;: 0.1, &#39;num_features&#39;: &#39;${dataset.parameters.num_features}&#39;}
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmarkx.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmark.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
 <span class="n">preprocessed_dataset</span> <span class="o">=</span> <span class="n">PreProcessor</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">,</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;transforms&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -944,7 +950,7 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
 <section id="Step-4.2:-Custom-Data-Transformations-⚙️">
 <h1>Step 4.2: Custom Data Transformations ⚙️<a class="headerlink" href="#Step-4.2:-Custom-Data-Transformations-⚙️" title="Link to this heading">#</a></h1>
 <p>In general any transfom in the library inherits <code class="docutils literal notranslate"><span class="pre">torch_geometric.transforms.BaseTransform</span></code> class, which allow to apply a sequency of transforms to the data. Our inderface requires to implement the <code class="docutils literal notranslate"><span class="pre">forward</span></code> method. The important part of all transforms is that it takes <code class="docutils literal notranslate"><span class="pre">torch_geometric.data.Data</span></code> object and returns updated <code class="docutils literal notranslate"><span class="pre">torch_geometric.data.Data</span></code> object.</p>
-<p>For language dataset, we have generated the <code class="docutils literal notranslate"><span class="pre">equal_gaus_features</span></code> transfroms that is a data_manipulation transform hence we place it into <code class="docutils literal notranslate"><span class="pre">topobenchmarkx/transforms/data_manipulation/</span></code> folder. Below you can see th <code class="docutils literal notranslate"><span class="pre">EqualGausFeatures</span></code> class:</p>
+<p>For language dataset, we have generated the <code class="docutils literal notranslate"><span class="pre">equal_gaus_features</span></code> transfroms that is a data_manipulation transform hence we place it into <code class="docutils literal notranslate"><span class="pre">topobenchmark/transforms/data_manipulation/</span></code> folder. Below you can see th <code class="docutils literal notranslate"><span class="pre">EqualGausFeatures</span></code> class:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EqualGausFeatures</span><span class="p">(</span><span class="n">torch_geometric</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">BaseTransform</span><span class="p">):</span>
 <span class="w"> </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A transform that generates equal Gaussian features for all nodes.</span>
 
@@ -992,7 +998,7 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
 <p>As we said above the <code class="docutils literal notranslate"><span class="pre">forward</span></code> function takes as input the <code class="docutils literal notranslate"><span class="pre">torch_geometric.data.Data</span></code> object, modifies it, and returns it.</p>
 <p>Similarly to adding dataset the transformations you have created and placed at right folder are automatically registered.</p>
 <p>Now as we have registered the transform we can finally create the configuration file and use it in the framework:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topobenchmarkx.transforms.data_transform.DataTransform</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topobenchmark.transforms.data_transform.DataTransform</span>
 <span class="nt">transform_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;EqualGausFeatures&quot;</span>
 <span class="nt">transform_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data</span><span class="nv"> </span><span class="s">manipulation&quot;</span>
 
@@ -1004,7 +1010,7 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
 <p>Please refer to <code class="docutils literal notranslate"><span class="pre">configs/transforms/dataset_defaults/equal_gaus_features.yaml</span></code> for the example.</p>
 <p><strong>Notes:</strong></p>
 <ul class="simple">
-<li><p>You might notice an interesting key <code class="docutils literal notranslate"><span class="pre">_target_</span></code> in the configuration file. In general for any new transform you the <code class="docutils literal notranslate"><span class="pre">_target_</span></code> is always <code class="docutils literal notranslate"><span class="pre">topobenchmarkx.transforms.data_transform.DataTransform</span></code>. <a class="reference external" href="https://hydra.cc/docs/advanced/instantiate_objects/overview/">For more information please refer to hydra documentation “Instantiating objects with Hydra” section.</a>.</p></li>
+<li><p>You might notice an interesting key <code class="docutils literal notranslate"><span class="pre">_target_</span></code> in the configuration file. In general for any new transform you the <code class="docutils literal notranslate"><span class="pre">_target_</span></code> is always <code class="docutils literal notranslate"><span class="pre">topobenchmark.transforms.data_transform.DataTransform</span></code>. <a class="reference external" href="https://hydra.cc/docs/advanced/instantiate_objects/overview/">For more information please refer to hydra documentation “Instantiating objects with Hydra” section.</a>.</p></li>
 </ul>
 </section>
 
@@ -1024,7 +1030,7 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Group Homophily</p>
+        <p class="prev-next-title">Homophily Tutorial</p>
       </div>
     </a>
     <a class="right-next"
@@ -1106,13 +1112,13 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/notebooks/tutorial_add_custom_dataset.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/notebooks/tutorial_add_custom_dataset.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -1127,8 +1133,8 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1161,7 +1167,8 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

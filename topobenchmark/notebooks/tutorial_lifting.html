@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Nov 28, 2024, 2:15:49 AM"/>
+    <meta name="docbuild:last-update" content="Dec 24, 2024, 1:18:53 AM"/>
   </head>
   
   
@@ -272,7 +272,8 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="homophily_tutorial.html">Group Homophily</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homophily_tutorial.html">Homophily Tutorial</a></li>
+
 
 
 <li class="toctree-l1"><a class="reference internal" href="tutorial_add_custom_dataset.html">📚 Adding a Custom Dataset Tutorial</a></li>
@@ -292,9 +293,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -371,17 +377,17 @@
 <span class="kn">from</span> <span class="nn">topomodelx.nn.simplicial.scn2</span> <span class="kn">import</span> <span class="n">SCN2</span>
 <span class="kn">from</span> <span class="nn">toponetx.classes</span> <span class="kn">import</span> <span class="n">SimplicialComplex</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmarkx.data.loaders.graph</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.dataloader</span> <span class="kn">import</span> <span class="n">TBXDataloader</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.evaluator</span> <span class="kn">import</span> <span class="n">TBXEvaluator</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.loss</span> <span class="kn">import</span> <span class="n">TBXLoss</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.model</span> <span class="kn">import</span> <span class="n">TBXModel</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.nn.encoders</span> <span class="kn">import</span> <span class="n">AllCellFeatureEncoder</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.nn.readouts</span> <span class="kn">import</span> <span class="n">PropagateSignalDown</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.nn.wrappers.simplicial</span> <span class="kn">import</span> <span class="n">SCNWrapper</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.optimizer</span> <span class="kn">import</span> <span class="n">TBXOptimizer</span>
-<span class="kn">from</span> <span class="nn">topobenchmarkx.transforms.liftings.graph2simplicial</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.data.loaders.graph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.dataloader</span> <span class="kn">import</span> <span class="n">TBDataloader</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.evaluator</span> <span class="kn">import</span> <span class="n">TBEvaluator</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.loss</span> <span class="kn">import</span> <span class="n">TBLoss</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.model</span> <span class="kn">import</span> <span class="n">TBModel</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.nn.encoders</span> <span class="kn">import</span> <span class="n">AllCellFeatureEncoder</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.nn.readouts</span> <span class="kn">import</span> <span class="n">PropagateSignalDown</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.nn.wrappers.simplicial</span> <span class="kn">import</span> <span class="n">SCNWrapper</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.optimizer</span> <span class="kn">import</span> <span class="n">TBOptimizer</span>
+<span class="kn">from</span> <span class="nn">topobenchmark.transforms.liftings.graph2simplicial</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Graph2SimplicialLifting</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -526,7 +532,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmarkx.transforms</span> <span class="kn">import</span> <span class="n">TRANSFORMS</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmark.transforms</span> <span class="kn">import</span> <span class="n">TRANSFORMS</span>
 
 <span class="n">TRANSFORMS</span><span class="p">[</span><span class="s2">&quot;SimplicialCliquesLEQLifting&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SimplicialCliquesLEQLifting</span>
 </pre></div>
@@ -542,7 +548,7 @@
 
 <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">PreProcessor</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">,</span> <span class="n">transform_config</span><span class="p">)</span>
 <span class="n">dataset_train</span><span class="p">,</span> <span class="n">dataset_val</span><span class="p">,</span> <span class="n">dataset_test</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">load_dataset_splits</span><span class="p">(</span><span class="n">split_config</span><span class="p">)</span>
-<span class="n">datamodule</span> <span class="o">=</span> <span class="n">TBXDataloader</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">,</span> <span class="n">dataset_val</span><span class="p">,</span> <span class="n">dataset_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">datamodule</span> <span class="o">=</span> <span class="n">TBDataloader</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">,</span> <span class="n">dataset_val</span><span class="p">,</span> <span class="n">dataset_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -557,7 +563,7 @@ Transform parameters are the same, using existing data_dir: data/MUTAG/MUTAG/cli
 </section>
 <section id="5.-Model-initialization">
 <h3>5. Model initialization<a class="headerlink" href="#5.-Model-initialization" title="Link to this heading">#</a></h3>
-<p>We can create the backbone by instantiating the SCN2 model form TopoModelX. Then the <code class="docutils literal notranslate"><span class="pre">SCNWrapper</span></code> and the <code class="docutils literal notranslate"><span class="pre">TBXModel</span></code> take care of the rest.</p>
+<p>We can create the backbone by instantiating the SCN2 model form TopoModelX. Then the <code class="docutils literal notranslate"><span class="pre">SCNWrapper</span></code> and the <code class="docutils literal notranslate"><span class="pre">TBModel</span></code> take care of the rest.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [7]:
 </pre></div>
@@ -566,11 +572,11 @@ Transform parameters are the same, using existing data_dir: data/MUTAG/MUTAG/cli
 <span class="n">backbone_wrapper</span> <span class="o">=</span> <span class="n">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">wrapper_config</span><span class="p">)</span>
 
 <span class="n">readout</span> <span class="o">=</span> <span class="n">PropagateSignalDown</span><span class="p">(</span><span class="o">**</span><span class="n">readout_config</span><span class="p">)</span>
-<span class="n">loss</span> <span class="o">=</span> <span class="n">TBXLoss</span><span class="p">(</span><span class="o">**</span><span class="n">loss_config</span><span class="p">)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">TBLoss</span><span class="p">(</span><span class="o">**</span><span class="n">loss_config</span><span class="p">)</span>
 <span class="n">feature_encoder</span> <span class="o">=</span> <span class="n">AllCellFeatureEncoder</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="p">[</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">],</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">dim_hidden</span><span class="p">)</span>
 
-<span class="n">evaluator</span> <span class="o">=</span> <span class="n">TBXEvaluator</span><span class="p">(</span><span class="o">**</span><span class="n">evaluator_config</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">TBXOptimizer</span><span class="p">(</span><span class="o">**</span><span class="n">optimizer_config</span><span class="p">)</span>
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">TBEvaluator</span><span class="p">(</span><span class="o">**</span><span class="n">evaluator_config</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">TBOptimizer</span><span class="p">(</span><span class="o">**</span><span class="n">optimizer_config</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -578,7 +584,7 @@ Transform parameters are the same, using existing data_dir: data/MUTAG/MUTAG/cli
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TBXModel</span><span class="p">(</span><span class="n">backbone</span><span class="o">=</span><span class="n">backbone</span><span class="p">,</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TBModel</span><span class="p">(</span><span class="n">backbone</span><span class="o">=</span><span class="n">backbone</span><span class="p">,</span>
                  <span class="n">backbone_wrapper</span><span class="o">=</span><span class="n">backbone_wrapper</span><span class="p">,</span>
                  <span class="n">readout</span><span class="o">=</span><span class="n">readout</span><span class="p">,</span>
                  <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
@@ -637,7 +643,7 @@ HPU available: False, using: 0 HPUs
   warnings.warn(*args, **kwargs)  # noqa: B028
 /home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: The ``compute`` method of metric MulticlassRecall was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
   warnings.warn(*args, **kwargs)  # noqa: B028
-/home/lev/projects/TopoBenchmark/topobenchmarkx/nn/wrappers/simplicial/scn_wrapper.py:75: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+/home/lev/projects/TopoBenchmark/topobenchmark/nn/wrappers/simplicial/scn_wrapper.py:75: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
   normalized_matrix = diag_matrix @ (matrix @ diag_matrix)
 /home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:424: The &#39;train_dataloader&#39; does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=31` in the `DataLoader` to improve performance.
 /home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/loops/fit_loop.py:298: The number of training batches (6) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
@@ -810,13 +816,13 @@ test/recall:         0.7115
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/notebooks/tutorial_lifting.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/notebooks/tutorial_lifting.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -831,8 +837,8 @@ test/recall:         0.7115
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -865,7 +871,8 @@ test/recall:         0.7115
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
