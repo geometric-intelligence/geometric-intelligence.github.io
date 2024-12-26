@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 24, 2024, 1:18:53 AM"/>
+    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
   </head>
   
   
@@ -353,8 +353,6 @@
         <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Logger not found! Skipping hyperparameter logging...&quot;</span><span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
-
     <span class="c1"># save number of model parameters</span>
     <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;model/params/total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
     <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;model/params/trainable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
@@ -364,17 +362,8 @@
         <span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span>
     <span class="p">)</span>
 
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span>
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;trainer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;trainer&quot;</span><span class="p">]</span>
-
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;callbacks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;callbacks&quot;</span><span class="p">)</span>
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;extras&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;extras&quot;</span><span class="p">)</span>
-
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;task_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;task_name&quot;</span><span class="p">)</span>
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">)</span>
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;ckpt_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ckpt_path&quot;</span><span class="p">)</span>
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;seed&quot;</span><span class="p">)</span>
-    <span class="n">hparams</span><span class="p">[</span><span class="s2">&quot;paths&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;paths&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">:</span>
+        <span class="n">hparams</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
     <span class="c1"># send hparams to all loggers</span>
     <span class="k">for</span> <span class="n">logger</span> <span class="ow">in</span> <span class="n">trainer</span><span class="o">.</span><span class="n">loggers</span><span class="p">:</span>
