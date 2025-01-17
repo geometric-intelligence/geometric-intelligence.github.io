@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,14 +316,14 @@
   <h1>Source code for topobenchmark.transforms.data_transform</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;DataTransform class.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">torch_geometric</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch_geometric</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.transforms</span> <span class="kn">import</span> <span class="n">TRANSFORMS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">TRANSFORMS</span>
 
 
 <div class="viewcode-block" id="DataTransform">
 <a class="viewcode-back" href="../../../api/transforms/data_transform/index.html#topobenchmark.transforms.data_transform.DataTransform">[docs]</a>
-<span class="k">class</span> <span class="nc">DataTransform</span><span class="p">(</span><span class="n">torch_geometric</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">BaseTransform</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataTransform</span><span class="p">(</span><span class="n">torch_geometric</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">BaseTransform</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract class to define a custom data lifting.</span>
 
 <span class="sd">    Parameters</span>
@@ -334,7 +334,7 @@
 <span class="sd">        Additional arguments for the class. Should contain &quot;transform_name&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;transform_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">transform_name</span>
@@ -348,7 +348,7 @@
 
 <div class="viewcode-block" id="DataTransform.forward">
 <a class="viewcode-back" href="../../../api/transforms/data_transform/index.html#topobenchmark.transforms.data_transform.DataTransform.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward pass of the lifting.</span>

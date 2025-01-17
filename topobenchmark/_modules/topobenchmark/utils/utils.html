@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,21 +316,21 @@
   <h1>Source code for topobenchmark.utils.utils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utility functions for the TopoBenchMarkX library.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Callable</span>
-<span class="kn">from</span> <span class="nn">importlib.util</span> <span class="kn">import</span> <span class="n">find_spec</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_spec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
-<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">DictConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omegaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictConfig</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.utils</span> <span class="kn">import</span> <span class="n">pylogger</span><span class="p">,</span> <span class="n">rich_utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">pylogger</span><span class="p">,</span> <span class="n">rich_utils</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">pylogger</span><span class="o">.</span><span class="n">RankedLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">rank_zero_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="extras">
 <a class="viewcode-back" href="../../../api/utils/index.html#topobenchmark.utils.utils.extras">[docs]</a>
-<span class="k">def</span> <span class="nf">extras</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extras</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Apply optional utilities before the task is started.</span>
 
 <span class="sd">    Utilities:</span>
@@ -371,7 +371,7 @@
 
 <div class="viewcode-block" id="task_wrapper">
 <a class="viewcode-back" href="../../../api/utils/index.html#topobenchmark.utils.utils.task_wrapper">[docs]</a>
-<span class="k">def</span> <span class="nf">task_wrapper</span><span class="p">(</span><span class="n">task_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">task_wrapper</span><span class="p">(</span><span class="n">task_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Optional decorator that controls the failure behavior when executing the task function.</span>
 
 <span class="sd">    This wrapper can be used to:</span>
@@ -399,7 +399,7 @@
 <span class="sd">        The wrapped task function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrap</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrapper function that executes the task function.</span>
 
 <span class="sd">        Parameters</span>
@@ -432,7 +432,7 @@
 
             <span class="c1"># always close wandb run (even if exception occurs so multirun won&#39;t fail)</span>
             <span class="k">if</span> <span class="n">find_spec</span><span class="p">(</span><span class="s2">&quot;wandb&quot;</span><span class="p">):</span>  <span class="c1"># check if wandb is installed</span>
-                <span class="kn">import</span> <span class="nn">wandb</span>
+                <span class="kn">import</span><span class="w"> </span><span class="nn">wandb</span>
 
                 <span class="k">if</span> <span class="n">wandb</span><span class="o">.</span><span class="n">run</span><span class="p">:</span>
                     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Closing wandb!&quot;</span><span class="p">)</span>
@@ -446,7 +446,7 @@
 
 <div class="viewcode-block" id="get_metric_value">
 <a class="viewcode-back" href="../../../api/utils/index.html#topobenchmark.utils.utils.get_metric_value">[docs]</a>
-<span class="k">def</span> <span class="nf">get_metric_value</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_metric_value</span><span class="p">(</span>
     <span class="n">metric_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Safely retrieves value of the metric logged in LightningModule.</span>

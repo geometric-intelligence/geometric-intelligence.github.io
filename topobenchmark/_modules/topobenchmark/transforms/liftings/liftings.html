@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,16 +316,16 @@
   <h1>Source code for topobenchmark.transforms.liftings.liftings</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module implements the abstract classes for lifting graphs.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">torch_geometric</span>
-<span class="kn">from</span> <span class="nn">torch_geometric.utils.undirected</span> <span class="kn">import</span> <span class="n">is_undirected</span><span class="p">,</span> <span class="n">to_undirected</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch_geometric</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils.undirected</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_undirected</span><span class="p">,</span> <span class="n">to_undirected</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.transforms.liftings</span> <span class="kn">import</span> <span class="n">AbstractLifting</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.transforms.liftings</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractLifting</span>
 
 
 <div class="viewcode-block" id="GraphLifting">
 <a class="viewcode-back" href="../../../../api/transforms/liftings/index.html#topobenchmark.transforms.liftings.GraphLifting">[docs]</a>
-<span class="k">class</span> <span class="nc">GraphLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GraphLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract class for lifting graph topologies to other domains.</span>
 
 <span class="sd">    Parameters</span>
@@ -338,7 +338,7 @@
 <span class="sd">        Additional arguments for the class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span>
         <span class="n">preserve_edge_attr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -347,7 +347,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">feature_lifting</span><span class="o">=</span><span class="n">feature_lifting</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preserve_edge_attr</span> <span class="o">=</span> <span class="n">preserve_edge_attr</span>
 
-    <span class="k">def</span> <span class="nf">_data_has_edge_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_data_has_edge_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check if the input data object has edge attributes.</span>
 
 <span class="sd">        Parameters</span>
@@ -362,7 +362,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;edge_attr&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_attr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">_generate_graph_from_data</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_graph_from_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate a NetworkX graph from the input data object.</span>
@@ -418,7 +418,7 @@
 
 <div class="viewcode-block" id="PointCloudLifting">
 <a class="viewcode-back" href="../../../../api/transforms/liftings/index.html#topobenchmark.transforms.liftings.PointCloudLifting">[docs]</a>
-<span class="k">class</span> <span class="nc">PointCloudLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PointCloudLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract class for lifting point clouds to other topological domains.</span>
 
 <span class="sd">    Parameters</span>
@@ -429,14 +429,14 @@
 <span class="sd">        Additional arguments for the class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">feature_lifting</span><span class="o">=</span><span class="n">feature_lifting</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="CellComplexLifting">
 <a class="viewcode-back" href="../../../../api/transforms/liftings/index.html#topobenchmark.transforms.liftings.CellComplexLifting">[docs]</a>
-<span class="k">class</span> <span class="nc">CellComplexLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CellComplexLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract class for lifting cell complexes to other domains.</span>
 
 <span class="sd">    Parameters</span>
@@ -447,14 +447,14 @@
 <span class="sd">        Additional arguments for the class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">feature_lifting</span><span class="o">=</span><span class="n">feature_lifting</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="SimplicialLifting">
 <a class="viewcode-back" href="../../../../api/transforms/liftings/index.html#topobenchmark.transforms.liftings.SimplicialLifting">[docs]</a>
-<span class="k">class</span> <span class="nc">SimplicialLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimplicialLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract class for lifting simplicial complexes to other domains.</span>
 
 <span class="sd">    Parameters</span>
@@ -465,14 +465,14 @@
 <span class="sd">        Additional arguments for the class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">feature_lifting</span><span class="o">=</span><span class="n">feature_lifting</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="HypergraphLifting">
 <a class="viewcode-back" href="../../../../api/transforms/liftings/index.html#topobenchmark.transforms.liftings.HypergraphLifting">[docs]</a>
-<span class="k">class</span> <span class="nc">HypergraphLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HypergraphLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract class for lifting hypergraphs to other domains.</span>
 
 <span class="sd">    Parameters</span>
@@ -483,14 +483,14 @@
 <span class="sd">        Additional arguments for the class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">feature_lifting</span><span class="o">=</span><span class="n">feature_lifting</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="CombinatorialLifting">
 <a class="viewcode-back" href="../../../../api/transforms/liftings/index.html#topobenchmark.transforms.liftings.CombinatorialLifting">[docs]</a>
-<span class="k">class</span> <span class="nc">CombinatorialLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CombinatorialLifting</span><span class="p">(</span><span class="n">AbstractLifting</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract class for lifting combinatorial complexes to other domains.</span>
 
 <span class="sd">    Parameters</span>
@@ -501,7 +501,7 @@
 <span class="sd">        Additional arguments for the class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_lifting</span><span class="o">=</span><span class="s2">&quot;ProjectionSum&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">feature_lifting</span><span class="o">=</span><span class="n">feature_lifting</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 </pre></div>

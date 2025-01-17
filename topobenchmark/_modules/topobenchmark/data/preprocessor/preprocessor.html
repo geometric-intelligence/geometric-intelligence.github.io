@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,27 +316,27 @@
   <h1>Source code for topobenchmark.data.preprocessor.preprocessor</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Preprocessor for datasets.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">hydra</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch_geometric</span>
-<span class="kn">from</span> <span class="nn">torch_geometric.io</span> <span class="kn">import</span> <span class="n">fs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hydra</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch_geometric</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">fs</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.data.utils</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.data.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">ensure_serializable</span><span class="p">,</span>
     <span class="n">load_inductive_splits</span><span class="p">,</span>
     <span class="n">load_transductive_splits</span><span class="p">,</span>
     <span class="n">make_hash</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.dataloader</span> <span class="kn">import</span> <span class="n">DataloadDataset</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.transforms.data_transform</span> <span class="kn">import</span> <span class="n">DataTransform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataloadDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.transforms.data_transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTransform</span>
 
 
 <div class="viewcode-block" id="PreProcessor">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.preprocessor.preprocessor.PreProcessor">[docs]</a>
-<span class="k">class</span> <span class="nc">PreProcessor</span><span class="p">(</span><span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">InMemoryDataset</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PreProcessor</span><span class="p">(</span><span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">InMemoryDataset</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Preprocessor for datasets.</span>
 
 <span class="sd">    Parameters</span>
@@ -351,7 +351,7 @@
 <span class="sd">        Optional additional arguments.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">transforms_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">transforms_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
             <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataset</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
@@ -381,7 +381,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">split_idx</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">split_idx</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">processed_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">processed_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the path to the processed directory.</span>
 
 <span class="sd">        Returns</span>
@@ -395,7 +395,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">+</span> <span class="s2">&quot;/processed&quot;</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">processed_file_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">processed_file_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the name of the processed file.</span>
 
 <span class="sd">        Returns</span>
@@ -407,7 +407,7 @@
 
 <div class="viewcode-block" id="PreProcessor.instantiate_pre_transform">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.preprocessor.preprocessor.PreProcessor.instantiate_pre_transform">[docs]</a>
-    <span class="k">def</span> <span class="nf">instantiate_pre_transform</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">instantiate_pre_transform</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">transforms_config</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate the pre-transforms.</span>
@@ -440,7 +440,7 @@
 
 <div class="viewcode-block" id="PreProcessor.set_processed_data_dir">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.preprocessor.preprocessor.PreProcessor.set_processed_data_dir">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_processed_data_dir</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_processed_data_dir</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">pre_transforms_dict</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">transforms_config</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the processed data directory.</span>
@@ -469,7 +469,7 @@
 
 <div class="viewcode-block" id="PreProcessor.save_transform_parameters">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.preprocessor.preprocessor.PreProcessor.save_transform_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">save_transform_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_transform_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the transform parameters.&quot;&quot;&quot;</span>
         <span class="c1"># Check if root/params_dict.json exists, if not, save it</span>
         <span class="n">path_transform_parameters</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
@@ -495,7 +495,7 @@
 
 <div class="viewcode-block" id="PreProcessor.process">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.preprocessor.preprocessor.PreProcessor.process">[docs]</a>
-    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that processes the data.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data_list</span> <span class="o">=</span> <span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pre_transform</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_list</span><span class="p">]</span>
@@ -512,7 +512,7 @@
 
 <div class="viewcode-block" id="PreProcessor.load">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.preprocessor.preprocessor.PreProcessor.load">[docs]</a>
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Load the dataset from the file path `path`.</span>
 
 <span class="sd">        Parameters</span>
@@ -538,7 +538,7 @@
 
 <div class="viewcode-block" id="PreProcessor.load_dataset_splits">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.preprocessor.preprocessor.PreProcessor.load_dataset_splits">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_dataset_splits</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_dataset_splits</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">split_params</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
         <span class="n">DataloadDataset</span><span class="p">,</span> <span class="n">DataloadDataset</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">DataloadDataset</span> <span class="o">|</span> <span class="kc">None</span>

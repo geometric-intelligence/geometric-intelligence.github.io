@@ -29,7 +29,7 @@
   <link href="../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,17 +316,17 @@
   <h1>Source code for topobenchmark.nn.backbones.hypergraph.edgnn</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Class implementing the EDGNN model.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-<span class="kn">import</span> <span class="nn">torch_geometric</span>
-<span class="kn">import</span> <span class="nn">torch_scatter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch_geometric</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch_scatter</span>
 
 
 <div class="viewcode-block" id="EDGNN">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.EDGNN">[docs]</a>
-<span class="k">class</span> <span class="nc">EDGNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EDGNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;EDGNN model.</span>
 
 <span class="sd">    Parameters</span>
@@ -359,7 +359,7 @@
 <span class="sd">        Whether to normalize input features. Defaults to False.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">num_features</span><span class="p">,</span>
         <span class="n">input_dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
@@ -429,14 +429,14 @@
 
 <div class="viewcode-block" id="EDGNN.reset_parameters">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.EDGNN.reset_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="EDGNN.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.EDGNN.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward pass.</span>
 
 <span class="sd">        Parameters</span>
@@ -469,7 +469,7 @@
 
 <div class="viewcode-block" id="MLP">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.MLP">[docs]</a>
-<span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing a multi-layer perceptron.</span>
 
 <span class="sd">    Adapted from https://github.com/CUAI/CorrectAndSmooth/blob/master/gen_models.py</span>
@@ -492,7 +492,7 @@
 <span class="sd">        Whether to normalize input features. Defaults to False.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">in_channels</span><span class="p">,</span>
         <span class="n">hidden_channels</span><span class="p">,</span>
@@ -575,7 +575,7 @@
 
 <div class="viewcode-block" id="MLP.reset_parameters">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.MLP.reset_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">lin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lins</span><span class="p">:</span>
             <span class="n">lin</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
@@ -586,7 +586,7 @@
 
 <div class="viewcode-block" id="MLP.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.MLP.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward pass.</span>
 
 <span class="sd">        Parameters</span>
@@ -611,7 +611,7 @@
 
 <div class="viewcode-block" id="MLP.flops">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.MLP.flops">[docs]</a>
-    <span class="k">def</span> <span class="nf">flops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">flops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate FLOPs.</span>
 
 <span class="sd">        Parameters</span>
@@ -647,7 +647,7 @@
 
 <div class="viewcode-block" id="PlainMLP">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.PlainMLP">[docs]</a>
-<span class="k">class</span> <span class="nc">PlainMLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PlainMLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing a multi-layer perceptron without normalization.</span>
 
 <span class="sd">    Adapted from https://github.com/CUAI/CorrectAndSmooth/blob/master/gen_models.py.</span>
@@ -666,7 +666,7 @@
 <span class="sd">        Dropout rate. Defaults to 0.5.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">in_channels</span><span class="p">,</span>
         <span class="n">hidden_channels</span><span class="p">,</span>
@@ -685,7 +685,7 @@
 
 <div class="viewcode-block" id="PlainMLP.reset_parameters">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.PlainMLP.reset_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">lin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lins</span><span class="p">:</span>
             <span class="n">lin</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span></div>
@@ -693,7 +693,7 @@
 
 <div class="viewcode-block" id="PlainMLP.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.PlainMLP.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward pass.</span>
 
 <span class="sd">        Parameters</span>
@@ -718,7 +718,7 @@
 
 <div class="viewcode-block" id="EquivSetConv">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.EquivSetConv">[docs]</a>
-<span class="k">class</span> <span class="nc">EquivSetConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EquivSetConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing the Equivariant Set Convolution.</span>
 
 <span class="sd">    Parameters</span>
@@ -745,7 +745,7 @@
 <span class="sd">        Whether to normalize input features. Defaults to False.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">in_features</span><span class="p">,</span>
         <span class="n">out_features</span><span class="p">,</span>
@@ -804,7 +804,7 @@
 
 <div class="viewcode-block" id="EquivSetConv.reset_parameters">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.EquivSetConv.reset_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">,</span> <span class="n">MLP</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
@@ -816,7 +816,7 @@
 
 <div class="viewcode-block" id="EquivSetConv.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.EquivSetConv.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">X0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">X0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward pass.</span>
 
 <span class="sd">        Parameters</span>
@@ -860,7 +860,7 @@
 
 <div class="viewcode-block" id="JumpLinkConv">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.JumpLinkConv">[docs]</a>
-<span class="k">class</span> <span class="nc">JumpLinkConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JumpLinkConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing the JumpLink Convolution.</span>
 
 <span class="sd">    Parameters</span>
@@ -877,7 +877,7 @@
 <span class="sd">        Alpha value. Defaults to 0.5.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="p">,</span> <span class="n">mlp_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">aggr</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -896,14 +896,14 @@
 
 <div class="viewcode-block" id="JumpLinkConv.reset_parameters">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.JumpLinkConv.reset_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="JumpLinkConv.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.JumpLinkConv.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward pass.</span>
 
 <span class="sd">        Parameters</span>
@@ -948,7 +948,7 @@
 
 <div class="viewcode-block" id="MeanDegConv">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.MeanDegConv">[docs]</a>
-<span class="k">class</span> <span class="nc">MeanDegConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeanDegConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing the Mean Degree Convolution.</span>
 
 <span class="sd">    Parameters</span>
@@ -967,7 +967,7 @@
 <span class="sd">        Number of layers in the third MLP. Defaults to 2.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">in_features</span><span class="p">,</span>
         <span class="n">out_features</span><span class="p">,</span>
@@ -1009,7 +1009,7 @@
 
 <div class="viewcode-block" id="MeanDegConv.reset_parameters">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.MeanDegConv.reset_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
@@ -1018,7 +1018,7 @@
 
 <div class="viewcode-block" id="MeanDegConv.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.hypergraph.edgnn.MeanDegConv.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">X0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">X0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward pass.</span>
 
 <span class="sd">        Parameters</span>

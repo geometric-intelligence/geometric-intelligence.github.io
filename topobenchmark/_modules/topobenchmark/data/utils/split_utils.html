@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,19 +316,19 @@
   <h1>Source code for topobenchmark.data.utils.split_utils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Split utilities.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">StratifiedKFold</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.dataloader</span> <span class="kn">import</span> <span class="n">DataloadDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataloadDataset</span>
 
 
 <span class="c1"># Generate splits in different fasions</span>
 <div class="viewcode-block" id="k_fold_split">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.split_utils.k_fold_split">[docs]</a>
-<span class="k">def</span> <span class="nf">k_fold_split</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">k_fold_split</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return train and valid indices as in K-Fold Cross-Validation.</span>
 
 <span class="sd">    If the split already exists it loads it automatically, otherwise it creates the</span>
@@ -413,7 +413,7 @@
 
 <div class="viewcode-block" id="random_splitting">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.split_utils.random_splitting">[docs]</a>
-<span class="k">def</span> <span class="nf">random_splitting</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">global_data_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">random_splitting</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">global_data_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Randomly splits label into train/valid/test splits.</span>
 
 <span class="sd">    Adapted from https://github.com/CUAI/Non-Homophily-Benchmarks.</span>
@@ -494,9 +494,9 @@
 
 
 
-<div class="viewcode-block" id="assing_train_val_test_mask_to_graphs">
-<a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.split_utils.assing_train_val_test_mask_to_graphs">[docs]</a>
-<span class="k">def</span> <span class="nf">assing_train_val_test_mask_to_graphs</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">split_idx</span><span class="p">):</span>
+<div class="viewcode-block" id="assign_train_val_test_mask_to_graphs">
+<a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.split_utils.assign_train_val_test_mask_to_graphs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_train_val_test_mask_to_graphs</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">split_idx</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Split the graph dataset into train, validation, and test datasets.</span>
 
 <span class="sd">    Parameters</span>
@@ -550,7 +550,7 @@
 
 <div class="viewcode-block" id="load_transductive_splits">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.split_utils.load_transductive_splits">[docs]</a>
-<span class="k">def</span> <span class="nf">load_transductive_splits</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_transductive_splits</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Load the graph dataset with the specified split.</span>
 
 <span class="sd">    Parameters</span>
@@ -607,7 +607,7 @@
 
 <div class="viewcode-block" id="load_inductive_splits">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.split_utils.load_inductive_splits">[docs]</a>
-<span class="k">def</span> <span class="nf">load_inductive_splits</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_inductive_splits</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Load multiple-graph datasets with the specified split.</span>
 
 <span class="sd">    Parameters</span>
@@ -646,7 +646,7 @@
         <span class="p">)</span>
 
     <span class="n">train_dataset</span><span class="p">,</span> <span class="n">val_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">assing_train_val_test_mask_to_graphs</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">split_idx</span><span class="p">)</span>
+        <span class="n">assign_train_val_test_mask_to_graphs</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">split_idx</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">train_dataset</span><span class="p">,</span> <span class="n">val_dataset</span><span class="p">,</span> <span class="n">test_dataset</span></div>
@@ -655,7 +655,7 @@
 
 <div class="viewcode-block" id="load_coauthorship_hypergraph_splits">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.split_utils.load_coauthorship_hypergraph_splits">[docs]</a>
-<span class="k">def</span> <span class="nf">load_coauthorship_hypergraph_splits</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">train_prop</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_coauthorship_hypergraph_splits</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">train_prop</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Load the split generated by rand_train_test_idx function.</span>
 
 <span class="sd">    Parameters</span>

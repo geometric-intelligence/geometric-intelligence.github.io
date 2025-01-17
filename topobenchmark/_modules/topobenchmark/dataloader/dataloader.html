@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,18 +316,18 @@
   <h1>Source code for topobenchmark.dataloader.dataloader</h1><div class="highlight"><pre>
 <span></span><span class="s2">&quot;TBDataloader class.&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
-<span class="kn">from</span> <span class="nn">lightning</span> <span class="kn">import</span> <span class="n">LightningDataModule</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lightning</span><span class="w"> </span><span class="kn">import</span> <span class="n">LightningDataModule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.dataloader.dataload_dataset</span> <span class="kn">import</span> <span class="n">DataloadDataset</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.dataloader.utils</span> <span class="kn">import</span> <span class="n">collate_fn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.dataloader.dataload_dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataloadDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.dataloader.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">collate_fn</span>
 
 
 <div class="viewcode-block" id="TBDataloader">
 <a class="viewcode-back" href="../../../api/dataloader/index.html#topobenchmark.dataloader.dataloader.TBDataloader">[docs]</a>
-<span class="k">class</span> <span class="nc">TBDataloader</span><span class="p">(</span><span class="n">LightningDataModule</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TBDataloader</span><span class="p">(</span><span class="n">LightningDataModule</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;This class takes care of returning the dataloaders for the training, validation, and test datasets.</span>
 
 <span class="sd">    It also handles the collate function. The class is designed to work with the `torch` dataloaders.</span>
@@ -355,7 +355,7 @@
 <span class="sd">        https://lightning.ai/docs/pytorch/latest/data/datamodule.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">dataset_train</span><span class="p">:</span> <span class="n">DataloadDataset</span><span class="p">,</span>
         <span class="n">dataset_val</span><span class="p">:</span> <span class="n">DataloadDataset</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -390,12 +390,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pin_memory</span> <span class="o">=</span> <span class="n">pin_memory</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">persistent_workers</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;persistent_workers&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(dataset_train=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_train</span><span class="si">}</span><span class="s2">, dataset_val=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_val</span><span class="si">}</span><span class="s2">, dataset_test=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_test</span><span class="si">}</span><span class="s2">, batch_size=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">)&quot;</span>
 
 <div class="viewcode-block" id="TBDataloader.train_dataloader">
 <a class="viewcode-back" href="../../../api/dataloader/index.html#topobenchmark.dataloader.dataloader.TBDataloader.train_dataloader">[docs]</a>
-    <span class="k">def</span> <span class="nf">train_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataLoader</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">train_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataLoader</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create and return the train dataloader.</span>
 
 <span class="sd">        Returns</span>
@@ -416,7 +416,7 @@
 
 <div class="viewcode-block" id="TBDataloader.val_dataloader">
 <a class="viewcode-back" href="../../../api/dataloader/index.html#topobenchmark.dataloader.dataloader.TBDataloader.val_dataloader">[docs]</a>
-    <span class="k">def</span> <span class="nf">val_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataLoader</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">val_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataLoader</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create and return the validation dataloader.</span>
 
 <span class="sd">        Returns</span>
@@ -437,7 +437,7 @@
 
 <div class="viewcode-block" id="TBDataloader.test_dataloader">
 <a class="viewcode-back" href="../../../api/dataloader/index.html#topobenchmark.dataloader.dataloader.TBDataloader.test_dataloader">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataLoader</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataLoader</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create and return the test dataloader.</span>
 
 <span class="sd">        Returns</span>
@@ -460,7 +460,7 @@
 
 <div class="viewcode-block" id="TBDataloader.teardown">
 <a class="viewcode-back" href="../../../api/dataloader/index.html#topobenchmark.dataloader.dataloader.TBDataloader.teardown">[docs]</a>
-    <span class="k">def</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lightning hook for cleaning up after `trainer.fit()`, `trainer.validate()`, `trainer.test()`, and `trainer.predict()`.</span>
 
 <span class="sd">        Parameters</span>
@@ -472,7 +472,7 @@
 
 <div class="viewcode-block" id="TBDataloader.state_dict">
 <a class="viewcode-back" href="../../../api/dataloader/index.html#topobenchmark.dataloader.dataloader.TBDataloader.state_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Called when saving a checkpoint. Implement to generate and save the datamodule state.</span>
 
 <span class="sd">        Returns</span>

@@ -29,7 +29,7 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,26 +316,26 @@
   <h1>Source code for topobenchmark.data.utils.io_utils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Data IO utilities.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os.path</span> <span class="k">as</span> <span class="nn">osp</span>
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">parse_qs</span><span class="p">,</span> <span class="n">urlparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">osp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_qs</span><span class="p">,</span> <span class="n">urlparse</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch_geometric</span>
-<span class="kn">from</span> <span class="nn">toponetx.classes</span> <span class="kn">import</span> <span class="n">SimplicialComplex</span>
-<span class="kn">from</span> <span class="nn">torch_geometric.data</span> <span class="kn">import</span> <span class="n">Data</span>
-<span class="kn">from</span> <span class="nn">torch_sparse</span> <span class="kn">import</span> <span class="n">coalesce</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch_geometric</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">toponetx.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplicialComplex</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">coalesce</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.data.utils</span> <span class="kn">import</span> <span class="n">get_complex_connectivity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.data.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_complex_connectivity</span>
 
 
 <div class="viewcode-block" id="get_file_id_from_url">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.io_utils.get_file_id_from_url">[docs]</a>
-<span class="k">def</span> <span class="nf">get_file_id_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_file_id_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the file ID from a Google Drive file URL.</span>
 
 <span class="sd">    Parameters</span>
@@ -371,7 +371,7 @@
 
 <div class="viewcode-block" id="download_file_from_drive">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.io_utils.download_file_from_drive">[docs]</a>
-<span class="k">def</span> <span class="nf">download_file_from_drive</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_file_from_drive</span><span class="p">(</span>
     <span class="n">file_link</span><span class="p">,</span> <span class="n">path_to_save</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;tar.gz&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a file from a Google Drive link and saves it to the specified path.</span>
@@ -408,7 +408,7 @@
 
 <div class="viewcode-block" id="download_file_from_link">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.io_utils.download_file_from_link">[docs]</a>
-<span class="k">def</span> <span class="nf">download_file_from_link</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_file_from_link</span><span class="p">(</span>
     <span class="n">file_link</span><span class="p">,</span> <span class="n">path_to_save</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;tar.gz&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a file from a link and saves it to the specified path.</span>
@@ -442,7 +442,7 @@
 
 <div class="viewcode-block" id="read_ndim_manifolds">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.io_utils.read_ndim_manifolds">[docs]</a>
-<span class="k">def</span> <span class="nf">read_ndim_manifolds</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">y_val</span><span class="o">=</span><span class="s2">&quot;betti_numbers&quot;</span><span class="p">,</span> <span class="nb">slice</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_ndim_manifolds</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">y_val</span><span class="o">=</span><span class="s2">&quot;betti_numbers&quot;</span><span class="p">,</span> <span class="nb">slice</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load MANTRA dataset.</span>
 
 <span class="sd">    Parameters</span>
@@ -545,7 +545,7 @@
 
 <div class="viewcode-block" id="read_us_county_demos">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.io_utils.read_us_county_demos">[docs]</a>
-<span class="k">def</span> <span class="nf">read_us_county_demos</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2012</span><span class="p">,</span> <span class="n">y_col</span><span class="o">=</span><span class="s2">&quot;Election&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_us_county_demos</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2012</span><span class="p">,</span> <span class="n">y_col</span><span class="o">=</span><span class="s2">&quot;Election&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load US County Demos dataset.</span>
 
 <span class="sd">    Parameters</span>
@@ -673,7 +673,7 @@
 
 <div class="viewcode-block" id="load_hypergraph_pickle_dataset">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobenchmark.data.utils.io_utils.load_hypergraph_pickle_dataset">[docs]</a>
-<span class="k">def</span> <span class="nf">load_hypergraph_pickle_dataset</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">data_name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_hypergraph_pickle_dataset</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">data_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load hypergraph datasets from pickle files.</span>
 
 <span class="sd">    Parameters</span>

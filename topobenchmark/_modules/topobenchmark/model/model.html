@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,17 +316,17 @@
   <h1>Source code for topobenchmark.model.model</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module defines the `TBModel` class.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">lightning</span> <span class="kn">import</span> <span class="n">LightningModule</span>
-<span class="kn">from</span> <span class="nn">torch_geometric.data</span> <span class="kn">import</span> <span class="n">Data</span>
-<span class="kn">from</span> <span class="nn">torchmetrics</span> <span class="kn">import</span> <span class="n">MeanMetric</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lightning</span><span class="w"> </span><span class="kn">import</span> <span class="n">LightningModule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchmetrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeanMetric</span>
 
 
 <div class="viewcode-block" id="TBModel">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel">[docs]</a>
-<span class="k">class</span> <span class="nc">TBModel</span><span class="p">(</span><span class="n">LightningModule</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TBModel</span><span class="p">(</span><span class="n">LightningModule</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A `LightningModule` to define a network.</span>
 
 <span class="sd">    Parameters</span>
@@ -349,7 +349,7 @@
 <span class="sd">        Additional keyword arguments.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">backbone</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
         <span class="n">backbone_wrapper</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
@@ -392,12 +392,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">metric_collector_val2</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metric_collector_test</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(backbone=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">backbone</span><span class="si">}</span><span class="s2">, readout=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">readout</span><span class="si">}</span><span class="s2">, loss=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="si">}</span><span class="s2">, feature_encoder=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_encoder</span><span class="si">}</span><span class="s2">)&quot;</span>
 
 <div class="viewcode-block" id="TBModel.forward">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform a forward pass through the model `self.backbone`.</span>
 
 <span class="sd">        Parameters</span>
@@ -415,7 +415,7 @@
 
 <div class="viewcode-block" id="TBModel.model_step">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.model_step">[docs]</a>
-    <span class="k">def</span> <span class="nf">model_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">model_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform a single model step on a batch of data.</span>
 
 <span class="sd">        Parameters</span>
@@ -453,7 +453,7 @@
 
 <div class="viewcode-block" id="TBModel.training_step">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.training_step">[docs]</a>
-    <span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">training_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform a single training step on a batch of data.</span>
 
 <span class="sd">        Parameters</span>
@@ -487,7 +487,7 @@
 
 <div class="viewcode-block" id="TBModel.validation_step">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.validation_step">[docs]</a>
-    <span class="k">def</span> <span class="nf">validation_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validation_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform a single validation step on a batch of data.</span>
 
 <span class="sd">        Parameters</span>
@@ -513,7 +513,7 @@
 
 <div class="viewcode-block" id="TBModel.test_step">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.test_step">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform a single test step on a batch of data.</span>
 
 <span class="sd">        Parameters</span>
@@ -539,7 +539,7 @@
 
 <div class="viewcode-block" id="TBModel.process_outputs">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.process_outputs">[docs]</a>
-    <span class="k">def</span> <span class="nf">process_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Handle model outputs.</span>
 
 <span class="sd">        Parameters</span>
@@ -575,7 +575,7 @@
 
 <div class="viewcode-block" id="TBModel.log_metrics">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.log_metrics">[docs]</a>
-    <span class="k">def</span> <span class="nf">log_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Log metrics.</span>
 
 <span class="sd">        Parameters</span>
@@ -598,7 +598,7 @@
 
 <div class="viewcode-block" id="TBModel.on_validation_epoch_start">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.on_validation_epoch_start">[docs]</a>
-    <span class="k">def</span> <span class="nf">on_validation_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_validation_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hook called when a validation epoch begins.</span>
 
 <span class="sd">        According pytorch lightning documentation this hook is called at the</span>
@@ -616,7 +616,7 @@
 
 <div class="viewcode-block" id="TBModel.on_train_epoch_end">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.on_train_epoch_end">[docs]</a>
-    <span class="k">def</span> <span class="nf">on_train_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_train_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lightning hook that is called when a train epoch ends.</span>
 
 <span class="sd">        This hook is used to log the train metrics.</span>
@@ -629,7 +629,7 @@
 
 <div class="viewcode-block" id="TBModel.on_validation_epoch_end">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.on_validation_epoch_end">[docs]</a>
-    <span class="k">def</span> <span class="nf">on_validation_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_validation_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lightning hook that is called when a validation epoch ends.</span>
 
 <span class="sd">        This hook is used to log the validation metrics.</span>
@@ -640,7 +640,7 @@
 
 <div class="viewcode-block" id="TBModel.on_test_epoch_end">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.on_test_epoch_end">[docs]</a>
-    <span class="k">def</span> <span class="nf">on_test_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_test_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lightning hook that is called when a test epoch ends.</span>
 
 <span class="sd">        This hook is used to log the test metrics.</span>
@@ -651,7 +651,7 @@
 
 <div class="viewcode-block" id="TBModel.on_train_epoch_start">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.on_train_epoch_start">[docs]</a>
-    <span class="k">def</span> <span class="nf">on_train_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_train_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lightning hook that is called when a train epoch begins.</span>
 
 <span class="sd">        This hook is used to reset the train metrics.</span>
@@ -662,7 +662,7 @@
 
 <div class="viewcode-block" id="TBModel.on_val_epoch_start">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.on_val_epoch_start">[docs]</a>
-    <span class="k">def</span> <span class="nf">on_val_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_val_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lightning hook that is called when a validation epoch begins.</span>
 
 <span class="sd">        This hook is used to reset the validation metrics.</span>
@@ -672,7 +672,7 @@
 
 <div class="viewcode-block" id="TBModel.on_test_epoch_start">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.on_test_epoch_start">[docs]</a>
-    <span class="k">def</span> <span class="nf">on_test_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_test_epoch_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lightning hook that is called when a test epoch begins.</span>
 
 <span class="sd">        This hook is used to reset the test metrics.</span>
@@ -682,7 +682,7 @@
 
 <div class="viewcode-block" id="TBModel.setup">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.setup">[docs]</a>
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hook to call torch.compile.</span>
 
 <span class="sd">        Lightning hook that is called at the beginning of fit (train +</span>
@@ -703,7 +703,7 @@
 
 <div class="viewcode-block" id="TBModel.configure_optimizers">
 <a class="viewcode-back" href="../../../api/model/index.html#topobenchmark.model.model.TBModel.configure_optimizers">[docs]</a>
-    <span class="k">def</span> <span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Configure optimizers and learning-rate schedulers.</span>
 
 <span class="sd">        Choose what optimizers and learning-rate schedulers to use in your</span>

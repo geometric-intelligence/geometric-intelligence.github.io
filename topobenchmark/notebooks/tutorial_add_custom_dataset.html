@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -527,7 +527,7 @@ shutil.rmtree(osp.join(folder, self.name))
 <hr class="docutils" />
 <p>Next it is required to update the data loader system. Modify the loader file (<code class="docutils literal notranslate"><span class="pre">topobenchmark/data/loaders/loaders.py</span></code>:) to include your custom dataset:</p>
 <p>For the the example dataset we add the following into the file <code class="docutils literal notranslate"><span class="pre">topobenchmark/data/loaders/graph/us_county_demos_dataset_loader.py</span></code> which consist of the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">USCountyDemosDatasetLoader</span><span class="p">(</span><span class="n">AbstractLoader</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">USCountyDemosDatasetLoader</span><span class="p">(</span><span class="n">AbstractLoader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load US County Demos dataset with configurable year and task variable.</span>
 
 <span class="sd">    Parameters</span>
@@ -540,10 +540,10 @@ shutil.rmtree(osp.join(folder, self.name))
 <span class="sd">            - task_variable: Task variable for the dataset</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">load_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">USCountyDemosDataset</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">USCountyDemosDataset</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the US County Demos dataset.</span>
 
 <span class="sd">        Returns</span>
@@ -561,7 +561,7 @@ shutil.rmtree(osp.join(folder, self.name))
         <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_redefine_data_dir</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dataset</span>
 
-    <span class="k">def</span> <span class="nf">_initialize_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">USCountyDemosDataset</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_initialize_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">USCountyDemosDataset</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the US County Demos dataset.</span>
 
 <span class="sd">        Returns</span>
@@ -575,7 +575,7 @@ shutil.rmtree(osp.join(folder, self.name))
             <span class="n">parameters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_redefine_data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">USCountyDemosDataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_redefine_data_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">USCountyDemosDataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Redefine the data directory based on the chosen (year, task_variable) pair.</span>
 
 <span class="sd">        Parameters</span>
@@ -673,7 +673,7 @@ shutil.rmtree(osp.join(folder, self.name))
 <section id="Key-Imports-for-Dynamic-Configuration">
 <h3>Key Imports for Dynamic Configuration<a class="headerlink" href="#Key-Imports-for-Dynamic-Configuration" title="Link to this heading">#</a></h3>
 <p>Let’s import the essential configuration resolver functions:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmark.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.utils.config_resolvers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_default_transform</span><span class="p">,</span>
     <span class="n">get_monitor_metric</span><span class="p">,</span>
     <span class="n">get_monitor_mode</span><span class="p">,</span>
@@ -708,12 +708,12 @@ shutil.rmtree(osp.join(folder, self.name))
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hydra</span> <span class="kn">import</span> <span class="n">compose</span><span class="p">,</span> <span class="n">initialize</span>
-<span class="kn">from</span> <span class="nn">hydra.utils</span> <span class="kn">import</span> <span class="n">instantiate</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hydra</span><span class="w"> </span><span class="kn">import</span> <span class="n">compose</span><span class="p">,</span> <span class="n">initialize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydra.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">instantiate</span>
 
 
 
-<span class="kn">from</span> <span class="nn">topobenchmark.utils.config_resolvers</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.utils.config_resolvers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_default_transform</span><span class="p">,</span>
     <span class="n">get_monitor_metric</span><span class="p">,</span>
     <span class="n">get_monitor_mode</span><span class="p">,</span>
@@ -894,7 +894,7 @@ Transform parameters: {&#39;_target_&#39;: &#39;topobenchmark.transforms.data_tr
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">topobenchmark.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.data.preprocessor</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreProcessor</span>
 <span class="n">preprocessed_dataset</span> <span class="o">=</span> <span class="n">PreProcessor</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">,</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;transforms&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -970,7 +970,7 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
 <h1>Step 4.2: Custom Data Transformations ⚙️<a class="headerlink" href="#Step-4.2:-Custom-Data-Transformations-⚙️" title="Link to this heading">#</a></h1>
 <p>In general any transfom in the library inherits <code class="docutils literal notranslate"><span class="pre">torch_geometric.transforms.BaseTransform</span></code> class, which allow to apply a sequency of transforms to the data. Our inderface requires to implement the <code class="docutils literal notranslate"><span class="pre">forward</span></code> method. The important part of all transforms is that it takes <code class="docutils literal notranslate"><span class="pre">torch_geometric.data.Data</span></code> object and returns updated <code class="docutils literal notranslate"><span class="pre">torch_geometric.data.Data</span></code> object.</p>
 <p>For language dataset, we have generated the <code class="docutils literal notranslate"><span class="pre">equal_gaus_features</span></code> transfroms that is a data_manipulation transform hence we place it into <code class="docutils literal notranslate"><span class="pre">topobenchmark/transforms/data_manipulation/</span></code> folder. Below you can see th <code class="docutils literal notranslate"><span class="pre">EqualGausFeatures</span></code> class:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EqualGausFeatures</span><span class="p">(</span><span class="n">torch_geometric</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">BaseTransform</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EqualGausFeatures</span><span class="p">(</span><span class="n">torch_geometric</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">BaseTransform</span><span class="p">):</span>
 <span class="w"> </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A transform that generates equal Gaussian features for all nodes.</span>
 
 <span class="sd"> Parameters</span>
@@ -982,7 +982,7 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
 <span class="sd">     - num_features (int): The number of features to generate.</span>
 <span class="sd"> &quot;&quot;&quot;</span>
 
- <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+ <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
      <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
      <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;generate_non_informative_features&quot;</span>
 
@@ -994,10 +994,10 @@ Data(x=[218, 10], edge_index=[2, 480], y=[1], incidence_hyperedges=[218, 218], n
          <span class="n">mean</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_vector</span><span class="p">)</span>
      <span class="p">)</span>
 
- <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+ <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
      <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">!r}</span><span class="s2">, mean=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="si">!r}</span><span class="s2">, std=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">std</span><span class="si">!r}</span><span class="s2">, feature_vector=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_vector</span><span class="si">!r}</span><span class="s2">)&quot;</span>
 
- <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span><span class="p">):</span>
+ <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span><span class="p">):</span>
 <span class="w">     </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Apply the transform to the input data.</span>
 
 <span class="sd">     Parameters</span>

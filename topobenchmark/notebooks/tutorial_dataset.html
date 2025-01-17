@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -364,21 +364,21 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lightning</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
-<span class="kn">from</span> <span class="nn">topomodelx.nn.simplicial.scn2</span> <span class="kn">import</span> <span class="n">SCN2</span>
-<span class="kn">from</span> <span class="nn">torch_geometric.datasets</span> <span class="kn">import</span> <span class="n">TUDataset</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omegaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">OmegaConf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topomodelx.nn.simplicial.scn2</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCN2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">TUDataset</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.data.preprocessor</span> <span class="kn">import</span> <span class="n">PreProcessor</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.dataloader.dataloader</span> <span class="kn">import</span> <span class="n">TBDataloader</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.evaluator.evaluator</span> <span class="kn">import</span> <span class="n">TBEvaluator</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.loss.loss</span> <span class="kn">import</span> <span class="n">TBLoss</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.model.model</span> <span class="kn">import</span> <span class="n">TBModel</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.nn.encoders</span> <span class="kn">import</span> <span class="n">AllCellFeatureEncoder</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.nn.readouts</span> <span class="kn">import</span> <span class="n">PropagateSignalDown</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.nn.wrappers.simplicial</span> <span class="kn">import</span> <span class="n">SCNWrapper</span>
-<span class="kn">from</span> <span class="nn">topobenchmark.optimizer</span> <span class="kn">import</span> <span class="n">TBOptimizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.data.preprocessor</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreProcessor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.dataloader.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBDataloader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.evaluator.evaluator</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBEvaluator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.loss.loss</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBLoss</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.model.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.nn.encoders</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllCellFeatureEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.nn.readouts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropagateSignalDown</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.nn.wrappers.simplicial</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCNWrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBOptimizer</span>
 </pre></div>
 </div>
 </div>
@@ -452,8 +452,8 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">factory_kwargs</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">factory</span><span class="p">(</span><span class="n">backbone</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">factory_kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">factory</span><span class="p">(</span><span class="n">backbone</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">SCNWrapper</span><span class="p">(</span><span class="n">backbone</span><span class="p">,</span> <span class="o">**</span><span class="n">factory_kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">factory</span>
 </pre></div>

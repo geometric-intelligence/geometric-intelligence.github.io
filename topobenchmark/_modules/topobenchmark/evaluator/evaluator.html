@@ -29,7 +29,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,14 +316,14 @@
   <h1>Source code for topobenchmark.evaluator.evaluator</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains the Evaluator class that is responsible for computing the metrics.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">torchmetrics</span> <span class="kn">import</span> <span class="n">MetricCollection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchmetrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricCollection</span>
 
-<span class="kn">from</span> <span class="nn">topobenchmark.evaluator</span> <span class="kn">import</span> <span class="n">METRICS</span><span class="p">,</span> <span class="n">AbstractEvaluator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobenchmark.evaluator</span><span class="w"> </span><span class="kn">import</span> <span class="n">METRICS</span><span class="p">,</span> <span class="n">AbstractEvaluator</span>
 
 
 <div class="viewcode-block" id="TBEvaluator">
 <a class="viewcode-back" href="../../../api/evaluator/index.html#topobenchmark.evaluator.evaluator.TBEvaluator">[docs]</a>
-<span class="k">class</span> <span class="nc">TBEvaluator</span><span class="p">(</span><span class="n">AbstractEvaluator</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TBEvaluator</span><span class="p">(</span><span class="n">AbstractEvaluator</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluator class that is responsible for computing the metrics.</span>
 
 <span class="sd">    Parameters</span>
@@ -339,7 +339,7 @@
 <span class="sd">        - metrics (list[str]): A list of regression metrics to be computed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Define the task</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
 
@@ -376,12 +376,12 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">best_metric</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(task=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="si">}</span><span class="s2">, metrics=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="si">}</span><span class="s2">)&quot;</span>
 
 <div class="viewcode-block" id="TBEvaluator.update">
 <a class="viewcode-back" href="../../../api/evaluator/index.html#topobenchmark.evaluator.evaluator.TBEvaluator.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Update the metrics with the model output.</span>
 
 <span class="sd">        Parameters</span>
@@ -416,7 +416,7 @@
 
 <div class="viewcode-block" id="TBEvaluator.compute">
 <a class="viewcode-back" href="../../../api/evaluator/index.html#topobenchmark.evaluator.evaluator.TBEvaluator.compute">[docs]</a>
-    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the metrics.</span>
 
 <span class="sd">        Returns</span>
@@ -429,7 +429,7 @@
 
 <div class="viewcode-block" id="TBEvaluator.reset">
 <a class="viewcode-back" href="../../../api/evaluator/index.html#topobenchmark.evaluator.evaluator.TBEvaluator.reset">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the metrics.</span>
 
 <span class="sd">        This method should be called after each epoch.</span>

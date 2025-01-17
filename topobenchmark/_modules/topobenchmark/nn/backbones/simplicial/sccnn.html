@@ -29,7 +29,7 @@
   <link href="../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=d2d258e8" />
   
   <!-- So that users can add custom icons -->
@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 26, 2024, 5:22:25 PM"/>
+    <meta name="docbuild:last-update" content="Jan 17, 2025, 3:48:19 AM"/>
   </head>
   
   
@@ -316,13 +316,13 @@
   <h1>Source code for topobenchmark.nn.backbones.simplicial.sccnn</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Implementation of the Simplicial Complex Convolutional Neural Network (SCCNN) for complex classification.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.nn.parameter</span> <span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.nn.parameter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parameter</span>
 
 
 <div class="viewcode-block" id="SCCNNCustom">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNCustom">[docs]</a>
-<span class="k">class</span> <span class="nc">SCCNNCustom</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SCCNNCustom</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;SCCNN implementation for complex classification.</span>
 
 <span class="sd">    Note: In this task, we can consider the output on any order of simplices for the</span>
@@ -346,7 +346,7 @@
 <span class="sd">        Number of layers (default: 2).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">in_channels_all</span><span class="p">,</span>
         <span class="n">hidden_channels_all</span><span class="p">,</span>
@@ -383,7 +383,7 @@
 
 <div class="viewcode-block" id="SCCNNCustom.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNCustom.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_all</span><span class="p">,</span> <span class="n">laplacian_all</span><span class="p">,</span> <span class="n">incidence_all</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_all</span><span class="p">,</span> <span class="n">laplacian_all</span><span class="p">,</span> <span class="n">incidence_all</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward computation.</span>
 
 <span class="sd">        Parameters</span>
@@ -417,7 +417,7 @@
 
 <div class="viewcode-block" id="SCCNNLayer">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNLayer">[docs]</a>
-<span class="k">class</span> <span class="nc">SCCNNLayer</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SCCNNLayer</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Layer of a Simplicial Complex Convolutional Neural Network.</span>
 
 <span class="sd">    Parameters</span>
@@ -438,7 +438,7 @@
 <span class="sd">        Initialization method for the weights (default: &quot;xavier_normal&quot;).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">in_channels</span><span class="p">,</span>
         <span class="n">out_channels</span><span class="p">,</span>
@@ -513,7 +513,7 @@
 
 <div class="viewcode-block" id="SCCNNLayer.reset_parameters">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNLayer.reset_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.414</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.414</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reset learnable parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -538,7 +538,7 @@
 
 <div class="viewcode-block" id="SCCNNLayer.aggr_norm_func">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNLayer.aggr_norm_func">[docs]</a>
-    <span class="k">def</span> <span class="nf">aggr_norm_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conv_operator</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggr_norm_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conv_operator</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform aggregation normalization.</span>
 
 <span class="sd">        Parameters</span>
@@ -564,7 +564,7 @@
 
 <div class="viewcode-block" id="SCCNNLayer.update">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNLayer.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update embeddings on each cell (step 4).</span>
 
 <span class="sd">        Parameters</span>
@@ -586,7 +586,7 @@
 
 <div class="viewcode-block" id="SCCNNLayer.chebyshev_conv">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNLayer.chebyshev_conv">[docs]</a>
-    <span class="k">def</span> <span class="nf">chebyshev_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conv_operator</span><span class="p">,</span> <span class="n">conv_order</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">chebyshev_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conv_operator</span><span class="p">,</span> <span class="n">conv_order</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform Chebyshev convolution.</span>
 
 <span class="sd">        Parameters</span>
@@ -623,7 +623,7 @@
 
 <div class="viewcode-block" id="SCCNNLayer.forward">
 <a class="viewcode-back" href="../../../../../api/nn/backbones/index.html#topobenchmark.nn.backbones.simplicial.sccnn.SCCNNLayer.forward">[docs]</a>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_all</span><span class="p">,</span> <span class="n">laplacian_all</span><span class="p">,</span> <span class="n">incidence_all</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_all</span><span class="p">,</span> <span class="n">laplacian_all</span><span class="p">,</span> <span class="n">incidence_all</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward computation.</span>
 
 <span class="sd">        Parameters</span>
