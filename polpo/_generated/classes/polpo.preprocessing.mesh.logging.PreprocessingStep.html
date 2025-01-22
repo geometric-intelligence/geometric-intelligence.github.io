@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PreprocessingStep &#8212; polpo latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.mesh.logging.PreprocessingStep';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.mesh.logging.PreprocessingStep.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="polpo.preprocessing.mesh.qof" href="../polpo.preprocessing.mesh.qof.html" />
+    <link rel="prev" title="MessageWithPrefixMixin" href="polpo.preprocessing.mesh.logging.MessageWithPrefixMixin.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Polpo @ GI lab</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../how_to.html">
+    How-tos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../how_to.html">
+    How-tos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../polpo.preprocessing.html">polpo.preprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.BranchingPipeline.html">BranchingPipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DataPrinter.html">DataPrinter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DecorateToIterable.html">DecorateToIterable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptyRemover.html">EmptyRemover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptySkipper.html">EmptySkipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ExceptionToWarning.html">ExceptionToWarning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Filter.html">Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IdentityStep.html">IdentityStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IfCondition.html">IfCondition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IfEmpty.html">IfEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IndexMap.html">IndexMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IndexSelector.html">IndexSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ListSqueeze.html">ListSqueeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Map.html">Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NestingSwapper.html">NestingSwapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NoneRemover.html">NoneRemover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NoneSkipper.html">NoneSkipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ParallelMap.html">ParallelMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.PartiallyInitializedStep.html">PartiallyInitializedStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Prefix.html">Prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.RemoveIndex.html">RemoveIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.SerialMap.html">SerialMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Sorter.html">Sorter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ToList.html">ToList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Truncater.html">Truncater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWith.html">TupleWith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWithIncoming.html">TupleWithIncoming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Unnest.html">Unnest</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.base.html">polpo.preprocessing.base</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.base.CacheableDataLoader.html">CacheableDataLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.base.DataLoader.html">DataLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.base.Pipeline.html">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html">PreprocessingStep</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.dict.html">polpo.preprocessing.dict</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.DictKeysFilter.html">DictKeysFilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.DictMap.html">DictMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.DictMerger.html">DictMerger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.DictNoneRemover.html">DictNoneRemover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.DictToTuplesList.html">DictToTuplesList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.DictToValuesList.html">DictToValuesList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.DictUpdate.html">DictUpdate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.Filter.html">Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.Hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.HashWithIncoming.html">HashWithIncoming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.dict.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.html">polpo.preprocessing.mesh</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.clone.html">polpo.preprocessing.mesh.clone</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.clone.TrimeshClone.html">TrimeshClone</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.conversion.html">polpo.preprocessing.mesh.conversion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.CombinatorialStructureTo.html">CombinatorialStructureTo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.DataFromTrimesh.html">DataFromTrimesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.DataToPv.html">DataToPv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.DataToTrimesh.html">DataToTrimesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.FromCombinatorialStructure.html">FromCombinatorialStructure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.PvFromData.html">PvFromData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.PvFromSks.html">PvFromSks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.PvFromTrimesh.html">PvFromTrimesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.PvToSks.html">PvToSks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.PvToTrimesh.html">PvToTrimesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.SksFromPv.html">SksFromPv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.SksToPv.html">SksToPv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.SurfaceFromTrimesh.html">SurfaceFromTrimesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.ToFaces.html">ToFaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.ToVertices.html">ToVertices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.TrimeshFromData.html">TrimeshFromData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.TrimeshFromPv.html">TrimeshFromPv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.TrimeshSurfaceFromTrimesh.html">TrimeshSurfaceFromTrimesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.TrimeshToData.html">TrimeshToData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.TrimeshToPv.html">TrimeshToPv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.TrimeshToSurface.html">TrimeshToSurface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.conversion.TrimeshToTrimeshSurface.html">TrimeshToTrimeshSurface</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.decimation.html">polpo.preprocessing.mesh.decimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.decimation.FastSimplificationDecimator.html">FastSimplificationDecimator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.decimation.PvDecimate.html">PvDecimate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.decimation.TrimeshDecimator.html">TrimeshDecimator</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.io.html">polpo.preprocessing.mesh.io</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.io.MeshioReader.html">MeshioReader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.io.MeshioWriter.html">MeshioWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.io.PvReader.html">PvReader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.io.PvWriter.html">PvWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.io.TrimeshReader.html">TrimeshReader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.io.TrimeshToPly.html">TrimeshToPly</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.logging.html">polpo.preprocessing.mesh.logging</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.logging.BaseMeshInfoPrinter.html">BaseMeshInfoPrinter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.logging.MeshSize.html">MeshSize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.logging.MessageWithPrefixMixin.html">MessageWithPrefixMixin</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">PreprocessingStep</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.qof.html">polpo.preprocessing.mesh.qof</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.qof.ColorCentroids.html">ColorCentroids</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.qof.PreprocessingStep.html">PreprocessingStep</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.registration.html">polpo.preprocessing.mesh.registration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.registration.IdentityMeshAligner.html">IdentityMeshAligner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.registration.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.registration.PvAlign.html">PvAlign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.registration.SksRigidRegistration.html">SksRigidRegistration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.repair.html">polpo.preprocessing.mesh.repair</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.repair.PvExtractLargest.html">PvExtractLargest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.repair.TrimeshDegenerateFacesRemover.html">TrimeshDegenerateFacesRemover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.repair.TrimeshFaceRemoverByArea.html">TrimeshFaceRemoverByArea</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.repair.TrimeshLargestComponentSelector.html">TrimeshLargestComponentSelector</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.smoothing.html">polpo.preprocessing.mesh.smoothing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.smoothing.PvSmoothTaubin.html">PvSmoothTaubin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.smoothing.TrimeshLaplacianSmoothing.html">TrimeshLaplacianSmoothing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.mesh.transform.html">polpo.preprocessing.mesh.transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.transform.MeshCenterer.html">MeshCenterer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.transform.MeshScaler.html">MeshScaler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.transform.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.mesh.transform.TransformVertices.html">TransformVertices</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.mri.html">polpo.preprocessing.mri</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html">MeshExtractorFromSegmentedImage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.mri.MriImageLoader.html">MriImageLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.mri.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.mri.SkimageMarchingCubes.html">SkimageMarchingCubes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.np.html">polpo.preprocessing.np</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.np.Complex2RealsRepr.html">Complex2RealsRepr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.np.FlattenButFirst.html">FlattenButFirst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.np.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.np.RealsRepr2Complex.html">RealsRepr2Complex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.np.Reshape.html">Reshape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.np.Stack.html">Stack</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.path.html">polpo.preprocessing.path</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.path.FileFinder.html">FileFinder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.path.FileRule.html">FileRule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.path.Path.html">Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.path.PathShortener.html">PathShortener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.path.PreprocessingStep.html">PreprocessingStep</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.pd.html">polpo.preprocessing.pd</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.ColumnSelector.html">ColumnSelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.ColumnsSelector.html">ColumnsSelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.CsvReader.html">CsvReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.DfToDict.html">DfToDict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.Dropna.html">Dropna</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.IndexSetter.html">IndexSetter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.SeriesToDict.html">SeriesToDict</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.point_cloud.html">polpo.preprocessing.point_cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../polpo.preprocessing.point_cloud.conversion.html">polpo.preprocessing.point_cloud.conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../polpo.preprocessing.point_cloud.registration.html">polpo.preprocessing.point_cloud.registration</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.point_cloud.smoothing.html">polpo.preprocessing.point_cloud.smoothing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.point_cloud.smoothing.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.point_cloud.smoothing.RegisteredPointCloudSmoothing.html">RegisteredPointCloudSmoothing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.point_cloud.transform.html">polpo.preprocessing.point_cloud.transform</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.point_cloud.transform.ApplyTransformation.html">ApplyTransformation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.point_cloud.transform.PreprocessingStep.html">PreprocessingStep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.html">polpo.preprocessing.sklearn</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.adapter.html">polpo.preprocessing.sklearn.adapter</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.adapter.AdapterPipeline.html">AdapterPipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.adapter.Iterable.html">Iterable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.adapter.TransformerAdapter.html">TransformerAdapter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.base.html">polpo.preprocessing.sklearn.base</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.base.GetParamsMixin.html">GetParamsMixin</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.compose.html">polpo.preprocessing.sklearn.compose</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.compose.ObjectBasedTransformedTargetRegressor.html">ObjectBasedTransformedTargetRegressor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.logging.html">polpo.preprocessing.sklearn.logging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.logging.BaseMessagePrinter.html">BaseMessagePrinter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.logging.ModelBasicMessagePrinter.html">ModelBasicMessagePrinter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.logging.TelemeteredModel.html">TelemeteredModel</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.mesh.html">polpo.preprocessing.sklearn.mesh</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.mesh.FromCombinatorialStructure.html">FromCombinatorialStructure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.mesh.InvertibleMeshesToVertices.html">InvertibleMeshesToVertices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.mesh.Map.html">Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.mesh.ToVertices.html">ToVertices</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.np.html">polpo.preprocessing.sklearn.np</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.np.FlattenButFirst.html">FlattenButFirst</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.np.InvertibleFlattenButFirst.html">InvertibleFlattenButFirst</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.np.Reshape.html">Reshape</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../polpo.preprocessing.sklearn.point_cloud.html">polpo.preprocessing.sklearn.point_cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.point_cloud.FittableRegisteredPointCloudSmoothing.html">FittableRegisteredPointCloudSmoothing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.point_cloud.GetParamsMixin.html">GetParamsMixin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="polpo.preprocessing.sklearn.point_cloud.RegisteredPointCloudSmoothing.html">RegisteredPointCloudSmoothing</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.ssh.html">polpo.preprocessing.ssh</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.ssh.CacheableDataLoader.html">CacheableDataLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.ssh.PreprocessingStep.html">PreprocessingStep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.ssh.ScpDataLoader.html">ScpDataLoader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.ssh.SshClient.html">SshClient</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.str.html">polpo.preprocessing.str</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.str.DigitFinder.html">DigitFinder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.str.PreprocessingStep.html">PreprocessingStep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../api.html" class="nav-link">API</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../polpo.preprocessing.html" class="nav-link">polpo.preprocessing</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../polpo.preprocessing.mesh.html" class="nav-link">polpo.preprocessing.mesh</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../polpo.preprocessing.mesh.logging.html" class="nav-link">polpo.preprocessing.mesh.logging</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">PreprocessingStep</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="preprocessingstep">
+<h1>PreprocessingStep<a class="headerlink" href="#preprocessingstep" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="polpo.preprocessing.mesh.logging.PreprocessingStep">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mesh.logging.</span></span><span class="sig-name descname"><span class="pre">PreprocessingStep</span></span><a class="reference internal" href="../../_modules/polpo/preprocessing/base.html#PreprocessingStep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.logging.PreprocessingStep" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Preprocessing step.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="polpo.preprocessing.mesh.logging.PreprocessingStep.apply">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/base.html#PreprocessingStep.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.logging.PreprocessingStep.apply" title="Link to this definition">#</a></dt>
+<dd><p>Apply step.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.mesh.logging.PreprocessingStep"><code class="docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.mesh.logging.PreprocessingStep.apply"><code class="docutils literal notranslate"><span class="pre">PreprocessingStep.apply()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_generated/classes/polpo.preprocessing.mesh.logging.PreprocessingStep.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024-, Geometric Intelligence Lab @ UC Santa Barbara.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
