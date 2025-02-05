@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,16 +26,16 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
@@ -258,9 +258,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -307,18 +312,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing._preprocessing</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">abc</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span> <span class="nn">polpo.utils</span> <span class="kn">import</span> <span class="n">is_non_string_iterable</span><span class="p">,</span> <span class="n">unnest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_non_string_iterable</span><span class="p">,</span> <span class="n">unnest</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">PreprocessingStep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">PreprocessingStep</span>
 
 
-<span class="k">def</span> <span class="nf">_wrap_step</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_wrap_step</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">step</span> <span class="o">=</span> <span class="n">IdentityStep</span><span class="p">()</span>
 
@@ -330,8 +335,8 @@
 
 <div class="viewcode-block" id="StepWrappingPreprocessingStep">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.StepWrappingPreprocessingStep.html#polpo.preprocessing.StepWrappingPreprocessingStep">[docs]</a>
-<span class="k">class</span> <span class="nc">StepWrappingPreprocessingStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StepWrappingPreprocessingStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">_wrap_step</span><span class="p">(</span><span class="n">step</span><span class="p">)</span></div>
@@ -340,14 +345,14 @@
 
 <div class="viewcode-block" id="ExceptionToWarning">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ExceptionToWarning.html#polpo.preprocessing.ExceptionToWarning">[docs]</a>
-<span class="k">class</span> <span class="nc">ExceptionToWarning</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExceptionToWarning</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">warn</span> <span class="o">=</span> <span class="n">warn</span>
 
 <div class="viewcode-block" id="ExceptionToWarning.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ExceptionToWarning.html#polpo.preprocessing.ExceptionToWarning.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -361,8 +366,8 @@
 
 <div class="viewcode-block" id="BranchingPipeline">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.BranchingPipeline.html#polpo.preprocessing.BranchingPipeline">[docs]</a>
-<span class="k">class</span> <span class="nc">BranchingPipeline</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branches</span><span class="p">,</span> <span class="n">merger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BranchingPipeline</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branches</span><span class="p">,</span> <span class="n">merger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">merger</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">merger</span> <span class="o">=</span> <span class="n">NestingSwapper</span><span class="p">()</span>
 
@@ -372,7 +377,7 @@
 
 <div class="viewcode-block" id="BranchingPipeline.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.BranchingPipeline.html#polpo.preprocessing.BranchingPipeline.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">pipeline</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
@@ -384,10 +389,10 @@
 
 <div class="viewcode-block" id="IdentityStep">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IdentityStep.html#polpo.preprocessing.IdentityStep">[docs]</a>
-<span class="k">class</span> <span class="nc">IdentityStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IdentityStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="IdentityStep.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IdentityStep.html#polpo.preprocessing.IdentityStep.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">data</span></div>
 </div>
 
@@ -395,10 +400,10 @@
 
 <div class="viewcode-block" id="NestingSwapper">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.NestingSwapper.html#polpo.preprocessing.NestingSwapper">[docs]</a>
-<span class="k">class</span> <span class="nc">NestingSwapper</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NestingSwapper</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="NestingSwapper.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.NestingSwapper.html#polpo.preprocessing.NestingSwapper.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">))</span></div>
 </div>
 
@@ -406,8 +411,8 @@
 
 <div class="viewcode-block" id="IndexSelector">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IndexSelector.html#polpo.preprocessing.IndexSelector">[docs]</a>
-<span class="k">class</span> <span class="nc">IndexSelector</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IndexSelector</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
@@ -415,7 +420,7 @@
 
 <div class="viewcode-block" id="IndexSelector.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IndexSelector.html#polpo.preprocessing.IndexSelector.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">selected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeat</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">selected</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -427,15 +432,15 @@
 
 <div class="viewcode-block" id="RemoveIndex">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.RemoveIndex.html#polpo.preprocessing.RemoveIndex">[docs]</a>
-<span class="k">class</span> <span class="nc">RemoveIndex</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RemoveIndex</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
 
 <div class="viewcode-block" id="RemoveIndex.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.RemoveIndex.html#polpo.preprocessing.RemoveIndex.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -447,10 +452,10 @@
 
 <div class="viewcode-block" id="Unnest">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Unnest.html#polpo.preprocessing.Unnest">[docs]</a>
-<span class="k">class</span> <span class="nc">Unnest</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Unnest</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="Unnest.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Unnest.html#polpo.preprocessing.Unnest.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">unnest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 </div>
 
@@ -458,13 +463,13 @@
 
 <div class="viewcode-block" id="ListSqueeze">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ListSqueeze.html#polpo.preprocessing.ListSqueeze">[docs]</a>
-<span class="k">class</span> <span class="nc">ListSqueeze</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raise_</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ListSqueeze</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raise_</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span> <span class="o">=</span> <span class="n">raise_</span>
 
 <div class="viewcode-block" id="ListSqueeze.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ListSqueeze.html#polpo.preprocessing.ListSqueeze.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsqueezable!&quot;</span><span class="p">)</span>
@@ -478,14 +483,14 @@
 
 <div class="viewcode-block" id="TupleWith">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.TupleWith.html#polpo.preprocessing.TupleWith">[docs]</a>
-<span class="k">class</span> <span class="nc">TupleWith</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">incoming_first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TupleWith</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">incoming_first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">incoming_first</span> <span class="o">=</span> <span class="n">incoming_first</span>
 
 <div class="viewcode-block" id="TupleWith.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.TupleWith.html#polpo.preprocessing.TupleWith.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">new_data</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">incoming_first</span> <span class="k">else</span> <span class="p">(</span><span class="n">new_data</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[(</span><span class="n">datum</span><span class="p">,</span> <span class="n">datum_</span><span class="p">)</span> <span class="k">for</span> <span class="n">datum</span><span class="p">,</span> <span class="n">datum_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">ordering</span><span class="p">)]</span></div>
@@ -495,18 +500,18 @@
 
 <div class="viewcode-block" id="TupleWithIncoming">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.TupleWithIncoming.html#polpo.preprocessing.TupleWithIncoming">[docs]</a>
-<span class="k">class</span> <span class="nc">TupleWithIncoming</span><span class="p">(</span><span class="n">TupleWith</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TupleWithIncoming</span><span class="p">(</span><span class="n">TupleWith</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">incoming_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="Sorter">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Sorter.html#polpo.preprocessing.Sorter">[docs]</a>
-<span class="k">class</span> <span class="nc">Sorter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Sorter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="Sorter.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Sorter.html#polpo.preprocessing.Sorter.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 </div>
 
@@ -514,8 +519,8 @@
 
 <div class="viewcode-block" id="Filter">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.Filter.html#polpo.preprocessing.Filter">[docs]</a>
-<span class="k">class</span> <span class="nc">Filter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">collection_type</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">to_iter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Filter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">collection_type</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">to_iter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">to_iter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">to_iter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
 
@@ -526,7 +531,7 @@
 
 <div class="viewcode-block" id="Filter.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.Filter.html#polpo.preprocessing.Filter.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_type</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_iter</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span></div>
 </div>
 
@@ -534,26 +539,26 @@
 
 <div class="viewcode-block" id="EmptyRemover">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.EmptyRemover.html#polpo.preprocessing.EmptyRemover">[docs]</a>
-<span class="k">class</span> <span class="nc">EmptyRemover</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EmptyRemover</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="NoneRemover">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.NoneRemover.html#polpo.preprocessing.NoneRemover">[docs]</a>
-<span class="k">class</span> <span class="nc">NoneRemover</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoneRemover</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="NoneSkipper">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.NoneSkipper.html#polpo.preprocessing.NoneSkipper">[docs]</a>
-<span class="k">class</span> <span class="nc">NoneSkipper</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NoneSkipper</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="NoneSkipper.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.NoneSkipper.html#polpo.preprocessing.NoneSkipper.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">data</span>
 
@@ -564,10 +569,10 @@
 
 <div class="viewcode-block" id="EmptySkipper">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.EmptySkipper.html#polpo.preprocessing.EmptySkipper">[docs]</a>
-<span class="k">class</span> <span class="nc">EmptySkipper</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EmptySkipper</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="EmptySkipper.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.EmptySkipper.html#polpo.preprocessing.EmptySkipper.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">data</span>
 
@@ -578,11 +583,11 @@
 
 <div class="viewcode-block" id="ToList">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ToList.html#polpo.preprocessing.ToList">[docs]</a>
-<span class="k">class</span> <span class="nc">ToList</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToList</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="c1"># TODO: better naming?</span>
 <div class="viewcode-block" id="ToList.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ToList.html#polpo.preprocessing.ToList.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span></div>
 </div>
 
@@ -590,14 +595,14 @@
 
 <div class="viewcode-block" id="SerialMap">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.SerialMap.html#polpo.preprocessing.SerialMap">[docs]</a>
-<span class="k">class</span> <span class="nc">SerialMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">pbar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SerialMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">pbar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span> <span class="o">=</span> <span class="n">pbar</span>
 
 <div class="viewcode-block" id="SerialMap.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.SerialMap.html#polpo.preprocessing.SerialMap.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span> <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="p">)]</span></div>
 </div>
 
@@ -605,15 +610,15 @@
 
 <div class="viewcode-block" id="ParallelMap">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ParallelMap.html#polpo.preprocessing.ParallelMap">[docs]</a>
-<span class="k">class</span> <span class="nc">ParallelMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParallelMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
 
 <div class="viewcode-block" id="ParallelMap.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ParallelMap.html#polpo.preprocessing.ParallelMap.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span> <span class="k">as</span> <span class="n">parallel</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span><span class="n">delayed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">)(</span><span class="n">datum</span><span class="p">)</span> <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
 
@@ -624,10 +629,10 @@
 
 <div class="viewcode-block" id="DecorateToIterable">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.DecorateToIterable.html#polpo.preprocessing.DecorateToIterable">[docs]</a>
-<span class="k">class</span> <span class="nc">DecorateToIterable</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DecorateToIterable</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="DecorateToIterable.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.DecorateToIterable.html#polpo.preprocessing.DecorateToIterable.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">decorated</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">decorated</span> <span class="o">=</span> <span class="kc">True</span>
@@ -645,8 +650,8 @@
 
 <div class="viewcode-block" id="Map">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.sklearn.mesh.Map.html#polpo.preprocessing.Map">[docs]</a>
-<span class="k">class</span> <span class="nc">Map</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">force_iter</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Map</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">force_iter</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n_jobs</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">map_</span> <span class="o">=</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
@@ -662,15 +667,15 @@
 
 <div class="viewcode-block" id="IndexMap">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IndexMap.html#polpo.preprocessing.IndexMap">[docs]</a>
-<span class="k">class</span> <span class="nc">IndexMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IndexMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
     <span class="c1"># TODO: name is confusing</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
 
 <div class="viewcode-block" id="IndexMap.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IndexMap.html#polpo.preprocessing.IndexMap.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">data</span></div>
@@ -680,13 +685,13 @@
 
 <div class="viewcode-block" id="Prefix">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Prefix.html#polpo.preprocessing.Prefix">[docs]</a>
-<span class="k">class</span> <span class="nc">Prefix</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Prefix</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span>
 
 <div class="viewcode-block" id="Prefix.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Prefix.html#polpo.preprocessing.Prefix.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">value</span></div>
 </div>
 
@@ -694,16 +699,16 @@
 
 <div class="viewcode-block" id="Truncater">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Truncater.html#polpo.preprocessing.Truncater">[docs]</a>
-<span class="k">class</span> <span class="nc">Truncater</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Truncater</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="c1"># useful for debugging</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="Truncater.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Truncater.html#polpo.preprocessing.Truncater.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">data</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">]</span></div>
@@ -713,16 +718,16 @@
 
 <div class="viewcode-block" id="DataPrinter">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.DataPrinter.html#polpo.preprocessing.DataPrinter">[docs]</a>
-<span class="k">class</span> <span class="nc">DataPrinter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataPrinter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="c1"># useful for debugging</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># avoids having to comment code out</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">silent</span> <span class="o">=</span> <span class="n">silent</span>
 
 <div class="viewcode-block" id="DataPrinter.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.DataPrinter.html#polpo.preprocessing.DataPrinter.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">silent</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span></div>
@@ -732,14 +737,14 @@
 
 <div class="viewcode-block" id="PartiallyInitializedStep">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.PartiallyInitializedStep.html#polpo.preprocessing.PartiallyInitializedStep">[docs]</a>
-<span class="k">class</span> <span class="nc">PartiallyInitializedStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Step</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PartiallyInitializedStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Step</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Step</span> <span class="o">=</span> <span class="n">Step</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
 <div class="viewcode-block" id="PartiallyInitializedStep.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.PartiallyInitializedStep.html#polpo.preprocessing.PartiallyInitializedStep.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">dependent_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dependent_keys</span><span class="p">:</span>
@@ -752,15 +757,15 @@
 
 <div class="viewcode-block" id="IfCondition">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IfCondition.html#polpo.preprocessing.IfCondition">[docs]</a>
-<span class="k">class</span> <span class="nc">IfCondition</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">else_step</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IfCondition</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">else_step</span><span class="p">,</span> <span class="n">condition</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">else_step</span> <span class="o">=</span> <span class="n">_wrap_step</span><span class="p">(</span><span class="n">else_step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">condition</span>
 
 <div class="viewcode-block" id="IfCondition.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IfCondition.html#polpo.preprocessing.IfCondition.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">new_data</span><span class="p">):</span>
@@ -773,8 +778,8 @@
 
 <div class="viewcode-block" id="IfEmpty">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IfEmpty.html#polpo.preprocessing.IfEmpty">[docs]</a>
-<span class="k">class</span> <span class="nc">IfEmpty</span><span class="p">(</span><span class="n">IfCondition</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">else_step</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IfEmpty</span><span class="p">(</span><span class="n">IfCondition</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">else_step</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">else_step</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span></div>
 
 </pre></div>
@@ -800,8 +805,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -834,7 +839,8 @@
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

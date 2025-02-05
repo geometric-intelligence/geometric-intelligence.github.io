@@ -14,9 +14,9 @@
    "outputs": [],
    "source": [
     "from polpo.plot.mri import MriPlotter, MriSlicer, SlicesPlotter\n",
+    "from polpo.preprocessing.load import FigsharePregnancyDataLoader\n",
     "from polpo.preprocessing.mri import MriImageLoader\n",
-    "from polpo.preprocessing.path import FileFinder, FileRule\n",
-    "from polpo.preprocessing.ssh import ScpDataLoader"
+    "from polpo.preprocessing.path import FileFinder, FileRule"
    ]
   },
   {
@@ -26,9 +26,9 @@
     "## Loading data\n",
     "\n",
     "We'll create a pipeline that:\n",
-    "- downloads data from the server\n",
-    "- finds [nii](https://en.wikipedia.org/wiki/Neuroimaging_Informatics_Technology_Initiative) file in folder\n",
-    "- loads image as an array"
+    "* [downloads data](load_figshare_data.ipynb) from [figshare](https://figshare.com/articles/dataset/pregnancy-data/28339535)\n",
+    "* finds [nii](https://en.wikipedia.org/wiki/Neuroimaging_Informatics_Technology_Initiative) file in folder\n",
+    "* loads image as an array"
    ]
   },
   {
@@ -48,11 +48,9 @@
    "source": [
     "folder_name = f\"ses-{str(SESSION_ID).zfill(2)}\"\n",
     "\n",
-    "loader = ScpDataLoader.from_host_name(\n",
+    "loader = FigsharePregnancyDataLoader(\n",
     "    data_dir=\"~/.herbrain/data/pregnancy/mri\",\n",
-    "    host_name=\"frank\",\n",
-    "    remote_path=f\"/home/data/pregnancy/folder1/{folder_name}\",\n",
-    "    recursive=True,\n",
+    "    remote_path=f\"mri/{folder_name}\",\n",
     ")\n",
     "\n",
     "finder = FileFinder(\n",

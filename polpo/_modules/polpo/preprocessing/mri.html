@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,16 +26,16 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
@@ -258,9 +258,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -307,21 +312,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing.mri</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">skimage</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span>
 
-<span class="kn">from</span> <span class="nn">polpo.utils</span> <span class="kn">import</span> <span class="n">params_to_kwargs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">params_to_kwargs</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">PreprocessingStep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessingStep</span>
 
 
 <div class="viewcode-block" id="MriImageLoader">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.mri.MriImageLoader">[docs]</a>
-<span class="k">class</span> <span class="nc">MriImageLoader</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MriImageLoader</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="MriImageLoader.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.mri.MriImageLoader.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">img_data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
 
@@ -332,7 +337,7 @@
 
 <div class="viewcode-block" id="MeshExtractorFromSegmentedImage">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage">[docs]</a>
-<span class="k">class</span> <span class="nc">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mesh extractor from images.</span>
 
 <span class="sd">    Structure_ID names, numbers, and colors:</span>
@@ -350,7 +355,7 @@
 <span class="sd">    4, 5 are expected to shrink in volume with progesterone</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">marching_cubes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">marching_cubes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">marching_cubes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">marching_cubes</span> <span class="o">=</span> <span class="n">SkimageMarchingCubes</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lewiner&quot;</span><span class="p">)</span>
 
@@ -372,7 +377,7 @@
 
 <div class="viewcode-block" id="MeshExtractorFromSegmentedImage.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_fdata</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_fdata</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract one surface mesh from the fdata of a segmented image.</span>
 
 <span class="sd">        Parameters</span>
@@ -403,12 +408,12 @@
 
 <div class="viewcode-block" id="SkimageMarchingCubes">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.SkimageMarchingCubes.html#polpo.preprocessing.mri.SkimageMarchingCubes">[docs]</a>
-<span class="k">class</span> <span class="nc">SkimageMarchingCubes</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SkimageMarchingCubes</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.marching_cubes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -422,7 +427,7 @@
 
 <div class="viewcode-block" id="SkimageMarchingCubes.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.SkimageMarchingCubes.html#polpo.preprocessing.mri.SkimageMarchingCubes.apply">[docs]</a>
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">img_fdata</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
@@ -463,8 +468,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -497,7 +502,8 @@
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
