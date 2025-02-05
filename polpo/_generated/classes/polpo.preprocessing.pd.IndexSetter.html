@@ -280,6 +280,7 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IfEmpty.html">IfEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IndexMap.html">IndexMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IndexSelector.html">IndexSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Lambda.html">Lambda</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ListSqueeze.html">ListSqueeze</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Map.html">Map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NestingSwapper.html">NestingSwapper</a></li>
@@ -439,14 +440,16 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../polpo.preprocessing.pd.html">polpo.preprocessing.pd</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.ColumnSelector.html">ColumnSelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.ColumnsSelector.html">ColumnsSelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.CsvReader.html">CsvReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.DfCopy.html">DfCopy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.DfToDict.html">DfToDict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.Drop.html">Drop</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.Dropna.html">Dropna</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">IndexSetter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.PreprocessingStep.html">PreprocessingStep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.SeriesToDict.html">SeriesToDict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.UpdateColumnValues.html">UpdateColumnValues</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.point_cloud.html">polpo.preprocessing.point_cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -599,10 +602,28 @@
 <dt class="sig sig-object py" id="polpo.preprocessing.pd.IndexSetter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.pd.</span></span><span class="sig-name descname"><span class="pre">IndexSetter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verify_integrity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/pd.html#IndexSetter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.pd.IndexSetter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
+<p>Set the DataFrame index using existing columns.</p>
+<p>Check out
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.set_index.html">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.set_index.html</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – New index.</p></li>
+<li><p><strong>inplace</strong> (<em>bool</em>) – Whether to perform operation in place.</p></li>
+<li><p><strong>drop</strong> (<em>bool</em>) – Delete columns to be used as the new index.</p></li>
+<li><p><strong>verify_integrity</strong> (<em>bool</em>) – Check the new index for duplicates.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.pd.IndexSetter.apply">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/pd.html#IndexSetter.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.pd.IndexSetter.apply" title="Link to this definition">#</a></dt>
 <dd><p>Apply step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Dataframe.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

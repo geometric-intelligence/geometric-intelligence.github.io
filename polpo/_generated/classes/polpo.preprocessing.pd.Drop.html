@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ColumnSelector &#8212; polpo latest documentation</title>
+    <title>Drop &#8212; polpo latest documentation</title>
   
   
   
@@ -42,12 +42,12 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.pd.ColumnSelector';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.pd.ColumnSelector.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.pd.Drop';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.pd.Drop.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ColumnsSelector" href="polpo.preprocessing.pd.ColumnsSelector.html" />
-    <link rel="prev" title="polpo.preprocessing.pd" href="../polpo.preprocessing.pd.html" />
+    <link rel="next" title="Dropna" href="polpo.preprocessing.pd.Dropna.html" />
+    <link rel="prev" title="DfToDict" href="polpo.preprocessing.pd.DfToDict.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -280,6 +280,7 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IfEmpty.html">IfEmpty</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IndexMap.html">IndexMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IndexSelector.html">IndexSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Lambda.html">Lambda</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ListSqueeze.html">ListSqueeze</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Map.html">Map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NestingSwapper.html">NestingSwapper</a></li>
@@ -439,14 +440,16 @@
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../polpo.preprocessing.pd.html">polpo.preprocessing.pd</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">ColumnSelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.ColumnsSelector.html">ColumnsSelector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.CsvReader.html">CsvReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.DfCopy.html">DfCopy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.DfToDict.html">DfToDict</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Drop</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.Dropna.html">Dropna</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.IndexSetter.html">IndexSetter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.PreprocessingStep.html">PreprocessingStep</a></li>
 <li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.SeriesToDict.html">SeriesToDict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polpo.preprocessing.pd.UpdateColumnValues.html">UpdateColumnValues</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../polpo.preprocessing.point_cloud.html">polpo.preprocessing.point_cloud</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -576,7 +579,7 @@
     
     <li class="breadcrumb-item"><a href="../polpo.preprocessing.pd.html" class="nav-link">polpo.preprocessing.pd</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ColumnSelector</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Drop</span></li>
   </ul>
 </nav>
 </div>
@@ -593,16 +596,29 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="columnselector">
-<h1>ColumnSelector<a class="headerlink" href="#columnselector" title="Link to this heading">#</a></h1>
+  <section id="drop">
+<h1>Drop<a class="headerlink" href="#drop" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="polpo.preprocessing.pd.ColumnSelector">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.pd.</span></span><span class="sig-name descname"><span class="pre">ColumnSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/pd.html#ColumnSelector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.pd.ColumnSelector" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="polpo.preprocessing.pd.Drop">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.pd.</span></span><span class="sig-name descname"><span class="pre">Drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/pd.html#Drop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.pd.Drop" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
+<p>Drop specified labels from rows or columns.</p>
+<p>Check out
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inplace</strong> (<em>bool</em>) – Whether to perform operation in place.</p>
+</dd>
+</dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="polpo.preprocessing.pd.ColumnSelector.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/pd.html#ColumnSelector.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.pd.ColumnSelector.apply" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="polpo.preprocessing.pd.Drop.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/pd.html#Drop.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.pd.Drop.apply" title="Link to this definition">#</a></dt>
 <dd><p>Apply step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Dataframe.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -632,8 +648,8 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.pd.ColumnSelector"><code class="docutils literal notranslate"><span class="pre">ColumnSelector</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.pd.ColumnSelector.apply"><code class="docutils literal notranslate"><span class="pre">ColumnSelector.apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.pd.Drop"><code class="docutils literal notranslate"><span class="pre">Drop</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.pd.Drop.apply"><code class="docutils literal notranslate"><span class="pre">Drop.apply()</span></code></a></li>
 </ul>
 </li>
 </ul>

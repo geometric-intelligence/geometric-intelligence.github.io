@@ -782,6 +782,21 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">else_step</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">else_step</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span></div>
 
+
+
+<div class="viewcode-block" id="Lambda">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Lambda.html#polpo.preprocessing.Lambda">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Lambda</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lambda_</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Lambda.apply">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Lambda.html#polpo.preprocessing.Lambda.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda_</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
                 </article>
