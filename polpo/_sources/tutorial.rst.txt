@@ -8,4 +8,4 @@ Tutorials
    :maxdepth: 1
    :glob:
 
-   notebooks/examples/*
+   _notebooks/tutorials/*
