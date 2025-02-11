@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to visualize MRI data? &#8212; polpo latest documentation</title>
+    <title>How to visualize meshes with overlay? &#8212; polpo latest documentation</title>
   
   
   
@@ -45,12 +45,12 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_notebooks/how_to/all/viz_mri';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_notebooks/how_to/all/viz_mri.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_notebooks/how_to/all/mesh_viz_compare';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_notebooks/how_to/all/mesh_viz_compare.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Tutorials" href="../../../tutorial.html" />
-    <link rel="prev" title="How to get a mesh from an MRI image?" href="mri2mesh.html" />
+    <link rel="next" title="How to get a mesh from an MRI image?" href="mri2mesh.html" />
+    <link rel="prev" title="How to download data from the server?" href="load_server_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -192,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -290,9 +286,9 @@
 <li class="toctree-l2"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_figshare_data.html">How to download data from figshare?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_server_data.html">How to download data from the server?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">How to visualize meshes with overlay?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">How to visualize MRI data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viz_mri.html">How to visualize MRI data?</a></li>
 </ul>
 </details></li>
 </ul>
@@ -341,7 +337,7 @@
     
     <li class="breadcrumb-item"><a href="../../../how_to/all.html" class="nav-link">All</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to visualize MRI data?</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to visualize meshes with overlay?</span></li>
   </ul>
 </nav>
 </div>
@@ -358,83 +354,155 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="How-to-visualize-MRI-data?">
-<h1>How to visualize MRI data?<a class="headerlink" href="#How-to-visualize-MRI-data?" title="Link to this heading">#</a></h1>
-<div class="nbinput nblast docutils container">
+  <section id="How-to-visualize-meshes-with-overlay?">
+<h1>How to visualize meshes with overlay?<a class="headerlink" href="#How-to-visualize-meshes-with-overlay?" title="Link to this heading">#</a></h1>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.mri</span><span class="w"> </span><span class="kn">import</span> <span class="n">MriPlotter</span><span class="p">,</span> <span class="n">MriSlicer</span><span class="p">,</span> <span class="n">SlicesPlotter</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigsharePregnancyDataLoader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="n">MriImageLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshCenterer</span><span class="p">,</span> <span class="n">MeshScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
+    <span class="n">MriImageLoader</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">FileRule</span>
 </pre></div>
 </div>
 </div>
-<section id="Loading-data">
-<h2>Loading data<a class="headerlink" href="#Loading-data" title="Link to this heading">#</a></h2>
-<p>We’ll create a pipeline that:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="load_figshare_data.html"><span class="doc">downloads data</span></a> from <a class="reference external" href="https://figshare.com/articles/dataset/pregnancy-data/28339535">figshare</a></p></li>
-<li><p>finds <a class="reference external" href="https://en.wikipedia.org/wiki/Neuroimaging_Informatics_Technology_Initiative">nii</a> file in folder</p></li>
-<li><p>loads image as an array</p></li>
-</ul>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[KeOps] Warning : cuda was detected, but driver API could not be initialized. Switching to cpu only.
+</pre></div></div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SESSION_ID</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
+    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<p>Following <a class="reference internal" href="mri2mesh.html"><span class="doc">How to get a mesh from an MRI image?</span></a>, we download a segmented MRI and get a mesh out of it.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ses-</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SESSION_ID</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;BB</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/mri&quot;</span><span class="p">,</span>
-    <span class="n">remote_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;mri/</span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/Segmentations&quot;</span><span class="p">,</span>
+    <span class="n">remote_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Segmentations/</span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">finder</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
     <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;BrainNormalized&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
+        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
         <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 <span class="p">)</span>
 
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">finder</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
+<span class="n">loading_pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">finder</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
+<span class="n">img2mesh_pipe</span> <span class="o">=</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">loading_pipe</span> <span class="o">+</span> <span class="n">img2mesh_pipe</span>
+
+<span class="n">raw_mesh</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_fdata</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
-</pre></div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/Segmentations/BB02&#39;).
+</pre></div></div>
 </div>
-</div>
-</section>
-<section id="Visualization">
-<h2>Visualization<a class="headerlink" href="#Visualization" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">MriSlicer</span></code> slices the MRI image. <code class="docutils literal notranslate"><span class="pre">SlicesPlotter</span></code> takes care of plotting slices. By default, it plots side, front and top views.</p>
-<div class="nbinput nblast docutils container">
+<p>We also load a registered version of the same mesh (NB: there’s more registrations at <a class="reference external" href="https://figshare.com/articles/dataset/pregnancy-data/28339535">figshare</a>).</p>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slices_plotter</span> <span class="o">=</span> <span class="n">SlicesPlotter</span><span class="p">()</span>
-<span class="n">slicer</span> <span class="o">=</span> <span class="n">MriSlicer</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/registration&quot;</span><span class="p">,</span>
+        <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;registration/elastic_20250106_80&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">FileFinder</span><span class="p">(</span>
+        <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;left_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
+            <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;.ply&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">PvReader</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">registered_mesh</span> <span class="o">=</span> <span class="n">loader</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/registration/elastic_20250106_80&#39;).
+</pre></div></div>
+</div>
+<p>The registered mesh was preprocessed before registration. Let’s apply the same preprocessing in order to have an overlayable representation.</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slices_plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slicer</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">img_fdata</span><span class="p">,</span> <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">105</span><span class="p">)));</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">processing_pipe</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">MeshCenterer</span><span class="p">(</span><span class="n">attr</span><span class="o">=</span><span class="s2">&quot;points&quot;</span><span class="p">),</span> <span class="n">MeshScaler</span><span class="p">(</span><span class="n">attr</span><span class="o">=</span><span class="s2">&quot;points&quot;</span><span class="p">)],</span>
+    <span class="n">force_iter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">raw_mesh</span> <span class="o">=</span> <span class="n">processing_pipe</span><span class="p">(</span><span class="n">raw_mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Visualization.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">raw_mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">registered_mesh</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">remove_scalar_bar</span><span class="p">()</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">registered_mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">raw_mesh</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">remove_scalar_bar</span><span class="p">()</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">link_views</span><span class="p">()</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -442,40 +510,30 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_viz_mri_8_0.png" src="../../../_images/_notebooks_how_to_all_viz_mri_8_0.png" />
+<img alt="../../../_images/_notebooks_how_to_all_mesh_viz_compare_11_0.png" src="../../../_images/_notebooks_how_to_all_mesh_viz_compare_11_0.png" />
 </div>
 </div>
-<p>For convenience, there’s also <code class="docutils literal notranslate"><span class="pre">MriPlotter</span></code>.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mri_plotter</span> <span class="o">=</span> <span class="n">MriPlotter</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<p>Notice the meshes fully overlap even though they have a very different combinatorial structure.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mri_plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">img_fdata</span><span class="p">,</span> <span class="p">[</span><span class="n">val</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">img_fdata</span><span class="o">.</span><span class="n">shape</span><span class="p">]);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">raw_mesh</span><span class="o">.</span><span class="n">faces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">registered_mesh</span><span class="o">.</span><span class="n">faces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_viz_mri_11_0.png" src="../../../_images/_notebooks_how_to_all_viz_mri_11_0.png" />
+<div class="highlight"><pre>
+(27680, 6032)
+</pre></div></div>
 </div>
-</div>
-</section>
-<section id="Further-reading">
-<h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="mri2mesh.html"><span class="doc">How to get a mesh from an MRI image?</span></a></p></li>
-</ul>
-</section>
 </section>
 
 
@@ -488,26 +546,6 @@
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-data">Loading data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualization">Visualization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
