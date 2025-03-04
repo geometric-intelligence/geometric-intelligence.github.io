@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>TransformVertices &#8212; polpo latest documentation</title>
+    <title>MeshTransformer &#8212; polpo latest documentation</title>
   
   
   
@@ -42,12 +42,12 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.mesh.transform.TransformVertices';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.mesh.transform.TransformVertices.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.mesh.transform.MeshTransformer';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.mesh.transform.MeshTransformer.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="polpo.preprocessing.mri" href="../polpo.preprocessing.mri.html" />
-    <link rel="prev" title="PreprocessingStep" href="polpo.preprocessing.mesh.transform.PreprocessingStep.html" />
+    <link rel="next" title="PreprocessingStep" href="polpo.preprocessing.mesh.transform.PreprocessingStep.html" />
+    <link rel="prev" title="MeshScaler" href="polpo.preprocessing.mesh.transform.MeshScaler.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -366,7 +366,7 @@
     
     <li class="breadcrumb-item"><a href="../polpo.preprocessing.mesh.transform.html" class="nav-link">polpo.preprocessing.mesh.transform</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">TransformVertices</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">MeshTransformer</span></li>
   </ul>
 </nav>
 </div>
@@ -383,16 +383,34 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="transformvertices">
-<h1>TransformVertices<a class="headerlink" href="#transformvertices" title="Link to this heading">#</a></h1>
+  <section id="meshtransformer">
+<h1>MeshTransformer<a class="headerlink" href="#meshtransformer" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="polpo.preprocessing.mesh.transform.TransformVertices">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mesh.transform.</span></span><span class="sig-name descname"><span class="pre">TransformVertices</span></span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/transform.html#TransformVertices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.transform.TransformVertices" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="polpo.preprocessing.mesh.transform.MeshTransformer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mesh.transform.</span></span><span class="sig-name descname"><span class="pre">MeshTransformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/transform.html#MeshTransformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.transform.MeshTransformer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
+<p>Applies function to mesh attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em>) – Function to apply to attribute.</p></li>
+<li><p><strong>attr</strong> (<em>str</em>) – Mesh attribute containing vertex information.
+If None, it uses registered or “vertices”.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="polpo.preprocessing.mesh.transform.TransformVertices.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/transform.html#TransformVertices.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.transform.TransformVertices.apply" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="polpo.preprocessing.mesh.transform.MeshTransformer.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/transform.html#MeshTransformer.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.transform.MeshTransformer.apply" title="Link to this definition">#</a></dt>
 <dd><p>Apply step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mesh</strong> (<em>Mesh</em>) – Mesh to transform.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>transformed_mesh</strong> (<em>Mesh</em>) – Transformed mesh.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -422,8 +440,8 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.mesh.transform.TransformVertices"><code class="docutils literal notranslate"><span class="pre">TransformVertices</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.mesh.transform.TransformVertices.apply"><code class="docutils literal notranslate"><span class="pre">TransformVertices.apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.mesh.transform.MeshTransformer"><code class="docutils literal notranslate"><span class="pre">MeshTransformer</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.mesh.transform.MeshTransformer.apply"><code class="docutils literal notranslate"><span class="pre">MeshTransformer.apply()</span></code></a></li>
 </ul>
 </li>
 </ul>

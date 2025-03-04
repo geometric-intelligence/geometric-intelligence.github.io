@@ -312,79 +312,134 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing.mesh.transform</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span></span><span class="sd">&quot;&quot;&quot;Mesh transformations.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessingStep</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">._register</span><span class="w"> </span><span class="kn">import</span> <span class="n">VERTICES_ATTR</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_apply_to_attr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># NB: done in place</span>
+    <span class="k">if</span> <span class="n">attr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="n">VERTICES_ATTR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">),</span> <span class="s2">&quot;vertices&quot;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mesh</span>
+
+
+<div class="viewcode-block" id="MeshTransformer">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.MeshTransformer.html#polpo.preprocessing.mesh.transform.MeshTransformer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeshTransformer</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Applies function to mesh attribute.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : callable</span>
+<span class="sd">        Function to apply to attribute.</span>
+<span class="sd">    attr : str</span>
+<span class="sd">        Mesh attribute containing vertex information.</span>
+<span class="sd">        If None, it uses registered or &quot;vertices&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span>
+
+<div class="viewcode-block" id="MeshTransformer.apply">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.MeshTransformer.html#polpo.preprocessing.mesh.transform.MeshTransformer.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mesh : Mesh</span>
+<span class="sd">            Mesh to transform.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        transformed_mesh : Mesh</span>
+<span class="sd">            Transformed mesh.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">mesh</span><span class="p">,</span> <span class="o">*</span><span class="n">transform_args</span> <span class="o">=</span> <span class="n">mesh</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_func</span><span class="p">(</span><span class="o">*</span><span class="n">transform_args</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span>
+
+        <span class="k">return</span> <span class="n">_apply_to_attr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">)</span></div>
+</div>
+
 
 
 <div class="viewcode-block" id="MeshCenterer">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.MeshCenterer.html#polpo.preprocessing.mesh.transform.MeshCenterer">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">MeshCenterer</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s2">&quot;vertices&quot;</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeshCenterer</span><span class="p">(</span><span class="n">MeshTransformer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Center mesh by removing vertex mean.</span>
 
-<div class="viewcode-block" id="MeshCenterer.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.MeshCenterer.html#polpo.preprocessing.mesh.transform.MeshCenterer.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Center a mesh by putting its barycenter at origin of the coordinates.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    attr : str</span>
+<span class="sd">        Mesh attribute containing vertex information.</span>
+<span class="sd">        If None, it uses registered or &quot;vertices&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        mesh : trimesh.Trimesh</span>
-<span class="sd">            Mesh to center.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        centered_mesh : trimesh.Trimesh</span>
-<span class="sd">            Centered Mesh.</span>
-<span class="sd">        hippocampus_center: coordinates of center of the mesh before centering</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">)</span>
-        <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">,</span> <span class="n">values</span> <span class="o">-</span> <span class="n">center</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">mesh</span></div>
-</div>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">attr</span><span class="o">=</span><span class="n">attr</span><span class="p">,</span>
+            <span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">vertices</span><span class="p">:</span> <span class="n">vertices</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="MeshScaler">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.MeshScaler.html#polpo.preprocessing.mesh.transform.MeshScaler">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">MeshScaler</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scaling_factor</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s2">&quot;vertices&quot;</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scaling_factor</span> <span class="o">=</span> <span class="n">scaling_factor</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeshScaler</span><span class="p">(</span><span class="n">MeshTransformer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scale mesh.</span>
 
-<div class="viewcode-block" id="MeshScaler.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.MeshScaler.html#polpo.preprocessing.mesh.transform.MeshScaler.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
-        <span class="n">values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">)</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">,</span> <span class="n">values</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling_factor</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">mesh</span></div>
-</div>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scaling_factor : float</span>
+<span class="sd">        Scaling factor.</span>
+<span class="sd">    attr : str</span>
+<span class="sd">        Mesh attribute containing vertex information.</span>
+<span class="sd">        If None, it uses registered or &quot;vertices&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scaling_factor</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">attr</span><span class="o">=</span><span class="n">attr</span><span class="p">,</span>
+            <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_build_function</span><span class="p">(</span><span class="n">scaling_factor</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scaling_factor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">vertices</span><span class="p">:</span> <span class="n">vertices</span> <span class="o">/</span> <span class="n">scaling_factor</span></div>
 
 
 
-<div class="viewcode-block" id="TransformVertices">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.TransformVertices.html#polpo.preprocessing.mesh.transform.TransformVertices">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">TransformVertices</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="TransformVertices.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.TransformVertices.html#polpo.preprocessing.mesh.transform.TransformVertices.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="c1"># TODO: accept transformation at init?</span>
-        <span class="c1"># TODO: consider in place?</span>
+<div class="viewcode-block" id="AffineTransformation">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.transform.AffineTransformation.html#polpo.preprocessing.mesh.transform.AffineTransformation">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AffineTransformation</span><span class="p">(</span><span class="n">MeshTransformer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply affine transform to mesh vertices.&quot;&quot;&quot;</span>
 
-        <span class="n">mesh</span><span class="p">,</span> <span class="n">transformation</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">attr</span><span class="o">=</span><span class="n">attr</span><span class="p">,</span>
+            <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_build_function</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span> <span class="k">if</span> <span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
 
-        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">transformation</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-        <span class="n">translation</span> <span class="o">=</span> <span class="n">transformation</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">):</span>
+        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">transform</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">translation</span> <span class="o">=</span> <span class="n">transform</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 
-        <span class="n">mesh</span><span class="o">.</span><span class="n">vertices</span> <span class="o">=</span> <span class="p">(</span><span class="n">rotation_matrix</span> <span class="o">@</span> <span class="n">mesh</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">translation</span>
-
-        <span class="k">return</span> <span class="n">mesh</span></div>
-</div>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">vertices</span><span class="p">:</span> <span class="p">(</span><span class="n">rotation_matrix</span> <span class="o">@</span> <span class="n">vertices</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">translation</span></div>
 
 </pre></div>
 

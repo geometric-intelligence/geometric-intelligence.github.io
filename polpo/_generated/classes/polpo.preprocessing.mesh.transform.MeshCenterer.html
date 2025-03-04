@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="MeshScaler" href="polpo.preprocessing.mesh.transform.MeshScaler.html" />
-    <link rel="prev" title="polpo.preprocessing.mesh.transform" href="../polpo.preprocessing.mesh.transform.html" />
+    <link rel="prev" title="AffineTransformation" href="polpo.preprocessing.mesh.transform.AffineTransformation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -387,22 +387,25 @@
 <h1>MeshCenterer<a class="headerlink" href="#meshcenterer" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="polpo.preprocessing.mesh.transform.MeshCenterer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mesh.transform.</span></span><span class="sig-name descname"><span class="pre">MeshCenterer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vertices'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/transform.html#MeshCenterer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.transform.MeshCenterer" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="polpo.preprocessing.mesh.transform.MeshCenterer.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/transform.html#MeshCenterer.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.transform.MeshCenterer.apply" title="Link to this definition">#</a></dt>
-<dd><p>Center a mesh by putting its barycenter at origin of the coordinates.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mesh.transform.</span></span><span class="sig-name descname"><span class="pre">MeshCenterer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/transform.html#MeshCenterer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.transform.MeshCenterer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.mesh.transform.MeshTransformer.html#polpo.preprocessing.mesh.transform.MeshTransformer" title="polpo.preprocessing.mesh.transform.MeshTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeshTransformer</span></code></a></p>
+<p>Center mesh by removing vertex mean.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mesh</strong> (<em>trimesh.Trimesh</em>) – Mesh to center.</p>
+<dd class="field-odd"><p><strong>attr</strong> (<em>str</em>) – Mesh attribute containing vertex information.
+If None, it uses registered or “vertices”.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="polpo.preprocessing.mesh.transform.MeshCenterer.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.mesh.transform.MeshCenterer.apply" title="Link to this definition">#</a></dt>
+<dd><p>Apply step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mesh</strong> (<em>Mesh</em>) – Mesh to transform.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><strong>centered_mesh</strong> (<em>trimesh.Trimesh</em>) – Centered Mesh.</p></li>
-<li><p><strong>hippocampus_center</strong> (<em>coordinates of center of the mesh before centering</em>)</p></li>
-</ul>
-</p>
+<dd class="field-even"><p><strong>transformed_mesh</strong> (<em>Mesh</em>) – Transformed mesh.</p>
 </dd>
 </dl>
 </dd></dl>
