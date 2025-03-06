@@ -329,9 +329,23 @@
 <div class="viewcode-block" id="PvFromData">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromData.html#polpo.preprocessing.mesh.conversion.PvFromData">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvFromData</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert arrays into pv.PolyData.&quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="PvFromData.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromData.html#polpo.preprocessing.mesh.conversion.PvFromData.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mesh : tuple</span>
+<span class="sd">            Mesh represented by (vertices, faces, colors) or (vertices, faces).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        mesh : pv.PolyData</span>
+<span class="sd">            Converted mesh.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">mesh</span>
         <span class="k">else</span><span class="p">:</span>
@@ -349,7 +363,7 @@
 <div class="viewcode-block" id="PvAlign">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.registration.PvAlign.html#polpo.preprocessing.mesh.conversion.PvAlign">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvAlign</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Align a dataset to another.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Align a dataset to another with ICP.</span>
 
 <span class="sd">    https://docs.pyvista.org/api/core/_autosummary/pyvista.datasetfilters.align</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -362,6 +376,7 @@
         <span class="n">check_mean_distance</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">start_by_matching_centroids</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_landmarks</span> <span class="o">=</span> <span class="n">max_landmarks</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_mean_distance</span> <span class="o">=</span> <span class="n">max_mean_distance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="n">max_iterations</span>
@@ -371,6 +386,19 @@
 <div class="viewcode-block" id="PvAlign.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.registration.PvAlign.html#polpo.preprocessing.mesh.conversion.PvAlign.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : tuple[pv.PolyData]</span>
+<span class="sd">            (source, target) meshes.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        mesh : pv.PolyData</span>
+<span class="sd">            Source aligned to target.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: allow target at init?</span>
         <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">return</span> <span class="n">source</span><span class="o">.</span><span class="n">align</span><span class="p">(</span>
             <span class="n">target</span><span class="p">,</span>
@@ -385,7 +413,7 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">PvSmoothTaubin</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Smooth a PolyData DataSet with Taubin smoothing.</span>
 
-<span class="sd">    https://docs.pyvista.org/api/core/_autosummary/pyvista.polydatafilters.smooth_taubin#pyvista.PolyDataFilters.smooth_taubin&quot;</span>
+<span class="sd">    https://docs.pyvista.org/api/core/_autosummary/pyvista.polydatafilters.smooth_taubin#pyvista.PolyDataFilters.smooth_taubin</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -415,6 +443,7 @@
 <div class="viewcode-block" id="PvSmoothTaubin.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.smoothing.PvSmoothTaubin.html#polpo.preprocessing.mesh.conversion.PvSmoothTaubin.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">smooth_taubin</span><span class="p">(</span><span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
 </div>
 
@@ -449,6 +478,7 @@
         <span class="n">progress_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">keep_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_reduction</span> <span class="o">=</span> <span class="n">target_reduction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">volume_preservation</span> <span class="o">=</span> <span class="n">volume_preservation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">attribute_error</span> <span class="o">=</span> <span class="n">attribute_error</span>
@@ -471,6 +501,18 @@
 <div class="viewcode-block" id="PvDecimate.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.decimation.PvDecimate.html#polpo.preprocessing.mesh.conversion.PvDecimate.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mesh : pv.PolyData</span>
+<span class="sd">            Mesh to decimate.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        decimated_mesh : pv.PolyData</span>
+<span class="sd">            Decimated mesh.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="ow">and</span> <span class="s2">&quot;colors&quot;</span> <span class="ow">in</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">array_names</span><span class="p">:</span>
             <span class="n">colors</span> <span class="o">=</span> <span class="n">poly_data</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span>
@@ -496,12 +538,27 @@
 <div class="viewcode-block" id="PvFromTrimesh">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromTrimesh.html#polpo.preprocessing.mesh.conversion.PvFromTrimesh">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvFromTrimesh</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert trimesh.Trimesh into pv.PolyData.&quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">store_colors</span> <span class="o">=</span> <span class="n">store_colors</span>
 
 <div class="viewcode-block" id="PvFromTrimesh.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromTrimesh.html#polpo.preprocessing.mesh.conversion.PvFromTrimesh.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mesh : trimesh.Trimesh</span>
+<span class="sd">            Mesh to convert.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        mesh : pv.PolyData</span>
+<span class="sd">            Converted mesh.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pvmesh</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_colors</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">visual</span><span class="p">,</span> <span class="s2">&quot;vertex_colors&quot;</span><span class="p">):</span>
             <span class="n">pvmesh</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">visual</span><span class="o">.</span><span class="n">vertex_colors</span><span class="p">)</span>
@@ -514,7 +571,8 @@
 <div class="viewcode-block" id="PvWriter">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.PvWriter.html#polpo.preprocessing.mesh.conversion.PvWriter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvWriter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write a surface mesh to disk.</span>
+
 <span class="sd">    https://docs.pyvista.org/api/core/_autosummary/pyvista.polydata.save</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -525,6 +583,7 @@
         <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">recompute_normals</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dirname</span> <span class="o">=</span> <span class="n">dirname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ext</span> <span class="o">=</span> <span class="n">ext</span>
 
@@ -534,17 +593,25 @@
 <div class="viewcode-block" id="PvWriter.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.PvWriter.html#polpo.preprocessing.mesh.conversion.PvWriter.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : tuple[str, pv.PolyData]</span>
+<span class="sd">            Filename and mesh to write.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Filename.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO: create dir if does not exist?</span>
-        <span class="c1"># filename extension ignored if ext is not None</span>
         <span class="n">filename</span><span class="p">,</span> <span class="n">poly_data</span> <span class="o">=</span> <span class="n">data</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext</span>
-            <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filename</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">filename</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">ext</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
@@ -569,12 +636,30 @@
 <div class="viewcode-block" id="PvReader">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.PvReader.html#polpo.preprocessing.mesh.conversion.PvReader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvReader</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read file.</span>
+
+<span class="sd">    https://docs.pyvista.org/api/utilities/_autosummary/pyvista.read</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rename_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rename_colors</span> <span class="o">=</span> <span class="n">rename_colors</span>
 
 <div class="viewcode-block" id="PvReader.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.PvReader.html#polpo.preprocessing.mesh.conversion.PvReader.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            File name.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        mesh : pv.PolyData</span>
+<span class="sd">            Loaded mesh.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">poly_data</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s2">&quot;RGBA&quot;</span> <span class="ow">in</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">array_names</span><span class="p">:</span>
@@ -596,13 +681,108 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">progress_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">progress_bar</span>
 
 <div class="viewcode-block" id="PvExtractLargest.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.repair.PvExtractLargest.html#polpo.preprocessing.mesh.conversion.PvExtractLargest.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        poly_data : pv.PolyData</span>
+<span class="sd">            Mesh.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        mesh : pv.PolyData</span>
+<span class="sd">            Largest mesh component.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">extract_largest</span><span class="p">(</span><span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PvExtractPoints">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.filter.PvExtractPoints.html#polpo.preprocessing.mesh.conversion.PvExtractPoints">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PvExtractPoints</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a subset of the grid (with cells).</span>
+
+<span class="sd">    Cells are added if contain any of the given point indices.</span>
+
+<span class="sd">    https://docs.pyvista.org/api/core/_autosummary/pyvista.datasetfilters.extract_points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">adjacent_cells</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">include_cells</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">progress_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">extract_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjacent_cells</span> <span class="o">=</span> <span class="n">adjacent_cells</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">include_cells</span> <span class="o">=</span> <span class="n">include_cells</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">progress_bar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extract_surface</span> <span class="o">=</span> <span class="n">extract_surface</span>
+
+<div class="viewcode-block" id="PvExtractPoints.apply">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.filter.PvExtractPoints.html#polpo.preprocessing.mesh.conversion.PvExtractPoints.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : tuple[pv.PolyData, indices]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mesh</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">subset</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">extract_points</span><span class="p">(</span>
+            <span class="n">indices</span><span class="p">,</span> <span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">extract_points</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_surface</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">subset</span><span class="o">.</span><span class="n">extract_surface</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">subset</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PvSelectColor">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.filter.PvSelectColor.html#polpo.preprocessing.mesh.conversion.PvSelectColor">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PvSelectColor</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get subset of a mesh with given color.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">adjacent_cells</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">include_cells</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">progress_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">extract_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_point_extractor</span> <span class="o">=</span> <span class="n">PvExtractPoints</span><span class="p">(</span>
+            <span class="n">adjacent_cells</span><span class="o">=</span><span class="n">adjacent_cells</span><span class="p">,</span>
+            <span class="n">include_cells</span><span class="o">=</span><span class="n">include_cells</span><span class="p">,</span>
+            <span class="n">progress_bar</span><span class="o">=</span><span class="n">progress_bar</span><span class="p">,</span>
+            <span class="n">extract_surface</span><span class="o">=</span><span class="n">extract_surface</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="PvSelectColor.apply">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.filter.PvSelectColor.html#polpo.preprocessing.mesh.conversion.PvSelectColor.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">mesh</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mesh</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span>
+
+        <span class="p">(</span><span class="n">ind</span><span class="p">,)</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="s2">&quot;colors&quot;</span><span class="p">),</span> <span class="n">color</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_point_extractor</span><span class="p">((</span><span class="n">mesh</span><span class="p">,</span> <span class="n">ind</span><span class="p">))</span></div>
 </div>
 
 </pre></div>
