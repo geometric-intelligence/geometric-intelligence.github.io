@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 6, 2025, 4:43:06 AM"/>
+    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
   </head>
   
   
@@ -497,7 +497,7 @@
 <div class="viewcode-block" id="assign_train_val_test_mask_to_graphs">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobench.data.utils.split_utils.assign_train_val_test_mask_to_graphs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">assign_train_val_test_mask_to_graphs</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">split_idx</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Split the graph dataset into train, validation, and test datasets.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split the graph dataset into train, validation, and test datasets.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -508,37 +508,33 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    list:</span>
-<span class="sd">        List containing the train, validation, and test datasets.</span>
+<span class="sd">    tuple:</span>
+<span class="sd">        Tuple containing the train, validation, and test datasets.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">data_train_lst</span><span class="p">,</span> <span class="n">data_val_lst</span><span class="p">,</span> <span class="n">data_test_lst</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
 
-    <span class="c1"># Go over each of the graph and assign correct label</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)):</span>
+    <span class="c1"># Assign masks directly by iterating over pre-split indices</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">split_idx</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]:</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">assigned</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">split_idx</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]:</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">val_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">test_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">data_train_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-            <span class="n">assigned</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">val_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">test_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">data_train_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">split_idx</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">]:</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">val_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">test_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">data_val_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-            <span class="n">assigned</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">split_idx</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">]:</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">val_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">test_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">data_val_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">split_idx</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]:</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">val_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">test_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="n">data_test_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-            <span class="n">assigned</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">assigned</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Graph not in any split&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">split_idx</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]:</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">val_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">test_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">data_test_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">(</span>
         <span class="n">DataloadDataset</span><span class="p">(</span><span class="n">data_train_lst</span><span class="p">),</span>
