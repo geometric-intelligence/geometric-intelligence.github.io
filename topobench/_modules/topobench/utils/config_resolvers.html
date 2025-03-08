@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
+    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
   </head>
   
   
@@ -488,6 +488,7 @@
             <span class="s2">&quot;pointcloud2combinatorial_lifting&quot;</span><span class="p">,</span>
             <span class="s2">&quot;pointcloud2hypergraph_lifting&quot;</span><span class="p">,</span>
             <span class="s2">&quot;pointcloud2cell_lifting&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hypergraph2combinatorial_lifting&quot;</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">complex_transforms</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">transforms</span><span class="p">:</span>
@@ -522,6 +523,7 @@
         <span class="c1"># Get type of feature lifting</span>
         <span class="n">feature_lifting</span> <span class="o">=</span> <span class="n">check_for_type_feature_lifting</span><span class="p">(</span><span class="n">transforms</span><span class="p">,</span> <span class="n">lifting</span><span class="p">)</span>
 
+        <span class="c1"># Check if the dataset.parameters.num_features defines a single value or a list</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="c1"># Case when the dataset has no edge attributes</span>
             <span class="k">if</span> <span class="n">feature_lifting</span> <span class="o">==</span> <span class="s2">&quot;Concatenation&quot;</span><span class="p">:</span>
@@ -536,8 +538,15 @@
                 <span class="k">return</span> <span class="p">[</span><span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">]</span> <span class="o">*</span> <span class="n">transforms</span><span class="p">[</span>
                     <span class="n">lifting</span>
                 <span class="p">]</span><span class="o">.</span><span class="n">complex_dim</span>
+        <span class="c1"># Case when the dataset has edge attributes (cells attributes)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Case when the dataset has edge attributes</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="nb">type</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">)</span>
+                <span class="ow">is</span> <span class="n">omegaconf</span><span class="o">.</span><span class="n">listconfig</span><span class="o">.</span><span class="n">ListConfig</span>
+            <span class="p">),</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;num_features should be a list of integers, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="c1"># If preserve_edge_attr == False</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">transforms</span><span class="p">[</span><span class="n">lifting</span><span class="p">]</span><span class="o">.</span><span class="n">preserve_edge_attr</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">feature_lifting</span> <span class="o">==</span> <span class="s2">&quot;Concatenation&quot;</span><span class="p">:</span>
                     <span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
@@ -551,7 +560,7 @@
                     <span class="k">return</span> <span class="p">[</span><span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">transforms</span><span class="p">[</span>
                         <span class="n">lifting</span>
                     <span class="p">]</span><span class="o">.</span><span class="n">complex_dim</span>
-
+            <span class="c1"># If preserve_edge_attr == True</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span>
                     <span class="n">dataset</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">num_features</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>

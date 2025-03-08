@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
+    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
   </head>
   
   
@@ -441,41 +441,48 @@
         <span class="c1"># Generate batch_slice values for x_1, x_2, x_3, ...</span>
         <span class="n">x_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">keys</span> <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;x_&quot;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">)]</span>
         <span class="k">for</span> <span class="n">x_key</span> <span class="ow">in</span> <span class="n">x_keys</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">x_key</span> <span class="o">!=</span> <span class="s2">&quot;x_0&quot;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">x_key</span> <span class="o">!=</span> <span class="s2">&quot;x_hyperedges&quot;</span><span class="p">:</span>
-                    <span class="n">cell_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">cell_dim</span> <span class="o">=</span> <span class="n">x_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># if x_key != &quot;x_0&quot;:</span>
+            <span class="k">if</span> <span class="n">x_key</span> <span class="o">!=</span> <span class="s2">&quot;x_hyperedges&quot;</span><span class="p">:</span>
+                <span class="n">cell_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cell_dim</span> <span class="o">=</span> <span class="n">x_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
-                <span class="n">current_number_of_cells</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">x_key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">current_number_of_cells</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">x_key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-                <span class="n">batch_idx_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;batch_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="n">batch_idx</span><span class="p">]</span> <span class="o">*</span> <span class="n">current_number_of_cells</span><span class="p">])</span>
+            <span class="n">batch_idx_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;batch_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="n">batch_idx</span><span class="p">]</span> <span class="o">*</span> <span class="n">current_number_of_cells</span><span class="p">])</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">running_idx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cell_running_idx_number_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">running_idx</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cell_running_idx_number_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">current_number_of_cells</span>
                 <span class="p">)</span>
 
-                <span class="k">if</span> <span class="p">(</span>
-                    <span class="n">running_idx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cell_running_idx_number_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                    <span class="ow">is</span> <span class="kc">None</span>
-                <span class="p">):</span>
-                    <span class="n">running_idx</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cell_running_idx_number_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="n">current_number_of_cells</span>
-                    <span class="p">)</span>
-
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">running_idx</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cell_running_idx_number_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span>
-                        <span class="n">current_number_of_cells</span>
-                    <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">running_idx</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cell_running_idx_number_</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="n">current_number_of_cells</span>
+                <span class="p">)</span>
 
         <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
     <span class="n">batch</span> <span class="o">=</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Batch</span><span class="o">.</span><span class="n">from_data_list</span><span class="p">(</span><span class="n">data_list</span><span class="p">)</span>
 
-    <span class="c1"># Rename batch.batch to batch.batch_0 for consistency</span>
-    <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;batch_0&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span>
+    <span class="c1"># # Rename batch.batch to batch.batch_0 for consistency</span>
+    <span class="c1"># if batch.get(&quot;shape&quot;) is not None:</span>
+    <span class="c1">#     assert torch.all(batch[&quot;batch_0&quot;] == batch.pop(&quot;batch&quot;))</span>
+    <span class="c1">#     # batch[&quot;batch_0&quot;] = batch.pop(&quot;batch&quot;)</span>
 
     <span class="c1"># Add batch slices to batch</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">batch_idx_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">batch</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+
+    <span class="c1"># Rename batch.batch to batch.batch_0 for consistency</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;batch_0&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Back compatiility check</span>
+        <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">&quot;batch_0&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">batch</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)),</span> <span class="p">(</span>
+            <span class="s2">&quot;batch[&#39;batch_0&#39;] and batch[&#39;batch] should match in the number of nodes&quot;</span>
+        <span class="p">)</span>
+        <span class="c1"># batch[&quot;batch_0&quot;] = batch.pop(&quot;batch&quot;)</span>
 
     <span class="c1"># Ensure shape is torch.Tensor</span>
     <span class="c1"># &quot;shape&quot; describes the number of n_cells in each graph</span>

@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
+    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
   </head>
   
   
@@ -384,6 +384,14 @@
                     <span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
                 <span class="p">)</span>
             <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_edge_attr</span> <span class="ow">and</span> <span class="n">simplicial_complex</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span>
+        <span class="p">):</span>
+            <span class="c1"># Stop the processing to avoid errors</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot; The variable self.contains_edge_attr is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">contains_edge_attr</span><span class="si">}</span><span class="s2"> however number of edges (1-cells) is not equal to the number of edges (1-cells) in the original graph. The number of edges in the simplicial complex is </span><span class="si">{</span><span class="n">simplicial_complex</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> and the number of edges in the original graph is </span><span class="si">{</span><span class="n">graph</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="si">}</span><span class="s2">. This is not expected behavior. Please, check your code. Please set self.contains_edge_attr to False or chose other lifting method that preserves number of edges (1-cells) (For example cluque lifting).&quot;</span>
+            <span class="p">)</span>
+
         <span class="k">return</span> <span class="n">lifted_topology</span></div>
 
 </pre></div>

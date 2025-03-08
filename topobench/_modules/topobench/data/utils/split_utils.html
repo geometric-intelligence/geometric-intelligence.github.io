@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
+    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
   </head>
   
   
@@ -562,9 +562,9 @@
 <span class="sd">        List containing the train, validation, and test splits.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Extract labels from dataset object</span>
-    <span class="k">assert</span> <span class="p">(</span>
-        <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-    <span class="p">),</span> <span class="s2">&quot;Dataset should have only one graph in a transductive setting.&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span>
+        <span class="s2">&quot;Dataset should have only one graph in a transductive setting.&quot;</span>
+    <span class="p">)</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
@@ -619,9 +619,9 @@
 <span class="sd">        List containing the train, validation, and test splits.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Extract labels from dataset object</span>
-    <span class="k">assert</span> <span class="p">(</span>
-        <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
-    <span class="p">),</span> <span class="s2">&quot;Datasets should have more than one graph in an inductive setting.&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span>
+        <span class="s2">&quot;Datasets should have more than one graph in an inductive setting.&quot;</span>
+    <span class="p">)</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
         <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data_list</span><span class="p">]</span>
     <span class="p">)</span>

@@ -52,7 +52,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
+    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
   </head>
   
   
@@ -516,11 +516,17 @@ to the appropriate location.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="topobench.data.loaders.base.AbstractLoader.load_dataset">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Data</span></span></span><a class="reference internal" href="../../_modules/topobench/data/loaders/base.html#AbstractLoader.load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.loaders.base.AbstractLoader.load_dataset" title="Link to this definition">#</a></dt>
-<dd><p>Load data into Data.</p>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dataset</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dataset</span></span></span><a class="reference internal" href="../../_modules/topobench/data/loaders/base.html#AbstractLoader.load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.loaders.base.AbstractLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load data into a dataset.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
+<dt>Union[torch_geometric.data.Dataset, torch.utils.data.Dataset]</dt><dd><p>The loaded dataset, which could be a PyG or PyTorch dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
 <dt>NotImplementedError</dt><dd><p>If the method is not implemented.</p>
 </dd>
 </dl>
@@ -1006,6 +1012,30 @@ split file for the subsequent runs.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.get_combinatorial_complex_connectivity">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_combinatorial_complex_connectivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">complex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighborhoods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#get_combinatorial_complex_connectivity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.get_combinatorial_complex_connectivity" title="Link to this definition">#</a></dt>
+<dd><p>Get the connectivity matrices for the Combinatorial Complex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>complex</strong><span class="classifier">topnetx.CombinatorialComplex</span></dt><dd><p>Cell complex.</p>
+</dd>
+<dt><strong>max_rank</strong><span class="classifier">int</span></dt><dd><p>Maximum rank of the complex.</p>
+</dd>
+<dt><strong>neighborhoods</strong><span class="classifier">list, optional</span></dt><dd><p>List of neighborhoods of interest.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the connectivity matrices.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.utils.get_complex_connectivity">
 <span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_complex_connectivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">complex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighborhoods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#get_complex_connectivity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.get_complex_connectivity" title="Link to this definition">#</a></dt>
 <dd><p>Get the connectivity matrices for the complex.</p>
@@ -1074,6 +1104,68 @@ split file for the subsequent runs.</p>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt>torch_geometric.data.Data</dt><dd><p>Manual graph.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.load_manual_hypergraph">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">load_manual_hypergraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#load_manual_hypergraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.load_manual_hypergraph" title="Link to this definition">#</a></dt>
+<dd><p>Create a manual hypergraph for testing purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Manual hypergraph.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.load_manual_pointcloud">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">load_manual_pointcloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos_to_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#load_manual_pointcloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.load_manual_pointcloud" title="Link to this definition">#</a></dt>
+<dd><p>Create a manual pointcloud for testing purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pos_to_x</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, the positions are used as features.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Manual pointcloud.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.load_manual_points">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">load_manual_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#load_manual_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.load_manual_points" title="Link to this definition">#</a></dt>
+<dd><p>Create a manual point cloud for testing purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Manual point cloud.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.load_manual_simplicial_complex">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">load_manual_simplicial_complex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#load_manual_simplicial_complex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.load_manual_simplicial_complex" title="Link to this definition">#</a></dt>
+<dd><p>Create a manual simplicial complex for testing purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Manual simplicial complex.</p>
 </dd>
 </dl>
 </dd>
@@ -1242,10 +1334,15 @@ split file for the subsequent runs.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.random_splitting"><code class="docutils literal notranslate"><span class="pre">random_splitting()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.ensure_serializable"><code class="docutils literal notranslate"><span class="pre">ensure_serializable()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.generate_zero_sparse_connectivity"><code class="docutils literal notranslate"><span class="pre">generate_zero_sparse_connectivity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.get_combinatorial_complex_connectivity"><code class="docutils literal notranslate"><span class="pre">get_combinatorial_complex_connectivity()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.get_complex_connectivity"><code class="docutils literal notranslate"><span class="pre">get_complex_connectivity()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.get_routes_from_neighborhoods"><code class="docutils literal notranslate"><span class="pre">get_routes_from_neighborhoods()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.load_cell_complex_dataset"><code class="docutils literal notranslate"><span class="pre">load_cell_complex_dataset()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.load_manual_graph"><code class="docutils literal notranslate"><span class="pre">load_manual_graph()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.load_manual_hypergraph"><code class="docutils literal notranslate"><span class="pre">load_manual_hypergraph()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.load_manual_pointcloud"><code class="docutils literal notranslate"><span class="pre">load_manual_pointcloud()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.load_manual_points"><code class="docutils literal notranslate"><span class="pre">load_manual_points()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.load_manual_simplicial_complex"><code class="docutils literal notranslate"><span class="pre">load_manual_simplicial_complex()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.load_simplicial_dataset"><code class="docutils literal notranslate"><span class="pre">load_simplicial_dataset()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.make_hash"><code class="docutils literal notranslate"><span class="pre">make_hash()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.select_neighborhoods_of_interest"><code class="docutils literal notranslate"><span class="pre">select_neighborhoods_of_interest()</span></code></a></li>

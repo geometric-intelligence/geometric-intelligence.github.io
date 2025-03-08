@@ -52,7 +52,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
+    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
   </head>
   
   
@@ -585,44 +585,6 @@
 </dl>
 </dd></dl>
 
-<p id="module-topobench.transforms.liftings.graph2cell.cycle">This module implements the cycle lifting for graphs to cell complexes.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle.CellCycleLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.cycle.</span></span><span class="sig-name descname"><span class="pre">CellCycleLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_cell_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2cell/cycle.html#CellCycleLifting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle.CellCycleLifting" title="Link to this definition">#</a></dt>
-<dd><p>Lift graphs to cell complexes.</p>
-<p>The algorithm creates 2-cells by identifying the cycles and considering them as 2-cells.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>max_cell_length</strong><span class="classifier">int, optional</span></dt><dd><p>The maximum length of the cycles to be lifted. Default is None.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle.CellCycleLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2cell/cycle.html#CellCycleLifting.lift_topology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle.CellCycleLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Find the cycles of a graph and lifts them to 2-cells.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <p id="module-topobench.transforms.liftings.graph2hypergraph.base">Abstract class for lifting graphs to hypergraphs.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting">
@@ -636,93 +598,6 @@
 </dl>
 </dd>
 </dl>
-</dd></dl>
-
-<p id="module-topobench.transforms.liftings.graph2hypergraph.khop">This module implements the k-hop lifting of graphs to hypergraphs.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.khop.HypergraphKHopLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2hypergraph.khop.</span></span><span class="sig-name descname"><span class="pre">HypergraphKHopLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2hypergraph/khop.html#HypergraphKHopLifting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.khop.HypergraphKHopLifting" title="Link to this definition">#</a></dt>
-<dd><p>Lift graph to hypergraphs by considering k-hop neighborhoods.</p>
-<p>The class transforms graphs to hypergraph domain by considering k-hop neighborhoods of
-a node. This lifting extracts a number of hyperedges equal to the number of
-nodes in the graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>k_value</strong><span class="classifier">int, optional</span></dt><dd><p>The number of hops to consider. Default is 1.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.khop.HypergraphKHopLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2hypergraph/khop.html#HypergraphKHopLifting.lift_topology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.khop.HypergraphKHopLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Lift a graphs to hypergraphs by considering k-hop neighborhoods.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<p id="module-topobench.transforms.liftings.graph2hypergraph.knn">This module implements the HypergraphKNNLifting class.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.knn.HypergraphKNNLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2hypergraph.knn.</span></span><span class="sig-name descname"><span class="pre">HypergraphKNNLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2hypergraph/knn.html#HypergraphKNNLifting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.knn.HypergraphKNNLifting" title="Link to this definition">#</a></dt>
-<dd><p>Lift graphs to hypergraph domain by considering k-nearest neighbors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>k_value</strong><span class="classifier">int, optional</span></dt><dd><p>The number of nearest neighbors to consider. Must be positive. Default is 1.</p>
-</dd>
-<dt><strong>loop</strong><span class="classifier">bool, optional</span></dt><dd><p>If True the hyperedges will contain the node they were created from.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>ValueError</dt><dd><p>If k_value is less than 1.</p>
-</dd>
-<dt>TypeError</dt><dd><p>If k_value is not an integer or if loop is not a boolean.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.knn.HypergraphKNNLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2hypergraph/knn.html#HypergraphKNNLifting.lift_topology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.knn.HypergraphKNNLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Lift a graph to hypergraph by considering k-nearest neighbors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <p id="module-topobench.transforms.liftings.graph2simplicial.base">Abstract class for lifting graphs to simplicial complexes.</p>
@@ -740,84 +615,6 @@ nodes in the graph.</p>
 </dl>
 </dd>
 </dl>
-</dd></dl>
-
-<p id="module-topobench.transforms.liftings.graph2simplicial.clique">This module implements the CliqueLifting class, which lifts graphs to simplicial complexes.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2simplicial.clique.SimplicialCliqueLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2simplicial.clique.</span></span><span class="sig-name descname"><span class="pre">SimplicialCliqueLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2simplicial/clique.html#SimplicialCliqueLifting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2simplicial.clique.SimplicialCliqueLifting" title="Link to this definition">#</a></dt>
-<dd><p>Lift graphs to simplicial complex domain.</p>
-<p>The algorithm creates simplices by identifying the cliques and considering them as simplices of the same dimension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2simplicial.clique.SimplicialCliqueLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2simplicial/clique.html#SimplicialCliqueLifting.lift_topology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2simplicial.clique.SimplicialCliqueLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Lift the topology of a graph to a simplicial complex.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<p id="module-topobench.transforms.liftings.graph2simplicial.khop">This module implements the k-hop lifting of graphs to simplicial complexes.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2simplicial.khop.SimplicialKHopLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2simplicial.khop.</span></span><span class="sig-name descname"><span class="pre">SimplicialKHopLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_k_simplices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2simplicial/khop.html#SimplicialKHopLifting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2simplicial.khop.SimplicialKHopLifting" title="Link to this definition">#</a></dt>
-<dd><p>Lift graphs to simplicial complex domain.</p>
-<p>The function lifts a graph to a simplicial complex by considering k-hop
-neighborhoods. For each node its neighborhood is selected and then all the
-possible simplices, when considering the neighborhood as a clique, are
-added to the simplicial complex. For this reason this lifting does not
-conserve the initial graph topology.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>max_k_simplices</strong><span class="classifier">int, optional</span></dt><dd><p>The maximum number of k-simplices to consider. Default is 5000.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2simplicial.khop.SimplicialKHopLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../../../_modules/topobench/transforms/liftings/graph2simplicial/khop.html#SimplicialKHopLifting.lift_topology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.transforms.liftings.graph2simplicial.khop.SimplicialKHopLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Lift the topology to simplicial complex domain.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -886,28 +683,8 @@ conserve the initial graph topology.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.PointCloudLifting"><code class="docutils literal notranslate"><span class="pre">PointCloudLifting</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.SimplicialLifting"><code class="docutils literal notranslate"><span class="pre">SimplicialLifting</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle.CellCycleLifting"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle.CellCycleLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">Graph2HypergraphLifting</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.khop.HypergraphKHopLifting"><code class="docutils literal notranslate"><span class="pre">HypergraphKHopLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.khop.HypergraphKHopLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">HypergraphKHopLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.knn.HypergraphKNNLifting"><code class="docutils literal notranslate"><span class="pre">HypergraphKNNLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.knn.HypergraphKNNLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">HypergraphKNNLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2simplicial.base.Graph2SimplicialLifting"><code class="docutils literal notranslate"><span class="pre">Graph2SimplicialLifting</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2simplicial.clique.SimplicialCliqueLifting"><code class="docutils literal notranslate"><span class="pre">SimplicialCliqueLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2simplicial.clique.SimplicialCliqueLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">SimplicialCliqueLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2simplicial.khop.SimplicialKHopLifting"><code class="docutils literal notranslate"><span class="pre">SimplicialKHopLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2simplicial.khop.SimplicialKHopLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">SimplicialKHopLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
 </ul>
   </nav></div>
 

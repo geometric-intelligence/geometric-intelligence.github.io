@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 7, 2025, 11:46:22 PM"/>
+    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
   </head>
   
   
@@ -340,6 +340,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">feature_lifting</span> <span class="o">=</span> <span class="n">FEATURE_LIFTINGS</span><span class="p">[</span><span class="n">feature_lifting</span><span class="p">]()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neighborhoods</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;neighborhoods&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">complex_dim</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;complex_dim&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AbstractLifting.lift_topology">
 <a class="viewcode-back" href="../../../../api/transforms/liftings/index.html#topobench.transforms.liftings.base.AbstractLifting.lift_topology">[docs]</a>
@@ -380,6 +381,9 @@
         <span class="n">initial_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="n">lifted_topology</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lift_topology</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">lifted_topology</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_lifting</span><span class="p">(</span><span class="n">lifted_topology</span><span class="p">)</span>
+        <span class="c1"># Remove the original features to avoid conflict with the feature lifting</span>
+        <span class="k">if</span> <span class="s2">&quot;x_0&quot;</span> <span class="ow">in</span> <span class="n">initial_data</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">initial_data</span><span class="p">[</span><span class="s2">&quot;x_0&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="o">**</span><span class="n">initial_data</span><span class="p">,</span> <span class="o">**</span><span class="n">lifted_topology</span><span class="p">)</span></div>
 </div>
 
