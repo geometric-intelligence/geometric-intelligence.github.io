@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 8, 2025, 4:06:43 AM"/>
+    <meta name="docbuild:last-update" content="Mar 11, 2025, 4:15:45 PM"/>
   </head>
   
   
@@ -272,10 +272,7 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="homophily_tutorial.html">Homophily Tutorial</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="homophily_tutorial.html">Data Manipulation Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_add_custom_dataset.html">📚 Adding a Custom Dataset Tutorial</a></li>
 
 
@@ -363,33 +360,39 @@
 <section id="1.-Imports">
 <h3>1. Imports<a class="headerlink" href="#1.-Imports" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">hydra</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch_geometric</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">omegaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">OmegaConf</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topomodelx.nn.simplicial.scn2</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCN2</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">toponetx.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplicialComplex</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.data.loaders.graph</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># Hydra related imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omegaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">OmegaConf</span>
+
+<span class="c1"># Date related imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">toponetx.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimplicialComplex</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.data.loaders.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">TUDatasetLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">topobench.data.preprocessor</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreProcessor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">topobench.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBDataloader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.evaluator</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBEvaluator</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.loss</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBLoss</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBModel</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.nn.encoders</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllCellFeatureEncoder</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.nn.readouts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropagateSignalDown</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.nn.wrappers.simplicial</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCNWrapper</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBOptimizer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">topobench.transforms.liftings.graph2simplicial</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Graph2SimplicialLifting</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="c1"># Model related imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.model.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topomodelx.nn.simplicial.scn2</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCN2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.nn.wrappers.simplicial</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCNWrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.nn.encoders</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllCellFeatureEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.nn.readouts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropagateSignalDown</span>
+
+<span class="c1"># Optimization related imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.loss.loss</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBLoss</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBOptimizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">topobench.evaluator.evaluator</span><span class="w"> </span><span class="kn">import</span> <span class="n">TBEvaluator</span>
 </pre></div>
 </div>
 </div>
@@ -398,7 +401,7 @@
 <h3>2. Configurations and utilities<a class="headerlink" href="#2.-Configurations-and-utilities" title="Link to this heading">#</a></h3>
 <p>Configurations can be specified using yaml files or directly specified in your code like in this example. To keep the notebook clean here we already define the configuration for the lifting, which is defined later in the notebook.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -619,9 +622,9 @@ Transform parameters are the same, using existing data_dir: data/MUTAG/MUTAG/cli
 GPU available: True (cuda), used: False
 TPU available: False, using: 0 TPU cores
 HPU available: False, using: 0 HPUs
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/trainer/setup.py:177: GPU available but not used. You can set it by doing `Trainer(accelerator=&#39;gpu&#39;)`.
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/logger_connector/logger_connector.py:75: Starting from v1.9.0, `tensorboardX` has been removed as a dependency of the `lightning.pytorch` package, due to potential conflicts with other packages in the ML ecosystem. For this reason, `logger=True` will use `CSVLogger` as the default logger, unless the `tensorboard` or `tensorboardX` packages are found. Please `pip install lightning[extra]` or one of them to enable TensorBoard support by default
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/utilities/parsing.py:44: Attribute &#39;backbone_wrapper&#39; removed from hparams because it cannot be pickled. You can suppress this warning by setting `self.save_hyperparameters(ignore=[&#39;backbone_wrapper&#39;])`.
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/lightning/pytorch/trainer/setup.py:177: GPU available but not used. You can set it by doing `Trainer(accelerator=&#39;gpu&#39;)`.
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/logger_connector/logger_connector.py:75: Starting from v1.9.0, `tensorboardX` has been removed as a dependency of the `lightning.pytorch` package, due to potential conflicts with other packages in the ML ecosystem. For this reason, `logger=True` will use `CSVLogger` as the default logger, unless the `tensorboard` or `tensorboardX` packages are found. Please `pip install lightning[extra]` or one of them to enable TensorBoard support by default
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/lightning/pytorch/utilities/parsing.py:44: Attribute &#39;backbone_wrapper&#39; removed from hparams because it cannot be pickled. You can suppress this warning by setting `self.save_hyperparameters(ignore=[&#39;backbone_wrapper&#39;])`.
 
   | Name            | Type                  | Params | Mode
 ------------------------------------------------------------------
@@ -636,17 +639,17 @@ HPU available: False, using: 0 HPUs
 0.612     Total estimated model params size (MB)
 36        Modules in train mode
 0         Modules in eval mode
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:424: The &#39;val_dataloader&#39; does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=31` in the `DataLoader` to improve performance.
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: The ``compute`` method of metric MulticlassAccuracy was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
-  warnings.warn(*args, **kwargs)  # noqa: B028
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: The ``compute`` method of metric MulticlassPrecision was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
-  warnings.warn(*args, **kwargs)  # noqa: B028
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: The ``compute`` method of metric MulticlassRecall was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
-  warnings.warn(*args, **kwargs)  # noqa: B028
-/home/lev/projects/TopoBench/topobench/nn/wrappers/simplicial/scn_wrapper.py:75: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:424: The &#39;val_dataloader&#39; does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=127` in the `DataLoader` to improve performance.
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: The ``compute`` method of metric MulticlassAccuracy was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
+  warnings.warn(*args, **kwargs)
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: The ``compute`` method of metric MulticlassPrecision was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
+  warnings.warn(*args, **kwargs)
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: The ``compute`` method of metric MulticlassRecall was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
+  warnings.warn(*args, **kwargs)
+/home/levtel/projects/dev/TopoBench/topobench/nn/wrappers/simplicial/scn_wrapper.py:75: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
   normalized_matrix = diag_matrix @ (matrix @ diag_matrix)
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:424: The &#39;train_dataloader&#39; does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=31` in the `DataLoader` to improve performance.
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/loops/fit_loop.py:298: The number of training batches (6) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:424: The &#39;train_dataloader&#39; does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=127` in the `DataLoader` to improve performance.
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/lightning/pytorch/loops/fit_loop.py:298: The number of training batches (6) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
 `Trainer.fit` stopped: `max_epochs=50` reached.
 </pre></div></div>
 </div>
@@ -667,14 +670,14 @@ HPU available: False, using: 0 HPUs
 <div class="highlight"><pre>
       Training metrics
  --------------------------
-train/accuracy:       0.7633
-train/precision:      0.7353
-train/recall:         0.7353
-val/loss:             0.6774
+train/accuracy:       0.7574
+train/precision:      0.7289
+train/recall:         0.7308
+val/loss:             0.6770
 val/accuracy:         0.7895
 val/precision:        0.7750
 val/recall:           0.7115
-train/loss:           0.5690
+train/loss:           0.5597
 </pre></div></div>
 </div>
 </section>
@@ -682,7 +685,7 @@ train/loss:           0.5690
 <h3>7. Testing the model<a class="headerlink" href="#7.-Testing-the-model" title="Link to this heading">#</a></h3>
 <p>Finally, we can test the model and obtain the results.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">)</span>
@@ -703,7 +706,7 @@ train/loss:           0.5690
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/home/lev/miniconda3/envs/tb/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:424: The &#39;test_dataloader&#39; does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=31` in the `DataLoader` to improve performance.
+/home/levtel/miniconda3/envs/topobench/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:424: The &#39;test_dataloader&#39; does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=127` in the `DataLoader` to improve performance.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -714,7 +717,7 @@ train/loss:           0.5690
 ┃<span style="font-weight: bold">        Test metric        </span>┃<span style="font-weight: bold">       DataLoader 0        </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
 │<span style="color: #008080; text-decoration-color: #008080">       test/accuracy       </span>│<span style="color: #800080; text-decoration-color: #800080">    0.7894737124443054     </span>│
-│<span style="color: #008080; text-decoration-color: #008080">         test/loss         </span>│<span style="color: #800080; text-decoration-color: #800080">    0.6774305701255798     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">         test/loss         </span>│<span style="color: #800080; text-decoration-color: #800080">    0.6769953966140747     </span>│
 │<span style="color: #008080; text-decoration-color: #008080">      test/precision       </span>│<span style="color: #800080; text-decoration-color: #800080">    0.7749999761581421     </span>│
 │<span style="color: #008080; text-decoration-color: #008080">        test/recall        </span>│<span style="color: #800080; text-decoration-color: #800080">    0.7115384340286255     </span>│
 └───────────────────────────┴───────────────────────────┘
@@ -737,19 +740,11 @@ train/loss:           0.5690
 <div class="highlight"><pre>
       Testing metrics
  -------------------------
-test/loss:           0.6774
+test/loss:           0.6770
 test/accuracy:       0.7895
 test/precision:      0.7750
 test/recall:         0.7115
 </pre></div></div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </div>
 </section>
 </section>
