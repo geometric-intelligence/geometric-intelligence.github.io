@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 11, 2025, 4:15:45 PM"/>
+    <meta name="docbuild:last-update" content="Mar 14, 2025, 9:20:35 AM"/>
   </head>
   
   
@@ -452,7 +452,11 @@
     <span class="k">for</span> <span class="n">rank_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_rank</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">connectivity_info</span> <span class="ow">in</span> <span class="p">[</span>
             <span class="s2">&quot;incidence&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;down_laplacian&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;up_laplacian&quot;</span><span class="p">,</span>
             <span class="s2">&quot;adjacency&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coadjacency&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hodge_laplacian&quot;</span><span class="p">,</span>
         <span class="p">]:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">connectivity_info</span> <span class="o">==</span> <span class="s2">&quot;adjacency&quot;</span><span class="p">:</span>
@@ -805,6 +809,68 @@
         <span class="n">num_nodes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">),</span>
         <span class="n">y</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
     <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_manual_graph_second_structure">
+<a class="viewcode-back" href="../../../../api/data/index.html#topobench.data.utils.utils.load_manual_graph_second_structure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_manual_graph_second_structure</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a manual graph for testing purposes with updated edges and node features.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    torch_geometric.data.Data</span>
+<span class="sd">        A simple graph data object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Define the vertices (12 vertices, based on the highest index in edges)</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Updated edges</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Create a graph</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+    <span class="c1"># Add vertices and edges</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+    <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()))</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+
+    <span class="c1"># Generate updated features (example features for 12 nodes)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">])</span>
+        <span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">torch_geometric</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+        <span class="n">edge_index</span><span class="o">=</span><span class="n">edge_list</span><span class="p">,</span>
+        <span class="n">num_nodes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
 
 
 
