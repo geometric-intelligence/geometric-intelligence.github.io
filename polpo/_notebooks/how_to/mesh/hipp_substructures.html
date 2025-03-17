@@ -287,8 +287,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../mri/viz_mri.html">How to visualize MRI data?</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/lddmm.html">LDDMM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/all.html">All</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../all/hipp_substructures.html">How to select a mesh subset?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/lddmm_register_mesh_template.html">LDDMM: how to register a mesh against a template?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/lddmm_register_mesh_template_viz.html">LDDMM: how to visualize registration results?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/load_csv.html">How to load a csv file?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/load_figshare_data.html">How to download data from figshare?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/load_server_data.html">How to download data from the server?</a></li>
@@ -373,6 +378,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSelectColor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BRAINSTRUCT2COLOR</span><span class="p">,</span>
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
     <span class="n">MriImageLoader</span><span class="p">,</span>
 <span class="p">)</span>
@@ -416,7 +422,6 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;BB</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
-
 <span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
     <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/Segmentations&quot;</span><span class="p">,</span>
     <span class="n">remote_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Segmentations/</span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -428,7 +433,6 @@
         <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">),</span>
     <span class="p">]</span>
 <span class="p">)</span>
-
 
 <span class="n">pipe</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">loader</span>
@@ -478,25 +482,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </section>
 <section id="Select-a-substructure">
 <h2>Select a substructure<a class="headerlink" href="#Select-a-substructure" title="Link to this heading">#</a></h2>
-<p>Substructures are endoded by colors. We start by mapping their name to the corresponding color.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STRUCT2COLOR</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;PRC&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;PHC&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;AntHipp&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;ERC&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;SUB&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="mi">221</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;PostHipp&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">184</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;CA1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;DG&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-    <span class="s2">&quot;CA2+3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
+<p>Substructures are endoded by colors. <code class="docutils literal notranslate"><span class="pre">BRAINSTRUCT2COLOR</span></code> maps their name to the corresponding color.</p>
 <p>We now create a preprocessing step that selects the cells of the mesh with the given color.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -513,11 +499,11 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_cols</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">struct_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">STRUCT2COLOR</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">struct_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">BRAINSTRUCT2COLOR</span><span class="p">):</span>
     <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">index</span> <span class="o">//</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">index</span> <span class="o">%</span> <span class="n">n_cols</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
 
-    <span class="n">color</span> <span class="o">=</span> <span class="n">STRUCT2COLOR</span><span class="p">[</span><span class="n">struct_name</span><span class="p">]</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">BRAINSTRUCT2COLOR</span><span class="p">[</span><span class="n">struct_name</span><span class="p">]</span>
 
     <span class="n">substructure</span> <span class="o">=</span> <span class="n">struct_selector</span><span class="p">((</span><span class="n">mesh</span><span class="p">,</span> <span class="n">color</span><span class="p">))</span>
 
@@ -534,7 +520,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_mesh_hipp_substructures_14_0.png" src="../../../_images/_notebooks_how_to_mesh_hipp_substructures_14_0.png" />
+<img alt="../../../_images/_notebooks_how_to_mesh_hipp_substructures_13_0.png" src="../../../_images/_notebooks_how_to_mesh_hipp_substructures_13_0.png" />
 </div>
 </div>
 <p>Any mesh preprocessing step can now be applied to the substructure.</p>

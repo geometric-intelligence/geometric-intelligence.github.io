@@ -61,7 +61,6 @@
     "    Pipeline,\n",
     "    Sorter,\n",
     "    Truncater,\n",
-    "    TupleWith,\n",
     ")\n",
     "from polpo.preprocessing.dict import (\n",
     "    DictKeysFilter,\n",
@@ -69,6 +68,7 @@
     "    DictNoneRemover,\n",
     "    DictUpdate,\n",
     "    Hash,\n",
+    "    HashWithIncoming,\n",
     ")\n",
     "from polpo.preprocessing.load import FigsharePregnancyDataLoader\n",
     "from polpo.preprocessing.mesh.clone import TrimeshClone\n",
@@ -83,7 +83,7 @@
     "from polpo.preprocessing.mesh.decimation import FastSimplificationDecimator\n",
     "from polpo.preprocessing.mesh.transform import MeshCenterer, MeshScaler\n",
     "from polpo.preprocessing.mri import MeshExtractorFromSegmentedImage, MriImageLoader\n",
-    "from polpo.preprocessing.path import FileFinder, FileRule, PathShortener\n",
+    "from polpo.preprocessing.path import FileFinder, FileRule, IsFileType, PathShortener\n",
     "from polpo.preprocessing.str import DigitFinder\n",
     "from polpo.varifold import GridBasedSigmaFinder"
    ]
@@ -168,7 +168,7 @@
     "                FileFinder(\n",
     "                    rules=[\n",
     "                        FileRule(value=\"left\", func=\"startswith\"),\n",
-    "                        FileRule(value=\".nii.gz\", func=\"endswith\"),\n",
+    "                        IsFileType(\"nii.gz\"),\n",
     "                    ]\n",
     "                ),\n",
     "                EmptySkipper(step=mri_to_mesh),\n",
@@ -185,7 +185,15 @@
    "cell_type": "code",
    "execution_count": 6,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "INFO: Data has already been downloaded... using cached file ('/home/luisfpereira/.herbrain/data/pregnancy/Segmentations').\n"
+     ]
+    }
+   ],
    "source": [
     "raw_data = loading_pipe.load()"
    ]
@@ -367,7 +375,7 @@
     {
      "data": {
       "text/plain": [
-       "<matplotlib.colorbar.Colorbar at 0x7c8c1f819d00>"
+       "<matplotlib.colorbar.Colorbar at 0x79d649082ea0>"
       ]
      },
      "execution_count": 16,
@@ -497,14 +505,14 @@
    "outputs": [],
    "source": [
     "right_meshes_loader = folders_finder + [\n",
-    "    TupleWith(digit_finder, incoming_first=False),\n",
+    "    HashWithIncoming(key_step=digit_finder),\n",
     "    DictKeysFilter(reflected_keys, keep=True),\n",
     "    DictMap(\n",
     "        [\n",
     "            FileFinder(\n",
     "                rules=[\n",
     "                    FileRule(value=\"right\", func=\"startswith\"),\n",
-    "                    FileRule(value=\".nii.gz\", func=\"endswith\"),\n",
+    "                    IsFileType(\"nii.gz\"),\n",
     "                ]\n",
     "            ),\n",
     "            mri_to_mesh,\n",
@@ -551,7 +559,6 @@
    ],
    "source": [
     "index = 7\n",
-    "\n",
     "\n",
     "pvmeshes = trimesh_to_pv(processing_pipe([raw_data[index], right_meshes[index]]))\n",
     "pl = pv.Plotter(shape=(1, 2), border=False)\n",
@@ -654,7 +661,7 @@
     {
      "data": {
       "text/plain": [
-       "<matplotlib.colorbar.Colorbar at 0x7c8c1ced5400>"
+       "<matplotlib.colorbar.Colorbar at 0x79d61c127d10>"
       ]
      },
      "execution_count": 29,

@@ -509,10 +509,14 @@
 <div class="viewcode-block" id="Sorter">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Sorter.html#polpo.preprocessing.Sorter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Sorter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+
 <div class="viewcode-block" id="Sorter.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Sorter.html#polpo.preprocessing.Sorter.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span></div>
 </div>
 
 
@@ -766,12 +770,10 @@
 <div class="viewcode-block" id="IfCondition.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.IfCondition.html#polpo.preprocessing.IfCondition.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">new_data</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">new_data</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 </div>
 
 
