@@ -384,18 +384,10 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">IfCondition</span><span class="p">,</span>
-    <span class="n">IndexSelector</span><span class="p">,</span>
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
-    <span class="n">Sorter</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DictKeysFilter</span><span class="p">,</span>
-    <span class="n">DictToTuplesList</span><span class="p">,</span>
-    <span class="n">HashWithIncoming</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigsharePregnancyDataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load</span><span class="w"> </span><span class="kn">import</span> <span class="n">PregnancyPilotSegmentationsLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSelectColor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvWriter</span>
@@ -407,8 +399,6 @@
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
     <span class="n">MriImageLoader</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">FileRule</span><span class="p">,</span> <span class="n">IsFileType</span><span class="p">,</span> <span class="n">PathShortener</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">DigitFinder</span>
 </pre></div>
 </div>
 </div>
@@ -451,74 +441,13 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 <h2>Load meshes<a class="headerlink" href="#Load-meshes" title="Link to this heading">#</a></h2>
 <p>We start by loading two selected meshes.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: encode in file</span>
-<span class="n">reflected_keys</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="mi">7</span><span class="p">,</span>
-    <span class="mi">8</span><span class="p">,</span>
-    <span class="mi">9</span><span class="p">,</span>
-    <span class="mi">10</span><span class="p">,</span>
-    <span class="mi">11</span><span class="p">,</span>
-    <span class="mi">12</span><span class="p">,</span>
-    <span class="mi">13</span><span class="p">,</span>
-    <span class="mi">14</span><span class="p">,</span>
-    <span class="mi">16</span><span class="p">,</span>
-    <span class="mi">17</span><span class="p">,</span>
-    <span class="mi">18</span><span class="p">,</span>
-    <span class="mi">19</span><span class="p">,</span>
-    <span class="mi">20</span><span class="p">,</span>
-    <span class="mi">21</span><span class="p">,</span>
-    <span class="mi">22</span><span class="p">,</span>
-    <span class="mi">23</span><span class="p">,</span>
-    <span class="mi">24</span><span class="p">,</span>
-    <span class="mi">25</span><span class="p">,</span>
-    <span class="mi">26</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folders_selector</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span>
-        <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-            <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span>
-            <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;Segmentations&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="o">+</span> <span class="n">FileFinder</span><span class="p">()</span>
-        <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
-    <span class="p">)</span>
-    <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span>
-        <span class="n">key_step</span><span class="o">=</span><span class="n">Map</span><span class="p">([</span><span class="n">PathShortener</span><span class="p">(),</span> <span class="n">DigitFinder</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)]),</span>
-    <span class="p">)</span>
-    <span class="o">+</span> <span class="n">DictKeysFilter</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">SOURCE_INDEX</span><span class="p">,</span> <span class="n">TARGET_INDEX</span><span class="p">])</span>
-    <span class="o">+</span> <span class="n">DictToTuplesList</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files_pipe</span> <span class="o">=</span> <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">SOURCE_INDEX</span><span class="p">,</span> <span class="n">TARGET_INDEX</span><span class="p">],</span>
+    <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
-
-<span class="n">left_file_selector</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
-    <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-        <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">right_file_selector</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
-    <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-        <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">file_selector</span> <span class="o">=</span> <span class="n">IfCondition</span><span class="p">(</span>
-    <span class="n">step</span><span class="o">=</span><span class="n">IndexSelector</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">left_file_selector</span><span class="p">,</span>
-    <span class="n">else_step</span><span class="o">=</span><span class="n">IndexSelector</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">right_file_selector</span><span class="p">,</span>
-    <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">datum</span><span class="p">:</span> <span class="n">datum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reflected_keys</span><span class="p">,</span>
-<span class="p">)</span>
-
 
 <span class="n">mri2mesh</span> <span class="o">=</span> <span class="n">MriImageLoader</span><span class="p">()</span> <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
 
@@ -531,7 +460,7 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
         <span class="n">extract_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">Map</span><span class="p">(</span><span class="n">file_selector</span> <span class="o">+</span> <span class="n">mri2mesh</span> <span class="o">+</span> <span class="n">struct_selector</span><span class="p">)</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">files_pipe</span> <span class="o">+</span> <span class="n">Map</span><span class="p">(</span><span class="n">mri2mesh</span> <span class="o">+</span> <span class="n">struct_selector</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -568,7 +497,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_10_0.png" src="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_10_0.png" />
+<img alt="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_9_0.png" src="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_9_0.png" />
 </div>
 </div>
 </section>
@@ -625,7 +554,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_15_0.png" src="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_15_0.png" />
+<img alt="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_14_0.png" src="../../../_images/_notebooks_how_to_all_lddmm_register_mesh_template_14_0.png" />
 </div>
 </div>
 </section>
@@ -1013,6 +942,13 @@ time.struct_time(tm_year=2025, tm_mon=3, tm_mday=18, tm_hour=1, tm_min=45, tm_se
 </pre></div></div>
 </div>
 </section>
+<section id="Further-reading">
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="lddmm_register_mesh_template_viz.html"><span class="doc">LDDMM: how to visualize registration results?</span></a></p></li>
+<li><p><a class="reference internal" href="lddmm_regression.html"><span class="doc">LDDMM: how to do regression?</span></a></p></li>
+</ul>
+</section>
 </section>
 
 
@@ -1041,6 +977,7 @@ time.struct_time(tm_year=2025, tm_mon=3, tm_mday=18, tm_hour=1, tm_min=45, tm_se
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-meshes">Load meshes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Preprocessing">Preprocessing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#LDDMM">LDDMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
 </ul>
   </nav></div>
 

@@ -323,12 +323,50 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.defaults</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BranchingPipeline</span><span class="p">,</span>
+    <span class="n">IfCondition</span><span class="p">,</span>
+    <span class="n">IndexSelector</span><span class="p">,</span>
+    <span class="n">Map</span><span class="p">,</span>
+    <span class="n">Sorter</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DictKeysFilter</span><span class="p">,</span>
+    <span class="n">DictToTuplesList</span><span class="p">,</span>
+    <span class="n">Hash</span><span class="p">,</span>
+    <span class="n">HashWithIncoming</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">FileRule</span><span class="p">,</span> <span class="n">IsFileType</span><span class="p">,</span> <span class="n">PathShortener</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">DigitFinder</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CacheableDataLoader</span><span class="p">,</span> <span class="n">PreprocessingStep</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="n">PREGNANCY_PILOT_REFLECTED_KEYS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">7</span><span class="p">,</span>
+    <span class="mi">8</span><span class="p">,</span>
+    <span class="mi">9</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span>
+    <span class="mi">11</span><span class="p">,</span>
+    <span class="mi">12</span><span class="p">,</span>
+    <span class="mi">13</span><span class="p">,</span>
+    <span class="mi">14</span><span class="p">,</span>
+    <span class="mi">16</span><span class="p">,</span>
+    <span class="mi">17</span><span class="p">,</span>
+    <span class="mi">18</span><span class="p">,</span>
+    <span class="mi">19</span><span class="p">,</span>
+    <span class="mi">20</span><span class="p">,</span>
+    <span class="mi">21</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">,</span>
+    <span class="mi">23</span><span class="p">,</span>
+    <span class="mi">24</span><span class="p">,</span>
+    <span class="mi">25</span><span class="p">,</span>
+    <span class="mi">26</span><span class="p">,</span>
+<span class="p">)</span>
 
 
 <div class="viewcode-block" id="FigshareDataLoader">
@@ -609,6 +647,75 @@
 
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">remote_path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span></div>
 
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">PregnancyPilotSegmentationsLoader</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load segmented mri filenames.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subset : array-like</span>
+<span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
+<span class="sd">    data_dir : str</span>
+<span class="sd">        Directory where to store data.</span>
+<span class="sd">    as_dict : bool</span>
+<span class="sd">        Whether to create a dictionary with session as key.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filenames : list[str] or dict[int, str]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">folders_selector</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
+            <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+            <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;Segmentations&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="o">+</span> <span class="n">FileFinder</span><span class="p">()</span>
+        <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
+    <span class="p">)</span> <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span>
+        <span class="n">key_step</span><span class="o">=</span><span class="n">Map</span><span class="p">([</span><span class="n">PathShortener</span><span class="p">(),</span> <span class="n">DigitFinder</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)]),</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">subset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">folders_selector</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictKeysFilter</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">subset</span><span class="p">)</span>
+
+    <span class="n">folders_selector</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictToTuplesList</span><span class="p">()</span>
+
+    <span class="n">left_file_selector</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
+        <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
+            <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">right_file_selector</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
+        <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
+            <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">file_selector</span> <span class="o">=</span> <span class="n">IfCondition</span><span class="p">(</span>
+        <span class="n">step</span><span class="o">=</span><span class="n">IndexSelector</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">left_file_selector</span><span class="p">,</span>
+        <span class="n">else_step</span><span class="o">=</span><span class="n">IndexSelector</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">right_file_selector</span><span class="p">,</span>
+        <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">datum</span><span class="p">:</span> <span class="n">datum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PREGNANCY_PILOT_REFLECTED_KEYS</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">folders_selector</span>
+            <span class="o">+</span> <span class="n">BranchingPipeline</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Map</span><span class="p">(</span><span class="n">IndexSelector</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+                    <span class="n">Map</span><span class="p">(</span><span class="n">file_selector</span><span class="p">),</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="o">+</span> <span class="n">Hash</span><span class="p">()</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">Map</span><span class="p">(</span><span class="n">file_selector</span><span class="p">)</span>
 </pre></div>
 
                 </article>
