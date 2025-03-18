@@ -399,30 +399,30 @@
 
 
 
-<span class="k">class</span><span class="w"> </span><span class="nc">_DictFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filter_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">filter_keys</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">keep</span><span class="p">:</span>
-            <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="ow">in</span> <span class="n">values</span>
+<div class="viewcode-block" id="DictFilter">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictFilter.html#polpo.preprocessing.dict.DictFilter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DictFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">filter_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">filter_keys</span><span class="p">:</span>
+            <span class="n">func_</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">values</span>
+            <span class="n">func_</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">func_</span><span class="p">,</span> <span class="n">collection_type</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">to_iter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">collection_type</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">to_iter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
 
 <div class="viewcode-block" id="DictKeysFilter">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictKeysFilter.html#polpo.preprocessing.dict.DictKeysFilter">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">DictKeysFilter</span><span class="p">(</span><span class="n">_DictFilter</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DictKeysFilter</span><span class="p">(</span><span class="n">DictFilter</span><span class="p">):</span>
+    <span class="c1"># TODO: update and/or rename/deletes</span>
+    <span class="c1"># TODO: aka SelectKeySubset</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">keep</span><span class="p">,</span> <span class="n">filter_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">keep</span><span class="p">:</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">values</span>
 
-
-
-<div class="viewcode-block" id="DictValuesFilter">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictValuesFilter.html#polpo.preprocessing.dict.DictValuesFilter">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">DictValuesFilter</span><span class="p">(</span><span class="n">_DictFilter</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">keep</span><span class="p">,</span> <span class="n">filter_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">filter_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 

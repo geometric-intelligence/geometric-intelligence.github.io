@@ -49,7 +49,7 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_notebooks/how_to/lddmm/lddmm_register_mesh_template_viz.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="All" href="../../../how_to/all.html" />
+    <link rel="next" title="LDDMM: how to do regression?" href="lddmm_regression.html" />
     <link rel="prev" title="LDDMM: how to register a mesh against a template?" href="lddmm_register_mesh_template.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -288,14 +288,18 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../how_to/lddmm.html">LDDMM</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh against a template?</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">LDDMM: how to visualize registration results?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lddmm_regression.html">LDDMM: how to do regression?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/all.html">All</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../all/hipp_substructures.html">How to select a mesh subset?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/lddmm_register_mesh_template.html">LDDMM: how to register a mesh against a template?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/lddmm_register_mesh_template_viz.html">LDDMM: how to visualize registration results?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/lddmm_regression.html">LDDMM: how to do regression?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/load_csv.html">How to load a csv file?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/load_figshare_data.html">How to download data from figshare?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/load_server_data.html">How to download data from the server?</a></li>
@@ -400,10 +404,8 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">registration_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span>
-<span class="n">initial_registration_dir</span> <span class="o">=</span> <span class="n">registration_dir</span> <span class="o">/</span> <span class="s2">&quot;initial_registration&quot;</span>
-
-<span class="n">pv_reader</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span>
+<span class="n">INITIAL_REGISTRATION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;initial_registration&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -411,9 +413,17 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pv_reader</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vtk_files</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">FileFinder</span><span class="p">(</span>
-        <span class="n">initial_registration_dir</span><span class="p">,</span>
+        <span class="n">INITIAL_REGISTRATION_DIR</span><span class="p">,</span>
         <span class="n">rules</span><span class="o">=</span><span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;vtk&quot;</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
@@ -424,7 +434,7 @@
 <section id="Template-and-control-points">
 <h2>Template and control points<a class="headerlink" href="#Template-and-control-points" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">template</span><span class="p">,)</span> <span class="o">=</span> <span class="p">(</span><span class="n">Filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;Template&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">pv_reader</span><span class="p">)(</span><span class="n">vtk_files</span><span class="p">)</span>
@@ -434,7 +444,7 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
@@ -452,14 +462,14 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_7_0.png" src="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_7_0.png" />
+<img alt="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_8_0.png" src="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_8_0.png" />
 </div>
 </div>
 </section>
 <section id="Target-and-reconstructed-meshes">
 <h2>Target and reconstructed meshes<a class="headerlink" href="#Target-and-reconstructed-meshes" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Reconstruction&quot;</span><span class="p">,</span> <span class="s2">&quot;target_shape&quot;</span><span class="p">]</span>
@@ -469,7 +479,7 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">meshes_reader</span><span class="p">(</span><span class="n">vtk_files</span><span class="p">)</span>
@@ -479,16 +489,16 @@
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(666, 662)
+(666, 607)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
@@ -504,19 +514,19 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_11_0.png" src="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_11_0.png" />
+<img alt="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_12_0.png" src="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_12_0.png" />
 </div>
 </div>
 </section>
-<section id="Load-flow">
-<h2>Load flow<a class="headerlink" href="#Load-flow" title="Link to this heading">#</a></h2>
+<section id="Flow">
+<h2>Flow<a class="headerlink" href="#Flow" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow_meshes_reader</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">FileFinder</span><span class="p">(</span>
-        <span class="n">initial_registration_dir</span><span class="p">,</span>
+        <span class="n">INITIAL_REGISTRATION_DIR</span><span class="p">,</span>
         <span class="n">rules</span><span class="o">=</span><span class="p">[</span><span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;vtk&quot;</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;flow&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span>
     <span class="p">)</span>
     <span class="o">+</span> <span class="n">Sorter</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">PathShortener</span><span class="p">()</span> <span class="o">+</span> <span class="n">DigitFinder</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
@@ -528,10 +538,10 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gif_name</span> <span class="o">=</span> <span class="n">initial_registration_dir</span> <span class="o">/</span> <span class="s2">&quot;flow.gif&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gif_name</span> <span class="o">=</span> <span class="n">INITIAL_REGISTRATION_DIR</span> <span class="o">/</span> <span class="s2">&quot;flow.gif&quot;</span>
 
 <span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">notebook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -553,12 +563,12 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/home/luisfpereira/miniconda3/lib/python3.11/site-packages/pyvista/plotting/plotter.py:4722: PyVistaDeprecationWarning: This method is deprecated and will be removed in a future version of PyVista. Directly modify the points of a mesh in-place instead.
+/home/luisfpereira/miniconda3/envs/py12/lib/python3.12/site-packages/pyvista/plotting/plotter.py:4872: PyVistaDeprecationWarning: This method is deprecated and will be removed in a future version of PyVista. Directly modify the points of a mesh in-place instead.
   warnings.warn(
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">gif_name</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
@@ -566,11 +576,11 @@
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_15_0.png" src="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_15_0.png" />
+<img alt="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_16_0.png" src="../../../_images/_notebooks_how_to_lddmm_lddmm_register_mesh_template_viz_16_0.png" />
 </div>
 </div>
 </section>
@@ -601,7 +611,7 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Template-and-control-points">Template and control points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Target-and-reconstructed-meshes">Target and reconstructed meshes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-flow">Load flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Flow">Flow</a></li>
 </ul>
   </nav></div>
 
