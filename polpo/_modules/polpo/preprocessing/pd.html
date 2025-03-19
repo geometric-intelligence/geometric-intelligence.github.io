@@ -423,13 +423,15 @@
 <span class="sd">    ----------</span>
 <span class="sd">    inplace : bool</span>
 <span class="sd">        Whether to perform operation in place.</span>
-
+<span class="sd">    axis : {0 or ‘index’, 1 or ‘columns’}</span>
+<span class="sd">        Whether to drop labels from the index (0 or ‘index’) or columns (1 or ‘columns’).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span>
 
 <div class="viewcode-block" id="Drop.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.Drop.html#polpo.preprocessing.pd.Drop.apply">[docs]</a>
@@ -441,7 +443,7 @@
 <span class="sd">        df : pandas.DataFrame</span>
 <span class="sd">            Dataframe.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axis</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span> <span class="ow">or</span> <span class="n">df</span></div>
 </div>
 
@@ -617,6 +619,27 @@
             <span class="n">verify_integrity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verify_integrity</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span> <span class="ow">or</span> <span class="n">df</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DfIsInFilter">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.DfIsInFilter.html#polpo.preprocessing.pd.DfIsInFilter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DfIsInFilter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">negation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_name</span> <span class="o">=</span> <span class="n">column_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">negation</span> <span class="o">=</span> <span class="n">negation</span>
+
+<div class="viewcode-block" id="DfIsInFilter.apply">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.DfIsInFilter.html#polpo.preprocessing.pd.DfIsInFilter.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negation</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="o">~</span><span class="n">indices</span>
+
+        <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span></div>
 </div>
 
 </pre></div>
