@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 14, 2025, 9:20:35 AM"/>
+    <meta name="docbuild:last-update" content="Mar 19, 2025, 2:31:26 PM"/>
   </head>
   
   
@@ -467,6 +467,10 @@
 <span class="sd">        List with dimensions of the input channels.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="c1"># Make it possible to pass lifting configuration as file path</span>
+    <span class="k">if</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">transforms</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;liftings&quot;</span><span class="p">}:</span>
+        <span class="n">transforms</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">liftings</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">find_complex_lifting</span><span class="p">(</span><span class="n">transforms</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Find if there is a complex lifting in the complex_transforms.</span>
 
@@ -482,9 +486,11 @@
 <span class="sd">        str</span>
 <span class="sd">            Name of the complex lifting, if it exists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span>
         <span class="n">complex_transforms</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1"># Default liftig configurations</span>
             <span class="s2">&quot;graph2cell_lifting&quot;</span><span class="p">,</span>
             <span class="s2">&quot;graph2simplicial_lifting&quot;</span><span class="p">,</span>
             <span class="s2">&quot;graph2combinatorial_lifting&quot;</span><span class="p">,</span>
@@ -495,6 +501,17 @@
             <span class="s2">&quot;pointcloud2hypergraph_lifting&quot;</span><span class="p">,</span>
             <span class="s2">&quot;pointcloud2cell_lifting&quot;</span><span class="p">,</span>
             <span class="s2">&quot;hypergraph2combinatorial_lifting&quot;</span><span class="p">,</span>
+            <span class="c1"># Make it possible to run directly from the folder</span>
+            <span class="s2">&quot;graph2cell&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;graph2simplicial&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;graph2combinatorial&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;graph2hypergraph&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pointcloud2graph&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pointcloud2simplicial&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pointcloud2combinatorial&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pointcloud2hypergraph&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pointcloud2cell&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hypergraph2combinatorial&quot;</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">complex_transforms</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">transforms</span><span class="p">:</span>

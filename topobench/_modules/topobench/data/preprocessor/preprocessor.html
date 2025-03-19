@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 14, 2025, 9:20:35 AM"/>
+    <meta name="docbuild:last-update" content="Mar 19, 2025, 2:31:26 PM"/>
   </head>
   
   
@@ -418,6 +418,8 @@
 <span class="sd">        torch_geometric.transforms.Compose</span>
 <span class="sd">            Pre-transform object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">transforms_config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;liftings&quot;</span><span class="p">}:</span>
+            <span class="n">transforms_config</span> <span class="o">=</span> <span class="n">transforms_config</span><span class="o">.</span><span class="n">liftings</span>
         <span class="n">pre_transforms_dict</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">transforms_config</span><span class="p">)</span>
         <span class="n">pre_transforms_dict</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">key</span><span class="p">:</span> <span class="n">DataTransform</span><span class="p">(</span><span class="o">**</span><span class="n">value</span><span class="p">)</span>

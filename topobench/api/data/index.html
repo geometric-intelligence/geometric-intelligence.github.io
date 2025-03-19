@@ -52,7 +52,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 14, 2025, 9:20:35 AM"/>
+    <meta name="docbuild:last-update" content="Mar 19, 2025, 2:31:26 PM"/>
   </head>
   
   
@@ -778,7 +778,7 @@ to the appropriate location.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.io_utils.read_ndim_manifolds">
-<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.io_utils.</span></span><span class="sig-name descname"><span class="pre">read_ndim_manifolds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'betti_numbers'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/io_utils.html#read_ndim_manifolds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.io_utils.read_ndim_manifolds" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.io_utils.</span></span><span class="sig-name descname"><span class="pre">read_ndim_manifolds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'betti_numbers'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_as_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/io_utils.html#read_ndim_manifolds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.io_utils.read_ndim_manifolds" title="Link to this definition">#</a></dt>
 <dd><p>Load MANTRA dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -791,6 +791,8 @@ to the appropriate location.</p>
 ‘name’, ‘genus’, ‘orientable’] (default: “orientable”).</p>
 </dd>
 <dt><strong>slice</strong><span class="classifier">int, optional</span></dt><dd><p>Slice of the dataset to load. If None, load the entire dataset (default: None). Used for testing.</p>
+</dd>
+<dt><strong>load_as_graph</strong><span class="classifier">bool</span></dt><dd><p>Load mantra dataset as graph. Useful when arbitrary graph lifting need to be used.</p>
 </dd>
 </dl>
 </dd>
@@ -970,6 +972,27 @@ split file for the subsequent runs.</p>
 
 <p id="module-topobench.data.utils.utils">Data utilities.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.data2simplicial">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">data2simplicial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#data2simplicial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.data2simplicial" title="Link to this definition">#</a></dt>
+<dd><p>Convert a data dictionary into a SimplicialComplex object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">dict</span></dt><dd><p>A dictionary containing at least ‘incidence_0’, ‘adjacency_0’, ‘incidence_1’,
+‘incidence_2’, and optionally ‘incidence_3’ tensors.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>SimplicialComplex</dt><dd><p>A SimplicialComplex object constructed from nodes, edges, triangles, and tetrahedrons.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.utils.ensure_serializable">
 <span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">ensure_serializable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#ensure_serializable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.ensure_serializable" title="Link to this definition">#</a></dt>
 <dd><p>Ensure that the object is serializable.</p>
@@ -983,6 +1006,52 @@ split file for the subsequent runs.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>object</dt><dd><p>Object that is serializable.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.find_tetrahedrons">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">find_tetrahedrons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incidence_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incidence_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incidence_3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#find_tetrahedrons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.find_tetrahedrons" title="Link to this definition">#</a></dt>
+<dd><p>Identify tetrahedrons in the simplicial complex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>incidence_1</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Incidence matrix of edges.</p>
+</dd>
+<dt><strong>incidence_2</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Incidence matrix of triangles.</p>
+</dd>
+<dt><strong>incidence_3</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Incidence matrix of tetrahedrons.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list of list</dt><dd><p>List of tetrahedrons, where each is represented as a list of four node indices.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.utils.find_triangles">
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.utils.</span></span><span class="sig-name descname"><span class="pre">find_triangles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incidence_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incidence_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/topobench/data/utils/utils.html#find_triangles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.data.utils.utils.find_triangles" title="Link to this definition">#</a></dt>
+<dd><p>Identify triangles in the simplicial complex based on incidence matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>incidence_1</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Incidence matrix of edges.</p>
+</dd>
+<dt><strong>incidence_2</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Incidence matrix of triangles.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list of list</dt><dd><p>List of triangles, where each triangle is a list of three node indices.</p>
 </dd>
 </dl>
 </dd>
@@ -1346,7 +1415,10 @@ split file for the subsequent runs.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.load_inductive_splits"><code class="docutils literal notranslate"><span class="pre">load_inductive_splits()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.load_transductive_splits"><code class="docutils literal notranslate"><span class="pre">load_transductive_splits()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.random_splitting"><code class="docutils literal notranslate"><span class="pre">random_splitting()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.data2simplicial"><code class="docutils literal notranslate"><span class="pre">data2simplicial()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.ensure_serializable"><code class="docutils literal notranslate"><span class="pre">ensure_serializable()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.find_tetrahedrons"><code class="docutils literal notranslate"><span class="pre">find_tetrahedrons()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.find_triangles"><code class="docutils literal notranslate"><span class="pre">find_triangles()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.generate_zero_sparse_connectivity"><code class="docutils literal notranslate"><span class="pre">generate_zero_sparse_connectivity()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.get_combinatorial_complex_connectivity"><code class="docutils literal notranslate"><span class="pre">get_combinatorial_complex_connectivity()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.utils.get_complex_connectivity"><code class="docutils literal notranslate"><span class="pre">get_complex_connectivity()</span></code></a></li>

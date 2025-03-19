@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 14, 2025, 9:20:35 AM"/>
+    <meta name="docbuild:last-update" content="Mar 19, 2025, 2:31:26 PM"/>
   </head>
   
   
@@ -442,7 +442,9 @@
 
 <div class="viewcode-block" id="read_ndim_manifolds">
 <a class="viewcode-back" href="../../../../api/data/index.html#topobench.data.utils.io_utils.read_ndim_manifolds">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">read_ndim_manifolds</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">y_val</span><span class="o">=</span><span class="s2">&quot;betti_numbers&quot;</span><span class="p">,</span> <span class="nb">slice</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_ndim_manifolds</span><span class="p">(</span>
+    <span class="n">path</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">y_val</span><span class="o">=</span><span class="s2">&quot;betti_numbers&quot;</span><span class="p">,</span> <span class="nb">slice</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">load_as_graph</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load MANTRA dataset.</span>
 
 <span class="sd">    Parameters</span>
@@ -456,6 +458,8 @@
 <span class="sd">        &#39;name&#39;, &#39;genus&#39;, &#39;orientable&#39;] (default: &quot;orientable&quot;).</span>
 <span class="sd">    slice : int, optional</span>
 <span class="sd">        Slice of the dataset to load. If None, load the entire dataset (default: None). Used for testing.</span>
+<span class="sd">    load_as_graph : bool</span>
+<span class="sd">        Load mantra dataset as graph. Useful when arbitrary graph lifting need to be used.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -534,10 +538,21 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">}</span>
 
-        <span class="c1"># Construct the connectivity matrices</span>
-        <span class="n">inc_dict</span> <span class="o">=</span> <span class="n">get_complex_connectivity</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">load_as_graph</span><span class="p">:</span>
+            <span class="c1"># Construct the connectivity matrices</span>
+            <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">inc_dict</span> <span class="o">=</span> <span class="n">get_complex_connectivity</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="n">inc_dict</span><span class="p">[</span><span class="s2">&quot;incidence_3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="s2">&quot;For 2-dim manifolds there shouldn&#39;t be any tetrahedrons.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inc_dict</span> <span class="o">=</span> <span class="n">get_complex_connectivity</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="n">data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">x_i</span><span class="p">,</span> <span class="o">**</span><span class="n">inc_dict</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">x_i</span><span class="p">,</span> <span class="o">**</span><span class="n">inc_dict</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Define if load_as_graph or not&quot;</span><span class="p">)</span>
+
         <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data_list</span></div>
 
