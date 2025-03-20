@@ -323,7 +323,7 @@
 
 
 <div class="viewcode-block" id="Hash">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.Hash.html#polpo.preprocessing.dict.Hash">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.Hash.html#polpo.preprocessing.dict.Hash">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Hash</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_none</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ignore_empty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -332,7 +332,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_empty</span> <span class="o">=</span> <span class="n">ignore_empty</span>
 
 <div class="viewcode-block" id="Hash.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.Hash.html#polpo.preprocessing.dict.Hash.apply">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.Hash.html#polpo.preprocessing.dict.Hash.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">new_data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
@@ -382,16 +382,16 @@
 
 
 <div class="viewcode-block" id="HashWithIncoming">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.HashWithIncoming.html#polpo.preprocessing.dict.HashWithIncoming">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.HashWithIncoming.html#polpo.preprocessing.dict.HashWithIncoming">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">HashWithIncoming</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key_step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key_step</span> <span class="o">=</span> <span class="n">_wrap_step</span><span class="p">(</span><span class="n">key_step</span><span class="p">)</span>
 
 <div class="viewcode-block" id="HashWithIncoming.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.HashWithIncoming.html#polpo.preprocessing.dict.HashWithIncoming.apply">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.HashWithIncoming.html#polpo.preprocessing.dict.HashWithIncoming.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys_data</span><span class="p">):</span>
-        <span class="n">values_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">keys_data</span><span class="p">)</span>
+        <span class="n">values_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">keys_data</span><span class="p">)</span>
         <span class="n">keys_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_step</span><span class="p">(</span><span class="n">keys_data</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys_data</span><span class="p">,</span> <span class="n">values_data</span><span class="p">)}</span></div>
@@ -412,7 +412,7 @@
 
 
 <div class="viewcode-block" id="DictKeysFilter">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.DictKeysFilter.html#polpo.preprocessing.dict.DictKeysFilter">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictKeysFilter.html#polpo.preprocessing.dict.DictKeysFilter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictKeysFilter</span><span class="p">(</span><span class="n">DictFilter</span><span class="p">):</span>
     <span class="c1"># TODO: update and/or rename/deletes</span>
     <span class="c1"># TODO: aka SelectKeySubset</span>
@@ -450,10 +450,10 @@
 
 
 <div class="viewcode-block" id="DictToTuplesList">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.DictToTuplesList.html#polpo.preprocessing.dict.DictToTuplesList">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictToTuplesList.html#polpo.preprocessing.dict.DictToTuplesList">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictToTuplesList</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <div class="viewcode-block" id="DictToTuplesList.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.DictToTuplesList.html#polpo.preprocessing.dict.DictToTuplesList.apply">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictToTuplesList.html#polpo.preprocessing.dict.DictToTuplesList.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
 </div>
