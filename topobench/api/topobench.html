@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>topobench package &#8212; TopoBench latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/topobench';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+    <meta name="docbuild:last-update" content="Mar 25, 2025, 9:40:23 PM"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">TopoBench latest documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../README.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">topobench package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="topobench-package">
+<h1>topobench package<a class="headerlink" href="#topobench-package" title="Link to this heading">#</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topobench.callbacks.html">topobench.callbacks package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.html#module-topobench.callbacks.timer_callback">topobench.callbacks.timer_callback module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer"><code class="docutils literal notranslate"><span class="pre">PipelineTimer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_test_batch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_batch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_test_batch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_batch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_test_epoch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_test_epoch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_train_batch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_batch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_train_batch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_batch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_train_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_train_epoch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_validation_batch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_batch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_validation_batch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_batch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.callbacks.html#topobench.callbacks.timer_callback.PipelineTimer.on_validation_epoch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_epoch_start()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.html#module-topobench.callbacks">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.data.html">topobench.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.datasets.html">topobench.data.datasets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.datasets.html#module-topobench.data.datasets.citation_hypergaph_dataset">topobench.data.datasets.citation_hypergaph_dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.datasets.html#module-topobench.data.datasets.mantra_dataset">topobench.data.datasets.mantra_dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.datasets.html#module-topobench.data.datasets.us_county_demos_dataset">topobench.data.datasets.us_county_demos_dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.datasets.html#module-topobench.data.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.html">topobench.data.loaders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.html#module-topobench.data.loaders.base">topobench.data.loaders.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.html#module-topobench.data.loaders">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.preprocessor.html">topobench.data.preprocessor package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.preprocessor.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.preprocessor.html#module-topobench.data.preprocessor.preprocessor">topobench.data.preprocessor.preprocessor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.preprocessor.html#module-topobench.data.preprocessor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.utils.html">topobench.data.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.utils.html#module-topobench.data.utils.io_utils">topobench.data.utils.io_utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.utils.html#module-topobench.data.utils.split_utils">topobench.data.utils.split_utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.utils.html#module-topobench.data.utils.utils">topobench.data.utils.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.utils.html#module-topobench.data.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.html#module-topobench.data">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.dataloader.html">topobench.dataloader package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#module-topobench.dataloader.dataload_dataset">topobench.dataloader.dataload_dataset module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataload_dataset.DataloadDataset"><code class="docutils literal notranslate"><span class="pre">DataloadDataset</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataload_dataset.DataloadDataset.get"><code class="docutils literal notranslate"><span class="pre">DataloadDataset.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataload_dataset.DataloadDataset.len"><code class="docutils literal notranslate"><span class="pre">DataloadDataset.len()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#module-topobench.dataloader.dataloader">topobench.dataloader.dataloader module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataloader.TBDataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataloader.TBDataloader.state_dict"><code class="docutils literal notranslate"><span class="pre">TBDataloader.state_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataloader.TBDataloader.teardown"><code class="docutils literal notranslate"><span class="pre">TBDataloader.teardown()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataloader.TBDataloader.test_dataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader.test_dataloader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataloader.TBDataloader.train_dataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader.train_dataloader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.dataloader.TBDataloader.val_dataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader.val_dataloader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#module-topobench.dataloader.utils">topobench.dataloader.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.utils.DomainData"><code class="docutils literal notranslate"><span class="pre">DomainData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.utils.DomainData.is_valid"><code class="docutils literal notranslate"><span class="pre">DomainData.is_valid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.utils.collate_fn"><code class="docutils literal notranslate"><span class="pre">collate_fn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.utils.to_data_list"><code class="docutils literal notranslate"><span class="pre">to_data_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#module-topobench.dataloader">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.DataloadDataset"><code class="docutils literal notranslate"><span class="pre">DataloadDataset</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.DataloadDataset.get"><code class="docutils literal notranslate"><span class="pre">DataloadDataset.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.DataloadDataset.len"><code class="docutils literal notranslate"><span class="pre">DataloadDataset.len()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.TBDataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.TBDataloader.state_dict"><code class="docutils literal notranslate"><span class="pre">TBDataloader.state_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.TBDataloader.teardown"><code class="docutils literal notranslate"><span class="pre">TBDataloader.teardown()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.TBDataloader.test_dataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader.test_dataloader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.TBDataloader.train_dataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader.train_dataloader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.TBDataloader.val_dataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader.val_dataloader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.evaluator.html">topobench.evaluator package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.evaluator.metrics.html">topobench.evaluator.metrics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.metrics.html#module-topobench.evaluator.metrics.example">topobench.evaluator.metrics.example module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.metrics.html#module-topobench.evaluator.metrics">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#module-topobench.evaluator.base">topobench.evaluator.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.base.AbstractEvaluator"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.base.AbstractEvaluator.compute"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.base.AbstractEvaluator.reset"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.base.AbstractEvaluator.update"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#module-topobench.evaluator.evaluator">topobench.evaluator.evaluator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.evaluator.TBEvaluator"><code class="docutils literal notranslate"><span class="pre">TBEvaluator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.evaluator.TBEvaluator.compute"><code class="docutils literal notranslate"><span class="pre">TBEvaluator.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.evaluator.TBEvaluator.reset"><code class="docutils literal notranslate"><span class="pre">TBEvaluator.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.evaluator.TBEvaluator.update"><code class="docutils literal notranslate"><span class="pre">TBEvaluator.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#module-topobench.evaluator">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.AbstractEvaluator"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.AbstractEvaluator.compute"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.AbstractEvaluator.reset"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.AbstractEvaluator.update"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.TBEvaluator"><code class="docutils literal notranslate"><span class="pre">TBEvaluator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.TBEvaluator.compute"><code class="docutils literal notranslate"><span class="pre">TBEvaluator.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.TBEvaluator.reset"><code class="docutils literal notranslate"><span class="pre">TBEvaluator.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.TBEvaluator.update"><code class="docutils literal notranslate"><span class="pre">TBEvaluator.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.loss.html">topobench.loss package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.dataset.html">topobench.loss.dataset package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.dataset.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.dataset.html#module-topobench.loss.dataset.DatasetLoss">topobench.loss.dataset.DatasetLoss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.dataset.html#module-topobench.loss.dataset">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.model.html">topobench.loss.model package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.model.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.model.html#module-topobench.loss.model.DGMLoss">topobench.loss.model.DGMLoss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.model.html#module-topobench.loss.model.GraphMLPLoss">topobench.loss.model.GraphMLPLoss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.model.html#module-topobench.loss.model">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#module-topobench.loss.base">topobench.loss.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.html#topobench.loss.base.AbstractLoss"><code class="docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.html#topobench.loss.base.AbstractLoss.forward"><code class="docutils literal notranslate"><span class="pre">AbstractLoss.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#module-topobench.loss.loss">topobench.loss.loss module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.html#topobench.loss.loss.TBLoss"><code class="docutils literal notranslate"><span class="pre">TBLoss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.html#topobench.loss.loss.TBLoss.forward"><code class="docutils literal notranslate"><span class="pre">TBLoss.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#module-topobench.loss">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.html#topobench.loss.TBLoss"><code class="docutils literal notranslate"><span class="pre">TBLoss</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.loss.html#topobench.loss.TBLoss.forward"><code class="docutils literal notranslate"><span class="pre">TBLoss.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.model.html">topobench.model package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.html#module-topobench.model.model">topobench.model.model module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel"><code class="docutils literal notranslate"><span class="pre">TBModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.configure_optimizers"><code class="docutils literal notranslate"><span class="pre">TBModel.configure_optimizers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.forward"><code class="docutils literal notranslate"><span class="pre">TBModel.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.log_metrics"><code class="docutils literal notranslate"><span class="pre">TBModel.log_metrics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.model_step"><code class="docutils literal notranslate"><span class="pre">TBModel.model_step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.on_test_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.on_test_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.on_train_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.on_val_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_val_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.on_validation_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.process_outputs"><code class="docutils literal notranslate"><span class="pre">TBModel.process_outputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.setup"><code class="docutils literal notranslate"><span class="pre">TBModel.setup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.test_step"><code class="docutils literal notranslate"><span class="pre">TBModel.test_step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.training_step"><code class="docutils literal notranslate"><span class="pre">TBModel.training_step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.model.TBModel.validation_step"><code class="docutils literal notranslate"><span class="pre">TBModel.validation_step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.html#module-topobench.model">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel"><code class="docutils literal notranslate"><span class="pre">TBModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.configure_optimizers"><code class="docutils literal notranslate"><span class="pre">TBModel.configure_optimizers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.forward"><code class="docutils literal notranslate"><span class="pre">TBModel.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.log_metrics"><code class="docutils literal notranslate"><span class="pre">TBModel.log_metrics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.model_step"><code class="docutils literal notranslate"><span class="pre">TBModel.model_step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.on_test_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.on_test_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.on_train_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.on_val_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_val_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.on_validation_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.process_outputs"><code class="docutils literal notranslate"><span class="pre">TBModel.process_outputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.setup"><code class="docutils literal notranslate"><span class="pre">TBModel.setup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.test_step"><code class="docutils literal notranslate"><span class="pre">TBModel.test_step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.training_step"><code class="docutils literal notranslate"><span class="pre">TBModel.training_step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel.validation_step"><code class="docutils literal notranslate"><span class="pre">TBModel.validation_step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.html">topobench.nn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.html">topobench.nn.backbones package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.html#module-topobench.nn.backbones">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.html">topobench.nn.encoders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.encoders.html#module-topobench.nn.encoders.all_cell_encoder">topobench.nn.encoders.all_cell_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.encoders.html#module-topobench.nn.encoders.base">topobench.nn.encoders.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.encoders.html#module-topobench.nn.encoders.dgm_encoder">topobench.nn.encoders.dgm_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.encoders.html#module-topobench.nn.encoders.kdgm">topobench.nn.encoders.kdgm module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.encoders.html#module-topobench.nn.encoders">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.html">topobench.nn.readouts package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.readouts.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.readouts.html#module-topobench.nn.readouts.base">topobench.nn.readouts.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.readouts.html#module-topobench.nn.readouts.identical">topobench.nn.readouts.identical module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.readouts.html#module-topobench.nn.readouts.propagate_signal_down">topobench.nn.readouts.propagate_signal_down module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.readouts.html#module-topobench.nn.readouts">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.wrappers.html">topobench.nn.wrappers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.html#module-topobench.nn.wrappers.base">topobench.nn.wrappers.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.html#module-topobench.nn.wrappers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.html#module-topobench.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.optimizer.html">topobench.optimizer package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.optimizer.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.optimizer.html#module-topobench.optimizer.base">topobench.optimizer.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.optimizer.html#topobench.optimizer.base.AbstractOptimizer"><code class="docutils literal notranslate"><span class="pre">AbstractOptimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.optimizer.html#topobench.optimizer.base.AbstractOptimizer.configure_optimizer"><code class="docutils literal notranslate"><span class="pre">AbstractOptimizer.configure_optimizer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.optimizer.html#module-topobench.optimizer.optimizer">topobench.optimizer.optimizer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.optimizer.html#topobench.optimizer.optimizer.TBOptimizer"><code class="docutils literal notranslate"><span class="pre">TBOptimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.optimizer.html#topobench.optimizer.optimizer.TBOptimizer.configure_optimizer"><code class="docutils literal notranslate"><span class="pre">TBOptimizer.configure_optimizer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.optimizer.html#module-topobench.optimizer">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.optimizer.html#topobench.optimizer.TBOptimizer"><code class="docutils literal notranslate"><span class="pre">TBOptimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.optimizer.html#topobench.optimizer.TBOptimizer.configure_optimizer"><code class="docutils literal notranslate"><span class="pre">TBOptimizer.configure_optimizer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.html">topobench.transforms package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.html">topobench.transforms.data_manipulations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.calculate_simplicial_curvature">topobench.transforms.data_manipulations.calculate_simplicial_curvature module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.equal_gaus_features">topobench.transforms.data_manipulations.equal_gaus_features module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.group_homophily">topobench.transforms.data_manipulations.group_homophily module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.identity_transform">topobench.transforms.data_manipulations.identity_transform module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.infere_knn_connectivity">topobench.transforms.data_manipulations.infere_knn_connectivity module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.infere_radius_connectivity">topobench.transforms.data_manipulations.infere_radius_connectivity module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.keep_only_connected_component">topobench.transforms.data_manipulations.keep_only_connected_component module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.keep_selected_data_fields">topobench.transforms.data_manipulations.keep_selected_data_fields module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.mp_homophily">topobench.transforms.data_manipulations.mp_homophily module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.node_degrees">topobench.transforms.data_manipulations.node_degrees module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.node_features_to_float">topobench.transforms.data_manipulations.node_features_to_float module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.one_hot_degree_features">topobench.transforms.data_manipulations.one_hot_degree_features module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods">topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.data_manipulations.html#module-topobench.transforms.data_manipulations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.html">topobench.transforms.feature_liftings package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.feature_liftings.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.feature_liftings.html#module-topobench.transforms.feature_liftings.concatenation">topobench.transforms.feature_liftings.concatenation module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.feature_liftings.html#module-topobench.transforms.feature_liftings.identity">topobench.transforms.feature_liftings.identity module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.feature_liftings.html#module-topobench.transforms.feature_liftings.projection_sum">topobench.transforms.feature_liftings.projection_sum module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.feature_liftings.html#module-topobench.transforms.feature_liftings.set">topobench.transforms.feature_liftings.set module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.feature_liftings.html#module-topobench.transforms.feature_liftings">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.html">topobench.transforms.liftings package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.liftings.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.liftings.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.liftings.html#module-topobench.transforms.liftings.base">topobench.transforms.liftings.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.liftings.html#module-topobench.transforms.liftings.liftings">topobench.transforms.liftings.liftings module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.liftings.html#module-topobench.transforms.liftings">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.html#module-topobench.transforms.data_transform">topobench.transforms.data_transform module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.html#topobench.transforms.data_transform.DataTransform"><code class="docutils literal notranslate"><span class="pre">DataTransform</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.transforms.html#topobench.transforms.data_transform.DataTransform.forward"><code class="docutils literal notranslate"><span class="pre">DataTransform.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.html#module-topobench.transforms">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.utils.html">topobench.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#module-topobench.utils.config_resolvers">topobench.utils.config_resolvers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.config_resolvers.get_default_metrics"><code class="docutils literal notranslate"><span class="pre">get_default_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.config_resolvers.get_default_transform"><code class="docutils literal notranslate"><span class="pre">get_default_transform()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.config_resolvers.get_monitor_metric"><code class="docutils literal notranslate"><span class="pre">get_monitor_metric()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.config_resolvers.get_monitor_mode"><code class="docutils literal notranslate"><span class="pre">get_monitor_mode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.config_resolvers.get_required_lifting"><code class="docutils literal notranslate"><span class="pre">get_required_lifting()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.config_resolvers.infer_in_channels"><code class="docutils literal notranslate"><span class="pre">infer_in_channels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.config_resolvers.infer_num_cell_dimensions"><code class="docutils literal notranslate"><span class="pre">infer_num_cell_dimensions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#module-topobench.utils.instantiators">topobench.utils.instantiators module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.instantiators.instantiate_callbacks"><code class="docutils literal notranslate"><span class="pre">instantiate_callbacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.instantiators.instantiate_loggers"><code class="docutils literal notranslate"><span class="pre">instantiate_loggers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#module-topobench.utils.logging_utils">topobench.utils.logging_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.logging_utils.log_hyperparameters"><code class="docutils literal notranslate"><span class="pre">log_hyperparameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#module-topobench.utils.pylogger">topobench.utils.pylogger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.pylogger.RankedLogger"><code class="docutils literal notranslate"><span class="pre">RankedLogger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.utils.html#topobench.utils.pylogger.RankedLogger.log"><code class="docutils literal notranslate"><span class="pre">RankedLogger.log()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#module-topobench.utils.rich_utils">topobench.utils.rich_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.rich_utils.enforce_tags"><code class="docutils literal notranslate"><span class="pre">enforce_tags()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.rich_utils.print_config_tree"><code class="docutils literal notranslate"><span class="pre">print_config_tree()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#module-topobench.utils.utils">topobench.utils.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.utils.extras"><code class="docutils literal notranslate"><span class="pre">extras()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.utils.get_metric_value"><code class="docutils literal notranslate"><span class="pre">get_metric_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.utils.task_wrapper"><code class="docutils literal notranslate"><span class="pre">task_wrapper()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#module-topobench.utils">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.RankedLogger"><code class="docutils literal notranslate"><span class="pre">RankedLogger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.utils.html#topobench.utils.RankedLogger.log"><code class="docutils literal notranslate"><span class="pre">RankedLogger.log()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.enforce_tags"><code class="docutils literal notranslate"><span class="pre">enforce_tags()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.extras"><code class="docutils literal notranslate"><span class="pre">extras()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.get_metric_value"><code class="docutils literal notranslate"><span class="pre">get_metric_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.instantiate_callbacks"><code class="docutils literal notranslate"><span class="pre">instantiate_callbacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.instantiate_loggers"><code class="docutils literal notranslate"><span class="pre">instantiate_loggers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.log_hyperparameters"><code class="docutils literal notranslate"><span class="pre">log_hyperparameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.print_config_tree"><code class="docutils literal notranslate"><span class="pre">print_config_tree()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.utils.html#topobench.utils.task_wrapper"><code class="docutils literal notranslate"><span class="pre">task_wrapper()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-topobench.run">
+<span id="topobench-run-module"></span><h2>topobench.run module<a class="headerlink" href="#module-topobench.run" title="Link to this heading">#</a></h2>
+<p>Main entry point for training and testing models.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.run.count_number_of_parameters">
+<span class="sig-prename descclassname"><span class="pre">topobench.run.</span></span><span class="sig-name descname"><span class="pre">count_number_of_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_trainable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../_modules/topobench/run.html#count_number_of_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.run.count_number_of_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of trainable params.</p>
+<p>If all params, specify only_trainable = False.</p>
+<dl class="simple">
+<dt>Ref:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://discuss.pytorch.org/t/how-do-i-check-the-number-of-parameters-of-a-model/4325/9?u=brando_miranda">https://discuss.pytorch.org/t/how-do-i-check-the-number-of-parameters-of-a-model/4325/9?u=brando_miranda</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/49201236/check-the-total-number-of-parameters-in-a-pytorch-model/62764464#62764464">https://stackoverflow.com/questions/49201236/check-the-total-number-of-parameters-in-a-pytorch-model/62764464#62764464</a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>The model.</p>
+</dd>
+<dt><strong>only_trainable</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, only count trainable parameters (default: True).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>The number of parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.run.initialize_hydra">
+<span class="sig-prename descclassname"><span class="pre">topobench.run.</span></span><span class="sig-name descname"><span class="pre">initialize_hydra</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DictConfig</span></span></span><a class="reference internal" href="../_modules/topobench/run.html#initialize_hydra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.run.initialize_hydra" title="Link to this definition">#</a></dt>
+<dd><p>Initialize Hydra when main is not an option (e.g. tests).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DictConfig</dt><dd><p>A DictConfig object containing the config tree.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.run.main">
+<span class="sig-prename descclassname"><span class="pre">topobench.run.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictConfig</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/topobench/run.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.run.main" title="Link to this definition">#</a></dt>
+<dd><p>Main entry point for training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cfg</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration composed by Hydra.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float | None</dt><dd><p>Optional[float] with optimized metric value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-topobench">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-topobench" title="Link to this heading">#</a></h2>
+<p>TopoBench: A library for benchmarking of topological models.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.initialize_hydra">
+<span class="sig-prename descclassname"><span class="pre">topobench.</span></span><span class="sig-name descname"><span class="pre">initialize_hydra</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DictConfig</span></span></span><a class="reference internal" href="../_modules/topobench/run.html#initialize_hydra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#topobench.initialize_hydra" title="Link to this definition">#</a></dt>
+<dd><p>Initialize Hydra when main is not an option (e.g. tests).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DictConfig</dt><dd><p>A DictConfig object containing the config tree.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-topobench.run">topobench.run module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.count_number_of_parameters"><code class="docutils literal notranslate"><span class="pre">count_number_of_parameters()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.initialize_hydra"><code class="docutils literal notranslate"><span class="pre">initialize_hydra()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-topobench">Module contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.initialize_hydra"><code class="docutils literal notranslate"><span class="pre">initialize_hydra()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/topobench.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Topological-Intelligence Team, Inc..
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
