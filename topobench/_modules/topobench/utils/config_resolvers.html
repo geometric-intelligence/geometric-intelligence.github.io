@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Mar 26, 2025, 12:11:21 AM"/>
+    <meta name="docbuild:last-update" content="Mar 26, 2025, 9:41:49 PM"/>
   </head>
   
   
@@ -279,6 +279,21 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">omegaconf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+
+<div class="viewcode-block" id="get_default_trainer">
+<a class="viewcode-back" href="../../../api/topobench.utils.html#topobench.utils.config_resolvers.get_default_trainer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_default_trainer</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get default trainer configuration.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Default trainer configuration file name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;gpu&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span></div>
+
 
 
 <div class="viewcode-block" id="get_default_transform">
