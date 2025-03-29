@@ -298,6 +298,7 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ToList.html">ToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Truncater.html">Truncater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleToList.html">TupleToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWith.html">TupleWith</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWithIncoming.html">TupleWithIncoming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Unnest.html">Unnest</a></li>
@@ -385,12 +386,36 @@
 <h1>MriImageLoader<a class="headerlink" href="#mriimageloader" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="polpo.preprocessing.mri.MriImageLoader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mri.</span></span><span class="sig-name descname"><span class="pre">MriImageLoader</span></span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MriImageLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MriImageLoader" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mri.</span></span><span class="sig-name descname"><span class="pre">MriImageLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_nib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_affine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MriImageLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MriImageLoader" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
+<p>Load image from .nii file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – File to load.</p></li>
+<li><p><strong>as_nib</strong> (<em>bool</em>) – Whether to return the nibabel object.</p></li>
+<li><p><strong>return_affine</strong> (<em>bool</em>) – Whether to return the affine transformation.
+Ignore if <cite>as_nib</cite> is True.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.mri.MriImageLoader.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MriImageLoader.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MriImageLoader.apply" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MriImageLoader.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MriImageLoader.apply" title="Link to this definition">#</a></dt>
 <dd><p>Apply step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – File to load.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>img</strong> (<em>nibabel.nifti1.Nifti1Image</em>) – If <cite>as_nib</cite> is True.</p></li>
+<li><p><strong>img_data</strong> (<em>np.array</em>) – If <cite>as_nib</cite> is False.</p></li>
+<li><p><strong>affine</strong> (<em>nibabel.nifti1.Nifti1Image</em>) – If <cite>as_nib</cite> is False and <cite>affine</cite> is True.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

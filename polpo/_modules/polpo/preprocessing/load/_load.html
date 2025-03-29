@@ -314,7 +314,6 @@
   <h1>Source code for polpo.preprocessing.load._load</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
@@ -323,22 +322,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.defaults</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">BranchingPipeline</span><span class="p">,</span>
-    <span class="n">IfCondition</span><span class="p">,</span>
-    <span class="n">IndexSelector</span><span class="p">,</span>
-    <span class="n">Map</span><span class="p">,</span>
-    <span class="n">Sorter</span><span class="p">,</span>
-<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CacheableDataLoader</span><span class="p">,</span> <span class="n">PreprocessingStep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DictKeysFilter</span><span class="p">,</span>
-    <span class="n">DictToTuplesList</span><span class="p">,</span>
-    <span class="n">Hash</span><span class="p">,</span>
-    <span class="n">HashWithIncoming</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">FileRule</span><span class="p">,</span> <span class="n">IsFileType</span><span class="p">,</span> <span class="n">PathShortener</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">DigitFinder</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>

@@ -321,7 +321,7 @@
 
 
 <div class="viewcode-block" id="FileRule">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileRule.html#polpo.preprocessing.load.FileRule">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileRule.html#polpo.preprocessing.load.pregnancy.FileRule">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FileRule</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;File rule.</span>
 
@@ -339,7 +339,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
 
 <div class="viewcode-block" id="FileRule.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileRule.html#polpo.preprocessing.load.FileRule.apply">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileRule.html#polpo.preprocessing.load.pregnancy.FileRule.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
@@ -358,7 +358,7 @@
 
 
 <div class="viewcode-block" id="IsFileType">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.IsFileType.html#polpo.preprocessing.load.IsFileType">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.IsFileType.html#polpo.preprocessing.load.pregnancy.IsFileType">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IsFileType</span><span class="p">(</span><span class="n">FileRule</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check extension of file.</span>
 
@@ -374,7 +374,7 @@
 
 
 <div class="viewcode-block" id="FileFinder">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileFinder.html#polpo.preprocessing.load.FileFinder">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileFinder.html#polpo.preprocessing.load.pregnancy.FileFinder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FileFinder</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find files given rules.</span>
 
@@ -401,8 +401,17 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="n">rules</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_postprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">warn</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Couldn&#39;t find file in: </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_list</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
 <div class="viewcode-block" id="FileFinder.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileFinder.html#polpo.preprocessing.load.FileFinder.apply">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileFinder.html#polpo.preprocessing.load.pregnancy.FileFinder.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
@@ -417,27 +426,23 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data_dir</span> <span class="o">=</span> <span class="n">data</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_dir</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess</span><span class="p">([],</span> <span class="n">data_dir</span><span class="p">)</span>
+
         <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
 
-        <span class="c1"># TODO: also implement as a pipeline?</span>
         <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="p">:</span>
             <span class="n">files</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">files</span><span class="p">)</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">files</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">warn</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Couldn&#39;t find file in: </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_list</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">out</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span></div>
 </div>
 
 
 
 <div class="viewcode-block" id="PathShortener">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.PathShortener.html#polpo.preprocessing.load.PathShortener">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.PathShortener.html#polpo.preprocessing.load.pregnancy.PathShortener">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PathShortener</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Shorten path.</span>
 
@@ -454,7 +459,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">last_index</span> <span class="o">=</span> <span class="n">last_index</span>
 
 <div class="viewcode-block" id="PathShortener.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.PathShortener.html#polpo.preprocessing.load.PathShortener.apply">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.PathShortener.html#polpo.preprocessing.load.pregnancy.PathShortener.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
@@ -469,6 +474,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path_ls</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_ls</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">init_index</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_index</span><span class="p">])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ExpandUser">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.ExpandUser.html#polpo.preprocessing.load.pregnancy.ExpandUser">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExpandUser</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<div class="viewcode-block" id="ExpandUser.apply">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.ExpandUser.html#polpo.preprocessing.load.pregnancy.ExpandUser.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">filename</span></div>
 </div>
 
 </pre></div>

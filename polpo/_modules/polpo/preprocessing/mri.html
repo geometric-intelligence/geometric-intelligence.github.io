@@ -336,13 +336,102 @@
 <div class="viewcode-block" id="MriImageLoader">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.mri.MriImageLoader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MriImageLoader</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load image from .nii file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        File to load.</span>
+<span class="sd">    as_nib : bool</span>
+<span class="sd">        Whether to return the nibabel object.</span>
+<span class="sd">    return_affine : bool</span>
+<span class="sd">        Whether to return the affine transformation.</span>
+<span class="sd">        Ignore if `as_nib` is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_nib</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_affine</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">as_nib</span> <span class="o">=</span> <span class="n">as_nib</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_affine</span> <span class="o">=</span> <span class="n">return_affine</span>
+
 <div class="viewcode-block" id="MriImageLoader.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.mri.MriImageLoader.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="n">img_data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
-        <span class="k">return</span> <span class="n">img_data</span></div>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            File to load.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        img : nibabel.nifti1.Nifti1Image</span>
+<span class="sd">            If `as_nib` is True.</span>
+<span class="sd">        img_data : np.array</span>
+<span class="sd">            If `as_nib` is False.</span>
+<span class="sd">        affine : nibabel.nifti1.Nifti1Image</span>
+<span class="sd">            If `as_nib` is False and `affine` is True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_nib</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img</span>
+
+        <span class="n">img_data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_affine</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img_data</span>
+
+        <span class="k">return</span> <span class="n">img_data</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">affine</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LocalToTemplateTransform">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.LocalToTemplateTransform.html#polpo.preprocessing.mri.LocalToTemplateTransform">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LocalToTemplateTransform</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get transform from local to template system.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    template_affine : array-like</span>
+<span class="sd">        Target affine matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_affine</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_affine</span> <span class="o">=</span> <span class="n">template_affine</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_affine</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_template_affine_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_affine</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LocalToTemplateTransform.apply">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.LocalToTemplateTransform.html#polpo.preprocessing.mri.LocalToTemplateTransform.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : array-like or tuple[array-like; 2]</span>
+<span class="sd">            (local, template) affine matrices.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        transformation_matrix : np.array</span>
+<span class="sd">            Transformation matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">local_affine</span><span class="p">,</span> <span class="n">template_affine</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="n">template_affine_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">template_affine</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_affine</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Template affine is undefined.&quot;</span><span class="p">)</span>
+            <span class="n">template_affine_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_template_affine_inv</span>
+
+        <span class="k">return</span> <span class="n">template_affine_inv</span> <span class="o">@</span> <span class="n">local_affine</span></div>
 </div>
 
 
@@ -365,15 +454,25 @@
 <span class="sd">    9   184  115   51        1  1  1    &quot;PostHipp&quot;</span>
 <span class="sd">    2, 6 are expected to grow in volume with progesterone</span>
 <span class="sd">    4, 5 are expected to shrink in volume with progesterone</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    structured_id : int</span>
+<span class="sd">        Structure to select.</span>
+<span class="sd">    marching_cubes : callable</span>
+<span class="sd">        Marching cubes algorithm.</span>
+<span class="sd">    return_colors : bool</span>
+<span class="sd">        Whether to output colors.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">marching_cubes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">marching_cubes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">marching_cubes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">marching_cubes</span> <span class="o">=</span> <span class="n">SkimageMarchingCubes</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lewiner&quot;</span><span class="p">)</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure_id</span> <span class="o">=</span> <span class="n">structure_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">marching_cubes</span> <span class="o">=</span> <span class="n">marching_cubes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_colors</span> <span class="o">=</span> <span class="n">return_colors</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">color_dict</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># trimesh uses format [r, g, b, a] where a is alpha</span>
             <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
@@ -412,6 +511,9 @@
             <span class="n">values</span><span class="p">,</span>
         <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span><span class="n">masked_img_fdata</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_colors</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span>
+
         <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_dict</span><span class="p">[</span><span class="n">value</span><span class="p">])</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">colors</span></div>
 </div>
@@ -431,11 +533,14 @@
         <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">allow_degenerate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lewiner&quot;</span><span class="p">,</span>
+        <span class="n">return_values</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">allow_degenerate</span> <span class="o">=</span> <span class="n">allow_degenerate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_values</span> <span class="o">=</span> <span class="n">return_values</span>
 
 <div class="viewcode-block" id="SkimageMarchingCubes.apply">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.SkimageMarchingCubes.html#polpo.preprocessing.mri.SkimageMarchingCubes.apply">[docs]</a>
@@ -452,9 +557,15 @@
             <span class="n">_</span><span class="p">,</span>
             <span class="n">values</span><span class="p">,</span>
         <span class="p">)</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">measure</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span>
-            <span class="n">img_fdata</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">img_fdata</span><span class="p">,</span>
+            <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;return_values&quot;</span><span class="p">,)),</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">values</span></div>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_values</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">values</span>
+
+        <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span></div>
 </div>
 
 </pre></div>

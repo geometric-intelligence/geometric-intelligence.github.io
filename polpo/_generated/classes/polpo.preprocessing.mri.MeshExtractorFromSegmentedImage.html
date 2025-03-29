@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="MriImageLoader" href="polpo.preprocessing.mri.MriImageLoader.html" />
-    <link rel="prev" title="polpo.preprocessing.mri" href="../polpo.preprocessing.mri.html" />
+    <link rel="prev" title="LocalToTemplateTransform" href="polpo.preprocessing.mri.LocalToTemplateTransform.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -298,6 +298,7 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ToList.html">ToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Truncater.html">Truncater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleToList.html">TupleToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWith.html">TupleWith</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWithIncoming.html">TupleWithIncoming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Unnest.html">Unnest</a></li>
@@ -385,7 +386,7 @@
 <h1>MeshExtractorFromSegmentedImage<a class="headerlink" href="#meshextractorfromsegmentedimage" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="polpo.preprocessing.mri.MeshExtractorFromSegmentedImage">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mri.</span></span><span class="sig-name descname"><span class="pre">MeshExtractorFromSegmentedImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marching_cubes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MeshExtractorFromSegmentedImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mri.</span></span><span class="sig-name descname"><span class="pre">MeshExtractorFromSegmentedImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marching_cubes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MeshExtractorFromSegmentedImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
 <p>Mesh extractor from images.</p>
 <section id="structure-id-names-numbers-and-colors">
@@ -401,6 +402,15 @@
 9   184  115   51        1  1  1    “PostHipp”
 2, 6 are expected to grow in volume with progesterone
 4, 5 are expected to shrink in volume with progesterone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>structured_id</strong> (<em>int</em>) – Structure to select.</p></li>
+<li><p><strong>marching_cubes</strong> (<em>callable</em>) – Marching cubes algorithm.</p></li>
+<li><p><strong>return_colors</strong> (<em>bool</em>) – Whether to output colors.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.apply">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_fdata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MeshExtractorFromSegmentedImage.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.apply" title="Link to this definition">#</a></dt>

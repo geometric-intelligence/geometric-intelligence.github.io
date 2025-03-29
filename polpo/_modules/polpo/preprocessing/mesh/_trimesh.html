@@ -593,6 +593,26 @@
         <span class="k">return</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 </div>
 
+
+
+<div class="viewcode-block" id="TrimeshMeshBounds">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.qof.TrimeshMeshBounds.html#polpo.preprocessing.mesh.clone.TrimeshMeshBounds">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TrimeshMeshBounds</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span> <span class="o">=</span> <span class="n">ratio</span>
+
+<div class="viewcode-block" id="TrimeshMeshBounds.apply">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.qof.TrimeshMeshBounds.html#polpo.preprocessing.mesh.clone.TrimeshMeshBounds.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">bounds</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">bounds</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span> <span class="o">*</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span> <span class="o">*</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span></div>
+</div>
+
 </pre></div>
 
                 </article>

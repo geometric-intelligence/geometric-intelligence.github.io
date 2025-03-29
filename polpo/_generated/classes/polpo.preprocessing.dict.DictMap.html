@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="DictMerger" href="polpo.preprocessing.dict.DictMerger.html" />
-    <link rel="prev" title="DictKeysFilter" href="polpo.preprocessing.dict.DictKeysFilter.html" />
+    <link rel="prev" title="DictFilter" href="polpo.preprocessing.dict.DictFilter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -298,6 +298,7 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ToList.html">ToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Truncater.html">Truncater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleToList.html">TupleToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWith.html">TupleWith</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWithIncoming.html">TupleWithIncoming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Unnest.html">Unnest</a></li>
@@ -387,10 +388,30 @@
 <dt class="sig sig-object py" id="polpo.preprocessing.dict.DictMap">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.dict.</span></span><span class="sig-name descname"><span class="pre">DictMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/dict.html#DictMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.dict.DictMap" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.dict.StepWrappingPreprocessingStep.html#polpo.preprocessing.dict.StepWrappingPreprocessingStep" title="polpo.preprocessing._preprocessing.StepWrappingPreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">StepWrappingPreprocessingStep</span></code></a></p>
+<p>Apply a given step to each element of a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step</strong> (<em>callable</em>) – Preprocessing step to apply to value.</p></li>
+<li><p><strong>pbar</strong> (<em>bool</em>) – Whether to show a progress bar.</p></li>
+<li><p><strong>key_step</strong> (<em>callable</em>) – Preprocessing step to apply to key.</p></li>
+<li><p><strong>special_keys</strong> (<em>array-like</em>) – Keys to be subject to a different step.</p></li>
+<li><p><strong>special_step</strong> (<em>callable</em>) – Step to apply to special keys.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.dict.DictMap.apply">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/dict.html#DictMap.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.dict.DictMap.apply" title="Link to this definition">#</a></dt>
 <dd><p>Apply step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>new_data</strong> (<em>dict</em>)</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
