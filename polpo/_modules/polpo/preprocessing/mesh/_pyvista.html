@@ -329,7 +329,17 @@
 <div class="viewcode-block" id="PvFromData">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromData.html#polpo.preprocessing.mesh.conversion.PvFromData">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvFromData</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert arrays into pv.PolyData.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert arrays into pv.PolyData.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    keep_colors : bool</span>
+<span class="sd">        Whether to keep colors if present.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="o">=</span> <span class="n">keep_colors</span>
 
 <div class="viewcode-block" id="PvFromData.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromData.html#polpo.preprocessing.mesh.conversion.PvFromData.apply">[docs]</a>
@@ -353,9 +363,39 @@
             <span class="n">colors</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="n">poly_data</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="o">.</span><span class="n">from_regular_faces</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="o">=</span><span class="n">faces</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="ow">and</span> <span class="n">colors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">poly_data</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span>
         <span class="k">return</span> <span class="n">poly_data</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DataFromPv">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.DataFromPv.html#polpo.preprocessing.mesh.conversion.DataFromPv">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataFromPv</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert pv.PolyData into arrays.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    keep_colors : bool</span>
+<span class="sd">        Whether to keep colors if present.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="o">=</span> <span class="n">keep_colors</span>
+
+<div class="viewcode-block" id="DataFromPv.apply">
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.DataFromPv.html#polpo.preprocessing.mesh.conversion.DataFromPv.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+        <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">points</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:],</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="ow">and</span> <span class="s2">&quot;colors&quot;</span> <span class="ow">in</span> <span class="n">mesh</span><span class="o">.</span><span class="n">array_names</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span></div>
 </div>
 
 
