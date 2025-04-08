@@ -532,11 +532,32 @@
 <div class="viewcode-block" id="TrimeshReader">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.TrimeshReader.html#polpo.preprocessing.mesh.clone.TrimeshReader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TrimeshReader</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="c1"># TODO: update</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read file.</span>
+
+<span class="sd">    Uses `load_mesh` (</span>
+<span class="sd">    https://trimesh.org/trimesh.exchange.load.html#trimesh.exchange.load.load_mesh</span>
+<span class="sd">    ) if supported format, which is very limited.</span>
+
+<span class="sd">    If not supported format, goes through `pyvista`.</span>
+<span class="sd">    Particularly relevant for `vtk` `Polydata`,</span>
+<span class="sd">    otherwise `meshio` could have been used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_supported_fmts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;stl&quot;</span><span class="p">,</span> <span class="s2">&quot;ply&quot;</span><span class="p">,</span> <span class="s2">&quot;dxf&quot;</span><span class="p">}</span>
+
 <div class="viewcode-block" id="TrimeshReader.apply">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.TrimeshReader.html#polpo.preprocessing.mesh.clone.TrimeshReader.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ext</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_supported_fmts</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">load_mesh</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="c1"># import here to avoid forcing pyvista installation</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">._pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">PvReader</span><span class="p">()</span> <span class="o">+</span> <span class="n">TrimeshFromPv</span><span class="p">())(</span><span class="n">path</span><span class="p">)</span></div>
 </div>
 
 

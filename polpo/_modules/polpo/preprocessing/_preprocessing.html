@@ -313,6 +313,7 @@
                   
   <h1>Source code for polpo.preprocessing._preprocessing</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
@@ -754,6 +755,7 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.PartiallyInitializedStep.html#polpo.preprocessing.PartiallyInitializedStep">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PartiallyInitializedStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Step</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Step</span> <span class="o">=</span> <span class="n">Step</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
@@ -797,18 +799,68 @@
 
 
 
+<div class="viewcode-block" id="Eval">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Eval.html#polpo.preprocessing.Eval">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Eval</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate string.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    expr : str</span>
+<span class="sd">        String expression to be evaluated.</span>
+<span class="sd">    imports : list[str]</span>
+<span class="sd">        Imports required to evaluate string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">imports</span><span class="o">=</span><span class="p">()):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_expr</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_locals_from_imports</span><span class="p">(</span><span class="n">imports</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_locals_from_imports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imports</span><span class="p">):</span>
+        <span class="n">locals_</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">import_</span> <span class="ow">in</span> <span class="n">imports</span><span class="p">:</span>
+            <span class="n">import_ls</span> <span class="o">=</span> <span class="n">import_</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">import_ls</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">obj_name</span> <span class="o">=</span> <span class="n">import_ls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">obj_name</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="n">locals_</span><span class="p">[</span><span class="n">obj_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">),</span> <span class="n">obj_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">locals_</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Eval.apply">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Eval.html#polpo.preprocessing.Eval.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expr</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</div>
+
+
+
 <div class="viewcode-block" id="Lambda">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Lambda.html#polpo.preprocessing.Lambda">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">Lambda</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lambda_</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Lambda</span><span class="p">(</span><span class="n">Eval</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate lambda function.</span>
 
-<div class="viewcode-block" id="Lambda.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Lambda.html#polpo.preprocessing.Lambda.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda_</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
-</div>
+<span class="sd">    Syntax sugar for `Eval` where `string` is a lambda function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    args : list[str]</span>
+<span class="sd">        Arguments of lambda function.</span>
+<span class="sd">    expr : str</span>
+<span class="sd">        Expression of lambda function.</span>
+<span class="sd">    imports : list[str]</span>
+<span class="sd">        Imports required to evaluate string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">imports</span><span class="o">=</span><span class="p">()):</span>
+        <span class="n">args_str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">lambda_</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lambda </span><span class="si">{</span><span class="n">args_str</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">lambda_</span><span class="p">,</span> <span class="n">imports</span><span class="p">)</span></div>
 
 
 

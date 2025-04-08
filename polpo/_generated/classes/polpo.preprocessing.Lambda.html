@@ -274,6 +274,7 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DecorateToIterable.html">DecorateToIterable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptyRemover.html">EmptyRemover</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptySkipper.html">EmptySkipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Eval.html">Eval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ExceptionToWarning.html">ExceptionToWarning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Filter.html">Filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IdentityStep.html">IdentityStep</a></li>
@@ -383,11 +384,22 @@
 <h1>Lambda<a class="headerlink" href="#lambda" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="polpo.preprocessing.Lambda">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.</span></span><span class="sig-name descname"><span class="pre">Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/_preprocessing.html#Lambda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.Lambda" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.</span></span><span class="sig-name descname"><span class="pre">Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/_preprocessing.html#Lambda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.Lambda" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.Eval.html#polpo.preprocessing.Eval" title="polpo.preprocessing._preprocessing.Eval"><code class="xref py py-class docutils literal notranslate"><span class="pre">Eval</span></code></a></p>
+<p>Evaluate lambda function.</p>
+<p>Syntax sugar for <cite>Eval</cite> where <cite>string</cite> is a lambda function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>list[str]</em>) – Arguments of lambda function.</p></li>
+<li><p><strong>expr</strong> (<em>str</em>) – Expression of lambda function.</p></li>
+<li><p><strong>imports</strong> (<em>list[str]</em>) – Imports required to evaluate string.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.Lambda.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/_preprocessing.html#Lambda.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.Lambda.apply" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.Lambda.apply" title="Link to this definition">#</a></dt>
 <dd><p>Apply step.</p>
 </dd></dl>
 

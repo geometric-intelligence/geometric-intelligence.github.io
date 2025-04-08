@@ -274,6 +274,7 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DecorateToIterable.html">DecorateToIterable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptyRemover.html">EmptyRemover</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptySkipper.html">EmptySkipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Eval.html">Eval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ExceptionToWarning.html">ExceptionToWarning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Filter.html">Filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IdentityStep.html">IdentityStep</a></li>
@@ -391,6 +392,13 @@
 <dt class="sig sig-object py" id="polpo.preprocessing.mesh.io.TrimeshReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mesh.io.</span></span><span class="sig-name descname"><span class="pre">TrimeshReader</span></span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/_trimesh.html#TrimeshReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.io.TrimeshReader" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
+<p>Read file.</p>
+<p>Uses <cite>load_mesh</cite> (
+<a class="reference external" href="https://trimesh.org/trimesh.exchange.load.html#trimesh.exchange.load.load_mesh">https://trimesh.org/trimesh.exchange.load.html#trimesh.exchange.load.load_mesh</a>
+) if supported format, which is very limited.</p>
+<p>If not supported format, goes through <cite>pyvista</cite>.
+Particularly relevant for <cite>vtk</cite> <cite>Polydata</cite>,
+otherwise <cite>meshio</cite> could have been used.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.mesh.io.TrimeshReader.apply">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mesh/_trimesh.html#TrimeshReader.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mesh.io.TrimeshReader.apply" title="Link to this definition">#</a></dt>
