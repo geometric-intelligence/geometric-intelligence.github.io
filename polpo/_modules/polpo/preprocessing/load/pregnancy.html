@@ -342,7 +342,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">._load</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigshareDataLoader</span><span class="p">,</span> <span class="n">_get_basename</span>
 
-<span class="n">PREGNANCY_PILOT_REFLECTED_KEYS</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">PREGNANCY_PILOT_REFLECTED_KEYS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">7</span><span class="p">,</span>
     <span class="mi">8</span><span class="p">,</span>
     <span class="mi">9</span><span class="p">,</span>
@@ -362,10 +362,21 @@
     <span class="mi">24</span><span class="p">,</span>
     <span class="mi">25</span><span class="p">,</span>
     <span class="mi">26</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="p">}</span>
 
 
-<span class="n">MATERNAL_STRUCTS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Accu&quot;</span><span class="p">,</span> <span class="s2">&quot;Amyg&quot;</span><span class="p">,</span> <span class="s2">&quot;Caud&quot;</span><span class="p">,</span> <span class="s2">&quot;Hipp&quot;</span><span class="p">,</span> <span class="s2">&quot;Pall&quot;</span><span class="p">,</span> <span class="s2">&quot;Puta&quot;</span><span class="p">,</span> <span class="s2">&quot;Thal&quot;</span><span class="p">)</span>
+<span class="n">FIRST_STRUCTS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Thal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Caud&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Puta&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pall&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BrStem&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Hipp&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Amyg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Accu&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">MATERNAL_IDS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;01&quot;</span><span class="p">,</span> <span class="s2">&quot;1001&quot;</span><span class="p">,</span> <span class="s2">&quot;1004&quot;</span><span class="p">}</span>
 
 
 <div class="viewcode-block" id="FigsharePregnancyDataLoader">
@@ -710,6 +721,7 @@
 <span class="sd">        Data root dir.</span>
 <span class="sd">    subject_id : str</span>
 <span class="sd">        Identification of the subject. If None, loads full dataframe.</span>
+<span class="sd">        One of the following: &quot;01&quot;, &quot;1001&quot;, &quot;1004&quot;.</span>
 <span class="sd">    pilot : bool</span>
 <span class="sd">        Whether to load pilot data.</span>
 
@@ -761,15 +773,13 @@
     <span class="k">return</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">CsvReader</span><span class="p">()</span> <span class="o">+</span> <span class="n">prep_pipe</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalMeshLoader</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalFoldersSelector</span><span class="p">(</span>
     <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal&quot;</span><span class="p">,</span>
     <span class="n">subject_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">struct</span><span class="o">=</span><span class="s2">&quot;Hipp&quot;</span><span class="p">,</span>
     <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load maternal mesh filenames.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load maternal sessions folder names.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -777,6 +787,7 @@
 <span class="sd">        Directory where data is stored.</span>
 <span class="sd">    subject_id : str</span>
 <span class="sd">        Identification of the subject. If None, assumes pilot.</span>
+<span class="sd">        One of the following: &quot;01&quot;, &quot;1001&quot;, &quot;1004&quot;.</span>
 <span class="sd">    subset : array-like</span>
 <span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
 <span class="sd">    as_dict : bool</span>
@@ -785,22 +796,19 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pipe : Pipeline</span>
-<span class="sd">        Pipeline whose output is list[str] or dict[int, str].</span>
-<span class="sd">        String represents filename. Sorting is always temporal.</span>
+<span class="sd">        Pipeline to load maternal sessions folder names.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">project_folder</span> <span class="o">=</span> <span class="s2">&quot;maternal_brain_project&quot;</span>
 
     <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
 
-    <span class="n">pilot</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">subject_id</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span> <span class="k">else</span> <span class="kc">False</span>
-
-    <span class="k">if</span> <span class="n">struct</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MATERNAL_STRUCTS</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MATERNAL_IDS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Ups, `</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MATERNAL_STRUCTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Ups, `</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MATERNAL_IDS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
-    <span class="n">side</span> <span class="o">=</span> <span class="s2">&quot;L&quot;</span> <span class="k">if</span> <span class="n">left</span> <span class="k">else</span> <span class="s2">&quot;R&quot;</span>
+    <span class="n">pilot</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">subject_id</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span> <span class="k">else</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">pilot</span><span class="p">:</span>
         <span class="n">project_folder</span> <span class="o">+=</span> <span class="s2">&quot;_pilot&quot;</span>
@@ -834,24 +842,116 @@
             <span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">folder_name</span><span class="p">:</span> <span class="n">path_to_session</span><span class="p">(</span><span class="n">folder_name</span><span class="p">)</span> <span class="ow">in</span> <span class="n">subset</span>
         <span class="p">)</span>
 
-    <span class="n">file_finder</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">folders_selector</span>
-        <span class="o">+</span> <span class="n">Map</span><span class="p">(</span>
-            <span class="n">FileFinder</span><span class="p">(</span>
-                <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-                    <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;vtk&quot;</span><span class="p">),</span>
-                    <span class="k">lambda</span> <span class="n">filename</span><span class="p">:</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">,</span>
-                    <span class="k">lambda</span> <span class="n">filename</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">side</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">,</span>
-                <span class="p">]</span>
-            <span class="p">)</span>
+    <span class="n">pipe</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">sorter</span>
+    <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
+        <span class="n">pipe</span> <span class="o">=</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">path_to_session</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">pipe</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalMeshLoader</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal&quot;</span><span class="p">,</span>
+    <span class="n">subject_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">struct</span><span class="o">=</span><span class="s2">&quot;Hipp&quot;</span><span class="p">,</span>
+    <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load maternal mesh filenames.</span>
+
+<span class="sd">    Check out https://fsl.fmrib.ox.ac.uk/fsl/docs/#/structural/first.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : str</span>
+<span class="sd">        Directory where data is stored.</span>
+<span class="sd">    subject_id : str</span>
+<span class="sd">        Identification of the subject. If None, assumes pilot.</span>
+<span class="sd">        One of the following: &quot;01&quot;, &quot;1001&quot;, &quot;1004&quot;.</span>
+<span class="sd">    struct : str</span>
+<span class="sd">        One of the following: &#39;Thal&#39;, &#39;Caud&#39;, &#39;Puta&#39;, &#39;Pall&#39;,</span>
+<span class="sd">        &#39;BrStem&#39;, &#39;Hipp&#39;, &#39;Amyg&#39;, &#39;Accu&#39;.</span>
+<span class="sd">    left : bool</span>
+<span class="sd">        Whether to load left side. Not applicable to &#39;BrStem&#39;.</span>
+<span class="sd">    subset : array-like</span>
+<span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
+<span class="sd">    as_dict : bool</span>
+<span class="sd">        Whether to create a dictionary with session as key.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pipe : Pipeline</span>
+<span class="sd">        Pipeline whose output is list[str] or dict[int, str].</span>
+<span class="sd">        String represents filename. Sorting is always temporal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">struct</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FIRST_STRUCTS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Ups, `</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
-        <span class="o">+</span> <span class="n">sorter</span>
+
+    <span class="k">if</span> <span class="n">struct</span> <span class="o">==</span> <span class="s2">&quot;BrStem&quot;</span><span class="p">:</span>
+        <span class="n">suffixed_side</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">suffixed_side</span> <span class="o">=</span> <span class="s2">&quot;L_&quot;</span> <span class="k">if</span> <span class="n">left</span> <span class="k">else</span> <span class="s2">&quot;R_&quot;</span>
+
+    <span class="n">folders_selector</span> <span class="o">=</span> <span class="n">DenseMaternalFoldersSelector</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">subset</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span>
+        <span class="n">FileFinder</span><span class="p">(</span>
+            <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;vtk&quot;</span><span class="p">),</span>
+                <span class="k">lambda</span> <span class="n">filename</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">suffixed_side</span><span class="si">}{</span><span class="n">struct</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">path_to_session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">file_finder</span>
 
-    <span class="k">return</span> <span class="n">file_finder</span>
+    <span class="k">return</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">DictToValuesList</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalSegmentationsLoader</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal&quot;</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load segmented mri filenames.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : str</span>
+<span class="sd">        Directory where to store data.</span>
+<span class="sd">    subset : array-like</span>
+<span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
+<span class="sd">    subject_id : str</span>
+<span class="sd">        Identification of the subject. If None, assumes pilot.</span>
+<span class="sd">        One of the following: &quot;01&quot;, &quot;1001&quot;, &quot;1004&quot;.</span>
+<span class="sd">    as_dict : bool</span>
+<span class="sd">        Whether to create a dictionary with session as key.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pipe : Pipeline</span>
+<span class="sd">        Pipeline to load segmented mri filenames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">folders_selector</span> <span class="o">=</span> <span class="n">DenseMaternalFoldersSelector</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">subset</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span>
+        <span class="n">FileFinder</span><span class="p">(</span>
+            <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">),</span>
+                <span class="k">lambda</span> <span class="n">filename</span><span class="p">:</span> <span class="s2">&quot;all_fast_firstseg&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">file_finder</span>
+
+    <span class="k">return</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">DictToValuesList</span><span class="p">()</span>
 </pre></div>
 
                 </article>
