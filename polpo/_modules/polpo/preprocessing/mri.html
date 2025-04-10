@@ -355,9 +355,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">as_nib</span> <span class="o">=</span> <span class="n">as_nib</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">return_affine</span> <span class="o">=</span> <span class="n">return_affine</span>
 
-<div class="viewcode-block" id="MriImageLoader.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.mri.MriImageLoader.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -385,7 +383,6 @@
             <span class="k">return</span> <span class="n">img_data</span>
 
         <span class="k">return</span> <span class="n">img_data</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">affine</span></div>
-</div>
 
 
 
@@ -407,9 +404,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_affine</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_template_affine_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_affine</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LocalToTemplateTransform.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.LocalToTemplateTransform.html#polpo.preprocessing.mri.LocalToTemplateTransform.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -432,7 +427,6 @@
             <span class="n">template_affine_inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_template_affine_inv</span>
 
         <span class="k">return</span> <span class="n">template_affine_inv</span> <span class="o">@</span> <span class="n">local_affine</span></div>
-</div>
 
 
 
@@ -465,6 +459,8 @@
 <span class="sd">        Whether to output colors.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="c1"># TODO: adapt this for tool</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">marching_cubes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">marching_cubes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">marching_cubes</span> <span class="o">=</span> <span class="n">SkimageMarchingCubes</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lewiner&quot;</span><span class="p">)</span>
@@ -486,9 +482,7 @@
             <span class="mi">9</span><span class="p">:</span> <span class="p">[</span><span class="mi">184</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
         <span class="p">}</span>
 
-<div class="viewcode-block" id="MeshExtractorFromSegmentedImage.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_fdata</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_fdata</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract one surface mesh from the fdata of a segmented image.</span>
 
 <span class="sd">        Parameters</span>
@@ -516,7 +510,6 @@
 
         <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_dict</span><span class="p">[</span><span class="n">value</span><span class="p">])</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">colors</span></div>
-</div>
 
 
 
@@ -542,9 +535,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">return_values</span> <span class="o">=</span> <span class="n">return_values</span>
 
-<div class="viewcode-block" id="SkimageMarchingCubes.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.SkimageMarchingCubes.html#polpo.preprocessing.mri.SkimageMarchingCubes.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">img_fdata</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
@@ -566,7 +557,6 @@
             <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">values</span>
 
         <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span></div>
-</div>
 
 </pre></div>
 

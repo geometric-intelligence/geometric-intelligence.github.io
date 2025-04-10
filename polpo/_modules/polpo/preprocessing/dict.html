@@ -334,9 +334,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_none</span> <span class="o">=</span> <span class="n">ignore_none</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_empty</span> <span class="o">=</span> <span class="n">ignore_empty</span>
 
-<div class="viewcode-block" id="Hash.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.Hash.html#polpo.preprocessing.dict.Hash.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">new_data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datum</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -355,7 +353,6 @@
             <span class="n">new_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">datum</span>
 
         <span class="k">return</span> <span class="n">new_data</span></div>
-</div>
 
 
 
@@ -371,16 +368,13 @@
 
         <span class="k">return</span> <span class="n">keys</span>
 
-<div class="viewcode-block" id="DictMerger.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictMerger.html#polpo.preprocessing.dict.DictMerger.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">shared_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_shared_keys</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">shared_keys</span><span class="p">:</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">datum</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">out</span></div>
-</div>
 
 
 
@@ -391,14 +385,11 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key_step</span> <span class="o">=</span> <span class="n">_wrap_step</span><span class="p">(</span><span class="n">key_step</span><span class="p">)</span>
 
-<div class="viewcode-block" id="HashWithIncoming.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.HashWithIncoming.html#polpo.preprocessing.dict.HashWithIncoming.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys_data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys_data</span><span class="p">):</span>
         <span class="n">values_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">keys_data</span><span class="p">)</span>
         <span class="n">keys_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_step</span><span class="p">(</span><span class="n">keys_data</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys_data</span><span class="p">,</span> <span class="n">values_data</span><span class="p">)}</span></div>
-</div>
 
 
 
@@ -467,48 +458,36 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
 
-<div class="viewcode-block" id="DictExtractKey.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictExtractKey.html#polpo.preprocessing.dict.DictExtractKey.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">]</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="DictToValuesList">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictToValuesList.html#polpo.preprocessing.dict.DictToValuesList">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictToValuesList</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="DictToValuesList.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictToValuesList.html#polpo.preprocessing.dict.DictToValuesList.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="DictToTuplesList">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictToTuplesList.html#polpo.preprocessing.dict.DictToTuplesList">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictToTuplesList</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="DictToTuplesList.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictToTuplesList.html#polpo.preprocessing.dict.DictToTuplesList.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="DictUpdate">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictUpdate.html#polpo.preprocessing.dict.DictUpdate">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictUpdate</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="DictUpdate.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictUpdate.html#polpo.preprocessing.dict.DictUpdate.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">new_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
             <span class="n">new_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">new_data</span></div>
-</div>
 
 
 
@@ -540,9 +519,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">special_keys</span> <span class="o">=</span> <span class="n">special_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">special_step</span> <span class="o">=</span> <span class="n">_wrap_step</span><span class="p">(</span><span class="n">special_step</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DictMap.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictMap.html#polpo.preprocessing.dict.DictMap.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -562,18 +539,14 @@
             <span class="n">out</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_step</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value_</span>
 
         <span class="k">return</span> <span class="n">out</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="NestedDictSwapper">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.NestedDictSwapper.html#polpo.preprocessing.dict.NestedDictSwapper">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NestedDictSwapper</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="NestedDictSwapper.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.NestedDictSwapper.html#polpo.preprocessing.dict.NestedDictSwapper.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nested_dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nested_dict</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">swap_nested_dict</span><span class="p">(</span><span class="n">nested_dict</span><span class="p">)</span></div>
-</div>
 
 </pre></div>
 

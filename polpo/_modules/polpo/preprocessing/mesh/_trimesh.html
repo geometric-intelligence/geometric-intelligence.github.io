@@ -327,40 +327,32 @@
 <div class="viewcode-block" id="TrimeshFromData">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.TrimeshFromData.html#polpo.preprocessing.mesh.clone.TrimeshFromData">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TrimeshFromData</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="TrimeshFromData.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.TrimeshFromData.html#polpo.preprocessing.mesh.clone.TrimeshFromData.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">mesh</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">mesh</span>
             <span class="n">colors</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">Trimesh</span><span class="p">(</span><span class="n">vertices</span><span class="o">=</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="o">=</span><span class="n">faces</span><span class="p">,</span> <span class="n">vertex_colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="DataFromTrimesh">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.DataFromTrimesh.html#polpo.preprocessing.mesh.clone.DataFromTrimesh">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DataFromTrimesh</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="DataFromTrimesh.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.DataFromTrimesh.html#polpo.preprocessing.mesh.clone.DataFromTrimesh.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">vertices</span><span class="p">),</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">faces</span><span class="p">),</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">visual</span><span class="o">.</span><span class="n">vertex_colors</span><span class="p">),</span>
         <span class="p">)</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="TrimeshFromPv">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.TrimeshFromPv.html#polpo.preprocessing.mesh.clone.TrimeshFromPv">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TrimeshFromPv</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="TrimeshFromPv.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.TrimeshFromPv.html#polpo.preprocessing.mesh.clone.TrimeshFromPv.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
         <span class="n">vertex_colors</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">poly_data</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;colors&quot;</span> <span class="ow">in</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">array_names</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="p">)</span>
@@ -368,7 +360,6 @@
         <span class="k">return</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">Trimesh</span><span class="p">(</span>
             <span class="n">poly_data</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">faces_as_array</span><span class="p">,</span> <span class="n">vertex_colors</span><span class="o">=</span><span class="n">vertex_colors</span>
         <span class="p">)</span></div>
-</div>
 
 
 
@@ -378,12 +369,11 @@
     <span class="c1"># TODO: generalize?</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
 
-<div class="viewcode-block" id="TrimeshFaceRemoverByArea.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.repair.TrimeshFaceRemoverByArea.html#polpo.preprocessing.mesh.clone.TrimeshFaceRemoverByArea.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">:</span>
             <span class="n">mesh</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -391,7 +381,6 @@
         <span class="n">mesh</span><span class="o">.</span><span class="n">update_faces</span><span class="p">(</span><span class="n">face_mask</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">mesh</span></div>
-</div>
 
 
 
@@ -410,19 +399,17 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">1e-08</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
 
-<div class="viewcode-block" id="TrimeshDegenerateFacesRemover.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.repair.TrimeshDegenerateFacesRemover.html#polpo.preprocessing.mesh.clone.TrimeshDegenerateFacesRemover.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">:</span>
             <span class="n">mesh</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="n">faces</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">nondegenerate_faces</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
         <span class="n">mesh</span><span class="o">.</span><span class="n">update_faces</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mesh</span></div>
-</div>
 
 
 
@@ -450,9 +437,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">face_count</span> <span class="o">=</span> <span class="n">face_count</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">agression</span> <span class="o">=</span> <span class="n">agression</span>
 
-<div class="viewcode-block" id="TrimeshDecimator.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.decimation.TrimeshDecimator.html#polpo.preprocessing.mesh.clone.TrimeshDecimator.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="c1"># TODO: issue with colors?</span>
         <span class="n">decimated_mesh</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">simplify_quadric_decimation</span><span class="p">(</span>
             <span class="n">percent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">percent</span><span class="p">,</span>
@@ -465,7 +450,6 @@
         <span class="c1"># print(&quot;unique colors after decimation:&quot;, len(np.unique(colors_, axis=0)))</span>
 
         <span class="k">return</span> <span class="n">decimated_mesh</span></div>
-</div>
 
 
 
@@ -473,18 +457,16 @@
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.repair.TrimeshLargestComponentSelector.html#polpo.preprocessing.mesh.clone.TrimeshLargestComponentSelector">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TrimeshLargestComponentSelector</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">only_watertight</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">only_watertight</span> <span class="o">=</span> <span class="n">only_watertight</span>
 
-<div class="viewcode-block" id="TrimeshLargestComponentSelector.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.repair.TrimeshLargestComponentSelector.html#polpo.preprocessing.mesh.clone.TrimeshLargestComponentSelector.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="n">components</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">only_watertight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">only_watertight</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">mesh</span>
 
         <span class="n">components</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">component</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">faces</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
-</div>
 
 
 
@@ -498,6 +480,7 @@
         <span class="n">vertex_normal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">include_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="c1"># TODO: create dir if does not exist?</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dirname</span> <span class="o">=</span> <span class="n">dirname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span>
@@ -506,9 +489,7 @@
 
         <span class="c1"># TODO: add override?</span>
 
-<div class="viewcode-block" id="TrimeshToPly.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.TrimeshToPly.html#polpo.preprocessing.mesh.clone.TrimeshToPly.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">filename</span><span class="p">,</span> <span class="n">mesh</span> <span class="o">=</span> <span class="n">data</span>
 
         <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;.ply&quot;</span>
@@ -525,7 +506,6 @@
             <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ply_text</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">path</span></div>
-</div>
 
 
 
@@ -547,9 +527,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_supported_fmts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;stl&quot;</span><span class="p">,</span> <span class="s2">&quot;ply&quot;</span><span class="p">,</span> <span class="s2">&quot;dxf&quot;</span><span class="p">}</span>
 
-<div class="viewcode-block" id="TrimeshReader.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.TrimeshReader.html#polpo.preprocessing.mesh.clone.TrimeshReader.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">ext</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_supported_fmts</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">load_mesh</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -558,7 +536,6 @@
         <span class="kn">from</span><span class="w"> </span><span class="nn">._pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">PvReader</span><span class="p">()</span> <span class="o">+</span> <span class="n">TrimeshFromPv</span><span class="p">())(</span><span class="n">path</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -578,6 +555,7 @@
         <span class="n">laplacian_operator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lamb</span> <span class="o">=</span> <span class="n">lamb</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span> <span class="o">=</span> <span class="n">iterations</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">implicit_time_integration</span> <span class="o">=</span> <span class="n">implicit_time_integration</span>
@@ -585,9 +563,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">laplacian_operator</span> <span class="o">=</span> <span class="n">laplacian_operator</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
 
-<div class="viewcode-block" id="TrimeshLaplacianSmoothing.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.smoothing.TrimeshLaplacianSmoothing.html#polpo.preprocessing.mesh.clone.TrimeshLaplacianSmoothing.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">:</span>
             <span class="n">mesh</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -601,18 +577,14 @@
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">mesh</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="TrimeshClone">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.clone.TrimeshClone.html#polpo.preprocessing.mesh.clone.TrimeshClone">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TrimeshClone</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="TrimeshClone.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.clone.TrimeshClone.html#polpo.preprocessing.mesh.clone.TrimeshClone.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
-</div>
 
 
 
@@ -623,16 +595,13 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span> <span class="o">=</span> <span class="n">ratio</span>
 
-<div class="viewcode-block" id="TrimeshMeshBounds.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.qof.TrimeshMeshBounds.html#polpo.preprocessing.mesh.clone.TrimeshMeshBounds.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="n">bounds</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">bounds</span>
 
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">bounds</span>
 
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span> <span class="o">*</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratio</span><span class="p">)</span> <span class="o">*</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span></div>
-</div>
 
 </pre></div>
 

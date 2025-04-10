@@ -341,9 +341,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="o">=</span> <span class="n">keep_colors</span>
 
-<div class="viewcode-block" id="PvFromData.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromData.html#polpo.preprocessing.mesh.conversion.PvFromData.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -366,7 +364,6 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="ow">and</span> <span class="n">colors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">poly_data</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span>
         <span class="k">return</span> <span class="n">poly_data</span></div>
-</div>
 
 
 
@@ -385,9 +382,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="o">=</span> <span class="n">keep_colors</span>
 
-<div class="viewcode-block" id="DataFromPv.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.DataFromPv.html#polpo.preprocessing.mesh.conversion.DataFromPv.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">points</span><span class="p">),</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:],</span>
@@ -396,7 +391,6 @@
             <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span></div>
-</div>
 
 
 
@@ -425,9 +419,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">check_mean_distance</span> <span class="o">=</span> <span class="n">check_mean_distance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start_by_matching_centroids</span> <span class="o">=</span> <span class="n">start_by_matching_centroids</span>
 
-<div class="viewcode-block" id="PvAlign.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.registration.PvAlign.html#polpo.preprocessing.mesh.conversion.PvAlign.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -453,7 +445,6 @@
             <span class="n">target</span><span class="p">,</span>
             <span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">,)),</span>
         <span class="p">)</span></div>
-</div>
 
 
 
@@ -489,12 +480,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">progress_bar</span>
 
-<div class="viewcode-block" id="PvSmoothTaubin.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.smoothing.PvSmoothTaubin.html#polpo.preprocessing.mesh.conversion.PvSmoothTaubin.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">smooth_taubin</span><span class="p">(</span><span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
-</div>
 
 
 
@@ -547,9 +535,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">keep_colors</span> <span class="o">=</span> <span class="n">keep_colors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PvDecimate.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.decimation.PvDecimate.html#polpo.preprocessing.mesh.conversion.PvDecimate.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -580,7 +566,6 @@
         <span class="n">poly_data</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">poly_data</span></div>
-</div>
 
 
 
@@ -593,9 +578,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">store_colors</span> <span class="o">=</span> <span class="n">store_colors</span>
 
-<div class="viewcode-block" id="PvFromTrimesh.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromTrimesh.html#polpo.preprocessing.mesh.conversion.PvFromTrimesh.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -613,7 +596,6 @@
             <span class="n">pvmesh</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">visual</span><span class="o">.</span><span class="n">vertex_colors</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">pvmesh</span></div>
-</div>
 
 
 
@@ -639,9 +621,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">binary</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">recompute_normals</span> <span class="o">=</span> <span class="n">recompute_normals</span>
 
-<div class="viewcode-block" id="PvWriter.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.PvWriter.html#polpo.preprocessing.mesh.conversion.PvWriter.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -678,7 +658,6 @@
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">path</span></div>
-</div>
 
 
 
@@ -694,9 +673,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rename_colors</span> <span class="o">=</span> <span class="n">rename_colors</span>
 
-<div class="viewcode-block" id="PvReader.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.PvReader.html#polpo.preprocessing.mesh.conversion.PvReader.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -717,7 +694,6 @@
             <span class="n">poly_data</span><span class="o">.</span><span class="n">rename_array</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="s2">&quot;colors&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">poly_data</span></div>
-</div>
 
 
 
@@ -734,9 +710,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">progress_bar</span>
 
-<div class="viewcode-block" id="PvExtractLargest.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.repair.PvExtractLargest.html#polpo.preprocessing.mesh.conversion.PvExtractLargest.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -750,7 +724,6 @@
 <span class="sd">            Largest mesh component.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">extract_largest</span><span class="p">(</span><span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
-</div>
 
 
 
@@ -777,9 +750,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">progress_bar</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extract_surface</span> <span class="o">=</span> <span class="n">extract_surface</span>
 
-<div class="viewcode-block" id="PvExtractPoints.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.filter.PvExtractPoints.html#polpo.preprocessing.mesh.conversion.PvExtractPoints.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -794,7 +765,6 @@
             <span class="k">return</span> <span class="n">subset</span><span class="o">.</span><span class="n">extract_surface</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">subset</span></div>
-</div>
 
 
 
@@ -820,9 +790,7 @@
             <span class="n">extract_surface</span><span class="o">=</span><span class="n">extract_surface</span><span class="p">,</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="PvSelectColor.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.filter.PvSelectColor.html#polpo.preprocessing.mesh.conversion.PvSelectColor.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">mesh</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
@@ -837,7 +805,6 @@
             <span class="n">mesh</span><span class="o">.</span><span class="n">point_data</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;colors&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">mesh</span></div>
-</div>
 
 </pre></div>
 

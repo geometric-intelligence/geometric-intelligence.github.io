@@ -345,16 +345,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">delimiter</span> <span class="o">=</span> <span class="n">delimiter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">=</span> <span class="n">nrows</span>
 
-<div class="viewcode-block" id="CsvReader.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.CsvReader.html#polpo.preprocessing.pd.CsvReader.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.&quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
             <span class="n">path</span><span class="p">,</span>
             <span class="o">**</span><span class="n">params_to_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,)),</span>
         <span class="p">)</span></div>
-</div>
 
 
 
@@ -373,9 +370,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">column_names</span> <span class="o">=</span> <span class="n">column_names</span>
 
-<div class="viewcode-block" id="ColumnsSelector.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.ColumnsSelector.html#polpo.preprocessing.pd.ColumnsSelector.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -384,7 +379,6 @@
 <span class="sd">            Dataframe.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">column_names</span><span class="p">]</span></div>
-</div>
 
 
 
@@ -406,9 +400,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
 
-<div class="viewcode-block" id="Dropna.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.Dropna.html#polpo.preprocessing.pd.Dropna.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -418,7 +410,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span> <span class="ow">or</span> <span class="n">df</span></div>
-</div>
 
 
 
@@ -444,9 +435,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span>
 
-<div class="viewcode-block" id="Drop.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.Drop.html#polpo.preprocessing.pd.Drop.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -456,7 +445,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axis</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span> <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df</span></div>
-</div>
 
 
 
@@ -478,9 +466,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">orient</span> <span class="o">=</span> <span class="n">orient</span>
 
-<div class="viewcode-block" id="DfToDict.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.DfToDict.html#polpo.preprocessing.pd.DfToDict.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -489,7 +475,6 @@
 <span class="sd">            Dataframe.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orient</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -510,9 +495,7 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deep</span> <span class="o">=</span> <span class="n">deep</span>
 
-<div class="viewcode-block" id="DfCopy.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.DfCopy.html#polpo.preprocessing.pd.DfCopy.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -521,7 +504,6 @@
 <span class="sd">            Dataframe.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">deep</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -546,9 +528,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">column_name</span> <span class="o">=</span> <span class="n">column_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
 
-<div class="viewcode-block" id="UpdateColumnValues.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.UpdateColumnValues.html#polpo.preprocessing.pd.UpdateColumnValues.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -559,7 +539,6 @@
         <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">df</span></div>
-</div>
 
 
 
@@ -572,9 +551,7 @@
 <span class="sd">    https://pandas.pydata.org/docs/reference/api/pandas.Series.to_dict.html.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="SeriesToDict.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.SeriesToDict.html#polpo.preprocessing.pd.SeriesToDict.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -583,7 +560,6 @@
 <span class="sd">            Series.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span></div>
-</div>
 
 
 
@@ -613,9 +589,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="o">=</span> <span class="n">drop</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verify_integrity</span> <span class="o">=</span> <span class="n">verify_integrity</span>
 
-<div class="viewcode-block" id="IndexSetter.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.IndexSetter.html#polpo.preprocessing.pd.IndexSetter.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -630,7 +604,6 @@
             <span class="n">verify_integrity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verify_integrity</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span> <span class="ow">or</span> <span class="n">df</span></div>
-</div>
 
 
 
@@ -643,15 +616,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">negation</span> <span class="o">=</span> <span class="n">negation</span>
 
-<div class="viewcode-block" id="DfIsInFilter.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.DfIsInFilter.html#polpo.preprocessing.pd.DfIsInFilter.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negation</span><span class="p">:</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="o">~</span><span class="n">indices</span>
 
         <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span></div>
-</div>
 
 </pre></div>
 

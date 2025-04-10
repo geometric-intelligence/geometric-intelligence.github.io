@@ -23,7 +23,6 @@
    "source": [
     "import pyvista as pv\n",
     "\n",
-    "from polpo.preprocessing import Pipeline, RemoveIndex\n",
     "from polpo.preprocessing.load.pregnancy import FigsharePregnancyDataLoader\n",
     "from polpo.preprocessing.mesh.conversion import PvFromData\n",
     "from polpo.preprocessing.mri import (\n",
@@ -130,13 +129,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "mesh_from_image = Pipeline(\n",
-    "    [\n",
-    "        SkimageMarchingCubes(),\n",
-    "        lambda x: list(x),\n",
-    "        RemoveIndex(index=-1, inplace=True),\n",
-    "    ]\n",
-    ")"
+    "mesh_from_image = SkimageMarchingCubes(return_values=False)"
    ]
   },
   {

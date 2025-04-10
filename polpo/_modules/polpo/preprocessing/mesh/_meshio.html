@@ -322,11 +322,8 @@
 <div class="viewcode-block" id="MeshioReader">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.MeshioReader.html#polpo.preprocessing.mesh.conversion.MeshioReader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MeshioReader</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="MeshioReader.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.MeshioReader.html#polpo.preprocessing.mesh.conversion.MeshioReader.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">meshio</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -338,9 +335,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ext</span> <span class="o">=</span> <span class="n">ext</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
-<div class="viewcode-block" id="MeshioWriter.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.io.MeshioWriter.html#polpo.preprocessing.mesh.conversion.MeshioWriter.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="c1"># TODO: maybe do opposite instead (give preference to arguments)</span>
         <span class="c1"># filename extension ignored if ext is not None</span>
         <span class="n">filename</span><span class="p">,</span> <span class="n">mesh</span> <span class="o">=</span> <span class="n">data</span>
@@ -353,7 +348,6 @@
         <span class="n">mesh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">path</span></div>
-</div>
 
 
 
@@ -364,9 +358,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">=</span> <span class="n">cell_type</span>
 
-<div class="viewcode-block" id="MeshioFromData.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.MeshioFromData.html#polpo.preprocessing.mesh.conversion.MeshioFromData.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
         <span class="c1"># TODO: also consider colors</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mesh</span>
@@ -377,7 +369,6 @@
             <span class="n">points</span><span class="o">=</span><span class="n">vertices</span><span class="p">,</span>
             <span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">meshio</span><span class="o">.</span><span class="n">CellBlock</span><span class="p">(</span><span class="n">cell_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cell_type</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">faces</span><span class="p">)],</span>
         <span class="p">)</span></div>
-</div>
 
 </pre></div>
 

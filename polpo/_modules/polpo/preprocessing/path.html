@@ -338,9 +338,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
 
-<div class="viewcode-block" id="FileRule.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileRule.html#polpo.preprocessing.load.pregnancy.FileRule.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -353,7 +351,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -410,9 +407,7 @@
 
         <span class="k">return</span> <span class="n">out</span>
 
-<div class="viewcode-block" id="FileFinder.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.FileFinder.html#polpo.preprocessing.load.pregnancy.FileFinder.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -437,7 +432,6 @@
         <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">files</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span></div>
-</div>
 
 
 
@@ -458,9 +452,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">init_index</span> <span class="o">=</span> <span class="n">init_index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_index</span> <span class="o">=</span> <span class="n">last_index</span>
 
-<div class="viewcode-block" id="PathShortener.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.PathShortener.html#polpo.preprocessing.load.pregnancy.PathShortener.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
 
 <span class="sd">        Parameters</span>
@@ -474,21 +466,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path_ls</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_ls</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">init_index</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_index</span><span class="p">])</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="ExpandUser">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.ExpandUser.html#polpo.preprocessing.load.pregnancy.ExpandUser">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExpandUser</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="ExpandUser.apply">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.ExpandUser.html#polpo.preprocessing.load.pregnancy.ExpandUser.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="k">if</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">filename</span></div>
-</div>
 
 </pre></div>
 

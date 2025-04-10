@@ -319,7 +319,7 @@
 
 
 <div class="viewcode-block" id="RegisteredPointCloudSmoothing">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.sklearn.point_cloud.RegisteredPointCloudSmoothing.html#polpo.preprocessing.point_cloud.smoothing.RegisteredPointCloudSmoothing">[docs]</a>
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.point_cloud.smoothing.RegisteredPointCloudSmoothing.html#polpo.preprocessing.point_cloud.smoothing.RegisteredPointCloudSmoothing">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RegisteredPointCloudSmoothing</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">smoothing_func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">smoothing_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -338,9 +338,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">neighbor_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">neighbor_indices</span>
 
-<div class="viewcode-block" id="RegisteredPointCloudSmoothing.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.sklearn.point_cloud.RegisteredPointCloudSmoothing.html#polpo.preprocessing.point_cloud.smoothing.RegisteredPointCloudSmoothing.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="c1"># points: (n_samples, n_vertices, dim)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neighbor_indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">template_points</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">data</span>
@@ -350,7 +348,6 @@
             <span class="n">points</span> <span class="o">=</span> <span class="n">data</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">smoothing_func</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="n">neighbor_indices</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span></div>
-</div>
 
 </pre></div>
 

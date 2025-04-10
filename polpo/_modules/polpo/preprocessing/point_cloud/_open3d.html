@@ -321,13 +321,10 @@
 <div class="viewcode-block" id="O3dPointCloudFromNp">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.point_cloud.conversion.O3dPointCloudFromNp.html#polpo.preprocessing.point_cloud.conversion.O3dPointCloudFromNp">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">O3dPointCloudFromNp</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="O3dPointCloudFromNp.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.point_cloud.conversion.O3dPointCloudFromNp.html#polpo.preprocessing.point_cloud.conversion.O3dPointCloudFromNp.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
         <span class="n">pcd</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">PointCloud</span><span class="p">()</span>
         <span class="n">pcd</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pcd</span></div>
-</div>
 
 
 
@@ -353,9 +350,7 @@
             <span class="o">*</span> <span class="mf">1.2</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="O3dIcp.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.point_cloud.registration.O3dIcp.html#polpo.preprocessing.point_cloud.conversion.O3dIcp.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">data</span>
 
         <span class="n">threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threshold</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
@@ -367,7 +362,6 @@
             <span class="n">estimation_method</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">estimation_method</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">reg_p2p</span><span class="o">.</span><span class="n">transformation</span></div>
-</div>
 
 </pre></div>
 

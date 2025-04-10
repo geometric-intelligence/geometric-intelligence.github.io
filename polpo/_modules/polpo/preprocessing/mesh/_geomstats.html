@@ -350,14 +350,11 @@
 <div class="viewcode-block" id="SurfaceFromTrimesh">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.SurfaceFromTrimesh.html#polpo.preprocessing.mesh.conversion.SurfaceFromTrimesh">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SurfaceFromTrimesh</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="SurfaceFromTrimesh.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.SurfaceFromTrimesh.html#polpo.preprocessing.mesh.conversion.SurfaceFromTrimesh.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trimesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trimesh</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Surface</span><span class="p">(</span>
             <span class="n">gs</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">trimesh</span><span class="o">.</span><span class="n">vertices</span><span class="p">),</span>
             <span class="n">gs</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">trimesh</span><span class="o">.</span><span class="n">faces</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)),</span>
         <span class="p">)</span></div>
-</div>
 
 
 
@@ -367,14 +364,11 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clone</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clone</span> <span class="o">=</span> <span class="n">clone</span>
 
-<div class="viewcode-block" id="TrimeshSurfaceFromTrimesh.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.TrimeshSurfaceFromTrimesh.html#polpo.preprocessing.mesh.conversion.TrimeshSurfaceFromTrimesh.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trimesh</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trimesh</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">:</span>
             <span class="n">trimesh</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">TrimeshSurface</span><span class="p">(</span><span class="n">trimesh</span><span class="p">)</span></div>
-</div>
 
 </pre></div>
 

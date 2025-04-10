@@ -398,7 +398,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartiallyInitializedStep</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMap</span><span class="p">,</span> <span class="n">NestedDictSwapper</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">MATERNAL_STRUCTS</span><span class="p">,</span>
+    <span class="n">FIRST_STRUCTS</span><span class="p">,</span>
     <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
@@ -449,7 +449,7 @@
 <span class="c1"># side, struct, time</span>
 <span class="n">meshes</span> <span class="o">=</span> <span class="p">{</span><span class="kc">True</span><span class="p">:</span> <span class="p">{},</span> <span class="kc">False</span><span class="p">:</span> <span class="p">{}}</span>  <span class="c1"># bool represents side</span>
 <span class="k">for</span> <span class="n">left</span> <span class="ow">in</span> <span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">MATERNAL_STRUCTS</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">FIRST_STRUCTS</span><span class="p">:</span>
         <span class="n">file_finder</span> <span class="o">=</span> <span class="n">DenseMaternalMeshLoader</span><span class="p">(</span>
             <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
             <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -488,7 +488,7 @@
 
 
 <span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span>
-    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">MATERNAL_STRUCTS</span><span class="p">)),</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">)),</span>
     <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">notebook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>

@@ -320,22 +320,16 @@
 <div class="viewcode-block" id="SksFromPv">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.SksFromPv.html#polpo.preprocessing.mesh.conversion.SksFromPv">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SksFromPv</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="SksFromPv.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.SksFromPv.html#polpo.preprocessing.mesh.conversion.SksFromPv.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">sks</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">poly_data</span><span class="p">)</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="PvFromSks">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromSks.html#polpo.preprocessing.mesh.conversion.PvFromSks">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvFromSks</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<div class="viewcode-block" id="PvFromSks.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.PvFromSks.html#polpo.preprocessing.mesh.conversion.PvFromSks.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poly_data</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">poly_data</span><span class="o">.</span><span class="n">to_pyvista</span><span class="p">()</span></div>
-</div>
 
 
 
@@ -353,13 +347,10 @@
             <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="SksRigidRegistration.apply">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.registration.SksRigidRegistration.html#polpo.preprocessing.mesh.conversion.SksRigidRegistration.apply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">)</span></div>
-</div>
 
 </pre></div>
 
