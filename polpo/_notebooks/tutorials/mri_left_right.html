@@ -368,9 +368,6 @@
     <span class="n">ExceptionToWarning</span><span class="p">,</span>
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">NestingSwapper</span><span class="p">,</span>
-    <span class="n">Pipeline</span><span class="p">,</span>
-    <span class="n">Sorter</span><span class="p">,</span>
-    <span class="n">Truncater</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DictMap</span><span class="p">,</span>
@@ -380,7 +377,7 @@
     <span class="n">HashWithIncoming</span><span class="p">,</span>
     <span class="n">SelectKeySubset</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigsharePregnancyDataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">PregnancyPilotMriLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.clone</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrimeshClone</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">PvFromTrimesh</span><span class="p">,</span>
@@ -393,8 +390,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.decimation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastSimplificationDecimator</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshCenterer</span><span class="p">,</span> <span class="n">MeshScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span> <span class="n">MriImageLoader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">FileRule</span><span class="p">,</span> <span class="n">IsFileType</span><span class="p">,</span> <span class="n">PathShortener</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">DigitFinder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">IsFileType</span><span class="p">,</span> <span class="n">PathShortener</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">DigitFinder</span><span class="p">,</span> <span class="n">StartsWith</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.varifold</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridBasedSigmaFinder</span>
 </pre></div>
 </div>
@@ -436,22 +433,12 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folders_finder</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-            <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/&quot;</span><span class="p">,</span>
-            <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;Segmentations&quot;</span><span class="p">,</span>
-        <span class="p">),</span>
-        <span class="n">FileFinder</span><span class="p">(),</span>
-        <span class="n">Sorter</span><span class="p">(),</span>
-        <span class="n">Truncater</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folders_finder</span> <span class="o">=</span> <span class="n">PregnancyPilotMriLoader</span><span class="p">()</span>
 
 <span class="n">mri_to_mesh</span> <span class="o">=</span> <span class="n">ExceptionToWarning</span><span class="p">(</span>
     <span class="p">[</span>
         <span class="n">MriImageLoader</span><span class="p">(),</span>
-        <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">structure_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">structure_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">),</span>
         <span class="n">TrimeshFromData</span><span class="p">(),</span>
     <span class="p">]</span>
 <span class="p">)</span>
@@ -468,12 +455,7 @@
         <span class="n">digit_finder</span><span class="p">,</span>
         <span class="n">Map</span><span class="p">(</span>
             <span class="n">step</span><span class="o">=</span><span class="p">[</span>
-                <span class="n">FileFinder</span><span class="p">(</span>
-                    <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-                        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-                        <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">),</span>
-                    <span class="p">]</span>
-                <span class="p">),</span>
+                <span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="p">[</span><span class="n">StartsWith</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">),</span> <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">)]),</span>
                 <span class="n">EmptySkipper</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">mri_to_mesh</span><span class="p">),</span>
             <span class="p">]</span>
         <span class="p">),</span>
@@ -747,12 +729,7 @@ tensor(0.9197)
     <span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">reflected_keys</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
     <span class="n">DictMap</span><span class="p">(</span>
         <span class="p">[</span>
-            <span class="n">FileFinder</span><span class="p">(</span>
-                <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-                    <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-                    <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">),</span>
-                <span class="p">]</span>
-            <span class="p">),</span>
+            <span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="p">[</span><span class="n">StartsWith</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">),</span> <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;nii.gz&quot;</span><span class="p">)]),</span>
             <span class="n">mri_to_mesh</span><span class="p">,</span>
         <span class="p">]</span>
     <span class="p">),</span>
