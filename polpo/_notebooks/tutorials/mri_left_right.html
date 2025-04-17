@@ -368,6 +368,9 @@
     <span class="n">ExceptionToWarning</span><span class="p">,</span>
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">NestingSwapper</span><span class="p">,</span>
+    <span class="n">Pipeline</span><span class="p">,</span>
+    <span class="n">Sorter</span><span class="p">,</span>
+    <span class="n">Truncater</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DictMap</span><span class="p">,</span>
@@ -377,7 +380,7 @@
     <span class="n">HashWithIncoming</span><span class="p">,</span>
     <span class="n">SelectKeySubset</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">PregnancyPilotMriLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigsharePregnancyDataLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.clone</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrimeshClone</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">PvFromTrimesh</span><span class="p">,</span>
@@ -433,7 +436,17 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folders_finder</span> <span class="o">=</span> <span class="n">PregnancyPilotMriLoader</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folders_finder</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
+            <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/&quot;</span><span class="p">,</span>
+            <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;Segmentations&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">FileFinder</span><span class="p">(),</span>
+        <span class="n">Sorter</span><span class="p">(),</span>
+        <span class="n">Truncater</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
 
 <span class="n">mri_to_mesh</span> <span class="o">=</span> <span class="n">ExceptionToWarning</span><span class="p">(</span>
     <span class="p">[</span>
