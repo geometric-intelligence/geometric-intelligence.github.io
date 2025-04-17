@@ -687,9 +687,20 @@
 <div class="viewcode-block" id="PartiallyInitializedStep">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.PartiallyInitializedStep.html#polpo.preprocessing.PartiallyInitializedStep">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PartiallyInitializedStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Step</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate a step based on data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Step : PreprocessingStep</span>
+<span class="sd">        Step to be instantiated.</span>
+<span class="sd">    pass_data : bool</span>
+<span class="sd">        Whether to pass that to callable after instantiation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Step</span><span class="p">,</span> <span class="n">pass_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Step</span> <span class="o">=</span> <span class="n">Step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pass_data</span> <span class="o">=</span> <span class="n">pass_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -698,7 +709,12 @@
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dependent_keys</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Step</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span></div>
+        <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Step</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pass_data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">step</span><span class="p">()</span></div>
 
 
 
