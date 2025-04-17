@@ -392,14 +392,17 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigsharePregnancyDataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListSqueeze</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PregnancyPilotMriLoader</span><span class="p">,</span>
+    <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
     <span class="n">MriImageLoader</span><span class="p">,</span>
     <span class="n">SkimageMarchingCubes</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">FileRule</span>
 </pre></div>
 </div>
 </div>
@@ -437,21 +440,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ses-</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">PregnancyPilotMriLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
 
-<span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/mri&quot;</span><span class="p">,</span>
-    <span class="n">remote_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;mri/</span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">finder</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
-    <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;BrainNormalized&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">finder</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">ListSqueeze</span><span class="p">()</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -479,7 +470,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_from_image</span> <span class="o">=</span> <span class="n">SkimageMarchingCubes</span><span class="p">(</span><span class="n">return_values</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_from_image</span> <span class="o">=</span> <span class="n">SkimageMarchingCubes</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -521,26 +512,15 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;BB</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-
-
-<span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/Segmentations&quot;</span><span class="p">,</span>
-    <span class="n">remote_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Segmentations/</span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
+    <span class="o">+</span> <span class="n">ListSqueeze</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
 <span class="p">)</span>
-
-<span class="n">finder</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
-    <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">finder</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
@@ -548,12 +528,24 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div>
 </div>
 </div>
-<p>The process changes only slightly when the data is segmented.</p>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/Segmentations/BB01&#39;).
+</pre></div></div>
+</div>
+<p>The process changes only slightly when the data is segmented. (NB: <code class="docutils literal notranslate"><span class="pre">encoding</span></code> informs about the tool used for segmentation, which matters to map ids to tool ids and colors.)</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="p">(</span><span class="n">MeshExtractorFromSegmentedImage</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">())(</span><span class="n">img_fdata</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img2mesh</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">return_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">img2mesh</span><span class="p">(</span><span class="n">img_fdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -576,6 +568,47 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <img alt="../../../_images/_notebooks_how_to_mri_mri2mesh_20_0.png" src="../../../_images/_notebooks_how_to_mri_mri2mesh_20_0.png" />
 </div>
 </div>
+<p>For example, we can select a particular subfield of the hippocampus.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img2mesh</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span>
+        <span class="n">struct_id</span><span class="o">=</span><span class="s2">&quot;PostHipp&quot;</span><span class="p">,</span> <span class="n">return_colors</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">img2mesh</span><span class="p">(</span><span class="n">img_fdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">show_axes</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/_notebooks_how_to_mri_mri2mesh_23_0.png" src="../../../_images/_notebooks_how_to_mri_mri2mesh_23_0.png" />
+</div>
+</div>
+</section>
+<section id="Further-reading">
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="./hipp_substructures.ipynb">How to select a mesh subset?</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -606,6 +639,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Marching-cubes">Marching cubes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualization">Visualization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Segmented-data">Segmented data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
 </ul>
   </nav></div>
 

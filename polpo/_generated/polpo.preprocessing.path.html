@@ -270,6 +270,8 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="polpo.preprocessing.html">polpo.preprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.BranchingPipeline.html">BranchingPipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Constant.html">Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Contains.html">Contains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ContainsAll.html">ContainsAll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.DataPrinter.html">DataPrinter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.DecorateToIterable.html">DecorateToIterable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.EmptyRemover.html">EmptyRemover</a></li>
@@ -285,11 +287,13 @@
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.IndexSelector.html">IndexSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Lambda.html">Lambda</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ListSqueeze.html">ListSqueeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Listify.html">Listify</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Map.html">Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.MethodApplier.html">MethodApplier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.NestingSwapper.html">NestingSwapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.NoneRemover.html">NoneRemover</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.NoneSkipper.html">NoneSkipper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ParallelMap.html">ParallelMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ParMap.html">ParMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.PartiallyInitializedStep.html">PartiallyInitializedStep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Pipeline.html">Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Prefix.html">Prefix</a></li>
@@ -298,12 +302,11 @@
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.SerialMap.html">SerialMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Sorter.html">Sorter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ToList.html">ToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Truncater.html">Truncater</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.TupleToList.html">TupleToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.TupleWith.html">TupleWith</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.TupleWithIncoming.html">TupleWithIncoming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Unnest.html">Unnest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.WrapInList.html">WrapInList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.base.html">polpo.preprocessing.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.dict.html">polpo.preprocessing.dict</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.load.html">polpo.preprocessing.load</a></li>
@@ -393,11 +396,11 @@
 <tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.path.FileFinder.html#polpo.preprocessing.path.FileFinder" title="polpo.preprocessing.path.FileFinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileFinder</span></code></a>([data_dir, rules, warn, as_list])</p></td>
 <td><p>Find files given rules.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.path.FileRule.html#polpo.preprocessing.path.FileRule" title="polpo.preprocessing.path.FileRule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileRule</span></code></a>(value[, func])</p></td>
-<td><p>File rule.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.path.IsFileType.html#polpo.preprocessing.path.IsFileType" title="polpo.preprocessing.path.IsFileType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IsFileType</span></code></a>(ext)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.path.IsFileType.html#polpo.preprocessing.path.IsFileType" title="polpo.preprocessing.path.IsFileType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IsFileType</span></code></a>(ext)</p></td>
 <td><p>Check extension of file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.path.MethodApplier.html#polpo.preprocessing.path.MethodApplier" title="polpo.preprocessing.path.MethodApplier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MethodApplier</span></code></a>(*args, method, **kwargs)</p></td>
+<td><p>Applies a named method with preset args and kwargs.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.path.PathShortener.html#polpo.preprocessing.path.PathShortener" title="polpo.preprocessing.path.PathShortener"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PathShortener</span></code></a>([init_index, last_index])</p></td>
 <td><p>Shorten path.</p></td>

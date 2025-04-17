@@ -312,7 +312,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing.dict</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">swap_nested_dict</span>
 
@@ -491,10 +494,10 @@
 
 
 
-<div class="viewcode-block" id="DictMap">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictMap.html#polpo.preprocessing.dict.DictMap">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">DictMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a given step to each element of a dictionary.</span>
+<div class="viewcode-block" id="SerialDictMap">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.SerialDictMap.html#polpo.preprocessing.dict.SerialDictMap">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SerialDictMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a given step to each element of a dict.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -539,6 +542,93 @@
             <span class="n">out</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_step</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value_</span>
 
         <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="ParDictMap">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ParDictMap.html#polpo.preprocessing.dict.ParDictMap">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ParDictMap</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a given step to each element of a dict in parallel.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    step : callable</span>
+<span class="sd">        Preprocessing step to apply to value.</span>
+<span class="sd">    n_jobs : int</span>
+<span class="sd">        The maximum number of concurrently running jobs.</span>
+<span class="sd">    verbose : int</span>
+<span class="sd">        The verbosity level: if non zero, progress messages are</span>
+<span class="sd">        printed. Above 50, the output is sent to stdout.</span>
+<span class="sd">        The frequency of the messages increases with the verbosity level.</span>
+<span class="sd">        If it more than 10, all iterations are reported.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    * has less functionality than `DictMap`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span> <span class="k">as</span> <span class="n">parallel</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span><span class="n">delayed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">)(</span><span class="n">datum</span><span class="p">)</span> <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">res</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="DictMap">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictMap.html#polpo.preprocessing.dict.DictMap">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DictMap</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a given step to each element of a dict.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">pbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">key_step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">special_keys</span><span class="o">=</span><span class="p">(),</span>
+        <span class="n">special_step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">n_jobs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate class.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        step : callable</span>
+<span class="sd">            Preprocessing step to apply to value.</span>
+<span class="sd">        pbar : bool</span>
+<span class="sd">            Whether to show a progress bar. Only if serial.</span>
+<span class="sd">        key_step : callable</span>
+<span class="sd">            Preprocessing step to apply to key. Only if serial.</span>
+<span class="sd">        special_keys : array-like</span>
+<span class="sd">            Keys to be subject to a different step.  Only if serial.</span>
+<span class="sd">        special_step : callable</span>
+<span class="sd">            Step to apply to special keys.  Only if serial.</span>
+<span class="sd">        n_jobs : int</span>
+<span class="sd">            The maximum number of concurrently running jobs.</span>
+<span class="sd">        verbose : int</span>
+<span class="sd">            The verbosity level. Only if parallel.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">n_jobs</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pbar</span> <span class="ow">or</span> <span class="n">key_step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">special_keys</span> <span class="ow">or</span> <span class="n">special_step</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;Several arguments where ignored, check `ParDictMap` for more info&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">ParDictMap</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">SerialDictMap</span><span class="p">(</span>
+            <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
+            <span class="n">pbar</span><span class="o">=</span><span class="n">pbar</span><span class="p">,</span>
+            <span class="n">key_step</span><span class="o">=</span><span class="n">key_step</span><span class="p">,</span>
+            <span class="n">special_keys</span><span class="o">=</span><span class="n">special_keys</span><span class="p">,</span>
+            <span class="n">special_step</span><span class="o">=</span><span class="n">special_step</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
 

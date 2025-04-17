@@ -46,7 +46,7 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/polpo.preprocessing.mri.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="LocalToTemplateTransform" href="classes/polpo.preprocessing.mri.LocalToTemplateTransform.html" />
+    <link rel="next" title="AshsPrincetonYoungAdult3TEncoding" href="classes/polpo.preprocessing.mri.AshsPrincetonYoungAdult3TEncoding.html" />
     <link rel="prev" title="PreprocessingStep" href="classes/polpo.preprocessing.mesh.transform.PreprocessingStep.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -270,6 +270,8 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="polpo.preprocessing.html">polpo.preprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.BranchingPipeline.html">BranchingPipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Constant.html">Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Contains.html">Contains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ContainsAll.html">ContainsAll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.DataPrinter.html">DataPrinter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.DecorateToIterable.html">DecorateToIterable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.EmptyRemover.html">EmptyRemover</a></li>
@@ -285,11 +287,13 @@
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.IndexSelector.html">IndexSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Lambda.html">Lambda</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ListSqueeze.html">ListSqueeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Listify.html">Listify</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Map.html">Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.MethodApplier.html">MethodApplier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.NestingSwapper.html">NestingSwapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.NoneRemover.html">NoneRemover</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.NoneSkipper.html">NoneSkipper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ParallelMap.html">ParallelMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ParMap.html">ParMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.PartiallyInitializedStep.html">PartiallyInitializedStep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Pipeline.html">Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Prefix.html">Prefix</a></li>
@@ -298,12 +302,11 @@
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.SerialMap.html">SerialMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Sorter.html">Sorter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.ToList.html">ToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Truncater.html">Truncater</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.TupleToList.html">TupleToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.TupleWith.html">TupleWith</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.TupleWithIncoming.html">TupleWithIncoming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.Unnest.html">Unnest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes/polpo.preprocessing.WrapInList.html">WrapInList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.base.html">polpo.preprocessing.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.dict.html">polpo.preprocessing.dict</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.load.html">polpo.preprocessing.load</a></li>
@@ -386,20 +389,35 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.AshsPrincetonYoungAdult3TEncoding.html#polpo.preprocessing.mri.AshsPrincetonYoungAdult3TEncoding" title="polpo.preprocessing.mri.AshsPrincetonYoungAdult3TEncoding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AshsPrincetonYoungAdult3TEncoding</span></code></a>()</p></td>
+<td><p>Encoding of hippocampus subfields.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.BrainStructEncoding.html#polpo.preprocessing.mri.BrainStructEncoding" title="polpo.preprocessing.mri.BrainStructEncoding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BrainStructEncoding</span></code></a>(midline_structs, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.FreeSurferStructEncoding.html#polpo.preprocessing.mri.FreeSurferStructEncoding" title="polpo.preprocessing.mri.FreeSurferStructEncoding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FreeSurferStructEncoding</span></code></a>()</p></td>
+<td><p><a class="reference external" href="https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/AnatomicalROI/FreeSurferColorLUT">https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/AnatomicalROI/FreeSurferColorLUT</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.FslFirstStructEncoding.html#polpo.preprocessing.mri.FslFirstStructEncoding" title="polpo.preprocessing.mri.FslFirstStructEncoding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FslFirstStructEncoding</span></code></a>()</p></td>
+<td><p><a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/docs/#/structural/first">https://fsl.fmrib.ox.ac.uk/fsl/docs/#/structural/first</a>?id=supported-structures</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.LocalToTemplateTransform.html#polpo.preprocessing.mri.LocalToTemplateTransform" title="polpo.preprocessing.mri.LocalToTemplateTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LocalToTemplateTransform</span></code></a>([template_affine])</p></td>
 <td><p>Get transform from local to template system.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage" title="polpo.preprocessing.mri.MeshExtractorFromSegmentedImage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeshExtractorFromSegmentedImage</span></code></a>([...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage" title="polpo.preprocessing.mri.MeshExtractorFromSegmentedImage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeshExtractorFromSegmentedImage</span></code></a>([struct_id, ...])</p></td>
 <td><p>Mesh extractor from images.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.mri.MriImageLoader" title="polpo.preprocessing.mri.MriImageLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MriImageLoader</span></code></a>([filename, as_nib, return_affine])</p></td>
-<td><p>Load image from .nii file.</p></td>
+<td><p>Load image from .nii/.mgz file.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.PreprocessingStep.html#polpo.preprocessing.mri.PreprocessingStep" title="polpo.preprocessing.mri.PreprocessingStep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a>()</p></td>
 <td><p>Preprocessing step.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.SkimageMarchingCubes.html#polpo.preprocessing.mri.SkimageMarchingCubes" title="polpo.preprocessing.mri.SkimageMarchingCubes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SkimageMarchingCubes</span></code></a>([level, step_size, ...])</p></td>
 <td><p><a class="reference external" href="https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.marching_cubes">https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.marching_cubes</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="classes/polpo.preprocessing.mri.StructEncoding.html#polpo.preprocessing.mri.StructEncoding" title="polpo.preprocessing.mri.StructEncoding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructEncoding</span></code></a>(structs, ids, colors)</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>

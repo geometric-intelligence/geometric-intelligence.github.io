@@ -388,8 +388,11 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigsharePregnancyDataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListSqueeze</span><span class="p">,</span> <span class="n">Map</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PregnancyPilotRegisteredMeshesLoader</span><span class="p">,</span>
+    <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshCenterer</span><span class="p">,</span> <span class="n">MeshScaler</span>
@@ -397,7 +400,6 @@
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
     <span class="n">MriImageLoader</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileFinder</span><span class="p">,</span> <span class="n">FileRule</span>
 </pre></div>
 </div>
 </div>
@@ -433,22 +435,10 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folder_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;BB</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
 
-<span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/Segmentations&quot;</span><span class="p">,</span>
-    <span class="n">remote_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Segmentations/</span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">finder</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span>
-    <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-        <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">loading_pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">finder</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
-<span class="n">img2mesh_pipe</span> <span class="o">=</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+<span class="n">loading_pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">ListSqueeze</span><span class="p">()</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
+<span class="n">img2mesh_pipe</span> <span class="o">=</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
 
 <span class="n">pipe</span> <span class="o">=</span> <span class="n">loading_pipe</span> <span class="o">+</span> <span class="n">img2mesh_pipe</span>
 
@@ -470,16 +460,10 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-        <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/registration&quot;</span><span class="p">,</span>
-        <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;registration/elastic_20250106_80&quot;</span><span class="p">,</span>
+    <span class="n">PregnancyPilotRegisteredMeshesLoader</span><span class="p">(</span>
+        <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;elastic&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">1</span>
     <span class="p">)</span>
-    <span class="o">+</span> <span class="n">FileFinder</span><span class="p">(</span>
-        <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;left_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">SESSION_ID</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">),</span>
-            <span class="n">FileRule</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;.ply&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">),</span>
-        <span class="p">],</span>
-    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ListSqueeze</span><span class="p">()</span>
     <span class="o">+</span> <span class="n">PvReader</span><span class="p">()</span>
 <span class="p">)</span>
 
@@ -492,7 +476,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/registration/elastic_20250106_80&#39;).
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/registration/elastic_1&#39;).
 </pre></div></div>
 </div>
 <p>The registered mesh was preprocessed before registration. Let’s apply the same preprocessing in order to have an overlayable representation.</p>
@@ -500,10 +484,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">processing_pipe</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">MeshCenterer</span><span class="p">(),</span> <span class="n">MeshScaler</span><span class="p">()],</span>
-    <span class="n">force_iter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">processing_pipe</span> <span class="o">=</span> <span class="n">Map</span><span class="p">([</span><span class="n">MeshCenterer</span><span class="p">(),</span> <span class="n">MeshScaler</span><span class="p">()],</span> <span class="n">force_iter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">raw_mesh</span> <span class="o">=</span> <span class="n">processing_pipe</span><span class="p">(</span><span class="n">raw_mesh</span><span class="p">)</span>
 </pre></div>

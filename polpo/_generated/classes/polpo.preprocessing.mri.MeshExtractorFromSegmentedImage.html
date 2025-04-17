@@ -270,6 +270,8 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../polpo.preprocessing.html">polpo.preprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.BranchingPipeline.html">BranchingPipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Constant.html">Constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Contains.html">Contains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ContainsAll.html">ContainsAll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DataPrinter.html">DataPrinter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DecorateToIterable.html">DecorateToIterable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptyRemover.html">EmptyRemover</a></li>
@@ -285,11 +287,13 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IndexSelector.html">IndexSelector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Lambda.html">Lambda</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ListSqueeze.html">ListSqueeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Listify.html">Listify</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Map.html">Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.MethodApplier.html">MethodApplier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NestingSwapper.html">NestingSwapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NoneRemover.html">NoneRemover</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.NoneSkipper.html">NoneSkipper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ParallelMap.html">ParallelMap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ParMap.html">ParMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.PartiallyInitializedStep.html">PartiallyInitializedStep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Pipeline.html">Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Prefix.html">Prefix</a></li>
@@ -298,12 +302,11 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.SerialMap.html">SerialMap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Sorter.html">Sorter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.StepWrappingPreprocessingStep.html">StepWrappingPreprocessingStep</a></li>
-<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ToList.html">ToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Truncater.html">Truncater</a></li>
-<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleToList.html">TupleToList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWith.html">TupleWith</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.TupleWithIncoming.html">TupleWithIncoming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Unnest.html">Unnest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.WrapInList.html">WrapInList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.base.html">polpo.preprocessing.base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.dict.html">polpo.preprocessing.dict</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.load.html">polpo.preprocessing.load</a></li>
@@ -387,32 +390,24 @@
 <h1>MeshExtractorFromSegmentedImage<a class="headerlink" href="#meshextractorfromsegmentedimage" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="polpo.preprocessing.mri.MeshExtractorFromSegmentedImage">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mri.</span></span><span class="sig-name descname"><span class="pre">MeshExtractorFromSegmentedImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marching_cubes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MeshExtractorFromSegmentedImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.mri.</span></span><span class="sig-name descname"><span class="pre">MeshExtractorFromSegmentedImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marching_cubes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/mri.html#MeshExtractorFromSegmentedImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.mri.MeshExtractorFromSegmentedImage" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.PreprocessingStep.html#polpo.preprocessing.base.PreprocessingStep" title="polpo.preprocessing.base.PreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreprocessingStep</span></code></a></p>
 <p>Mesh extractor from images.</p>
-<section id="structure-id-names-numbers-and-colors">
-<h2>Structure_ID names, numbers, and colors:<a class="headerlink" href="#structure-id-names-numbers-and-colors" title="Link to this heading">#</a></h2>
-<p>1   255    0    0        1  1  1    “CA1”
-2     0  255    0        1  1  1    “CA2+3”
-3     0    0  255        1  1  1    “DG”
-4   255  255    0        1  1  1    “ERC”
-5     0  255  255        1  1  1    “PHC”
-6   255    0  255        1  1  1    “PRC”
-7    80  179  221        1  1  1    “SUB”
-8   255  215    0        1  1  1    “AntHipp”
-9   184  115   51        1  1  1    “PostHipp”
-2, 6 are expected to grow in volume with progesterone
-4, 5 are expected to shrink in volume with progesterone</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>structured_id</strong> (<em>int</em>) – Structure to select.</p></li>
+<li><p><strong>struct_id</strong> (<em>int or str</em>) – Structure to select. Depends on segmentation tool.
+If -1 considers full structure. If integer, ignores encoding.</p></li>
 <li><p><strong>marching_cubes</strong> (<em>callable</em>) – Marching cubes algorithm.</p></li>
-<li><p><strong>return_colors</strong> (<em>bool</em>) – Whether to output colors.</p></li>
+<li><p><strong>return_colors</strong> (<em>bool</em>) – Whether to output colors.
+Ignored if marching_cubes is not None or no encoding.
+For the former, output len sets value.</p></li>
+<li><p><strong>encoding</strong> (<em>str or StructEncoding</em>) – Encoding or used segmentation tool.
+One of the following: ‘ashs*’, ‘fast*’, ‘free*’, ‘fsl*’.
+If None, tries to figure it out.</p></li>
 </ul>
 </dd>
 </dl>
-</section>
 </dd></dl>
 
 </section>
