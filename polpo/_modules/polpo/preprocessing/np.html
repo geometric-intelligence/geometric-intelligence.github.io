@@ -373,6 +373,22 @@
 
 
 
+<div class="viewcode-block" id="InvHstack">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.np.InvHstack.html#polpo.preprocessing.np.InvHstack">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InvHstack</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sizes</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span> <span class="o">=</span> <span class="n">sizes</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">cumsize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sizes</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">data</span><span class="p">[:,</span> <span class="n">init_index</span><span class="p">:</span><span class="n">last_index</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">init_index</span><span class="p">,</span> <span class="n">last_index</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cumsize</span><span class="p">,</span> <span class="n">cumsize</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="p">]</span></div>
+
+
+
 <div class="viewcode-block" id="Complex2RealsRepr">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.np.Complex2RealsRepr.html#polpo.preprocessing.np.Complex2RealsRepr">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Complex2RealsRepr</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>

@@ -474,6 +474,24 @@
 
 
 
+<div class="viewcode-block" id="ValuesListToDict">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ValuesListToDict.html#polpo.preprocessing.dict.ValuesListToDict">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ValuesListToDict</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">keys</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span></div>
+
+
+
 <div class="viewcode-block" id="DictToTuplesList">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictToTuplesList.html#polpo.preprocessing.dict.DictToTuplesList">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictToTuplesList</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
@@ -637,6 +655,26 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">NestedDictSwapper</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nested_dict</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">swap_nested_dict</span><span class="p">(</span><span class="n">nested_dict</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ListDictSwapper">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ListDictSwapper.html#polpo.preprocessing.dict.ListDictSwapper">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ListDictSwapper</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="c1"># swap a list of dict</span>
+    <span class="c1"># assumes same keys</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ls</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">ls</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
 
 </pre></div>
 

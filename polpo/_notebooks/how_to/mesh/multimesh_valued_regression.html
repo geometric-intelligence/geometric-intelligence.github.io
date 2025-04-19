@@ -1,0 +1,1295 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>How to do multiple structures mesh-valued regression? &#8212; polpo latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_notebooks/how_to/mesh/multimesh_valued_regression';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_notebooks/how_to/mesh/multimesh_valued_regression.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="MRI" href="../../../how_to/mri.html" />
+    <link rel="prev" title="How to get a mesh from an MRI image?" href="mri2mesh.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Polpo @ GI lab</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../how_to/index.html">
+    How-tos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../how_to/index.html">
+    How-tos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/data_loading.html">Data loading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_loading/load_csv.html">How to load a csv file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_loading/load_figshare_data.html">How to download data from figshare?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_loading/load_server_data.html">How to download data from the server?</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../how_to/mesh.html">Mesh</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">How to do multiple structures mesh-valued regression?</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/mri.html">MRI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mri/mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mri/viz_mri.html">How to visualize MRI data?</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/lddmm.html">LDDMM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lddmm/ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lddmm/lddmm_register_mesh_template.html">LDDMM: how to register a mesh against a template?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lddmm/lddmm_register_mesh_template_viz.html">LDDMM: how to visualize registration results?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lddmm/lddmm_regression.html">LDDMM: how to do regression?</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/maternal.html">Maternal</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../maternal/maternal_sessions_gif.html">How to create a gif showing how the brain substructures change over time?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../maternal/maternal_volume.html">How to compute and plot the volume of the brain substructures?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../maternal/mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../maternal/mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../maternal/multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/all.html">All</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../all/hipp_substructures.html">How to select a mesh subset?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/lddmm_register_mesh_template.html">LDDMM: how to register a mesh against a template?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/lddmm_register_mesh_template_viz.html">LDDMM: how to visualize registration results?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/lddmm_regression.html">LDDMM: how to do regression?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/load_csv.html">How to load a csv file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/load_figshare_data.html">How to download data from figshare?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/load_server_data.html">How to download data from the server?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/maternal_sessions_gif.html">How to create a gif showing how the brain substructures change over time?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/maternal_volume.html">How to compute and plot the volume of the brain substructures?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/viz_mri.html">How to visualize MRI data?</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../how_to/index.html" class="nav-link">How-tos</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../../how_to/mesh.html" class="nav-link">Mesh</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to do multiple structures mesh-valued regression?</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="How-to-do-multiple-structures-mesh-valued-regression?">
+<h1>How to do multiple structures mesh-valued regression?<a class="headerlink" href="#How-to-do-multiple-structures-mesh-valued-regression?" title="Link to this heading">#</a></h1>
+<p>NB: an alternative way to using a for loop on <a class="reference internal" href="mesh_valued_regression.html"><span class="doc">“How to do mesh-valued regression?</span></a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.pd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMeshes2Comps</span><span class="p">,</span> <span class="n">ObjectRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">IndexMap</span><span class="p">,</span>
+    <span class="n">Map</span><span class="p">,</span>
+    <span class="n">NestingSwapper</span><span class="p">,</span>
+    <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DictMap</span><span class="p">,</span>
+    <span class="n">DictMerger</span><span class="p">,</span>
+    <span class="n">HashWithIncoming</span><span class="p">,</span>
+    <span class="n">ListDictSwapper</span><span class="p">,</span>
+    <span class="n">NestedDictSwapper</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DenseMaternalCsvDataLoader</span><span class="p">,</span>
+    <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvAlign</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="n">segmtool2encoding</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[KeOps] Warning : cuda was detected, but driver API could not be initialized. Switching to cpu only.
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
+    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Loading-meshes">
+<h2>Loading meshes<a class="headerlink" href="#Loading-meshes" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tool</span> <span class="o">=</span> <span class="s2">&quot;fsl&quot;</span>
+<span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
+
+<span class="n">encoding</span> <span class="o">=</span> <span class="n">segmtool2encoding</span><span class="p">(</span><span class="n">tool</span><span class="p">)</span>
+
+<span class="n">struct_keys</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">structs</span>
+
+<span class="n">n_structs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">struct_keys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
+    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
+    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]],</span>
+    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_loader</span> <span class="o">=</span> <span class="n">HashWithIncoming</span><span class="p">(</span>
+    <span class="n">Map</span><span class="p">(</span>
+        <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
+            <span class="n">Step</span><span class="o">=</span><span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
+            <span class="n">pass_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
+            <span class="n">_struct</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">_left</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span>
+            <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">mesh_loader</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">prep_pipe</span><span class="p">)</span>
+
+<span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="n">struct_keys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Loading-tabular-data">
+<h2>Loading tabular data<a class="headerlink" href="#Loading-tabular-data" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pilot</span> <span class="o">=</span> <span class="n">subject_id</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">DenseMaternalCsvDataLoader</span><span class="p">(</span><span class="n">pilot</span><span class="o">=</span><span class="n">pilot</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/maternal/28Baby_Hormones.csv&#39;).
+</pre></div></div>
+</div>
+<p>Here, we filter the tabular data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_selector</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfIsInFilter</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;post&quot;</span><span class="p">],</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">predictor_selector</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">session_selector</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">SeriesToDict</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_dict</span> <span class="o">=</span> <span class="n">predictor_selector</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Merge-data">
+<h2>Merge data<a class="headerlink" href="#Merge-data" title="Link to this heading">#</a></h2>
+<p>We get the data in the proper format for fitting.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_pipe</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">IndexMap</span><span class="p">(</span><span class="n">NestedDictSwapper</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">DictMerger</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">NestingSwapper</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">IndexMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">IndexMap</span><span class="p">(</span><span class="n">ListDictSwapper</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># meshes_ : dict[list]</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">meshes_</span> <span class="o">=</span> <span class="n">dict_pipe</span><span class="p">([</span><span class="n">x_dict</span><span class="p">,</span> <span class="n">meshes</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-and-fix-regressor">
+<h2>Create and fix regressor<a class="headerlink" href="#Create-and-fix-regressor" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">objs2y</span> <span class="o">=</span> <span class="n">DictMeshes2Comps</span><span class="p">(</span><span class="n">n_pipes</span><span class="o">=</span><span class="n">n_structs</span><span class="p">,</span> <span class="n">dim_reduction</span><span class="o">=</span><span class="n">pca</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ObjectRegressor</span><span class="p">(</span><span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">objs2y</span><span class="o">=</span><span class="n">objs2y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">meshes_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiDictToValuesList()),
+                                              (&#x27;step_1&#x27;,
+                                               MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                                                 BiMeshesToVertices()),
+                                                                                                (&#x27;step_1&#x27;,
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                (&#x27;step_2&#x27;,
+                                                                                                 BiFlattenButFirst()),
+                                                                                                (&#x27;step_3&#x27;,
+                                                                                                 StandardScaler(with_std=False)),
+                                                                                                (&#x27;step_4&#x27;,
+                                                                                                 PCA(n_components=4))]),
+                                                                         Adapte...
+                                                                                                 BiFlattenButFirst()),
+                                                                                                (&#x27;step_3&#x27;,
+                                                                                                 StandardScaler(with_std=False)),
+                                                                                                (&#x27;step_4&#x27;,
+                                                                                                 PCA(n_components=4))]),
+                                                                         AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                                                 BiMeshesToVertices()),
+                                                                                                (&#x27;step_1&#x27;,
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                (&#x27;step_2&#x27;,
+                                                                                                 BiFlattenButFirst()),
+                                                                                                (&#x27;step_3&#x27;,
+                                                                                                 StandardScaler(with_std=False)),
+                                                                                                (&#x27;step_4&#x27;,
+                                                                                                 PCA(n_components=4))])])),
+                                              (&#x27;step_2&#x27;, BiHstack())]))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>ObjectRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiDictToValuesList()),
+                                              (&#x27;step_1&#x27;,
+                                               MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                                                 BiMeshesToVertices()),
+                                                                                                (&#x27;step_1&#x27;,
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                (&#x27;step_2&#x27;,
+                                                                                                 BiFlattenButFirst()),
+                                                                                                (&#x27;step_3&#x27;,
+                                                                                                 StandardScaler(with_std=False)),
+                                                                                                (&#x27;step_4&#x27;,
+                                                                                                 PCA(n_components=4))]),
+                                                                         Adapte...
+                                                                                                 BiFlattenButFirst()),
+                                                                                                (&#x27;step_3&#x27;,
+                                                                                                 StandardScaler(with_std=False)),
+                                                                                                (&#x27;step_4&#x27;,
+                                                                                                 PCA(n_components=4))]),
+                                                                         AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                                                 BiMeshesToVertices()),
+                                                                                                (&#x27;step_1&#x27;,
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                (&#x27;step_2&#x27;,
+                                                                                                 BiFlattenButFirst()),
+                                                                                                (&#x27;step_3&#x27;,
+                                                                                                 StandardScaler(with_std=False)),
+                                                                                                (&#x27;step_4&#x27;,
+                                                                                                 PCA(n_components=4))])])),
+                                              (&#x27;step_2&#x27;, BiHstack())]))</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>pre: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                        TransformerAdapter(step=&lt;built-in function asarray&gt;)),
+                       (&#x27;step_1&#x27;,
+                        TransformerAdapter(step=&lt;function atleast_2d at 0x792e8668d930&gt;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;built-in function asarray&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;function atleast_2d at 0x792e8668d930&gt;)</pre></div> </div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: ObjectBasedTransformedTargetRegressor</div></div></label><div class="sk-toggleable__content fitted"><pre>ObjectBasedTransformedTargetRegressor(check_inverse=False,
+                                      regressor=LinearRegression(),
+                                      transformer=AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                          BiDictToValuesList()),
+                                                                         (&#x27;step_1&#x27;,
+                                                                          MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                                                                            BiMeshesToVertices()),
+                                                                                                                           (&#x27;step_1&#x27;,
+                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                                           (&#x27;step_2&#x27;,
+                                                                                                                            BiFlattenButFirst()),
+                                                                                                                           (&#x27;ste...
+                                                                                                                            BiFlattenButFirst()),
+                                                                                                                           (&#x27;step_3&#x27;,
+                                                                                                                            StandardScaler(with_std=False)),
+                                                                                                                           (&#x27;step_4&#x27;,
+                                                                                                                            PCA(n_components=4))]),
+                                                                                                    AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                                                                            BiMeshesToVertices()),
+                                                                                                                           (&#x27;step_1&#x27;,
+                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                                           (&#x27;step_2&#x27;,
+                                                                                                                            BiFlattenButFirst()),
+                                                                                                                           (&#x27;step_3&#x27;,
+                                                                                                                            StandardScaler(with_std=False)),
+                                                                                                                           (&#x27;step_4&#x27;,
+                                                                                                                            PCA(n_components=4))])])),
+                                                                         (&#x27;step_2&#x27;,
+                                                                          BiHstack())]))</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>regressor: LinearRegression</div></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>transformer: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiDictToValuesList()),
+                       (&#x27;step_1&#x27;,
+                        MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                          BiMeshesToVertices()),
+                                                                         (&#x27;step_1&#x27;,
+                                                                          FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                         (&#x27;step_2&#x27;,
+                                                                          BiFlattenButFirst()),
+                                                                         (&#x27;step_3&#x27;,
+                                                                          StandardScaler(with_std=False)),
+                                                                         (&#x27;step_4&#x27;,
+                                                                          PCA(n_components=4))]),
+                                                  AdapterPipeline(steps=[(&#x27;step...
+                                                                          BiFlattenButFirst()),
+                                                                         (&#x27;step_3&#x27;,
+                                                                          StandardScaler(with_std=False)),
+                                                                         (&#x27;step_4&#x27;,
+                                                                          PCA(n_components=4))]),
+                                                  AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                                          BiMeshesToVertices()),
+                                                                         (&#x27;step_1&#x27;,
+                                                                          FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                         (&#x27;step_2&#x27;,
+                                                                          BiFlattenButFirst()),
+                                                                         (&#x27;step_3&#x27;,
+                                                                          StandardScaler(with_std=False)),
+                                                                         (&#x27;step_4&#x27;,
+                                                                          PCA(n_components=4))])])),
+                       (&#x27;step_2&#x27;, BiHstack())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DictToValuesList(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiDictToValuesList()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>MapTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                  BiMeshesToVertices()),
+                                                 (&#x27;step_1&#x27;,
+                                                  FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                 (&#x27;step_2&#x27;,
+                                                  BiFlattenButFirst()),
+                                                 (&#x27;step_3&#x27;,
+                                                  StandardScaler(with_std=False)),
+                                                 (&#x27;step_4&#x27;,
+                                                  PCA(n_components=4))]),
+                          AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                  BiMeshesToVertices()),
+                                                 (&#x27;step_1&#x27;,
+                                                  FunctionTransformer(func=&lt;fun...
+                                                  FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                 (&#x27;step_2&#x27;,
+                                                  BiFlattenButFirst()),
+                                                 (&#x27;step_3&#x27;,
+                                                  StandardScaler(with_std=False)),
+                                                 (&#x27;step_4&#x27;,
+                                                  PCA(n_components=4))]),
+                          AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                                  BiMeshesToVertices()),
+                                                 (&#x27;step_1&#x27;,
+                                                  FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                 (&#x27;step_2&#x27;,
+                                                  BiFlattenButFirst()),
+                                                 (&#x27;step_3&#x27;,
+                                                  StandardScaler(with_std=False)),
+                                                 (&#x27;step_4&#x27;,
+                                                  PCA(n_components=4))])])</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>hstack</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiHstack()</pre></div> </div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+</div>
+</section>
+<section id="Evaluate-fit">
+<h2>Evaluate fit<a class="headerlink" href="#Evaluate-fit" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">model.predict</span></code> outputs meshes, but we know <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> sees <code class="docutils literal notranslate"><span class="pre">PCA</span></code> components. We can evaluate <code class="docutils literal notranslate"><span class="pre">`r2_score</span></code> &lt;<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html</a>&gt;`__ by applying transform.</p>
+<p>NB: these are values on the training data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">objs2y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">meshes_</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">objs2y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">meshes_pred</span><span class="p">)</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s2">&quot;raw_values&quot;</span><span class="p">)</span>
+
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">struct_keys</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_structs</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;BrStem&#39;: array([0.43173305, 0.00093644, 0.1275041 , 0.02389214]),
+ &#39;L_Thal&#39;: array([0.01415539, 0.53246232, 0.01803249, 0.19446462]),
+ &#39;R_Thal&#39;: array([0.29409484, 0.19884918, 0.00710387, 0.04048802]),
+ &#39;L_Caud&#39;: array([0.19577603, 0.43087557, 0.0341979 , 0.01492186]),
+ &#39;R_Caud&#39;: array([0.28438233, 0.25672117, 0.06444697, 0.03906281]),
+ &#39;L_Puta&#39;: array([0.66647758, 0.01291946, 0.03550197, 0.02858578]),
+ &#39;R_Puta&#39;: array([0.31350877, 0.13438541, 0.12970828, 0.1337651 ]),
+ &#39;L_Pall&#39;: array([0.3591528 , 0.04855132, 0.24886364, 0.057122  ]),
+ &#39;R_Pall&#39;: array([0.52617966, 0.02088384, 0.06184903, 0.07608355]),
+ &#39;L_Hipp&#39;: array([0.04356306, 0.0064415 , 0.24583457, 0.00145246]),
+ &#39;R_Hipp&#39;: array([0.03846712, 0.0608323 , 0.25813046, 0.00213181]),
+ &#39;L_Amyg&#39;: array([0.0095485 , 0.25933399, 0.39715459, 0.00524612]),
+ &#39;R_Amyg&#39;: array([0.31313143, 0.10727696, 0.01111527, 0.00072597]),
+ &#39;L_Accu&#39;: array([3.66642465e-01, 9.99459512e-03, 5.68689499e-02, 1.89262827e-04]),
+ &#39;R_Accu&#39;: array([0.26589629, 0.01162286, 0.01511762, 0.20374888])}
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-meshes">Loading meshes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-tabular-data">Loading tabular data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Merge-data">Merge data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-and-fix-regressor">Create and fix regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluate-fit">Evaluate fit</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024-, Geometric Intelligence Lab @ UC Santa Barbara.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

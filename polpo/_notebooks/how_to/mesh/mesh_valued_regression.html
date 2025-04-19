@@ -282,6 +282,7 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">How to do mesh-valued regression?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/mri.html">MRI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -301,6 +302,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../maternal/maternal_volume.html">How to compute and plot the volume of the brain substructures?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../maternal/mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../maternal/mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../maternal/multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/all.html">All</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -318,6 +320,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../all/mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../all/multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../all/viz_mri.html">How to visualize MRI data?</a></li>
 </ul>
 </details></li>
@@ -405,7 +408,6 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ObjectRegressor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">IndexMap</span><span class="p">,</span>
-    <span class="n">ListSqueeze</span><span class="p">,</span>
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">NestingSwapper</span><span class="p">,</span>
     <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
@@ -559,8 +561,6 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 
 <span class="n">objs2y</span> <span class="o">=</span> <span class="n">AdapterPipeline</span><span class="p">(</span>
     <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">),</span>  <span class="c1"># undo sklearn 2d</span>
-        <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">inverse_func</span><span class="o">=</span><span class="n">ListSqueeze</span><span class="p">(</span><span class="n">raise_</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
         <span class="n">BiMeshesToVertices</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
         <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">),</span>
         <span class="n">BiFlattenButFirst</span><span class="p">(),</span>
@@ -1008,54 +1008,38 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                               FunctionTransformer(func=&lt;function squeeze at 0x7e7b25e940f0&gt;)),
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiMeshesToVertices()),
                                               (&#x27;step_1&#x27;,
-                                               FunctionTransformer(inverse_func=&lt;polpo.preprocessing._preprocessing.ListSqueeze object at 0x7e79ca845e80&gt;)),
-                                              (&#x27;step_2&#x27;, BiMeshesToVertices()),
+                                               FunctionTransformer(func=&lt;function stack at 0x7cdb424c39b0&gt;)),
+                                              (&#x27;step_2&#x27;, BiFlattenButFirst()),
                                               (&#x27;step_3&#x27;,
-                                               FunctionTransformer(func=&lt;function stack at 0x7e7b25e97e30&gt;)),
-                                              (&#x27;step_4&#x27;, BiFlattenButFirst()),
-                                              (&#x27;step_5&#x27;,
                                                StandardScaler(with_std=False)),
-                                              (&#x27;step_6&#x27;, PCA(n_components=4))]))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>ObjectRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                               FunctionTransformer(func=&lt;function squeeze at 0x7e7b25e940f0&gt;)),
+                                              (&#x27;step_4&#x27;, PCA(n_components=4))]))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>ObjectRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiMeshesToVertices()),
                                               (&#x27;step_1&#x27;,
-                                               FunctionTransformer(inverse_func=&lt;polpo.preprocessing._preprocessing.ListSqueeze object at 0x7e79ca845e80&gt;)),
-                                              (&#x27;step_2&#x27;, BiMeshesToVertices()),
+                                               FunctionTransformer(func=&lt;function stack at 0x7cdb424c39b0&gt;)),
+                                              (&#x27;step_2&#x27;, BiFlattenButFirst()),
                                               (&#x27;step_3&#x27;,
-                                               FunctionTransformer(func=&lt;function stack at 0x7e7b25e97e30&gt;)),
-                                              (&#x27;step_4&#x27;, BiFlattenButFirst()),
-                                              (&#x27;step_5&#x27;,
                                                StandardScaler(with_std=False)),
-                                              (&#x27;step_6&#x27;, PCA(n_components=4))]))</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>pre: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;,
+                                              (&#x27;step_4&#x27;, PCA(n_components=4))]))</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>pre: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                         TransformerAdapter(step=&lt;built-in function asarray&gt;)),
                        (&#x27;step_1&#x27;,
-                        TransformerAdapter(step=&lt;function atleast_2d at 0x7e7b25e7a8b0&gt;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;built-in function asarray&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;function atleast_2d at 0x7e7b25e7a8b0&gt;)</pre></div> </div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: ObjectBasedTransformedTargetRegressor</div></div></label><div class="sk-toggleable__content fitted"><pre>ObjectBasedTransformedTargetRegressor(check_inverse=False,
+                        TransformerAdapter(step=&lt;function atleast_2d at 0x7cdb424a23f0&gt;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;built-in function asarray&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;function atleast_2d at 0x7cdb424a23f0&gt;)</pre></div> </div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: ObjectBasedTransformedTargetRegressor</div></div></label><div class="sk-toggleable__content fitted"><pre>ObjectBasedTransformedTargetRegressor(check_inverse=False,
                                       regressor=LinearRegression(),
                                       transformer=AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                          FunctionTransformer(func=&lt;function squeeze at 0x7e7b25e940f0&gt;)),
-                                                                         (&#x27;step_1&#x27;,
-                                                                          FunctionTransformer(inverse_func=&lt;polpo.preprocessing._preprocessing.ListSqueeze object at 0x7e79ca845e80&gt;)),
-                                                                         (&#x27;step_2&#x27;,
                                                                           BiMeshesToVertices()),
-                                                                         (&#x27;step_3&#x27;,
-                                                                          FunctionTransformer(func=&lt;function stack at 0x7e7b25e97e30&gt;)),
-                                                                         (&#x27;step_4&#x27;,
+                                                                         (&#x27;step_1&#x27;,
+                                                                          FunctionTransformer(func=&lt;function stack at 0x7cdb424c39b0&gt;)),
+                                                                         (&#x27;step_2&#x27;,
                                                                           BiFlattenButFirst()),
-                                                                         (&#x27;step_5&#x27;,
+                                                                         (&#x27;step_3&#x27;,
                                                                           StandardScaler(with_std=False)),
-                                                                         (&#x27;step_6&#x27;,
-                                                                          PCA(n_components=4))]))</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>regressor: LinearRegression</div></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>transformer: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                        FunctionTransformer(func=&lt;function squeeze at 0x7e7b25e940f0&gt;)),
+                                                                         (&#x27;step_4&#x27;,
+                                                                          PCA(n_components=4))]))</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>regressor: LinearRegression</div></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>transformer: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiMeshesToVertices()),
                        (&#x27;step_1&#x27;,
-                        FunctionTransformer(inverse_func=&lt;polpo.preprocessing._preprocessing.ListSqueeze object at 0x7e79ca845e80&gt;)),
-                       (&#x27;step_2&#x27;, BiMeshesToVertices()),
-                       (&#x27;step_3&#x27;,
-                        FunctionTransformer(func=&lt;function stack at 0x7e7b25e97e30&gt;)),
-                       (&#x27;step_4&#x27;, BiFlattenButFirst()),
-                       (&#x27;step_5&#x27;, StandardScaler(with_std=False)),
-                       (&#x27;step_6&#x27;, PCA(n_components=4))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>squeeze</div><div class="caption">FunctionTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.FunctionTransformer.html">?<span>Documentation for FunctionTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>FunctionTransformer(func=&lt;function squeeze at 0x7e7b25e940f0&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>NoneType(...)</div><div class="caption">FunctionTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.FunctionTransformer.html">?<span>Documentation for FunctionTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>FunctionTransformer(inverse_func=&lt;polpo.preprocessing._preprocessing.ListSqueeze object at 0x7e79ca845e80&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SerialMap(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiMeshesToVertices()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>stack</div><div class="caption">FunctionTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.FunctionTransformer.html">?<span>Documentation for FunctionTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>FunctionTransformer(func=&lt;function stack at 0x7e7b25e97e30&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>FlattenButFirst(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiFlattenButFirst()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler(with_std=False)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>PCA</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.decomposition.PCA.html">?<span>Documentation for PCA</span></a></div></label><div class="sk-toggleable__content fitted"><pre>PCA(n_components=4)</pre></div> </div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+                        FunctionTransformer(func=&lt;function stack at 0x7cdb424c39b0&gt;)),
+                       (&#x27;step_2&#x27;, BiFlattenButFirst()),
+                       (&#x27;step_3&#x27;, StandardScaler(with_std=False)),
+                       (&#x27;step_4&#x27;, PCA(n_components=4))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SerialMap(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiMeshesToVertices()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>stack</div><div class="caption">FunctionTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.FunctionTransformer.html">?<span>Documentation for FunctionTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>FunctionTransformer(func=&lt;function stack at 0x7cdb424c39b0&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>FlattenButFirst(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiFlattenButFirst()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler(with_std=False)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>PCA</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.decomposition.PCA.html">?<span>Documentation for PCA</span></a></div></label><div class="sk-toggleable__content fitted"><pre>PCA(n_components=4)</pre></div> </div></div></div></div></div></div></div></div></div></div></div></div></div></div>
 </div>
 </section>
 <section id="Evaluate-fit">
@@ -1082,7 +1066,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
+array([0.04356307, 0.0064414 , 0.24583477, 0.00145251])
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1099,7 +1083,7 @@ array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.07432292948145314
+0.0743229349789655
 </pre></div></div>
 </div>
 <p>This shows the model performs poorly. (NB: the goal of this notebook is not to find a great model, but to show how the analysis can be performed. Adapting the pipeline to use different models is a no-brainer.)</p>
@@ -1108,11 +1092,11 @@ array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes2vertices</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">ToVertices</span><span class="p">())</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span> <span class="o">+</span> <span class="n">FlattenButFirst</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes2flatvertices</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">ToVertices</span><span class="p">())</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span> <span class="o">+</span> <span class="n">FlattenButFirst</span><span class="p">()</span>
 
 <span class="n">r2_score</span><span class="p">(</span>
-    <span class="n">meshes2vertices</span><span class="p">(</span><span class="n">meshes_</span><span class="p">),</span>
-    <span class="n">meshes2vertices</span><span class="p">(</span><span class="n">meshes_pred</span><span class="p">),</span>
+    <span class="n">meshes2flatvertices</span><span class="p">(</span><span class="n">meshes_</span><span class="p">),</span>
+    <span class="n">meshes2flatvertices</span><span class="p">(</span><span class="n">meshes_pred</span><span class="p">),</span>
     <span class="n">multioutput</span><span class="o">=</span><span class="s2">&quot;uniform_average&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -1124,14 +1108,39 @@ array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.048441951402524296
+0.04844195125737487
 </pre></div></div>
+</div>
+<p>To build understanding, let’s plot the data the model actually “sees”.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">index</span> <span class="o">//</span> <span class="mi">2</span><span class="p">][</span><span class="n">index</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="p">[:,</span> <span class="n">index</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Comp </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Gestational week&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_29_0.png" src="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_29_0.png" />
+</div>
 </div>
 </section>
 <section id="Visualize-predictions">
 <h2>Visualize predictions<a class="headerlink" href="#Visualize-predictions" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
@@ -1141,7 +1150,7 @@ array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;_images&quot;</span><span class="p">)</span>
@@ -1177,7 +1186,7 @@ array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">gif_name</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
@@ -1185,16 +1194,16 @@ array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_31_0.png" src="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_31_0.png" />
+<img alt="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_33_0.png" src="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_33_0.png" />
 </div>
 </div>
 <p>Let’s check the predicted volumes.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">volumes</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesh</span><span class="o">.</span><span class="n">volume</span> <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes_pred</span><span class="p">]</span>
@@ -1209,7 +1218,7 @@ array([0.04356303, 0.0064415 , 0.24583473, 0.00145246])
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_33_0.png" src="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_33_0.png" />
+<img alt="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_35_0.png" src="../../../_images/_notebooks_how_to_mesh_mesh_valued_regression_35_0.png" />
 </div>
 </div>
 </section>
