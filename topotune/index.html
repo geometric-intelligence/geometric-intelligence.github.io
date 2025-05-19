@@ -120,12 +120,13 @@
     .publication-title {
       font-family: var(--pst-font-family-heading);
       font-size: 2.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0 !important;
+      line-height: 1.2;
     }
 
     .publication-authors {
       font-size: 1.2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.3rem;
     }
 
     .publication-links {
@@ -162,19 +163,36 @@
       height: 100%;
       display: flex;
       align-items: center;
+      max-width: 100px;
+      transform: translateY(1rem);
     }
 
     .title-section .logo-container img {
-      height: 100px; /* Adjust this value to match the height of the title + subtitle */
-      width: auto;
+      height: 100px !important;
+      width: auto !important;
+      max-width: 100%;
+      object-fit: contain;
     }
 
     .title-section .text-container {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .title-section .subtitle {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      line-height: 1.2;
+    }
+
+    .title-section .subtitle.is-4 {
+      margin-top: -0.05rem !important;
     }
 
     .main-content {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 0 2rem;
     }
@@ -200,7 +218,8 @@
     .equal-contribution {
       font-size: 0.9rem;
       color: #666;
-      margin-top: 0.5rem;
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
     }
 
     .card-header-title {
@@ -272,7 +291,7 @@
           <div class="title-section">
             <div class="container">
               <div class="logo-container">
-                <img src="static/images/logo-clean.png" alt="TopoTune logo"/>
+                <img src="static/images/logo-clean.png" alt="TopoTune logo" style="height: 100px !important; width: auto !important;"/>
               </div>
               <div class="text-container">
                 <h1 class="publication-title">TopoTune</h1>
@@ -321,7 +340,7 @@
             </div>
             <div class="content has-text-centered" style="margin: 2rem 0;">
               <p>Have you ever been curious to try higher order relationships in your graph neural network? Does the theoretical and practical burden of such topological deep learning seem daunting? We built TopoTune for you.</p>
-              <p>In short, TopoTune takes any (graph) neural network, message-passing or otherwise, as input and builds a general and flexible topological neural network that can work on any topological domain, like a simplicial complex or hypergraph. We call this network a Generalized Combinatorial Complex Neural Network. Simply put, this network breaks down a higher order complex, like a simplicial complex or hypergraph, into an ensemble of graphs that are then processed by an ensemble of synchronized GNNs.</p>
+              <p>In short, TopoTune takes any (graph) neural network as input, whether it be message-passing or otherwise, and builds a general and flexible topological neural network that can work on any topological domain, like a simplicial complex or hypergraph. We call this network a Generalized Combinatorial Complex Neural Network. Simply put, this network breaks down a higher order complex, like a simplicial complex or hypergraph, into an ensemble of graphs that are then processed by an ensemble of synchronized GNNs.</p>
               <div class="image-container">
                 <img src="static/images/gccn_website.jpg" alt="GCCN"/>
               </div>
