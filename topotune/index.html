@@ -51,63 +51,9 @@
       min-height: 100vh;
     }
 
-    .bd-sidebar-primary {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 300px;
-      height: 100vh;
-      background: #f8f9fa;
-      border-left: 1px solid #e9ecef;
-      padding: 2rem 1rem;
-      overflow-y: auto;
-      z-index: 1000;
-    }
-
     .bd-main {
       flex: 1;
-      margin-right: 300px;
       padding: 2rem;
-    }
-
-    .bd-sidebar-primary .navbar-brand {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .bd-sidebar-primary .navbar-brand img {
-      max-width: 120px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-
-    .bd-sidebar-primary .navbar-brand .title {
-      font-family: var(--pst-font-family-heading);
-      font-size: 1.5rem;
-      color: #363636;
-    }
-
-    .bd-sidebar-primary .navbar-menu {
-      padding: 0;
-    }
-
-    .bd-sidebar-primary .navbar-menu .navbar-item {
-      padding: 0.5rem 1rem;
-      color: #363636;
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
-      display: block;
-      text-align: left;
-    }
-
-    .bd-sidebar-primary .navbar-menu .navbar-item:hover {
-      background: #3273dc;
-      color: white;
-    }
-
-    .bd-sidebar-primary .navbar-menu .navbar-item.is-active {
-      background: #3273dc;
-      color: white;
     }
 
     .bd-content {
@@ -146,10 +92,29 @@
       background: #f8f9fa;
       border-bottom: 1px solid #e9ecef;
       padding: 1rem;
+      cursor: pointer;
     }
 
-    .card-content {
-      padding: 1.5rem;
+    .card-header-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dropdown-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-arrow.is-active {
+      transform: rotate(180deg);
+    }
+
+    .abstract-content {
+      display: none;
+    }
+
+    .abstract-content.is-active {
+      display: block;
     }
 
     .publication-title {
@@ -171,20 +136,19 @@
       margin: 0 0.5rem;
     }
 
+    .title-section {
+      background-color: #fff8e1;
+      margin: -2rem -2rem 2rem -2rem;
+      padding: 3rem 2rem;
+    }
+
+    .equal-contribution {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
     @media (max-width: 1023px) {
-      .bd-sidebar-primary {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-
-      .bd-sidebar-primary.is-active {
-        transform: translateX(0);
-      }
-
-      .bd-main {
-        margin-left: 0;
-      }
-
       .navbar-burger {
         display: block;
         position: fixed;
@@ -197,79 +161,57 @@
 </head>
 <body>
   <div class="bd-container">
-    <nav class="bd-sidebar-primary" id="sidebar">
-      <div class="navbar-brand">
-        <img src="/topotune/_static/images/nodes_edges.jpg" alt="TopoTune logo">
-        <h1 class="title">TopoTune</h1>
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="#abstract">Abstract</a>
-          <a class="navbar-item" href="#getting-started">Getting Started</a>
-          <a class="navbar-item" href="#video">Recorded talk</a>
-          <a class="navbar-item" href="#BibTeX">BibTeX</a>
-        </div>
-      </div>
-    </nav>
-
     <main class="bd-main">
       <div class="bd-content">
         <section class="hero">
-          <div class="hero-body" style="background-color: #fff8e1; padding: 3rem 0;">
+          <div class="title-section">
             <div class="container">
-              <div class="columns is-vcentered">
-                <div class="column is-2">
-                  <img src="/topotune/_static/images/nodes_edges.jpg" alt="TopoTune logo" style="max-width: 100%;">
-                </div>
-                <div class="column">
-                  <h1 class="publication-title">TopoTune</h1>
-                  <h2 class="subtitle is-4">Make any GNN Go Topological</h2>
-                </div>
-              </div>
-              <div class="publication-authors">
-                <span class="author-block">
-                  <a href="https://www.mathildep.ca" target="_blank">Mathilde Papillon</a><sup>1</sup>,
-                </span>
-                <span class="author-block">
-                  <a href="https://gi.ece.ucsb.edu/people" target="_blank">Guillermo Bernárdez</a><sup>1</sup>,
-                </span>
-                <span class="author-block">
-                  <a href="https://cbattiloro.com" target="_blank">Claudio Battiloro</a><sup>*2</sup>,
-                </span>
-                <span class="author-block">
-                  <a href="https://www.ninamiolane.com" target="_blank">Nina Miolane</a><sup>*1</sup>
-                </span>
-              </div>
-              <div class="publication-authors">
-                <span class="author-block">
-                  <sup>1</sup>University of California, Santa Barbara, <sup>2</sup>Harvard University
-                </span>
-                <br>
-                <span class="eql-cntrb">
-                  <small><sup>*</sup>Indicates Equal Contribution</small>
-                </span>
-                <br>
-                <span class="conference">
-                  Accepted to ICML 2025
-                </span>
-              </div>
-              <div class="publication-links">
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2410.06530" target="_blank" class="button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="ai ai-arxiv"></i></span>
-                    <span>arXiv</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank" class="button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-book"></i></span>
-                    <span>Tutorial</span>
-                  </a>
-                </span>
-              </div>
-              <div class="content has-text-centered" style="margin-top: 2rem;">
-                <p>Have you ever been curious to try introducing higher order relationships to your graph neural network? Have you ever been curious to try different higher order relationships or different message-passing schemes, but weighed down by the code complexity of TDL? We built TopoTune for you.</p>
-              </div>
+              <h1 class="publication-title">TopoTune</h1>
+              <h2 class="subtitle is-4">Make any GNN Go Topological</h2>
+            </div>
+          </div>
+          <div class="container">
+            <div class="publication-authors">
+              <span class="author-block">
+                <a href="https://www.mathildep.ca" target="_blank">Mathilde Papillon</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/guillermobernardez/" target="_blank">Guillermo Bernárdez</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://cbattiloro.com" target="_blank">Claudio Battiloro</a><sup>*2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.ninamiolane.com" target="_blank">Nina Miolane</a><sup>*1</sup>
+              </span>
+              <div class="equal-contribution"><sup>*</sup>Indicates Equal Contribution</div>
+            </div>
+            <div class="publication-authors">
+              <span class="author-block">
+                <sup>1</sup>University of California, Santa Barbara, <sup>2</sup>Harvard University
+              </span>
+              <br>
+              <span class="conference">
+                Accepted to ICML 2025
+              </span>
+            </div>
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2410.06530" target="_blank" class="button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank" class="button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-book"></i></span>
+                  <span>Tutorial</span>
+                </a>
+              </span>
+            </div>
+            <div class="content has-text-centered">
+              <img src="/topotune/static/images/photo_1.jpg" alt="GCCN" style="max-width: 750px; width: 100%; margin: 0 auto;"/>
+              <p class="has-text-centered" style="font-size: 1rem; margin-top: 1rem;">TopoTune takes any GNN as input and builds a general and flexible topological neural network that can work on any topological domain. We call this network a Generalized Combinatorial Complex Neural Network. Simply put, this network breaks down a higher order complex, like a simplicial complex or hypergraph, into an ensemble of graphs that are then processed by an ensemble of synchronized GNNs.</p>
             </div>
           </div>
         </section>
@@ -290,10 +232,15 @@
         <section id="abstract" class="section">
           <div class="container">
             <div class="card" style="background-color: #f5f5f5;">
-              <header class="card-header">
-                <p class="card-header-title">Abstract</p>
+              <header class="card-header" onclick="toggleAbstract()">
+                <p class="card-header-title">
+                  Abstract
+                  <span class="dropdown-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                  </span>
+                </p>
               </header>
-              <div class="card-content">
+              <div class="card-content abstract-content">
                 <div class="content has-text-justified">
                   <p>Graph Neural Networks (GNNs) excel in learning from relational datasets, processing node and edge features in a way that preserves the symmetries of the graph domain. However, many complex systems -- such as biological or social networks--involve multiway complex interactions that are more naturally represented by higher-order topological domains. The emerging field of Topological Deep Learning (TDL) aims to accommodate and leverage these higher-order structures. Combinatorial Complex Neural Networks (CCNNs), fairly general TDL models, have been shown to be more expressive and better performing than GNNs. However, differently from the GNN ecosystem, TDL lacks a principled and standardized framework for easily defining new architectures, restricting its accessibility and applicability. To address this issue, we introduce Generalized CCNNs (GCCNs), a novel simple yet powerful family of TDL models that can be used to systematically transform any (graph) neural network into its TDL counterpart. We prove that GCCNs generalize and subsume CCNNs, while extensive experiments on a diverse class of GCCNs show that these architectures consistently match or outperform CCNNs, often with less model complexity. In an effort to accelerate and democratize TDL, we introduce TopoTune, a lightweight software for defining, building, and training GCCNs with unprecedented flexibility and ease.</p>
                 </div>
@@ -328,8 +275,8 @@
                   <h4 class="title is-4"><strong>Quick Start Guide</strong></h4>
                   <div style="margin-left: 1.5rem;">
                     <ul>
-                      <li>Install the <code>tb</code> environment of TopoBench as per the <a href="https://github.com/geometric-intelligence/TopoBench?tab=readme-ov-file#jigsaw-get-started" target="_blank">instructions</a>. Then, select <code>tb</code> as your kernel when running the notebook.</li>
-                      <li>Check out our comprehensive <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank">tutorial</a> to get started with TopoTune.</li>
+                      <li>Install the <code>tb</code> environment of TopoBench as per the <a href="https://github.com/geometric-intelligence/TopoBench?tab=readme-ov-file#jigsaw-get-started" target="_blank">instructions</a>.</li>
+                      <li>Check out our comprehensive <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank">tutorial</a> to get started with TopoTune. Select <code>tb</code> as your kernel when running the notebook.</li>
                     </ul>
                   </div>
                 </div>
@@ -384,8 +331,7 @@
                 <div class="content">
                   <a href="https://gi.ece.ucsb.edu" target="_blank">Geometric Intelligence Lab</a> |
                   <a href="https://x.com/geometric_intel" target="_blank">Twitter</a> |
-                  <a href="https://bsky.app/profile/geometric-intel.bsky.social" target="_blank">Bluesky</a> |
-                  <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Template</a>
+                  <a href="https://bsky.app/profile/geometric-intel.bsky.social" target="_blank">Bluesky</a>
                 </div>
               </div>
             </div>
@@ -424,6 +370,14 @@
         });
       }
     });
+
+    // Toggle abstract visibility
+    function toggleAbstract() {
+      const abstractContent = document.querySelector('.abstract-content');
+      const dropdownArrow = document.querySelector('.dropdown-arrow');
+      abstractContent.classList.toggle('is-active');
+      dropdownArrow.classList.toggle('is-active');
+    }
   </script>
 </body>
 </html>
