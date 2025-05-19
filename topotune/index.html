@@ -206,8 +206,7 @@
         <div class="navbar-start">
           <a class="navbar-item" href="#abstract">Abstract</a>
           <a class="navbar-item" href="#getting-started">Getting Started</a>
-          <a class="navbar-item" href="#video">Video</a>
-          <a class="navbar-item" href="#paper">Paper</a>
+          <a class="navbar-item" href="#video">Recorded talk</a>
           <a class="navbar-item" href="#BibTeX">BibTeX</a>
         </div>
       </div>
@@ -216,10 +215,17 @@
     <main class="bd-main">
       <div class="bd-content">
         <section class="hero">
-          <div class="hero-body">
+          <div class="hero-body" style="background-color: #fff8e1; padding: 3rem 0;">
             <div class="container">
-              <h1 class="publication-title">TopoTune</h1>
-              <h2 class="subtitle is-4">Make any GNN Go Topological</h2>
+              <div class="columns is-vcentered">
+                <div class="column is-2">
+                  <img src="/topotune/_static/images/nodes_edges.jpg" alt="TopoTune logo" style="max-width: 100%;">
+                </div>
+                <div class="column">
+                  <h1 class="publication-title">TopoTune</h1>
+                  <h2 class="subtitle is-4">Make any GNN Go Topological</h2>
+                </div>
+              </div>
               <div class="publication-authors">
                 <span class="author-block">
                   <a href="https://www.mathildep.ca" target="_blank">Mathilde Papillon</a><sup>1</sup>,
@@ -236,12 +242,15 @@
               </div>
               <div class="publication-authors">
                 <span class="author-block">
-                  <sup>1</sup>University of California, Santa Barbara<br>
-                  <sup>2</sup>Harvard University<br>
-                  ICLR 2025
+                  <sup>1</sup>University of California, Santa Barbara, <sup>2</sup>Harvard University
                 </span>
+                <br>
                 <span class="eql-cntrb">
-                  <small><br><sup>*</sup>Indicates Equal Contribution</small>
+                  <small><sup>*</sup>Indicates Equal Contribution</small>
+                </span>
+                <br>
+                <span class="conference">
+                  Accepted to ICML 2025
                 </span>
               </div>
               <div class="publication-links">
@@ -270,8 +279,8 @@
             <div class="card">
               <div class="card-content">
                 <div class="content has-text-centered">
-                  <img src="/topotune/static/images/photo_1.jpg" alt="GCCN" style="max-width: 500px; width: 100%; margin: 0 auto;"/>
-                  <h2 class="subtitle has-text-centered">TopoTune: A framework that transforms any GNN into its topological counterpart, enabling higher-order message passing and complex interactions.</h2>
+                  <img src="/topotune/static/images/photo_1.jpg" alt="GCCN" style="max-width: 750px; width: 100%; margin: 0 auto;"/>
+                  <p class="has-text-centered" style="font-size: 1rem; margin-top: 1rem;">TopoTune: A framework that transforms any GNN into its topological counterpart, enabling higher-order message passing and complex interactions.</p>
                 </div>
               </div>
             </div>
@@ -301,22 +310,28 @@
               </header>
               <div class="card-content">
                 <div class="content">
-                  <h4 class="title is-4">Quick Start Guide</h4>
-                  <p>Check out our comprehensive <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank">tutorial</a> to get started with TopoTune.</p>
+                  <h4 class="title is-4"><strong>Where is TopoTune hosted?</strong></h4>
+                  <div style="margin-left: 1.5rem;">
+                    <p>TopoTune is hosted inside <a href="https://github.com/geometric-intelligence/TopoBench" target="_blank">TopoBench</a>, a fully integrated benchmarking platform for topological deep learning. Specifically, the GCCN is implemented as a <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/topobench/nn/backbones/combinatorial/gccn.py" target="_blank">backbone model</a>, one of many implemented on this platform. As a backbone model, it can be paired with any dataset / dataset lifting / encoder / decoder / sub model $\omega$ / readout etc.</p>
+                  </div>
                   
-                  <h4 class="title is-4">Where is TopoTune hosted?</h4>
-                  <p>TopoTune is hosted inside <a href="https://github.com/geometric-intelligence/TopoBench" target="_blank">TopoBench</a>, a fully integrated benchmarking platform for topological deep learning. Specifically, the GCCN is implemented as a <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/topobench/nn/backbones/combinatorial/gccn.py" target="_blank">backbone model</a>, one of many implemented on this platform. As a backbone model, it can be paired with any dataset / dataset lifting / encoder / decoder / sub model $\omega$ / readout etc.</p>
+                  <h4 class="title is-4"><strong>How can I use TopoTune?</strong></h4>
+                  <div style="margin-left: 1.5rem;">
+                    <p>As a user, you can either:</p>
+                    <ol>
+                      <li>Make your own GNN go topological directly in your own infrastructure by importing TopoTune from TopoBench, or</li>
+                      <li>Leverage TopoBench's large scale automated process to rapidly define and test many GCCNs.</li>
+                    </ol>
+                    <p>We cover both of these options in our comprehensive <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank">tutorial</a>.</p>
+                  </div>
                   
-                  <h4 class="title is-4">How can I use TopoTune?</h4>
-                  <p>As a user, you can either:</p>
-                  <ol>
-                    <li>Make your own GNN go topological directly in your own infrastructure by importing TopoTune from TopoBench, or</li>
-                    <li>Leverage TopoBench's large scale automated process to rapidly define and test many GCCNs.</li>
-                  </ol>
-                  <p>We cover both of these options in our comprehensive <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank">tutorial</a>.</p>
-                  
-                  <h4 class="title is-4">Why don't the imports on the tutorial work?</h4>
-                  <p>Make sure to install the <code>tb</code> environment of TopoBench as per the <a href="https://github.com/geometric-intelligence/TopoBench?tab=readme-ov-file#jigsaw-get-started" target="_blank">instructions</a>. Then, select <code>tb</code> as your kernel when running the notebook.</p>
+                  <h4 class="title is-4"><strong>Quick Start Guide</strong></h4>
+                  <div style="margin-left: 1.5rem;">
+                    <ul>
+                      <li>Install the <code>tb</code> environment of TopoBench as per the <a href="https://github.com/geometric-intelligence/TopoBench?tab=readme-ov-file#jigsaw-get-started" target="_blank">instructions</a>. Then, select <code>tb</code> as your kernel when running the notebook.</li>
+                      <li>Check out our comprehensive <a href="https://github.com/geometric-intelligence/TopoBench/blob/main/tutorials/tutorial_topotune.ipynb" target="_blank">tutorial</a> to get started with TopoTune.</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -327,25 +342,12 @@
           <div class="container">
             <div class="card">
               <header class="card-header">
-                <p class="card-header-title">Video</p>
+                <p class="card-header-title">Recorded talk: Introduction to TopoTune</p>
               </header>
               <div class="card-content">
                 <div class="publication-video">
                   <iframe src="https://www.youtube.com/embed/AR_3yRjFHYQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="paper" class="section">
-          <div class="container">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">Paper</p>
-              </header>
-              <div class="card-content">
-                <iframe src="/topotune/_static/pdfs/TopoTune - A Framework for Generalized Combinatorial Complex Neural Networks.pdf" width="100%" height="550"></iframe>
               </div>
             </div>
           </div>
@@ -358,7 +360,9 @@
                 <p class="card-header-title">BibTeX</p>
               </header>
               <div class="card-content">
-                <pre><code>@misc{papillon2025topotuneframeworkgeneralized,
+                <div class="content">
+                  <p>If TopoTune was useful for your work, please consider citing the work:</p>
+                  <pre><code>@misc{papillon2025topotuneframeworkgeneralized,
   title={TopoTune : A Framework for Generalized Combinatorial Complex Neural Networks},
   author={Mathilde Papillon and Guillermo Bernárdez and Claudio Battiloro and Nina Miolane},
   year={2025},
@@ -367,6 +371,7 @@
   primaryClass={cs.LG},
   url={https://arxiv.org/abs/2410.06530},
 }</code></pre>
+                </div>
               </div>
             </div>
           </div>
