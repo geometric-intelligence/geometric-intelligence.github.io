@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 14, 2025, 12:19:58 AM"/>
+    <meta name="docbuild:last-update" content="May 29, 2025, 1:26:35 PM"/>
   </head>
   
   
@@ -740,6 +740,128 @@
     <span class="c1"># Add parameters to attribute</span>
     <span class="n">data</span><span class="o">.</span><span class="n">n_x</span> <span class="o">=</span> <span class="n">n_x</span>
     <span class="n">data</span><span class="o">.</span><span class="n">num_hyperedges</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hypergraph</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="n">num_class</span>
+
+    <span class="n">data</span><span class="o">.</span><span class="n">incidence_hyperedges</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sparse_coo_tensor</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span>
+        <span class="n">values</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">num_hyperedges</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Print some info</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final num_hyperedges&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">num_hyperedges</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final num_nodes&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final num_class&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">num_class</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_dir</span></div>
+
+
+
+<div class="viewcode-block" id="load_hypergraph_content_dataset">
+<a class="viewcode-back" href="../../../../api/topobench.data.utils.html#topobench.data.utils.io_utils.load_hypergraph_content_dataset">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_hypergraph_content_dataset</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">data_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load hypergraph datasets from pickle files.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : str</span>
+<span class="sd">        Path to data.</span>
+<span class="sd">    data_name : str</span>
+<span class="sd">        Name of the dataset.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    torch_geometric.data.Data</span>
+<span class="sd">        Hypergraph dataset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># data_dir = osp.join(data_dir, data_name)</span>
+
+    <span class="n">p2idx_features_labels</span> <span class="o">=</span> <span class="n">osp</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_name</span><span class="si">}</span><span class="s2">.content&quot;</span><span class="p">)</span>
+    <span class="n">idx_features_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
+        <span class="n">p2idx_features_labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># features = np.array(idx_features_labels[:, 1:-1])</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">idx_features_labels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">idx_features_labels</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+
+    <span class="c1"># build graph</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">idx_features_labels</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">idx_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">idx</span><span class="p">)}</span>
+
+    <span class="n">p2edges_unordered</span> <span class="o">=</span> <span class="n">p2idx_features_labels</span> <span class="o">=</span> <span class="n">osp</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_name</span><span class="si">}</span><span class="s2">.edges&quot;</span>
+    <span class="p">)</span>
+    <span class="n">edges_unordered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">p2edges_unordered</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">idx_map</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">edges_unordered</span><span class="o">.</span><span class="n">flatten</span><span class="p">())),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">edges_unordered</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="c1"># From adjacency matrix to edge_list</span>
+    <span class="n">edge_index</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">assert</span> <span class="n">edge_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="n">edge_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># check if values in edge_index is consecutive. i.e. no missing value for node_id/he_id.</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">edge_index</span><span class="p">))</span> <span class="o">==</span> <span class="n">edge_index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="n">num_nodes</span> <span class="o">=</span> <span class="n">edge_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">num_he</span> <span class="o">=</span> <span class="n">edge_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">num_nodes</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[:</span><span class="n">num_nodes</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[:</span><span class="n">num_nodes</span><span class="p">]</span>
+
+    <span class="c1"># In case labels start from 1, we shift it to start from 0</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span> <span class="o">-</span> <span class="n">labels</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+    <span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">edge_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">edge_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+    <span class="n">node_list</span><span class="p">,</span> <span class="n">edge_list</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">edge_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">edge_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># # check that every node is in some hyperedge</span>
+    <span class="c1"># if len(np.unique(node_list)) != num_nodes:</span>
+    <span class="c1">#     # add self hyperedges to isolated nodes</span>
+    <span class="c1">#     isolated_nodes = np.setdiff1d(</span>
+    <span class="c1">#         np.arange(num_nodes), np.unique(node_list)</span>
+    <span class="c1">#     )</span>
+
+    <span class="c1">#     for node in isolated_nodes:</span>
+    <span class="c1">#         node_list += [node]</span>
+    <span class="c1">#         edge_list += [num_he]</span>
+    <span class="c1">#         num_he += 1</span>
+
+    <span class="k">assert</span> <span class="n">num_he</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">edge_list</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span>
+        <span class="s2">&quot;Num hyperedges do not coincide after adding isolated nodes&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">edge_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">node_list</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">edge_index</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">Data</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">features</span><span class="p">,</span>
+        <span class="n">x_0</span><span class="o">=</span><span class="n">features</span><span class="p">,</span>
+        <span class="n">edge_index</span><span class="o">=</span><span class="n">edge_index</span><span class="p">,</span>
+        <span class="n">incidence_hyperedges</span><span class="o">=</span><span class="n">edge_index</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># There might be errors if edge_index.max() != num_nodes.</span>
+    <span class="c1"># used user function to override the default function.</span>
+    <span class="c1"># the following will also sort the edge_index and remove duplicates.</span>
+    <span class="n">total_num_node_id_he_id</span> <span class="o">=</span> <span class="n">edge_index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_attr</span> <span class="o">=</span> <span class="n">coalesce</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">total_num_node_id_he_id</span><span class="p">,</span> <span class="n">total_num_node_id_he_id</span>
+    <span class="p">)</span>
+
+    <span class="n">n_x</span> <span class="o">=</span> <span class="n">num_nodes</span>
+    <span class="n">num_class</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+
+    <span class="c1"># Add parameters to attribute</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">n_x</span> <span class="o">=</span> <span class="n">n_x</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">num_hyperedges</span> <span class="o">=</span> <span class="n">num_he</span>
     <span class="n">data</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="n">num_class</span>
 
     <span class="n">data</span><span class="o">.</span><span class="n">incidence_hyperedges</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sparse_coo_tensor</span><span class="p">(</span>

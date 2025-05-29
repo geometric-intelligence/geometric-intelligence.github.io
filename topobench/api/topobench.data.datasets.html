@@ -50,7 +50,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 14, 2025, 12:19:58 AM"/>
+    <meta name="docbuild:last-update" content="May 29, 2025, 1:26:35 PM"/>
   </head>
   
   
@@ -785,6 +785,123 @@ to the appropriate location.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.data.datasets.</span></span><span class="sig-name descname"><span class="pre">HypergraphDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictConfig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">InMemoryDataset</span></code></p>
+<p>Dataset class for Hypergaph dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>root</strong><span class="classifier">str</span></dt><dd><p>Root directory where the dataset will be saved.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the dataset.</p>
+</dd>
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameters for the dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>URLS (dict): Dictionary containing the URLs for downloading the dataset.</strong></dt><dd></dd>
+<dt><strong>FILE_FORMAT (dict): Dictionary containing the file formats for the dataset.</strong></dt><dd></dd>
+<dt><strong>RAW_FILE_NAMES (dict): Dictionary containing the raw file names for the dataset.</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.FILE_FORMAT">
+<span class="sig-name descname"><span class="pre">FILE_FORMAT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.13)"><span class="pre">ClassVar</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'20newsW100':</span> <span class="pre">'zip',</span> <span class="pre">'ModelNet40':</span> <span class="pre">'zip',</span> <span class="pre">'Mushroom':</span> <span class="pre">'zip',</span> <span class="pre">'NTU2012':</span> <span class="pre">'zip',</span> <span class="pre">'zoo':</span> <span class="pre">'zip'}</span></em><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.FILE_FORMAT" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.RAW_FILE_NAMES">
+<span class="sig-name descname"><span class="pre">RAW_FILE_NAMES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.13)"><span class="pre">ClassVar</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.RAW_FILE_NAMES" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.URLS">
+<span class="sig-name descname"><span class="pre">URLS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.13)"><span class="pre">ClassVar</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'20newsW100':</span> <span class="pre">'https://drive.google.com/file/d/1D1NtyS4g9LZJPlnxOOySGlRR2km1wGMm/view?usp=drive_link',</span> <span class="pre">'ModelNet40':</span> <span class="pre">'https://drive.google.com/file/d/1u3-SFCjOIh1G0U8pVclfGIlDCceJ0qxr/view?usp=drive_link',</span> <span class="pre">'Mushroom':</span> <span class="pre">'https://drive.google.com/file/d/1iad2l9w58UJvMMXOz6PtrbZkvGyFjWK6/view?usp=drive_link',</span> <span class="pre">'NTU2012':</span> <span class="pre">'https://drive.google.com/file/d/1g9P-uEVSATg6B_JRnyey78YbliIfst3Z/view?usp=drive_link',</span> <span class="pre">'zoo':</span> <span class="pre">'https://drive.google.com/file/d/18TuuGv3qiBfU-wqB3USB3HiiI9G-8X71/view?usp=drive_link'}</span></em><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.URLS" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.download" title="Link to this definition">#</a></dt>
+<dd><p>Download the dataset from a URL and saves it to the raw directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.13)"><strong>FileNotFoundError</strong></a> – If the dataset URL is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.process" title="Link to this definition">#</a></dt>
+<dd><p>Handle the data for the dataset.</p>
+<p>This method loads the US county demographics data, applies any pre-
+processing transformations if specified, and saves the processed data
+to the appropriate location.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.processed_dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">processed_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.processed_dir" title="Link to this definition">#</a></dt>
+<dd><p>Return the path to the processed directory of the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Path to the processed directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.processed_file_names">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">processed_file_names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.processed_file_names" title="Link to this definition">#</a></dt>
+<dd><p>Return the processed file name for the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Processed file name.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.raw_dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raw_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.raw_dir" title="Link to this definition">#</a></dt>
+<dd><p>Return the path to the raw directory of the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Path to the raw directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.data.datasets.HypergraphDataset.raw_file_names">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raw_file_names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#topobench.data.datasets.HypergraphDataset.raw_file_names" title="Link to this definition">#</a></dt>
+<dd><p>Return the raw file names for the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>list[str]</dt><dd><p>List of raw file names.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.data.datasets.MantraDataset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.data.datasets.</span></span><span class="sig-name descname"><span class="pre">MantraDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DictConfig</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.datasets.MantraDataset" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">InMemoryDataset</span></code></p>
@@ -1109,6 +1226,18 @@ to the appropriate location.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.CitationHypergraphDataset.processed_file_names"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDataset.processed_file_names</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.CitationHypergraphDataset.raw_dir"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDataset.raw_dir</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.CitationHypergraphDataset.raw_file_names"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDataset.raw_file_names</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.FILE_FORMAT"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.FILE_FORMAT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.RAW_FILE_NAMES"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.RAW_FILE_NAMES</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.URLS"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.URLS</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.download"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.download()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.process"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.process()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.processed_dir"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.processed_dir</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.processed_file_names"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.processed_file_names</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.raw_dir"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.raw_dir</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.HypergraphDataset.raw_file_names"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset.raw_file_names</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.datasets.MantraDataset"><code class="docutils literal notranslate"><span class="pre">MantraDataset</span></code></a><ul class="nav section-nav flex-column">
