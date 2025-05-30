@@ -318,7 +318,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">params_to_kwargs</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessingStep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">PreprocessingStep</span>
 
 
 <div class="viewcode-block" id="CsvReader">
@@ -459,7 +459,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    orient : str</span>
-<span class="sd">        Determines the type of the values of the dictionary.</span>
+<span class="sd">        Determines the type of the values of the dict.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;dict&quot;</span><span class="p">):</span>
@@ -622,6 +622,52 @@
             <span class="n">indices</span> <span class="o">=</span> <span class="o">~</span><span class="n">indices</span>
 
         <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="ColumnToDict">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.ColumnToDict.html#polpo.preprocessing.pd.ColumnToDict">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColumnToDict</span><span class="p">(</span><span class="n">Pipeline</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract a column from a dataframe and convert it to a dict.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    column_name : str</span>
+<span class="sd">        Name of the column to extract.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">ColumnsSelector</span><span class="p">(</span><span class="n">column_names</span><span class="o">=</span><span class="n">column_name</span><span class="p">),</span>
+                <span class="n">SeriesToDict</span><span class="p">(),</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ColumnsToDict">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.ColumnsToDict.html#polpo.preprocessing.pd.ColumnsToDict">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColumnsToDict</span><span class="p">(</span><span class="n">Pipeline</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract one or more columns from a dataframe and convert them to a row-indexed dict.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    column_names : list of str</span>
+<span class="sd">        Names of the columns to extract.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># TODO: make dropna optional?</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_names</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">ColumnsSelector</span><span class="p">(</span><span class="n">column_names</span><span class="o">=</span><span class="n">column_names</span><span class="p">),</span>
+                <span class="n">Dropna</span><span class="p">(),</span>
+                <span class="n">DfToDict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
 
 </pre></div>
 
