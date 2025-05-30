@@ -394,27 +394,19 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.pd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMeshes2Comps</span><span class="p">,</span> <span class="n">ObjectRegressor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">IndexMap</span><span class="p">,</span>
     <span class="n">Map</span><span class="p">,</span>
-    <span class="n">NestingSwapper</span><span class="p">,</span>
     <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DictMap</span><span class="p">,</span>
-    <span class="n">DictMerger</span><span class="p">,</span>
-    <span class="n">HashWithIncoming</span><span class="p">,</span>
-    <span class="n">ListDictSwapper</span><span class="p">,</span>
-    <span class="n">NestedDictSwapper</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDictsToXY</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DenseMaternalCsvDataLoader</span><span class="p">,</span>
     <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
@@ -466,7 +458,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
+    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
     <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]],</span>
     <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span>
@@ -477,7 +469,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_loader</span> <span class="o">=</span> <span class="n">HashWithIncoming</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_loader</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span>
     <span class="n">Map</span><span class="p">(</span>
         <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
             <span class="n">Step</span><span class="o">=</span><span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
@@ -487,11 +479,11 @@
             <span class="n">_left</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span>
             <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
     <span class="p">)</span>
 <span class="p">)</span>
 
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">mesh_loader</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">prep_pipe</span><span class="p">)</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">mesh_loader</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">prep_pipe</span><span class="p">)</span>
 
 <span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="n">struct_keys</span><span class="p">)</span>
 </pre></div>
@@ -549,13 +541,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_pipe</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">IndexMap</span><span class="p">(</span><span class="n">NestedDictSwapper</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">DictMerger</span><span class="p">()</span>
-    <span class="o">+</span> <span class="n">NestingSwapper</span><span class="p">()</span>
-    <span class="o">+</span> <span class="n">IndexMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">IndexMap</span><span class="p">(</span><span class="n">ListDictSwapper</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_pipe</span> <span class="o">=</span> <span class="n">NestedDictsToXY</span><span class="p">()</span>
 
 <span class="c1"># meshes_ : dict[list]</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">meshes_</span> <span class="o">=</span> <span class="n">dict_pipe</span><span class="p">([</span><span class="n">x_dict</span><span class="p">,</span> <span class="n">meshes</span><span class="p">])</span>
@@ -1016,7 +1002,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                  BiMeshesToVertices()),
                                                                                                 (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                                                 (&#x27;step_2&#x27;,
                                                                                                  BiFlattenButFirst()),
                                                                                                 (&#x27;step_3&#x27;,
@@ -1032,7 +1018,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                          AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                  BiMeshesToVertices()),
                                                                                                 (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                                                 (&#x27;step_2&#x27;,
                                                                                                  BiFlattenButFirst()),
                                                                                                 (&#x27;step_3&#x27;,
@@ -1044,7 +1030,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                  BiMeshesToVertices()),
                                                                                                 (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                                                 (&#x27;step_2&#x27;,
                                                                                                  BiFlattenButFirst()),
                                                                                                 (&#x27;step_3&#x27;,
@@ -1060,7 +1046,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                          AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                  BiMeshesToVertices()),
                                                                                                 (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                                                 (&#x27;step_2&#x27;,
                                                                                                  BiFlattenButFirst()),
                                                                                                 (&#x27;step_3&#x27;,
@@ -1070,7 +1056,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                               (&#x27;step_2&#x27;, BiHstack())]))</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>pre: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                         TransformerAdapter(step=&lt;built-in function asarray&gt;)),
                        (&#x27;step_1&#x27;,
-                        TransformerAdapter(step=&lt;function atleast_2d at 0x792e8668d930&gt;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;built-in function asarray&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;function atleast_2d at 0x792e8668d930&gt;)</pre></div> </div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: ObjectBasedTransformedTargetRegressor</div></div></label><div class="sk-toggleable__content fitted"><pre>ObjectBasedTransformedTargetRegressor(check_inverse=False,
+                        TransformerAdapter(step=&lt;function atleast_2d at 0x75dae1e6bab0&gt;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;built-in function asarray&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;function atleast_2d at 0x75dae1e6bab0&gt;)</pre></div> </div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: ObjectBasedTransformedTargetRegressor</div></div></label><div class="sk-toggleable__content fitted"><pre>ObjectBasedTransformedTargetRegressor(check_inverse=False,
                                       regressor=LinearRegression(),
                                       transformer=AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                           BiDictToValuesList()),
@@ -1078,7 +1064,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                           MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                                             BiMeshesToVertices()),
                                                                                                                            (&#x27;step_1&#x27;,
-                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                                                                            (&#x27;step_2&#x27;,
                                                                                                                             BiFlattenButFirst()),
                                                                                                                            (&#x27;ste...
@@ -1090,7 +1076,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                                                     AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                                             BiMeshesToVertices()),
                                                                                                                            (&#x27;step_1&#x27;,
-                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                                                                            (&#x27;step_2&#x27;,
                                                                                                                             BiFlattenButFirst()),
                                                                                                                            (&#x27;step_3&#x27;,
@@ -1103,7 +1089,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                         MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                           BiMeshesToVertices()),
                                                                          (&#x27;step_1&#x27;,
-                                                                          FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                          FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                          (&#x27;step_2&#x27;,
                                                                           BiFlattenButFirst()),
                                                                          (&#x27;step_3&#x27;,
@@ -1119,7 +1105,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                   AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                           BiMeshesToVertices()),
                                                                          (&#x27;step_1&#x27;,
-                                                                          FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                                          FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                                          (&#x27;step_2&#x27;,
                                                                           BiFlattenButFirst()),
                                                                          (&#x27;step_3&#x27;,
@@ -1129,7 +1115,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                        (&#x27;step_2&#x27;, BiHstack())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DictToValuesList(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiDictToValuesList()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>MapTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                   BiMeshesToVertices()),
                                                  (&#x27;step_1&#x27;,
-                                                  FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                  FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                  (&#x27;step_2&#x27;,
                                                   BiFlattenButFirst()),
                                                  (&#x27;step_3&#x27;,
@@ -1140,7 +1126,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                   BiMeshesToVertices()),
                                                  (&#x27;step_1&#x27;,
                                                   FunctionTransformer(func=&lt;fun...
-                                                  FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                  FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                  (&#x27;step_2&#x27;,
                                                   BiFlattenButFirst()),
                                                  (&#x27;step_3&#x27;,
@@ -1150,7 +1136,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                           AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                   BiMeshesToVertices()),
                                                  (&#x27;step_1&#x27;,
-                                                  FunctionTransformer(func=&lt;function stack at 0x792e866aee30&gt;)),
+                                                  FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
                                                  (&#x27;step_2&#x27;,
                                                   BiFlattenButFirst()),
                                                  (&#x27;step_3&#x27;,
@@ -1184,21 +1170,21 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;BrStem&#39;: array([0.43173305, 0.00093644, 0.1275041 , 0.02389214]),
- &#39;L_Thal&#39;: array([0.01415539, 0.53246232, 0.01803249, 0.19446462]),
- &#39;R_Thal&#39;: array([0.29409484, 0.19884918, 0.00710387, 0.04048802]),
- &#39;L_Caud&#39;: array([0.19577603, 0.43087557, 0.0341979 , 0.01492186]),
- &#39;R_Caud&#39;: array([0.28438233, 0.25672117, 0.06444697, 0.03906281]),
- &#39;L_Puta&#39;: array([0.66647758, 0.01291946, 0.03550197, 0.02858578]),
- &#39;R_Puta&#39;: array([0.31350877, 0.13438541, 0.12970828, 0.1337651 ]),
- &#39;L_Pall&#39;: array([0.3591528 , 0.04855132, 0.24886364, 0.057122  ]),
- &#39;R_Pall&#39;: array([0.52617966, 0.02088384, 0.06184903, 0.07608355]),
- &#39;L_Hipp&#39;: array([0.04356306, 0.0064415 , 0.24583457, 0.00145246]),
- &#39;R_Hipp&#39;: array([0.03846712, 0.0608323 , 0.25813046, 0.00213181]),
- &#39;L_Amyg&#39;: array([0.0095485 , 0.25933399, 0.39715459, 0.00524612]),
- &#39;R_Amyg&#39;: array([0.31313143, 0.10727696, 0.01111527, 0.00072597]),
- &#39;L_Accu&#39;: array([3.66642465e-01, 9.99459512e-03, 5.68689499e-02, 1.89262827e-04]),
- &#39;R_Accu&#39;: array([0.26589629, 0.01162286, 0.01511762, 0.20374888])}
+{&#39;BrStem&#39;: array([0.43173305, 0.00093647, 0.12750477, 0.02389184]),
+ &#39;L_Thal&#39;: array([0.01415542, 0.53246225, 0.01803256, 0.1944647 ]),
+ &#39;R_Thal&#39;: array([0.29409483, 0.19884927, 0.0071038 , 0.04048802]),
+ &#39;L_Caud&#39;: array([0.19577605, 0.43087542, 0.03419801, 0.0149218 ]),
+ &#39;R_Caud&#39;: array([0.28438227, 0.25672121, 0.06444696, 0.03906288]),
+ &#39;L_Puta&#39;: array([0.66647759, 0.0129195 , 0.03550186, 0.02858566]),
+ &#39;R_Puta&#39;: array([0.3135088 , 0.13438528, 0.1297084 , 0.13376509]),
+ &#39;L_Pall&#39;: array([0.35915277, 0.04855107, 0.24886398, 0.05712195]),
+ &#39;R_Pall&#39;: array([0.52617963, 0.0208839 , 0.06184913, 0.07608356]),
+ &#39;L_Hipp&#39;: array([0.04356306, 0.00644147, 0.24583467, 0.00145252]),
+ &#39;R_Hipp&#39;: array([0.03846718, 0.06083203, 0.25813068, 0.0021323 ]),
+ &#39;L_Amyg&#39;: array([0.00954856, 0.25933572, 0.39715277, 0.00524614]),
+ &#39;R_Amyg&#39;: array([0.31313141, 0.10727703, 0.01111522, 0.00072597]),
+ &#39;L_Accu&#39;: array([3.66642523e-01, 9.99478421e-03, 5.68751851e-02, 1.89862875e-04]),
+ &#39;R_Accu&#39;: array([0.2658962 , 0.01162296, 0.01511773, 0.20374928])}
 </pre></div></div>
 </div>
 </section>
