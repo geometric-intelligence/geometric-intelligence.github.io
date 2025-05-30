@@ -312,7 +312,9 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing.learning</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">IfCondition</span><span class="p">,</span>
     <span class="n">IndexMap</span><span class="p">,</span>
@@ -326,15 +328,16 @@
 <div class="viewcode-block" id="DictsToXY">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.learning.DictsToXY.html#polpo.preprocessing.learning.DictsToXY">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictsToXY</span><span class="p">(</span><span class="n">Pipeline</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert two key-matching dictionaries into input-output pairs for learning.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert two key-matching dictionaries into (X, y) for learning.</span>
 
-<span class="sd">    The pipeline expects a list of two dictionaries with identical keys.</span>
-<span class="sd">    It merges them by key, swaps the nesting to produce (key -&gt; [x, y]) pairs,</span>
-<span class="sd">    and returns a tuple of two lists: one for inputs (X) and one for targets (y).</span>
+<span class="sd">    Expects a list of two dictionaries with identical keys.</span>
+<span class="sd">    Merges them by key, swaps the nesting to produce (key -&gt; [x, y]) pairs,</span>
+<span class="sd">    and returns a tuple of two elements:</span>
+<span class="sd">    an array for X and a list for y.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: generalize for y other than meshes</span>
         <span class="c1"># TODO: can be generalized for more cases</span>
         <span class="n">x_step</span> <span class="o">=</span> <span class="n">IfCondition</span><span class="p">(</span>
             <span class="n">step</span><span class="o">=</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">(),</span>
@@ -346,7 +349,35 @@
             <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
                 <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMerger</span><span class="p">(),</span>
                 <span class="n">NestingSwapper</span><span class="p">(),</span>
-                <span class="n">IndexMap</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">x_step</span><span class="p">)),</span>
+                <span class="n">IndexMap</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">x_step</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="NestedDictsToXY">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.learning.NestedDictsToXY.html#polpo.preprocessing.learning.NestedDictsToXY">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NestedDictsToXY</span><span class="p">(</span><span class="n">Pipeline</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert two key-matching dictionaries into (X, y) for learning.</span>
+
+<span class="sd">    Similar to ``DictsToXY``, but assumes ``y`` is a nested ``dict``</span>
+<span class="sd">    (outer keys correspond to different outputs; merging is done using inner keys).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x_step</span> <span class="o">=</span> <span class="n">IfCondition</span><span class="p">(</span>
+            <span class="n">step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()),</span>
+            <span class="n">else_step</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">],</span>
+            <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dict</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">IndexMap</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()),</span>
+                <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMerger</span><span class="p">(),</span>
+                <span class="n">NestingSwapper</span><span class="p">(),</span>
+                <span class="n">IndexMap</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">x_step</span><span class="p">),</span>
+                <span class="n">IndexMap</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">ppdict</span><span class="o">.</span><span class="n">ListDictSwapper</span><span class="p">()),</span>
             <span class="p">]</span>
         <span class="p">)</span></div>
 

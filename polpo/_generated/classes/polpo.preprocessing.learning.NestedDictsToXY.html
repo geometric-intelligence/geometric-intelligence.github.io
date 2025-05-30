@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>DictsToXY &#8212; polpo latest documentation</title>
+    <title>NestedDictsToXY &#8212; polpo latest documentation</title>
   
   
   
@@ -42,12 +42,12 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.learning.DictsToXY';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.learning.DictsToXY.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.learning.NestedDictsToXY';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.learning.NestedDictsToXY.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="IfCondition" href="polpo.preprocessing.learning.IfCondition.html" />
-    <link rel="prev" title="polpo.preprocessing.learning" href="../polpo.preprocessing.learning.html" />
+    <link rel="next" title="NestingSwapper" href="polpo.preprocessing.learning.NestingSwapper.html" />
+    <link rel="prev" title="Map" href="polpo.preprocessing.learning.Map.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -370,7 +370,7 @@
     
     <li class="breadcrumb-item"><a href="../polpo.preprocessing.learning.html" class="nav-link">polpo.preprocessing.learning</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">DictsToXY</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">NestedDictsToXY</span></li>
   </ul>
 </nav>
 </div>
@@ -387,20 +387,18 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="dictstoxy">
-<h1>DictsToXY<a class="headerlink" href="#dictstoxy" title="Link to this heading">#</a></h1>
+  <section id="nesteddictstoxy">
+<h1>NestedDictsToXY<a class="headerlink" href="#nesteddictstoxy" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="polpo.preprocessing.learning.DictsToXY">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.learning.</span></span><span class="sig-name descname"><span class="pre">DictsToXY</span></span><a class="reference internal" href="../../_modules/polpo/preprocessing/learning.html#DictsToXY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.learning.DictsToXY" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="polpo.preprocessing.learning.NestedDictsToXY">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.learning.</span></span><span class="sig-name descname"><span class="pre">NestedDictsToXY</span></span><a class="reference internal" href="../../_modules/polpo/preprocessing/learning.html#NestedDictsToXY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.learning.NestedDictsToXY" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.base.Pipeline.html#polpo.preprocessing.base.Pipeline" title="polpo.preprocessing.base.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a></p>
 <p>Convert two key-matching dictionaries into (X, y) for learning.</p>
-<p>Expects a list of two dictionaries with identical keys.
-Merges them by key, swaps the nesting to produce (key -&gt; [x, y]) pairs,
-and returns a tuple of two elements:
-an array for X and a list for y.</p>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">DictsToXY</span></code>, but assumes <code class="docutils literal notranslate"><span class="pre">y</span></code> is a nested <code class="docutils literal notranslate"><span class="pre">dict</span></code>
+(outer keys correspond to different outputs; merging is done using inner keys).</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="polpo.preprocessing.learning.DictsToXY.load">
-<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.learning.DictsToXY.load" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="polpo.preprocessing.learning.NestedDictsToXY.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.learning.NestedDictsToXY.load" title="Link to this definition">#</a></dt>
 <dd><p>Load data.</p>
 </dd></dl>
 
@@ -431,8 +429,8 @@ an array for X and a list for y.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.learning.DictsToXY"><code class="docutils literal notranslate"><span class="pre">DictsToXY</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.learning.DictsToXY.load"><code class="docutils literal notranslate"><span class="pre">DictsToXY.load()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.learning.NestedDictsToXY"><code class="docutils literal notranslate"><span class="pre">NestedDictsToXY</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.learning.NestedDictsToXY.load"><code class="docutils literal notranslate"><span class="pre">NestedDictsToXY.load()</span></code></a></li>
 </ul>
 </li>
 </ul>
