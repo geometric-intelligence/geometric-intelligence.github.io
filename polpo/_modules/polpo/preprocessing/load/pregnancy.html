@@ -326,6 +326,7 @@
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
     <span class="n">Sorter</span><span class="p">,</span>
+    <span class="n">StepWithLogging</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DictMap</span><span class="p">,</span>
@@ -474,7 +475,13 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_FigsharePregnancyFolderLoader</span><span class="p">(</span>
-    <span class="n">subset</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">remote_path</span><span class="p">,</span> <span class="n">id_to_path</span><span class="p">,</span> <span class="n">none_to_subset</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">subset</span><span class="p">,</span>
+    <span class="n">data_dir</span><span class="p">,</span>
+    <span class="n">remote_path</span><span class="p">,</span>
+    <span class="n">id_to_path</span><span class="p">,</span>
+    <span class="n">none_to_subset</span><span class="p">,</span>
+    <span class="n">thresh</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">local_basename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load folders.</span>
 
@@ -488,6 +495,8 @@
 <span class="sd">        Remote directory where data is stored.</span>
 <span class="sd">    id_to_path : callable</span>
 <span class="sd">        Maps a session id to basename.</span>
+<span class="sd">    local_basename : str</span>
+<span class="sd">        Basename of transferred file/folder if different from remote host.</span>
 <span class="sd">    none_to_subset : callable</span>
 <span class="sd">        Creates subset with all session ids.</span>
 <span class="sd">    thresh : int</span>
@@ -500,47 +509,70 @@
 <span class="sd">        Pipeline whose output is dict[int, string].</span>
 <span class="sd">        Key represents session id and value the corresponding filename.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">local_basename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">local_basename</span> <span class="o">=</span> <span class="n">remote_path</span>
+
     <span class="n">data_dir</span> <span class="o">=</span> <span class="n">ExpandUser</span><span class="p">()(</span><span class="n">data_dir</span><span class="p">)</span>
-    <span class="n">local_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">remote_path</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">local_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">local_basename</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="n">paths_to_ids</span> <span class="o">=</span> <span class="n">Map</span><span class="p">([</span><span class="n">PathShortener</span><span class="p">(),</span> <span class="n">DigitFinder</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)])</span>
 
-    <span class="n">subfolders_selector</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">()</span> <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">subset</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">local_dir</span><span class="p">):</span>
-        <span class="n">figshare_loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-            <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">remote_path</span><span class="o">=</span><span class="n">remote_path</span>
+        <span class="n">files_loader</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
+                <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+                <span class="n">remote_path</span><span class="o">=</span><span class="n">remote_path</span><span class="p">,</span>
+                <span class="n">local_basename</span><span class="o">=</span><span class="n">local_basename</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="o">+</span> <span class="n">FileFinder</span><span class="p">()</span>
+            <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
         <span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">subset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">subset</span> <span class="o">=</span> <span class="n">none_to_subset</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">thresh</span> <span class="ow">or</span> <span class="p">(</span>
-            <span class="nb">len</span><span class="p">(</span>
-                <span class="nb">set</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
-                <span class="o">-</span> <span class="nb">set</span><span class="p">((</span><span class="n">FileFinder</span><span class="p">(</span><span class="n">as_list</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">+</span> <span class="n">paths_to_ids</span><span class="p">)(</span><span class="n">local_dir</span><span class="p">))</span>
-            <span class="p">)</span>
-            <span class="o">&lt;=</span> <span class="n">thresh</span>
-        <span class="p">):</span>
-            <span class="n">figshare_loader</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">+</span> <span class="n">Map</span><span class="p">(</span>
-                <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-                    <span class="n">FigsharePregnancyDataLoader</span><span class="p">,</span>
-                    <span class="n">data_dir</span><span class="o">=</span><span class="n">local_dir</span><span class="p">,</span>
-                    <span class="n">_remote_path</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session_id</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">remote_path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">id_to_path</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                    <span class="n">validate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">FileFinder</span><span class="p">(</span><span class="n">as_list</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">local_dir</span><span class="p">)</span>
+        <span class="n">missing_subset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">paths_to_ids</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_subset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">files_loader</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">StepWithLogging</span><span class="p">(</span>
+                    <span class="n">Constant</span><span class="p">(</span><span class="n">files</span><span class="p">),</span>
+                    <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Data has already been downloaded... using cached file (&#39;</span><span class="si">{</span><span class="n">local_dir</span><span class="si">}</span><span class="s2">&#39;).&quot;</span><span class="p">,</span>
                 <span class="p">)</span>
+                <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
             <span class="p">)</span>
-            <span class="n">subfolders_selector</span> <span class="o">=</span> <span class="n">Sorter</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">thresh</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_subset</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">thresh</span><span class="p">:</span>
+            <span class="n">files_loader</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">Constant</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+                <span class="o">+</span> <span class="n">Map</span><span class="p">(</span>
+                    <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
+                        <span class="n">FigsharePregnancyDataLoader</span><span class="p">,</span>
+                        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+                        <span class="n">_remote_path</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session_id</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">remote_path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">id_to_path</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="n">_local_basename</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session_id</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">local_basename</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">id_to_path</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
+            <span class="p">)</span>
+
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">figshare_loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-                <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">remote_path</span><span class="o">=</span><span class="n">remote_path</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="kc">False</span>
+            <span class="n">files_loader</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
+                    <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+                    <span class="n">local_basename</span><span class="o">=</span><span class="n">local_basename</span><span class="p">,</span>
+                    <span class="n">remote_path</span><span class="o">=</span><span class="n">remote_path</span><span class="p">,</span>
+                    <span class="n">use_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="o">+</span> <span class="n">FileFinder</span><span class="p">()</span>
+                <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
             <span class="p">)</span>
 
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">figshare_loader</span>
-        <span class="o">+</span> <span class="n">subfolders_selector</span>
-        <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">paths_to_ids</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+        <span class="n">files_loader</span> <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">paths_to_ids</span><span class="p">)</span> <span class="o">+</span> <span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
     <span class="p">)</span>
 
 
@@ -568,6 +600,7 @@
         <span class="n">subset</span><span class="p">,</span>
         <span class="n">data_dir</span><span class="p">,</span>
         <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;mri&quot;</span><span class="p">,</span>
+        <span class="n">local_basename</span><span class="o">=</span><span class="s2">&quot;raw/mri&quot;</span><span class="p">,</span>
         <span class="n">id_to_path</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session_id</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;ses-</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">none_to_subset</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">)),</span>
     <span class="p">)</span>
@@ -612,6 +645,7 @@
         <span class="n">subset</span><span class="p">,</span>
         <span class="n">data_dir</span><span class="p">,</span>
         <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;Segmentations&quot;</span><span class="p">,</span>
+        <span class="n">local_basename</span><span class="o">=</span><span class="s2">&quot;derivatives/segmentations&quot;</span><span class="p">,</span>
         <span class="n">id_to_path</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session_id</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;BB</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">none_to_subset</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">27</span><span class="p">)),</span>
     <span class="p">)</span>
@@ -682,7 +716,7 @@
     <span class="p">}</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">method_to_path</span><span class="p">[(</span><span class="n">method</span><span class="p">,</span> <span class="n">version</span><span class="p">)]</span>
 
-    <span class="n">local_basename</span> <span class="o">=</span> <span class="n">method</span>
+    <span class="n">local_basename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;derivatives/</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;elastic&quot;</span><span class="p">:</span>
         <span class="n">local_basename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">local_basename</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span>
 
@@ -690,7 +724,7 @@
 
     <span class="n">pipe</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-            <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy/registration&quot;</span><span class="p">,</span>
+            <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span>
             <span class="n">remote_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;registration/</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="n">local_basename</span><span class="o">=</span><span class="n">local_basename</span><span class="p">,</span>
         <span class="p">)</span>
@@ -740,7 +774,7 @@
         <span class="n">project_folder</span> <span class="o">+=</span> <span class="s2">&quot;_pilot&quot;</span>
 
         <span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-            <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+            <span class="n">data_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/raw&quot;</span><span class="p">,</span>
             <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;28Baby_Hormones.csv&quot;</span><span class="p">,</span>
             <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
