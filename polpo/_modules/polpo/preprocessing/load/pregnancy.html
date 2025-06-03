@@ -765,13 +765,9 @@
 <span class="sd">    pipe : Pipeline</span>
 <span class="sd">        Pipeline to load maternal csv data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">project_folder</span> <span class="o">=</span> <span class="s2">&quot;maternal_brain_project&quot;</span>
-
     <span class="k">if</span> <span class="n">pilot</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">subject_id</span> <span class="o">!=</span> <span class="s2">&quot;01&quot;</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;`subject_id` is ignored, as there&#39;s only one subject&quot;</span><span class="p">)</span>
-
-        <span class="n">project_folder</span> <span class="o">+=</span> <span class="s2">&quot;_pilot&quot;</span>
 
         <span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
             <span class="n">data_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/raw&quot;</span><span class="p">,</span>
@@ -783,6 +779,8 @@
         <span class="p">)</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">IndexSetter</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;sessionID&quot;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
+        <span class="n">project_folder</span> <span class="o">=</span> <span class="s2">&quot;maternal_brain_project&quot;</span>
+
         <span class="n">loader</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span>
             <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">project_folder</span> <span class="o">/</span> <span class="s2">&quot;rawdata&quot;</span> <span class="o">/</span> <span class="s2">&quot;SubjectData.csv&quot;</span>
         <span class="p">)</span>
