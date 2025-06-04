@@ -366,7 +366,6 @@
     <span class="mi">26</span><span class="p">,</span>
 <span class="p">}</span>
 
-
 <span class="n">FIRST_STRUCTS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;Thal&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Caud&quot;</span><span class="p">,</span>
@@ -377,6 +376,24 @@
     <span class="s2">&quot;Amyg&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Accu&quot;</span><span class="p">,</span>
 <span class="p">}</span>
+
+<span class="n">ENIGMA_STRUCT2ID</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;L_Thal&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;L_Caud&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+    <span class="s2">&quot;L_Puta&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">&quot;L_Pall&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+    <span class="s2">&quot;L_Hipp&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+    <span class="s2">&quot;L_Amyg&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="s2">&quot;L_Accu&quot;</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span>
+    <span class="s2">&quot;R_Thal&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+    <span class="s2">&quot;R_Caud&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;R_Puta&quot;</span><span class="p">:</span> <span class="mi">51</span><span class="p">,</span>
+    <span class="s2">&quot;R_Pall&quot;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span>
+    <span class="s2">&quot;R_Hipp&quot;</span><span class="p">:</span> <span class="mi">53</span><span class="p">,</span>
+    <span class="s2">&quot;R_Amyg&quot;</span><span class="p">:</span> <span class="mi">54</span><span class="p">,</span>
+    <span class="s2">&quot;R_Accu&quot;</span><span class="p">:</span> <span class="mi">58</span><span class="p">,</span>
+<span class="p">}</span>
+
 
 <span class="n">MATERNAL_IDS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;01&quot;</span><span class="p">,</span> <span class="s2">&quot;1001&quot;</span><span class="p">,</span> <span class="s2">&quot;1004&quot;</span><span class="p">}</span>
 
@@ -906,6 +923,7 @@
     <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;fsl&quot;</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load maternal mesh filenames.</span>
 
@@ -927,6 +945,8 @@
 <span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
 <span class="sd">    as_dict : bool</span>
 <span class="sd">        Whether to create a dictionary with session as key.</span>
+<span class="sd">    derivative : str</span>
+<span class="sd">        Derivative folder starting (e.g. &quot;fsl_first&quot;, &quot;fastsurfer-long&quot;).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -945,17 +965,26 @@
         <span class="n">suffixed_side</span> <span class="o">=</span> <span class="s2">&quot;L_&quot;</span> <span class="k">if</span> <span class="n">left</span> <span class="k">else</span> <span class="s2">&quot;R_&quot;</span>
 
     <span class="n">folders_selector</span> <span class="o">=</span> <span class="n">DenseMaternalFoldersSelector</span><span class="p">(</span>
-        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">subset</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
+        <span class="n">subset</span><span class="o">=</span><span class="n">subset</span><span class="p">,</span>
+        <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">derivative</span><span class="o">=</span><span class="n">derivative</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span>
-        <span class="n">FileFinder</span><span class="p">(</span>
-            <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
-                <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;vtk&quot;</span><span class="p">),</span>
-                <span class="k">lambda</span> <span class="n">filename</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">suffixed_side</span><span class="si">}{</span><span class="n">struct</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">,</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
+    <span class="n">suffixed_struct</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">suffixed_side</span><span class="si">}{</span><span class="n">struct</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">derivative</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;enigma&quot;</span><span class="p">):</span>
+        <span class="n">enigma_index</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">ENIGMA_STRUCT2ID</span><span class="p">[</span><span class="n">suffixed_struct</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">rules</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="k">lambda</span> <span class="n">file</span><span class="p">:</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">enigma_index</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rules</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">IsFileType</span><span class="p">(</span><span class="s2">&quot;vtk&quot;</span><span class="p">),</span>
+            <span class="k">lambda</span> <span class="n">filename</span><span class="p">:</span> <span class="n">suffixed_struct</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">,</span>
+        <span class="p">]</span>
+
+    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">file_finder</span>
