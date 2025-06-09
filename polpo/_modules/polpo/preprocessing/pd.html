@@ -625,6 +625,23 @@
 
 
 
+<div class="viewcode-block" id="DfFilter">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.DfFilter.html#polpo.preprocessing.pd.DfFilter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DfFilter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="n">filter_</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">negate</span> <span class="o">=</span> <span class="n">negate</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="o">~</span><span class="n">indices</span>
+
+        <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span></div>
+
+
+
 <div class="viewcode-block" id="ColumnToDict">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.pd.ColumnToDict.html#polpo.preprocessing.pd.ColumnToDict">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ColumnToDict</span><span class="p">(</span><span class="n">Pipeline</span><span class="p">):</span>

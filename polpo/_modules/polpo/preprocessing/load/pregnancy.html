@@ -1157,6 +1157,49 @@
     <span class="n">pipe</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">file_finder</span>
 
     <span class="k">return</span> <span class="n">pipe</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">NeuroMaternalTabularDataLoader</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal/neuromaternal_madrid_2021&quot;</span><span class="p">,</span>
+    <span class="n">keep_mothers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">keep_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load neuro maternal tabular data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : str</span>
+<span class="sd">        Project directory.</span>
+<span class="sd">    keep_mothers : bool</span>
+<span class="sd">        Wether to keep mothers.</span>
+<span class="sd">    keep_control : bool</span>
+<span class="sd">        Whether to keep control.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pipe : Pipeline</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">&quot;rawdata&quot;</span><span class="p">,</span> <span class="s2">&quot;participants_long_czi.tsv&quot;</span><span class="p">)</span>
+
+    <span class="n">load_pipe</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">CsvReader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">prep_pipe</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ppd</span><span class="o">.</span><span class="n">UpdateColumnValues</span><span class="p">(</span>
+            <span class="n">column_name</span><span class="o">=</span><span class="s2">&quot;participant_id&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">UpdateColumnValues</span><span class="p">(</span>
+            <span class="n">column_name</span><span class="o">=</span><span class="s2">&quot;ses&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">Drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;participant_id_ses&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_mothers</span><span class="p">:</span>
+        <span class="n">prep_pipe</span> <span class="o">+=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfFilter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mother&quot;</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_control</span><span class="p">:</span>
+        <span class="n">prep_pipe</span> <span class="o">+=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfFilter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;control&quot;</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">load_pipe</span> <span class="o">+</span> <span class="n">prep_pipe</span>
 </pre></div>
 
                 </article>
