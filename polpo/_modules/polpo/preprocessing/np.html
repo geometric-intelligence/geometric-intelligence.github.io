@@ -408,6 +408,26 @@
         <span class="n">half_index</span> <span class="o">=</span> <span class="n">rnumber</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="n">rnumber</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">half_index</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">rnumber</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">half_index</span><span class="p">:]</span></div>
 
+
+
+<div class="viewcode-block" id="ConcatenationIndices">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.np.ConcatenationIndices.html#polpo.preprocessing.np.ConcatenationIndices">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConcatenationIndices</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arrays</span><span class="p">):</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">:</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">axis</span><span class="p">]</span>
+            <span class="n">end_index</span> <span class="o">=</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">dim</span>
+            <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start_index</span><span class="p">,</span> <span class="n">end_index</span><span class="p">))</span>
+            <span class="n">start_index</span> <span class="o">=</span> <span class="n">end_index</span>
+
+        <span class="k">return</span> <span class="n">indices</span></div>
+
 </pre></div>
 
                 </article>

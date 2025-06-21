@@ -680,6 +680,32 @@
 
         <span class="k">return</span> <span class="n">out</span></div>
 
+
+
+<div class="viewcode-block" id="ZipWithKeys">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ZipWithKeys.html#polpo.preprocessing.dict.ZipWithKeys">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ZipWithKeys</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply step to the values of a dict.</span>
+
+<span class="sd">    Then, get a list back, zip with original keys, and return a dict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">check_length</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_length</span> <span class="o">=</span> <span class="n">check_length</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dict_</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dict_</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">new_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_length</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_values</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Length mismatch: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span><span class="si">}</span><span class="s2"> keys but </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">new_values</span><span class="p">)</span><span class="si">}</span><span class="s2"> outputs&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">new_values</span><span class="p">))</span></div>
+
 </pre></div>
 
                 </article>
