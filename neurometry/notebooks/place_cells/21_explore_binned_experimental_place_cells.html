@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Nov 26, 2024, 8:31:29 PM"/>
+    <meta name="docbuild:last-update" content="Jun 24, 2025, 6:33:25 PM"/>
   </head>
   
   
@@ -254,9 +254,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -305,8 +310,17 @@
   </p>
 </div><section id="Post-Bining:-Experimental-Place-Cells">
 <h1>Post-Bining: Experimental Place Cells<a class="headerlink" href="#Post-Bining:-Experimental-Place-Cells" title="Link to this heading">#</a></h1>
-<p>This notebook reads an experimental dataset after: - cell firings, - labels, - times, have been binned according to a given time-step <code class="docutils literal notranslate"><span class="pre">timestep_microsec</span></code>.</p>
-<p>Specifically, we read the files obtained after the processing function <code class="docutils literal notranslate"><span class="pre">experimental.datasets.load_neural_activity</span></code> that: - bins cell firings, times and labels according to the time-step, - save the results in 3 files.</p>
+<p>This notebook reads an experimental dataset after:</p>
+<ul class="simple">
+<li><p>cell firings,</p></li>
+<li><p>labels,</p></li>
+<li><p>times, have been binned according to a given time-step <code class="docutils literal notranslate"><span class="pre">timestep_microsec</span></code>.</p></li>
+</ul>
+<p>Specifically, we read the files obtained after the processing function <code class="docutils literal notranslate"><span class="pre">experimental.datasets.load_neural_activity</span></code> that:</p>
+<ul class="simple">
+<li><p>bins cell firings, times and labels according to the time-step,</p></li>
+<li><p>save the results in 3 files.</p></li>
+</ul>
 <p>Plotting the binned files allows us to determine how many neurons were recorded in each experiment.</p>
 <p>Runtime: This notebook takes ~1 minute to run on a 32 CPUs server if the data is already preprocessed and stored in the npy, txt files.</p>
 <section id="Set-up">
@@ -315,8 +329,8 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [54]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 
 <span class="n">gitroot_path</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
     <span class="p">[</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;rev-parse&quot;</span><span class="p">,</span> <span class="s2">&quot;--show-toplevel&quot;</span><span class="p">],</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span>
@@ -325,11 +339,11 @@
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gitroot_path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;neurometry&quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working directory: &quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="n">sys_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sys_dir</span><span class="p">)</span>
@@ -361,15 +375,15 @@ The autoreload extension is already loaded. To reload it, use:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [55]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">neurometry.datasets.experimental</span> <span class="k">as</span> <span class="nn">experimental</span>
-<span class="kn">import</span> <span class="nn">neurometry.datasets.utils</span> <span class="k">as</span> <span class="nn">utils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">neurometry.datasets.experimental</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">experimental</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">neurometry.datasets.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utils</span>
 
 <span class="n">RAW_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;raw&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The raw data is located in the directory:</span><span class="se">\n</span><span class="si">{</span><span class="n">RAW_DIR</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
@@ -510,10 +524,10 @@ Raw data in directory /Users/facosta/Desktop/code/neurometry/neurometry/data/raw
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [59]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
 
 
-<span class="k">def</span> <span class="nf">bin_neural_spikes</span><span class="p">(</span><span class="n">expt_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bin_neural_spikes</span><span class="p">(</span><span class="n">expt_id</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;Processing expt </span><span class="si">{</span><span class="n">expt_id</span><span class="si">}</span><span class="s2"> at timestep </span><span class="si">{</span><span class="n">timestep_microseconds</span><span class="si">}</span><span class="s2"> microseconds...&quot;</span>
     <span class="p">)</span>
@@ -3631,7 +3645,7 @@ Saving the values of the two gains for each expt to: /home/nmiolane/code/neurome
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_n_laps</span><span class="p">(</span><span class="n">absolute_angles</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_get_n_laps</span><span class="p">(</span><span class="n">absolute_angles</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the number of laps.</span>
 
 <span class="sd">    Note: this assumes that the angles are *not* given modulo 360,</span>
@@ -3643,7 +3657,7 @@ Saving the values of the two gains for each expt to: /home/nmiolane/code/neurome
     <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">absolute_angles</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">absolute_angles</span><span class="p">))</span> <span class="o">//</span> <span class="mi">360</span>
 
 
-<span class="k">def</span> <span class="nf">get_n_laps</span><span class="p">(</span><span class="n">expt_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_n_laps</span><span class="p">(</span><span class="n">expt_id</span><span class="p">):</span>
     <span class="n">expt</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RAW_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;expt</span><span class="si">{</span><span class="n">expt_id</span><span class="si">}</span><span class="s2">.mat&quot;</span><span class="p">))</span>
     <span class="n">rosdata</span> <span class="o">=</span> <span class="n">expt</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">][</span><span class="s2">&quot;rosdata&quot;</span><span class="p">]</span>
     <span class="n">enctimes</span> <span class="o">=</span> <span class="n">rosdata</span><span class="p">[</span><span class="s2">&quot;encTimes&quot;</span><span class="p">]</span>
@@ -3836,7 +3850,7 @@ Expt 9_hd: Only one gain!
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">expt_to_n_laps_dict</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">one_result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
@@ -4322,7 +4336,7 @@ False
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [24]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
 
 <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">place_cells</span><span class="p">)</span>
@@ -4345,7 +4359,7 @@ False
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [25]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
 <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pca_lowrank</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">place_cells</span><span class="p">),</span> <span class="n">q</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -8197,8 +8211,8 @@ run_cb1896a1_experimental_34_other_gain.json
 
 <span class="c1"># Convert a dict into an object where attributes are accessed with &quot;.&quot;</span>
 <span class="c1"># This is needed for the utils.load() function</span>
-<span class="k">class</span> <span class="nc">AttrDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AttrDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -9369,7 +9383,7 @@ Loading experiment 9_hd...
     <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
 
 <span class="n">final_df</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;expt_id&quot;</span><span class="p">),</span> <span class="n">dfs</span><span class="p">)</span>
 <span class="n">final_df</span>
@@ -9984,13 +9998,13 @@ Saving the summary statistics into a master csv file at: /home/nmiolane/code/neu
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../../_sources/notebooks/place_cells/21_explore_binned_experimental_place_cells.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/notebooks/place_cells/21_explore_binned_experimental_place_cells.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -10005,8 +10019,8 @@ Saving the summary statistics into a master csv file at: /home/nmiolane/code/neu
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -10039,7 +10053,8 @@ Saving the summary statistics into a master csv file at: /home/nmiolane/code/neu
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
