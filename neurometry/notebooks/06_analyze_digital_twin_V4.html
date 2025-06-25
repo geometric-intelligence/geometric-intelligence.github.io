@@ -55,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Jun 25, 2025, 12:04:37 AM"/>
+    <meta name="docbuild:last-update" content="Jun 25, 2025, 12:18:42 AM"/>
   </head>
   
   
@@ -342,12 +342,22 @@
 <span class="n">setup</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 <span class="o">%</span><span class="k">load_ext</span> autoreload
 <span class="o">%</span><span class="k">autoreload</span> 2
-<span class="o">%</span><span class="k">load_ext</span> jupyter_black
+<span class="c1"># %load_ext jupyter_black</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nnvision.models.ptrmodels</span><span class="w"> </span><span class="kn">import</span> <span class="n">task_core_gauss_readout</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">mei.modules</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnsembleModel</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">neurometry.datasets.synthetic</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">synthetic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">neurometry.estimators.dimension.dimension</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_dimension_experiments</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">neurometry.estimators.dimension.dimension</span><span class="w"> </span><span class="kn">import</span> <span class="n">skdim_dimension_estimation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">neurometry.estimators.topology.topology_classifier</span><span class="w"> </span><span class="kn">import</span> <span class="n">TopologyClassifier</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GEOMSTATS_BACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geomstats.backend</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gs</span>
 </pre></div>
 </div>
 </div>
@@ -356,44 +366,25 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Working directory:  /home/facosta/neurometry/neurometry
-Directory added to path:  /home/facosta/neurometry
-Directory added to path:  /home/facosta/neurometry/neurometry
+Working directory:  /notebooks/neurometry/neurometry
+Directory added to path:  /notebooks/neurometry
+Directory added to path:  /notebooks/neurometry/neurometry
+Connecting kwilleke@134.76.19.44:3306
 </pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<script type="application/javascript" id="jupyter_black">
-(function() {
-    if (window.IPython === undefined) {
-        return
-    }
-    var msg = "WARNING: it looks like you might have loaded " +
-        "jupyter_black in a non-lab notebook with " +
-        "`is_lab=True`. Please double check, and if " +
-        "loading with `%load_ext` please review the README!"
-    console.log(msg)
-    alert(msg)
-})()
-</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2024-09-04 17:05:46.580091: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2024-09-04 17:05:47.357973: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+INFO: Using pytorch backend
 </pre></div></div>
 </div>
 </section>
 <section id="Load-model">
 <h2>Load model<a class="headerlink" href="#Load-model" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;datasets/digital_twins/weights&quot;</span><span class="p">)</span>
@@ -401,7 +392,7 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">load_v4_model_from_weights</span><span class="p">(</span><span class="n">base_dir</span><span class="p">):</span>
@@ -462,12 +453,77 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [4]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">load_v4_model_from_weights</span><span class="p">(</span><span class="n">weights_path</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Load-images">
+<h2>Load images<a class="headerlink" href="#Load-images" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">images_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;datasets/digital_twins/images/rotations.npy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">images_path</span><span class="p">)</span>
+<span class="n">images</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(100, 100, 100, 3)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make images grayscale</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">images</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(100, 100, 100)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select 10 images with a step size of 10</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>  <span class="c1"># This will give [0, 10, 20, ..., 90]</span>
+<span class="n">selected_images</span> <span class="o">=</span> <span class="p">[</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
+
+<span class="c1"># Create a figure with 1 row and 10 columns to display the images</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Adjust figsize as needed</span>
+
+<span class="c1"># Plot each image on a separate axis</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">selected_images</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>  <span class="c1"># Turn off axis labels for a cleaner look</span>
 </pre></div>
 </div>
 </div>
@@ -475,534 +531,93 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
+<img alt="../_images/notebooks_06_analyze_digital_twin_V4_11_0.png" src="../_images/notebooks_06_analyze_digital_twin_V4_11_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare image shape to present to V4 model</span>
+<span class="n">images_model</span> <span class="o">=</span> <span class="n">images</span><span class="p">[:,:,:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">images_model</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-EnsembleModel(EncoderShifter(
-  (core): TaskDrivenCore3(
-    (features): Sequential(
-      (TaskDriven): Sequential(
-        (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (relu): ReLU(inplace=True)
-        (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
-        (layer1): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-              (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (layer2): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
-              (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (3): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (0): Bottleneck(
-          (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          )
-        )
-      )
-      (OutBatchNorm): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (OutNonlin): ReLU(inplace=True)
-    )
-  ) [TaskDrivenCore3 regularizers: ]
-
-  (readout): MultipleFullGaussian2d(
-    (all_sessions): isotropic FullGaussian2d (1024 x 7 x 7 -&gt; 1244) with bias
-  )
-), EncoderShifter(
-  (core): TaskDrivenCore3(
-    (features): Sequential(
-      (TaskDriven): Sequential(
-        (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (relu): ReLU(inplace=True)
-        (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
-        (layer1): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-              (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (layer2): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
-              (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (3): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (0): Bottleneck(
-          (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          )
-        )
-      )
-      (OutBatchNorm): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (OutNonlin): ReLU(inplace=True)
-    )
-  ) [TaskDrivenCore3 regularizers: ]
-
-  (readout): MultipleFullGaussian2d(
-    (all_sessions): isotropic FullGaussian2d (1024 x 7 x 7 -&gt; 1244) with bias
-  )
-), EncoderShifter(
-  (core): TaskDrivenCore3(
-    (features): Sequential(
-      (TaskDriven): Sequential(
-        (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (relu): ReLU(inplace=True)
-        (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
-        (layer1): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-              (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (layer2): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
-              (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (3): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (0): Bottleneck(
-          (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          )
-        )
-      )
-      (OutBatchNorm): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (OutNonlin): ReLU(inplace=True)
-    )
-  ) [TaskDrivenCore3 regularizers: ]
-
-  (readout): MultipleFullGaussian2d(
-    (all_sessions): isotropic FullGaussian2d (1024 x 7 x 7 -&gt; 1244) with bias
-  )
-), EncoderShifter(
-  (core): TaskDrivenCore3(
-    (features): Sequential(
-      (TaskDriven): Sequential(
-        (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (relu): ReLU(inplace=True)
-        (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
-        (layer1): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-              (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (layer2): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
-              (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (3): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (0): Bottleneck(
-          (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          )
-        )
-      )
-      (OutBatchNorm): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (OutNonlin): ReLU(inplace=True)
-    )
-  ) [TaskDrivenCore3 regularizers: ]
-
-  (readout): MultipleFullGaussian2d(
-    (all_sessions): isotropic FullGaussian2d (1024 x 7 x 7 -&gt; 1244) with bias
-  )
-), EncoderShifter(
-  (core): TaskDrivenCore3(
-    (features): Sequential(
-      (TaskDriven): Sequential(
-        (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (relu): ReLU(inplace=True)
-        (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
-        (layer1): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-              (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (layer2): Sequential(
-          (0): Bottleneck(
-            (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-            (downsample): Sequential(
-              (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
-              (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            )
-          )
-          (1): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (2): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-          (3): Bottleneck(
-            (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
-            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-            (relu): ReLU(inplace=True)
-          )
-        )
-        (0): Bottleneck(
-          (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
-          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
-          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          (relu): ReLU(inplace=True)
-          (downsample): Sequential(
-            (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
-            (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-          )
-        )
-      )
-      (OutBatchNorm): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (OutNonlin): ReLU(inplace=True)
-    )
-  ) [TaskDrivenCore3 regularizers: ]
-
-  (readout): MultipleFullGaussian2d(
-    (all_sessions): isotropic FullGaussian2d (1024 x 7 x 7 -&gt; 1244) with bias
-  )
-))
+(100, 1, 100, 100)
 </pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalize images based on training data mean and std</span>
+<span class="n">img_mean</span> <span class="o">=</span> <span class="mf">124.54466</span>
+<span class="n">img_std</span> <span class="o">=</span> <span class="mf">70.28</span>
+
+<span class="n">images_model</span><span class="o">-=</span><span class="n">img_mean</span>
+<span class="n">images_model</span><span class="o">/=</span><span class="n">img_std</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-neural-manifold-of-V4-neurons-to-images">
+<h2>Get neural manifold of V4 neurons to images<a class="headerlink" href="#Get-neural-manifold-of-V4-neurons-to-images" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+
+<span class="c1"># Move model and input to the same device</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">images_model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">images_model</span><span class="p">)</span>
+<span class="n">images_model</span> <span class="o">=</span> <span class="n">images_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Ensure consistent tensor types (using float for both)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+<span class="n">images_model</span> <span class="o">=</span> <span class="n">images_model</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+<span class="c1"># Pass the input to the model</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images_model</span><span class="p">,</span> <span class="n">data_key</span><span class="o">=</span><span class="s1">&#39;all_sessions&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make into numpy array</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> Out [14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(100, 1244)
+</pre></div></div>
+</div>
+</section>
+<section id="Perform-analyses-on-the-manifold">
+<h2>Perform analyses on the manifold<a class="headerlink" href="#Perform-analyses-on-the-manifold" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span> In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </section>
 </section>
@@ -1056,6 +671,9 @@ EnsembleModel(EncoderShifter(
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-Up-+-Imports">Set Up + Imports</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-model">Load model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-images">Load images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Get-neural-manifold-of-V4-neurons-to-images">Get neural manifold of V4 neurons to images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Perform-analyses-on-the-manifold">Perform analyses on the manifold</a></li>
 </ul>
   </nav></div>
 
