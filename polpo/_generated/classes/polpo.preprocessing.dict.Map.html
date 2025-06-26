@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>HashWithIncoming &#8212; polpo latest documentation</title>
+    <title>Map &#8212; polpo latest documentation</title>
   
   
   
@@ -42,12 +42,12 @@
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.load.pregnancy.HashWithIncoming';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.load.pregnancy.HashWithIncoming.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/classes/polpo.preprocessing.dict.Map';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/classes/polpo.preprocessing.dict.Map.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="IsFileType" href="polpo.preprocessing.load.pregnancy.IsFileType.html" />
-    <link rel="prev" title="Filter" href="polpo.preprocessing.load.pregnancy.Filter.html" />
+    <link rel="next" title="NestDict" href="polpo.preprocessing.dict.NestDict.html" />
+    <link rel="prev" title="ListDictSwapper" href="polpo.preprocessing.dict.ListDictSwapper.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -269,17 +269,19 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../polpo.preprocessing.html">polpo.preprocessing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.BranchingPipeline.html">BranchingPipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.CachablePipeline.html">CachablePipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Constant.html">Constant</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Contains.html">Contains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ContainsAll.html">ContainsAll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DataPrinter.html">DataPrinter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.DecorateToIterable.html">DecorateToIterable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptyRemover.html">EmptyRemover</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EmptySkipper.html">EmptySkipper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EnsureIterable.html">EnsureIterable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Eval.html">Eval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.EvalFromImport.html">EvalFromImport</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.ExceptionToWarning.html">ExceptionToWarning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Filter.html">Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.FunctionCaller.html">FunctionCaller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IdentityStep.html">IdentityStep</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IfCondition.html">IfCondition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.IfEmpty.html">IfEmpty</a></li>
@@ -309,9 +311,9 @@
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.Unnest.html">Unnest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polpo.preprocessing.WrapInList.html">WrapInList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.base.html">polpo.preprocessing.base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.dict.html">polpo.preprocessing.dict</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="../polpo.preprocessing.dict.html">polpo.preprocessing.dict</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.learning.html">polpo.preprocessing.learning</a></li>
-<li class="toctree-l2 current active"><a class="reference internal" href="../polpo.preprocessing.load.html">polpo.preprocessing.load</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.load.html">polpo.preprocessing.load</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.mesh.html">polpo.preprocessing.mesh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.mri.html">polpo.preprocessing.mri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../polpo.preprocessing.np.html">polpo.preprocessing.np</a></li>
@@ -369,12 +371,9 @@
     <li class="breadcrumb-item"><a href="../polpo.preprocessing.html" class="nav-link">polpo.preprocessing</a></li>
     
     
-    <li class="breadcrumb-item"><a href="../polpo.preprocessing.load.html" class="nav-link">polpo.preprocessing.load</a></li>
+    <li class="breadcrumb-item"><a href="../polpo.preprocessing.dict.html" class="nav-link">polpo.preprocessing.dict</a></li>
     
-    
-    <li class="breadcrumb-item"><a href="../polpo.preprocessing.load.pregnancy.html" class="nav-link">polpo.preprocessing.load.pregnancy</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">HashWithIncoming</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Map</span></li>
   </ul>
 </nav>
 </div>
@@ -391,12 +390,12 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="hashwithincoming">
-<h1>HashWithIncoming<a class="headerlink" href="#hashwithincoming" title="Link to this heading">#</a></h1>
+  <section id="map">
+<h1>Map<a class="headerlink" href="#map" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.HashWithIncoming">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.load.pregnancy.</span></span><span class="sig-name descname"><span class="pre">HashWithIncoming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/dict.html#HashWithIncoming"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.HashWithIncoming" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="polpo.preprocessing.dict.StepWrappingPreprocessingStep.html#polpo.preprocessing.dict.StepWrappingPreprocessingStep" title="polpo.preprocessing._preprocessing.StepWrappingPreprocessingStep"><code class="xref py py-class docutils literal notranslate"><span class="pre">StepWrappingPreprocessingStep</span></code></a></p>
+<dt class="sig sig-object py" id="polpo.preprocessing.dict.Map">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polpo.preprocessing.dict.</span></span><span class="sig-name descname"><span class="pre">Map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/polpo/preprocessing/_preprocessing.html#Map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.dict.Map" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 </dd></dl>
 
 </section>
@@ -424,7 +423,7 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.HashWithIncoming"><code class="docutils literal notranslate"><span class="pre">HashWithIncoming</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.dict.Map"><code class="docutils literal notranslate"><span class="pre">Map</span></code></a></li>
 </ul>
   </nav></div>
 

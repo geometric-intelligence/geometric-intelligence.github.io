@@ -317,9 +317,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">nest_dict</span><span class="p">,</span> <span class="n">unnest_dict</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">._preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Filter</span><span class="p">,</span>
+    <span class="n">FunctionCaller</span><span class="p">,</span>
     <span class="n">IdentityStep</span><span class="p">,</span>
+    <span class="n">Map</span><span class="p">,</span>
     <span class="n">StepWrappingPreprocessingStep</span><span class="p">,</span>
     <span class="n">_wrap_step</span><span class="p">,</span>
 <span class="p">)</span>
@@ -380,7 +384,7 @@
 
 
 <div class="viewcode-block" id="HashWithIncoming">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.HashWithIncoming.html#polpo.preprocessing.dict.HashWithIncoming">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.HashWithIncoming.html#polpo.preprocessing.dict.HashWithIncoming">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">HashWithIncoming</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key_step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
@@ -395,7 +399,7 @@
 
 
 <div class="viewcode-block" id="DictFilter">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictFilter.html#polpo.preprocessing.dict.DictFilter">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictFilter.html#polpo.preprocessing.dict.DictFilter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">filter_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">filter_keys</span><span class="p">:</span>
@@ -407,7 +411,7 @@
 
 
 <div class="viewcode-block" id="SelectKeySubset">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.SelectKeySubset.html#polpo.preprocessing.dict.SelectKeySubset">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.SelectKeySubset.html#polpo.preprocessing.dict.SelectKeySubset">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SelectKeySubset</span><span class="p">(</span><span class="n">DictFilter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Select key subset.</span>
 
@@ -464,8 +468,19 @@
 
 
 
+<div class="viewcode-block" id="ExtractUniqueKey">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ExtractUniqueKey.html#polpo.preprocessing.dict.ExtractUniqueKey">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExtractUniqueKey</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n_keys</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected one key, but there&#39;s </span><span class="si">{</span><span class="n">n_keys</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">dict_</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">dict_</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span></div>
+
+
+
 <div class="viewcode-block" id="DictToValuesList">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictToValuesList.html#polpo.preprocessing.dict.DictToValuesList">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictToValuesList.html#polpo.preprocessing.dict.DictToValuesList">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictToValuesList</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
@@ -597,7 +612,7 @@
 
 
 <div class="viewcode-block" id="DictMap">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.DictMap.html#polpo.preprocessing.dict.DictMap">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictMap.html#polpo.preprocessing.dict.DictMap">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictMap</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a given step to each element of a dict.&quot;&quot;&quot;</span>
 
@@ -645,6 +660,32 @@
             <span class="n">special_keys</span><span class="o">=</span><span class="n">special_keys</span><span class="p">,</span>
             <span class="n">special_step</span><span class="o">=</span><span class="n">special_step</span><span class="p">,</span>
         <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="NestedDictMap">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.NestedDictMap.html#polpo.preprocessing.dict.NestedDictMap">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NestedDictMap</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Nested dict map.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    depth : int</span>
+<span class="sd">        Depth at which step is applied.</span>
+<span class="sd">    inner_is_dict : bool</span>
+<span class="sd">        Whether inner is a dict. If not, must be an iterable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inner_is_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">DictMap</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">inner_is_dict</span>
+            <span class="k">else</span> <span class="n">Map</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">step</span></div>
 
 
 
@@ -705,6 +746,22 @@
             <span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">new_values</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="UnnestDict">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.UnnestDict.html#polpo.preprocessing.dict.UnnestDict">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UnnestDict</span><span class="p">(</span><span class="n">FunctionCaller</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unnest_dict</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="NestDict">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.NestDict.html#polpo.preprocessing.dict.NestDict">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NestDict</span><span class="p">(</span><span class="n">FunctionCaller</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nest_dict</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
 
 </pre></div>
 

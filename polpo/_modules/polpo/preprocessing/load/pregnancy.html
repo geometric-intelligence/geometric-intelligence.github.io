@@ -317,25 +317,26 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.pd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BranchingPipeline</span><span class="p">,</span>
+    <span class="n">CachablePipeline</span><span class="p">,</span>
     <span class="n">Constant</span><span class="p">,</span>
     <span class="n">Contains</span><span class="p">,</span>
     <span class="n">ContainsAll</span><span class="p">,</span>
+    <span class="n">EnsureIterable</span><span class="p">,</span>
     <span class="n">Filter</span><span class="p">,</span>
+    <span class="n">IdentityStep</span><span class="p">,</span>
+    <span class="n">IndexMap</span><span class="p">,</span>
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
     <span class="n">Sorter</span><span class="p">,</span>
     <span class="n">StepWithLogging</span><span class="p">,</span>
     <span class="n">TupleWith</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DictFilter</span><span class="p">,</span>
-    <span class="n">DictMap</span><span class="p">,</span>
-    <span class="n">DictToValuesList</span><span class="p">,</span>
-    <span class="n">HashWithIncoming</span><span class="p">,</span>
-    <span class="n">SelectKeySubset</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">FreeSurferReader</span><span class="p">,</span> <span class="n">PvReader</span><span class="p">,</span> <span class="n">PvWriter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">ExpandUser</span><span class="p">,</span>
     <span class="n">FileFinder</span><span class="p">,</span>
@@ -398,6 +399,14 @@
 
 
 <span class="n">MATERNAL_IDS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;01&quot;</span><span class="p">,</span> <span class="s2">&quot;1001&quot;</span><span class="p">,</span> <span class="s2">&quot;1004&quot;</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_tool_to_mesh_reader</span><span class="p">(</span><span class="n">tool</span><span class="p">):</span>
+    <span class="c1"># update for other tools</span>
+    <span class="k">if</span> <span class="n">tool</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;enigma&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">FreeSurferReader</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Oops, don&#39;t know how to handle: </span><span class="si">{</span><span class="n">tool</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="FigsharePregnancyDataLoader">
@@ -591,7 +600,9 @@
             <span class="p">)</span>
 
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">files_loader</span> <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">paths_to_ids</span><span class="p">)</span> <span class="o">+</span> <span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+        <span class="n">files_loader</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">paths_to_ids</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
     <span class="p">)</span>
 
 
@@ -624,7 +635,7 @@
         <span class="n">none_to_subset</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">)),</span>
     <span class="p">)</span>
 
-    <span class="n">files_selector</span> <span class="o">=</span> <span class="n">DictMap</span><span class="p">(</span>
+    <span class="n">files_selector</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
         <span class="n">step</span><span class="o">=</span><span class="n">FileFinder</span><span class="p">(</span>
             <span class="n">rules</span><span class="o">=</span><span class="p">[</span>
                 <span class="n">StartsWith</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;BrainNormalized&quot;</span><span class="p">),</span>
@@ -638,7 +649,7 @@
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">pipe</span>
 
-    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">PregnancyPilotSegmentationsLoader</span><span class="p">(</span>
@@ -683,7 +694,7 @@
         <span class="p">]</span>
     <span class="p">)</span>
 
-    <span class="n">files_selector</span> <span class="o">=</span> <span class="n">DictMap</span><span class="p">(</span>
+    <span class="n">files_selector</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
         <span class="n">step</span><span class="o">=</span><span class="n">left_file_selector</span><span class="p">,</span>
         <span class="n">special_step</span><span class="o">=</span><span class="n">right_file_selector</span><span class="p">,</span>
         <span class="n">special_keys</span><span class="o">=</span><span class="n">PREGNANCY_PILOT_REFLECTED_KEYS</span><span class="p">,</span>
@@ -694,7 +705,7 @@
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">pipe</span>
 
-    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">PregnancyPilotRegisteredMeshesLoader</span><span class="p">(</span>
@@ -754,14 +765,14 @@
             <span class="p">],</span>
         <span class="p">)</span>
         <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
-        <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">paths_to_ids</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">paths_to_ids</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">pipe</span>
 
-    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalCsvDataLoader</span><span class="p">(</span>
@@ -876,7 +887,7 @@
 
     <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MATERNAL_IDS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Ups, `</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MATERNAL_IDS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Oops, `</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">MATERNAL_IDS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
     <span class="n">pilot</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">subject_id</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span> <span class="k">else</span> <span class="kc">False</span>
@@ -913,7 +924,7 @@
 
     <span class="n">pipe</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">sorter</span>
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
-        <span class="n">pipe</span> <span class="o">=</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">path_to_session</span><span class="p">))</span>
+        <span class="n">pipe</span> <span class="o">=</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">path_to_session</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">pipe</span>
 
@@ -958,7 +969,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">struct</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FIRST_STRUCTS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Ups, `</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Oops, `</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">struct</span> <span class="o">==</span> <span class="s2">&quot;BrStem&quot;</span><span class="p">:</span>
@@ -986,12 +997,12 @@
             <span class="k">lambda</span> <span class="n">filename</span><span class="p">:</span> <span class="n">suffixed_struct</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">,</span>
         <span class="p">]</span>
 
-    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">))</span>
+    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">file_finder</span>
 
-    <span class="k">return</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalSegmentationsLoader</span><span class="p">(</span>
@@ -1043,14 +1054,14 @@
             <span class="n">rules</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;aseg.auto.mgz&quot;</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ups, don&#39;t know how to handle: </span><span class="si">{</span><span class="n">tool</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Oops, don&#39;t know how to handle: </span><span class="si">{</span><span class="n">tool</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">image_selector</span><span class="p">)</span>
+    <span class="n">file_finder</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">image_selector</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">file_finder</span>
 
-    <span class="k">return</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">NeuroMaternalFoldersSelector</span><span class="p">(</span>
@@ -1066,12 +1077,12 @@
 <span class="sd">    subset : array-like</span>
 <span class="sd">        Subset of participants to load. If `None`, loads all.</span>
 <span class="sd">    remove_missing_sessions : bool</span>
-<span class="sd">        Whether to keep only subjects for which there&#39;s two sessions</span>
+<span class="sd">        Whether to keep only subjects for which there&#39;s two sessions.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pipe : Pipeline</span>
-<span class="sd">        Pipeline whose output is dict[int, list[string]].</span>
+<span class="sd">        Pipeline whose output is dict[str, list[str]].</span>
 <span class="sd">        Key represents participant id and value the corresponding filenames.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># TODO: homogenize data_dir with Pregnancy one; use derivatives folder above</span>
@@ -1102,7 +1113,8 @@
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="n">filter_</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">DictFilter</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># TODO: this get rid of 3&#39;s; bring them in again</span>
+        <span class="n">ppdict</span><span class="o">.</span><span class="n">DictFilter</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">remove_missing_sessions</span>
         <span class="k">else</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
     <span class="p">)</span>
@@ -1112,7 +1124,7 @@
         <span class="o">+</span> <span class="n">TupleWith</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">path_to_sub</span><span class="p">),</span> <span class="n">incoming_first</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="o">+</span> <span class="n">_group_sessions</span>
         <span class="o">+</span> <span class="n">filter_</span>
-        <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">Sorter</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">Sorter</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">pipe</span>
@@ -1124,19 +1136,22 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">NeuroMaternalMeshLoader</span><span class="p">(</span>
     <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal/neuromaternal_madrid_2021&quot;</span><span class="p">,</span>
-    <span class="n">subject_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">struct</span><span class="o">=</span><span class="s2">&quot;Hipp&quot;</span><span class="p">,</span>
     <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;enigma&quot;</span><span class="p">,</span>
+    <span class="n">as_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="c1"># NB: as_dict controls session</span>
     <span class="c1"># NB: sessions names are remapped to start at zero</span>
 
+    <span class="c1"># TODO: update uses of left and right?</span>
+    <span class="c1"># TODO: update behavior of other mesh loaders</span>
+
     <span class="k">if</span> <span class="n">struct</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FIRST_STRUCTS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Ups, `</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Oops, `</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">` is not available. Please, choose from: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">struct</span> <span class="o">==</span> <span class="s2">&quot;BrStem&quot;</span><span class="p">:</span>
@@ -1170,18 +1185,49 @@
 
     <span class="c1"># NB: sessions are already sorted</span>
     <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
-        <span class="n">file_finder</span> <span class="o">=</span> <span class="n">DictMap</span><span class="p">(</span>
-            <span class="n">HashWithIncoming</span><span class="p">(</span>
+        <span class="n">file_finder</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+            <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span>
                 <span class="n">Map</span><span class="p">(</span><span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">)),</span>
                 <span class="n">key_step</span><span class="o">=</span><span class="n">Map</span><span class="p">(</span><span class="n">path_to_session</span><span class="p">),</span>
             <span class="p">)</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">file_finder</span> <span class="o">=</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">)))</span>
+        <span class="n">file_finder</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">FileFinder</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="n">rules</span><span class="p">)))</span>
 
     <span class="n">pipe</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">file_finder</span>
 
-    <span class="k">return</span> <span class="n">pipe</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">as_mesh</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pipe</span>
+
+    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span>
+        <span class="n">_tool_to_mesh_reader</span><span class="p">(</span><span class="n">derivative</span><span class="p">),</span> <span class="n">inner_is_dict</span><span class="o">=</span><span class="n">as_dict</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">NeuroMaternalMultiMeshLoader</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal/neuromaternal_madrid_2021&quot;</span><span class="p">,</span>
+    <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">as_inner_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;enigma&quot;</span><span class="p">,</span>
+    <span class="n">as_mesh</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># TODO: update name? make other private</span>
+
+    <span class="k">return</span> <span class="n">EnsureIterable</span><span class="p">(</span>
+        <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span>
+            <span class="n">Map</span><span class="p">(</span>
+                <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
+                    <span class="n">Step</span><span class="o">=</span><span class="n">NeuroMaternalMeshLoader</span><span class="p">,</span>
+                    <span class="n">as_dict</span><span class="o">=</span><span class="n">as_inner_dict</span><span class="p">,</span>
+                    <span class="n">pass_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">_struct</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">_left</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span>
+                    <span class="n">derivative</span><span class="o">=</span><span class="n">derivative</span><span class="p">,</span>
+                    <span class="n">as_mesh</span><span class="o">=</span><span class="n">as_mesh</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">NeuroMaternalTabularDataLoader</span><span class="p">(</span>
@@ -1229,6 +1275,54 @@
         <span class="n">prep_pipe</span> <span class="o">+=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfFilter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;control&quot;</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">load_pipe</span> <span class="o">+</span> <span class="n">prep_pipe</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CacheableMeshLoader</span><span class="p">(</span>
+    <span class="n">cache_dir</span><span class="p">,</span>
+    <span class="n">pipe</span><span class="p">,</span>
+    <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># TODO: move place?</span>
+    <span class="c1"># TODO: make reader and writer package agnostic?</span>
+
+    <span class="c1"># TODO: check DictToValuesList and depth</span>
+    <span class="n">cache_pipe</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">FileFinder</span><span class="p">(</span><span class="n">IsFileType</span><span class="p">(</span><span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">))</span>
+        <span class="o">+</span> <span class="n">Sorter</span><span class="p">()</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">PvReader</span><span class="p">()))</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestDict</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">(),</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># TODO: update depth</span>
+    <span class="c1"># &lt;struct&gt;-&lt;participant&gt;-&lt;mesh-index&gt;</span>
+    <span class="n">to_cache_pipe</span> <span class="o">=</span> <span class="n">IndexMap</span><span class="p">(</span>
+        <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">=</span><span class="p">(</span>
+            <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span>
+                <span class="n">BranchingPipeline</span><span class="p">([</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">IdentityStep</span><span class="p">()])</span> <span class="o">+</span> <span class="nb">dict</span><span class="p">,</span>
+                <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">UnnestDict</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">)</span> <span class="o">+</span> <span class="p">(</span>
+        <span class="p">(</span><span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToTuplesList</span><span class="p">()</span>
+        <span class="o">+</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvWriter</span><span class="p">(</span><span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">CachablePipeline</span><span class="p">(</span>
+        <span class="n">cache_dir</span><span class="p">,</span>
+        <span class="n">pipe</span><span class="p">,</span>
+        <span class="n">cache_pipe</span><span class="p">,</span>
+        <span class="n">to_cache_pipe</span><span class="p">,</span>
+        <span class="n">use_cache</span><span class="o">=</span><span class="n">use_cache</span><span class="p">,</span>
+        <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
+        <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
 
                 </article>
