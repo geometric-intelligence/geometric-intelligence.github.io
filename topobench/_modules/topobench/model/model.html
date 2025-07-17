@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Jul 17, 2025, 10:34:07 AM"/>
+    <meta name="docbuild:last-update" content="Jul 17, 2025, 10:51:39 AM"/>
   </head>
   
   
@@ -312,7 +312,7 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">backbone</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
-        <span class="n">backbone_wrapper</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+        <span class="n">backbone_wrapper</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">readout</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
         <span class="n">loss</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
         <span class="n">feature_encoder</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -358,7 +358,7 @@
 <div class="viewcode-block" id="TBModel.forward">
 <a class="viewcode-back" href="../../../api/topobench.model.html#topobench.model.model.TBModel.forward">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform a forward pass through the model `self.backbone`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Perform a forward pass through the model.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -368,9 +368,19 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            Dictionary containing the model output.</span>
+<span class="sd">            Dictionary containing the model output, which includes the logits and other relevant information.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backbone</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span></div>
+        <span class="c1"># Feature Encoder</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_encoder</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_encoder</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+
+        <span class="c1"># Domain model</span>
+        <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backbone</span><span class="p">(</span><span class="n">model_out</span><span class="p">)</span>
+
+        <span class="c1"># Readout</span>
+        <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readout</span><span class="p">(</span><span class="n">model_out</span><span class="o">=</span><span class="n">model_out</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">model_out</span></div>
 
 
 <div class="viewcode-block" id="TBModel.model_step">
@@ -390,16 +400,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Allow batch object to know the phase of the training</span>
         <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;model_state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_str</span>
-
-        <span class="c1"># Feature Encoder</span>
-        <span class="n">batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_encoder</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
-
-        <span class="c1"># Domain model</span>
+        
+        <span class="c1"># Forward pass</span>
         <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
-
-        <span class="c1"># Readout</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">readout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readout</span><span class="p">(</span><span class="n">model_out</span><span class="o">=</span><span class="n">model_out</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
 
         <span class="c1"># Loss</span>
         <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_outputs</span><span class="p">(</span><span class="n">model_out</span><span class="o">=</span><span class="n">model_out</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
