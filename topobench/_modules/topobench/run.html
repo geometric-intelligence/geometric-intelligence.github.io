@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Jun 6, 2025, 2:04:23 PM"/>
+    <meta name="docbuild:last-update" content="Jul 17, 2025, 10:34:07 AM"/>
   </head>
   
   
@@ -474,6 +474,14 @@
         <span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
             <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">datamodule</span><span class="o">=</span><span class="n">datamodule</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ckpt_path&quot;</span><span class="p">)</span>
         <span class="p">)</span>
+        <span class="c1"># Log the best model checkpoint path into wandb</span>
+        <span class="k">for</span> <span class="n">logger_elem</span> <span class="ow">in</span> <span class="n">logger</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
+                <span class="n">logger_elem</span><span class="p">,</span> <span class="n">L</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">wandb</span><span class="o">.</span><span class="n">WandbLogger</span>
+            <span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">logger_elem</span><span class="p">,</span> <span class="s2">&quot;experiment&quot;</span><span class="p">):</span>
+                <span class="n">logger_elem</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="p">{</span><span class="s2">&quot;checkpoint&quot;</span><span class="p">:</span> <span class="n">trainer</span><span class="o">.</span><span class="n">checkpoint_callback</span><span class="o">.</span><span class="n">best_model_path</span><span class="p">}</span>
+                <span class="p">)</span>
 
     <span class="n">train_metrics</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">callback_metrics</span>
 
