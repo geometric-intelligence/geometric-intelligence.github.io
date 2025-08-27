@@ -439,7 +439,8 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.path.ExpandUser.html#polpo.preprocessing.load.pregnancy.ExpandUser">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExpandUser</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="c1"># TODO: check use of path</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">filename</span></div>

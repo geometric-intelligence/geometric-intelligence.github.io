@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>LDDMM: how to register a mesh against a template? &#8212; polpo latest documentation</title>
+    <title>LDDMM: how to register a mesh to a template? &#8212; polpo latest documentation</title>
   
   
   
@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="LDDMM: how to visualize registration results?" href="lddmm_register_mesh_template_viz.html" />
-    <link rel="prev" title="LDDMM: how to visualize regression results?" href="ldddm_regression_viz.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="lddmm_pls.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -292,7 +292,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../how_to/lddmm.html">LDDMM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../lddmm/ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../lddmm/lddmm_register_mesh_template.html">LDDMM: how to register a mesh against a template?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lddmm/lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lddmm/lddmm_register_mesh_template_viz.html">LDDMM: how to visualize registration results?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lddmm/lddmm_regression.html">LDDMM: how to do regression?</a></li>
 </ul>
@@ -308,7 +308,8 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../how_to/all.html">All</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">LDDMM: how to register a mesh against a template?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lddmm_deterministic_atlas.html">LDDMM: how to estimate a deterministic atlas?</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">LDDMM: how to register a mesh to a template?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lddmm_register_mesh_template_viz.html">LDDMM: how to visualize registration results?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lddmm_regression.html">LDDMM: how to do regression?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
@@ -370,7 +371,7 @@
     
     <li class="breadcrumb-item"><a href="../../../how_to/all.html" class="nav-link">All</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LDDMM: how to register a mesh against a template?</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LDDMM: how to register a mesh to a template?</span></li>
   </ul>
 </nav>
 </div>
@@ -387,8 +388,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="LDDMM:-how-to-register-a-mesh-against-a-template?">
-<h1>LDDMM: how to register a mesh against a template?<a class="headerlink" href="#LDDMM:-how-to-register-a-mesh-against-a-template?" title="Link to this heading">#</a></h1>
+  <section id="LDDMM:-how-to-register-a-mesh-to-a-template?">
+<h1>LDDMM: how to register a mesh to a template?<a class="headerlink" href="#LDDMM:-how-to-register-a-mesh-to-a-template?" title="Link to this heading">#</a></h1>
 <p>TODO: create a how to fully emulating Nicolas’ script (i.e. including registration parameters)</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -396,9 +397,9 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">herbrain.lddmm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">lddmm</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.lddmm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">lddmm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
@@ -411,7 +412,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.smoothing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSmoothTaubin</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshCenterer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">BRAINSTRUCT2COLOR</span><span class="p">,</span>
+    <span class="n">AshsPrincetonYoungAdult3TEncoding</span><span class="p">,</span>
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
     <span class="n">MriImageLoader</span><span class="p">,</span>
 <span class="p">)</span>
@@ -446,8 +447,8 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 
 <span class="n">STRUCT_NAME</span> <span class="o">=</span> <span class="s2">&quot;PostHipp&quot;</span>
 
-<span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span>
-<span class="n">INITIAL_REGISTRATION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;initial_registration&quot;</span>
+<span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;registration_</span><span class="si">{</span><span class="n">STRUCT_NAME</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">REGISTRATION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span>
 
 <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -457,7 +458,7 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 <h2>Load meshes<a class="headerlink" href="#Load-meshes" title="Link to this heading">#</a></h2>
 <p>We start by loading two selected meshes.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files_pipe</span> <span class="o">=</span> <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span>
@@ -465,14 +466,18 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
     <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">mri2mesh</span> <span class="o">=</span> <span class="n">MriImageLoader</span><span class="p">()</span> <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+<span class="c1"># NB: filtering in the mesh produces different results</span>
+<span class="c1"># e.g. MeshExtractorFromSegmentedImage(struct_id=STRUCT_NAME, encoding=&quot;ashs&quot;)</span>
+<span class="n">mri2mesh</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MriImageLoader</span><span class="p">()</span> <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+<span class="p">)</span>
 
 <span class="k">if</span> <span class="n">STRUCT_NAME</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
     <span class="n">struct_selector</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
 
 <span class="k">else</span><span class="p">:</span>
     <span class="n">struct_selector</span> <span class="o">=</span> <span class="n">PvSelectColor</span><span class="p">(</span>
-        <span class="n">color</span><span class="o">=</span><span class="n">BRAINSTRUCT2COLOR</span><span class="p">[</span><span class="n">STRUCT_NAME</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">AshsPrincetonYoungAdult3TEncoding</span><span class="p">()</span><span class="o">.</span><span class="n">structs2colors</span><span class="p">[</span><span class="n">STRUCT_NAME</span><span class="p">],</span>
         <span class="n">extract_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 
@@ -481,7 +486,7 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
@@ -493,11 +498,11 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/Segmentations&#39;).
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/derivatives/segmentations&#39;).
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -521,7 +526,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <h2>Preprocessing<a class="headerlink" href="#Preprocessing" title="Link to this heading">#</a></h2>
 <p>As we can see in the visualization, meshes are not rigid aligned. Preprocessing takes care of this kind of details, before applying LDDMM.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: consider decimation if above a given number of points</span>
@@ -535,7 +540,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">prep_pipe</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
@@ -545,7 +550,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -554,7 +559,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -578,7 +583,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <h2>LDDMM<a class="headerlink" href="#LDDMM" title="Link to this heading">#</a></h2>
 <p>Save meshes in <code class="docutils literal notranslate"><span class="pre">vtk</span></code> format (as required by <code class="docutils literal notranslate"><span class="pre">deformetrica</span></code>).</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes_writer</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">OUTPUTS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">))</span>
@@ -590,7 +595,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 <p>Use LDDMM to register the meshes.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: need to adapt registration parameters to substructure</span>
@@ -609,7 +614,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <span class="n">lddmm</span><span class="o">.</span><span class="n">registration</span><span class="p">(</span>
     <span class="n">mesh_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
     <span class="n">mesh_filenames</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="n">INITIAL_REGISTRATION_DIR</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">REGISTRATION_DIR</span><span class="p">,</span>
     <span class="o">**</span><span class="n">registration_kwargs</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -627,8 +632,8 @@ OMP_NUM_THREADS will be set to 10
 context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/registration/initial_registration/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7b71f6479850
-instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7b71f648fb90
+instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7e972cd833d0
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7e972dd6b8d0
 &gt;&gt; Set of 110 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -943,18 +948,18 @@ dtype=float32
 &gt;&gt; Log-likelihood = -2.187E+02     [ attachment = -7.051E+01 ; regularity = -1.482E+02 ]
 &gt;&gt; Gradient at Termination: 584.2678895664351
 &gt;&gt; `callback` raised `StopIteration`.
-&gt;&gt; Estimation took: 02 minutes and 40 seconds
-instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7b71f5ab2710
+&gt;&gt; Estimation took: 05 minutes and 07 seconds
+instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7e972cd8a190
 Deformetrica.__del__()
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-time.struct_time(tm_year=2025, tm_mon=3, tm_mday=18, tm_hour=1, tm_min=45, tm_sec=57, tm_wday=1, tm_yday=77, tm_isdst=0)
+time.struct_time(tm_year=2025, tm_mon=8, tm_mday=26, tm_hour=17, tm_min=8, tm_sec=40, tm_wday=1, tm_yday=238, tm_isdst=0)
 </pre></div></div>
 </div>
 </section>
