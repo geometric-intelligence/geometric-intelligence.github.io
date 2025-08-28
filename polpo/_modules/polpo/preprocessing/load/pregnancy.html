@@ -775,9 +775,7 @@
     <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalCsvDataLoader</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal&quot;</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pilot</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">DenseMaternalCsvDataLoader</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/maternal&quot;</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load maternal csv data.</span>
 
 <span class="sd">    Parameters</span>
@@ -786,7 +784,7 @@
 <span class="sd">        Data root dir.</span>
 <span class="sd">    subject_id : str</span>
 <span class="sd">        Identification of the subject. If None, loads full dataframe.</span>
-<span class="sd">        One of the following: &quot;01&quot;, &quot;1001&quot;, &quot;1004&quot;.</span>
+<span class="sd">        One of the following: &quot;01&quot;, &quot;1001B&quot;, &quot;1004B&quot;.</span>
 <span class="sd">    pilot : bool</span>
 <span class="sd">        Whether to load pilot data.</span>
 
@@ -795,12 +793,18 @@
 <span class="sd">    pipe : Pipeline</span>
 <span class="sd">        Pipeline to load maternal csv data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">project_folder</span> <span class="o">=</span> <span class="s2">&quot;maternal_brain_project&quot;</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+    <span class="n">pilot</span> <span class="o">=</span> <span class="n">subject_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">subject_id</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span>
+
     <span class="k">if</span> <span class="n">pilot</span><span class="p">:</span>
+        <span class="n">project_folder</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">project_folder</span><span class="si">}</span><span class="s2">_pilot&quot;</span>
+
         <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">subject_id</span> <span class="o">!=</span> <span class="s2">&quot;01&quot;</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;`subject_id` is ignored, as there&#39;s only one subject&quot;</span><span class="p">)</span>
 
         <span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
-            <span class="n">data_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/raw&quot;</span><span class="p">,</span>
+            <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">project_folder</span> <span class="o">/</span> <span class="s2">&quot;rawdata&quot;</span><span class="p">,</span>
             <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;28Baby_Hormones.csv&quot;</span><span class="p">,</span>
             <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
@@ -809,11 +813,7 @@
         <span class="p">)</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">IndexSetter</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;sessionID&quot;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">project_folder</span> <span class="o">=</span> <span class="s2">&quot;maternal_brain_project&quot;</span>
-
-        <span class="n">loader</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span>
-            <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">project_folder</span> <span class="o">/</span> <span class="s2">&quot;rawdata&quot;</span> <span class="o">/</span> <span class="s2">&quot;SubjectData.csv&quot;</span>
-        <span class="p">)</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">project_folder</span> <span class="o">/</span> <span class="s2">&quot;rawdata&quot;</span> <span class="o">/</span> <span class="s2">&quot;SubjectData.csv&quot;</span><span class="p">)</span>
 
         <span class="n">session_updater</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">UpdateColumnValues</span><span class="p">(</span>
             <span class="n">column_name</span><span class="o">=</span><span class="s2">&quot;sessionID&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>

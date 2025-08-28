@@ -323,6 +323,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.defaults</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CacheableDataLoader</span><span class="p">,</span> <span class="n">PreprocessingStep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExpandUser</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -374,12 +375,9 @@
         <span class="k">if</span> <span class="n">data_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">data_dir</span> <span class="o">=</span> <span class="n">DATA_DIR</span>
 
-        <span class="k">if</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">data_dir</span><span class="p">:</span>
-            <span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">figshare_id</span> <span class="o">=</span> <span class="n">figshare_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remote_path</span> <span class="o">=</span> <span class="n">remote_path</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">data_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">ExpandUser</span><span class="p">()(</span><span class="n">data_dir</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">local_basename</span> <span class="o">=</span> <span class="n">local_basename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remove_id</span> <span class="o">=</span> <span class="n">remove_id</span>
