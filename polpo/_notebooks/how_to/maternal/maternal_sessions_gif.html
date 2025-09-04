@@ -397,10 +397,11 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesGifPlotter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartiallyInitializedStep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMap</span><span class="p">,</span> <span class="n">NestedDictSwapper</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">FIRST_STRUCTS</span><span class="p">,</span>
     <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
@@ -437,7 +438,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
+    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
     <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]],</span>
     <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span>
@@ -450,10 +451,13 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
 
-<span class="c1"># side, struct, time</span>
-<span class="n">meshes</span> <span class="o">=</span> <span class="p">{</span><span class="kc">True</span><span class="p">:</span> <span class="p">{},</span> <span class="kc">False</span><span class="p">:</span> <span class="p">{}}</span>  <span class="c1"># bool represents side</span>
-<span class="k">for</span> <span class="n">left</span> <span class="ow">in</span> <span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">FIRST_STRUCTS</span><span class="p">:</span>
+<span class="c1"># prefixed_struct, time</span>
+<span class="n">meshes</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># bool represents side</span>
+<span class="k">for</span> <span class="n">left</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">struct</span> <span class="o">==</span> <span class="s2">&quot;BrStem&quot;</span><span class="p">:</span>
+            <span class="k">continue</span>
+
         <span class="n">file_finder</span> <span class="o">=</span> <span class="n">DenseMaternalMeshLoader</span><span class="p">(</span>
             <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
             <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -461,84 +465,53 @@
             <span class="n">struct</span><span class="o">=</span><span class="n">struct</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">pipe</span> <span class="o">=</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span> <span class="o">+</span> <span class="n">prep_pipe</span>
+        <span class="n">pipe</span> <span class="o">=</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span> <span class="o">+</span> <span class="n">prep_pipe</span>
 
-        <span class="n">meshes</span><span class="p">[</span><span class="n">left</span><span class="p">][</span><span class="n">struct</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<p>For easier handling of nested, we swap the nested structure of the <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># time, side, struct</span>
-<span class="n">meshes_</span> <span class="o">=</span> <span class="p">(</span><span class="n">DictMap</span><span class="p">(</span><span class="n">NestedDictSwapper</span><span class="p">())</span> <span class="o">+</span> <span class="n">NestedDictSwapper</span><span class="p">())(</span><span class="n">meshes</span><span class="p">)</span>
+        <span class="n">prefixed_struct</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;L&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;R&quot;</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">meshes</span><span class="p">[</span><span class="n">prefixed_struct</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Create-gif">
 <h2>Create gif<a class="headerlink" href="#Create-gif" title="Link to this heading">#</a></h2>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;_images&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">outputs_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-    <span class="n">outputs_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gif_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;_images&quot;</span><span class="p">)</span>
+<span class="n">gif_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">gif_name</span> <span class="o">=</span> <span class="n">outputs_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">_all_structs.gif&quot;</span>
+<span class="n">gif_name</span> <span class="o">=</span> <span class="n">gif_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">_all_structs.gif&quot;</span>
 
 
-<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span>
-    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">)),</span>
+<span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesGifPlotter</span><span class="p">(</span>
+    <span class="n">shape</span><span class="o">=</span><span class="n">putils</span><span class="o">.</span><span class="n">plot_shape_from_n_plots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">meshes</span><span class="p">),</span> <span class="n">n_axis</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">rowise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">gif_name</span><span class="o">=</span><span class="n">gif_name</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span>
+    <span class="n">fps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
     <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">notebook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">),</span>
+    <span class="n">subtitle</span><span class="o">=</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">struct_name</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">struct_name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">pl</span><span class="o">.</span><span class="n">open_gif</span><span class="p">(</span><span class="n">gif_name</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="n">fps</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="n">rendered_meshes</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">time_index</span><span class="p">,</span> <span class="p">(</span><span class="n">session_key</span><span class="p">,</span> <span class="n">meshes_sides</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">meshes_</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-    <span class="k">for</span> <span class="n">left</span><span class="p">,</span> <span class="n">meshes_side</span> <span class="ow">in</span> <span class="n">meshes_sides</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">side_name</span> <span class="o">=</span> <span class="s2">&quot;L&quot;</span> <span class="k">if</span> <span class="n">left</span> <span class="k">else</span> <span class="s2">&quot;R&quot;</span>
-        <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">meshes_side</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-            <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">pos</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">time_index</span><span class="p">:</span>
-                <span class="n">rendered_meshes</span><span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">points</span>
-                <span class="n">pl</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">rendered_meshes</span><span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">mesh_</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh_</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-            <span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">side_name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">session_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">8</span>
-            <span class="p">)</span>
-
-    <span class="n">pl</span><span class="o">.</span><span class="n">write_frame</span><span class="p">()</span>
-
+<span class="n">pl</span><span class="o">.</span><span class="n">add_meshes</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">meshes</span><span class="p">))</span>
 <span class="n">pl</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">gif_name</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_maternal_maternal_sessions_gif_11_0.png" src="../../../_images/_notebooks_how_to_maternal_maternal_sessions_gif_11_0.png" />
+<img alt="../../../_images/_notebooks_how_to_maternal_maternal_sessions_gif_8_0.png" src="../../../_images/_notebooks_how_to_maternal_maternal_sessions_gif_8_0.png" />
 </div>
 </div>
 </section>
