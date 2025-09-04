@@ -319,6 +319,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">._preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>  <span class="c1"># noqa:F401</span>
     <span class="n">Contains</span><span class="p">,</span>
     <span class="n">ContainsAll</span><span class="p">,</span>
+    <span class="n">ContainsAny</span><span class="p">,</span>
     <span class="n">ExceptionToWarning</span><span class="p">,</span>
     <span class="n">MethodApplier</span><span class="p">,</span>
 <span class="p">)</span>
@@ -326,7 +327,7 @@
 
 
 <div class="viewcode-block" id="DigitFinder">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.DigitFinder.html#polpo.preprocessing.load.pregnancy.DigitFinder">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.DigitFinder.html#polpo.preprocessing.load.bids.DigitFinder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DigitFinder</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find digits in a strings.</span>
 
@@ -360,7 +361,7 @@
 
 
 <div class="viewcode-block" id="RegexGroupFinder">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.RegexGroupFinder.html#polpo.preprocessing.load.pregnancy.RegexGroupFinder">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.RegexGroupFinder.html#polpo.preprocessing.load.bids.RegexGroupFinder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RegexGroupFinder</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
         <span class="c1"># pattern must contain a group</span>
@@ -373,15 +374,40 @@
 
 
 <div class="viewcode-block" id="StartsWith">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.StartsWith.html#polpo.preprocessing.load.pregnancy.StartsWith">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.StartsWith.html#polpo.preprocessing.load.bids.StartsWith">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StartsWith</span><span class="p">(</span><span class="n">MethodApplier</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">)</span></div>
 
 
 
+<div class="viewcode-block" id="EndsWithAny">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.EndsWithAny.html#polpo.preprocessing.load.bids.EndsWithAny">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EndsWithAny</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="c1"># TODO: generalize based on ContainsAny?</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">negate</span> <span class="o">=</span> <span class="n">negate</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        membership : bool</span>
+<span class="sd">            Membership or lack of it (depending on negate) for all items.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="n">out</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+
 <div class="viewcode-block" id="TryToInt">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.TryToInt.html#polpo.preprocessing.load.pregnancy.TryToInt">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.TryToInt.html#polpo.preprocessing.load.bids.TryToInt">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TryToInt</span><span class="p">(</span><span class="n">ExceptionToWarning</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="n">warn</span><span class="p">)</span></div>

@@ -402,11 +402,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesGifPlotter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartiallyInitializedStep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">FIRST_STRUCTS</span><span class="p">,</span>
-    <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.fsl</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_all_first_structs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.jacobs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvAlign</span>
 </pre></div>
 </div>
@@ -437,11 +434,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
-    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]],</span>
-    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">structs</span> <span class="o">=</span> <span class="n">get_all_first_structs</span><span class="p">(</span><span class="n">include_brstem</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -451,24 +444,27 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
 
+<span class="n">mesh_loader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshLoader</span><span class="p">(</span>
+        <span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span>
+        <span class="n">struct_subset</span><span class="o">=</span><span class="n">structs</span><span class="p">,</span>
+        <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
+    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
+    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]],</span>
+    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">mesh_loader</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">prep_pipe</span><span class="p">)</span>
+
 <span class="c1"># prefixed_struct, time</span>
-<span class="n">meshes</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># bool represents side</span>
-<span class="k">for</span> <span class="n">left</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]:</span>
-    <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">FIRST_STRUCTS</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">struct</span> <span class="o">==</span> <span class="s2">&quot;BrStem&quot;</span><span class="p">:</span>
-            <span class="k">continue</span>
-
-        <span class="n">file_finder</span> <span class="o">=</span> <span class="n">DenseMaternalMeshLoader</span><span class="p">(</span>
-            <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
-            <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">left</span><span class="o">=</span><span class="n">left</span><span class="p">,</span>
-            <span class="n">struct</span><span class="o">=</span><span class="n">struct</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">pipe</span> <span class="o">=</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span> <span class="o">+</span> <span class="n">prep_pipe</span>
-
-        <span class="n">prefixed_struct</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;L&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;R&quot;</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">struct</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">meshes</span><span class="p">[</span><span class="n">prefixed_struct</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
+<span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
