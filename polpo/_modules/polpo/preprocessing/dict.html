@@ -365,6 +365,7 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictMerger.html#polpo.preprocessing.dict.DictMerger">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictMerger</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="c1"># NB: not shared keys are ignored</span>
+    <span class="c1"># TODO: allow to raise or provide more behaviors?</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_collect_shared_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -718,6 +719,27 @@
         <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">ls</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
                 <span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="DictListSwapper">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictListSwapper.html#polpo.preprocessing.dict.DictListSwapper">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DictListSwapper</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="c1"># swap a dict of list</span>
+    <span class="c1"># assumes lists have the same size</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]))]</span>
+        <span class="n">n_out</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value_ls</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_ls</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_out</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Trying to swap lists with different sizes.&quot;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">value_ls</span><span class="p">):</span>
+                <span class="n">out</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
         <span class="k">return</span> <span class="n">out</span></div>
 

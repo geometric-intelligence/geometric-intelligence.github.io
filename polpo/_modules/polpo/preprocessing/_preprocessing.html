@@ -326,6 +326,8 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">PreprocessingStep</span>
 
+<span class="c1"># TODO: create polpo.preprocessing.iter</span>
+
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_wrap_step</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -348,7 +350,7 @@
 
 
 <div class="viewcode-block" id="ExceptionToWarning">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.ExceptionToWarning.html#polpo.preprocessing.ExceptionToWarning">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.ExceptionToWarning.html#polpo.preprocessing.ExceptionToWarning">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExceptionToWarning</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
@@ -361,7 +363,7 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">warn</span><span class="p">:</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="kc">None</span></div>
+        <span class="k">return</span> <span class="n">data</span></div>
 
 
 
@@ -597,9 +599,12 @@
 <div class="viewcode-block" id="EnsureIterable">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.load.pregnancy.EnsureIterable.html#polpo.preprocessing.EnsureIterable">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EnsureIterable</span><span class="p">(</span><span class="n">StepWrappingPreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">is_non_string_iterable</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">decorated</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_non_string_iterable</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_iter</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
             <span class="n">decorated</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
 
@@ -612,6 +617,14 @@
             <span class="k">return</span> <span class="n">new_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">new_data</span></div>
+
+
+
+<div class="viewcode-block" id="EnsureListIterable">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.EnsureListIterable.html#polpo.preprocessing.EnsureListIterable">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EnsureListIterable</span><span class="p">(</span><span class="n">EnsureIterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span></div>
 
 
 
@@ -1035,6 +1048,25 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">reset_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">):</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="GroupBy">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.GroupBy.html#polpo.preprocessing.GroupBy">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GroupBy</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datum2group</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datum2group</span> <span class="o">=</span> <span class="n">datum2group</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datum2group</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span>
+            <span class="n">key_ls</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">key_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span>
+            <span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">key_ls</span>
+
+        <span class="k">return</span> <span class="n">out</span></div>
 
 </pre></div>
 
