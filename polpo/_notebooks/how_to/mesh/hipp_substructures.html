@@ -398,13 +398,14 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListSqueeze</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">PregnancyPilotSegmentationsLoader</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.pilot</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSelectColor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
-    <span class="n">MriImageLoader</span><span class="p">,</span>
     <span class="n">segmtool2encoding</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -445,9 +446,8 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
-    <span class="o">+</span> <span class="n">ListSqueeze</span><span class="p">()</span>
-    <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
+    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">],</span> <span class="n">as_image</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
     <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span>
     <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
 <span class="p">)</span>
@@ -467,7 +467,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/Segmentations/BB01&#39;).
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/derivatives/segmentations&#39;).
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -541,6 +541,14 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 <p>Any mesh preprocessing step can now be applied to the substructure.</p>
 <p>NB: recall that a substructure can directly be extracted from the image, as shown <a class="reference internal" href="mri2mesh.html"><span class="doc">here</span></a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: show that doing extraction in the image leads to different results</span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 

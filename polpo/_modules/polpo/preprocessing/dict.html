@@ -317,7 +317,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">nest_dict</span><span class="p">,</span> <span class="n">unnest_dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">._preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Filter</span><span class="p">,</span>
@@ -485,14 +485,22 @@
 
 
 
-<div class="viewcode-block" id="ExtractUniqueKey">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ExtractUniqueKey.html#polpo.preprocessing.dict.ExtractUniqueKey">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExtractUniqueKey</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ExtractUniqueOuterKey</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">n_keys</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected one key, but there&#39;s </span><span class="si">{</span><span class="n">n_keys</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">dict_</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">dict_</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dict_</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+
+<div class="viewcode-block" id="ExtractUniqueKey">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ExtractUniqueKey.html#polpo.preprocessing.dict.ExtractUniqueKey">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExtractUniqueKey</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">nested</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nested</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">putils</span><span class="o">.</span><span class="n">extract_unique_key_nested</span>
+
+        <span class="k">return</span> <span class="n">_ExtractUniqueOuterKey</span><span class="p">()</span></div>
 
 
 
@@ -791,7 +799,7 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.UnnestDict.html#polpo.preprocessing.dict.UnnestDict">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UnnestDict</span><span class="p">(</span><span class="n">FunctionCaller</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unnest_dict</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">putils</span><span class="o">.</span><span class="n">unnest_dict</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
 
 
 
@@ -799,7 +807,7 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.NestDict.html#polpo.preprocessing.dict.NestDict">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NestDict</span><span class="p">(</span><span class="n">FunctionCaller</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nest_dict</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">putils</span><span class="o">.</span><span class="n">nest_dict</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
 
 </pre></div>
 

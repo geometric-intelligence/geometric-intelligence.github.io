@@ -20,9 +20,9 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "from polpo.preprocessing.load.pregnancy import (\n",
+    "from polpo.preprocessing.load.pregnancy.pilot import (\n",
     "    FigsharePregnancyDataLoader,\n",
-    "    PregnancyPilotMriLoader,\n",
+    "    MriLoader,\n",
     ")"
    ]
   },
@@ -66,7 +66,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "`PregnancyPilotMriLoader` conveniently wraps `FigsharePregnancyDataLoader` for the use case shown in this slide. The following is equivalent to the above (except it outputs a `list`)."
+    "`MriLoader` conveniently wraps `FigsharePregnancyDataLoader` for the use case shown in this slide. The following is equivalent to the above (except it outputs a `dict`)."
    ]
   },
   {
@@ -77,7 +77,7 @@
     {
      "data": {
       "text/plain": [
-       "['/home/luisfpereira/.herbrain/data/pregnancy/mri/ses-01/BrainNormalizedToTemplate.nii.gz']"
+       "{1: '/home/luisfpereira/.herbrain/data/pregnancy/raw/mri/ses-01/BrainNormalizedToTemplate.nii.gz'}"
       ]
      },
      "execution_count": 3,
@@ -86,7 +86,7 @@
     }
    ],
    "source": [
-    "loader = PregnancyPilotMriLoader(subset=[SESSION_ID])\n",
+    "loader = MriLoader(subset=[SESSION_ID])\n",
     "\n",
     "loader()"
    ]
@@ -95,7 +95,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Tip: `ListSqueeze` it if needed!"
+    "Tip: `ppdict.ExtractUniqueKey` if needed!"
    ]
   },
   {

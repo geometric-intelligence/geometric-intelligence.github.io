@@ -397,15 +397,14 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListSqueeze</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">PregnancyPilotMriLoader</span><span class="p">,</span>
-    <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">,</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.pilot</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">,</span>
+    <span class="n">MriLoader</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
-    <span class="n">MriImageLoader</span><span class="p">,</span>
     <span class="n">SkimageMarchingCubes</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -445,9 +444,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">PregnancyPilotMriLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">MriLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">],</span> <span class="n">as_image</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">ListSqueeze</span><span class="p">()</span> <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -464,7 +463,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/mri/ses-01&#39;).
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/raw/mri&#39;).
 </pre></div></div>
 </div>
 </section>
@@ -518,9 +517,8 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
-    <span class="o">+</span> <span class="n">ListSqueeze</span><span class="p">()</span>
-    <span class="o">+</span> <span class="n">MriImageLoader</span><span class="p">()</span>
+    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">],</span> <span class="n">as_image</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -538,7 +536,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/Segmentations/BB01&#39;).
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/derivatives/segmentations&#39;).
 </pre></div></div>
 </div>
 <p>The process changes only slightly when the data is segmented. (NB: <code class="docutils literal notranslate"><span class="pre">encoding</span></code> informs about the tool used for segmentation, which matters to map ids to tool ids and colors.)</p>
@@ -547,7 +545,11 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img2mesh</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">return_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span>
+        <span class="n">return_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
 <span class="p">)</span>
 
 <span class="n">mesh</span> <span class="o">=</span> <span class="n">img2mesh</span><span class="p">(</span><span class="n">img_fdata</span><span class="p">)</span>

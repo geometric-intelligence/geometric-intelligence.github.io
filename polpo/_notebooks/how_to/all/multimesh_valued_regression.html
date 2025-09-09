@@ -391,7 +391,7 @@
                   
   <section id="How-to-do-multiple-structures-mesh-valued-regression?">
 <h1>How to do multiple structures mesh-valued regression?<a class="headerlink" href="#How-to-do-multiple-structures-mesh-valued-regression?" title="Link to this heading">#</a></h1>
-<p>NB: an alternative way to using a for loop on <a class="reference internal" href="mesh_valued_regression.html"><span class="doc">“How to do mesh-valued regression?</span></a>.</p>
+<p>NB: an alternative way to using a for loop on <a class="reference internal" href="mesh_valued_regression.html"><span class="doc">How to do mesh-valued regression?</span></a>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -404,18 +404,12 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.pd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMeshes2Comps</span><span class="p">,</span> <span class="n">ObjectRegressor</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">Map</span><span class="p">,</span>
-    <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
-<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.learning</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDictsToXY</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DenseMaternalCsvDataLoader</span><span class="p">,</span>
-    <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.jacobs</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MeshLoader</span><span class="p">,</span>
+    <span class="n">TabularDataLoader</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvAlign</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="n">segmtool2encoding</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidAlignment</span>
 </pre></div>
 </div>
 </div>
@@ -444,14 +438,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tool</span> <span class="o">=</span> <span class="s2">&quot;fsl&quot;</span>
-<span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
-
-<span class="n">encoding</span> <span class="o">=</span> <span class="n">segmtool2encoding</span><span class="p">(</span><span class="n">tool</span><span class="p">)</span>
-
-<span class="n">struct_keys</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">structs</span>
-
-<span class="n">n_structs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">struct_keys</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -459,35 +446,21 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
-    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]],</span>
-    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_loader</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span>
-    <span class="n">Map</span><span class="p">(</span>
-        <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-            <span class="n">Step</span><span class="o">=</span><span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
-            <span class="n">pass_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
-            <span class="n">_struct</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="n">_left</span><span class="o">=</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span>
-            <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_loader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshLoader</span><span class="p">(</span>
+        <span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span>
+        <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>  <span class="c1"># session, struct</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span>  <span class="c1"># struct, session</span>
 <span class="p">)</span>
 
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">mesh_loader</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">prep_pipe</span><span class="p">)</span>
+<span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">RigidAlignment</span><span class="p">(</span><span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">))</span>
 
-<span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">(</span><span class="n">struct_keys</span><span class="p">)</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">mesh_loader</span> <span class="o">+</span> <span class="n">prep_pipe</span>
+
+<span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -495,12 +468,10 @@
 <section id="Loading-tabular-data">
 <h2>Loading tabular data<a class="headerlink" href="#Loading-tabular-data" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pilot</span> <span class="o">=</span> <span class="n">subject_id</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span>
-
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">DenseMaternalCsvDataLoader</span><span class="p">(</span><span class="n">pilot</span><span class="o">=</span><span class="n">pilot</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">)</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
 </pre></div>
@@ -511,12 +482,12 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/maternal/28Baby_Hormones.csv&#39;).
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/maternal/maternal_brain_project_pilot/rawdata/28Baby_Hormones.csv&#39;).
 </pre></div></div>
 </div>
 <p>Here, we filter the tabular data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_selector</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfIsInFilter</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;post&quot;</span><span class="p">],</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -528,7 +499,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_dict</span> <span class="o">=</span> <span class="n">predictor_selector</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -540,7 +511,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <h2>Merge data<a class="headerlink" href="#Merge-data" title="Link to this heading">#</a></h2>
 <p>We get the data in the proper format for fitting.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_pipe</span> <span class="o">=</span> <span class="n">NestedDictsToXY</span><span class="p">()</span>
@@ -554,17 +525,17 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <section id="Create-and-fit-regressor">
 <h2>Create and fit regressor<a class="headerlink" href="#Create-and-fit-regressor" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-<span class="n">objs2y</span> <span class="o">=</span> <span class="n">DictMeshes2Comps</span><span class="p">(</span><span class="n">n_pipes</span><span class="o">=</span><span class="n">n_structs</span><span class="p">,</span> <span class="n">dim_reduction</span><span class="o">=</span><span class="n">pca</span><span class="p">)</span>
+<span class="n">objs2y</span> <span class="o">=</span> <span class="n">DictMeshes2Comps</span><span class="p">(</span><span class="n">n_pipes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">meshes</span><span class="p">),</span> <span class="n">dim_reduction</span><span class="o">=</span><span class="n">pca</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ObjectRegressor</span><span class="p">(</span><span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">objs2y</span><span class="o">=</span><span class="n">objs2y</span><span class="p">)</span>
@@ -572,7 +543,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">meshes_</span><span class="p">)</span>
@@ -580,7 +551,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -764,9 +735,7 @@ clickable and can be expanded/collapsed.
 /* Toggleable content - dropdown */
 
 #sk-container-id-1 div.sk-toggleable__content {
-  max-height: 0;
-  max-width: 0;
-  overflow: hidden;
+  display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
@@ -792,9 +761,9 @@ clickable and can be expanded/collapsed.
 
 #sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
-  max-height: 200px;
-  max-width: 100%;
-  overflow: auto;
+  display: block;
+  width: 100%;
+  overflow: visible;
 }
 
 #sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
@@ -999,12 +968,76 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiDictToValuesList()),
+
+.estimator-table summary {
+    padding: .5rem;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.estimator-table details[open] {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.estimator-table .parameters-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.estimator-table .parameters-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.estimator-table .parameters-table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+.estimator-table .parameters-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.estimator-table table td {
+    border: 1px solid rgba(106, 105, 104, 0.232);
+}
+
+.user-set td {
+    color:rgb(255, 94, 0);
+    text-align: left;
+}
+
+.user-set td.value pre {
+    color:rgb(255, 94, 0) !important;
+    background-color: transparent !important;
+}
+
+.default td {
+    color: black;
+    text-align: left;
+}
+
+.user-set td i,
+.default td i {
+    color: black;
+}
+
+.copy-paste-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+</style><body><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiDictToValuesList()),
                                               (&#x27;step_1&#x27;,
                                                MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                  BiMeshesToVertices()),
                                                                                                 (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x7828b0bd0870&gt;)),
                                                                                                 (&#x27;step_2&#x27;,
                                                                                                  BiFlattenButFirst()),
                                                                                                 (&#x27;step_3&#x27;,
@@ -1020,131 +1053,298 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                          AdapterPipeline(steps=[(&#x27;step_0&#x27;,
                                                                                                  BiMeshesToVertices()),
                                                                                                 (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
+                                                                                                 FunctionTransformer(func=&lt;function stack at 0x7828b0bd0870&gt;)),
                                                                                                 (&#x27;step_2&#x27;,
                                                                                                  BiFlattenButFirst()),
                                                                                                 (&#x27;step_3&#x27;,
                                                                                                  StandardScaler(with_std=False)),
                                                                                                 (&#x27;step_4&#x27;,
                                                                                                  PCA(n_components=4))])])),
-                                              (&#x27;step_2&#x27;, BiHstack())]))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>ObjectRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>ObjectRegressor(objs2y=AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiDictToValuesList()),
-                                              (&#x27;step_1&#x27;,
-                                               MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                                                 BiMeshesToVertices()),
-                                                                                                (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                                                                (&#x27;step_2&#x27;,
-                                                                                                 BiFlattenButFirst()),
-                                                                                                (&#x27;step_3&#x27;,
-                                                                                                 StandardScaler(with_std=False)),
-                                                                                                (&#x27;step_4&#x27;,
-                                                                                                 PCA(n_components=4))]),
-                                                                         Adapte...
-                                                                                                 BiFlattenButFirst()),
-                                                                                                (&#x27;step_3&#x27;,
-                                                                                                 StandardScaler(with_std=False)),
-                                                                                                (&#x27;step_4&#x27;,
-                                                                                                 PCA(n_components=4))]),
-                                                                         AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                                                 BiMeshesToVertices()),
-                                                                                                (&#x27;step_1&#x27;,
-                                                                                                 FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                                                                (&#x27;step_2&#x27;,
-                                                                                                 BiFlattenButFirst()),
-                                                                                                (&#x27;step_3&#x27;,
-                                                                                                 StandardScaler(with_std=False)),
-                                                                                                (&#x27;step_4&#x27;,
-                                                                                                 PCA(n_components=4))])])),
-                                              (&#x27;step_2&#x27;, BiHstack())]))</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>pre: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                        TransformerAdapter(step=&lt;built-in function asarray&gt;)),
-                       (&#x27;step_1&#x27;,
-                        TransformerAdapter(step=&lt;function atleast_2d at 0x75dae1e6bab0&gt;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;built-in function asarray&gt;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted"><pre>TransformerAdapter(step=&lt;function atleast_2d at 0x75dae1e6bab0&gt;)</pre></div> </div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: ObjectBasedTransformedTargetRegressor</div></div></label><div class="sk-toggleable__content fitted"><pre>ObjectBasedTransformedTargetRegressor(check_inverse=False,
-                                      regressor=LinearRegression(),
-                                      transformer=AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                          BiDictToValuesList()),
-                                                                         (&#x27;step_1&#x27;,
-                                                                          MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                                                                            BiMeshesToVertices()),
-                                                                                                                           (&#x27;step_1&#x27;,
-                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                                                                                           (&#x27;step_2&#x27;,
-                                                                                                                            BiFlattenButFirst()),
-                                                                                                                           (&#x27;ste...
-                                                                                                                            BiFlattenButFirst()),
-                                                                                                                           (&#x27;step_3&#x27;,
-                                                                                                                            StandardScaler(with_std=False)),
-                                                                                                                           (&#x27;step_4&#x27;,
-                                                                                                                            PCA(n_components=4))]),
-                                                                                                    AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                                                                            BiMeshesToVertices()),
-                                                                                                                           (&#x27;step_1&#x27;,
-                                                                                                                            FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                                                                                           (&#x27;step_2&#x27;,
-                                                                                                                            BiFlattenButFirst()),
-                                                                                                                           (&#x27;step_3&#x27;,
-                                                                                                                            StandardScaler(with_std=False)),
-                                                                                                                           (&#x27;step_4&#x27;,
-                                                                                                                            PCA(n_components=4))])])),
-                                                                         (&#x27;step_2&#x27;,
-                                                                          BiHstack())]))</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>regressor: LinearRegression</div></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>transformer: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted"><pre>AdapterPipeline(steps=[(&#x27;step_0&#x27;, BiDictToValuesList()),
-                       (&#x27;step_1&#x27;,
-                        MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                          BiMeshesToVertices()),
-                                                                         (&#x27;step_1&#x27;,
-                                                                          FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                                         (&#x27;step_2&#x27;,
-                                                                          BiFlattenButFirst()),
-                                                                         (&#x27;step_3&#x27;,
-                                                                          StandardScaler(with_std=False)),
-                                                                         (&#x27;step_4&#x27;,
-                                                                          PCA(n_components=4))]),
-                                                  AdapterPipeline(steps=[(&#x27;step...
-                                                                          BiFlattenButFirst()),
-                                                                         (&#x27;step_3&#x27;,
-                                                                          StandardScaler(with_std=False)),
-                                                                         (&#x27;step_4&#x27;,
-                                                                          PCA(n_components=4))]),
-                                                  AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                                          BiMeshesToVertices()),
-                                                                         (&#x27;step_1&#x27;,
-                                                                          FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                                         (&#x27;step_2&#x27;,
-                                                                          BiFlattenButFirst()),
-                                                                         (&#x27;step_3&#x27;,
-                                                                          StandardScaler(with_std=False)),
-                                                                         (&#x27;step_4&#x27;,
-                                                                          PCA(n_components=4))])])),
-                       (&#x27;step_2&#x27;, BiHstack())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DictToValuesList(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiDictToValuesList()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>MapTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>MapTransformer(par_steps=[AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                  BiMeshesToVertices()),
-                                                 (&#x27;step_1&#x27;,
-                                                  FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                 (&#x27;step_2&#x27;,
-                                                  BiFlattenButFirst()),
-                                                 (&#x27;step_3&#x27;,
-                                                  StandardScaler(with_std=False)),
-                                                 (&#x27;step_4&#x27;,
-                                                  PCA(n_components=4))]),
-                          AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                  BiMeshesToVertices()),
-                                                 (&#x27;step_1&#x27;,
-                                                  FunctionTransformer(func=&lt;fun...
-                                                  FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                 (&#x27;step_2&#x27;,
-                                                  BiFlattenButFirst()),
-                                                 (&#x27;step_3&#x27;,
-                                                  StandardScaler(with_std=False)),
-                                                 (&#x27;step_4&#x27;,
-                                                  PCA(n_components=4))]),
-                          AdapterPipeline(steps=[(&#x27;step_0&#x27;,
-                                                  BiMeshesToVertices()),
-                                                 (&#x27;step_1&#x27;,
-                                                  FunctionTransformer(func=&lt;function stack at 0x75dae1e9cff0&gt;)),
-                                                 (&#x27;step_2&#x27;,
-                                                  BiFlattenButFirst()),
-                                                 (&#x27;step_3&#x27;,
-                                                  StandardScaler(with_std=False)),
-                                                 (&#x27;step_4&#x27;,
-                                                  PCA(n_components=4))])])</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>hstack</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted"><pre>BiHstack()</pre></div> </div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+                                              (&#x27;step_2&#x27;, BiHstack())]))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>ObjectRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('objs2y',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">objs2y&nbsp;</td>
+            <td class="value">AdapterPipeli... BiHstack())])</td>
+        </tr>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>pre: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="pre__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('steps',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">steps&nbsp;</td>
+            <td class="value">[(&#x27;step_0&#x27;, ...), (&#x27;step_1&#x27;, ...)]</td>
+        </tr>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="pre__step_0__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('step',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">step&nbsp;</td>
+            <td class="value">&lt;built-in function asarray&gt;</td>
+        </tr>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>TransformerAdapter</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="pre__step_1__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('step',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">step&nbsp;</td>
+            <td class="value">&lt;function atl...x7828b0bd0170&gt;</td>
+        </tr>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>model: ObjectBasedTransformedTargetRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('regressor',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">regressor&nbsp;</td>
+            <td class="value">LinearRegression()</td>
+        </tr>
+
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('transformer',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">transformer&nbsp;</td>
+            <td class="value">AdapterPipeli... BiHstack())])</td>
+        </tr>
+
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('func',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">func&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('inverse_func',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">inverse_func&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('check_inverse',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">check_inverse&nbsp;</td>
+            <td class="value">False</td>
+        </tr>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>regressor: LinearRegression</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__regressor__"><pre>LinearRegression()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__regressor__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('fit_intercept',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">fit_intercept&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('copy_X',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">copy_X&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('tol',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">tol&nbsp;</td>
+            <td class="value">1e-06</td>
+        </tr>
+
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('n_jobs',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">n_jobs&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('positive',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">positive&nbsp;</td>
+            <td class="value">False</td>
+        </tr>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>transformer: AdapterPipeline</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__transformer__"></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DictToValuesList(...)</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__transformer__step_0__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>MapTransformer</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__transformer__step_1__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('par_steps',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">par_steps&nbsp;</td>
+            <td class="value">[AdapterPipeli...mponents=4))]), AdapterPipeli...mponents=4))]), ...]</td>
+        </tr>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>hstack</div><div class="caption">FunctionTransformer</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="model__transformer__step_2__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div></div></div></div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
+    // Get the parameter prefix from the closest toggleable content
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
+
+    const originalStyle = element.style;
+    const computedStyle = window.getComputedStyle(element);
+    const originalWidth = computedStyle.width;
+    const originalHTML = element.innerHTML.replace('Copied!', '');
+
+    navigator.clipboard.writeText(fullParamName)
+        .then(() => {
+            element.style.width = originalWidth;
+            element.style.color = 'green';
+            element.innerHTML = "Copied!";
+
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'red';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        });
+    return false;
+}
+
+document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const paramName = element.parentElement.nextElementSibling.textContent.trim();
+    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
+
+    element.setAttribute('title', fullParamName);
+});
+</script></body></div>
 </div>
 </section>
 <section id="Evaluate-fit">
@@ -1152,7 +1352,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <p><code class="docutils literal notranslate"><span class="pre">model.predict</span></code> outputs meshes, but we know <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> sees <code class="docutils literal notranslate"><span class="pre">PCA</span></code> components. We can evaluate <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">r2_score</a> by applying transform.</p>
 <p>NB: these are values on the training data.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -1162,31 +1362,31 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 <span class="n">scores</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s2">&quot;raw_values&quot;</span><span class="p">)</span>
 
-<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">struct_keys</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_structs</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">meshes</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;BrStem&#39;: array([0.43173305, 0.00093647, 0.12750477, 0.02389184]),
- &#39;L_Thal&#39;: array([0.01415542, 0.53246225, 0.01803256, 0.1944647 ]),
- &#39;R_Thal&#39;: array([0.29409483, 0.19884927, 0.0071038 , 0.04048802]),
- &#39;L_Caud&#39;: array([0.19577605, 0.43087542, 0.03419801, 0.0149218 ]),
- &#39;R_Caud&#39;: array([0.28438227, 0.25672121, 0.06444696, 0.03906288]),
- &#39;L_Puta&#39;: array([0.66647759, 0.0129195 , 0.03550186, 0.02858566]),
- &#39;R_Puta&#39;: array([0.3135088 , 0.13438528, 0.1297084 , 0.13376509]),
- &#39;L_Pall&#39;: array([0.35915277, 0.04855107, 0.24886398, 0.05712195]),
- &#39;R_Pall&#39;: array([0.52617963, 0.0208839 , 0.06184913, 0.07608356]),
- &#39;L_Hipp&#39;: array([0.04356306, 0.00644147, 0.24583467, 0.00145252]),
- &#39;R_Hipp&#39;: array([0.03846718, 0.06083203, 0.25813068, 0.0021323 ]),
- &#39;L_Amyg&#39;: array([0.00954856, 0.25933572, 0.39715277, 0.00524614]),
- &#39;R_Amyg&#39;: array([0.31313141, 0.10727703, 0.01111522, 0.00072597]),
- &#39;L_Accu&#39;: array([3.66642523e-01, 9.99478421e-03, 5.68751851e-02, 1.89862875e-04]),
- &#39;R_Accu&#39;: array([0.2658962 , 0.01162296, 0.01511773, 0.20374928])}
+{&#39;L_Caud&#39;: array([0.19577571, 0.43087607, 0.03419797, 0.01492182]),
+ &#39;L_Pall&#39;: array([0.35915275, 0.04855135, 0.24886381, 0.05712201]),
+ &#39;L_Amyg&#39;: array([0.00954852, 0.25933387, 0.3971549 , 0.00524618]),
+ &#39;L_Accu&#39;: array([3.66642485e-01, 9.99477298e-03, 5.68769931e-02, 1.89650868e-04]),
+ &#39;L_Hipp&#39;: array([0.04356304, 0.00644152, 0.24583455, 0.00145247]),
+ &#39;L_Puta&#39;: array([0.66647764, 0.01291934, 0.03550199, 0.02858547]),
+ &#39;L_Thal&#39;: array([0.01415544, 0.53246226, 0.01803246, 0.19446471]),
+ &#39;R_Caud&#39;: array([0.28438218, 0.25672153, 0.06444699, 0.03906277]),
+ &#39;R_Pall&#39;: array([0.52617965, 0.02088388, 0.06184909, 0.07608363]),
+ &#39;R_Amyg&#39;: array([0.31313143, 0.10727699, 0.01111522, 0.00072599]),
+ &#39;R_Accu&#39;: array([0.26589627, 0.01162288, 0.01511771, 0.20374866]),
+ &#39;R_Hipp&#39;: array([0.03846713, 0.0608323 , 0.25813036, 0.0021322 ]),
+ &#39;R_Puta&#39;: array([0.31350877, 0.13438504, 0.12970855, 0.13376527]),
+ &#39;R_Thal&#39;: array([0.29409485, 0.19884905, 0.00710386, 0.04048809]),
+ &#39;BrStem&#39;: array([0.43173304, 0.00093647, 0.12750402, 0.02389235])}
 </pre></div></div>
 </div>
 </section>

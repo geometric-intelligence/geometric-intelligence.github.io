@@ -405,7 +405,11 @@
     <span class="n">Map</span><span class="p">,</span>
     <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">PregnancyPilotSegmentationsLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidAlignment</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.pilot</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSelectColor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvWriter</span>
@@ -415,8 +419,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">AshsPrincetonYoungAdult3TEncoding</span><span class="p">,</span>
     <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
-    <span class="n">MriImageLoader</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 </pre></div>
 </div>
 </div>
@@ -462,16 +466,13 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files_pipe</span> <span class="o">=</span> <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">SOURCE_INDEX</span><span class="p">,</span> <span class="n">TARGET_INDEX</span><span class="p">],</span>
-    <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files_pipe</span> <span class="o">=</span> <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SOURCE_INDEX</span><span class="p">,</span> <span class="n">TARGET_INDEX</span><span class="p">],</span> <span class="n">as_image</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
 <span class="c1"># NB: filtering in the mesh produces different results</span>
 <span class="c1"># e.g. MeshExtractorFromSegmentedImage(struct_id=STRUCT_NAME, encoding=&quot;ashs&quot;)</span>
-<span class="n">mri2mesh</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">MriImageLoader</span><span class="p">()</span> <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
-<span class="p">)</span>
+<span class="n">mri2mesh</span> <span class="o">=</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">STRUCT_NAME</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
     <span class="n">struct_selector</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
@@ -482,7 +483,9 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
         <span class="n">extract_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">files_pipe</span> <span class="o">+</span> <span class="n">Map</span><span class="p">(</span><span class="n">mri2mesh</span> <span class="o">+</span> <span class="n">struct_selector</span><span class="p">)</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">files_pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">mri2mesh</span> <span class="o">+</span> <span class="n">struct_selector</span><span class="p">)</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -527,15 +530,13 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <h2>Preprocessing<a class="headerlink" href="#Preprocessing" title="Link to this heading">#</a></h2>
 <p>As we can see in the visualization, meshes are not rigid aligned. Preprocessing takes care of this kind of details, before applying LDDMM.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: consider decimation if above a given number of points</span>
 
-<span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">MeshCenterer</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvSmoothTaubin</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span> <span class="o">+</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
-    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">MeshCenterer</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvSmoothTaubin</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span> <span class="o">+</span> <span class="n">RigidAlignment</span><span class="p">(</span>
+    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">is_dict</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -605,11 +606,8 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
     <span class="n">regularisation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
     <span class="n">freeze_control_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">attachment_kernel_width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
     <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;varifold&quot;</span><span class="p">,</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">,</span>
-    <span class="n">filter_cp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">plddmm</span><span class="o">.</span><span class="n">estimate_registration</span><span class="p">(</span>
@@ -621,7 +619,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
@@ -631,10 +629,9 @@ Logger has been set to: DEBUG
 OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
 OMP_NUM_THREADS will be set to 10
 context has already been set
-&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/registration/initial_registration/deformetrica-state.p.
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/registration_posthipp/registration/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7e972cd833d0
-instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7e972dd6b8d0
+instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7e25e1506a50
 &gt;&gt; Set of 110 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -645,322 +642,60 @@ dtype=float32
 ------------------------------------- Iteration: 1 -------------------------------------
 
 ------------------------------------- Iteration: 20 -------------------------------------
-&gt;&gt; Log-likelihood = -4.003E+02     [ attachment = -2.139E+02 ; regularity = -1.864E+02 ]
+&gt;&gt; Log-likelihood = -3.396E+02     [ attachment = -1.451E+02 ; regularity = -1.945E+02 ]
+&gt;&gt; Log-likelihood = -3.366E+02     [ attachment = -1.439E+02 ; regularity = -1.927E+02 ]
 
 ------------------------------------- Iteration: 40 -------------------------------------
-&gt;&gt; Log-likelihood = -3.077E+02     [ attachment = -1.116E+02 ; regularity = -1.961E+02 ]
+&gt;&gt; Log-likelihood = -2.715E+02     [ attachment = -8.166E+01 ; regularity = -1.898E+02 ]
 
 ------------------------------------- Iteration: 60 -------------------------------------
-&gt;&gt; Log-likelihood = -2.875E+02     [ attachment = -9.781E+01 ; regularity = -1.897E+02 ]
+&gt;&gt; Log-likelihood = -2.516E+02     [ attachment = -6.505E+01 ; regularity = -1.865E+02 ]
 
 ------------------------------------- Iteration: 80 -------------------------------------
-&gt;&gt; Log-likelihood = -2.784E+02     [ attachment = -8.946E+01 ; regularity = -1.889E+02 ]
+&gt;&gt; Log-likelihood = -2.428E+02     [ attachment = -6.194E+01 ; regularity = -1.808E+02 ]
 
 ------------------------------------- Iteration: 100 -------------------------------------
-&gt;&gt; Log-likelihood = -2.720E+02     [ attachment = -8.605E+01 ; regularity = -1.859E+02 ]
+&gt;&gt; Log-likelihood = -2.379E+02     [ attachment = -5.816E+01 ; regularity = -1.798E+02 ]
 
 ------------------------------------- Iteration: 120 -------------------------------------
-&gt;&gt; Log-likelihood = -2.689E+02     [ attachment = -8.548E+01 ; regularity = -1.834E+02 ]
-&gt;&gt; Log-likelihood = -2.687E+02     [ attachment = -8.514E+01 ; regularity = -1.836E+02 ]
+&gt;&gt; Log-likelihood = -2.338E+02     [ attachment = -5.503E+01 ; regularity = -1.788E+02 ]
 
 ------------------------------------- Iteration: 140 -------------------------------------
-&gt;&gt; Log-likelihood = -2.666E+02     [ attachment = -8.320E+01 ; regularity = -1.834E+02 ]
+&gt;&gt; Log-likelihood = -2.307E+02     [ attachment = -5.296E+01 ; regularity = -1.777E+02 ]
 
 ------------------------------------- Iteration: 160 -------------------------------------
-&gt;&gt; Log-likelihood = -2.653E+02     [ attachment = -8.187E+01 ; regularity = -1.834E+02 ]
+&gt;&gt; Log-likelihood = -2.286E+02     [ attachment = -5.126E+01 ; regularity = -1.774E+02 ]
 
 ------------------------------------- Iteration: 180 -------------------------------------
-&gt;&gt; Log-likelihood = -2.643E+02     [ attachment = -8.171E+01 ; regularity = -1.826E+02 ]
+&gt;&gt; Log-likelihood = -2.274E+02     [ attachment = -5.100E+01 ; regularity = -1.764E+02 ]
 
 ------------------------------------- Iteration: 200 -------------------------------------
-&gt;&gt; Log-likelihood = -2.635E+02     [ attachment = -8.052E+01 ; regularity = -1.830E+02 ]
+&gt;&gt; Log-likelihood = -2.263E+02     [ attachment = -5.045E+01 ; regularity = -1.758E+02 ]
 
 ------------------------------------- Iteration: 220 -------------------------------------
-&gt;&gt; Log-likelihood = -2.628E+02     [ attachment = -8.034E+01 ; regularity = -1.825E+02 ]
+&gt;&gt; Log-likelihood = -2.256E+02     [ attachment = -5.054E+01 ; regularity = -1.750E+02 ]
 
 ------------------------------------- Iteration: 240 -------------------------------------
-&gt;&gt; Log-likelihood = -2.621E+02     [ attachment = -7.918E+01 ; regularity = -1.829E+02 ]
+&gt;&gt; Log-likelihood = -2.249E+02     [ attachment = -4.978E+01 ; regularity = -1.751E+02 ]
 
 ------------------------------------- Iteration: 260 -------------------------------------
-&gt;&gt; Log-likelihood = -2.615E+02     [ attachment = -7.934E+01 ; regularity = -1.822E+02 ]
+&gt;&gt; Log-likelihood = -2.243E+02     [ attachment = -4.888E+01 ; regularity = -1.754E+02 ]
 
 ------------------------------------- Iteration: 280 -------------------------------------
-&gt;&gt; Log-likelihood = -2.610E+02     [ attachment = -7.919E+01 ; regularity = -1.818E+02 ]
-&gt;&gt; Log-likelihood = -2.609E+02     [ attachment = -7.903E+01 ; regularity = -1.819E+02 ]
+&gt;&gt; Log-likelihood = -2.238E+02     [ attachment = -4.785E+01 ; regularity = -1.759E+02 ]
 
 ------------------------------------- Iteration: 300 -------------------------------------
-&gt;&gt; Log-likelihood = -2.601E+02     [ attachment = -7.898E+01 ; regularity = -1.812E+02 ]
+&gt;&gt; Log-likelihood = -2.232E+02     [ attachment = -4.804E+01 ; regularity = -1.752E+02 ]
 
 ------------------------------------- Iteration: 320 -------------------------------------
-&gt;&gt; Log-likelihood = -2.596E+02     [ attachment = -7.822E+01 ; regularity = -1.814E+02 ]
+&gt;&gt; Log-likelihood = -2.227E+02     [ attachment = -4.738E+01 ; regularity = -1.753E+02 ]
 
 ------------------------------------- Iteration: 340 -------------------------------------
-&gt;&gt; Log-likelihood = -2.591E+02     [ attachment = -7.824E+01 ; regularity = -1.809E+02 ]
-
-------------------------------------- Iteration: 360 -------------------------------------
-&gt;&gt; Log-likelihood = -2.586E+02     [ attachment = -7.756E+01 ; regularity = -1.810E+02 ]
-
-------------------------------------- Iteration: 380 -------------------------------------
-&gt;&gt; Log-likelihood = -2.581E+02     [ attachment = -7.781E+01 ; regularity = -1.803E+02 ]
-
-------------------------------------- Iteration: 400 -------------------------------------
-&gt;&gt; Log-likelihood = -2.578E+02     [ attachment = -7.768E+01 ; regularity = -1.801E+02 ]
-
-------------------------------------- Iteration: 420 -------------------------------------
-&gt;&gt; Log-likelihood = -2.575E+02     [ attachment = -7.750E+01 ; regularity = -1.800E+02 ]
-
-------------------------------------- Iteration: 440 -------------------------------------
-&gt;&gt; Log-likelihood = -2.572E+02     [ attachment = -7.715E+01 ; regularity = -1.800E+02 ]
-
-------------------------------------- Iteration: 460 -------------------------------------
-&gt;&gt; Log-likelihood = -2.568E+02     [ attachment = -7.729E+01 ; regularity = -1.795E+02 ]
-
-------------------------------------- Iteration: 480 -------------------------------------
-&gt;&gt; Log-likelihood = -2.566E+02     [ attachment = -7.700E+01 ; regularity = -1.796E+02 ]
-
-------------------------------------- Iteration: 500 -------------------------------------
-&gt;&gt; Log-likelihood = -2.563E+02     [ attachment = -7.671E+01 ; regularity = -1.796E+02 ]
-
-------------------------------------- Iteration: 520 -------------------------------------
-&gt;&gt; Log-likelihood = -2.559E+02     [ attachment = -7.703E+01 ; regularity = -1.789E+02 ]
-
-------------------------------------- Iteration: 540 -------------------------------------
-&gt;&gt; Log-likelihood = -2.555E+02     [ attachment = -7.708E+01 ; regularity = -1.784E+02 ]
-
-------------------------------------- Iteration: 560 -------------------------------------
-&gt;&gt; Log-likelihood = -2.551E+02     [ attachment = -7.713E+01 ; regularity = -1.780E+02 ]
-
-------------------------------------- Iteration: 580 -------------------------------------
-&gt;&gt; Log-likelihood = -2.546E+02     [ attachment = -7.654E+01 ; regularity = -1.781E+02 ]
-
-------------------------------------- Iteration: 600 -------------------------------------
-&gt;&gt; Log-likelihood = -2.541E+02     [ attachment = -7.659E+01 ; regularity = -1.775E+02 ]
-
-------------------------------------- Iteration: 620 -------------------------------------
-&gt;&gt; Log-likelihood = -2.536E+02     [ attachment = -7.662E+01 ; regularity = -1.770E+02 ]
-
-------------------------------------- Iteration: 640 -------------------------------------
-&gt;&gt; Log-likelihood = -2.532E+02     [ attachment = -7.691E+01 ; regularity = -1.763E+02 ]
-
-------------------------------------- Iteration: 660 -------------------------------------
-&gt;&gt; Log-likelihood = -2.527E+02     [ attachment = -7.661E+01 ; regularity = -1.761E+02 ]
-
-------------------------------------- Iteration: 680 -------------------------------------
-&gt;&gt; Log-likelihood = -2.522E+02     [ attachment = -7.681E+01 ; regularity = -1.754E+02 ]
-
-------------------------------------- Iteration: 700 -------------------------------------
-&gt;&gt; Log-likelihood = -2.515E+02     [ attachment = -7.608E+01 ; regularity = -1.754E+02 ]
-
-------------------------------------- Iteration: 720 -------------------------------------
-&gt;&gt; Log-likelihood = -2.506E+02     [ attachment = -7.584E+01 ; regularity = -1.747E+02 ]
-
-------------------------------------- Iteration: 740 -------------------------------------
-&gt;&gt; Log-likelihood = -2.497E+02     [ attachment = -7.680E+01 ; regularity = -1.729E+02 ]
-
-------------------------------------- Iteration: 760 -------------------------------------
-&gt;&gt; Log-likelihood = -2.487E+02     [ attachment = -7.521E+01 ; regularity = -1.735E+02 ]
-
-------------------------------------- Iteration: 780 -------------------------------------
-&gt;&gt; Log-likelihood = -2.480E+02     [ attachment = -7.508E+01 ; regularity = -1.729E+02 ]
-
-------------------------------------- Iteration: 800 -------------------------------------
-&gt;&gt; Log-likelihood = -2.472E+02     [ attachment = -7.469E+01 ; regularity = -1.725E+02 ]
-
-------------------------------------- Iteration: 820 -------------------------------------
-&gt;&gt; Log-likelihood = -2.464E+02     [ attachment = -7.468E+01 ; regularity = -1.717E+02 ]
-
-------------------------------------- Iteration: 840 -------------------------------------
-&gt;&gt; Log-likelihood = -2.456E+02     [ attachment = -7.489E+01 ; regularity = -1.707E+02 ]
-
-------------------------------------- Iteration: 860 -------------------------------------
-&gt;&gt; Log-likelihood = -2.448E+02     [ attachment = -7.480E+01 ; regularity = -1.700E+02 ]
-
-------------------------------------- Iteration: 880 -------------------------------------
-&gt;&gt; Log-likelihood = -2.440E+02     [ attachment = -7.417E+01 ; regularity = -1.698E+02 ]
-
-------------------------------------- Iteration: 900 -------------------------------------
-&gt;&gt; Log-likelihood = -2.431E+02     [ attachment = -7.377E+01 ; regularity = -1.693E+02 ]
-
-------------------------------------- Iteration: 920 -------------------------------------
-&gt;&gt; Log-likelihood = -2.424E+02     [ attachment = -7.316E+01 ; regularity = -1.692E+02 ]
-
-------------------------------------- Iteration: 940 -------------------------------------
-&gt;&gt; Log-likelihood = -2.417E+02     [ attachment = -7.338E+01 ; regularity = -1.683E+02 ]
-
-------------------------------------- Iteration: 960 -------------------------------------
-&gt;&gt; Log-likelihood = -2.410E+02     [ attachment = -7.292E+01 ; regularity = -1.681E+02 ]
-
-------------------------------------- Iteration: 980 -------------------------------------
-&gt;&gt; Log-likelihood = -2.404E+02     [ attachment = -7.307E+01 ; regularity = -1.674E+02 ]
-
-------------------------------------- Iteration: 1000 -------------------------------------
-&gt;&gt; Log-likelihood = -2.399E+02     [ attachment = -7.352E+01 ; regularity = -1.664E+02 ]
-
-------------------------------------- Iteration: 1020 -------------------------------------
-&gt;&gt; Log-likelihood = -2.393E+02     [ attachment = -7.352E+01 ; regularity = -1.658E+02 ]
-
-------------------------------------- Iteration: 1040 -------------------------------------
-&gt;&gt; Log-likelihood = -2.388E+02     [ attachment = -7.364E+01 ; regularity = -1.651E+02 ]
-
-------------------------------------- Iteration: 1060 -------------------------------------
-&gt;&gt; Log-likelihood = -2.381E+02     [ attachment = -7.337E+01 ; regularity = -1.647E+02 ]
-
-------------------------------------- Iteration: 1080 -------------------------------------
-&gt;&gt; Log-likelihood = -2.375E+02     [ attachment = -7.246E+01 ; regularity = -1.651E+02 ]
-
-------------------------------------- Iteration: 1100 -------------------------------------
-&gt;&gt; Log-likelihood = -2.371E+02     [ attachment = -7.257E+01 ; regularity = -1.645E+02 ]
-&gt;&gt; Log-likelihood = -2.370E+02     [ attachment = -7.247E+01 ; regularity = -1.646E+02 ]
-
-------------------------------------- Iteration: 1120 -------------------------------------
-&gt;&gt; Log-likelihood = -2.365E+02     [ attachment = -7.303E+01 ; regularity = -1.635E+02 ]
-
-------------------------------------- Iteration: 1140 -------------------------------------
-&gt;&gt; Log-likelihood = -2.360E+02     [ attachment = -7.322E+01 ; regularity = -1.628E+02 ]
-
-------------------------------------- Iteration: 1160 -------------------------------------
-&gt;&gt; Log-likelihood = -2.355E+02     [ attachment = -7.267E+01 ; regularity = -1.628E+02 ]
-
-------------------------------------- Iteration: 1180 -------------------------------------
-&gt;&gt; Log-likelihood = -2.349E+02     [ attachment = -7.177E+01 ; regularity = -1.632E+02 ]
-
-------------------------------------- Iteration: 1200 -------------------------------------
-&gt;&gt; Log-likelihood = -2.344E+02     [ attachment = -7.214E+01 ; regularity = -1.623E+02 ]
-
-------------------------------------- Iteration: 1220 -------------------------------------
-&gt;&gt; Log-likelihood = -2.338E+02     [ attachment = -7.245E+01 ; regularity = -1.614E+02 ]
-
-------------------------------------- Iteration: 1240 -------------------------------------
-&gt;&gt; Log-likelihood = -2.334E+02     [ attachment = -7.217E+01 ; regularity = -1.612E+02 ]
-
-------------------------------------- Iteration: 1260 -------------------------------------
-&gt;&gt; Log-likelihood = -2.328E+02     [ attachment = -7.197E+01 ; regularity = -1.609E+02 ]
-
-------------------------------------- Iteration: 1280 -------------------------------------
-&gt;&gt; Log-likelihood = -2.322E+02     [ attachment = -7.162E+01 ; regularity = -1.606E+02 ]
-
-------------------------------------- Iteration: 1300 -------------------------------------
-&gt;&gt; Log-likelihood = -2.317E+02     [ attachment = -7.160E+01 ; regularity = -1.601E+02 ]
-
-------------------------------------- Iteration: 1320 -------------------------------------
-&gt;&gt; Log-likelihood = -2.311E+02     [ attachment = -7.159E+01 ; regularity = -1.595E+02 ]
-
-------------------------------------- Iteration: 1340 -------------------------------------
-&gt;&gt; Log-likelihood = -2.307E+02     [ attachment = -7.176E+01 ; regularity = -1.589E+02 ]
-
-------------------------------------- Iteration: 1360 -------------------------------------
-&gt;&gt; Log-likelihood = -2.301E+02     [ attachment = -7.092E+01 ; regularity = -1.592E+02 ]
-
-------------------------------------- Iteration: 1380 -------------------------------------
-&gt;&gt; Log-likelihood = -2.296E+02     [ attachment = -7.160E+01 ; regularity = -1.580E+02 ]
-
-------------------------------------- Iteration: 1400 -------------------------------------
-&gt;&gt; Log-likelihood = -2.289E+02     [ attachment = -7.155E+01 ; regularity = -1.574E+02 ]
-
-------------------------------------- Iteration: 1420 -------------------------------------
-&gt;&gt; Log-likelihood = -2.285E+02     [ attachment = -7.031E+01 ; regularity = -1.582E+02 ]
-
-------------------------------------- Iteration: 1440 -------------------------------------
-&gt;&gt; Log-likelihood = -2.280E+02     [ attachment = -6.993E+01 ; regularity = -1.580E+02 ]
-
-------------------------------------- Iteration: 1460 -------------------------------------
-&gt;&gt; Log-likelihood = -2.276E+02     [ attachment = -7.018E+01 ; regularity = -1.574E+02 ]
-&gt;&gt; Log-likelihood = -2.275E+02     [ attachment = -7.000E+01 ; regularity = -1.575E+02 ]
-
-------------------------------------- Iteration: 1480 -------------------------------------
-&gt;&gt; Log-likelihood = -2.271E+02     [ attachment = -7.092E+01 ; regularity = -1.562E+02 ]
-
-------------------------------------- Iteration: 1500 -------------------------------------
-&gt;&gt; Log-likelihood = -2.267E+02     [ attachment = -7.093E+01 ; regularity = -1.558E+02 ]
-
-------------------------------------- Iteration: 1520 -------------------------------------
-&gt;&gt; Log-likelihood = -2.263E+02     [ attachment = -7.129E+01 ; regularity = -1.550E+02 ]
-
-------------------------------------- Iteration: 1540 -------------------------------------
-&gt;&gt; Log-likelihood = -2.259E+02     [ attachment = -7.170E+01 ; regularity = -1.542E+02 ]
-
-------------------------------------- Iteration: 1560 -------------------------------------
-&gt;&gt; Log-likelihood = -2.255E+02     [ attachment = -7.142E+01 ; regularity = -1.541E+02 ]
-
-------------------------------------- Iteration: 1580 -------------------------------------
-&gt;&gt; Log-likelihood = -2.250E+02     [ attachment = -7.076E+01 ; regularity = -1.543E+02 ]
-
-------------------------------------- Iteration: 1600 -------------------------------------
-&gt;&gt; Log-likelihood = -2.247E+02     [ attachment = -7.123E+01 ; regularity = -1.535E+02 ]
-
-------------------------------------- Iteration: 1620 -------------------------------------
-&gt;&gt; Log-likelihood = -2.244E+02     [ attachment = -7.134E+01 ; regularity = -1.531E+02 ]
-
-------------------------------------- Iteration: 1640 -------------------------------------
-&gt;&gt; Log-likelihood = -2.241E+02     [ attachment = -7.120E+01 ; regularity = -1.529E+02 ]
-
-------------------------------------- Iteration: 1660 -------------------------------------
-&gt;&gt; Log-likelihood = -2.237E+02     [ attachment = -7.110E+01 ; regularity = -1.526E+02 ]
-
-------------------------------------- Iteration: 1680 -------------------------------------
-&gt;&gt; Log-likelihood = -2.235E+02     [ attachment = -7.107E+01 ; regularity = -1.524E+02 ]
-
-------------------------------------- Iteration: 1700 -------------------------------------
-&gt;&gt; Log-likelihood = -2.231E+02     [ attachment = -7.097E+01 ; regularity = -1.521E+02 ]
-
-------------------------------------- Iteration: 1720 -------------------------------------
-&gt;&gt; Log-likelihood = -2.228E+02     [ attachment = -7.117E+01 ; regularity = -1.516E+02 ]
-
-------------------------------------- Iteration: 1740 -------------------------------------
-&gt;&gt; Log-likelihood = -2.225E+02     [ attachment = -7.156E+01 ; regularity = -1.510E+02 ]
-
-------------------------------------- Iteration: 1760 -------------------------------------
-&gt;&gt; Log-likelihood = -2.222E+02     [ attachment = -7.115E+01 ; regularity = -1.511E+02 ]
-
-------------------------------------- Iteration: 1780 -------------------------------------
-&gt;&gt; Log-likelihood = -2.218E+02     [ attachment = -7.042E+01 ; regularity = -1.514E+02 ]
-
-------------------------------------- Iteration: 1800 -------------------------------------
-&gt;&gt; Log-likelihood = -2.215E+02     [ attachment = -7.054E+01 ; regularity = -1.510E+02 ]
-
-------------------------------------- Iteration: 1820 -------------------------------------
-&gt;&gt; Log-likelihood = -2.213E+02     [ attachment = -7.066E+01 ; regularity = -1.506E+02 ]
-
-------------------------------------- Iteration: 1840 -------------------------------------
-&gt;&gt; Log-likelihood = -2.211E+02     [ attachment = -7.082E+01 ; regularity = -1.502E+02 ]
-
-------------------------------------- Iteration: 1860 -------------------------------------
-&gt;&gt; Log-likelihood = -2.208E+02     [ attachment = -7.101E+01 ; regularity = -1.498E+02 ]
-
-------------------------------------- Iteration: 1880 -------------------------------------
-&gt;&gt; Log-likelihood = -2.205E+02     [ attachment = -7.065E+01 ; regularity = -1.498E+02 ]
-
-------------------------------------- Iteration: 1900 -------------------------------------
-&gt;&gt; Log-likelihood = -2.201E+02     [ attachment = -7.025E+01 ; regularity = -1.499E+02 ]
-
-------------------------------------- Iteration: 1920 -------------------------------------
-&gt;&gt; Log-likelihood = -2.198E+02     [ attachment = -7.081E+01 ; regularity = -1.490E+02 ]
-
-------------------------------------- Iteration: 1940 -------------------------------------
-&gt;&gt; Log-likelihood = -2.196E+02     [ attachment = -7.073E+01 ; regularity = -1.488E+02 ]
-
-------------------------------------- Iteration: 1960 -------------------------------------
-&gt;&gt; Log-likelihood = -2.193E+02     [ attachment = -7.073E+01 ; regularity = -1.486E+02 ]
-
-------------------------------------- Iteration: 1980 -------------------------------------
-&gt;&gt; Log-likelihood = -2.190E+02     [ attachment = -7.080E+01 ; regularity = -1.482E+02 ]
-
-------------------------------------- Iteration: 2000 -------------------------------------
-&gt;&gt; Log-likelihood = -2.187E+02     [ attachment = -7.051E+01 ; regularity = -1.482E+02 ]
-&gt;&gt; Gradient at Termination: 584.2678895664351
-&gt;&gt; `callback` raised `StopIteration`.
-&gt;&gt; Estimation took: 05 minutes and 07 seconds
-instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7e972cd8a190
+&gt;&gt; Log-likelihood = -2.223E+02     [ attachment = -4.741E+01 ; regularity = -1.749E+02 ]
+&gt;&gt; Gradient at Termination: 19.074395461023922
+&gt;&gt; CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
+&gt;&gt; Estimation took: 15 seconds
 Deformetrica.__del__()
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-time.struct_time(tm_year=2025, tm_mon=8, tm_mday=26, tm_hour=17, tm_min=8, tm_sec=40, tm_wday=1, tm_yday=238, tm_isdst=0)
 </pre></div></div>
 </div>
 </section>

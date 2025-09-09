@@ -17,15 +17,11 @@
     "from matplotlib import pyplot as plt\n",
     "from sklearn.linear_model import LinearRegression\n",
     "\n",
+    "import polpo.preprocessing.dict as ppdict\n",
     "import polpo.preprocessing.pd as ppd\n",
     "from polpo.preprocessing import IndexMap, NestingSwapper\n",
-    "from polpo.preprocessing.dict import DictMap, DictMerger\n",
-    "from polpo.preprocessing.load.pregnancy import (\n",
-    "    FIRST_STRUCTS,\n",
-    "    DenseMaternalCsvDataLoader,\n",
-    "    DenseMaternalMeshLoader,\n",
-    ")\n",
-    "from polpo.preprocessing.mesh.io import PvReader"
+    "from polpo.preprocessing.load.fsl import get_all_first_structs\n",
+    "from polpo.preprocessing.load.pregnancy.jacobs import MeshLoader"
    ]
   },
   {
@@ -37,26 +33,30 @@
   },
   {
    "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "structs = get_all_first_structs(include_brstem=False, order=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
    "execution_count": 2,
    "metadata": {},
    "outputs": [],
    "source": [
     "subject_id = \"01\"\n",
     "\n",
-    "# side, struct, time\n",
-    "meshes = {True: {}, False: {}}  # bool represents side\n",
-    "for left in meshes.keys():\n",
-    "    for struct in FIRST_STRUCTS:\n",
-    "        file_finder = DenseMaternalMeshLoader(\n",
-    "            subject_id=subject_id,\n",
-    "            as_dict=True,\n",
-    "            left=left,\n",
-    "            struct=struct,\n",
-    "        )\n",
-    "\n",
-    "        pipe = file_finder + DictMap(PvReader())\n",
-    "\n",
-    "        meshes[left][struct] = pipe()"
+    "mesh_loader = (\n",
+    "    MeshLoader(\n",
+    "        subject_subset=[subject_id],\n",
+    "        struct_subset=structs,\n",
+    "        as_mesh=True,\n",
+    "    )\n",
+    "    + ppdict.ExtractUniqueKey()\n",
+    "    + ppdict.NestedDictSwapper()\n",
+    ")"
    ]
   },
   {

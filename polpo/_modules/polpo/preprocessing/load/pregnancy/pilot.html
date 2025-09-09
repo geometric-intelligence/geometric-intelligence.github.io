@@ -333,6 +333,7 @@
     <span class="n">StepWithLogging</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.figshare</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigshareDataLoader</span><span class="p">,</span> <span class="n">_get_basename</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="n">MriImageLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.path</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">ExpandUser</span><span class="p">,</span>
     <span class="n">FileFinder</span><span class="p">,</span>
@@ -362,6 +363,10 @@
     <span class="mi">25</span><span class="p">,</span>
     <span class="mi">26</span><span class="p">,</span>
 <span class="p">}</span>
+
+
+<span class="c1"># TODO: add the possibility to download and reorganize data</span>
+<span class="c1"># then use loaders available in maternal</span>
 
 
 <div class="viewcode-block" id="FigsharePregnancyDataLoader">
@@ -579,7 +584,11 @@
     <span class="k">return</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">CsvReader</span><span class="p">()</span> <span class="o">+</span> <span class="n">prep_pipe</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">MriLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">MriLoader</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span>
+    <span class="n">as_image</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load mri filenames.</span>
 
 <span class="sd">    Parameters</span>
@@ -588,13 +597,13 @@
 <span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
 <span class="sd">    data_dir : str</span>
 <span class="sd">        Directory where to store data.</span>
-<span class="sd">    as_dict : bool</span>
-<span class="sd">        Whether to create a dictionary with session as key.</span>
+<span class="sd">    as_image : bool</span>
+<span class="sd">        Whether to load file as image.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pipe : Pipeline</span>
-<span class="sd">        Pipeline whose output is list[str] or dict[int, str].</span>
+<span class="sd">        Pipeline whose output is dict[int, str or np.array].</span>
 <span class="sd">        String represents filename. Sorting is by session id.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">folders_selector</span> <span class="o">=</span> <span class="n">_FigsharePregnancyFolderLoader</span><span class="p">(</span>
@@ -616,15 +625,16 @@
     <span class="p">)</span>
 
     <span class="n">pipe</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">files_selector</span>
+    <span class="k">if</span> <span class="n">as_image</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">MriImageLoader</span><span class="p">())</span>
 
-    <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pipe</span>
-
-    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pipe</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">HippocampalSubfieldsSegmentationsLoader</span><span class="p">(</span>
-    <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span>
+    <span class="n">as_image</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create pipeline to load segmented mri filenames.</span>
 
@@ -634,12 +644,12 @@
 <span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
 <span class="sd">    data_dir : str</span>
 <span class="sd">        Directory where to store data.</span>
-<span class="sd">    as_dict : bool</span>
-<span class="sd">        Whether to create a dictionary with session as key.</span>
+<span class="sd">    as_image : bool</span>
+<span class="sd">        Whether to load file as image.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    filenames : list[str] or dict[int, str]</span>
+<span class="sd">    filenames : dict[int, str]</span>
 <span class="sd">        String represents filename. Sorting is by session id.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">folders_selector</span> <span class="o">=</span> <span class="n">_FigsharePregnancyFolderLoader</span><span class="p">(</span>
@@ -673,16 +683,15 @@
 
     <span class="n">pipe</span> <span class="o">=</span> <span class="n">folders_selector</span> <span class="o">+</span> <span class="n">files_selector</span>
 
-    <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pipe</span>
+    <span class="k">if</span> <span class="n">as_image</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">MriImageLoader</span><span class="p">())</span>
 
-    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pipe</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">RegisteredMeshesLoader</span><span class="p">(</span>
     <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span>
-    <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">method</span><span class="o">=</span><span class="s2">&quot;deformetrica&quot;</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">):</span>
@@ -696,8 +705,6 @@
 <span class="sd">        Subset of sessions to load. If `None`, loads all.</span>
 <span class="sd">    data_dir : str</span>
 <span class="sd">        Directory where to store data.</span>
-<span class="sd">    as_dict : bool</span>
-<span class="sd">        Whether to create a dictionary with session as key.</span>
 <span class="sd">    method : str</span>
 <span class="sd">        Which meshes to load based on registration methodology.</span>
 <span class="sd">        Available options are &#39;deformetrica&#39; and &#39;elastic&#39;.</span>
@@ -707,7 +714,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pipe : Pipeline</span>
-<span class="sd">        Pipeline whose output is list[str] or dict[int, str].</span>
+<span class="sd">        Pipeline whose output is dict[int, str].</span>
 <span class="sd">        String represents filename. Sorting is by session id.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">method_to_path</span> <span class="o">=</span> <span class="p">{</span>
@@ -740,10 +747,7 @@
         <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pipe</span>
-
-    <span class="k">return</span> <span class="n">pipe</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pipe</span>
 </pre></div>
 
                 </article>

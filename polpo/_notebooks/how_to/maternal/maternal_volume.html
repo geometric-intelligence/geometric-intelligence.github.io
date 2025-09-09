@@ -399,40 +399,39 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.pd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">IndexMap</span><span class="p">,</span> <span class="n">NestingSwapper</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMap</span><span class="p">,</span> <span class="n">DictMerger</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">FIRST_STRUCTS</span><span class="p">,</span>
-    <span class="n">DenseMaternalCsvDataLoader</span><span class="p">,</span>
-    <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.fsl</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_all_first_structs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.jacobs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshLoader</span>
 </pre></div>
 </div>
 </div>
 <section id="Loading-meshes">
 <h2>Loading meshes<a class="headerlink" href="#Loading-meshes" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">structs</span> <span class="o">=</span> <span class="n">get_all_first_structs</span><span class="p">(</span><span class="n">include_brstem</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
 
-<span class="c1"># side, struct, time</span>
-<span class="n">meshes</span> <span class="o">=</span> <span class="p">{</span><span class="kc">True</span><span class="p">:</span> <span class="p">{},</span> <span class="kc">False</span><span class="p">:</span> <span class="p">{}}</span>  <span class="c1"># bool represents side</span>
-<span class="k">for</span> <span class="n">left</span> <span class="ow">in</span> <span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">FIRST_STRUCTS</span><span class="p">:</span>
-        <span class="n">file_finder</span> <span class="o">=</span> <span class="n">DenseMaternalMeshLoader</span><span class="p">(</span>
-            <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
-            <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">left</span><span class="o">=</span><span class="n">left</span><span class="p">,</span>
-            <span class="n">struct</span><span class="o">=</span><span class="n">struct</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">pipe</span> <span class="o">=</span> <span class="n">file_finder</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
-
-        <span class="n">meshes</span><span class="p">[</span><span class="n">left</span><span class="p">][</span><span class="n">struct</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
+<span class="n">mesh_loader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshLoader</span><span class="p">(</span>
+        <span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span>
+        <span class="n">struct_subset</span><span class="o">=</span><span class="n">structs</span><span class="p">,</span>
+        <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -547,7 +546,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_maternal_maternal_volume_10_0.png" src="../../../_images/_notebooks_how_to_maternal_maternal_volume_10_0.png" />
+<img alt="../../../_images/_notebooks_how_to_maternal_maternal_volume_11_0.png" src="../../../_images/_notebooks_how_to_maternal_maternal_volume_11_0.png" />
 </div>
 </div>
 </section>

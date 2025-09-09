@@ -396,9 +396,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.pilot</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">FigsharePregnancyDataLoader</span><span class="p">,</span>
-    <span class="n">PregnancyPilotMriLoader</span><span class="p">,</span>
+    <span class="n">MriLoader</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -430,12 +430,12 @@
 </pre></div></div>
 </div>
 <p>The most general <code class="docutils literal notranslate"><span class="pre">FigShareDataLoader</span></code> could also be used, but <code class="docutils literal notranslate"><span class="pre">FigsharePregnancyDataLoader</span></code> has more guard rails at instantiation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">PregnancyPilotMriLoader</span></code> conveniently wraps <code class="docutils literal notranslate"><span class="pre">FigsharePregnancyDataLoader</span></code> for the use case shown in this slide. The following is equivalent to the above (except it outputs a <code class="docutils literal notranslate"><span class="pre">list</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">MriLoader</span></code> conveniently wraps <code class="docutils literal notranslate"><span class="pre">FigsharePregnancyDataLoader</span></code> for the use case shown in this slide. The following is equivalent to the above (except it outputs a <code class="docutils literal notranslate"><span class="pre">dict</span></code>).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">PregnancyPilotMriLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">MriLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">])</span>
 
 <span class="n">loader</span><span class="p">()</span>
 </pre></div>
@@ -447,10 +447,10 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&#39;/home/luisfpereira/.herbrain/data/pregnancy/mri/ses-01/BrainNormalizedToTemplate.nii.gz&#39;]
+{1: &#39;/home/luisfpereira/.herbrain/data/pregnancy/raw/mri/ses-01/BrainNormalizedToTemplate.nii.gz&#39;}
 </pre></div></div>
 </div>
-<p>Tip: <code class="docutils literal notranslate"><span class="pre">ListSqueeze</span></code> it if needed!</p>
+<p>Tip: <code class="docutils literal notranslate"><span class="pre">ppdict.ExtractUniqueKey</span></code> if needed!</p>
 <section id="Further-reading">
 <h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
 <ul class="simple">
