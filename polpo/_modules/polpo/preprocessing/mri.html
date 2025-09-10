@@ -316,11 +316,12 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSelectColor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">params_to_kwargs</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessingStep</span>
 
-<span class="n">HippStructs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">ASHS_STRUCTS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;CA1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;CA2+3&quot;</span><span class="p">,</span>
     <span class="s2">&quot;DG&quot;</span><span class="p">,</span>
@@ -334,7 +335,7 @@
 
 
 <div class="viewcode-block" id="StructEncoding">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.StructEncoding.html#polpo.preprocessing.load.pregnancy.pilot.StructEncoding">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.StructEncoding.html#polpo.preprocessing.load.pregnancy.jacobs.StructEncoding">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StructEncoding</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structs</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structs</span> <span class="o">=</span> <span class="n">structs</span>
@@ -369,7 +370,7 @@
 
 
 <div class="viewcode-block" id="AshsPrincetonYoungAdult3TEncoding">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.AshsPrincetonYoungAdult3TEncoding.html#polpo.preprocessing.load.pregnancy.pilot.AshsPrincetonYoungAdult3TEncoding">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.AshsPrincetonYoungAdult3TEncoding.html#polpo.preprocessing.load.pregnancy.jacobs.AshsPrincetonYoungAdult3TEncoding">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AshsPrincetonYoungAdult3TEncoding</span><span class="p">(</span><span class="n">StructEncoding</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Encoding of hippocampus subfields.</span>
 
@@ -427,7 +428,7 @@
 
 
 <div class="viewcode-block" id="BrainStructEncoding">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.BrainStructEncoding.html#polpo.preprocessing.load.pregnancy.pilot.BrainStructEncoding">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.BrainStructEncoding.html#polpo.preprocessing.load.pregnancy.jacobs.BrainStructEncoding">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BrainStructEncoding</span><span class="p">(</span><span class="n">StructEncoding</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">midline_structs</span><span class="p">,</span> <span class="n">bilateral_structs</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">midline_colors</span><span class="p">,</span> <span class="n">bilateral_colors</span>
@@ -450,7 +451,7 @@
 
 
 <div class="viewcode-block" id="FreeSurferStructEncoding">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.FreeSurferStructEncoding.html#polpo.preprocessing.load.pregnancy.pilot.FreeSurferStructEncoding">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.FreeSurferStructEncoding.html#polpo.preprocessing.load.pregnancy.jacobs.FreeSurferStructEncoding">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FreeSurferStructEncoding</span><span class="p">(</span><span class="n">BrainStructEncoding</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    https://surfer.nmr.mgh.harvard.edu/fswiki/FsTutorial/AnatomicalROI/FreeSurferColorLUT</span>
@@ -505,7 +506,7 @@
 
 
 <div class="viewcode-block" id="FslFirstStructEncoding">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.FslFirstStructEncoding.html#polpo.preprocessing.load.pregnancy.pilot.FslFirstStructEncoding">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.FslFirstStructEncoding.html#polpo.preprocessing.load.pregnancy.jacobs.FslFirstStructEncoding">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FslFirstStructEncoding</span><span class="p">(</span><span class="n">FreeSurferStructEncoding</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    https://fsl.fmrib.ox.ac.uk/fsl/docs/#/structural/first?id=supported-structures</span>
@@ -519,7 +520,7 @@
     <span class="c1"># struct is ignored if tool is not None</span>
 
     <span class="k">if</span> <span class="n">tool</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">HippStructs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">ASHS_STRUCTS</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">AshsPrincetonYoungAdult3TEncoding</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">FreeSurferStructEncoding</span><span class="p">()</span>
@@ -546,7 +547,7 @@
 
 
 <div class="viewcode-block" id="MriImageLoader">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.load.pregnancy.pilot.MriImageLoader">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MriImageLoader.html#polpo.preprocessing.load.pregnancy.jacobs.MriImageLoader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MriImageLoader</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load image from .nii/.mgz file.</span>
 
@@ -599,7 +600,7 @@
 
 
 <div class="viewcode-block" id="LocalToTemplateTransform">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.LocalToTemplateTransform.html#polpo.preprocessing.load.pregnancy.pilot.LocalToTemplateTransform">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.LocalToTemplateTransform.html#polpo.preprocessing.load.pregnancy.jacobs.LocalToTemplateTransform">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LocalToTemplateTransform</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get transform from local to template system.</span>
 
@@ -644,7 +645,7 @@
 
 
 <div class="viewcode-block" id="MeshExtractorFromSegmentedImage">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html#polpo.preprocessing.load.pregnancy.pilot.MeshExtractorFromSegmentedImage">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedImage.html#polpo.preprocessing.load.pregnancy.jacobs.MeshExtractorFromSegmentedImage">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mesh extractor from images.</span>
 
@@ -653,6 +654,10 @@
 <span class="sd">    struct_id : int or str</span>
 <span class="sd">        Structure to select. Depends on segmentation tool.</span>
 <span class="sd">        If -1 considers full structure. If integer, ignores encoding.</span>
+<span class="sd">    image : array-like, shape = [n_x, n_y, n_z]</span>
+<span class="sd">        Voxels which are colored according to substructure assignment.</span>
+<span class="sd">        For example, color of voxel (0, 0, 0) is an integer value that can be</span>
+<span class="sd">        anywhere from 0-9.</span>
 <span class="sd">    marching_cubes : callable</span>
 <span class="sd">        Marching cubes algorithm.</span>
 <span class="sd">    return_colors : bool</span>
@@ -668,64 +673,72 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">struct_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">marching_cubes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">return_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">encoding</span> <span class="o">=</span> <span class="n">segmtool2encoding</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">struct_id</span><span class="p">,</span> <span class="n">raise_</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">struct_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Need encoding to handle str id: `</span><span class="si">{</span><span class="n">struct_id</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">marching_cubes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">marching_cubes</span> <span class="o">=</span> <span class="n">SkimageMarchingCubes</span><span class="p">(</span>
                 <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lewiner&quot;</span><span class="p">,</span> <span class="n">return_values</span><span class="o">=</span><span class="n">return_colors</span>
             <span class="p">)</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">structure_id</span> <span class="o">=</span> <span class="n">struct_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">struct_id</span> <span class="o">=</span> <span class="n">struct_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">marching_cubes</span> <span class="o">=</span> <span class="n">marching_cubes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_fdata</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract one surface mesh from the fdata of a segmented image.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_encoding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">struct_id</span><span class="p">):</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        img_fdata: array-like, shape = [n_x, n_y, n_z]. Voxels which are colored</span>
-<span class="sd">            according to substructure assignment. For example, color of voxel</span>
-<span class="sd">            (0, 0, 0) is an integer value that can be anywhere from 0-9.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">structure_id</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">structure_id</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structure_id</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
-            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="o">.</span><span class="n">structs2ids</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structure_id</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">encoding</span> <span class="o">=</span> <span class="n">segmtool2encoding</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">struct_id</span><span class="p">,</span> <span class="n">raise_</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">structure_id</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">img_mask</span> <span class="o">=</span> <span class="n">img_fdata</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">struct_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Need encoding to handle str id: `</span><span class="si">{</span><span class="n">struct_id</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">encoding</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract one surface mesh from the fdata of a segmented image.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">image</span><span class="p">,</span> <span class="n">struct_id</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span>
+            <span class="n">struct_id</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">img_mask</span> <span class="o">=</span> <span class="n">img_fdata</span> <span class="o">==</span> <span class="n">structure_id</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="n">struct_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">struct_id</span>
 
-        <span class="n">masked_img_fdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img_mask</span><span class="p">,</span> <span class="n">img_fdata</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">(</span><span class="n">struct_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">struct_id</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">struct_id</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">structs2ids</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">struct_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">struct_id</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">img_mask</span> <span class="o">=</span> <span class="n">image</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">img_mask</span> <span class="o">=</span> <span class="n">image</span> <span class="o">==</span> <span class="n">struct_id</span>
+
+        <span class="n">masked_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img_mask</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># (vertices, faces) or (vertices, faces, values)</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span><span class="n">masked_img_fdata</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span><span class="n">masked_image</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">out</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">out</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 
-        <span class="n">colors2dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="o">.</span><span class="n">ids2colors</span>
+        <span class="n">colors2dict</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">ids2colors</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">colors2dict</span><span class="p">[</span><span class="n">value</span><span class="p">])</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
         <span class="k">return</span> <span class="n">out</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">colors</span><span class="p">,)</span></div>
 
 
 
 <div class="viewcode-block" id="SkimageMarchingCubes">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.SkimageMarchingCubes.html#polpo.preprocessing.load.pregnancy.pilot.SkimageMarchingCubes">[docs]</a>
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.SkimageMarchingCubes.html#polpo.preprocessing.load.pregnancy.jacobs.SkimageMarchingCubes">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SkimageMarchingCubes</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.marching_cubes</span>
@@ -749,7 +762,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">return_values</span> <span class="o">=</span> <span class="n">return_values</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">img_fdata</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">img_fdata</span> <span class="o">=</span> <span class="n">data</span>
@@ -775,6 +788,54 @@
             <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="p">(</span><span class="n">values</span><span class="p">,)</span>
 
         <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="MeshExtractorFromSegmentedMesh">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mri.MeshExtractorFromSegmentedMesh.html#polpo.preprocessing.load.pregnancy.jacobs.MeshExtractorFromSegmentedMesh">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeshExtractorFromSegmentedMesh</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">struct_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">mesh</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">color_selector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">color_selector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">color_selector</span> <span class="o">=</span> <span class="n">PvSelectColor</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">struct_id</span> <span class="o">=</span> <span class="n">struct_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span> <span class="o">=</span> <span class="n">mesh</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span> <span class="o">=</span> <span class="n">color_selector</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_encoding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">struct_id</span><span class="p">):</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span>
+
+        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">encoding</span> <span class="o">=</span> <span class="n">segmtool2encoding</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">struct_id</span><span class="p">,</span> <span class="n">raise_</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">struct_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Need encoding to handle str id: `</span><span class="si">{</span><span class="n">struct_id</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">encoding</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">mesh</span><span class="p">,</span> <span class="n">struct_id</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="n">mesh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span>
+            <span class="n">struct_id</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mesh</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="n">struct_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">struct_id</span>
+
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">(</span><span class="n">struct_id</span><span class="p">)</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">structs2colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">struct_id</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span><span class="p">((</span><span class="n">mesh</span><span class="p">,</span> <span class="n">color</span><span class="p">))</span></div>
 
 </pre></div>
 
