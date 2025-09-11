@@ -313,6 +313,7 @@
                   
   <h1>Source code for polpo.preprocessing.mesh._pyvista</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
@@ -613,10 +614,12 @@
         <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">recompute_normals</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">exists_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dirname</span> <span class="o">=</span> <span class="n">dirname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ext</span> <span class="o">=</span> <span class="n">ext</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exists_ok</span> <span class="o">=</span> <span class="n">exists_ok</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">binary</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">recompute_normals</span> <span class="o">=</span> <span class="n">recompute_normals</span>
@@ -642,7 +645,8 @@
 
         <span class="n">ext</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exists_ok</span><span class="p">)</span>
 
         <span class="n">texture</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">poly_data</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span>
@@ -769,7 +773,7 @@
 
 
 <div class="viewcode-block" id="PvSelectColor">
-<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mri.PvSelectColor.html#polpo.preprocessing.load.fsl.PvSelectColor">[docs]</a>
+<a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.filter.PvSelectColor.html#polpo.preprocessing.load.fsl.PvSelectColor">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PvSelectColor</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get subset of a mesh with given color.&quot;&quot;&quot;</span>
 

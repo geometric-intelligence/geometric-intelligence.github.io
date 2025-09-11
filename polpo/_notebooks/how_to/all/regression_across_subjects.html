@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas &#8212; polpo latest documentation</title>
+    <title>LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas &#8212; polpo latest documentation</title>
   
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -318,7 +322,7 @@
 <li class="toctree-l2"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">How To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="viz_mri.html">How to visualize MRI data?</a></li>
 </ul>
 </details></li>
@@ -368,7 +372,7 @@
     
     <li class="breadcrumb-item"><a href="../../../how_to/all.html" class="nav-link">All</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</span></li>
   </ul>
 </nav>
 </div>
@@ -385,8 +389,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="How-To-Bring-Deformations-from-Subject-Specific-Atlases-Into-the-Tangent-Space-at-the-Global-Atlas">
-<h1>How To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas<a class="headerlink" href="#How-To-Bring-Deformations-from-Subject-Specific-Atlases-Into-the-Tangent-Space-at-the-Global-Atlas" title="Link to this heading">#</a></h1>
+  <section id="LDDMM:-how-To-Bring-Deformations-from-Subject-Specific-Atlases-Into-the-Tangent-Space-at-the-Global-Atlas">
+<h1>LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas<a class="headerlink" href="#LDDMM:-how-To-Bring-Deformations-from-Subject-Specific-Atlases-Into-the-Tangent-Space-at-the-Global-Atlas" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Load meshes:</p>
 <ul>
@@ -428,58 +432,112 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">in_out.array_readers_and_writers</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_3D_array</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.lddmm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plddmm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.jacobs</span><span class="w"> </span><span class="kn">import</span> <span class="n">TabularDataLoader</span><span class="p">,</span> <span class="n">MeshLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span><span class="p">,</span> <span class="n">PvWriter</span><span class="p">,</span> <span class="n">DictMeshWriter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidAlignment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.decimation</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvDecimate</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.lddmm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">lddmm</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.lddmm.strings</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">lddmm_strings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.pd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">DenseMaternalMeshLoader</span><span class="p">,</span>
-    <span class="n">DenseMaternalCsvDataLoader</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvReader</span><span class="p">,</span> <span class="n">PvWriter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">PartiallyInitializedStep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvAlign</span>
+<span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
+    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SUBJECT_IDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">,</span> <span class="s2">&quot;1001B&quot;</span><span class="p">,</span> <span class="s2">&quot;1004B&quot;</span><span class="p">]</span>
 
-<span class="n">SUBJECT_IDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">,</span> <span class="s2">&quot;1001&quot;</span><span class="p">,</span> <span class="s2">&quot;1004&quot;</span><span class="p">]</span>
-
-<span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span>
+<span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;regression_example&quot;</span>
 <span class="n">ATLAS_DIR</span> <span class="o">=</span> <span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;atlases&quot;</span>
 <span class="n">REGISTRATIONS_DIR</span> <span class="o">=</span> <span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;registrations&quot;</span>
 <span class="n">TRANSPORTS_DIR</span> <span class="o">=</span> <span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;transports&quot;</span>
 
-<span class="n">GLOBAL_ATLAS_DIR</span> <span class="o">=</span> <span class="n">ATLAS_DIR</span> <span class="o">/</span> <span class="s2">&quot;global_atlas&quot;</span>
-<span class="n">SUBJECT_ATLAS_DIR</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="n">ATLAS_DIR</span> <span class="o">/</span> <span class="s2">&quot;subject01_atlas&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1001&quot;</span><span class="p">:</span> <span class="n">ATLAS_DIR</span> <span class="o">/</span> <span class="s2">&quot;subject1001_atlas&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1004&quot;</span><span class="p">:</span> <span class="n">ATLAS_DIR</span> <span class="o">/</span> <span class="s2">&quot;subject1004_atlas&quot;</span><span class="p">,</span>
-<span class="p">}</span>
 
-<span class="n">SUBJECT_REGISTRATION_DIR</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="n">REGISTRATIONS_DIR</span> <span class="o">/</span> <span class="s2">&quot;subject01_registrations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1001&quot;</span><span class="p">:</span> <span class="n">REGISTRATIONS_DIR</span> <span class="o">/</span> <span class="s2">&quot;subject1001_registrations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1004&quot;</span><span class="p">:</span> <span class="n">REGISTRATIONS_DIR</span> <span class="o">/</span> <span class="s2">&quot;subject1004_registrations&quot;</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="c1"># SUBJECT_ATLAS_DIR = {</span>
+<span class="c1">#     &quot;01&quot;: ATLAS_DIR / &quot;subject01_atlas&quot;,</span>
+<span class="c1">#     &quot;1001B&quot;: ATLAS_DIR / &quot;subject1001_atlas&quot;,</span>
+<span class="c1">#     &quot;1004B&quot;: ATLAS_DIR / &quot;subject1004_atlas&quot;,</span>
+<span class="c1"># }</span>
 
-<span class="n">TRANSPORTS_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">SUBJECT_TRANSPORTS_DIR</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="n">TRANSPORTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;01&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1001&quot;</span><span class="p">:</span> <span class="n">TRANSPORTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;1001&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1004&quot;</span><span class="p">:</span> <span class="n">TRANSPORTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;1004&quot;</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="c1"># SUBJECT_REGISTRATION_DIR = {</span>
+<span class="c1">#     &quot;01&quot;: REGISTRATIONS_DIR / &quot;subject01_registrations&quot;,</span>
+<span class="c1">#     &quot;1001B&quot;: REGISTRATIONS_DIR / &quot;subject1001_registrations&quot;,</span>
+<span class="c1">#     &quot;1004B&quot;: REGISTRATIONS_DIR / &quot;subject1004_registrations&quot;,</span>
+<span class="c1"># }</span>
+
+<span class="c1"># TRANSPORTS_DIR.mkdir(parents=True, exist_ok=True)</span>
+<span class="c1"># SUBJECT_TRANSPORTS_DIR = {</span>
+<span class="c1">#     &quot;01B&quot;: TRANSPORTS_DIR / &quot;01&quot;,</span>
+<span class="c1">#     &quot;1001B&quot;: TRANSPORTS_DIR / &quot;1001&quot;,</span>
+<span class="c1">#     &quot;1004B&quot;: TRANSPORTS_DIR / &quot;1004&quot;,</span>
+<span class="c1"># }</span>
 
 <span class="n">RESULTS_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ATLAS_DIR</span><span class="p">,</span> <span class="n">REGISTRATIONS_DIR</span><span class="p">,</span> <span class="n">GLOBAL_ATLAS_DIR</span><span class="p">,</span> <span class="n">TRANSPORTS_DIR</span><span class="p">]:</span>
-    <span class="nb">dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span><span class="p">:</span>
-    <span class="n">SUBJECT_ATLAS_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">SUBJECT_REGISTRATION_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">SUBJECT_TRANSPORTS_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># # TODO: make it simpler</span>
+<span class="c1"># for dir in [ATLAS_DIR, REGISTRATIONS_DIR, GLOBAL_ATLAS_DIR, TRANSPORTS_DIR]:</span>
+<span class="c1">#     dir.mkdir(parents=True, exist_ok=True)</span>
+<span class="c1"># for subject_id in SUBJECT_IDS:</span>
+<span class="c1">#     SUBJECT_ATLAS_DIR[subject_id].mkdir(parents=True, exist_ok=True)</span>
+<span class="c1">#     SUBJECT_REGISTRATION_DIR[subject_id].mkdir(parents=True, exist_ok=True)</span>
+<span class="c1">#     SUBJECT_TRANSPORTS_DIR[subject_id].mkdir(parents=True, exist_ok=True)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_sub_id2name</span><span class="p">(</span><span class="n">sub_id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;sub_</span><span class="si">{</span><span class="n">sub_id</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<section id="Load-meshes">
+<h2>Load meshes<a class="headerlink" href="#Load-meshes" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path2meshes</span> <span class="o">=</span> <span class="n">MeshLoader</span><span class="p">(</span>
+    <span class="n">subject_subset</span><span class="o">=</span><span class="n">SUBJECT_IDS</span><span class="p">,</span> <span class="n">struct_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;L_Hipp&quot;</span><span class="p">],</span> <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">(</span><span class="n">nested</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># subject_id, session_id</span>
+<span class="n">raw_meshes</span> <span class="o">=</span> <span class="n">path2meshes</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of meshes for:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">meshes</span> <span class="ow">in</span> <span class="n">raw_meshes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  -subject </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -488,42 +546,22 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Jupyter environment detected. Enabling Open3D WebVisualizer.
-[Open3D INFO] WebRTC GUI backend enabled.
-[Open3D INFO] WebRTCWindowSystem: HTTP handshake server disabled.
+Number of meshes for:
+  -subject 01: 27
+  -subject 1001B: 13
+  -subject 1004B: 21
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load meshes of all three subjects for left hipp structure using DenseMaternalMeshLoader</span>
-<span class="n">raw_meshes</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">csvs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">n_meshes</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">csvs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">subject_id</span><span class="p">:</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">)()</span> <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span>
+<span class="p">}</span>
 
 <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span><span class="p">:</span>
-    <span class="n">pipe</span> <span class="o">=</span> <span class="n">DenseMaternalMeshLoader</span><span class="p">(</span>
-        <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;/home/data/maternal&quot;</span><span class="p">,</span>
-        <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">,</span>
-        <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">struct</span><span class="o">=</span><span class="s2">&quot;Hipp&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">+</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())</span>
-
-    <span class="n">raw_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
-
-    <span class="n">n_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of meshes for subject </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">n_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># TODO: FIX this inconsistent imports between subject 01 and other subjects</span>
-    <span class="k">if</span> <span class="n">subject_id</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span><span class="p">:</span>
-        <span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">DenseMaternalCsvDataLoader</span><span class="p">(</span>
-            <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">)()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">DenseMaternalCsvDataLoader</span><span class="p">(</span>
-            <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;/home/data/maternal&quot;</span><span class="p">,</span>
-            <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="o">+</span><span class="s2">&quot;B&quot;</span><span class="p">)()</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -532,27 +570,8 @@ Jupyter environment detected. Enabling Open3D WebVisualizer.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/nmiolane/.herbrain/data/maternal/maternal_brain_project_pilot/rawdata/28Baby_Hormones.csv&#39;).
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/maternal/maternal_brain_project_pilot/rawdata/28Baby_Hormones.csv&#39;).
 </pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Number of meshes for subject 01: 27
-Number of meshes for subject 1001: 13
-Number of meshes for subject 1004: 21
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span><span class="p">:</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])</span>
-</pre></div>
-</div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
@@ -1188,148 +1207,226 @@ Number of meshes for subject 1004: 21
 </table>
 </div></div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rigid alignment of all meshes to the first mesh of subject 01</span>
-
-<span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
-    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<span class="n">align_pipe</span> <span class="o">=</span> <span class="n">RigidAlignment</span><span class="p">(</span>
+    <span class="n">target</span><span class="o">=</span><span class="n">putils</span><span class="o">.</span><span class="n">get_first</span><span class="p">(</span><span class="n">raw_meshes</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]),</span>
+    <span class="c1"># TODO: update here</span>
+    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">all_raw_meshes</span> <span class="o">=</span> <span class="n">prep_pipe</span><span class="p">([</span><span class="n">mesh</span> <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span> <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">raw_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]])</span>
-
-<span class="n">rigidly_aligned_meshes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="n">all_raw_meshes</span><span class="p">[:</span><span class="n">n_meshes</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;1001&quot;</span><span class="p">:</span> <span class="n">all_raw_meshes</span><span class="p">[</span><span class="n">n_meshes</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]:</span><span class="n">n_meshes</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_meshes</span><span class="p">[</span><span class="s2">&quot;1001&quot;</span><span class="p">]],</span>
-    <span class="s2">&quot;1004&quot;</span><span class="p">:</span> <span class="n">all_raw_meshes</span><span class="p">[</span><span class="n">n_meshes</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_meshes</span><span class="p">[</span><span class="s2">&quot;1001&quot;</span><span class="p">]:],</span>
-<span class="p">}</span>
-
-<span class="n">meshes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;1001&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;1004&quot;</span><span class="p">:</span> <span class="p">[],</span>
-<span class="p">}</span>
 <span class="c1"># Coarsen all meshes to reduce number of vertices</span>
-<span class="n">target_reduction</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c1"># Reduce number of vertices by 60%</span>
+<span class="n">decimate_pipe</span> <span class="o">=</span> <span class="n">PvDecimate</span><span class="p">(</span><span class="n">target_reduction</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">rigidly_aligned_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]:</span>
-        <span class="n">meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">decimate</span><span class="p">(</span><span class="n">target_reduction</span><span class="o">=</span><span class="n">target_reduction</span><span class="p">))</span>
-    <span class="n">meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])</span>
 
-<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
+<span class="c1"># TODO: it is better to go the other way around</span>
+<span class="n">rigidly_aligned_meshes</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">align_pipe</span><span class="p">)(</span><span class="n">raw_meshes</span><span class="p">)</span>
+
+<span class="n">meshes</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">decimate_pipe</span><span class="p">)(</span><span class="n">rigidly_aligned_meshes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">SUBJECT_IDS</span><span class="p">):</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">rigidly_aligned_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First mesh of subject </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper_edge&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">putils</span><span class="o">.</span><span class="n">get_first</span><span class="p">(</span><span class="n">rigidly_aligned_meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]),</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;First mesh of subject </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s2">&quot;upper_edge&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span>
+    <span class="p">)</span>
 
-    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decimated First Mesh of subject </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper_edge&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">putils</span><span class="o">.</span><span class="n">get_first</span><span class="p">(</span><span class="n">meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]),</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Decimated First Mesh of subject </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">position</span><span class="o">=</span><span class="s2">&quot;upper_edge&quot;</span><span class="p">,</span>
+        <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span>
 
 <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<br/></pre></div>
+</pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-<span class="ansi-yellow-fg">2025-08-28 17:13:19.948 (   7.619s) [    7F41A7DB1440]vtkXOpenGLRenderWindow.:1458  WARN| bad X server connection. DISPLAY=</span>
-/home/nmiolane/anaconda3/envs/polpo/lib/python3.11/site-packages/pyvista/jupyter/notebook.py:56: UserWarning: Failed to use notebook backend:
-
-No module named &#39;trame&#39;
-
-Falling back to a static output.
-  warnings.warn(
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_regression_across_subjects_4_1.png" src="../../../_images/_notebooks_how_to_all_regression_across_subjects_4_1.png" />
+<img alt="../../../_images/_notebooks_how_to_all_regression_across_subjects_9_0.png" src="../../../_images/_notebooks_how_to_all_regression_across_subjects_9_0.png" />
 </div>
 </div>
+</section>
+<section id="Estimate-deterministic-atlas-for-subject-and-global">
+<h2>Estimate deterministic atlas for subject and global<a class="headerlink" href="#Estimate-deterministic-atlas-for-subject-and-global" title="Link to this heading">#</a></h2>
+<p>Compute subject specific deterministic atlas by averaging pre-pregnancy meshes.</p>
+<p>First, we select the pre-pregnancy meshes.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">registration_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">kernel_width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_keys_selector</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfIsInFilter</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;pre&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">pre_keys</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">pre_keys_selector</span><span class="p">)(</span><span class="n">csvs</span><span class="p">)</span>
+
+<span class="n">pre_meshes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">subject_id</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">pre_keys</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])(</span><span class="n">meshes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">meshes</span> <span class="ow">in</span> <span class="n">meshes</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_meshes</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;01&#39;: {1: PolyData (0x777b6a212ce0)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.432e+01, 1.175e+02
+    Y Bounds:   7.762e+01, 1.171e+02
+    Z Bounds:   1.080e+02, 1.255e+02
+    N Arrays:   0,
+  2: PolyData (0x777b6a2117e0)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.416e+01, 1.172e+02
+    Y Bounds:   7.753e+01, 1.170e+02
+    Z Bounds:   1.080e+02, 1.256e+02
+    N Arrays:   0,
+  3: PolyData (0x777b6a212c80)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.450e+01, 1.172e+02
+    Y Bounds:   7.723e+01, 1.172e+02
+    Z Bounds:   1.082e+02, 1.257e+02
+    N Arrays:   0,
+  4: PolyData (0x777b6a212d40)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.465e+01, 1.173e+02
+    Y Bounds:   7.734e+01, 1.171e+02
+    Z Bounds:   1.077e+02, 1.259e+02
+    N Arrays:   0,
+  5: PolyData (0x777b6a212da0)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.463e+01, 1.172e+02
+    Y Bounds:   7.744e+01, 1.170e+02
+    Z Bounds:   1.080e+02, 1.257e+02
+    N Arrays:   0},
+ &#39;1001B&#39;: {&#39;base1&#39;: PolyData (0x777b6a213640)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.305e+01, 1.173e+02
+    Y Bounds:   7.844e+01, 1.163e+02
+    Z Bounds:   1.082e+02, 1.248e+02
+    N Arrays:   0,
+  &#39;base2&#39;: PolyData (0x777b6a2136a0)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.298e+01, 1.180e+02
+    Y Bounds:   7.853e+01, 1.167e+02
+    Z Bounds:   1.083e+02, 1.251e+02
+    N Arrays:   0},
+ &#39;1004B&#39;: {&#39;base1&#39;: PolyData (0x777b6a213b20)
+    N Cells:    584
+    N Points:   294
+    N Strips:   0
+    X Bounds:   9.585e+01, 1.148e+02
+    Y Bounds:   7.547e+01, 1.177e+02
+    Z Bounds:   1.072e+02, 1.259e+02
+    N Arrays:   0}}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_key2name</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">sub_id</span><span class="p">,</span> <span class="n">session_id</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_sub_id2name</span><span class="p">(</span><span class="n">sub_id</span><span class="p">)</span><span class="si">}</span><span class="s2">/mesh_</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="n">meshes2files</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ppdict</span><span class="o">.</span><span class="n">UnnestDict</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">DictMeshWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">REGISTRATIONS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">,</span> <span class="n">key2name</span><span class="o">=</span><span class="n">_key2name</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestDict</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># subject, session, filename</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">meshes2files</span><span class="p">(</span><span class="n">pre_meshes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Closely follows <a class="reference internal" href="lddmm_deterministic_atlas.html"><span class="doc">LDDMM: how to estimate a deterministic atlas?</span></a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kernel_width</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># NB: influences the number of cp</span>
+
+<span class="n">registration_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">kernel_width</span><span class="o">=</span><span class="n">kernel_width</span><span class="p">,</span>
     <span class="n">regularisation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
     <span class="n">freeze_control_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;varifold&quot;</span><span class="p">,</span>
-    <span class="c1"># attachment_kernel_width=2.0,</span>
+    <span class="n">attachment_kernel_width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
-    <span class="c1"># filter_cp=True,</span>
-    <span class="c1"># threshold=0.75,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute subject specific deterministic atlas by averaging pre-pregnancy meshes</span>
-<span class="n">templates</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;01&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;1001&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;1004&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># can&#39;t be hardcoded, even if there is only one pre- mesh in 1004, bcs of filenames</span>
-    <span class="s2">&quot;global&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">templates</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span><span class="p">:</span>
-    <span class="n">subject_csv</span> <span class="o">=</span> <span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span>
-    <span class="n">subject_meshes</span> <span class="o">=</span> <span class="n">meshes</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">subject_meshes</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">subject_csv</span><span class="p">)</span>
-    <span class="n">pre_indices</span> <span class="o">=</span> <span class="n">subject_csv</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">subject_csv</span><span class="p">[</span><span class="s2">&quot;trimester&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;pre&quot;</span><span class="p">]</span>
-    <span class="c1"># Select corresponding pre-pregnancy meshes</span>
-    <span class="n">pre_meshes</span> <span class="o">=</span> <span class="p">[</span><span class="n">subject_meshes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pre_indices</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Subject </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">: Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pre_meshes</span><span class="p">)</span><span class="si">}</span><span class="s2"> pre-pregnancy meshes&quot;</span><span class="p">)</span>
-
-    <span class="n">meshes_writer</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">SUBJECT_ATLAS_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">))</span>
-
-    <span class="n">mesh_filenames</span> <span class="o">=</span> <span class="n">meshes_writer</span><span class="p">(</span>
-        <span class="p">[(</span><span class="sa">f</span><span class="s2">&quot;premesh</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pre_meshes</span><span class="p">)]</span>
-    <span class="p">)</span>
-    <span class="n">dataset</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">}</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">mesh_filenames</span><span class="p">]</span>
-
-    <span class="n">lddmm</span><span class="o">.</span><span class="n">estimate_deterministic_atlas</span><span class="p">(</span>
-        <span class="n">source</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;shape&quot;</span><span class="p">],</span>
-        <span class="n">targets</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
-        <span class="n">subject_id</span><span class="o">=</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span>  <span class="c1"># WHY?</span>
-        <span class="n">output_dir</span><span class="o">=</span><span class="n">SUBJECT_ATLAS_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span>
+<span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">dataset_</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">estimate_deterministic_atlas</span><span class="p">(</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">putils</span><span class="o">.</span><span class="n">get_first</span><span class="p">(</span><span class="n">dataset_</span><span class="p">),</span>
+        <span class="n">targets</span><span class="o">=</span><span class="n">dataset_</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="n">ATLAS_DIR</span> <span class="o">/</span> <span class="n">_sub_id2name</span><span class="p">(</span><span class="n">subject_id</span><span class="p">),</span>
         <span class="n">initial_step_size</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span>
         <span class="o">**</span><span class="n">registration_kwargs</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">templates</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">PvReader</span><span class="p">()(</span><span class="n">SUBJECT_ATLAS_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">/</span> <span class="n">lddmm_strings</span><span class="o">.</span><span class="n">template_str</span><span class="p">)</span>
 
-<span class="c1"># compute global prepregnancy control deterministic atlas</span>
-<span class="n">meshes_writer</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">GLOBAL_ATLAS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">))</span>
+    <span class="n">templates</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">template</span>
 
-<span class="n">mesh_filenames</span> <span class="o">=</span> <span class="n">meshes_writer</span><span class="p">(</span>
-    <span class="p">[(</span><span class="sa">f</span><span class="s2">&quot;template_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">templates</span><span class="p">[</span><span class="s2">&quot;1001&quot;</span><span class="p">],</span> <span class="n">templates</span><span class="p">[</span><span class="s2">&quot;1004&quot;</span><span class="p">]])]</span>
-<span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">}</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">mesh_filenames</span><span class="p">]</span>
 
-<span class="n">lddmm</span><span class="o">.</span><span class="n">estimate_deterministic_atlas</span><span class="p">(</span>
-    <span class="n">source</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;shape&quot;</span><span class="p">],</span>
-    <span class="n">targets</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
-    <span class="n">subject_id</span><span class="o">=</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="n">GLOBAL_ATLAS_DIR</span><span class="p">,</span>
+<span class="n">templates</span><span class="p">[</span><span class="s2">&quot;global&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">estimate_deterministic_atlas</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">putils</span><span class="o">.</span><span class="n">get_first</span><span class="p">(</span><span class="n">templates</span><span class="p">),</span>
+    <span class="n">targets</span><span class="o">=</span><span class="n">templates</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">ATLAS_DIR</span> <span class="o">/</span> <span class="s2">&quot;global&quot;</span><span class="p">,</span>
     <span class="n">initial_step_size</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span>
     <span class="o">**</span><span class="n">registration_kwargs</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">templates</span><span class="p">[</span><span class="s2">&quot;global&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PvReader</span><span class="p">()(</span><span class="n">GLOBAL_ATLAS_DIR</span> <span class="o">/</span> <span class="n">lddmm_strings</span><span class="o">.</span><span class="n">template_str</span><span class="p">)</span>
+
+<span class="n">templates</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvReader</span><span class="p">())(</span><span class="n">templates</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1338,40 +1435,41 @@ Falling back to a static output.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Subject 01: Found 4 pre-pregnancy meshes
 Logger has been set to: DEBUG
-&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
 OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
-OMP_NUM_THREADS will be set to 128
+OMP_NUM_THREADS will be set to 10
 context has already been set
-&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/atlases/subject01_atlas/deformetrica-state.p.
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/sub_01/deformetrica-state.p.
 &gt;&gt; Removing the pre-existing state file with same path.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/atlases/subject01_atlas/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
-instantiating kernel torch with kernel_width 10 and gpu_mode GpuMode.KERNEL. addr: 0x7f3e80e52f50
-instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7f3e809f9050
+{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/sub_01/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
+instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x777b6a21b090
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x777b63f077d0
 &gt;&gt; Set of 24 control points defined.
-&gt;&gt; Momenta initialized to zero, for 4 subjects.
+&gt;&gt; Momenta initialized to zero, for 5 subjects.
 dtype=float32
 &gt;&gt; Started estimator: ScipyOptimize
 
 &gt;&gt; Scipy optimization method: L-BFGS-B
 
 ------------------------------------- Iteration: 1 -------------------------------------
-&gt;&gt; Gradient at Termination: 493974.89500695723
-&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
-&gt;&gt; Estimation took: 06 seconds
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -3.255E+03     [ attachment = -3.249E+03 ; regularity = -6.260E+00 ]
+&gt;&gt; Gradient at Termination: 64726.30970460872
+&gt;&gt; CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
+&gt;&gt; Estimation took: 04 seconds
 Deformetrica.__del__()
-Subject 1001: Found 2 pre-pregnancy meshes
 Logger has been set to: DEBUG
-&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
 OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
-OMP_NUM_THREADS will be set to 128
+OMP_NUM_THREADS will be set to 10
 context has already been set
-&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/atlases/subject1001_atlas/deformetrica-state.p.
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/sub_1001B/deformetrica-state.p.
 &gt;&gt; Removing the pre-existing state file with same path.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/atlases/subject1001_atlas/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
+{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/sub_1001B/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
 &gt;&gt; Set of 24 control points defined.
 &gt;&gt; Momenta initialized to zero, for 2 subjects.
 dtype=float32
@@ -1382,26 +1480,20 @@ dtype=float32
 ------------------------------------- Iteration: 1 -------------------------------------
 
 ------------------------------------- Iteration: 20 -------------------------------------
-&gt;&gt; Log-likelihood = -1.899E+02     [ attachment = -1.862E+02 ; regularity = -3.703E+00 ]
-
-------------------------------------- Iteration: 40 -------------------------------------
-&gt;&gt; Log-likelihood = -1.452E+02     [ attachment = -1.358E+02 ; regularity = -9.425E+00 ]
-&gt;&gt; Log-likelihood = -1.427E+02     [ attachment = -1.340E+02 ; regularity = -8.631E+00 ]
-&gt;&gt; Gradient at Termination: 66352.43218704964
-&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
-&gt;&gt; Estimation took: 08 seconds
+&gt;&gt; Gradient at Termination: 40015.72149555154
+&gt;&gt; CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
+&gt;&gt; Estimation took: 02 seconds
 Deformetrica.__del__()
-Subject 1004: Found 1 pre-pregnancy meshes
 Logger has been set to: DEBUG
-&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
 OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
-OMP_NUM_THREADS will be set to 128
+OMP_NUM_THREADS will be set to 10
 context has already been set
-&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/atlases/subject1004_atlas/deformetrica-state.p.
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/sub_1004B/deformetrica-state.p.
 &gt;&gt; Removing the pre-existing state file with same path.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/atlases/subject1004_atlas/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
-&gt;&gt; Set of 30 control points defined.
+{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/sub_1004B/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
+&gt;&gt; Set of 20 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
 &gt;&gt; Started estimator: ScipyOptimize
@@ -1409,73 +1501,46 @@ dtype=float32
 &gt;&gt; Scipy optimization method: L-BFGS-B
 
 ------------------------------------- Iteration: 1 -------------------------------------
-&gt;&gt; Gradient at Termination: 0.4677599411042054
-&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
-&gt;&gt; Estimation took: 01 seconds
-Deformetrica.__del__()
-Logger has been set to: DEBUG
-&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10
-OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
-OMP_NUM_THREADS will be set to 128
-context has already been set
-&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/atlases/global_atlas/deformetrica-state.p.
-&gt;&gt; Removing the pre-existing state file with same path.
-&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/atlases/global_atlas/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
-&gt;&gt; Set of 24 control points defined.
-&gt;&gt; Momenta initialized to zero, for 2 subjects.
-dtype=float32
-&gt;&gt; Started estimator: ScipyOptimize
-
-&gt;&gt; Scipy optimization method: L-BFGS-B
-
-------------------------------------- Iteration: 1 -------------------------------------
-
-------------------------------------- Iteration: 20 -------------------------------------
-&gt;&gt; Log-likelihood = -1.016E+03     [ attachment = -9.125E+02 ; regularity = -1.035E+02 ]
-&gt;&gt; Gradient at Termination: 1924950.866868444
-&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
-&gt;&gt; Estimation took: 10 seconds
+&gt;&gt; Gradient at Termination: 44972.02116515963
+&gt;&gt; CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
+&gt;&gt; Estimation took: 00 seconds
 Deformetrica.__del__()
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">[</span><span class="mi">800</span><span class="p">,</span> <span class="mi">150</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">[</span><span class="mi">800</span><span class="p">,</span> <span class="mi">150</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">SUBJECT_IDS</span><span class="p">):</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">templates</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pre-pregnancy template of </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper_edge&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;pre-pregnancy template of </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s2">&quot;upper_edge&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span>
+    <span class="p">)</span>
 
-<span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">templates</span><span class="p">[</span><span class="s2">&quot;global&quot;</span><span class="p">],</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s2">&quot;global template&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper_edge&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s2">&quot;global template&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s2">&quot;upper_edge&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/nmiolane/anaconda3/envs/polpo/lib/python3.11/site-packages/pyvista/jupyter/notebook.py:56: UserWarning: Failed to use notebook backend:
-
-No module named &#39;trame&#39;
-
-Falling back to a static output.
-  warnings.warn(
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_regression_across_subjects_7_1.png" src="../../../_images/_notebooks_how_to_all_regression_across_subjects_7_1.png" />
+<img alt="../../../_images/_notebooks_how_to_all_regression_across_subjects_18_0.png" src="../../../_images/_notebooks_how_to_all_regression_across_subjects_18_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1484,12 +1549,15 @@ Falling back to a static output.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parallel transport the momenta (?) of each subject from its subject-specific template to the global template</span>
 <span class="n">n_rungs</span> <span class="o">=</span> <span class="mi">11</span>
-<span class="n">transport_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;kernel_type&quot;</span><span class="p">:</span> <span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;kernel_width&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;n_rungs&quot;</span><span class="p">:</span><span class="mi">11</span><span class="p">}</span>
+<span class="n">transport_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;kernel_type&quot;</span><span class="p">:</span> <span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;kernel_width&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;n_rungs&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">}</span>
 <span class="n">shoot_args</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;use_rk2_for_flow&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;kernel_width&#39;</span><span class="p">:</span> <span class="n">registration_kwargs</span><span class="p">[</span><span class="s2">&quot;kernel_width&quot;</span><span class="p">],</span>
-    <span class="s1">&#39;number_of_time_steps&#39;</span><span class="p">:</span> <span class="n">n_rungs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;write_params&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+    <span class="s2">&quot;use_rk2_for_flow&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;kernel_width&quot;</span><span class="p">:</span> <span class="n">registration_kwargs</span><span class="p">[</span><span class="s2">&quot;kernel_width&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;number_of_time_steps&quot;</span><span class="p">:</span> <span class="n">n_rungs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;write_params&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">}</span>
 
-<span class="c1">#NOTE : according to deformetrica, the main geodesic needs to be estimated with rk4</span>
+<span class="c1"># NOTE : according to deformetrica, the main geodesic needs to be estimated with rk4</span>
 <span class="n">fixed_control_points_registration_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="o">**</span><span class="n">registration_kwargs</span><span class="p">,</span>
     <span class="s2">&quot;freeze_control_points&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -1522,10 +1590,12 @@ Falling back to a static output.
             <span class="n">target</span><span class="o">=</span><span class="n">mesh_writer</span><span class="p">([(</span><span class="sa">f</span><span class="s2">&quot;mesh_</span><span class="si">{</span><span class="n">i_mesh</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)])[</span><span class="mi">0</span><span class="p">],</span>
             <span class="n">atlas</span><span class="o">=</span><span class="n">GLOBAL_ATLAS_DIR</span> <span class="o">/</span> <span class="n">lddmm_strings</span><span class="o">.</span><span class="n">template_str</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;transport_</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">_mesh_</span><span class="si">{</span><span class="n">i_mesh</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">output_dir</span><span class="o">=</span><span class="n">SUBJECT_TRANSPORTS_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;transported_mesh_</span><span class="si">{</span><span class="n">i_mesh</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="o">=</span><span class="n">SUBJECT_TRANSPORTS_DIR</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span>
+            <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;transported_mesh_</span><span class="si">{</span><span class="n">i_mesh</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="n">registration_args</span><span class="o">=</span><span class="n">registration_kwargs</span><span class="p">,</span>
             <span class="n">transport_args</span><span class="o">=</span><span class="n">transport_args</span><span class="p">,</span>
-            <span class="n">main_reg_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">main_reg_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="n">control_points</span><span class="p">[</span><span class="n">subject_id</span><span class="p">][</span><span class="n">i_mesh</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span>
         <span class="n">momenta</span><span class="p">[</span><span class="n">subject_id</span><span class="p">][</span><span class="n">i_mesh</span><span class="p">]</span> <span class="o">=</span> <span class="n">mom</span>
 </pre></div>
@@ -5564,7 +5634,7 @@ In exponential update, I am not flowing because I don&#39;t have any template po
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that control points are the same across subjects</span>
-<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
+<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">SUBJECT_IDS</span><span class="p">):</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
@@ -5575,7 +5645,11 @@ In exponential update, I am not flowing because I don&#39;t have any template po
     <span class="c1"># cps[&quot;vectors&quot;] = momenta[subject_id][0].cpu().numpy()</span>
     <span class="c1"># pl.add_mesh(cps.glyph(orient=&quot;vectors&quot;, scale=False, factor=2),</span>
     <span class="c1">#             color=&quot;red&quot;, opacity=0.8)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;deformation of first mesh of </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2"> on global template&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper_edge&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;deformation of first mesh of </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2"> on global template&quot;</span><span class="p">,</span>
+        <span class="n">position</span><span class="o">=</span><span class="s2">&quot;upper_edge&quot;</span><span class="p">,</span>
+        <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span>
 
 
 <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -5600,7 +5674,7 @@ Falling back to a static output.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_regression_across_subjects_9_1.png" src="../../../_images/_notebooks_how_to_all_regression_across_subjects_9_1.png" />
+<img alt="../../../_images/_notebooks_how_to_all_regression_across_subjects_21_1.png" src="../../../_images/_notebooks_how_to_all_regression_across_subjects_21_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -5619,8 +5693,10 @@ Falling back to a static output.
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">subject_momenta</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">subject_csv</span><span class="p">)</span>
     <span class="n">pregnancy_indices</span> <span class="o">=</span> <span class="n">subject_csv</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">subject_csv</span><span class="p">[</span><span class="s2">&quot;stage&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;preg&quot;</span><span class="p">]</span>
     <span class="c1"># Select corresponding pre-pregnancy meshes</span>
-    <span class="n">pregnancy_momenta</span>  <span class="o">=</span> <span class="p">[</span><span class="n">subject_momenta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pregnancy_indices</span><span class="p">]</span>
-    <span class="n">pregnancy_gestweek</span> <span class="o">=</span> <span class="n">subject_csv</span><span class="p">[</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">][</span><span class="n">subject_csv</span><span class="p">[</span><span class="s2">&quot;stage&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;preg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">pregnancy_momenta</span> <span class="o">=</span> <span class="p">[</span><span class="n">subject_momenta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pregnancy_indices</span><span class="p">]</span>
+    <span class="n">pregnancy_gestweek</span> <span class="o">=</span> <span class="n">subject_csv</span><span class="p">[</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">][</span>
+        <span class="n">subject_csv</span><span class="p">[</span><span class="s2">&quot;stage&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;preg&quot;</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pregnancy_gestweek</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pregnancy_momenta</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pregnancy_momenta</span><span class="p">)</span><span class="si">}</span><span class="s2"> pregnancy momenta&quot;</span><span class="p">)</span>
     <span class="n">y</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pregnancy_gestweek</span><span class="p">)</span>
@@ -5656,7 +5732,10 @@ Found 14 pregnancy momenta
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train-test split and regression</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
 
 <span class="n">regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 <span class="n">regression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -5668,7 +5747,7 @@ Found 14 pregnancy momenta
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Regression intercept: </span><span class="si">{</span><span class="n">regression</span><span class="o">.</span><span class="n">intercept_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train R2 score: </span><span class="si">{</span><span class="n">train_r2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test R2 score: </span><span class="si">{</span><span class="n">test_r2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<br/></pre></div>
+</pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -5702,6 +5781,7 @@ Test R2 score: -1.999
 </div>
 </div>
 </section>
+</section>
 
 
                 </article>
@@ -5713,6 +5793,25 @@ Test R2 score: -1.999
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-meshes">Load meshes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Estimate-deterministic-atlas-for-subject-and-global">Estimate deterministic atlas for subject and global</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
