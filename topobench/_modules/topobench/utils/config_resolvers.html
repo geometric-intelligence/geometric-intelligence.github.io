@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Jul 17, 2025, 10:51:39 AM"/>
+    <meta name="docbuild:last-update" content="Sep 17, 2025, 11:10:46 PM"/>
   </head>
   
   
@@ -282,6 +282,55 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
 
+<div class="viewcode-block" id="get_flattened_channels">
+<a class="viewcode-back" href="../../../api/topobench.utils.html#topobench.utils.config_resolvers.get_flattened_channels">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_flattened_channels</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">channels</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get the output dimension of flattening a feature matrix.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    num_nodes : int</span>
+<span class="sd">        Hidden dimension for the first layer.</span>
+<span class="sd">    channels : int</span>
+<span class="sd">        Channel dimension.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Flatenned cchannels dimension.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">channels</span></div>
+
+
+
+<div class="viewcode-block" id="get_non_relational_out_channels">
+<a class="viewcode-back" href="../../../api/topobench.utils.html#topobench.utils.config_resolvers.get_non_relational_out_channels">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_non_relational_out_channels</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">task_level</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get the output dimension for a non-relational model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    num_nodes : int</span>
+<span class="sd">        Number of nodes in the input graph.</span>
+<span class="sd">    channels : int</span>
+<span class="sd">        Channel dimension.</span>
+<span class="sd">    task_level : int</span>
+<span class="sd">        Task level for the model.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Output dimension.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">task_level</span> <span class="o">==</span> <span class="s2">&quot;node&quot;</span><span class="p">:</span>  <span class="c1"># node-level task</span>
+        <span class="k">return</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">channels</span>
+    <span class="k">elif</span> <span class="n">task_level</span> <span class="o">==</span> <span class="s2">&quot;graph&quot;</span><span class="p">:</span>  <span class="c1"># graph-level task</span>
+        <span class="k">return</span> <span class="n">channels</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid task level </span><span class="si">{</span><span class="n">task_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
 <div class="viewcode-block" id="get_default_trainer">
 <a class="viewcode-back" href="../../../api/topobench.utils.html#topobench.utils.config_resolvers.get_default_trainer">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_default_trainer</span><span class="p">():</span>
@@ -315,6 +364,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_domain</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
     <span class="n">model_domain</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">model_domain</span> <span class="o">==</span> <span class="s2">&quot;non_relational&quot;</span><span class="p">:</span>
+        <span class="n">model_domain</span> <span class="o">=</span> <span class="s2">&quot;graph&quot;</span>
     <span class="c1"># Check if there is a default transform for the dataset at ./configs/transforms/dataset_defaults/</span>
     <span class="c1"># If not, use the default lifting transform for the dataset to be compatible with the model</span>
     <span class="n">base_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>

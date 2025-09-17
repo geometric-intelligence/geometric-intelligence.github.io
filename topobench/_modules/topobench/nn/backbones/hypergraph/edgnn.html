@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Jul 17, 2025, 10:51:39 AM"/>
+    <meta name="docbuild:last-update" content="Sep 17, 2025, 11:10:46 PM"/>
   </head>
   
   
@@ -427,9 +427,9 @@
 
 
 
-<div class="viewcode-block" id="MLP">
-<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.MLP">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="customMLP">
+<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.customMLP">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">customMLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing a multi-layer perceptron.</span>
 
 <span class="sd">    Adapted from https://github.com/CUAI/CorrectAndSmooth/blob/master/gen_models.py</span>
@@ -533,8 +533,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
 
-<div class="viewcode-block" id="MLP.reset_parameters">
-<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.MLP.reset_parameters">[docs]</a>
+<div class="viewcode-block" id="customMLP.reset_parameters">
+<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.customMLP.reset_parameters">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">lin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lins</span><span class="p">:</span>
@@ -544,8 +544,8 @@
                 <span class="n">normalization</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="MLP.forward">
-<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.MLP.forward">[docs]</a>
+<div class="viewcode-block" id="customMLP.forward">
+<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.customMLP.forward">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Forward pass.</span>
 
@@ -569,8 +569,8 @@
         <span class="k">return</span> <span class="n">x</span></div>
 
 
-<div class="viewcode-block" id="MLP.flops">
-<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.MLP.flops">[docs]</a>
+<div class="viewcode-block" id="customMLP.flops">
+<a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.customMLP.flops">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">flops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate FLOPs.</span>
 
@@ -721,7 +721,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">mlp1_layers</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">customMLP</span><span class="p">(</span>
                 <span class="n">in_features</span><span class="p">,</span>
                 <span class="n">out_features</span><span class="p">,</span>
                 <span class="n">out_features</span><span class="p">,</span>
@@ -734,7 +734,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">mlp2_layers</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">customMLP</span><span class="p">(</span>
                 <span class="n">in_features</span> <span class="o">+</span> <span class="n">out_features</span><span class="p">,</span>
                 <span class="n">out_features</span><span class="p">,</span>
                 <span class="n">out_features</span><span class="p">,</span>
@@ -747,7 +747,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">X</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">in_features</span><span class="p">:]</span>
 
         <span class="k">if</span> <span class="n">mlp3_layers</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">customMLP</span><span class="p">(</span>
                 <span class="n">out_features</span><span class="p">,</span>
                 <span class="n">out_features</span><span class="p">,</span>
                 <span class="n">out_features</span><span class="p">,</span>
@@ -766,11 +766,11 @@
 <a class="viewcode-back" href="../../../../../api/topobench.nn.backbones.hypergraph.html#topobench.nn.backbones.hypergraph.edgnn.EquivSetConv.reset_parameters">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset parameters.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">,</span> <span class="n">MLP</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">,</span> <span class="n">customMLP</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">,</span> <span class="n">MLP</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">,</span> <span class="n">customMLP</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">MLP</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">customMLP</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span></div>
 
 
@@ -841,7 +841,7 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="p">,</span> <span class="n">mlp_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">aggr</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">customMLP</span><span class="p">(</span>
             <span class="n">in_features</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>
@@ -939,7 +939,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">init_features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">init_features</span> <span class="o">=</span> <span class="n">out_features</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">customMLP</span><span class="p">(</span>
             <span class="n">in_features</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>
@@ -948,7 +948,7 @@
             <span class="n">Normalization</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
             <span class="n">InputNorm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">customMLP</span><span class="p">(</span>
             <span class="n">in_features</span> <span class="o">+</span> <span class="n">out_features</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>
@@ -957,7 +957,7 @@
             <span class="n">Normalization</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
             <span class="n">InputNorm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">W3</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W3</span> <span class="o">=</span> <span class="n">customMLP</span><span class="p">(</span>
             <span class="n">in_features</span> <span class="o">+</span> <span class="n">out_features</span> <span class="o">+</span> <span class="n">init_features</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>
             <span class="n">out_features</span><span class="p">,</span>

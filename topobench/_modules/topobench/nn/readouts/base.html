@@ -49,7 +49,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Jul 17, 2025, 10:51:39 AM"/>
+    <meta name="docbuild:last-update" content="Sep 17, 2025, 11:10:46 PM"/>
   </head>
   
   
@@ -298,6 +298,8 @@
 <span class="sd">        Task level for readout layer. Either &quot;graph&quot; or &quot;node&quot;.</span>
 <span class="sd">    pooling_type : str</span>
 <span class="sd">        Pooling type for readout layer. Either &quot;max&quot;, &quot;sum&quot; or &quot;mean&quot;.</span>
+<span class="sd">    logits_linear_layer : bool</span>
+<span class="sd">        Whether to use a linear layer for getting the final logits.</span>
 <span class="sd">    **kwargs : dict</span>
 <span class="sd">        Additional arguments.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -308,13 +310,19 @@
         <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">task_level</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">pooling_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span>
+        <span class="n">logits_linear_layer</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">hidden_dim</span> <span class="o">!=</span> <span class="n">out_channels</span> <span class="ow">or</span> <span class="n">logits_linear_layer</span>
+            <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+        <span class="p">)</span>
         <span class="k">assert</span> <span class="n">task_level</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;node&quot;</span><span class="p">],</span> <span class="s2">&quot;Invalid task_level&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task_level</span> <span class="o">=</span> <span class="n">task_level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logits_linear_layer</span> <span class="o">=</span> <span class="n">logits_linear_layer</span>
 
         <span class="k">assert</span> <span class="n">pooling_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">],</span> <span class="s2">&quot;Invalid pooling_type&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pooling_type</span> <span class="o">=</span> <span class="n">pooling_type</span>
@@ -341,9 +349,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">model_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">model_out</span><span class="p">,</span> <span class="n">batch</span><span class="p">)</span>
 
-        <span class="n">model_out</span><span class="p">[</span><span class="s2">&quot;logits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_logits</span><span class="p">(</span>
-            <span class="n">model_out</span><span class="p">[</span><span class="s2">&quot;x_0&quot;</span><span class="p">],</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;batch_0&quot;</span><span class="p">]</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">model_out</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logits&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">model_out</span><span class="p">[</span><span class="s2">&quot;logits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_logits</span><span class="p">(</span>
+                <span class="n">model_out</span><span class="p">[</span><span class="s2">&quot;x_0&quot;</span><span class="p">],</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;batch_0&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">model_out</span>
 
