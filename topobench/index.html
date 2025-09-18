@@ -47,10 +47,11 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/index.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TAG-DS Challenge 2025" href="tdl-challenge/index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Sep 18, 2025, 11:56:30 AM"/>
+    <meta name="docbuild:last-update" content="Sep 18, 2025, 11:29:32 PM"/>
   </head>
   
   
@@ -126,6 +127,12 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tdl-challenge/index.html">
+    TAG-DS Challenge 2025
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -201,6 +208,12 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tdl-challenge/index.html">
+    TAG-DS Challenge 2025
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -277,7 +290,7 @@ sorts of Topological Neural Networks (TNNs) across the different
 topological domains, where by <em>topological domain</em> we refer to a graph,
 a simplicial complex, a cellular complex, or a hypergraph. For detailed
 information, please refer to the
-<code class="docutils literal notranslate"><span class="pre">`TopoBench:</span> <span class="pre">A</span> <span class="pre">Framework</span> <span class="pre">for</span> <span class="pre">Benchmarking</span> <span class="pre">Topological</span> <span class="pre">Deep</span> <span class="pre">Learning</span></code> &lt;<a class="reference external" href="https://arxiv.org/pdf/2406.06642">https://arxiv.org/pdf/2406.06642</a>&gt;`__
+<a class="reference external" href="https://arxiv.org/pdf/2406.06642">TopoBench: A Framework for Benchmarking Topological Deep Learning</a>
 paper.</p>
 <p align="center"></p><p>The main pipeline trains and evaluates a wide range of state-of-the-art
 TNNs and Graph Neural Networks (GNNs) (see :gear: Neural Networks) on
@@ -286,14 +299,10 @@ numerous and varied datasets and benchmark tasks (see :books: Datasets
 i.e. <em>lift</em>, each dataset from one topological domain to another (see
 :rocket: Liftings), enabling for the first time an exhaustive
 inter-domain comparison of TNNs.</p>
-<dl class="field-list simple">
-<dt class="field-odd">jigsaw<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Get Started</p>
-</dd>
-</dl>
-<hr class="docutils" />
+<section id="get-started">
+<h2>🧩 Get Started<a class="headerlink" href="#get-started" title="Link to this heading">#</a></h2>
 <section id="create-environment">
-<h2>Create Environment<a class="headerlink" href="#create-environment" title="Link to this heading">#</a></h2>
+<h3>Create Environment<a class="headerlink" href="#create-environment" title="Link to this heading">#</a></h3>
 <p>First, clone and navigate to the <code class="docutils literal notranslate"><span class="pre">TopoBench</span></code> repository</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:geometric-intelligence/topobench.git
 <span class="nb">cd</span><span class="w"> </span>TopoBench
@@ -324,14 +333,14 @@ update <code class="docutils literal notranslate"><span class="pre">env_setup.sh
 <p>This command installs the <code class="docutils literal notranslate"><span class="pre">TopoBench</span></code> library and its dependencies.</p>
 </section>
 <section id="run-training-pipeline">
-<h2>Run Training Pipeline<a class="headerlink" href="#run-training-pipeline" title="Link to this heading">#</a></h2>
+<h3>Run Training Pipeline<a class="headerlink" href="#run-training-pipeline" title="Link to this heading">#</a></h3>
 <p>Next, train the neural networks by running the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>topobench
 </pre></div>
 </div>
 </section>
 <section id="customizing-experiment-configuration">
-<h2>Customizing Experiment Configuration<a class="headerlink" href="#customizing-experiment-configuration" title="Link to this heading">#</a></h2>
+<h3>Customizing Experiment Configuration<a class="headerlink" href="#customizing-experiment-configuration" title="Link to this heading">#</a></h3>
 <p>Thanks to <code class="docutils literal notranslate"><span class="pre">hydra</span></code> implementation, one can easily override the default
 experiment configuration through the command line. For instance, the
 model and dataset can be selected as:</p>
@@ -344,8 +353,10 @@ them if required.</p>
 <p>Transforms allow you to modify your data before processing. There are
 two main ways to configure transforms: individual transforms and
 transform groups.</p>
+</section>
+</section>
 <section id="configuring-individual-transforms">
-<h3>Configuring Individual Transforms<a class="headerlink" href="#configuring-individual-transforms" title="Link to this heading">#</a></h3>
+<h2>Configuring Individual Transforms<a class="headerlink" href="#configuring-individual-transforms" title="Link to this heading">#</a></h2>
 <p>When configuring a single transform, follow these steps:</p>
 <ol class="arabic simple">
 <li><p>Choose a desired transform (e.g., a lifting transform).</p></li>
@@ -372,7 +383,7 @@ the <code class="docutils literal notranslate"><span class="pre">cell/cwn</span>
 </div>
 </section>
 <section id="configuring-transform-groups">
-<h3>Configuring Transform Groups<a class="headerlink" href="#configuring-transform-groups" title="Link to this heading">#</a></h3>
+<h2>Configuring Transform Groups<a class="headerlink" href="#configuring-transform-groups" title="Link to this heading">#</a></h2>
 <p>For more complex scenarios, such as combining multiple data
 manipulations, use transform groups:</p>
 <ol class="arabic simple">
@@ -400,7 +411,7 @@ including multiple data manipulations and liftings, in a single
 configuration file.</p>
 </section>
 <section id="additional-notes">
-<h3>Additional Notes<a class="headerlink" href="#additional-notes" title="Link to this heading">#</a></h3>
+<h2>Additional Notes<a class="headerlink" href="#additional-notes" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Automatic Lifting:</strong> By default, our pipeline identifies the source
 and destination topological domains and applies a default lifting
@@ -412,10 +423,8 @@ Please refer to the official <a class="reference external" href="https://hydra.c
 for further details.</p></li>
 </ul>
 <p>By mastering these configuration options, you can easily customize your experiments to suit your specific needs, from simple model and dataset selections to complex data transformation pipelines.</p>
-</section>
-</section>
 <section id="experiments-reproducibility">
-<h2>Experiments Reproducibility<a class="headerlink" href="#experiments-reproducibility" title="Link to this heading">#</a></h2>
+<h3>Experiments Reproducibility<a class="headerlink" href="#experiments-reproducibility" title="Link to this heading">#</a></h3>
 <p>To reproduce Table 1 from the
 <a class="reference external" href="https://arxiv.org/pdf/2406.06642">TopoBench: A Framework for Benchmarking Topological Deep Learning</a>
 paper, please run the following command:</p>
@@ -428,21 +437,23 @@ project</a>
 with logs for the corresponding runs (updated on June 11, 2024).</p>
 </section>
 <section id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h2>
+<h3>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h3>
 <p>Explore our
 <a class="reference external" href="https://github.com/geometric-intelligence/TopoBench/tree/main/tutorials">tutorials</a>
 for further details on how to add new datasets, transforms/liftings, and
 benchmark tasks.</p>
 </section>
 <section id="neural-networks">
-<h2>Neural Networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h2>
+<h3>Neural Networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h3>
 <p>We list the neural networks trained and evaluated by <code class="docutils literal notranslate"><span class="pre">TopoBench</span></code>,
 organized by the topological domain over which they operate: graph,
 simplicial complex, cellular complex or hypergraph. Many of these neural
 networks were originally implemented in
-<code class="docutils literal notranslate"><span class="pre">`TopoModelX</span></code> &lt;<a class="github reference external" href="https://github.com/pyt-team/TopoModelX">pyt-team/TopoModelX</a>&gt;`__.</p>
+<a class="reference external" href="https://github.com/pyt-team/TopoModelX">TopoModelX</a>.</p>
+</section>
+</section>
 <section id="graphs">
-<h3>Graphs<a class="headerlink" href="#graphs" title="Link to this heading">#</a></h3>
+<h2>Graphs<a class="headerlink" href="#graphs" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Model</p></th>
@@ -471,7 +482,7 @@ in Graph</a></p></td>
 </div>
 </section>
 <section id="simplicial-complexes">
-<h3>Simplicial complexes<a class="headerlink" href="#simplicial-complexes" title="Link to this heading">#</a></h3>
+<h2>Simplicial complexes<a class="headerlink" href="#simplicial-complexes" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Model</p></th>
@@ -503,7 +514,7 @@ Networks</a></p></td>
 </div>
 </section>
 <section id="cellular-complexes">
-<h3>Cellular complexes<a class="headerlink" href="#cellular-complexes" title="Link to this heading">#</a></h3>
+<h2>Cellular complexes<a class="headerlink" href="#cellular-complexes" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Model</p></th>
@@ -539,7 +550,7 @@ Networks</a></p></td>
 </div>
 </section>
 <section id="hypergraphs">
-<h3>Hypergraphs<a class="headerlink" href="#hypergraphs" title="Link to this heading">#</a></h3>
+<h2>Hypergraphs<a class="headerlink" href="#hypergraphs" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Model</p></th>
@@ -579,7 +590,7 @@ Networks</a></p></td>
 </div>
 </section>
 <section id="combinatorial-complexes">
-<h3>Combinatorial complexes<a class="headerlink" href="#combinatorial-complexes" title="Link to this heading">#</a></h3>
+<h2>Combinatorial complexes<a class="headerlink" href="#combinatorial-complexes" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Model</p></th>
@@ -604,17 +615,17 @@ extended <a class="reference external" href="https://github.com/geometric-intell
 page</a>
 for further details on how to leverage this framework to define and
 train customized topological neural network architectures.</p>
-</section>
-</section>
 <section id="liftings-transforms">
-<h2>Liftings &amp; Transforms<a class="headerlink" href="#liftings-transforms" title="Link to this heading">#</a></h2>
+<h3>Liftings &amp; Transforms<a class="headerlink" href="#liftings-transforms" title="Link to this heading">#</a></h3>
 <p>We list the liftings used in <code class="docutils literal notranslate"><span class="pre">TopoBench</span></code> to transform datasets. Here,
 a <em>lifting</em> refers to a function that transforms a dataset defined on a
 topological domain (<em>e.g.</em>, on a graph) into the same dataset but
 supported on a different topological domain (<em>e.g.</em>, on a simplicial
 complex).</p>
+</section>
+</section>
 <section id="structural-liftings">
-<h3>Structural Liftings<a class="headerlink" href="#structural-liftings" title="Link to this heading">#</a></h3>
+<h2>Structural Liftings<a class="headerlink" href="#structural-liftings" title="Link to this heading">#</a></h2>
 <p>The structural lifting is responsible for the transformation of the
 underlying relationships or elements of the data. For instance, it might
 determine how nodes and edges in a graph are mapped into triangles and
@@ -633,8 +644,6 @@ submissions of the ICML TDL Challenge 2024
 <a class="reference external" href="https://github.com/geometric-intelligence/TopoBench/wiki/Structural-Liftings">Structural Liftings
 wiki</a>
 for a complete list of compatible liftings.</p>
-<section id="graph-to-simplicial-complex">
-<h4>Graph to Simplicial Complex<a class="headerlink" href="#graph-to-simplicial-complex" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -700,9 +709,6 @@ age</a></p></td>
 </tbody>
 </table>
 </div>
-</section>
-<section id="graph-to-cell-complex">
-<h4>Graph to Cell Complex<a class="headerlink" href="#graph-to-cell-complex" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -725,9 +731,6 @@ page</a></p></td>
 </tbody>
 </table>
 </div>
-</section>
-<section id="graph-to-hypergraph">
-<h4>Graph to Hypergraph<a class="headerlink" href="#graph-to-hypergraph" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -773,9 +776,6 @@ page</a></p></td>
 </tbody>
 </table>
 </div>
-</section>
-<section id="pointcloud-to-simplicial">
-<h4>Pointcloud to Simplicial<a class="headerlink" href="#pointcloud-to-simplicial" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -798,9 +798,6 @@ age</a></p></td>
 </tbody>
 </table>
 </div>
-</section>
-<section id="pointcloud-to-hypergraph">
-<h4>Pointcloud to Hypergraph<a class="headerlink" href="#pointcloud-to-hypergraph" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -828,9 +825,6 @@ page</a></p></td>
 </tbody>
 </table>
 </div>
-</section>
-<section id="simplicial-to-combinatorial">
-<h4>Simplicial to Combinatorial<a class="headerlink" href="#simplicial-to-combinatorial" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -847,9 +841,6 @@ page</a></p></td>
 </tbody>
 </table>
 </div>
-</section>
-<section id="hypergraph-to-combinatorial">
-<h4>Hypergraph to Combinatorial<a class="headerlink" href="#hypergraph-to-combinatorial" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -868,9 +859,8 @@ page</a></p></td>
 </table>
 </div>
 </section>
-</section>
 <section id="feature-liftings">
-<h3>Feature Liftings<a class="headerlink" href="#feature-liftings" title="Link to this heading">#</a></h3>
+<h2>Feature Liftings<a class="headerlink" href="#feature-liftings" title="Link to this heading">#</a></h2>
 <p>Feature liftings address the transfer of data attributes or features
 during mapping, ensuring that the properties associated with the data
 elements are consistently preserved in the new representation.</p>
@@ -902,10 +892,8 @@ mplicial</p></td>
 </tbody>
 </table>
 </div>
-</section>
-</section>
 <section id="data-transformations">
-<h2>Data Transformations<a class="headerlink" href="#data-transformations" title="Link to this heading">#</a></h2>
+<h3>Data Transformations<a class="headerlink" href="#data-transformations" title="Link to this heading">#</a></h3>
 <p>Specially useful in pre-processing steps, these are the general data
 manipulations currently implemented in <code class="docutils literal notranslate"><span class="pre">TopoBench</span></code>:</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -964,9 +952,11 @@ curvature of the input graph.</p></td>
 <dd class="field-odd"><p>Datasets</p>
 </dd>
 </dl>
+</section>
+</section>
 <hr class="docutils" />
 <section id="graph">
-<h3>Graph<a class="headerlink" href="#graph" title="Link to this heading">#</a></h3>
+<h2>Graph<a class="headerlink" href="#graph" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Dataset</p></th>
@@ -1098,7 +1088,7 @@ regression.</p></td>
 </div>
 </section>
 <section id="simplicial">
-<h3>Simplicial<a class="headerlink" href="#simplicial" title="Link to this heading">#</a></h3>
+<h2>Simplicial<a class="headerlink" href="#simplicial" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Dataset</p></th>
@@ -1125,7 +1115,7 @@ urce</a></p></td>
 </div>
 </section>
 <section id="hypergraph">
-<h3>Hypergraph<a class="headerlink" href="#hypergraph" title="Link to this heading">#</a></h3>
+<h2>Hypergraph<a class="headerlink" href="#hypergraph" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Dataset</p></th>
@@ -1178,10 +1168,8 @@ ource</a></p></td>
 </tbody>
 </table>
 </div>
-</section>
-</section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
 <p>To learn more about <code class="docutils literal notranslate"><span class="pre">TopoBench</span></code>, we invite you to read the paper:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">telyatnikov2024topobench</span><span class="p">,</span>
       <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="n">TopoBench</span><span class="p">:</span> <span class="n">A</span> <span class="n">Framework</span> <span class="k">for</span> <span class="n">Benchmarking</span> <span class="n">Topological</span> <span class="n">Deep</span> <span class="n">Learning</span><span class="p">},</span>
@@ -1197,7 +1185,7 @@ ource</a></p></td>
 <p>If you find <code class="docutils literal notranslate"><span class="pre">TopoBench</span></code> useful, we would appreciate if you cite us!</p>
 </section>
 <section id="additional-details">
-<h2>Additional Details<a class="headerlink" href="#additional-details" title="Link to this heading">#</a></h2>
+<h3>Additional Details<a class="headerlink" href="#additional-details" title="Link to this heading">#</a></h3>
 <details><p>Hierarchy of configuration files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── configs                   &lt;- Hydra configs
 │   ├── callbacks                &lt;- Callbacks configs
@@ -1253,7 +1241,7 @@ domains</a></p>
 </details></section>
 <hr class="docutils" />
 <section id="get-in-touch">
-<h2>📢 Get in Touch!<a class="headerlink" href="#get-in-touch" title="Link to this heading">#</a></h2>
+<h3>📢 Get in Touch!<a class="headerlink" href="#get-in-touch" title="Link to this heading">#</a></h3>
 <div class="line-block">
 <div class="line">We are always open to collaborations and discussions on TDL research.</div>
 <div class="line">Feel free to reach out via email if you want to collaborate, do your
@@ -1264,6 +1252,9 @@ thesis with our team, or open a discussion for various opportunities.</div>
 <div class="line">▶️ <strong>YouTube Channel:</strong> <a class="reference external" href="https://www.youtube.com/&#64;TopologicalIntelligence">Topological
 Intelligence</a></div>
 </div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 </section>
 </section>
 
@@ -1277,6 +1268,15 @@ Intelligence</a></div>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="right-next"
+       href="tdl-challenge/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TAG-DS Challenge 2025</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1296,58 +1296,43 @@ Intelligence</a></div>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment">Create Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training-pipeline">Run Training Pipeline</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-experiment-configuration">Customizing Experiment Configuration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-individual-transforms">Configuring Individual Transforms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-transform-groups">Configuring Transform Groups</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes">Additional Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-started">🧩 Get Started</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment">Create Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training-pipeline">Run Training Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-experiment-configuration">Customizing Experiment Configuration</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments-reproducibility">Experiments Reproducibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural Networks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphs">Graphs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplicial-complexes">Simplicial complexes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cellular-complexes">Cellular complexes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypergraphs">Hypergraphs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorial-complexes">Combinatorial complexes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-individual-transforms">Configuring Individual Transforms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-transform-groups">Configuring Transform Groups</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes">Additional Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments-reproducibility">Experiments Reproducibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural Networks</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#liftings-transforms">Liftings &amp; Transforms</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-liftings">Structural Liftings</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-to-simplicial-complex">Graph to Simplicial Complex</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-to-cell-complex">Graph to Cell Complex</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-to-hypergraph">Graph to Hypergraph</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pointcloud-to-simplicial">Pointcloud to Simplicial</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pointcloud-to-hypergraph">Pointcloud to Hypergraph</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simplicial-to-combinatorial">Simplicial to Combinatorial</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypergraph-to-combinatorial">Hypergraph to Combinatorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphs">Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplicial-complexes">Simplicial complexes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellular-complexes">Cellular complexes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypergraphs">Hypergraphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorial-complexes">Combinatorial complexes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liftings-transforms">Liftings &amp; Transforms</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-liftings">Feature Liftings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-liftings">Structural Liftings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-liftings">Feature Liftings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformations">Data Transformations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformations">Data Transformations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph">Graph</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplicial">Simplicial</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypergraph">Hypergraph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph">Graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplicial">Simplicial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypergraph">Hypergraph</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-details">Additional Details</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-in-touch">📢 Get in Touch!</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-details">Additional Details</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-in-touch">📢 Get in Touch!</a></li>
 </ul>
   </nav></div>
-
-  <div class="sidebar-secondary-item">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/index.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div></div>
 
 </div></div>
               
