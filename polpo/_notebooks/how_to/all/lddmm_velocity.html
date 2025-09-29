@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to create a gif showing how the brain substructures change over time? &#8212; polpo latest documentation</title>
+    <title>LDDMM: compute velocity and reconstruct parametrization &#8212; polpo latest documentation</title>
   
   
   
@@ -45,12 +45,12 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_notebooks/how_to/all/maternal_sessions_gif';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_notebooks/how_to/all/maternal_sessions_gif.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_notebooks/how_to/all/lddmm_velocity';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_notebooks/how_to/all/lddmm_velocity.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="How to compute and plot the volume of the brain substructures?" href="maternal_volume.html" />
-    <link rel="prev" title="How to download data from the server?" href="load_server_data.html" />
+    <link rel="next" title="How to load a csv file?" href="load_csv.html" />
+    <link rel="prev" title="LDDMM: parallel transport" href="lddmm_transport_abc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -312,11 +312,11 @@
 <li class="toctree-l2"><a class="reference internal" href="lddmm_regression.html">LDDMM: how to do regression?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lddmm_shape_geodesic.html">LDDMM: parallel transporting face motion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lddmm_transport_abc.html">LDDMM: parallel transport</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lddmm_velocity.html">LDDMM: compute velocity and reconstruct parametrization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">LDDMM: compute velocity and reconstruct parametrization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_figshare_data.html">How to download data from figshare?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_server_data.html">How to download data from the server?</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">How to create a gif showing how the brain substructures change over time?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maternal_sessions_gif.html">How to create a gif showing how the brain substructures change over time?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="maternal_volume.html">How to compute and plot the volume of the brain substructures?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
@@ -373,7 +373,7 @@
     
     <li class="breadcrumb-item"><a href="../../../how_to/all.html" class="nav-link">All</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to create a gif showing how the brain substructures change over time?</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LDDMM: compute velocity and reconstruct parametrization</span></li>
   </ul>
 </nav>
 </div>
@@ -390,23 +390,173 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="How-to-create-a-gif-showing-how-the-brain-substructures-change-over-time?">
-<h1>How to create a gif showing how the brain substructures change over time?<a class="headerlink" href="#How-to-create-a-gif-showing-how-the-brain-substructures-change-over-time?" title="Link to this heading">#</a></h1>
+  <section id="LDDMM:-compute-velocity-and-reconstruct-parametrization">
+<h1>LDDMM: compute velocity and reconstruct parametrization<a class="headerlink" href="#LDDMM:-compute-velocity-and-reconstruct-parametrization" title="Link to this heading">#</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.lddmm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plddmm</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesGifPlotter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartiallyInitializedStep</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.fsl</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_all_first_structs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.jacobs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshLoader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvAlign</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMeshWriter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidAlignment</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+W0929 11:32:52.075000 162786 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ONLY_VIS</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># in case registration has already been run</span>
+<span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
+    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;velocity_example&quot;</span>
+
+
+<span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ONLY_VIS</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">OUTPUTS_DIR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Loading-meshes">
+<h2>Loading meshes<a class="headerlink" href="#Loading-meshes" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">struct_subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;L_Hipp&quot;</span><span class="p">]</span>
+
+
+<span class="n">path2mesh_01</span> <span class="o">=</span> <span class="n">MeshLoader</span><span class="p">(</span>
+    <span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">],</span>
+    <span class="n">session_subset</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">26</span><span class="p">],</span>
+    <span class="n">struct_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;L_Hipp&quot;</span><span class="p">],</span>
+    <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">dict_to_vals</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">(</span><span class="n">nested</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">raw_meshes</span> <span class="o">=</span> <span class="p">(</span><span class="n">path2mesh_01</span> <span class="o">+</span> <span class="n">dict_to_vals</span><span class="p">)()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">raw_meshes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/_notebooks_how_to_all_lddmm_velocity_6_0.png" src="../../../_images/_notebooks_how_to_all_lddmm_velocity_6_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">RigidAlignment</span><span class="p">(</span><span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="n">meshes</span> <span class="o">=</span> <span class="n">prep_pipe</span><span class="p">(</span><span class="n">raw_meshes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/_notebooks_how_to_all_lddmm_velocity_8_0.png" src="../../../_images/_notebooks_how_to_all_lddmm_velocity_8_0.png" />
+</div>
+</div>
+</section>
+<section id="Registration">
+<h2>Registration<a class="headerlink" href="#Registration" title="Link to this heading">#</a></h2>
+<p>Closely following <a class="reference internal" href="lddmm_register_mesh_template.html"><span class="doc">LDDMM: how to register a mesh to a template?</span></a>, we register A to B and C to B.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes_writer</span> <span class="o">=</span> <span class="n">DictMeshWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">OUTPUTS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">)</span>
+
+<span class="c1"># index: path</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">meshes_writer</span><span class="p">({</span><span class="n">index</span><span class="p">:</span> <span class="n">mesh</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kernel_width</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">registration_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">kernel_width</span><span class="o">=</span><span class="n">kernel_width</span><span class="p">,</span>
+    <span class="n">regularisation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">freeze_control_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;varifold&quot;</span><span class="p">,</span>
+    <span class="n">tol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">,</span>
+    <span class="n">attachment_kernel_width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">registration_dir</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span>
+
+<span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">registration_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ONLY_VIS</span><span class="p">:</span>
+    <span class="n">plddmm</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">estimate_registration</span><span class="p">(</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="n">source</span><span class="p">],</span>
+        <span class="n">target</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="n">target</span><span class="p">],</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="n">registration_dir</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">registration_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -415,89 +565,56 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[KeOps] Warning : cuda was detected, but driver API could not be initialized. Switching to cpu only.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/velocity_example/registration/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x73ad8ff16cf0
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x73ad8ff16720
+&gt;&gt; Set of 24 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.372E+02     [ attachment = -1.304E+02 ; regularity = -6.805E+00 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -1.156E+02     [ attachment = -1.027E+02 ; regularity = -1.297E+01 ]
+&gt;&gt; Gradient at Termination: 2032.3460390858818
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 08 seconds
+Deformetrica.__del__()
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
-    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<section id="Loading-meshes">
-<h2>Loading meshes<a class="headerlink" href="#Loading-meshes" title="Link to this heading">#</a></h2>
-<p>NB: we perform rigid alignment on the meshes wrt the first mesh.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">structs</span> <span class="o">=</span> <span class="n">get_all_first_structs</span><span class="p">(</span><span class="n">include_brstem</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
-
-<span class="n">mesh_loader</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">MeshLoader</span><span class="p">(</span>
-        <span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span>
-        <span class="n">struct_subset</span><span class="o">=</span><span class="n">structs</span><span class="p">,</span>
-        <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
-    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span>
-<span class="p">)</span>
-
-<span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
-    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
-    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">meshes</span><span class="p">:</span> <span class="n">meshes</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]],</span>
-    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
-<span class="p">)</span>
-
-
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">mesh_loader</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">prep_pipe</span><span class="p">)</span>
-
-<span class="c1"># prefixed_struct, time</span>
-<span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="Create-gif">
-<h2>Create gif<a class="headerlink" href="#Create-gif" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gif_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;_images&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow_meshes</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">load_deterministic_atlas_flow</span><span class="p">(</span>
+    <span class="n">registration_dir</span><span class="p">,</span>
+    <span class="n">as_pv</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">gif_dir</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;_images&quot;</span>
 <span class="n">gif_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">gif_name</span> <span class="o">=</span> <span class="n">gif_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">_all_structs.gif&quot;</span>
+<span class="n">gif_name</span> <span class="o">=</span> <span class="n">gif_dir</span> <span class="o">/</span> <span class="s2">&quot;flow.gif&quot;</span>
 
 
 <span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesGifPlotter</span><span class="p">(</span>
-    <span class="n">shape</span><span class="o">=</span><span class="n">putils</span><span class="o">.</span><span class="n">plot_shape_from_n_plots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">meshes</span><span class="p">),</span> <span class="n">n_axis</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-    <span class="n">rowise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">gif_name</span><span class="o">=</span><span class="n">gif_name</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span>
-    <span class="n">fps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-    <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">notebook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">window_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">),</span>
-    <span class="n">subtitle</span><span class="o">=</span><span class="p">(</span>
-        <span class="k">lambda</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">struct_name</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">struct_name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="p">),</span>
 <span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="n">pl</span><span class="o">.</span><span class="n">add_meshes</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">meshes</span><span class="p">))</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_meshes</span><span class="p">(</span><span class="n">flow_meshes</span><span class="p">)</span>
 <span class="n">pl</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -505,12 +622,73 @@
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_notebooks_how_to_all_maternal_sessions_gif_8_0.png" src="../../../_images/_notebooks_how_to_all_maternal_sessions_gif_8_0.png" />
+<div class="highlight"><pre>
+&lt;IPython.core.display.Image object&gt;
+</pre></div></div>
 </div>
+</section>
+<section id="Compute-velocity-and-reconstruct-parametrization">
+<h2>Compute velocity and reconstruct parametrization<a class="headerlink" href="#Compute-velocity-and-reconstruct-parametrization" title="Link to this heading">#</a></h2>
+<p>Given control points and momenta, we start by computing the velocity at control points (NB: any other choice of <code class="docutils literal notranslate"><span class="pre">x</span></code> could have been done).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">load_cp</span><span class="p">(</span><span class="n">registration_dir</span><span class="p">,</span> <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">momenta</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">load_momenta</span><span class="p">(</span><span class="n">registration_dir</span><span class="p">,</span> <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">vel</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">velocity_at_x</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">momenta</span><span class="p">,</span> <span class="n">kernel_width</span><span class="o">=</span><span class="n">kernel_width</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We now do the inverse operation: given the velocity and control points, we compute the momenta.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">momenta_</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">reconstruct_parametrization</span><span class="p">(</span>
+    <span class="n">vel</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">kernel_width</span><span class="o">=</span><span class="n">kernel_width</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/luisfpereira/Repos/github/polpo/polpo/lddmm/geometry.py:358: UserWarning: torch.cholesky is deprecated in favor of torch.linalg.cholesky and will be removed in a future PyTorch release.
+L = torch.cholesky(A)
+should be replaced with
+L = torch.linalg.cholesky(A)
+and
+U = torch.cholesky(A, upper=True)
+should be replaced with
+U = torch.linalg.cholesky(A).mH
+This transform will produce equivalent results for all valid (symmetric positive definite) inputs. (Triggered internally at /pytorch/aten/src/ATen/native/BatchLinearAlgebra.cpp:1765.)
+  cholesky_kernel_matrix = torch.cholesky(kernel_matrix)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">momenta</span> <span class="o">-</span> <span class="n">momenta_</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+np.float64(8.041399688826778e-05)
+</pre></div></div>
 </div>
 </section>
 </section>
@@ -539,7 +717,8 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-meshes">Loading meshes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-gif">Create gif</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Registration">Registration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Compute-velocity-and-reconstruct-parametrization">Compute velocity and reconstruct parametrization</a></li>
 </ul>
   </nav></div>
 
