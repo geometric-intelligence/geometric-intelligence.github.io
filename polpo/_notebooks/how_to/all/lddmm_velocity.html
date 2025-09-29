@@ -423,7 +423,7 @@ W0929 12:26:23.202000 180940 site-packages/torch/utils/cpp_extension.py:118] No 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ONLY_VIS</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># in case registration has already been run</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RECOMPUTE</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># in case registration has already been run</span>
 <span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
@@ -437,7 +437,7 @@ W0929 12:26:23.202000 180940 site-packages/torch/utils/cpp_extension.py:118] No 
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;velocity_example&quot;</span>
 
-<span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ONLY_VIS</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">RECOMPUTE</span><span class="p">:</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">OUTPUTS_DIR</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -549,7 +549,7 @@ W0929 12:26:23.202000 180940 site-packages/torch/utils/cpp_extension.py:118] No 
 
 <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">registration_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ONLY_VIS</span><span class="p">:</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">registration_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="n">plddmm</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">estimate_registration</span><span class="p">(</span>
         <span class="n">source</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="n">source</span><span class="p">],</span>
         <span class="n">target</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="n">target</span><span class="p">],</span>

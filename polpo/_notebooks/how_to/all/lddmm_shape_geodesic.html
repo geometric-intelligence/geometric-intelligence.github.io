@@ -398,6 +398,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -424,7 +425,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W0929 12:20:36.275000 178958 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+W0929 14:33:59.328000 198892 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -432,6 +433,7 @@ W0929 12:20:36.275000 178958 site-packages/torch/utils/cpp_extension.py:118] No 
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">RECOMPUTE</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
@@ -468,6 +470,9 @@ W0929 12:20:36.275000 178958 site-packages/torch/utils/cpp_extension.py:118] No 
 <span class="n">SHOOT_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR_PY</span> <span class="o">/</span> <span class="s2">&quot;shoot&quot;</span>
 <span class="n">PARALLEL_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR_PY</span> <span class="o">/</span> <span class="s2">&quot;parallel&quot;</span>
 <span class="n">POLE_LADDER_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR_PY</span> <span class="o">/</span> <span class="s2">&quot;pole&quot;</span>
+
+<span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">RECOMPUTE</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">OUTPUTS_DIR</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -566,7 +571,7 @@ W0929 12:20:36.275000 178958 site-packages/torch/utils/cpp_extension.py:118] No 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">DEBUG</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">OUTPUTS_DIR_CLI</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">OUTPUTS_DIR_CLI</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;deformetrica compute _data/alien/model.xml -o </span><span class="si">{</span><span class="n">OUTPUTS_DIR_CLI</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -576,31 +581,16 @@ W0929 12:20:36.275000 178958 site-packages/torch/utils/cpp_extension.py:118] No 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W0929 12:20:40.868000 179265 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Logger has been set to: WARNING
+W0929 14:34:03.778000 199212 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-Traceback (most recent call last):
-  File &#34;/home/luisfpereira/miniconda3/envs/deformetrica/bin/deformetrica&#34;, line 7, in &lt;module&gt;
-    sys.exit(main())
-             ^^^^^^
-  File &#34;/home/luisfpereira/miniconda3/envs/deformetrica/lib/python3.12/site-packages/deformetrica.py&#34;, line 207, in main
-    deformetrica.compute_parallel_transport(
-  File &#34;/home/luisfpereira/miniconda3/envs/deformetrica/lib/python3.12/site-packages/api/deformetrica.py&#34;, line 517, in compute_parallel_transport
-    compute_parallel_transport(template_specifications, output_dir=self.output_dir, **model_options)
-TypeError: compute_parallel_transport() got an unexpected keyword argument &#39;deformation_kernel_device&#39;
+Logger has been set to: WARNING
+initial-control-points-to-transport was not specified, I am assuming they are the same as initial-control-points
 </pre></div></div>
 </div>
 <p>The above is equivalent to running the following code.</p>
@@ -608,7 +598,7 @@ TypeError: compute_parallel_transport() got an unexpected keyword argument &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">DEBUG</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">FULL_RUN_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">FULL_RUN_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">parallel_transport</span><span class="p">(</span>
         <span class="n">source</span><span class="o">=</span><span class="n">base_shape_name</span><span class="p">,</span>
         <span class="n">control_points</span><span class="o">=</span><span class="n">cp_name</span><span class="p">,</span>
@@ -1076,8 +1066,8 @@ np.float64(33.456961154937744)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">DEBUG</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">OUTPUTS_DIR_CLI</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-    <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">pole_ladder</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">POLE_LADDER_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">parallel_transport</span><span class="p">(</span>
         <span class="n">cp_name</span><span class="p">,</span>
         <span class="n">momenta_name</span><span class="p">,</span>
         <span class="n">momenta_to_transport_name</span><span class="p">,</span>
@@ -1085,6 +1075,7 @@ np.float64(33.456961154937744)
         <span class="n">kernel_width</span><span class="o">=</span><span class="n">kernel_width</span><span class="p">,</span>
         <span class="n">tmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
         <span class="n">tmax</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span>
+        <span class="n">use_pole_ladder</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 
 <span class="n">transported_cp_</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">load_cp</span><span class="p">(</span><span class="n">POLE_LADDER_DIR</span><span class="p">,</span> <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1128,7 +1119,7 @@ In exponential update, I am not flowing because I don&#39;t have any template po
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-np.float64(1.16162692)
+np.float64(1.105946396)
 </pre></div></div>
 </div>
 </section>

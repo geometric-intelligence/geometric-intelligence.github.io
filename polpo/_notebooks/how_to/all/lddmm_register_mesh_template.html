@@ -434,7 +434,7 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ONLY_VIS</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># in case registration has already been run</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RECOMPUTE</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># in case registration has already been run</span>
 <span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
@@ -454,7 +454,7 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 <span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;registration_</span><span class="si">{</span><span class="n">STRUCT_NAME</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="n">REGISTRATION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span>
 
-<span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ONLY_VIS</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">RECOMPUTE</span><span class="p">:</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">OUTPUTS_DIR</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -609,7 +609,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
     <span class="n">attachment_kernel_width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">REGISTRATION_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ONLY_VIS</span><span class="p">:</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">REGISTRATION_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="n">plddmm</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">estimate_registration</span><span class="p">(</span>
         <span class="n">mesh_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
         <span class="n">mesh_filenames</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -631,8 +631,8 @@ OMP_NUM_THREADS will be set to 10
 context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/registration_posthipp/registration/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x7d9fe51a6750
-instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7d9fe51d2d50
+instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x7684d0876bd0
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7684d046e790
 &gt;&gt; Set of 10 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -699,7 +699,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -8.319E+02     [ attachment = -6.201E+02 ; regularity = -2.118E+02 ]
 &gt;&gt; Gradient at Termination: 439.6210930702169
 &gt;&gt; CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
-&gt;&gt; Estimation took: 35 seconds
+&gt;&gt; Estimation took: 38 seconds
 Deformetrica.__del__()
 </pre></div></div>
 </div>

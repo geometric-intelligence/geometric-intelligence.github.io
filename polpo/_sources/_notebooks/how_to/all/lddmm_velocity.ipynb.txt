@@ -41,7 +41,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "ONLY_VIS = False  # in case registration has already been run\n",
+    "RECOMPUTE = True  # in case registration has already been run\n",
     "STATIC_VIZ = True\n",
     "\n",
     "if STATIC_VIZ:\n",
@@ -56,7 +56,7 @@
    "source": [
     "OUTPUTS_DIR = Path(\"results\") / \"velocity_example\"\n",
     "\n",
-    "if OUTPUTS_DIR.exists() and not ONLY_VIS:\n",
+    "if OUTPUTS_DIR.exists() and RECOMPUTE:\n",
     "    shutil.rmtree(OUTPUTS_DIR)"
    ]
   },
@@ -233,7 +233,7 @@
     "\n",
     "source, target = meshes.keys()\n",
     "\n",
-    "if not registration_dir.exists() or not ONLY_VIS:\n",
+    "if not registration_dir.exists():\n",
     "    plddmm.registration.estimate_registration(\n",
     "        source=dataset[source],\n",
     "        target=dataset[target],\n",
