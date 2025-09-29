@@ -424,7 +424,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W0924 12:40:50.103000 37170 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+W0929 12:20:36.275000 178958 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -576,16 +576,31 @@ W0924 12:40:50.103000 37170 site-packages/torch/utils/cpp_extension.py:118] No C
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W0924 12:40:53.687000 37402 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+W0929 12:20:40.868000 179265 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Logger has been set to: WARNING
-initial-control-points-to-transport was not specified, I am assuming they are the same as initial-control-points
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Traceback (most recent call last):
+  File &#34;/home/luisfpereira/miniconda3/envs/deformetrica/bin/deformetrica&#34;, line 7, in &lt;module&gt;
+    sys.exit(main())
+             ^^^^^^
+  File &#34;/home/luisfpereira/miniconda3/envs/deformetrica/lib/python3.12/site-packages/deformetrica.py&#34;, line 207, in main
+    deformetrica.compute_parallel_transport(
+  File &#34;/home/luisfpereira/miniconda3/envs/deformetrica/lib/python3.12/site-packages/api/deformetrica.py&#34;, line 517, in compute_parallel_transport
+    compute_parallel_transport(template_specifications, output_dir=self.output_dir, **model_options)
+TypeError: compute_parallel_transport() got an unexpected keyword argument &#39;deformation_kernel_device&#39;
 </pre></div></div>
 </div>
 <p>The above is equivalent to running the following code.</p>
@@ -692,14 +707,7 @@ np.float64(0.0)
     <span class="n">meshes</span> <span class="o">=</span> <span class="n">truncate_dict</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
 
 
-<span class="n">gif_dir</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;_images&quot;</span>
-<span class="n">gif_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">gif_name</span> <span class="o">=</span> <span class="n">gif_dir</span> <span class="o">/</span> <span class="s2">&quot;regression_flow.gif&quot;</span>
-
-
 <span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesGifPlotter</span><span class="p">(</span>
-    <span class="n">gif_name</span><span class="o">=</span><span class="n">gif_name</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span>
     <span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -859,14 +867,7 @@ np.float64(1.4572500000000193e-05)
     <span class="n">meshes</span> <span class="o">=</span> <span class="n">truncate_dict</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
 
 
-<span class="n">gif_dir</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;_images&quot;</span>
-<span class="n">gif_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">gif_name</span> <span class="o">=</span> <span class="n">gif_dir</span> <span class="o">/</span> <span class="s2">&quot;parallel_flow.gif&quot;</span>
-
-
 <span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesGifPlotter</span><span class="p">(</span>
-    <span class="n">gif_name</span><span class="o">=</span><span class="n">gif_name</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span>
     <span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1045,14 +1046,7 @@ np.float64(33.456961154937744)
 <span class="p">}</span>
 
 
-<span class="n">gif_dir</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;_images&quot;</span>
-<span class="n">gif_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">gif_name</span> <span class="o">=</span> <span class="n">gif_dir</span> <span class="o">/</span> <span class="s2">&quot;parallel_flow.gif&quot;</span>
-
-
 <span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesGifPlotter</span><span class="p">(</span>
-    <span class="n">gif_name</span><span class="o">=</span><span class="n">gif_name</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span>
     <span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1083,7 +1077,7 @@ np.float64(33.456961154937744)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">DEBUG</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">OUTPUTS_DIR_CLI</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-    <span class="n">transported_cp_</span><span class="p">,</span> <span class="n">transported_mom_</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">pole_ladder</span><span class="p">(</span>
+    <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">pole_ladder</span><span class="p">(</span>
         <span class="n">cp_name</span><span class="p">,</span>
         <span class="n">momenta_name</span><span class="p">,</span>
         <span class="n">momenta_to_transport_name</span><span class="p">,</span>
@@ -1092,11 +1086,9 @@ np.float64(33.456961154937744)
         <span class="n">tmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
         <span class="n">tmax</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">transported_cp_</span> <span class="o">=</span> <span class="n">transported_cp_</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-    <span class="n">transported_mom_</span> <span class="o">=</span> <span class="n">transported_mom_</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">transported_cp_</span> <span class="o">=</span> <span class="n">read_3D_array</span><span class="p">(</span><span class="n">POLE_LADDER_DIR</span> <span class="o">/</span> <span class="s2">&quot;final_cp.txt&quot;</span><span class="p">)</span>
-    <span class="n">transported_mom_</span> <span class="o">=</span> <span class="n">read_3D_array</span><span class="p">(</span><span class="n">POLE_LADDER_DIR</span> <span class="o">/</span> <span class="s2">&quot;transported_momenta.txt&quot;</span><span class="p">)</span>
+
+<span class="n">transported_cp_</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">load_cp</span><span class="p">(</span><span class="n">POLE_LADDER_DIR</span><span class="p">,</span> <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">transported_mom_</span> <span class="o">=</span> <span class="n">plddmm</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">load_momenta</span><span class="p">(</span><span class="n">POLE_LADDER_DIR</span><span class="p">,</span> <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1136,224 +1128,9 @@ In exponential update, I am not flowing because I don&#39;t have any template po
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-np.float64(1.112947985905243)
+np.float64(1.16162692)
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-<p>DEBUG!!</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp_name</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;control_points.txt&quot;</span>
-<span class="n">momenta_name</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;momenta.txt&quot;</span>
-<span class="n">momenta_to_transport_name</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;momenta_to_transport.txt&quot;</span>
-
-<span class="n">base_shape_name</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;face.vtk&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: delete</span>
-
-<span class="n">geodesic</span><span class="p">,</span> <span class="n">exponential</span><span class="p">,</span> <span class="n">parallel_transport_trajectory</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">plddmm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">parallel_transport</span><span class="p">(</span>
-        <span class="n">source</span><span class="o">=</span><span class="n">base_shape_name</span><span class="p">,</span>
-        <span class="n">control_points</span><span class="o">=</span><span class="n">cp_name</span><span class="p">,</span>
-        <span class="n">momenta</span><span class="o">=</span><span class="n">momenta_name</span><span class="p">,</span>
-        <span class="n">momenta_to_transport</span><span class="o">=</span><span class="n">momenta_to_transport_name</span><span class="p">,</span>
-        <span class="n">kernel_width</span><span class="o">=</span><span class="n">kernel_width</span><span class="p">,</span>
-        <span class="n">concentration_of_time_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-        <span class="n">output_dir</span><span class="o">=</span><span class="n">FULL_RUN_DIR</span><span class="p">,</span>
-        <span class="n">tmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">tmax</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span>
-            <span class="n">geodesic</span><span class="o">.</span><span class="n">get_template_points</span><span class="p">(</span><span class="n">time</span><span class="p">)[</span><span class="s2">&quot;landmark_points&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-            <span class="o">-</span> <span class="n">regression_meshes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">points</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geodesic</span><span class="o">.</span><span class="n">get_times</span><span class="p">())</span>
-<span class="p">]</span>
-
-<span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span>
-        <span class="n">LoadControlPointsFlow</span><span class="p">(</span><span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">OUTPUTS_DIR_CLI</span><span class="p">)</span>
-        <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">array</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="n">geodesic</span><span class="o">.</span><span class="n">get_control_points_trajectory</span><span class="p">()]</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># momenta, not transported</span>
-<span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span>
-        <span class="n">LoadMomentaFlow</span><span class="p">(</span>
-            <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">extra_rules</span><span class="o">=</span><span class="n">Contains</span><span class="p">(</span><span class="s2">&quot;Transported&quot;</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-        <span class="p">)(</span><span class="n">OUTPUTS_DIR_CLI</span><span class="p">)</span>
-        <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">array</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="n">geodesic</span><span class="o">.</span><span class="n">get_momenta_trajectory</span><span class="p">()])</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span>
-        <span class="n">LoadMomentaFlow</span><span class="p">(</span>
-            <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">extra_rules</span><span class="o">=</span><span class="n">Contains</span><span class="p">(</span><span class="s2">&quot;Transported&quot;</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-        <span class="p">)(</span><span class="n">OUTPUTS_DIR_CLI</span><span class="p">)</span>
-        <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">array</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="n">parallel_transport_trajectory</span><span class="p">])</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cps</span> <span class="o">=</span> <span class="n">LoadControlPointsFlow</span><span class="p">(</span><span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">OUTPUTS_DIR_CLI</span><span class="p">)</span>
-<span class="n">transported_momenta</span> <span class="o">=</span> <span class="n">LoadMomentaFlow</span><span class="p">(</span>
-    <span class="n">as_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">extra_rules</span><span class="o">=</span><span class="n">Contains</span><span class="p">(</span><span class="s2">&quot;Transported&quot;</span><span class="p">),</span>
-<span class="p">)(</span><span class="n">OUTPUTS_DIR_CLI</span><span class="p">)</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMerger</span><span class="p">(</span><span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span>
-    <span class="p">(</span>
-        <span class="n">cps</span><span class="p">,</span>
-        <span class="n">transported_momenta</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-
-<span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">truncate_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-
-<span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geodesic</span><span class="o">.</span><span class="n">get_times</span><span class="p">()):</span>
-    <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="k">break</span>
-
-    <span class="n">deformed_points</span> <span class="o">=</span> <span class="n">geodesic</span><span class="o">.</span><span class="n">get_template_points</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-
-    <span class="n">cp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">deformed_points</span><span class="p">[</span><span class="s2">&quot;landmark_points&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">transported_mom</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
-        <span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">deformed_points</span><span class="p">[</span><span class="s2">&quot;landmark_points&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
-    <span class="p">)</span>
-
-    <span class="n">exponential</span><span class="o">.</span><span class="n">set_initial_template_points</span><span class="p">(</span><span class="n">deformed_points</span><span class="p">)</span>
-    <span class="n">exponential</span><span class="o">.</span><span class="n">set_initial_control_points</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
-    <span class="n">exponential</span><span class="o">.</span><span class="n">set_initial_momenta</span><span class="p">(</span><span class="n">transported_mom</span><span class="p">)</span>
-    <span class="n">exponential</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-
-    <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exponential</span><span class="o">.</span><span class="n">get_template_points</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">points_</span><span class="p">[</span><span class="s2">&quot;landmark_points&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">-</span> <span class="n">parallel_meshes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">points</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">points_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-<span class="p">]</span>
-
-<span class="n">diffs</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">transported_mom</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
-    <span class="nb">zip</span><span class="p">(</span>
-        <span class="n">geodesic</span><span class="o">.</span><span class="n">get_times</span><span class="p">(),</span>
-        <span class="n">geodesic</span><span class="o">.</span><span class="n">get_control_points_trajectory</span><span class="p">(),</span>
-        <span class="n">parallel_transport_trajectory</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">):</span>
-    <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="k">break</span>
-
-    <span class="n">deformed_points</span> <span class="o">=</span> <span class="n">geodesic</span><span class="o">.</span><span class="n">get_template_points</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-
-    <span class="n">exponential</span><span class="o">.</span><span class="n">set_initial_template_points</span><span class="p">(</span><span class="n">deformed_points</span><span class="p">)</span>
-    <span class="n">exponential</span><span class="o">.</span><span class="n">set_initial_control_points</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
-    <span class="n">exponential</span><span class="o">.</span><span class="n">set_initial_momenta</span><span class="p">(</span><span class="n">transported_mom</span><span class="p">)</span>
-    <span class="n">exponential</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-
-    <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exponential</span><span class="o">.</span><span class="n">get_template_points</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">points_</span><span class="p">[</span><span class="s2">&quot;landmark_points&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">-</span> <span class="n">parallel_meshes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">points</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">points_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-<span class="p">]</span>
-
-<span class="n">diffs</span>
-</pre></div>
-</div>
-</div>
-<p>TODO: same with pole ladder</p>
 </section>
 </section>
 
