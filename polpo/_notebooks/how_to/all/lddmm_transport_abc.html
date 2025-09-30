@@ -429,7 +429,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W0929 16:06:41.839000 224645 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+W0930 10:53:58.768000 19856 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -603,8 +603,8 @@ OMP_NUM_THREADS will be set to 10
 context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/transport_abc/B-&gt;A/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x7c772b2e32f0
-instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7c772b31c2c0
+instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x72f9f4ce4710
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x72f9f4ce4890
 &gt;&gt; Set of 24 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -655,7 +655,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -1.474E+02     [ attachment = -1.410E+02 ; regularity = -6.468E+00 ]
 &gt;&gt; Gradient at Termination: 804.101821842839
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 13 seconds
+&gt;&gt; Estimation took: 07 seconds
 Deformetrica.__del__()
 </pre></div></div>
 </div>
@@ -761,6 +761,14 @@ Deformetrica.__del__()
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+time taken to compute parallel_transport: 0.017053807999218407
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /home/luisfpereira/miniconda3/envs/deformetrica/lib/python3.12/site-packages/launch/compute_parallel_transport.py:92: UserWarning: torch.cholesky is deprecated in favor of torch.linalg.cholesky and will be removed in a future PyTorch release.
@@ -775,14 +783,6 @@ This transform will produce equivalent results for all valid (symmetric positive
   cholesky_kernel_matrix = torch.cholesky(kernel_matrix)
 /home/luisfpereira/miniconda3/envs/deformetrica/lib/python3.12/site-packages/in_out/dataset_functions.py:265: UserWarning: Watch out, I did not get a distance type for the object shape, Please make sure you are running shooting or a parallel transport, otherwise distances are required.
   warnings.warn(msg)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-time taken to compute parallel_transport: 0.009394772991072387
 </pre></div></div>
 </div>
 <p>Let’s visualize the parallel curve.</p>
@@ -1019,7 +1019,7 @@ OMP_NUM_THREADS will be set to 10
 context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/transport_abc/simple_api/B-&gt;A/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 20.0 and gpu_mode GpuMode.KERNEL. addr: 0x7c76f81d2510
+instantiating kernel torch with kernel_width 20.0 and gpu_mode GpuMode.KERNEL. addr: 0x72f9cc13a450
 &gt;&gt; Set of 4 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -1043,7 +1043,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -2.110E+03     [ attachment = -2.076E+03 ; regularity = -3.319E+01 ]
 &gt;&gt; Gradient at Termination: 491.2100760683912
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 01 minutes and 17 seconds
+&gt;&gt; Estimation took: 16 seconds
 Deformetrica.__del__()
 Logger has been set to: DEBUG
 &gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
@@ -1062,9 +1062,9 @@ dtype=float32
 ------------------------------------- Iteration: 1 -------------------------------------
 &gt;&gt; Gradient at Termination: 245.3812747945223
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 26 seconds
+&gt;&gt; Estimation took: 04 seconds
 Deformetrica.__del__()
-time taken to compute parallel_transport: 0.01729683400481008
+time taken to compute parallel_transport: 0.013347967999834509
 </pre></div></div>
 </div>
 </section>
