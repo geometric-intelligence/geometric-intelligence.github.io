@@ -429,7 +429,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W0930 11:10:00.424000 21676 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+W1001 10:12:12.208000 10625 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -603,8 +603,8 @@ OMP_NUM_THREADS will be set to 10
 context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/transport_abc/B-&gt;A/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x7df3e16ac920
-instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7df3e16ac6b0
+instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x761f088a7b30
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x761f088d89e0
 &gt;&gt; Set of 24 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -670,8 +670,13 @@ Deformetrica.__del__()
     <span class="n">as_pv</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="n">gif_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;_images&quot;</span><span class="p">)</span>
+<span class="n">gif_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesGifPlotter</span><span class="p">()</span>
+<span class="n">gif_name</span> <span class="o">=</span> <span class="n">gif_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">.gif&quot;</span>
+
+
+<span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesGifPlotter</span><span class="p">(</span><span class="n">gif_name</span><span class="o">=</span><span class="n">gif_name</span><span class="p">)</span>
 <span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">pl</span><span class="o">.</span><span class="n">add_meshes</span><span class="p">(</span><span class="n">flow_meshes</span><span class="p">)</span>
@@ -763,7 +768,7 @@ Deformetrica.__del__()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-time taken to compute parallel_transport: 0.014646030000221799
+time taken to compute parallel_transport: 0.017428602999984832
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1019,7 +1024,7 @@ OMP_NUM_THREADS will be set to 10
 context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/transport_abc/simple_api/B-&gt;A/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 20.0 and gpu_mode GpuMode.KERNEL. addr: 0x7df3e16ad8b0
+instantiating kernel torch with kernel_width 20.0 and gpu_mode GpuMode.KERNEL. addr: 0x761f088d99a0
 &gt;&gt; Set of 4 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -1062,9 +1067,9 @@ dtype=float32
 ------------------------------------- Iteration: 1 -------------------------------------
 &gt;&gt; Gradient at Termination: 245.3812747945223
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 04 seconds
+&gt;&gt; Estimation took: 03 seconds
 Deformetrica.__del__()
-time taken to compute parallel_transport: 0.013415272998827277
+time taken to compute parallel_transport: 0.013447454000015568
 </pre></div></div>
 </div>
 </section>
