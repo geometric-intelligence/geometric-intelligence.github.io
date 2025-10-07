@@ -438,6 +438,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.lddmm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plddmm</span>
@@ -459,7 +460,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W0929 18:41:44.980000 257557 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+W1007 14:56:50.734000 29039 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -1337,7 +1338,7 @@ Number of meshes for:
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
@@ -1373,6 +1374,104 @@ Number of meshes for:
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/sub_01/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/sub_01/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
+instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x758560315460
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x758560315850
+&gt;&gt; Set of 24 control points defined.
+&gt;&gt; Momenta initialized to zero, for 5 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -3.248E+03     [ attachment = -3.241E+03 ; regularity = -7.385E+00 ]
+&gt;&gt; Gradient at Termination: 393752.36947430304
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 10 seconds
+Deformetrica.__del__()
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/sub_1001B/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/sub_1001B/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
+&gt;&gt; Set of 24 control points defined.
+&gt;&gt; Momenta initialized to zero, for 2 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -7.362E+02     [ attachment = -7.328E+02 ; regularity = -3.317E+00 ]
+&gt;&gt; Gradient at Termination: 30616.935054977213
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 04 seconds
+Deformetrica.__del__()
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/sub_1004B/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/sub_1004B/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
+&gt;&gt; Set of 20 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 34299.45904670179
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 10.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/global/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+{&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/global/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
+&gt;&gt; Set of 24 control points defined.
+&gt;&gt; Momenta initialized to zero, for 3 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -3.921E+03     [ attachment = -3.844E+03 ; regularity = -7.690E+01 ]
+&gt;&gt; Gradient at Termination: 1520974.913669366
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 06 seconds
+Deformetrica.__del__()
+</pre></div></div>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1405,7 +1504,7 @@ Number of meshes for:
 <section id="Parallel-transport-to-atlas">
 <h2>Parallel transport to atlas<a class="headerlink" href="#Parallel-transport-to-atlas" title="Link to this heading">#</a></h2>
 <p>Closely follows <a class="reference internal" href="lddmm_transport_abc.html"><span class="doc">LDDMM: parallel transport?</span></a>.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
@@ -1442,6 +1541,1799 @@ Number of meshes for:
         <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;global/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+instantiating kernel torch with kernel_width 20.0 and gpu_mode GpuMode.KERNEL. addr: 0x758560317b30
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 2076.6978893306127
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;1/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 409.691571709972
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;2/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/luisfpereira/miniconda3/envs/deformetrica/lib/python3.12/site-packages/in_out/dataset_functions.py:265: UserWarning: Watch out, I did not get a distance type for the object shape, Please make sure you are running shooting or a parallel transport, otherwise distances are required.
+  warnings.warn(msg)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&gt;&gt; Gradient at Termination: 1739.4395109621248
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 00 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;3/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 457.4014482280067
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 00 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;4/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 688.5967234551742
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;5/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 92.71615746407014
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;6/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 152.1385305640774
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;7/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1757.1258860380285
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;8/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 3384.183368428571
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;9/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1388.9212485216735
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;10/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 3978.6830487726647
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;11/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1635.1460789930147
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;12/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 685.6532014168621
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 00 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;13/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1101.5877024262231
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 00 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;14/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 579.2028275418893
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;15/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1469.621156866755
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;16/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 144.31421561709726
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;17/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 264.1367399452377
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;18/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1188.7802624428198
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;19/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 4904.561448410275
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;20/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 417.45722682985314
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;21/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 439.5702180436356
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;22/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 3930.697721797267
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;23/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 7190.264503332513
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;24/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 813.7921379461327
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;25/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1628.7307875161764
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;26/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Gradient at Termination: 830.4643551525734
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;27/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.126E+00 ]
+&gt;&gt; Log-likelihood = -1.167E+03     [ attachment = -1.164E+03 ; regularity = -2.144E+00 ]
+&gt;&gt; Log-likelihood = -1.167E+03     [ attachment = -1.165E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -3.322E+04     [ attachment = -3.285E+04 ; regularity = -3.701E+02 ]
+&gt;&gt; Log-likelihood = -1.168E+03     [ attachment = -1.166E+03 ; regularity = -2.143E+00 ]
+&gt;&gt; Log-likelihood = -1.167E+03     [ attachment = -1.165E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.168E+03     [ attachment = -1.166E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
+&gt;&gt; Gradient at Termination: 317.3147814181185
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;global/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -2.689E+03     [ attachment = -2.675E+03 ; regularity = -1.458E+01 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -2.250E+03     [ attachment = -2.211E+03 ; regularity = -3.930E+01 ]
+
+------------------------------------- Iteration: 60 -------------------------------------
+&gt;&gt; Log-likelihood = -2.124E+03     [ attachment = -2.092E+03 ; regularity = -3.203E+01 ]
+&gt;&gt; Gradient at Termination: 901.3190770704099
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 05 seconds
+Deformetrica.__del__()
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;base1/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 4726.536849103331
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;base2/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -8.507E+02     [ attachment = -8.488E+02 ; regularity = -1.925E+00 ]
+&gt;&gt; Gradient at Termination: 3195.7940340298233
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;gest1/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.029E+03     [ attachment = -1.026E+03 ; regularity = -2.638E+00 ]
+&gt;&gt; Gradient at Termination: 1120.1715484036818
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;gest2/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 3044.9105112278667
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;gest3/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.154E+03     [ attachment = -1.152E+03 ; regularity = -2.263E+00 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -1.070E+03     [ attachment = -1.068E+03 ; regularity = -2.228E+00 ]
+&gt;&gt; Gradient at Termination: 818.6166352303965
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 04 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;gest4/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 441.06816413407546
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;gest5/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 903.4862542893511
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;gest6/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 924.2082044058429
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;gest7/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 7708.734458259769
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;post1/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.416E+03     [ attachment = -1.414E+03 ; regularity = -2.353E+00 ]
+&gt;&gt; Gradient at Termination: 8052.354901812929
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 03 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;post2/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.183E+00 ]
+&gt;&gt; Log-likelihood = -1.034E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -3.881E+04     [ attachment = -3.740E+04 ; regularity = -1.406E+03 ]
+&gt;&gt; Log-likelihood = -1.150E+03     [ attachment = -1.148E+03 ; regularity = -2.228E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.034E+03     [ attachment = -1.032E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Log-likelihood = -1.033E+03     [ attachment = -1.031E+03 ; regularity = -2.184E+00 ]
+&gt;&gt; Gradient at Termination: 1230.5794346376501
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;post3/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1909.8115530552022
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;post4/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 4 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 1008.0990288404191
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;global/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -4.798E+03     [ attachment = -4.754E+03 ; regularity = -4.381E+01 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -3.741E+03     [ attachment = -3.657E+03 ; regularity = -8.429E+01 ]
+
+------------------------------------- Iteration: 60 -------------------------------------
+&gt;&gt; Log-likelihood = -3.388E+03     [ attachment = -3.311E+03 ; regularity = -7.712E+01 ]
+
+------------------------------------- Iteration: 80 -------------------------------------
+&gt;&gt; Log-likelihood = -3.279E+03     [ attachment = -3.208E+03 ; regularity = -7.101E+01 ]
+
+------------------------------------- Iteration: 100 -------------------------------------
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.860E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.805E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.149E+03 ; regularity = -6.785E+01 ]
+&gt;&gt; Log-likelihood = -3.217E+03     [ attachment = -3.149E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.215E+03     [ attachment = -3.147E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -4.202E+04     [ attachment = -4.118E+04 ; regularity = -8.344E+02 ]
+&gt;&gt; Log-likelihood = -3.225E+03     [ attachment = -3.157E+03 ; regularity = -6.806E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.785E+01 ]
+&gt;&gt; Log-likelihood = -3.217E+03     [ attachment = -3.149E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
+&gt;&gt; Gradient at Termination: 717.2825981120169
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 10 seconds
+Deformetrica.__del__()
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;base1/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 2.439210948221298
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 00 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;base2/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 689.292167682434
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest1/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.131E+03     [ attachment = -1.128E+03 ; regularity = -3.527E+00 ]
+&gt;&gt; Gradient at Termination: 160.0985341470868
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest2/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 144.49017508060354
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest3/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 169.24522925308756
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest4/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 311.9598103151875
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest5/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 81.53334789976563
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest6/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 951.1385230588965
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest7/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 2045.3637226053593
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest8/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 304.6945704716948
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest9/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 353.43109846013
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest10/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 156.539397881387
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest11/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 825.3278459855346
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest12/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.726E+03     [ attachment = -1.723E+03 ; regularity = -3.278E+00 ]
+&gt;&gt; Gradient at Termination: 148.00620729165294
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 03 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;gest13/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 279.86289962540195
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;post1/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -6.796E+02     [ attachment = -6.775E+02 ; regularity = -2.088E+00 ]
+&gt;&gt; Gradient at Termination: 1031.4915544190653
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;post2/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.456E+03     [ attachment = -1.454E+03 ; regularity = -2.012E+00 ]
+&gt;&gt; Gradient at Termination: 155.29581141432877
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 04 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;post3/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 761.9562670752257
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;post4/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+&gt;&gt; Gradient at Termination: 325.74419379103347
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 01 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;post5/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -8.396E+02     [ attachment = -8.386E+02 ; regularity = -9.706E-01 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -7.562E+02     [ attachment = -7.510E+02 ; regularity = -5.142E+00 ]
+&gt;&gt; Log-likelihood = -7.533E+02     [ attachment = -7.485E+02 ; regularity = -4.836E+00 ]
+&gt;&gt; Gradient at Termination: 424.5594798679826
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 05 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+Logger has been set to: DEBUG
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1004B/1004B-&gt;post6/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 3 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.499E+03     [ attachment = -1.490E+03 ; regularity = -9.082E+00 ]
+&gt;&gt; Gradient at Termination: 853.4368250066632
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 02 seconds
+Deformetrica.__del__()
+source is ignored when pole ladder is used
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+In exponential update, I am not flowing because I don&#39;t have any template points to flow
+[ compute_shooting function ]
+Defaulting geodesic t0 to 1.
+Defaulting geodesic tmax to 1.
+Defaulting geodesic tmin to 0.
+</pre></div></div>
 </div>
 </section>
 <section id="Visualize-shooting-from-atlases-to-subject-last-mesh">
@@ -1588,14 +3480,6 @@ results/regression_example/parallel_shoot/sub_1004B/global(t1004B&gt;post6)
 </section>
 <section id="Compute-velocities">
 <h1>Compute velocities<a class="headerlink" href="#Compute-velocities" title="Link to this heading">#</a></h1>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
@@ -1614,7 +3498,7 @@ PosixPath(&#39;results/regression_example/atlases/global/DeterministicAtlas__Est
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1648,6 +3532,41 @@ PosixPath(&#39;results/regression_example/atlases/global/DeterministicAtlas__Est
 </div>
 </div>
 <p>Velocities are comparable quantities.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vel_week</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">subj_dict</span> <span class="ow">in</span> <span class="n">vel</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">session2week</span> <span class="o">=</span> <span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">][</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">]</span>
+    <span class="n">vel_week</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+        <span class="n">key_step</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">session2week</span><span class="p">[</span><span class="n">session</span><span class="p">])</span>
+    <span class="p">)(</span><span class="n">vel</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])</span>
+
+<span class="n">vel_ls</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">subj_id</span><span class="p">,</span> <span class="n">subj_vel</span> <span class="ow">in</span> <span class="n">vel_week</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">week</span><span class="p">,</span> <span class="n">vels</span> <span class="ow">in</span> <span class="n">subj_vel</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">vel_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="n">subj_id</span><span class="p">,</span>
+                <span class="s2">&quot;week&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">week</span><span class="p">),</span>
+                <span class="s2">&quot;vel&quot;</span><span class="p">:</span> <span class="n">vels</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">vel_ls</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;velocities.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
