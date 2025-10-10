@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../_static/documentation_options.js?v=91d07486"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -127,7 +127,7 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../how_to/index.html">
+  <a class="nav-link nav-internal" href="../../how_to.html">
     How-tos
   </a>
 </li>
@@ -220,7 +220,7 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../how_to/index.html">
+  <a class="nav-link nav-internal" href="../../how_to.html">
     How-tos
   </a>
 </li>
@@ -448,8 +448,7 @@ slashes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.cwd">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.cwd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.cwd" title="Link to this definition">#</a></dt>
-<dd><p>Return a new path pointing to the current working directory
-(as returned by os.getcwd()).</p>
+<dd><p>Return a new path pointing to the current working directory.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -460,8 +459,10 @@ slashes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.exists">
-<span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.exists" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_symlinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.exists" title="Link to this definition">#</a></dt>
 <dd><p>Whether this path exists.</p>
+<p>This method normally follows symlinks; to check whether a symlink exists,
+add the argument follow_symlinks=False.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -473,7 +474,7 @@ slashes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.glob">
-<span class="sig-name descname"><span class="pre">glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.glob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.glob" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.glob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.glob" title="Link to this definition">#</a></dt>
 <dd><p>Iterate over this subtree and yield all existing files (of any
 kind, including directories) matching the given relative pattern.</p>
 </dd></dl>
@@ -537,14 +538,20 @@ to regular files).</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.is_junction">
+<span class="sig-name descname"><span class="pre">is_junction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.is_junction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_junction" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a junction.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.is_mount">
 <span class="sig-name descname"><span class="pre">is_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.is_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_mount" title="Link to this definition">#</a></dt>
-<dd><p>Check if this path is a POSIX mount point</p>
+<dd><p>Check if this path is a mount point</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.is_relative_to">
-<span class="sig-name descname"><span class="pre">is_relative_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_relative_to" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">is_relative_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_deprecated</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_relative_to" title="Link to this definition">#</a></dt>
 <dd><p>Return True if the path is relative to another path or False.</p>
 </dd></dl>
 
@@ -570,13 +577,14 @@ by the system, if any.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.iterdir">
 <span class="sig-name descname"><span class="pre">iterdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.iterdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.iterdir" title="Link to this definition">#</a></dt>
-<dd><p>Iterate over the files in this directory.  Does not yield any
-result for the special paths ‘.’ and ‘..’.</p>
+<dd><p>Yield path objects of the directory contents.</p>
+<p>The children are yielded in arbitrary order, and the
+special entries ‘.’ and ‘..’ are not included.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.joinpath">
-<span class="sig-name descname"><span class="pre">joinpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.joinpath" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">joinpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.joinpath" title="Link to this definition">#</a></dt>
 <dd><p>Combine this path with one or several arguments, and return a
 new path representing either a subpath (if all arguments are relative
 paths) or a totally different path (if one of the arguments is
@@ -591,18 +599,6 @@ permissions are changed, rather than its target’s.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.link_to">
-<span class="sig-name descname"><span class="pre">link_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.link_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.link_to" title="Link to this definition">#</a></dt>
-<dd><p>Make the target path a hard link pointing to this path.</p>
-<p>Note this function does not make this path a hard link to <em>target</em>,
-despite the implication of the function and argument names. The order
-of arguments (target, link) is the reverse of Path.symlink_to, but
-matches that of os.link.</p>
-<p>Deprecated since Python 3.10 and scheduled for removal in Python 3.12.
-Use <cite>hardlink_to()</cite> instead.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.lstat">
 <span class="sig-name descname"><span class="pre">lstat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.lstat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.lstat" title="Link to this definition">#</a></dt>
 <dd><p>Like stat(), except if the path points to a symlink, the symlink’s
@@ -611,7 +607,7 @@ status information is returned, rather than its target’s.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.match">
-<span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_pattern</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.match" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_pattern</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.match" title="Link to this definition">#</a></dt>
 <dd><p>Return True if this path matches the given pattern.</p>
 </dd></dl>
 
@@ -630,7 +626,7 @@ status information is returned, rather than its target’s.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.open">
 <span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffering</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.open" title="Link to this definition">#</a></dt>
-<dd><p>Open the file pointed by this path and return a file object, as
+<dd><p>Open the file pointed to by this path and return a file object, as
 the built-in open() function does.</p>
 </dd></dl>
 
@@ -679,10 +675,12 @@ components in the filesystem path.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.relative_to">
-<span class="sig-name descname"><span class="pre">relative_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.relative_to" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">relative_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_deprecated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">walk_up</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.relative_to" title="Link to this definition">#</a></dt>
 <dd><p>Return the relative path to another path identified by the passed
 arguments.  If the operation is not possible (because this is not
-a subpath of the other path), raise ValueError.</p>
+related to the other path), raise ValueError.</p>
+<p>The <em>walk_up</em> parameter controls whether <cite>..</cite> may be used to resolve
+the path.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -714,7 +712,7 @@ normalizing it.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.rglob">
-<span class="sig-name descname"><span class="pre">rglob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.rglob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.rglob" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">rglob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.rglob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.rglob" title="Link to this definition">#</a></dt>
 <dd><p>Recursively yield all existing files (of any kind, including
 directories) matching the given relative pattern, anywhere in
 this subtree.</p>
@@ -787,9 +785,23 @@ If the path is a directory, use rmdir() instead.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.walk">
+<span class="sig-name descname"><span class="pre">walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_down</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_symlinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pathlib.html#Path.walk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.walk" title="Link to this definition">#</a></dt>
+<dd><p>Walk the directory tree from this directory, similar to os.walk().</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.with_name">
 <span class="sig-name descname"><span class="pre">with_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.with_name" title="Link to this definition">#</a></dt>
 <dd><p>Return a new path with the file name changed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polpo.preprocessing.load.pregnancy.jacobs.Path.with_segments">
+<span class="sig-name descname"><span class="pre">with_segments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.with_segments" title="Link to this definition">#</a></dt>
+<dd><p>Construct a new path object from any number of path-like objects.
+Subclasses may override this method to customize how new path objects
+are created from methods like <cite>iterdir()</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -865,6 +877,7 @@ string, remove the suffix from the path.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_dir"><code class="docutils literal notranslate"><span class="pre">Path.is_dir()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_fifo"><code class="docutils literal notranslate"><span class="pre">Path.is_fifo()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_file"><code class="docutils literal notranslate"><span class="pre">Path.is_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_junction"><code class="docutils literal notranslate"><span class="pre">Path.is_junction()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_mount"><code class="docutils literal notranslate"><span class="pre">Path.is_mount()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_relative_to"><code class="docutils literal notranslate"><span class="pre">Path.is_relative_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.is_reserved"><code class="docutils literal notranslate"><span class="pre">Path.is_reserved()</span></code></a></li>
@@ -873,7 +886,6 @@ string, remove the suffix from the path.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.iterdir"><code class="docutils literal notranslate"><span class="pre">Path.iterdir()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.joinpath"><code class="docutils literal notranslate"><span class="pre">Path.joinpath()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.lchmod"><code class="docutils literal notranslate"><span class="pre">Path.lchmod()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.link_to"><code class="docutils literal notranslate"><span class="pre">Path.link_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.lstat"><code class="docutils literal notranslate"><span class="pre">Path.lstat()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.match"><code class="docutils literal notranslate"><span class="pre">Path.match()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.mkdir"><code class="docutils literal notranslate"><span class="pre">Path.mkdir()</span></code></a></li>
@@ -901,7 +913,9 @@ string, remove the suffix from the path.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.symlink_to"><code class="docutils literal notranslate"><span class="pre">Path.symlink_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.touch"><code class="docutils literal notranslate"><span class="pre">Path.touch()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.unlink"><code class="docutils literal notranslate"><span class="pre">Path.unlink()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.walk"><code class="docutils literal notranslate"><span class="pre">Path.walk()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.with_name"><code class="docutils literal notranslate"><span class="pre">Path.with_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.with_segments"><code class="docutils literal notranslate"><span class="pre">Path.with_segments()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.with_stem"><code class="docutils literal notranslate"><span class="pre">Path.with_stem()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.with_suffix"><code class="docutils literal notranslate"><span class="pre">Path.with_suffix()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polpo.preprocessing.load.pregnancy.jacobs.Path.write_bytes"><code class="docutils literal notranslate"><span class="pre">Path.write_bytes()</span></code></a></li>

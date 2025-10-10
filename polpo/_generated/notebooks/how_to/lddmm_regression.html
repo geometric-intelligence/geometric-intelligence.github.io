@@ -1,0 +1,1169 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>LDDMM: how to do regression? &#8212; polpo latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=91d07486"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/notebooks/how_to/lddmm_regression';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/notebooks/how_to/lddmm_regression.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="LDDMM: parallel transporting face motion" href="lddmm_shape_geodesic.html" />
+    <link rel="prev" title="LDDMM: how to register a mesh to a template?" href="lddmm_register_mesh_template.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Polpo @ GI lab</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../how_to.html">
+    How-tos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../how_to.html">
+    How-tos
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../tutorial.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lddmm_deterministic_atlas.html">LDDMM: how to estimate a deterministic atlas?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: how to do regression?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lddmm_shape_geodesic.html">LDDMM: parallel transporting face motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lddmm_transport_abc.html">LDDMM: parallel transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lddmm_velocity.html">LDDMM: compute velocity and reconstruct parametrization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load_figshare_data.html">How to download data from figshare?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load_server_data.html">How to download data from the server?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maternal_sessions_gif.html">How to create a gif showing how the brain substructures change over time?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maternal_volume.html">How to compute and plot the volume of the brain substructures?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_across_subjects.html">LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="viz_mri.html">How to visualize MRI data?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data loading</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="load_figshare_data.html">How to download data from figshare?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load_server_data.html">How to download data from the server?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mesh</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viz_mri.html">How to visualize MRI data?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Maternal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maternal_sessions_gif.html">How to create a gif showing how the brain substructures change over time?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maternal_volume.html">How to compute and plot the volume of the brain substructures?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LDDMM</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: how to do regression?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldddm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../how_to.html" class="nav-link">How-tos</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LDDMM: how to do regression?</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="LDDMM:-how-to-do-regression?">
+<h1>LDDMM: how to do regression?<a class="headerlink" href="#LDDMM:-how-to-do-regression?" title="Link to this heading">#</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">herbrain.lddmm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">lddmm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">herbrain.lddmm.strings</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">lddmm_strings</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.pd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BranchingPipeline</span><span class="p">,</span>
+    <span class="n">IndexMap</span><span class="p">,</span>
+    <span class="n">IndexSelector</span><span class="p">,</span>
+    <span class="n">Map</span><span class="p">,</span>
+    <span class="n">NestingSwapper</span><span class="p">,</span>
+    <span class="n">PartiallyInitializedStep</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DictFilter</span><span class="p">,</span>
+    <span class="n">DictMap</span><span class="p">,</span>
+    <span class="n">DictMerger</span><span class="p">,</span>
+    <span class="n">DictToTuplesList</span><span class="p">,</span>
+    <span class="n">Hash</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FigsharePregnancyDataLoader</span><span class="p">,</span>
+    <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSelectColor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvWriter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvAlign</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.smoothing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSmoothTaubin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshCenterer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BRAINSTRUCT2COLOR</span><span class="p">,</span>
+    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
+    <span class="n">MriImageLoader</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_MIN</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">T_MAX</span> <span class="o">=</span> <span class="mf">25.0</span>
+
+<span class="n">TEMPLATE_SESSION</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">TARGET_SESSION</span> <span class="o">=</span> <span class="mi">14</span>
+
+<span class="n">STRUCT_NAME</span> <span class="o">=</span> <span class="s2">&quot;PostHipp&quot;</span>
+
+<span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;regression&quot;</span>
+
+<span class="n">REGISTRATION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span>
+
+<span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># If not None, uses already computed points (assumes consistency)</span>
+<span class="n">CTRL_POINTS_FILE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span> <span class="o">/</span> <span class="s2">&quot;initial_registration&quot;</span> <span class="o">/</span> <span class="n">lddmm_strings</span><span class="o">.</span><span class="n">cp_str</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Load-predictor">
+<h2>Load predictor<a class="headerlink" href="#Load-predictor" title="Link to this heading">#</a></h2>
+<p>Following <a class="reference internal" href="load_csv.html"><span class="doc">How to load a csv file?</span></a> and doing preprocessing:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">FigsharePregnancyDataLoader</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;~/.herbrain/data/pregnancy&quot;</span><span class="p">,</span>
+    <span class="n">remote_path</span><span class="o">=</span><span class="s2">&quot;28Baby_Hormones.csv&quot;</span><span class="p">,</span>
+    <span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">prep_pipe</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ppd</span><span class="o">.</span><span class="n">UpdateColumnValues</span><span class="p">(</span>
+        <span class="n">column_name</span><span class="o">=</span><span class="s2">&quot;sessionID&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">entry</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">IndexSetter</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;sessionID&quot;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">SeriesToDict</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">DictFilter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">T_MIN</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">T_MAX</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">predictor</span> <span class="o">=</span> <span class="p">(</span><span class="n">loader</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">CsvReader</span><span class="p">()</span> <span class="o">+</span> <span class="n">prep_pipe</span><span class="p">)()</span>
+
+<span class="n">predictor</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/28Baby_Hormones.csv&#39;).
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{3: 1.0,
+ 4: 1.5,
+ 5: 2.0,
+ 6: 3.0,
+ 7: 9.0,
+ 8: 12.0,
+ 9: 14.0,
+ 10: 15.0,
+ 11: 17.0,
+ 12: 19.0,
+ 13: 22.0,
+ 14: 24.0}
+</pre></div></div>
+</div>
+</section>
+<section id="Load-meshes">
+<h2>Load meshes<a class="headerlink" href="#Load-meshes" title="Link to this heading">#</a></h2>
+<p>Following data loading of <a class="reference internal" href="lddmm_register_mesh_template.html"><span class="doc">LDDMM: how to register a mesh against a template?</span></a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files_pipe</span> <span class="o">=</span> <span class="n">PregnancyPilotSegmentationsLoader</span><span class="p">(</span>
+    <span class="n">predictor</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
+    <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">mri2mesh</span> <span class="o">=</span> <span class="n">MriImageLoader</span><span class="p">()</span> <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">STRUCT_NAME</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">struct_selector</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">struct_selector</span> <span class="o">=</span> <span class="n">PvSelectColor</span><span class="p">(</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">BRAINSTRUCT2COLOR</span><span class="p">[</span><span class="n">STRUCT_NAME</span><span class="p">],</span>
+        <span class="n">extract_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">files_pipe</span> <span class="o">+</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">mri2mesh</span> <span class="o">+</span> <span class="n">struct_selector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
+
+<span class="n">meshes</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/Segmentations&#39;).
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dict_keys([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
+</pre></div></div>
+</div>
+</section>
+<section id="Preprocessing-meshes">
+<h2>Preprocessing meshes<a class="headerlink" href="#Preprocessing-meshes" title="Link to this heading">#</a></h2>
+<p>Following preprocessing of <a class="reference internal" href="lddmm_register_mesh_template.html"><span class="doc">LDDMM: how to register a mesh against a template?</span></a>, we center, smooth, and rigid align the meshes against the template.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: consider decimation if above a given number of points</span>
+
+<span class="n">prep_pipe</span> <span class="o">=</span> <span class="n">DictMap</span><span class="p">(</span>
+    <span class="n">MeshCenterer</span><span class="p">()</span> <span class="o">+</span> <span class="n">PvSmoothTaubin</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="p">)</span> <span class="o">+</span> <span class="n">PartiallyInitializedStep</span><span class="p">(</span>
+    <span class="n">Step</span><span class="o">=</span><span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)),</span>
+    <span class="n">_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">TEMPLATE_SESSION</span><span class="p">],</span>
+    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">prep_pipe</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Save meshes in <code class="docutils literal notranslate"><span class="pre">vtk</span></code> format (as required by <code class="docutils literal notranslate"><span class="pre">deformetrica</span></code>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes_writer</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">OUTPUTS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">))</span>
+
+<span class="n">write_pipe</span> <span class="o">=</span> <span class="n">DictToTuplesList</span><span class="p">()</span> <span class="o">+</span> <span class="n">BranchingPipeline</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">Map</span><span class="p">(</span><span class="n">IndexSelector</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+        <span class="n">Map</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="k">lambda</span> <span class="n">datum</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">datum</span><span class="p">),</span>
+                <span class="n">IndexMap</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;mesh_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+                <span class="n">PvWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">OUTPUTS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">merger</span><span class="o">=</span><span class="n">NestingSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">Hash</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="n">mesh_filenames_dict</span> <span class="o">=</span> <span class="n">write_pipe</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We can now create the dataset:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">mesh_filenames</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">DictMerger</span><span class="p">()</span> <span class="o">+</span> <span class="n">NestingSwapper</span><span class="p">())(</span>
+    <span class="p">[</span><span class="n">predictor</span><span class="p">,</span> <span class="n">mesh_filenames_dict</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>And we also normalize time:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: do it in a sklearn style</span>
+<span class="n">min_time</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+<span class="n">maxmindiff_time</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">times</span><span class="p">)</span> <span class="o">-</span> <span class="n">min_time</span>
+
+<span class="n">times</span> <span class="o">=</span> <span class="p">[(</span><span class="n">time_</span> <span class="o">-</span> <span class="n">min_time</span><span class="p">)</span> <span class="o">/</span> <span class="n">maxmindiff_time</span> <span class="k">for</span> <span class="n">time_</span> <span class="ow">in</span> <span class="n">times</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: just to make it run, needs improvement</span>
+<span class="n">mesh_filenames</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">}</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">mesh_filenames</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="LDDMM">
+<h2>LDDMM<a class="headerlink" href="#LDDMM" title="Link to this heading">#</a></h2>
+<section id="Step-1:-find-control-points">
+<h3>Step 1: find control points<a class="headerlink" href="#Step-1:-find-control-points" title="Link to this heading">#</a></h3>
+<p>Follows <a class="reference internal" href="lddmm_register_mesh_template.html"><span class="doc">LDDMM: how to register a mesh against a template?</span></a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: need to adapt registration parameters to substructure</span>
+<span class="n">registration_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">kernel_width</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+    <span class="n">regularisation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">freeze_control_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">attachment_kernel_width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;varifold&quot;</span><span class="p">,</span>
+    <span class="n">tol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">,</span>
+    <span class="n">filter_cp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">CTRL_POINTS_FILE</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">initial_control_points</span> <span class="o">=</span> <span class="n">CTRL_POINTS_FILE</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">lddmm</span><span class="o">.</span><span class="n">registration</span><span class="p">(</span>
+        <span class="n">mesh_filenames</span><span class="p">[</span><span class="n">TEMPLATE_SESSION</span><span class="p">],</span>
+        <span class="n">mesh_filenames</span><span class="p">[</span><span class="n">TARGET_SESSION</span><span class="p">],</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="n">INITIAL_REGISTRATION_DIR</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">registration_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">initial_control_points</span> <span class="o">=</span> <span class="n">INITIAL_REGISTRATION_DIR</span> <span class="o">/</span> <span class="n">lddmm_strings</span><span class="o">.</span><span class="n">cp_str</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-2:-perform-regression">
+<h3>Step 2: perform regression<a class="headerlink" href="#Step-2:-perform-regression" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spline_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">initial_step_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">regularisation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">freeze_external_forces</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">freeze_control_points</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">kwargs</span> <span class="o">=</span> <span class="n">registration_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">spline_kwargs</span><span class="p">)</span>
+
+<span class="n">target_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+
+
+<span class="n">lddmm</span><span class="o">.</span><span class="n">spline_regression</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">mesh_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;shape&quot;</span><span class="p">],</span>
+    <span class="n">targets</span><span class="o">=</span><span class="n">mesh_filenames</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">OUTPUTS_DIR</span><span class="p">,</span>
+    <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span>
+    <span class="n">subject_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">],</span>
+    <span class="n">t0</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">times</span><span class="p">),</span>
+    <span class="n">target_weights</span><span class="o">=</span><span class="n">target_weights</span><span class="p">,</span>
+    <span class="n">initial_control_points</span><span class="o">=</span><span class="n">initial_control_points</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Logger has been set to: DEBUG
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+&gt;&gt; Initial t0 set by the user to 0.00 ; note that the mean visit age is 0.46
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression/deformetrica-state.p.
+instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7d265fde2f10
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x7d265fdc8ad0
+&gt;&gt; Reading 110 initial control points from file results/registration/initial_registration/DeterministicAtlas__EstimatedParameters__ControlPoints.txt.
+&gt;&gt; Momenta initialized to zero.
+dtype=float32
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.441E+03     [ attachment = -1.198E+03 ; regularity = -2.425E+02 ]
+&gt;&gt; Log-likelihood = -1.435E+03     [ attachment = -1.194E+03 ; regularity = -2.409E+02 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -1.396E+03     [ attachment = -1.160E+03 ; regularity = -2.363E+02 ]
+
+------------------------------------- Iteration: 60 -------------------------------------
+&gt;&gt; Log-likelihood = -1.388E+03     [ attachment = -1.151E+03 ; regularity = -2.376E+02 ]
+&gt;&gt; Log-likelihood = -1.388E+03     [ attachment = -1.149E+03 ; regularity = -2.382E+02 ]
+
+------------------------------------- Iteration: 80 -------------------------------------
+&gt;&gt; Log-likelihood = -1.383E+03     [ attachment = -1.144E+03 ; regularity = -2.392E+02 ]
+
+------------------------------------- Iteration: 100 -------------------------------------
+&gt;&gt; Log-likelihood = -1.381E+03     [ attachment = -1.144E+03 ; regularity = -2.375E+02 ]
+
+------------------------------------- Iteration: 120 -------------------------------------
+&gt;&gt; Log-likelihood = -1.379E+03     [ attachment = -1.140E+03 ; regularity = -2.391E+02 ]
+
+------------------------------------- Iteration: 140 -------------------------------------
+&gt;&gt; Log-likelihood = -1.378E+03     [ attachment = -1.138E+03 ; regularity = -2.398E+02 ]
+
+------------------------------------- Iteration: 160 -------------------------------------
+&gt;&gt; Log-likelihood = -1.376E+03     [ attachment = -1.136E+03 ; regularity = -2.404E+02 ]
+
+------------------------------------- Iteration: 180 -------------------------------------
+&gt;&gt; Log-likelihood = -1.375E+03     [ attachment = -1.135E+03 ; regularity = -2.402E+02 ]
+
+------------------------------------- Iteration: 200 -------------------------------------
+&gt;&gt; Log-likelihood = -1.375E+03     [ attachment = -1.134E+03 ; regularity = -2.409E+02 ]
+
+------------------------------------- Iteration: 220 -------------------------------------
+&gt;&gt; Log-likelihood = -1.374E+03     [ attachment = -1.133E+03 ; regularity = -2.411E+02 ]
+&gt;&gt; Log-likelihood = -1.374E+03     [ attachment = -1.133E+03 ; regularity = -2.413E+02 ]
+
+------------------------------------- Iteration: 240 -------------------------------------
+&gt;&gt; Log-likelihood = -1.373E+03     [ attachment = -1.132E+03 ; regularity = -2.411E+02 ]
+
+------------------------------------- Iteration: 260 -------------------------------------
+&gt;&gt; Log-likelihood = -1.373E+03     [ attachment = -1.130E+03 ; regularity = -2.428E+02 ]
+&gt;&gt; Log-likelihood = -1.373E+03     [ attachment = -1.130E+03 ; regularity = -2.426E+02 ]
+
+------------------------------------- Iteration: 280 -------------------------------------
+&gt;&gt; Log-likelihood = -1.372E+03     [ attachment = -1.130E+03 ; regularity = -2.424E+02 ]
+
+------------------------------------- Iteration: 300 -------------------------------------
+&gt;&gt; Log-likelihood = -1.371E+03     [ attachment = -1.128E+03 ; regularity = -2.437E+02 ]
+
+------------------------------------- Iteration: 320 -------------------------------------
+&gt;&gt; Log-likelihood = -1.371E+03     [ attachment = -1.127E+03 ; regularity = -2.434E+02 ]
+
+------------------------------------- Iteration: 340 -------------------------------------
+&gt;&gt; Log-likelihood = -1.370E+03     [ attachment = -1.125E+03 ; regularity = -2.445E+02 ]
+
+------------------------------------- Iteration: 360 -------------------------------------
+&gt;&gt; Log-likelihood = -1.369E+03     [ attachment = -1.123E+03 ; regularity = -2.461E+02 ]
+
+------------------------------------- Iteration: 380 -------------------------------------
+&gt;&gt; Log-likelihood = -1.368E+03     [ attachment = -1.122E+03 ; regularity = -2.461E+02 ]
+&gt;&gt; Log-likelihood = -1.368E+03     [ attachment = -1.122E+03 ; regularity = -2.461E+02 ]
+
+------------------------------------- Iteration: 400 -------------------------------------
+&gt;&gt; Log-likelihood = -1.367E+03     [ attachment = -1.119E+03 ; regularity = -2.474E+02 ]
+
+------------------------------------- Iteration: 420 -------------------------------------
+&gt;&gt; Log-likelihood = -1.366E+03     [ attachment = -1.118E+03 ; regularity = -2.474E+02 ]
+
+------------------------------------- Iteration: 440 -------------------------------------
+&gt;&gt; Log-likelihood = -1.365E+03     [ attachment = -1.119E+03 ; regularity = -2.461E+02 ]
+
+------------------------------------- Iteration: 460 -------------------------------------
+&gt;&gt; Log-likelihood = -1.364E+03     [ attachment = -1.118E+03 ; regularity = -2.461E+02 ]
+
+------------------------------------- Iteration: 480 -------------------------------------
+&gt;&gt; Log-likelihood = -1.364E+03     [ attachment = -1.119E+03 ; regularity = -2.450E+02 ]
+
+------------------------------------- Iteration: 500 -------------------------------------
+&gt;&gt; Log-likelihood = -1.363E+03     [ attachment = -1.118E+03 ; regularity = -2.450E+02 ]
+
+------------------------------------- Iteration: 520 -------------------------------------
+&gt;&gt; Log-likelihood = -1.363E+03     [ attachment = -1.117E+03 ; regularity = -2.456E+02 ]
+
+------------------------------------- Iteration: 540 -------------------------------------
+&gt;&gt; Log-likelihood = -1.362E+03     [ attachment = -1.117E+03 ; regularity = -2.451E+02 ]
+
+------------------------------------- Iteration: 560 -------------------------------------
+&gt;&gt; Log-likelihood = -1.362E+03     [ attachment = -1.117E+03 ; regularity = -2.449E+02 ]
+
+------------------------------------- Iteration: 580 -------------------------------------
+&gt;&gt; Log-likelihood = -1.362E+03     [ attachment = -1.117E+03 ; regularity = -2.446E+02 ]
+
+------------------------------------- Iteration: 600 -------------------------------------
+&gt;&gt; Log-likelihood = -1.362E+03     [ attachment = -1.117E+03 ; regularity = -2.445E+02 ]
+
+------------------------------------- Iteration: 620 -------------------------------------
+&gt;&gt; Log-likelihood = -1.361E+03     [ attachment = -1.117E+03 ; regularity = -2.445E+02 ]
+&gt;&gt; Log-likelihood = -1.361E+03     [ attachment = -1.117E+03 ; regularity = -2.445E+02 ]
+
+------------------------------------- Iteration: 640 -------------------------------------
+&gt;&gt; Log-likelihood = -1.361E+03     [ attachment = -1.116E+03 ; regularity = -2.446E+02 ]
+
+------------------------------------- Iteration: 660 -------------------------------------
+&gt;&gt; Log-likelihood = -1.361E+03     [ attachment = -1.117E+03 ; regularity = -2.438E+02 ]
+
+------------------------------------- Iteration: 680 -------------------------------------
+&gt;&gt; Log-likelihood = -1.361E+03     [ attachment = -1.117E+03 ; regularity = -2.438E+02 ]
+
+------------------------------------- Iteration: 700 -------------------------------------
+&gt;&gt; Log-likelihood = -1.360E+03     [ attachment = -1.117E+03 ; regularity = -2.436E+02 ]
+
+------------------------------------- Iteration: 720 -------------------------------------
+&gt;&gt; Log-likelihood = -1.360E+03     [ attachment = -1.117E+03 ; regularity = -2.431E+02 ]
+
+------------------------------------- Iteration: 740 -------------------------------------
+&gt;&gt; Log-likelihood = -1.360E+03     [ attachment = -1.117E+03 ; regularity = -2.429E+02 ]
+
+------------------------------------- Iteration: 760 -------------------------------------
+&gt;&gt; Log-likelihood = -1.360E+03     [ attachment = -1.118E+03 ; regularity = -2.423E+02 ]
+
+------------------------------------- Iteration: 780 -------------------------------------
+&gt;&gt; Log-likelihood = -1.360E+03     [ attachment = -1.118E+03 ; regularity = -2.421E+02 ]
+
+------------------------------------- Iteration: 800 -------------------------------------
+&gt;&gt; Log-likelihood = -1.360E+03     [ attachment = -1.119E+03 ; regularity = -2.411E+02 ]
+
+------------------------------------- Iteration: 820 -------------------------------------
+&gt;&gt; Log-likelihood = -1.360E+03     [ attachment = -1.119E+03 ; regularity = -2.407E+02 ]
+
+------------------------------------- Iteration: 840 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.119E+03 ; regularity = -2.404E+02 ]
+
+------------------------------------- Iteration: 860 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.120E+03 ; regularity = -2.396E+02 ]
+
+------------------------------------- Iteration: 880 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.120E+03 ; regularity = -2.393E+02 ]
+
+------------------------------------- Iteration: 900 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.120E+03 ; regularity = -2.389E+02 ]
+
+------------------------------------- Iteration: 920 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.120E+03 ; regularity = -2.389E+02 ]
+
+------------------------------------- Iteration: 940 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.120E+03 ; regularity = -2.387E+02 ]
+
+------------------------------------- Iteration: 960 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.121E+03 ; regularity = -2.382E+02 ]
+
+------------------------------------- Iteration: 980 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.121E+03 ; regularity = -2.376E+02 ]
+
+------------------------------------- Iteration: 1000 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.121E+03 ; regularity = -2.378E+02 ]
+
+------------------------------------- Iteration: 1020 -------------------------------------
+&gt;&gt; Log-likelihood = -1.359E+03     [ attachment = -1.121E+03 ; regularity = -2.379E+02 ]
+
+------------------------------------- Iteration: 1040 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.121E+03 ; regularity = -2.376E+02 ]
+
+------------------------------------- Iteration: 1060 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.121E+03 ; regularity = -2.371E+02 ]
+
+------------------------------------- Iteration: 1080 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.368E+02 ]
+
+------------------------------------- Iteration: 1100 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.362E+02 ]
+
+------------------------------------- Iteration: 1120 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.359E+02 ]
+
+------------------------------------- Iteration: 1140 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.357E+02 ]
+
+------------------------------------- Iteration: 1160 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.356E+02 ]
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.356E+02 ]
+
+------------------------------------- Iteration: 1180 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.355E+02 ]
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.355E+02 ]
+
+------------------------------------- Iteration: 1200 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.355E+02 ]
+
+------------------------------------- Iteration: 1220 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.357E+02 ]
+
+------------------------------------- Iteration: 1240 -------------------------------------
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.358E+02 ]
+&gt;&gt; Log-likelihood = -1.358E+03     [ attachment = -1.122E+03 ; regularity = -2.359E+02 ]
+
+------------------------------------- Iteration: 1260 -------------------------------------
+&gt;&gt; Log-likelihood = -1.357E+03     [ attachment = -1.119E+03 ; regularity = -2.379E+02 ]
+
+------------------------------------- Iteration: 1280 -------------------------------------
+&gt;&gt; Log-likelihood = -1.356E+03     [ attachment = -1.116E+03 ; regularity = -2.401E+02 ]
+
+------------------------------------- Iteration: 1300 -------------------------------------
+&gt;&gt; Log-likelihood = -1.355E+03     [ attachment = -1.115E+03 ; regularity = -2.406E+02 ]
+
+------------------------------------- Iteration: 1320 -------------------------------------
+&gt;&gt; Log-likelihood = -1.354E+03     [ attachment = -1.116E+03 ; regularity = -2.381E+02 ]
+
+------------------------------------- Iteration: 1340 -------------------------------------
+&gt;&gt; Log-likelihood = -1.353E+03     [ attachment = -1.115E+03 ; regularity = -2.377E+02 ]
+
+------------------------------------- Iteration: 1360 -------------------------------------
+&gt;&gt; Log-likelihood = -1.352E+03     [ attachment = -1.115E+03 ; regularity = -2.365E+02 ]
+
+------------------------------------- Iteration: 1380 -------------------------------------
+&gt;&gt; Log-likelihood = -1.351E+03     [ attachment = -1.115E+03 ; regularity = -2.359E+02 ]
+
+------------------------------------- Iteration: 1400 -------------------------------------
+&gt;&gt; Log-likelihood = -1.350E+03     [ attachment = -1.114E+03 ; regularity = -2.366E+02 ]
+
+------------------------------------- Iteration: 1420 -------------------------------------
+&gt;&gt; Log-likelihood = -1.350E+03     [ attachment = -1.114E+03 ; regularity = -2.356E+02 ]
+
+------------------------------------- Iteration: 1440 -------------------------------------
+&gt;&gt; Log-likelihood = -1.349E+03     [ attachment = -1.114E+03 ; regularity = -2.350E+02 ]
+
+------------------------------------- Iteration: 1460 -------------------------------------
+&gt;&gt; Log-likelihood = -1.349E+03     [ attachment = -1.114E+03 ; regularity = -2.354E+02 ]
+
+------------------------------------- Iteration: 1480 -------------------------------------
+&gt;&gt; Log-likelihood = -1.349E+03     [ attachment = -1.113E+03 ; regularity = -2.355E+02 ]
+
+------------------------------------- Iteration: 1500 -------------------------------------
+&gt;&gt; Log-likelihood = -1.349E+03     [ attachment = -1.113E+03 ; regularity = -2.359E+02 ]
+
+------------------------------------- Iteration: 1520 -------------------------------------
+&gt;&gt; Log-likelihood = -1.349E+03     [ attachment = -1.113E+03 ; regularity = -2.356E+02 ]
+
+------------------------------------- Iteration: 1540 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.113E+03 ; regularity = -2.356E+02 ]
+
+------------------------------------- Iteration: 1560 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.112E+03 ; regularity = -2.360E+02 ]
+
+------------------------------------- Iteration: 1580 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.112E+03 ; regularity = -2.359E+02 ]
+
+------------------------------------- Iteration: 1600 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.112E+03 ; regularity = -2.360E+02 ]
+
+------------------------------------- Iteration: 1620 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.112E+03 ; regularity = -2.360E+02 ]
+
+------------------------------------- Iteration: 1640 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.112E+03 ; regularity = -2.359E+02 ]
+
+------------------------------------- Iteration: 1660 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.112E+03 ; regularity = -2.360E+02 ]
+
+------------------------------------- Iteration: 1680 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.111E+03 ; regularity = -2.364E+02 ]
+
+------------------------------------- Iteration: 1700 -------------------------------------
+&gt;&gt; Log-likelihood = -1.348E+03     [ attachment = -1.111E+03 ; regularity = -2.367E+02 ]
+
+------------------------------------- Iteration: 1720 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.111E+03 ; regularity = -2.368E+02 ]
+
+------------------------------------- Iteration: 1740 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.111E+03 ; regularity = -2.362E+02 ]
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.111E+03 ; regularity = -2.363E+02 ]
+
+------------------------------------- Iteration: 1760 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.111E+03 ; regularity = -2.365E+02 ]
+
+------------------------------------- Iteration: 1780 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.111E+03 ; regularity = -2.364E+02 ]
+
+------------------------------------- Iteration: 1800 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.110E+03 ; regularity = -2.370E+02 ]
+
+------------------------------------- Iteration: 1820 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.110E+03 ; regularity = -2.372E+02 ]
+
+------------------------------------- Iteration: 1840 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.110E+03 ; regularity = -2.368E+02 ]
+
+------------------------------------- Iteration: 1860 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.110E+03 ; regularity = -2.372E+02 ]
+
+------------------------------------- Iteration: 1880 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.110E+03 ; regularity = -2.372E+02 ]
+
+------------------------------------- Iteration: 1900 -------------------------------------
+&gt;&gt; Log-likelihood = -1.347E+03     [ attachment = -1.110E+03 ; regularity = -2.369E+02 ]
+&gt;&gt; Gradient at Termination: 2.2635546810751768
+&gt;&gt; CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
+&gt;&gt; Estimation took: 21 minutes and 27 seconds
+instantiating kernel torch with kernel_width 4.0 and gpu_mode GpuMode.KERNEL. addr: 0x7d2660822b50
+Deformetrica.__del__()
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+time.struct_time(tm_year=2025, tm_mon=3, tm_mday=18, tm_hour=2, tm_min=24, tm_sec=41, tm_wday=1, tm_yday=77, tm_isdst=0)
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Further-reading">
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="ldddm_regression_viz.html"><span class="doc">LDDMM: how to visualize regression results?</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-predictor">Load predictor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-meshes">Load meshes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Preprocessing-meshes">Preprocessing meshes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#LDDMM">LDDMM</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-find-control-points">Step 1: find control points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-perform-regression">Step 2: perform regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024-, Geometric Intelligence Lab @ UC Santa Barbara.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
