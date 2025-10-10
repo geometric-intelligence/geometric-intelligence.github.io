@@ -50,7 +50,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 10, 2025, 4:53:42 PM"/>
+    <meta name="docbuild:last-update" content="Oct 10, 2025, 7:13:39 PM"/>
   </head>
   
   
@@ -513,6 +513,68 @@
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.readouts.MLPReadout">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.readouts.</span></span><span class="sig-name descname"><span class="pre">MLPReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooling_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_act_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.MLPReadout" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MLP</span></code></p>
+<p>MLP-based Readout over 0-cells (i.e. nodes).</p>
+<p>This class implements a readout layer for graph neural networks, allowing for customizable MLP layers and pooling strategies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>The dimensionality of the input features.</p>
+</dd>
+<dt><strong>hidden_layers</strong><span class="classifier">int</span></dt><dd><p>The dimensionality of the hidden MLP layers.</p>
+</dd>
+<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>The dimensionality of the output features.</p>
+</dd>
+<dt><strong>pooling_type</strong><span class="classifier">str</span></dt><dd><p>Pooling type for readout layer. Either “max”, “sum” or “mean”.</p>
+</dd>
+<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>The dropout rate (default 0.25).</p>
+</dd>
+<dt><strong>norm</strong><span class="classifier">str, optional</span></dt><dd><p>The normalization layer to use (default None).</p>
+</dd>
+<dt><strong>norm_kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments for the normalization layer (default None).</p>
+</dd>
+<dt><strong>act</strong><span class="classifier">str, optional</span></dt><dd><p>The activation function to use (default “relu”).</p>
+</dd>
+<dt><strong>act_kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments for the activation function (default None).</p>
+</dd>
+<dt><strong>final_act</strong><span class="classifier">str, optional</span></dt><dd><p>The final activation function to use (default “sigmoid”).</p>
+</dd>
+<dt><strong>final_act_kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments for the final activation function (default None).</p>
+</dd>
+<dt><strong>task_level</strong><span class="classifier">str</span></dt><dd><p>Task level for readout layer. Either “graph” or “node”.</p>
+</dd>
+<dt><strong>**kwargs</strong></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.MLPReadout.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.MLPReadout.forward" title="Link to this definition">#</a></dt>
+<dd><p>Readout logic based on model_output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the updated model output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.readouts.NoReadOut">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.readouts.</span></span><span class="sig-name descname"><span class="pre">NoReadOut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.NoReadOut" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#topobench.nn.readouts.base.AbstractZeroCellReadOut" title="topobench.nn.readouts.base.AbstractZeroCellReadOut"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut</span></code></a></p>
@@ -652,6 +714,10 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.AbstractZeroCellReadOut"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.AbstractZeroCellReadOut.compute_logits"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.compute_logits()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.AbstractZeroCellReadOut.forward"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.MLPReadout"><code class="docutils literal notranslate"><span class="pre">MLPReadout</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.MLPReadout.forward"><code class="docutils literal notranslate"><span class="pre">MLPReadout.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.NoReadOut"><code class="docutils literal notranslate"><span class="pre">NoReadOut</span></code></a><ul class="nav section-nav flex-column">
