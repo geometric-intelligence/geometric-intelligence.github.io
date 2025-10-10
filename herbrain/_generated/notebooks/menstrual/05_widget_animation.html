@@ -1,0 +1,1510 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Widget animation &#8212; herbrain latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=91d07486"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/notebooks/menstrual/05_widget_animation';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/herbrain/_generated/notebooks/menstrual/05_widget_animation.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Pregnancy" href="../../../pregnancy.html" />
+    <link rel="prev" title="Visualize the preprocessing of real data" href="04_viz_real_meshes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">HerBrain @ GI lab</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../menstrual.html">
+    Menstrual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../pregnancy.html">
+    Pregnancy
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../menstrual.html">
+    Menstrual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../pregnancy.html">
+    Pregnancy
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_viz_brain_mris_and_segmentations_menstrual.html">Explore Brains During the Menstrual Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_viz_hormones_timeseries.html">Create animations of hormones over time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_viz_synthetic_meshes.html">Visualize the creation of synthetic data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_viz_real_meshes.html">Visualize the preprocessing of real data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Widget animation</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../menstrual.html" class="nav-link">Menstrual</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Widget animation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Widget-animation">
+<h1>Widget animation<a class="headerlink" href="#Widget-animation" title="Link to this heading">#</a></h1>
+<section id="Imports">
+<h2>Imports<a class="headerlink" href="#Imports" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GEOMSTATS_BACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
+
+<span class="c1"># build work path from git root path</span>
+<span class="n">gitroot_path</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;rev-parse&quot;</span><span class="p">,</span> <span class="s2">&quot;--show-toplevel&quot;</span><span class="p">],</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">gitroot_path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">work_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>  <span class="c1"># code/my28brains/</span>
+<span class="n">code_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">work_dir</span><span class="p">)</span>  <span class="c1"># code/</span>
+<span class="n">raw_dir</span> <span class="o">=</span> <span class="s2">&quot;/home/data/28andMeOC_correct&quot;</span>
+<span class="n">project_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;project_menstrual&quot;</span>
+<span class="p">)</span>  <span class="c1"># code/my28brains/project_regression/</span>
+<span class="n">src_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;src&quot;</span><span class="p">)</span>
+<span class="n">h2_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;H2_SurfaceMatch&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">code_dir</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h2_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">widgets</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+
+<span class="c1"># import meshplot as mp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">widgets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span><span class="p">,</span> <span class="n">art3d</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GEOMSTATS_BACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>  <span class="c1"># noqa: E402</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geomstats.backend</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gs</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">src.setcwd</span>
+
+<span class="n">src</span><span class="o">.</span><span class="n">setcwd</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">H2_SurfaceMatch.utils.input_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">h2_io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">H2_SurfaceMatch.utils.utils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">project_menstrual.default_config</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">default_config</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">src.datasets.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">data_utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">H2_SurfaceMatch.utils.input_output</span><span class="w"> </span><span class="kn">import</span> <span class="n">plotGeodesic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_euclidean</span><span class="p">,</span> <span class="n">training</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/var/folders/yw/6dl955ps7fj9ysnf7qh0j4tc0000gn/T/ipykernel_40941/551281012.py:8: DeprecationWarning:
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+
+  import pandas as pd
+INFO: Using pytorch backend
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Working directory:  /Users/adelemyers/code/my28brains/src
+Directory added to path:  /Users/adelemyers/code/my28brains
+Directory added to path:  /Users/adelemyers/code/my28brains/src
+Directory added to path:  /Users/adelemyers/code/my28brains/H2_SurfaceMatch
+Directory added to path:  /Users/adelemyers/code/my28brains/src/notebooks
+Directory added to path:  /Users/adelemyers/code/my28brains/src/notebooks/csv
+[KeOps] Warning : omp.h header is not in the path, disabling OpenMP. To fix this, you can set the environment
+                  variable OMP_PATH to the location of the header before importing keopscore or pykeops,
+                  e.g. using os.environ: import os; os.environ[&#39;OMP_PATH&#39;] = &#39;/path/to/omp/header&#39;
+[KeOps] Warning : Cuda libraries were not detected on the system or could not be loaded ; using cpu only mode
+</pre></div></div>
+</div>
+</section>
+<section id="Multiple-Linear-Regression">
+<h2>Multiple Linear Regression<a class="headerlink" href="#Multiple-Linear-Regression" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># multiple linear regression, as done in project_menstrual/main_2_linear_regression</span>
+
+<span class="p">(</span>
+    <span class="n">space</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">all_hormone_levels</span><span class="p">,</span>
+    <span class="n">true_intercept</span><span class="p">,</span>
+    <span class="n">true_coef</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">=</span> <span class="n">data_utils</span><span class="o">.</span><span class="n">load_real_data</span><span class="p">(</span><span class="n">default_config</span><span class="p">)</span>
+
+<span class="n">n_vertices</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">faces</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">space</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="n">n_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">default_config</span><span class="o">.</span><span class="n">train_test_split</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+<span class="n">X_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="c1"># Shuffle the array to get random values</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">X_indices</span><span class="p">)</span>
+<span class="n">train_indices</span> <span class="o">=</span> <span class="n">X_indices</span><span class="p">[:</span><span class="n">n_train</span><span class="p">]</span>
+<span class="n">train_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">train_indices</span><span class="p">)</span>
+<span class="n">test_indices</span> <span class="o">=</span> <span class="n">X_indices</span><span class="p">[</span><span class="n">n_train</span><span class="p">:]</span>
+<span class="n">test_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span>
+
+<span class="c1"># TODO: instead, save these values in main_2, and then load them here. or, figure out how to predict the mesh using just the intercept and coef learned here, and then load them.</span>
+
+<span class="n">progesterone_levels</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_hormone_levels</span><span class="p">[</span><span class="s2">&quot;Prog&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">estrogen_levels</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_hormone_levels</span><span class="p">[</span><span class="s2">&quot;Estro&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">dheas_levels</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_hormone_levels</span><span class="p">[</span><span class="s2">&quot;DHEAS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">lh_levels</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_hormone_levels</span><span class="p">[</span><span class="s2">&quot;LH&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">fsh_levels</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_hormone_levels</span><span class="p">[</span><span class="s2">&quot;FSH&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">shbg_levels</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_hormone_levels</span><span class="p">[</span><span class="s2">&quot;SHBG&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">X_multiple</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+    <span class="p">(</span>
+        <span class="n">progesterone_levels</span><span class="p">,</span>
+        <span class="n">estrogen_levels</span><span class="p">,</span>
+        <span class="n">dheas_levels</span><span class="p">,</span>
+        <span class="n">lh_levels</span><span class="p">,</span>
+        <span class="n">fsh_levels</span><span class="p">,</span>
+        <span class="n">shbg_levels</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># NOTE: copilot thinks this should be transposed.</span>
+
+<span class="p">(</span>
+    <span class="n">multiple_intercept_hat</span><span class="p">,</span>
+    <span class="n">multiple_coef_hat</span><span class="p">,</span>
+    <span class="n">mr</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">=</span> <span class="n">training</span><span class="o">.</span><span class="n">fit_linear_regression</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_multiple</span><span class="p">)</span>
+
+<span class="n">mr_score_array</span> <span class="o">=</span> <span class="n">training</span><span class="o">.</span><span class="n">compute_R2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_multiple</span><span class="p">,</span> <span class="n">test_indices</span><span class="p">,</span> <span class="n">train_indices</span><span class="p">)</span>
+
+<span class="n">X_multiple_predict</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_multiple</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_multiple</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">y_pred_for_mr</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_multiple_predict</span><span class="p">)</span>
+<span class="n">y_pred_for_mr</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">X_multiple</span><span class="p">),</span> <span class="n">n_vertices</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;module &#39;project_menstrual.default_config&#39; from &#39;/Users/adelemyers/code/my28brains/project_menstrual/default_config.py&#39;&gt;
+project_dir: /Users/adelemyers/code/my28brains/project_menstrual
+Using menstrual mesh data (from reparameterized directory)
+
+e. (Sort) Found 29 .plys for (left, -1) in /Users/adelemyers/code/my28brains/project_menstrual/results/1_preprocess/d_reparameterized
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+<span class="ansi-yellow-intense-fg ansi-bold">[Open3D WARNING] Read PLY failed: unable to open file: /Users/adelemyers/code/my28brains/project_menstrual/results/1_preprocess/d_reparameterized/left_structure_-1_day20_at_0.0.ply</span>
+Day 20 has no data. Skipping.
+DayID not to use: 20
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+vertices.shape  (1146, 3)
+/Users/adelemyers/code/my28brains/project_menstrual/results/1_preprocess/d_reparameterized
+Hormones excluded from day:  20
+    dayID  Estro    Prog  Test   DHEAS     LH    FSH   SHBG EthinylEstradiol  \
+0       1   52.4  11.900  98.7  192.88   8.61   5.06  55.72              NaN
+1       2   74.2  10.600  81.2  247.12   4.89   4.13  58.22              NaN
+2       3   91.7  12.400  96.3  226.23   5.98   3.49  56.92              NaN
+3       4   94.6  13.500  90.5  212.84   4.32   3.65  57.29              NaN
+4       5  110.0  15.000  77.6  217.60   3.44   3.30  58.87              NaN
+5       6  117.0  15.500  85.2  254.84   2.58   3.08  63.26              NaN
+6       7  125.0  13.300  78.7  250.41   3.55   3.26  58.36              NaN
+7       8  123.0   8.780  88.9  271.71   5.21   4.47  61.78              NaN
+8       9  109.0   6.050  75.8  288.47   4.76   4.76  62.44              NaN
+9      10   73.8   2.460  87.3  204.74   3.32   7.94  53.76              NaN
+10     11   31.7   0.630  58.9  224.66   5.21   7.82  61.74              NaN
+11     12   22.9   0.280  70.4  233.79   5.29   7.85  54.77              NaN
+12     13   21.8   0.170  76.4  240.26   6.42   7.27  57.52              NaN
+13     14   36.7   0.084  61.6  244.45   5.04   7.12  53.98              NaN
+14     15   26.7   0.056  72.3  272.85   6.16   7.19  54.61              NaN
+15     16   31.4   0.073  74.5  237.81   6.08   7.09  56.71              NaN
+16     17   34.3   0.045  77.2  205.92   7.01   6.17  54.88              NaN
+17     18   51.0   0.037  95.2  262.48   6.82   5.35  55.83              NaN
+18     19   47.9   0.075  80.6  231.06   5.25   4.63  49.49              NaN
+20     21  127.0   0.019  64.6  201.62   7.55   4.71  55.35              NaN
+21     22  157.0   0.043  68.7  232.76  19.08   6.82  52.15              NaN
+22     23  264.0   0.140  67.1  224.98  45.27  13.23  49.25              NaN
+23     24  193.0   0.520  77.9  232.88  14.85   7.67  54.47              NaN
+24     25   64.3   0.970  69.9  224.46   8.59   5.53  51.91              NaN
+25     26   41.8   2.130  66.2  226.27   6.50   5.92  54.29              NaN
+26     27   49.8   5.080  76.8  198.96   7.73   5.99  53.31              NaN
+27     28   75.9   8.510  62.6  183.11   8.16   6.17  57.44              NaN
+28     29   74.6  12.700  66.1  167.49   4.45   5.32  57.13              NaN
+29     30   88.9  13.200  79.4  158.80   6.22   5.00  56.57              NaN
+
+    Levonorgestresl  CycleDay
+0               NaN        21
+1               NaN        22
+2               NaN        23
+3               NaN        24
+4               NaN        25
+5               NaN        26
+6               NaN        27
+7               NaN        28
+8               NaN        29
+9               NaN        30
+10              NaN         1
+11              NaN         2
+12              NaN         3
+13              NaN         4
+14              NaN         5
+15              NaN         6
+16              NaN         7
+17              NaN         8
+18              NaN         9
+20              NaN        11
+21              NaN        12
+22              NaN        13
+23              NaN        14
+24              NaN        15
+25              NaN        16
+26              NaN        17
+27              NaN        18
+28              NaN        19
+29              NaN        20
+space faces: torch.Size([2322, 3])
+y shape: torch.Size([29, 1146, 3])
+X shape: (29, 11)
+true intercept shape: torch.Size([1146, 3])
+true coef shape: torch.Size([1146, 3])
+y.shape:  torch.Size([29, 1146, 3])
+original_point_shape:  torch.Size([1146, 3])
+X.shape:  torch.Size([29, 6])
+regression reshaped y.shape:  torch.Size([29, 3438])
+coef_hat.shape:  (6, 1146, 3)
+X_pred:  tensor([[1.1900e+01, 5.2400e+01, 1.9288e+02, 8.6100e+00, 5.0600e+00, 5.5720e+01],
+        [1.0600e+01, 7.4200e+01, 2.4712e+02, 4.8900e+00, 4.1300e+00, 5.8220e+01],
+        [1.2400e+01, 9.1700e+01, 2.2623e+02, 5.9800e+00, 3.4900e+00, 5.6920e+01],
+        [1.3500e+01, 9.4600e+01, 2.1284e+02, 4.3200e+00, 3.6500e+00, 5.7290e+01],
+        [1.5000e+01, 1.1000e+02, 2.1760e+02, 3.4400e+00, 3.3000e+00, 5.8870e+01],
+        [1.5500e+01, 1.1700e+02, 2.5484e+02, 2.5800e+00, 3.0800e+00, 6.3260e+01],
+        [1.3300e+01, 1.2500e+02, 2.5041e+02, 3.5500e+00, 3.2600e+00, 5.8360e+01],
+        [8.7800e+00, 1.2300e+02, 2.7171e+02, 5.2100e+00, 4.4700e+00, 6.1780e+01],
+        [6.0500e+00, 1.0900e+02, 2.8847e+02, 4.7600e+00, 4.7600e+00, 6.2440e+01],
+        [2.4600e+00, 7.3800e+01, 2.0474e+02, 3.3200e+00, 7.9400e+00, 5.3760e+01],
+        [6.3000e-01, 3.1700e+01, 2.2466e+02, 5.2100e+00, 7.8200e+00, 6.1740e+01],
+        [2.8000e-01, 2.2900e+01, 2.3379e+02, 5.2900e+00, 7.8500e+00, 5.4770e+01],
+        [1.7000e-01, 2.1800e+01, 2.4026e+02, 6.4200e+00, 7.2700e+00, 5.7520e+01],
+        [8.4000e-02, 3.6700e+01, 2.4445e+02, 5.0400e+00, 7.1200e+00, 5.3980e+01],
+        [5.6000e-02, 2.6700e+01, 2.7285e+02, 6.1600e+00, 7.1900e+00, 5.4610e+01],
+        [7.3000e-02, 3.1400e+01, 2.3781e+02, 6.0800e+00, 7.0900e+00, 5.6710e+01],
+        [4.5000e-02, 3.4300e+01, 2.0592e+02, 7.0100e+00, 6.1700e+00, 5.4880e+01],
+        [3.7000e-02, 5.1000e+01, 2.6248e+02, 6.8200e+00, 5.3500e+00, 5.5830e+01],
+        [7.5000e-02, 4.7900e+01, 2.3106e+02, 5.2500e+00, 4.6300e+00, 4.9490e+01],
+        [1.9000e-02, 1.2700e+02, 2.0162e+02, 7.5500e+00, 4.7100e+00, 5.5350e+01],
+        [4.3000e-02, 1.5700e+02, 2.3276e+02, 1.9080e+01, 6.8200e+00, 5.2150e+01],
+        [1.4000e-01, 2.6400e+02, 2.2498e+02, 4.5270e+01, 1.3230e+01, 4.9250e+01],
+        [5.2000e-01, 1.9300e+02, 2.3288e+02, 1.4850e+01, 7.6700e+00, 5.4470e+01],
+        [9.7000e-01, 6.4300e+01, 2.2446e+02, 8.5900e+00, 5.5300e+00, 5.1910e+01],
+        [2.1300e+00, 4.1800e+01, 2.2627e+02, 6.5000e+00, 5.9200e+00, 5.4290e+01],
+        [5.0800e+00, 4.9800e+01, 1.9896e+02, 7.7300e+00, 5.9900e+00, 5.3310e+01],
+        [8.5100e+00, 7.5900e+01, 1.8311e+02, 8.1600e+00, 6.1700e+00, 5.7440e+01],
+        [1.2700e+01, 7.4600e+01, 1.6749e+02, 4.4500e+00, 5.3200e+00, 5.7130e+01],
+        [1.3200e+01, 8.8900e+01, 1.5880e+02, 6.2200e+00, 5.0000e+00, 5.6570e+01]])
+X_train:  tensor([[1.1900e+01, 5.2400e+01, 1.9288e+02, 8.6100e+00, 5.0600e+00, 5.5720e+01],
+        [1.0600e+01, 7.4200e+01, 2.4712e+02, 4.8900e+00, 4.1300e+00, 5.8220e+01],
+        [1.3500e+01, 9.4600e+01, 2.1284e+02, 4.3200e+00, 3.6500e+00, 5.7290e+01],
+        [1.5500e+01, 1.1700e+02, 2.5484e+02, 2.5800e+00, 3.0800e+00, 6.3260e+01],
+        [1.3300e+01, 1.2500e+02, 2.5041e+02, 3.5500e+00, 3.2600e+00, 5.8360e+01],
+        [8.7800e+00, 1.2300e+02, 2.7171e+02, 5.2100e+00, 4.4700e+00, 6.1780e+01],
+        [6.0500e+00, 1.0900e+02, 2.8847e+02, 4.7600e+00, 4.7600e+00, 6.2440e+01],
+        [2.4600e+00, 7.3800e+01, 2.0474e+02, 3.3200e+00, 7.9400e+00, 5.3760e+01],
+        [6.3000e-01, 3.1700e+01, 2.2466e+02, 5.2100e+00, 7.8200e+00, 6.1740e+01],
+        [2.8000e-01, 2.2900e+01, 2.3379e+02, 5.2900e+00, 7.8500e+00, 5.4770e+01],
+        [1.7000e-01, 2.1800e+01, 2.4026e+02, 6.4200e+00, 7.2700e+00, 5.7520e+01],
+        [5.6000e-02, 2.6700e+01, 2.7285e+02, 6.1600e+00, 7.1900e+00, 5.4610e+01],
+        [3.7000e-02, 5.1000e+01, 2.6248e+02, 6.8200e+00, 5.3500e+00, 5.5830e+01],
+        [7.5000e-02, 4.7900e+01, 2.3106e+02, 5.2500e+00, 4.6300e+00, 4.9490e+01],
+        [1.9000e-02, 1.2700e+02, 2.0162e+02, 7.5500e+00, 4.7100e+00, 5.5350e+01],
+        [4.3000e-02, 1.5700e+02, 2.3276e+02, 1.9080e+01, 6.8200e+00, 5.2150e+01],
+        [1.4000e-01, 2.6400e+02, 2.2498e+02, 4.5270e+01, 1.3230e+01, 4.9250e+01],
+        [5.2000e-01, 1.9300e+02, 2.3288e+02, 1.4850e+01, 7.6700e+00, 5.4470e+01],
+        [9.7000e-01, 6.4300e+01, 2.2446e+02, 8.5900e+00, 5.5300e+00, 5.1910e+01],
+        [5.0800e+00, 4.9800e+01, 1.9896e+02, 7.7300e+00, 5.9900e+00, 5.3310e+01],
+        [8.5100e+00, 7.5900e+01, 1.8311e+02, 8.1600e+00, 6.1700e+00, 5.7440e+01],
+        [1.2700e+01, 7.4600e+01, 1.6749e+02, 4.4500e+00, 5.3200e+00, 5.7130e+01],
+        [1.3200e+01, 8.8900e+01, 1.5880e+02, 6.2200e+00, 5.0000e+00, 5.6570e+01]])
+X_test:  tensor([[1.2400e+01, 9.1700e+01, 2.2623e+02, 5.9800e+00, 3.4900e+00, 5.6920e+01],
+        [1.5000e+01, 1.1000e+02, 2.1760e+02, 3.4400e+00, 3.3000e+00, 5.8870e+01],
+        [8.4000e-02, 3.6700e+01, 2.4445e+02, 5.0400e+00, 7.1200e+00, 5.3980e+01],
+        [7.3000e-02, 3.1400e+01, 2.3781e+02, 6.0800e+00, 7.0900e+00, 5.6710e+01],
+        [4.5000e-02, 3.4300e+01, 2.0592e+02, 7.0100e+00, 6.1700e+00, 5.4880e+01],
+        [2.1300e+00, 4.1800e+01, 2.2627e+02, 6.5000e+00, 5.9200e+00, 5.4290e+01]])
+train_sample_size (n):  23
+n_independent_variables (p):  6
+Adjusted R2 score:  -0.7864185239387478
+R2 score:  -0.2992134719554528
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+RPly: Unable to open file
+</pre></div></div>
+</div>
+</section>
+<section id="Parameters-for-sliders">
+<h2>Parameters for sliders<a class="headerlink" href="#Parameters-for-sliders" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hormones_info</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;progesterone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+    <span class="s2">&quot;FSH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+    <span class="s2">&quot;LH&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+    <span class="s2">&quot;estrogen&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span>
+    <span class="s2">&quot;DHEAS&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span>
+    <span class="s2">&quot;SHBG&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min_value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_hormone_dataframe</span><span class="p">(</span><span class="n">hormones_info</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;min_value&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;max_value&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;num_points&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">hormone</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">hormones_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">min_value</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;min_value&quot;</span><span class="p">]</span>
+        <span class="n">max_value</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;max_value&quot;</span><span class="p">]</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;step&quot;</span><span class="p">]</span>
+        <span class="n">num_points</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">max_value</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">)</span> <span class="o">/</span> <span class="n">step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;min_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">min_value</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;max_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;step&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;num_points&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">hormones_info</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="c1"># Generate the dataframe</span>
+<span class="n">hormone_df</span> <span class="o">=</span> <span class="n">generate_hormone_dataframe</span><span class="p">(</span><span class="n">hormones_info</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hormone_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+              min_value  max_value  step  num_points  \
+progesterone          0         15     1          16
+FSH                   0         15     1          16
+LH                    0         50     5          11
+estrogen              0        250    20          13
+DHEAS                 0        300    20          16
+SHBG                  0         70     5          15
+
+                                                         values
+progesterone  [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, ...
+FSH           [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, ...
+LH            [0.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0,...
+estrogen      [0.0, 20.833333333333332, 41.666666666666664, ...
+DHEAS         [0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 14...
+SHBG          [0.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0,...
+</pre></div></div>
+</div>
+</section>
+<section id="Load-meshes-for-all-possible-hormone-combinations">
+<h2>Load meshes for all possible hormone combinations<a class="headerlink" href="#Load-meshes-for-all-possible-hormone-combinations" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hormones_info</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;j&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">progesterone</span><span class="p">,</span> <span class="n">estrogen</span><span class="p">,</span> <span class="n">DHEAS</span><span class="p">,</span> <span class="n">LH</span><span class="p">,</span> <span class="n">FSH</span><span class="p">,</span> <span class="n">SHBG</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;progesterone&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;estrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DHEAS&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;FSH&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;SHBG&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">],</span>
+<span class="p">):</span>
+    <span class="c1"># Predict Mesh</span>
+    <span class="n">X_multiple</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">progesterone</span><span class="p">),</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">estrogen</span><span class="p">),</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">DHEAS</span><span class="p">),</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">LH</span><span class="p">),</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">FSH</span><span class="p">),</span>
+            <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">SHBG</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">X_multiple_predict</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_multiple</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_multiple</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">y_pred_for_mr</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_multiple_predict</span><span class="p">)</span>
+    <span class="n">y_pred_for_mr</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">n_vertices</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">faces</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">space</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="c1"># Extract x, y, z values</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Extract i, j, k values</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Append results to list</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">])</span>
+
+<span class="c1"># Create DataFrame from results</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;j&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">]</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># THIS WORKS BUT WILL KILL YOUR NOTEBOOK</span>
+
+<span class="c1"># results_dir = os.path.join(default_config.project_dir, &quot;results&quot;)</span>
+<span class="c1"># anim_dir = os.path.join(results_dir, &quot;3_animation&quot;)</span>
+<span class="c1"># sys.path.append(anim_dir)</span>
+
+<span class="c1"># if not os.path.exists(anim_dir):</span>
+<span class="c1">#         os.makedirs(anim_dir)</span>
+
+<span class="c1"># Assuming you have defined progesterone, estrogen, DHEAS, LH, FSH, SHBG, mr, n_vertices, and space elsewhere</span>
+
+<span class="c1"># Initialize dictionary to store pre-calculated values</span>
+<span class="c1"># pre_calculated_values = {}</span>
+
+<span class="c1"># # Generate all possible combinations of hormone values</span>
+<span class="c1"># combinations = list(itertools.product(</span>
+<span class="c1">#     hormone_df.loc[&#39;progesterone&#39;, &#39;values&#39;],</span>
+<span class="c1">#     hormone_df.loc[&#39;estrogen&#39;,&#39;values&#39;],</span>
+<span class="c1">#     hormone_df.loc[&#39;DHEAS&#39;,&#39;values&#39;],</span>
+<span class="c1">#     hormone_df.loc[&#39;LH&#39;,&#39;values&#39;],</span>
+<span class="c1">#     hormone_df.loc[&#39;FSH&#39;,&#39;values&#39;],</span>
+<span class="c1">#     hormone_df.loc[&#39;SHBG&#39;,&#39;values&#39;]</span>
+<span class="c1"># ))</span>
+
+
+<span class="c1"># # Loop over each combination of hormone values</span>
+<span class="c1"># for combination in combinations:</span>
+<span class="c1">#     print(combination)</span>
+<span class="c1">#     # Extract hormone values</span>
+<span class="c1">#     progesterone, estrogen, DHEAS, LH, FSH, SHBG = combination</span>
+
+<span class="c1">#     mesh_path = os.path.join(anim_dir, f&quot;progesterone{progesterone}_estrogen{estrogen}_DHEAS{DHEAS}_LH{LH}_FSH{FSH}_SHBG{SHBG}_mesh.csv&quot;)</span>
+
+<span class="c1">#     if not os.path.exists(mesh_path):</span>
+<span class="c1">#         # Predict Mesh and Save</span>
+<span class="c1">#         data = {</span>
+<span class="c1">#             &quot;x&quot;: [],</span>
+<span class="c1">#             &quot;y&quot;: [],</span>
+<span class="c1">#             &quot;z&quot;: [],</span>
+<span class="c1">#             &quot;i&quot;: [],</span>
+<span class="c1">#             &quot;j&quot;: [],</span>
+<span class="c1">#             &quot;k&quot;: [],</span>
+<span class="c1">#         }</span>
+
+<span class="c1">#         X_multiple = gs.vstack((</span>
+<span class="c1">#             gs.array(progesterone),</span>
+<span class="c1">#             gs.array(estrogen),</span>
+<span class="c1">#             gs.array(DHEAS),</span>
+<span class="c1">#             gs.array(LH),</span>
+<span class="c1">#             gs.array(FSH),</span>
+<span class="c1">#             gs.array(SHBG),</span>
+<span class="c1">#         )).T</span>
+<span class="c1">#         X_multiple_predict = gs.array(X_multiple.reshape(len(X_multiple), -1))</span>
+<span class="c1">#         y_pred_for_mr = mr.predict(X_multiple_predict)</span>
+<span class="c1">#         y_pred_for_mr = y_pred_for_mr.reshape([n_vertices, 3])</span>
+<span class="c1">#         faces = gs.array(space.faces).numpy()</span>
+
+<span class="c1">#         # Extract x, y, z values</span>
+<span class="c1">#         x = y_pred_for_mr[:, 0]</span>
+<span class="c1">#         y = y_pred_for_mr[:, 1]</span>
+<span class="c1">#         z = y_pred_for_mr[:, 2]</span>
+
+<span class="c1">#         # Extract i, j, k values</span>
+<span class="c1">#         i = faces[:, 0]</span>
+<span class="c1">#         j = faces[:, 1]</span>
+<span class="c1">#         k = faces[:, 2]</span>
+
+<span class="c1">#         print(f&quot;len x {len(x)}&quot;)</span>
+<span class="c1">#         print(f&quot;len i {len(i)}&quot;)</span>
+
+<span class="c1">#         # Store pre-calculated values in dictionary</span>
+<span class="c1">#         data[&quot;x&quot;].append(x)</span>
+<span class="c1">#         data[&quot;y&quot;].append(y)</span>
+<span class="c1">#         data[&quot;z&quot;].append(z)</span>
+<span class="c1">#         data[&quot;i&quot;].append(i)</span>
+<span class="c1">#         data[&quot;j&quot;].append(j)</span>
+<span class="c1">#         data[&quot;k&quot;].append(k)</span>
+
+<span class="c1">#         columns = [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;i&quot;, &quot;j&quot;, &quot;k&quot;]</span>
+<span class="c1">#         mesh_df = pd.DataFrame(data)</span>
+<span class="c1">#         mesh_df.to_csv(mesh_path)</span>
+
+<span class="c1">#         # check to make sure it can be opened</span>
+<span class="c1">#         df = pd.read_csv(mesh_path)</span>
+<span class="c1">#         display(df)</span>
+<span class="c1">#         x_values = df[&quot;x&quot;]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Plot-hormones-via-slider">
+<h2>Plot hormones via slider<a class="headerlink" href="#Plot-hormones-via-slider" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_hormone_levels_plotly</span><span class="p">(</span><span class="n">progesterone</span><span class="p">,</span> <span class="n">FSH</span><span class="p">,</span> <span class="n">LH</span><span class="p">,</span> <span class="n">estrogen</span><span class="p">,</span> <span class="n">SHBG</span><span class="p">,</span> <span class="n">DHEAS</span><span class="p">):</span>
+    <span class="n">progesterone</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">progesterone</span><span class="p">)</span>
+    <span class="n">FSH</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">FSH</span><span class="p">)</span>
+    <span class="n">LH</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">LH</span><span class="p">)</span>
+    <span class="n">estrogen</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">estrogen</span><span class="p">)</span>
+    <span class="n">SHBG</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">SHBG</span><span class="p">)</span>
+    <span class="n">DHEAS</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">DHEAS</span><span class="p">)</span>
+
+    <span class="c1"># Predict Mesh</span>
+    <span class="n">X_multiple</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="n">progesterone</span><span class="p">,</span>
+            <span class="n">estrogen</span><span class="p">,</span>
+            <span class="n">DHEAS</span><span class="p">,</span>
+            <span class="n">LH</span><span class="p">,</span>
+            <span class="n">FSH</span><span class="p">,</span>
+            <span class="n">SHBG</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">X_multiple_predict</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_multiple</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_multiple</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">y_pred_for_mr</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_multiple_predict</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">y_pred_for_mr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">y_pred_for_mr</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">n_vertices</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+    <span class="n">faces</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">space</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">y_pred_for_mr</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Mesh3d</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+                <span class="n">colorbar_title</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span>
+                <span class="n">colorscale</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;gold&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;mediumturquoise&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;magenta&quot;</span><span class="p">]],</span>
+                <span class="c1"># Intensity of each vertex, which will be interpolated and color-coded</span>
+                <span class="c1"># intensity=[0, 0.33, 0.66, 1],</span>
+                <span class="c1"># i, j and k give the vertices of triangles</span>
+                <span class="c1"># here we represent the 4 triangles of the tetrahedron surface</span>
+                <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="p">,</span>
+                <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+                <span class="n">showscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-Sliders-and-Plot">
+<h2>Create Sliders and Plot<a class="headerlink" href="#Create-Sliders-and-Plot" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to create sliders</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_slider</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
+        <span class="n">value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="n">min_value</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">max_value</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># Create sliders using data from hormone_df</span>
+<span class="n">progesterone_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;progesterone&quot;</span><span class="p">,</span> <span class="s2">&quot;min_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;progesterone&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;progesterone&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Progesterone&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">FSH_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;FSH&quot;</span><span class="p">,</span> <span class="s2">&quot;min_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;FSH&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;FSH&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;FSH&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">LH_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="s2">&quot;min_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;LH&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">estrogen_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;estrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;min_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;estrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;estrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Estrogen&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">DHEAS_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DHEAS&quot;</span><span class="p">,</span> <span class="s2">&quot;min_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DHEAS&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;DHEAS&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;DHEAS&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">SHBG_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;SHBG&quot;</span><span class="p">,</span> <span class="s2">&quot;min_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;SHBG&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value&quot;</span><span class="p">],</span>
+    <span class="n">hormone_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;SHBG&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;SHBG&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">interact</span><span class="p">(</span>
+    <span class="n">plot_hormone_levels_plotly</span><span class="p">,</span>
+    <span class="n">progesterone</span><span class="o">=</span><span class="n">progesterone_slider</span><span class="p">,</span>
+    <span class="n">FSH</span><span class="o">=</span><span class="n">FSH_slider</span><span class="p">,</span>
+    <span class="n">LH</span><span class="o">=</span><span class="n">LH_slider</span><span class="p">,</span>
+    <span class="n">estrogen</span><span class="o">=</span><span class="n">estrogen_slider</span><span class="p">,</span>
+    <span class="n">SHBG</span><span class="o">=</span><span class="n">SHBG_slider</span><span class="p">,</span>
+    <span class="n">DHEAS</span><span class="o">=</span><span class="n">DHEAS_slider</span><span class="p">,</span>
+    <span class="c1"># fits=fixed(fits),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def plot_hormone_levels(change):</span>
+<span class="c1">#     with output:</span>
+<span class="c1">#         clear_output(wait=True)</span>
+<span class="c1">#         # Retrieve the current values of the sliders</span>
+<span class="c1">#         progesterone = gs.array(progesterone_slider.value)</span>
+<span class="c1">#         FSH = gs.array(FSH_slider.value)</span>
+<span class="c1">#         LH = gs.array(LH_slider.value)</span>
+<span class="c1">#         estrogen = gs.array(estrogen_slider.value)</span>
+<span class="c1">#         SHBG = gs.array(SHBG_slider.value)</span>
+<span class="c1">#         DHEAS = gs.array(DHEAS_slider.value)</span>
+
+<span class="c1">#         # Predict Mesh</span>
+<span class="c1">#         X_multiple = gs.vstack(</span>
+<span class="c1">#             (</span>
+<span class="c1">#                 progesterone,</span>
+<span class="c1">#                 estrogen,</span>
+<span class="c1">#                 DHEAS,</span>
+<span class="c1">#                 LH,</span>
+<span class="c1">#                 FSH,</span>
+<span class="c1">#                 SHBG,</span>
+<span class="c1">#             )</span>
+<span class="c1">#         ).T</span>
+
+<span class="c1">#         X_multiple_predict = gs.array(X_multiple.reshape(len(X_multiple), -1))</span>
+
+<span class="c1">#         y_pred_for_mr = mr.predict(X_multiple_predict)</span>
+<span class="c1">#         print(y_pred_for_mr.shape)</span>
+<span class="c1">#         y_pred_for_mr = y_pred_for_mr.reshape([len(y[0]), 3])</span>
+
+
+<span class="c1">#         # Decimate mesh for plotting</span>
+<span class="c1">#         vertices = y_pred_for_mr</span>
+<span class="c1">#         faces = gs.array(space.faces).numpy()</span>
+<span class="c1">#         # n_faces_after_decimation = int(faces.shape[0] / 110)</span>
+<span class="c1">#         # vertices, faces = H2_SurfaceMatch.utils.utils.decimate_mesh(</span>
+<span class="c1">#         #     vertices, faces, n_faces_after_decimation</span>
+<span class="c1">#         # )</span>
+
+<span class="c1">#         print(vertices.shape)</span>
+
+<span class="c1">#         # Plotting</span>
+<span class="c1">#         mesh = pv.PolyData(vertices, faces)</span>
+<span class="c1">#         mesh.plot(show_edges=True, line_width=5)</span>
+<span class="c1">#         # mp.plot(vertices, faces)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def plot_hormone_levels(progesterone, FSH, LH, estrogen, SHBG, DHEAS, faces):</span>
+<span class="c1">#     progesterone = gs.array(progesterone)</span>
+<span class="c1">#     FSH = gs.array(FSH)</span>
+<span class="c1">#     LH = gs.array(LH)</span>
+<span class="c1">#     estrogen = gs.array(estrogen)</span>
+<span class="c1">#     SHBG = gs.array(SHBG)</span>
+<span class="c1">#     DHEAS = gs.array(DHEAS)</span>
+
+<span class="c1">#     # Predict Mesh</span>
+<span class="c1">#     X_multiple = gs.vstack(</span>
+<span class="c1">#         (</span>
+<span class="c1">#             progesterone,</span>
+<span class="c1">#             estrogen,</span>
+<span class="c1">#             DHEAS,</span>
+<span class="c1">#             LH,</span>
+<span class="c1">#             FSH,</span>
+<span class="c1">#             SHBG,</span>
+<span class="c1">#         )</span>
+<span class="c1">#     ).T</span>
+
+<span class="c1">#     X_multiple_predict = gs.array(X_multiple.reshape(len(X_multiple), -1))</span>
+
+<span class="c1">#     y_pred_for_mr = mr.predict(X_multiple_predict)</span>
+<span class="c1">#     print(y_pred_for_mr.shape)</span>
+<span class="c1">#     y_pred_for_mr = y_pred_for_mr.reshape([len(y[0]), 3])</span>
+
+<span class="c1">#     # Decimate mesh for plotting</span>
+<span class="c1">#     vertices = y_pred_for_mr</span>
+<span class="c1">#     # n_faces_after_decimation = int(faces.shape[0] / 110)</span>
+<span class="c1">#     # vertices, faces = H2_SurfaceMatch.utils.utils.decimate_mesh(</span>
+<span class="c1">#     #     vertices, faces, n_faces_after_decimation</span>
+<span class="c1">#     # )</span>
+
+<span class="c1">#     print(vertices.shape)</span>
+
+<span class="c1">#     # Plotting</span>
+<span class="c1">#     mesh = pv.PolyData(vertices, faces)</span>
+<span class="c1">#     mesh.plot(show_edges=True, line_width=5)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def plot_hormone_levels_matplotlib(</span>
+<span class="c1">#     progesterone, FSH, LH, estrogen, SHBG, DHEAS, n_vertices, faces</span>
+<span class="c1"># ):</span>
+<span class="c1">#     progesterone = gs.array(progesterone)</span>
+<span class="c1">#     FSH = gs.array(FSH)</span>
+<span class="c1">#     LH = gs.array(LH)</span>
+<span class="c1">#     estrogen = gs.array(estrogen)</span>
+<span class="c1">#     SHBG = gs.array(SHBG)</span>
+<span class="c1">#     DHEAS = gs.array(DHEAS)</span>
+
+<span class="c1">#     # Predict Mesh</span>
+<span class="c1">#     X_multiple = gs.vstack(</span>
+<span class="c1">#         (</span>
+<span class="c1">#             progesterone,</span>
+<span class="c1">#             estrogen,</span>
+<span class="c1">#             DHEAS,</span>
+<span class="c1">#             LH,</span>
+<span class="c1">#             FSH,</span>
+<span class="c1">#             SHBG,</span>
+<span class="c1">#         )</span>
+<span class="c1">#     ).T</span>
+
+<span class="c1">#     X_multiple_predict = gs.array(X_multiple.reshape(len(X_multiple), -1))</span>
+
+<span class="c1">#     y_pred_for_mr = mr.predict(X_multiple_predict)</span>
+<span class="c1">#     print(y_pred_for_mr.shape)</span>
+<span class="c1">#     y_pred_for_mr = y_pred_for_mr.reshape([n_vertices, 3])</span>
+
+<span class="c1">#     v = y_pred_for_mr</span>
+<span class="c1">#     f = gs.array(space.faces).numpy()</span>
+<span class="c1">#     C = np.array([1])</span>
+
+<span class="c1">#     # x = y_pred_for_mr[:, 0]</span>
+<span class="c1">#     # y = y_pred_for_mr[:, 1]</span>
+<span class="c1">#     # z = y_pred_for_mr[:, 2]</span>
+
+<span class="c1">#     # print(x)</span>
+<span class="c1">#     # print(y)</span>
+<span class="c1">#     # print(z)</span>
+
+<span class="c1">#     fig = plt.figure()</span>
+<span class="c1">#     ax = fig.add_subplot(projection=&quot;3d&quot;)</span>
+
+<span class="c1">#     norm = plt.Normalize(C.min(), C.max())</span>
+<span class="c1">#     colors = plt.cm.viridis(norm(C))</span>
+
+<span class="c1">#     pc = art3d.Poly3DCollection(v[f], facecolors=colors, edgecolor=&quot;black&quot;)</span>
+<span class="c1">#     ax.add_collection(pc)</span>
+
+<span class="c1">#     ax.set_xlim(-3, 3)</span>
+<span class="c1">#     ax.set_ylim(-3, 3)</span>
+<span class="c1">#     ax.set_zlim(-3, 3)</span>
+
+<span class="c1">#     plt.show()</span>
+
+<span class="c1"># # Plot the surface</span>
+<span class="c1"># fig = plt.figure()</span>
+<span class="c1"># ax = fig.add_subplot(projection=&#39;3d&#39;)</span>
+
+<span class="c1"># ax.plot_trisurf(x, y, z)</span>
+
+<span class="c1"># # Set an equal aspect ratio</span>
+<span class="c1"># ax.set_aspect(&#39;equal&#39;)</span>
+
+<span class="c1"># plt.show()</span>
+
+<span class="c1"># fig = go.Figure(data=[go.Mesh3d(x=x, y=y, z=z, color=&#39;lightpink&#39;, opacity=0.50)])</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def plot_hormone_levels_static_plot(progesterone, FSH, LH, estrogen, SHBG, DHEAS):</span>
+<span class="c1">#     progesterone = gs.array(progesterone)</span>
+<span class="c1">#     FSH = gs.array(FSH)</span>
+<span class="c1">#     LH = gs.array(LH)</span>
+<span class="c1">#     estrogen = gs.array(estrogen)</span>
+<span class="c1">#     SHBG = gs.array(SHBG)</span>
+<span class="c1">#     DHEAS = gs.array(DHEAS)</span>
+
+<span class="c1">#     # Predict Mesh</span>
+<span class="c1">#     X_multiple = gs.vstack(</span>
+<span class="c1">#         (</span>
+<span class="c1">#             progesterone,</span>
+<span class="c1">#             estrogen,</span>
+<span class="c1">#             DHEAS,</span>
+<span class="c1">#             LH,</span>
+<span class="c1">#             FSH,</span>
+<span class="c1">#             SHBG,</span>
+<span class="c1">#         )</span>
+<span class="c1">#     ).T</span>
+
+<span class="c1">#     X_multiple_predict = gs.array(X_multiple.reshape(len(X_multiple), -1))</span>
+
+<span class="c1">#     y_pred_for_mr = mr.predict(X_multiple_predict)</span>
+<span class="c1">#     print(y_pred_for_mr.shape)</span>
+<span class="c1">#     y_pred_for_mr = y_pred_for_mr.reshape([len(y[0]), 3])</span>
+
+<span class="c1">#     # Decimate mesh for plotting</span>
+<span class="c1">#     vertices = y_pred_for_mr</span>
+<span class="c1">#     faces = gs.array(space.faces).numpy()</span>
+<span class="c1">#     # n_faces_after_decimation = int(faces.shape[0] / 110)</span>
+<span class="c1">#     # vertices, faces = H2_SurfaceMatch.utils.utils.decimate_mesh(</span>
+<span class="c1">#     #     vertices, faces, n_faces_after_decimation</span>
+<span class="c1">#     # )</span>
+
+<span class="c1">#     vertices = np.array([[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0], [0.5, 0.5, -1]])</span>
+
+<span class="c1">#     # mesh faces</span>
+<span class="c1">#     faces = np.hstack(</span>
+<span class="c1">#         [</span>
+<span class="c1">#             [4, 0, 1, 2, 3],  # square</span>
+<span class="c1">#             [3, 0, 1, 4],  # triangle</span>
+<span class="c1">#             [3, 1, 2, 4],  # triangle</span>
+<span class="c1">#         ]</span>
+<span class="c1">#     )</span>
+
+<span class="c1">#     surf = pv.PolyData(vertices, faces)</span>
+
+<span class="c1">#     # plot each face with a different color</span>
+<span class="c1">#     surf.plot(</span>
+<span class="c1">#         scalars=np.arange(3),</span>
+<span class="c1">#         cpos=[-1, 1, 0.5],</span>
+<span class="c1">#         show_scalar_bar=False,</span>
+<span class="c1">#         show_edges=True,</span>
+<span class="c1">#         line_width=5,</span>
+<span class="c1">#     )</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create widgets for the four hormones</span>
+<span class="c1"># progesterone_slider = widgets.FloatSlider(value=0.5, min=0, max=10, step=0.01, description=&#39;Progesterone&#39;)</span>
+<span class="c1"># FSH_slider = widgets.FloatSlider(value=0.5, min=0, max=1, step=0.01, description=&#39;FSH&#39;)</span>
+<span class="c1"># LH_slider = widgets.FloatSlider(value=0.5, min=0, max=1, step=0.01, description=&#39;LH&#39;)</span>
+<span class="c1"># estrogen_slider = widgets.FloatSlider(value=0.5, min=0, max=1, step=0.01, description=&#39;Estrogen&#39;)</span>
+<span class="c1"># DHEAS_slider = widgets.FloatSlider(value=0.5, min=0, max=1, step=0.01, description=&#39;DHEAS&#39;)</span>
+<span class="c1"># SHBG_slider = widgets.FloatSlider(value=0.5, min=0, max=1, step=0.01, description=&#39;SHBG&#39;)</span>
+
+<span class="c1"># output = widgets.Output()</span>
+
+<span class="c1"># # Attach the plotting function to the sliders</span>
+<span class="c1"># progesterone_slider.observe(plot_hormone_levels, names=&#39;value&#39;)</span>
+<span class="c1"># FSH_slider.observe(plot_hormone_levels, names=&#39;value&#39;)</span>
+<span class="c1"># LH_slider.observe(plot_hormone_levels, names=&#39;value&#39;)</span>
+<span class="c1"># estrogen_slider.observe(plot_hormone_levels, names=&#39;value&#39;)</span>
+<span class="c1"># DHEAS_slider.observe(plot_hormone_levels, names=&#39;value&#39;)</span>
+<span class="c1"># SHBG_slider.observe(plot_hormone_levels, names=&#39;value&#39;)</span>
+
+<span class="c1"># # Display the widgets</span>
+<span class="c1"># widgets_display = widgets.VBox([progesterone_slider, FSH_slider, LH_slider, estrogen_slider, DHEAS_slider, SHBG_slider, output])</span>
+<span class="c1"># display(widgets_display)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mesh points</span>
+<span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># mesh faces</span>
+<span class="n">faces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>  <span class="c1"># square</span>
+        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># triangle</span>
+        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># triangle</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">surf</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
+
+<span class="c1"># plot each face with a different color</span>
+<span class="n">surf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">scalars</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">cpos</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="n">show_scalar_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Multiple-Linear-Regression">Multiple Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Parameters-for-sliders">Parameters for sliders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-meshes-for-all-possible-hormone-combinations">Load meshes for all possible hormone combinations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Plot-hormones-via-slider">Plot hormones via slider</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-Sliders-and-Plot">Create Sliders and Plot</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024-, Geometric Intelligence Lab @ UC Santa Barbara.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

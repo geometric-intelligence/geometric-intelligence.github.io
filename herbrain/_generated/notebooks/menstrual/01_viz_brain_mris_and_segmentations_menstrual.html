@@ -1,0 +1,762 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Explore Brains During the Menstrual Cycle &#8212; herbrain latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=91d07486"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/notebooks/menstrual/01_viz_brain_mris_and_segmentations_menstrual';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/herbrain/_generated/notebooks/menstrual/01_viz_brain_mris_and_segmentations_menstrual.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Create animations of hormones over time" href="02_viz_hormones_timeseries.html" />
+    <link rel="prev" title="Menstrual" href="../../../menstrual.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="latest" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">HerBrain @ GI lab</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../menstrual.html">
+    Menstrual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../pregnancy.html">
+    Pregnancy
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../menstrual.html">
+    Menstrual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../pregnancy.html">
+    Pregnancy
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Explore Brains During the Menstrual Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_viz_hormones_timeseries.html">Create animations of hormones over time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_viz_synthetic_meshes.html">Visualize the creation of synthetic data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_viz_real_meshes.html">Visualize the preprocessing of real data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_widget_animation.html">Widget animation</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../menstrual.html" class="nav-link">Menstrual</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Explore Brains During the Menstrual Cycle</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Explore-Brains-During-the-Menstrual-Cycle">
+<h1>Explore Brains During the Menstrual Cycle<a class="headerlink" href="#Explore-Brains-During-the-Menstrual-Cycle" title="Link to this heading">#</a></h1>
+<p>This notebook loads and visualizes the brain data available in the folder <code class="docutils literal notranslate"><span class="pre">/home/data/28andme</span></code></p>
+<section id="Set-up">
+<h2>Set-up<a class="headerlink" href="#Set-up" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">src.setcwd</span>
+
+<span class="n">src</span><span class="o">.</span><span class="n">setcwd</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Imports">
+<h2>Imports<a class="headerlink" href="#Imports" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">plotting</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">src.viz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">viz</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualize-Brain-Images-from-Anatomical-T1w">
+<h2>Visualize Brain Images from Anatomical T1w<a class="headerlink" href="#Visualize-Brain-Images-from-Anatomical-T1w" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/home/data/28andme/sub-01/ses-02/anat/sub-01_ses-02_T1w.nii.gz&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">slice_0</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[</span><span class="mi">26</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="n">slice_1</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[:,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">slice_2</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">show_slices</span><span class="p">([</span><span class="n">slice_0</span><span class="p">,</span> <span class="n">slice_1</span><span class="p">,</span> <span class="n">slice_2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">view</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">view</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualize-Brain-Images-from-Anatomical-T2hipp">
+<h2>Visualize Brain Images from Anatomical T2hipp<a class="headerlink" href="#Visualize-Brain-Images-from-Anatomical-T2hipp" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/home/data/28andme/sub-01/ses-02/anat/sub-01_ses-02_T2hipp.nii.gz&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+<span class="n">img_data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">slice_0</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[</span><span class="mi">26</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="n">slice_1</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[:,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">slice_2</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">show_slices</span><span class="p">([</span><span class="n">slice_0</span><span class="p">,</span> <span class="n">slice_1</span><span class="p">,</span> <span class="n">slice_2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">view</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">view</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualize-Images-from-the-Segmentation-ASHS-left_lfseg_corr">
+<h2>Visualize Images from the Segmentation ASHS left_lfseg_corr<a class="headerlink" href="#Visualize-Images-from-the-Segmentation-ASHS-left_lfseg_corr" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s2">&quot;/home/data/28andme/sub-01/ses-02/ashs/left_lfseg_corr_usegray_CT_LQ.nii.gz&quot;</span>
+<span class="p">)</span>
+<span class="n">img_data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">img_data</span><span class="o">.</span><span class="n">flatten</span><span class="p">())))</span>
+<span class="c1"># Set value 0 to &quot;bad data&quot;</span>
+<span class="n">img_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">img_data</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">img_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;tab20b&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">cmaplist</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmap</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="s2">&quot;Custom cmap&quot;</span><span class="p">,</span> <span class="n">cmaplist</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">cmap</span><span class="o">.</span><span class="n">set_bad</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_data</span><span class="p">[</span><span class="mi">120</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span> <span class="mi">120</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<section id="Inspect-Segmentation:-9-classes">
+<h3>Inspect Segmentation: 9 classes<a class="headerlink" href="#Inspect-Segmentation:-9-classes" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_vec</span> <span class="o">=</span> <span class="n">img_data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">img_mask</span> <span class="o">=</span> <span class="n">img_vec</span><span class="p">[</span><span class="n">img_vec</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img_mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">view</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">view</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Visualize-Images-from-the-Segmentation-ASHS-right_lfseg_corr">
+<h2>Visualize Images from the Segmentation ASHS right_lfseg_corr<a class="headerlink" href="#Visualize-Images-from-the-Segmentation-ASHS-right_lfseg_corr" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s2">&quot;/home/data/28andme/sub-01/ses-02/ashs/right_lfseg_corr_usegray_CT_LQ.nii.gz&quot;</span>
+<span class="p">)</span>
+<span class="n">img_data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">slice_0</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[</span><span class="mi">26</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="n">slice_1</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[:,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">slice_2</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[</span><span class="mi">220</span><span class="p">:</span><span class="mi">320</span><span class="p">,</span> <span class="mi">120</span><span class="p">:</span><span class="mi">220</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">show_slices</span><span class="p">([</span><span class="n">slice_0</span><span class="p">,</span> <span class="n">slice_1</span><span class="p">,</span> <span class="n">slice_2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">view</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">view</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Play-Video-of-2D-Slice-from-a-Time-Series-of-3D-Images">
+<h2>Play Video of 2D Slice from a Time-Series of 3D Images<a class="headerlink" href="#Play-Video-of-2D-Slice-from-a-Time-Series-of-3D-Images" title="Link to this heading">#</a></h2>
+<p>Choose which video to play, among:</p>
+<ul class="simple">
+<li><p>anat/sub-01_ses-**_T1w.nii.gz</p></li>
+<li><p>anat/sub-01_ses-**_T2hipp.nii.gz</p></li>
+<li><p>ashs/left_lfseg_corr_usegray_CT_LQ.nii.gz</p></li>
+<li><p>ashs/right_lfseg_corr_usegray_CT_LQ.nii.gz</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anima</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span>
+    <span class="s2">&quot;ashs/left_lfseg_corr_usegray_CT_LQ.nii.gz&quot;</span><span class="p">,</span>
+    <span class="n">img_dir</span><span class="o">=</span><span class="s2">&quot;/home/data/28andme/&quot;</span><span class="p">,</span>
+    <span class="n">slice_z</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">anima</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anima</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s2">&quot;ashs/right_lfseg_corr_usegray_CT_LQ.nii.gz&quot;</span><span class="p">,</span> <span class="n">slice_z</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">anima</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Make-video-of-Laura's-brain-for-presentation">
+<h2>Make video of Laura’s brain for presentation<a class="headerlink" href="#Make-video-of-Laura's-brain-for-presentation" title="Link to this heading">#</a></h2>
+<p>Creating paths to brain data, one path for each day, contained in nii_paths.</p>
+<p>Note that you need to choose which data_dir to use and only use half of the code in the below cell.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose either this data_dir</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/home/data/28andme/sub-01&quot;</span>
+<span class="n">nii_paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">):</span>
+    <span class="n">nii_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/ses-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">/anat/sub-01_ses-</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">_T1w.nii.gz&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nii_paths</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Or choose this data_dir</span>
+<span class="c1"># data_dir = &quot;/home/data/28andMeOC_correct&quot;</span>
+<span class="c1"># hemisphere = &quot;left&quot;</span>
+<span class="c1"># day_dirs = [os.path.join(data_dir, f&quot;Day{i:02d}&quot;) for i in range(1, 61)]</span>
+
+<span class="c1"># print(f&quot;Looking into: {day_dirs}&quot;)</span>
+<span class="c1"># nii_paths = []</span>
+<span class="c1"># for i_day, day_dir in enumerate(day_dirs):</span>
+<span class="c1">#     for file_name in os.listdir(day_dir):</span>
+<span class="c1">#         if file_name.startswith(hemisphere) and file_name.endswith(&quot;.nii.gz&quot;):</span>
+<span class="c1">#             nii_paths.append(os.path.join(day_dir, file_name))</span>
+<span class="c1">#             break</span>
+<span class="c1"># print(nii_paths)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the directory to save the converted images</span>
+<span class="n">anim_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;my28brains/results/anims&quot;</span><span class="p">)</span>
+<span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;my28brains/results/tmp&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Will save the animation in </span><span class="si">{</span><span class="n">anim_dir</span><span class="si">}</span><span class="s2"> and the temporary images in </span><span class="si">{</span><span class="n">tmp_dir</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i_path</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nii_paths</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="p">(</span><span class="n">img</span> <span class="o">/</span> <span class="n">img</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>  <span class="c1"># Normalize pixel values</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;mri_day_</span><span class="si">{</span><span class="n">i_path</span><span class="si">:</span><span class="s2">03</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+    <span class="c1"># brain shifts, need to take different slices for later days.</span>
+    <span class="k">if</span> <span class="n">i_path</span> <span class="o">&lt;</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">i_path</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">[:,</span> <span class="mi">50</span><span class="p">,</span> <span class="p">:])</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">[:,</span> <span class="mi">50</span><span class="p">,</span> <span class="p">:])</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">anim_dir</span><span class="p">,</span> <span class="s2">&quot;mris.mp4&quot;</span><span class="p">)</span>
+<span class="n">frame_rate</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Use ffmpeg to create the movie from the images</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;ffmpeg -framerate </span><span class="si">{</span><span class="n">frame_rate</span><span class="si">}</span><span class="s2"> -pattern_type glob -i &#39;</span><span class="si">{</span><span class="n">tmp_dir</span><span class="si">}</span><span class="s2">/mri_day_*.png&#39; -c:v libx264 -pix_fmt yuv420p </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">font_size</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Set the font style</span>
+<span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">anim_dir</span><span class="p">,</span> <span class="s2">&quot;DejaVuSerif.ttf&quot;</span><span class="p">),</span>
+    <span class="n">font_size</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">):</span>
+    <span class="c1"># Set the text to display</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Day </span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Get the width and height of the text</span>
+    <span class="n">text_width</span><span class="p">,</span> <span class="n">text_height</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Create a new image with a white background</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">text_width</span><span class="p">,</span> <span class="n">text_height</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+
+    <span class="c1"># Add the text to the image</span>
+    <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
+
+    <span class="c1"># Save the image as a .png file</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Day_</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the output file name and path</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">anim_dir</span><span class="p">,</span> <span class="s2">&quot;mris_days.mp4&quot;</span><span class="p">)</span>
+<span class="n">frame_rate</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Use ffmpeg to create the movie from the images</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;ffmpeg -framerate </span><span class="si">{</span><span class="n">frame_rate</span><span class="si">}</span><span class="s2"> -pattern_type glob -i &#39;</span><span class="si">{</span><span class="n">tmp_dir</span><span class="si">}</span><span class="s2">/Day_*.png&#39; -c:v libx264 -pix_fmt yuv420p </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-up">Set-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualize-Brain-Images-from-Anatomical-T1w">Visualize Brain Images from Anatomical T1w</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualize-Brain-Images-from-Anatomical-T2hipp">Visualize Brain Images from Anatomical T2hipp</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualize-Images-from-the-Segmentation-ASHS-left_lfseg_corr">Visualize Images from the Segmentation ASHS left_lfseg_corr</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Inspect-Segmentation:-9-classes">Inspect Segmentation: 9 classes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualize-Images-from-the-Segmentation-ASHS-right_lfseg_corr">Visualize Images from the Segmentation ASHS right_lfseg_corr</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Play-Video-of-2D-Slice-from-a-Time-Series-of-3D-Images">Play Video of 2D Slice from a Time-Series of 3D Images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Make-video-of-Laura's-brain-for-presentation">Make video of Laura’s brain for presentation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024-, Geometric Intelligence Lab @ UC Santa Barbara.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
