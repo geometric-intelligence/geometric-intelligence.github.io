@@ -50,7 +50,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 11, 2025, 1:50:48 AM"/>
+    <meta name="docbuild:last-update" content="Oct 11, 2025, 2:29:48 AM"/>
   </head>
   
   
@@ -1111,6 +1111,50 @@ features (default: False).</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CombinedPSEs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.data_manipulations.</span></span><span class="sig-name descname"><span class="pre">CombinedPSEs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CombinedPSEs" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
+<p>Combined PSEs transform.</p>
+<p>Applies one or more pre-defined positional or structural encoding transforms
+(LapPE, RWSE) to a graph, storing their outputs and optionally
+concatenating them to <cite>data.x</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>encodings</strong><span class="classifier">list of str</span></dt><dd><p>List of structural encodings to apply. Supported values are
+“LapPE” for Laplacian Positional Encoding and “RWSE” for
+Random Walk Structural Encoding.</p>
+</dd>
+<dt><strong>parameters</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional parameters for the encoding transforms.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CombinedPSEs.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Data</span></span></span><a class="headerlink" href="#topobench.transforms.data_manipulations.CombinedPSEs.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data with added structural encodings.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.data_manipulations.EqualGausFeatures">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.data_manipulations.</span></span><span class="sig-name descname"><span class="pre">EqualGausFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.EqualGausFeatures" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
@@ -1463,6 +1507,55 @@ and degree type.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.LapPE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.data_manipulations.</span></span><span class="sig-name descname"><span class="pre">LapPE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_eigenvalues</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.LapPE" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
+<p>Laplacian Positional Encoding (LapPE) transform.</p>
+<p>This computes the smallest eigenvectors of the normalized Laplacian
+matrix and appends them as node features (structural encodings).
+Optionally pads to a fixed dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>max_pe_dim</strong><span class="classifier">int</span></dt><dd><p>Maximum number of eigenvectors to use (dimensionality of the encoding).</p>
+</dd>
+<dt><strong>include_eigenvalues</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates eigenvalues alongside eigenvectors.
+Shape then becomes <code class="docutils literal notranslate"><span class="pre">[num_nodes,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">max_pe_dim]</span></code>. Default is False.</p>
+</dd>
+<dt><strong>include_first</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, removes eigenvectors corresponding to (near-)zero eigenvalues
+(constant eigenvector in connected graphs). Default is False.</p>
+</dd>
+<dt><strong>concat_to_x</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates the encodings with existing node features in
+<code class="docutils literal notranslate"><span class="pre">data.x</span></code>. If <code class="docutils literal notranslate"><span class="pre">data.x</span></code> is None, creates it. Default is True.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments (not used).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.LapPE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Data</span></span></span><a class="headerlink" href="#topobench.transforms.data_manipulations.LapPE.forward" title="Link to this definition">#</a></dt>
+<dd><p>Compute the Laplacian positional encodings for the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">Data</span></dt><dd><p>Input graph data object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Data</dt><dd><p>Graph data object with Laplacian positional encodings added.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.data_manipulations.MessagePassingHomophily">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.data_manipulations.</span></span><span class="sig-name descname"><span class="pre">MessagePassingHomophily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.MessagePassingHomophily" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
@@ -1651,6 +1744,50 @@ features (default: False).</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RWSE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.data_manipulations.</span></span><span class="sig-name descname"><span class="pre">RWSE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RWSE" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
+<p>Random Walk Structural Encoding (RWSE) transform.</p>
+<p>Computes return probabilities of random walks of length 1..K
+for each node in the graph, and appends them as structural
+encodings to node features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>max_pe_dim</strong><span class="classifier">int</span></dt><dd><p>Maximum walk length (number of RWSE dimensions).</p>
+</dd>
+<dt><strong>concat_to_x</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates the encodings with existing node
+features in <code class="docutils literal notranslate"><span class="pre">data.x</span></code>. If <code class="docutils literal notranslate"><span class="pre">data.x</span></code> is None, creates it.
+Default is True.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments (not used).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RWSE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Data</span></span></span><a class="headerlink" href="#topobench.transforms.data_manipulations.RWSE.forward" title="Link to this definition">#</a></dt>
+<dd><p>Compute the RWSE for the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">Data</span></dt><dd><p>Input graph data object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Data</dt><dd><p>Graph data object with RWSE added.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.data_manipulations.</span></span><span class="sig-name descname"><span class="pre">RedefineSimplicialNeighbourhoods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
@@ -1824,6 +1961,10 @@ features (default: False).</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.zero_cell_curvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.zero_cell_curvature()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CombinedPSEs"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CombinedPSEs.forward"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.EqualGausFeatures"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.EqualGausFeatures.forward"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures.forward()</span></code></a></li>
 </ul>
@@ -1855,6 +1996,10 @@ features (default: False).</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.KeepSelectedDataFields.forward"><code class="docutils literal notranslate"><span class="pre">KeepSelectedDataFields.forward()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.LapPE"><code class="docutils literal notranslate"><span class="pre">LapPE</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.LapPE.forward"><code class="docutils literal notranslate"><span class="pre">LapPE.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.MessagePassingHomophily"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.MessagePassingHomophily.forward"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily.forward()</span></code></a></li>
 </ul>
@@ -1870,6 +2015,10 @@ features (default: False).</p>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures.forward"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RWSE"><code class="docutils literal notranslate"><span class="pre">RWSE</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RWSE.forward"><code class="docutils literal notranslate"><span class="pre">RWSE.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods"><code class="docutils literal notranslate"><span class="pre">RedefineSimplicialNeighbourhoods</span></code></a><ul class="nav section-nav flex-column">
