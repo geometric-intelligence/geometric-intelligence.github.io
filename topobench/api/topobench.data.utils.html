@@ -50,7 +50,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 10, 2025, 7:13:39 PM"/>
+    <meta name="docbuild:last-update" content="Oct 11, 2025, 1:28:56 AM"/>
   </head>
   
   
@@ -495,7 +495,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.split_utils.k_fold_split">
-<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.split_utils.</span></span><span class="sig-name descname"><span class="pre">k_fold_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.k_fold_split" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.split_utils.</span></span><span class="sig-name descname"><span class="pre">k_fold_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.k_fold_split" title="Link to this definition">#</a></dt>
 <dd><p>Return train and valid indices as in K-Fold Cross-Validation.</p>
 <p>If the split already exists it loads it automatically, otherwise it creates the
 split file for the subsequent runs.</p>
@@ -505,6 +505,8 @@ split file for the subsequent runs.</p>
 <dt><strong>labels</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Label tensor.</p>
 </dd>
 <dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameters.</p>
+</dd>
+<dt><strong>root</strong><span class="classifier">str, optional</span></dt><dd><p>Root directory for data splits. Overwrite the default directory.</p>
 </dd>
 </dl>
 </dd>
@@ -587,7 +589,7 @@ split file for the subsequent runs.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.split_utils.random_splitting">
-<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.split_utils.</span></span><span class="sig-name descname"><span class="pre">random_splitting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_data_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.random_splitting" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">topobench.data.utils.split_utils.</span></span><span class="sig-name descname"><span class="pre">random_splitting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_data_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.random_splitting" title="Link to this definition">#</a></dt>
 <dd><p>Randomly splits label into train/valid/test splits.</p>
 <p>Adapted from <a class="github reference external" href="https://github.com/CUAI/Non-Homophily-Benchmarks">CUAI/Non-Homophily-Benchmarks</a>.</p>
 <dl class="field-list simple">
@@ -596,6 +598,8 @@ split file for the subsequent runs.</p>
 <dt><strong>labels</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Label tensor.</p>
 </dd>
 <dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameter.</p>
+</dd>
+<dt><strong>root</strong><span class="classifier">str, optional</span></dt><dd><p>Root directory for data splits. Overwrite the default directory.</p>
 </dd>
 <dt><strong>global_data_seed</strong><span class="classifier">int</span></dt><dd><p>Seed for the random number generator.</p>
 </dd>
