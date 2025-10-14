@@ -272,6 +272,7 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_deterministic_atlas.html">LDDMM: how to estimate a deterministic atlas?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lddmm_pls.html">LDDMM: PLS regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regression.html">LDDMM: how to do regression?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</a></li>
@@ -324,6 +325,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_shape_geodesic.html">LDDMM: parallel transporting face motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lddmm_pls.html">LDDMM: PLS regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_velocity.html">LDDMM: compute velocity and reconstruct parametrization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_deterministic_atlas.html">LDDMM: how to estimate a deterministic atlas?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</a></li>
@@ -460,7 +462,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-W1007 14:56:50.734000 29039 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
+W1013 17:06:16.921000 166878 site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -538,7 +540,7 @@ W1007 14:56:50.734000 29039 site-packages/torch/utils/cpp_extension.py:118] No C
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Number of meshes for:
-  -subject 01: 27
+  -subject 01: 26
   -subject 1001B: 13
   -subject 1004B: 21
 </pre></div></div>
@@ -547,486 +549,11 @@ Number of meshes for:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">csvs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span><span class="p">:</span>
-    <span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject_id</span><span class="o">=</span><span class="n">subject_id</span><span class="p">)()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject_subset</span><span class="o">=</span><span class="n">SUBJECT_IDS</span><span class="p">)()</span>
 
-<span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">SUBJECT_IDS</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">subject_id</span><span class="p">)</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-01
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>estro</th>
-      <th>prog</th>
-      <th>lh</th>
-      <th>gestWeek</th>
-      <th>stage</th>
-      <th>EndoStatus</th>
-      <th>trimester</th>
-    </tr>
-    <tr>
-      <th>sessionID</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>-3.0</td>
-      <td>pre</td>
-      <td>pilot1</td>
-      <td>pre</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3.42</td>
-      <td>0.840</td>
-      <td>NaN</td>
-      <td>-0.5</td>
-      <td>pre</td>
-      <td>pilot2</td>
-      <td>pre</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>386.00</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>pre</td>
-      <td>IVF</td>
-      <td>pre</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1238.00</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.5</td>
-      <td>pre</td>
-      <td>IVF</td>
-      <td>pre</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1350.00</td>
-      <td>2.940</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>pre</td>
-      <td>IVF</td>
-      <td>first</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>241.00</td>
-      <td>8.760</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>first</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>9.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>first</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>12.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>first</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>14.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>second</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>4700.00</td>
-      <td>53.900</td>
-      <td>1.45</td>
-      <td>15.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>second</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>4100.00</td>
-      <td>56.800</td>
-      <td>0.87</td>
-      <td>17.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>second</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>6190.00</td>
-      <td>70.600</td>
-      <td>0.93</td>
-      <td>19.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>second</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>9640.00</td>
-      <td>54.700</td>
-      <td>0.62</td>
-      <td>22.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>second</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>8800.00</td>
-      <td>64.100</td>
-      <td>0.73</td>
-      <td>24.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>second</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>8970.00</td>
-      <td>61.400</td>
-      <td>0.73</td>
-      <td>27.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>third</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>10200.00</td>
-      <td>74.200</td>
-      <td>0.69</td>
-      <td>29.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>third</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>9920.00</td>
-      <td>83.000</td>
-      <td>0.77</td>
-      <td>31.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>third</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>9860.00</td>
-      <td>95.300</td>
-      <td>0.83</td>
-      <td>33.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>third</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>12400.00</td>
-      <td>103.000</td>
-      <td>0.59</td>
-      <td>36.0</td>
-      <td>preg</td>
-      <td>Pregnant</td>
-      <td>third</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>9.18</td>
-      <td>0.120</td>
-      <td>0.96</td>
-      <td>43.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>20.70</td>
-      <td>0.043</td>
-      <td>4.01</td>
-      <td>46.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>17.50</td>
-      <td>0.068</td>
-      <td>7.58</td>
-      <td>49.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>11.50</td>
-      <td>0.042</td>
-      <td>4.67</td>
-      <td>51.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>68.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>93.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>162.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>162.0</td>
-      <td>post</td>
-      <td>Postpartum</td>
-      <td>post</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-1001B
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>gestWeek</th>
-      <th>stage</th>
-      <th>trimester</th>
-      <th>date</th>
-    </tr>
-    <tr>
-      <th>sessionID</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>base1</th>
-      <td>-18.0</td>
-      <td>pre</td>
-      <td>pre</td>
-      <td>4/1/2023</td>
-    </tr>
-    <tr>
-      <th>base2</th>
-      <td>-13.0</td>
-      <td>pre</td>
-      <td>pre</td>
-      <td>5/6/2023</td>
-    </tr>
-    <tr>
-      <th>gest1</th>
-      <td>8.0</td>
-      <td>preg</td>
-      <td>first</td>
-      <td>9/30/2023</td>
-    </tr>
-    <tr>
-      <th>gest2</th>
-      <td>13.0</td>
-      <td>preg</td>
-      <td>first</td>
-      <td>11/4/2023</td>
-    </tr>
-    <tr>
-      <th>gest3</th>
-      <td>17.0</td>
-      <td>preg</td>
-      <td>second</td>
-      <td>12/2/2023</td>
-    </tr>
-    <tr>
-      <th>gest4</th>
-      <td>22.0</td>
-      <td>preg</td>
-      <td>second</td>
-      <td>1/6/2024</td>
-    </tr>
-    <tr>
-      <th>gest5</th>
-      <td>26.0</td>
-      <td>preg</td>
-      <td>second</td>
-      <td>2/3/2024</td>
-    </tr>
-    <tr>
-      <th>gest6</th>
-      <td>30.0</td>
-      <td>preg</td>
-      <td>third</td>
-      <td>3/2/2024</td>
-    </tr>
-    <tr>
-      <th>gest7</th>
-      <td>35.0</td>
-      <td>preg</td>
-      <td>third</td>
-      <td>4/6/2024</td>
-    </tr>
-    <tr>
-      <th>post1</th>
-      <td>43.0</td>
-      <td>post</td>
-      <td>post</td>
-      <td>6/1/2024</td>
-    </tr>
-    <tr>
-      <th>post2</th>
-      <td>48.0</td>
-      <td>post</td>
-      <td>post</td>
-      <td>7/6/2024</td>
-    </tr>
-    <tr>
-      <th>post3</th>
-      <td>56.0</td>
-      <td>post</td>
-      <td>post</td>
-      <td>9/1/2024</td>
-    </tr>
-    <tr>
-      <th>post4</th>
-      <td>65.0</td>
-      <td>post</td>
-      <td>post</td>
-      <td>11/2/2024</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-1004B
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -1050,166 +577,493 @@ Number of meshes for:
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>subject</th>
+      <th>sessionID</th>
       <th>gestWeek</th>
       <th>stage</th>
       <th>trimester</th>
-      <th>date</th>
-    </tr>
-    <tr>
-      <th>sessionID</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>base1</th>
-      <td>-2.5</td>
+      <th>0</th>
+      <td>01</td>
+      <td>1</td>
+      <td>-3.0</td>
       <td>pre</td>
       <td>pre</td>
-      <td>8/22/2023</td>
     </tr>
     <tr>
-      <th>base2</th>
+      <th>1</th>
+      <td>01</td>
+      <td>2</td>
+      <td>-0.5</td>
+      <td>pre</td>
+      <td>pre</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>01</td>
+      <td>3</td>
+      <td>1.0</td>
+      <td>pre</td>
+      <td>pre</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>01</td>
+      <td>4</td>
+      <td>1.5</td>
+      <td>pre</td>
+      <td>pre</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>01</td>
+      <td>5</td>
       <td>2.0</td>
-      <td>preg</td>
+      <td>pre</td>
       <td>first</td>
-      <td>9/21/2023</td>
     </tr>
     <tr>
-      <th>gest1</th>
-      <td>5.0</td>
+      <th>5</th>
+      <td>01</td>
+      <td>6</td>
+      <td>3.0</td>
       <td>preg</td>
       <td>first</td>
-      <td>10/11/2023</td>
     </tr>
     <tr>
-      <th>gest2</th>
-      <td>7.0</td>
+      <th>6</th>
+      <td>01</td>
+      <td>7</td>
+      <td>9.0</td>
       <td>preg</td>
       <td>first</td>
-      <td>10/26/2023</td>
     </tr>
     <tr>
-      <th>gest3</th>
-      <td>8.5</td>
+      <th>7</th>
+      <td>01</td>
+      <td>8</td>
+      <td>12.0</td>
       <td>preg</td>
       <td>first</td>
-      <td>11/7/2023</td>
     </tr>
     <tr>
-      <th>gest4</th>
-      <td>10.5</td>
-      <td>preg</td>
-      <td>first</td>
-      <td>11/20/2023</td>
-    </tr>
-    <tr>
-      <th>gest5</th>
-      <td>12.5</td>
-      <td>preg</td>
-      <td>first</td>
-      <td>12/4/2023</td>
-    </tr>
-    <tr>
-      <th>gest6</th>
-      <td>14.5</td>
+      <th>8</th>
+      <td>01</td>
+      <td>9</td>
+      <td>14.0</td>
       <td>preg</td>
       <td>second</td>
-      <td>12/18/2023</td>
     </tr>
     <tr>
-      <th>gest7</th>
-      <td>16.5</td>
+      <th>9</th>
+      <td>01</td>
+      <td>10</td>
+      <td>15.0</td>
       <td>preg</td>
       <td>second</td>
-      <td>1/3/2024</td>
     </tr>
     <tr>
-      <th>gest8</th>
+      <th>10</th>
+      <td>01</td>
+      <td>11</td>
+      <td>17.0</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>01</td>
+      <td>12</td>
       <td>19.0</td>
       <td>preg</td>
       <td>second</td>
-      <td>1/18/2024</td>
     </tr>
     <tr>
-      <th>gest9</th>
-      <td>21.0</td>
+      <th>12</th>
+      <td>01</td>
+      <td>13</td>
+      <td>22.0</td>
       <td>preg</td>
       <td>second</td>
-      <td>2/1/2024</td>
     </tr>
     <tr>
-      <th>gest10</th>
-      <td>23.0</td>
+      <th>13</th>
+      <td>01</td>
+      <td>14</td>
+      <td>24.0</td>
       <td>preg</td>
       <td>second</td>
-      <td>2/15/2024</td>
     </tr>
     <tr>
-      <th>gest11</th>
-      <td>24.5</td>
-      <td>preg</td>
-      <td>second</td>
-      <td>2/27/2024</td>
-    </tr>
-    <tr>
-      <th>gest12</th>
+      <th>14</th>
+      <td>01</td>
+      <td>15</td>
       <td>27.0</td>
       <td>preg</td>
       <td>third</td>
-      <td>3/14/2024</td>
     </tr>
     <tr>
-      <th>gest13</th>
-      <td>30.0</td>
+      <th>15</th>
+      <td>01</td>
+      <td>16</td>
+      <td>29.0</td>
       <td>preg</td>
       <td>third</td>
-      <td>4/5/2024</td>
     </tr>
     <tr>
-      <th>post1</th>
+      <th>16</th>
+      <td>01</td>
+      <td>17</td>
+      <td>31.0</td>
+      <td>preg</td>
+      <td>third</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>01</td>
+      <td>18</td>
+      <td>33.0</td>
+      <td>preg</td>
+      <td>third</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>01</td>
+      <td>19</td>
+      <td>36.0</td>
+      <td>preg</td>
+      <td>third</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>01</td>
+      <td>20</td>
       <td>43.0</td>
       <td>post</td>
       <td>post</td>
-      <td>7/5/2024</td>
     </tr>
     <tr>
-      <th>post2</th>
+      <th>20</th>
+      <td>01</td>
+      <td>21</td>
+      <td>46.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>01</td>
+      <td>22</td>
+      <td>49.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>01</td>
+      <td>23</td>
+      <td>51.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>01</td>
+      <td>24</td>
+      <td>68.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>01</td>
+      <td>25</td>
+      <td>93.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>01</td>
+      <td>26</td>
+      <td>162.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>1004B</td>
+      <td>base1</td>
+      <td>-2.5</td>
+      <td>pre</td>
+      <td>pre</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>1004B</td>
+      <td>base2</td>
+      <td>2.0</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>1004B</td>
+      <td>gest1</td>
+      <td>5.0</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1004B</td>
+      <td>gest2</td>
+      <td>7.0</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>1004B</td>
+      <td>gest3</td>
+      <td>8.5</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>1004B</td>
+      <td>gest4</td>
+      <td>10.5</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>1004B</td>
+      <td>gest5</td>
+      <td>12.5</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>1004B</td>
+      <td>gest6</td>
+      <td>14.5</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>1004B</td>
+      <td>gest7</td>
+      <td>16.5</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>1004B</td>
+      <td>gest8</td>
+      <td>19.0</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>1004B</td>
+      <td>gest9</td>
+      <td>21.0</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>1004B</td>
+      <td>gest10</td>
+      <td>23.0</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>1004B</td>
+      <td>gest11</td>
+      <td>24.5</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>1004B</td>
+      <td>gest12</td>
+      <td>27.0</td>
+      <td>preg</td>
+      <td>third</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>1004B</td>
+      <td>gest13</td>
+      <td>30.0</td>
+      <td>preg</td>
+      <td>third</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>1004B</td>
+      <td>post1</td>
+      <td>43.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>1004B</td>
+      <td>post2</td>
       <td>50.0</td>
       <td>post</td>
       <td>post</td>
-      <td>8/21/2024</td>
     </tr>
     <tr>
-      <th>post3</th>
+      <th>43</th>
+      <td>1004B</td>
+      <td>post3</td>
       <td>52.0</td>
       <td>post</td>
       <td>post</td>
-      <td>9/4/2024</td>
     </tr>
     <tr>
-      <th>post4</th>
+      <th>44</th>
+      <td>1004B</td>
+      <td>post4</td>
       <td>54.0</td>
       <td>post</td>
       <td>post</td>
-      <td>9/23/2024</td>
     </tr>
     <tr>
-      <th>post5</th>
+      <th>45</th>
+      <td>1004B</td>
+      <td>post5</td>
       <td>57.0</td>
       <td>post</td>
       <td>post</td>
-      <td>10/10/2024</td>
     </tr>
     <tr>
-      <th>post6</th>
+      <th>46</th>
+      <td>1004B</td>
+      <td>post6</td>
       <td>65.5</td>
       <td>post</td>
       <td>post</td>
-      <td>12/11/2024</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>1001B</td>
+      <td>base1</td>
+      <td>-18.0</td>
+      <td>pre</td>
+      <td>pre</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>1001B</td>
+      <td>base2</td>
+      <td>-13.0</td>
+      <td>pre</td>
+      <td>pre</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>1001B</td>
+      <td>gest1</td>
+      <td>8.0</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>1001B</td>
+      <td>gest2</td>
+      <td>13.0</td>
+      <td>preg</td>
+      <td>first</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>1001B</td>
+      <td>gest3</td>
+      <td>17.0</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>1001B</td>
+      <td>gest4</td>
+      <td>22.0</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>1001B</td>
+      <td>gest5</td>
+      <td>26.0</td>
+      <td>preg</td>
+      <td>second</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>1001B</td>
+      <td>gest6</td>
+      <td>30.0</td>
+      <td>preg</td>
+      <td>third</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>1001B</td>
+      <td>gest7</td>
+      <td>35.0</td>
+      <td>preg</td>
+      <td>third</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>1001B</td>
+      <td>post1</td>
+      <td>43.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>1001B</td>
+      <td>post2</td>
+      <td>48.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>1001B</td>
+      <td>post3</td>
+      <td>56.0</td>
+      <td>post</td>
+      <td>post</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>1001B</td>
+      <td>post4</td>
+      <td>65.0</td>
+      <td>post</td>
+      <td>post</td>
     </tr>
   </tbody>
 </table>
@@ -1301,10 +1155,11 @@ Number of meshes for:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: update here</span>
-<span class="n">pre_keys_selector</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfIsInFilter</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;pre&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-
-<span class="n">pre_keys</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">pre_keys_selector</span><span class="p">)(</span><span class="n">csvs</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_keys</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ppd</span><span class="o">.</span><span class="n">DfIsInFilter</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;pre&quot;</span><span class="p">])</span>
+    <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">GroupByColumn</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">&quot;sessionID&quot;</span><span class="p">,</span> <span class="n">as_list</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="p">)(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1312,10 +1167,10 @@ Number of meshes for:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_dataset</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">subject_id</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">pre_keys</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])(</span><span class="n">meshes</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">meshes</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-<span class="p">}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_dataset</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">values</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">SelectKeySubset</span><span class="p">(</span><span class="n">pre_keys</span><span class="p">[</span><span class="n">key</span><span class="p">])(</span><span class="n">values</span><span class="p">),</span>
+    <span class="n">pass_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)(</span><span class="n">dataset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1387,8 +1242,8 @@ context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/atlases/sub_01/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
 {&#39;max_iterations&#39;: 2000, &#39;freeze_template&#39;: False, &#39;freeze_control_points&#39;: False, &#39;freeze_momenta&#39;: False, &#39;use_sobolev_gradient&#39;: True, &#39;sobolev_kernel_width_ratio&#39;: 1, &#39;max_line_search_iterations&#39;: 50, &#39;initial_control_points&#39;: None, &#39;initial_cp_spacing&#39;: None, &#39;initial_momenta&#39;: None, &#39;dense_mode&#39;: False, &#39;number_of_threads&#39;: 1, &#39;print_every_n_iters&#39;: 20, &#39;downsampling_factor&#39;: 1, &#39;dimension&#39;: 3, &#39;optimization_method_type&#39;: &#39;ScipyLBFGS&#39;, &#39;convergence_tolerance&#39;: 1e-10, &#39;initial_step_size&#39;: 0.1, &#39;gpu_mode&#39;: &lt;GpuMode.KERNEL: 4&gt;, &#39;state_file&#39;: &#39;results/regression_example/atlases/sub_01/deformetrica-state.p&#39;, &#39;load_state_file&#39;: False, &#39;memory_length&#39;: 10}
-instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x758560315460
-instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x758560315850
+instantiating kernel torch with kernel_width 10.0 and gpu_mode GpuMode.KERNEL. addr: 0x79b34c68c860
+instantiating kernel torch with kernel_width 2.0 and gpu_mode GpuMode.KERNEL. addr: 0x79b34c68d8b0
 &gt;&gt; Set of 24 control points defined.
 &gt;&gt; Momenta initialized to zero, for 5 subjects.
 dtype=float32
@@ -1478,8 +1333,8 @@ Deformetrica.__del__()
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="p">[</span><span class="mi">800</span><span class="p">,</span> <span class="mi">150</span><span class="p">])</span>
 
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">SUBJECT_IDS</span><span class="p">):</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">SUBJECT_IDS</span><span class="p">):</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">templates</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;pre-pregnancy template of </span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s2">&quot;upper_edge&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">4</span>
@@ -1554,7 +1409,7 @@ OMP_NUM_THREADS will be set to 10
 context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;global/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-instantiating kernel torch with kernel_width 20.0 and gpu_mode GpuMode.KERNEL. addr: 0x758560317b30
+instantiating kernel torch with kernel_width 20.0 and gpu_mode GpuMode.KERNEL. addr: 0x79b34c68db80
 &gt;&gt; Set of 4 control points defined.
 &gt;&gt; Momenta initialized to zero, for 1 subjects.
 dtype=float32
@@ -1730,7 +1585,7 @@ dtype=float32
 ------------------------------------- Iteration: 1 -------------------------------------
 &gt;&gt; Gradient at Termination: 152.1385305640774
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 02 seconds
+&gt;&gt; Estimation took: 01 seconds
 Deformetrica.__del__()
 source is ignored when pole ladder is used
 In exponential update, I am not flowing because I don&#39;t have any template points to flow
@@ -2266,54 +2121,6 @@ Logger has been set to: DEBUG
 OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
 OMP_NUM_THREADS will be set to 10
 context has already been set
-&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_01/01-&gt;27/deformetrica-state.p.
-&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
-&gt;&gt; Set of 4 control points defined.
-&gt;&gt; Momenta initialized to zero, for 1 subjects.
-dtype=float32
-&gt;&gt; Started estimator: ScipyOptimize
-
-&gt;&gt; Scipy optimization method: L-BFGS-B
-
-------------------------------------- Iteration: 1 -------------------------------------
-
-------------------------------------- Iteration: 20 -------------------------------------
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.126E+00 ]
-&gt;&gt; Log-likelihood = -1.167E+03     [ attachment = -1.164E+03 ; regularity = -2.144E+00 ]
-&gt;&gt; Log-likelihood = -1.167E+03     [ attachment = -1.165E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -3.322E+04     [ attachment = -3.285E+04 ; regularity = -3.701E+02 ]
-&gt;&gt; Log-likelihood = -1.168E+03     [ attachment = -1.166E+03 ; regularity = -2.143E+00 ]
-&gt;&gt; Log-likelihood = -1.167E+03     [ attachment = -1.165E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.168E+03     [ attachment = -1.166E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Log-likelihood = -1.166E+03     [ attachment = -1.164E+03 ; regularity = -2.148E+00 ]
-&gt;&gt; Gradient at Termination: 317.3147814181185
-&gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 02 seconds
-Deformetrica.__del__()
-source is ignored when pole ladder is used
-In exponential update, I am not flowing because I don&#39;t have any template points to flow
-In exponential update, I am not flowing because I don&#39;t have any template points to flow
-[ compute_shooting function ]
-Defaulting geodesic t0 to 1.
-Defaulting geodesic tmax to 1.
-Defaulting geodesic tmin to 0.
-Logger has been set to: DEBUG
-&gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
-OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
-OMP_NUM_THREADS will be set to 10
-context has already been set
 &gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: results/regression_example/registrations/sub_1001B/1001B-&gt;global/deformetrica-state.p.
 &gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
 &gt;&gt; Set of 4 control points defined.
@@ -2335,7 +2142,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -2.124E+03     [ attachment = -2.092E+03 ; regularity = -3.203E+01 ]
 &gt;&gt; Gradient at Termination: 901.3190770704099
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 05 seconds
+&gt;&gt; Estimation took: 07 seconds
 Deformetrica.__del__()
 Logger has been set to: DEBUG
 &gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
@@ -2470,7 +2277,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -1.070E+03     [ attachment = -1.068E+03 ; regularity = -2.228E+00 ]
 &gt;&gt; Gradient at Termination: 818.6166352303965
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 04 seconds
+&gt;&gt; Estimation took: 03 seconds
 Deformetrica.__del__()
 source is ignored when pole ladder is used
 In exponential update, I am not flowing because I don&#39;t have any template points to flow
@@ -2677,7 +2484,7 @@ dtype=float32
 ------------------------------------- Iteration: 1 -------------------------------------
 &gt;&gt; Gradient at Termination: 1909.8115530552022
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 02 seconds
+&gt;&gt; Estimation took: 01 seconds
 Deformetrica.__del__()
 source is ignored when pole ladder is used
 In exponential update, I am not flowing because I don&#39;t have any template points to flow
@@ -2763,7 +2570,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -3.216E+03     [ attachment = -3.148E+03 ; regularity = -6.782E+01 ]
 &gt;&gt; Gradient at Termination: 717.2825981120169
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 10 seconds
+&gt;&gt; Estimation took: 09 seconds
 Deformetrica.__del__()
 Logger has been set to: DEBUG
 &gt;&gt; No initial CP spacing given: using diffeo kernel width of 20.0
@@ -2837,7 +2644,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -1.131E+03     [ attachment = -1.128E+03 ; regularity = -3.527E+00 ]
 &gt;&gt; Gradient at Termination: 160.0985341470868
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 02 seconds
+&gt;&gt; Estimation took: 03 seconds
 Deformetrica.__del__()
 source is ignored when pole ladder is used
 In exponential update, I am not flowing because I don&#39;t have any template points to flow
@@ -3126,7 +2933,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -1.726E+03     [ attachment = -1.723E+03 ; regularity = -3.278E+00 ]
 &gt;&gt; Gradient at Termination: 148.00620729165294
 &gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
-&gt;&gt; Estimation took: 03 seconds
+&gt;&gt; Estimation took: 02 seconds
 Deformetrica.__del__()
 source is ignored when pole ladder is used
 In exponential update, I am not flowing because I don&#39;t have any template points to flow
@@ -3210,7 +3017,7 @@ dtype=float32
 &gt;&gt; Log-likelihood = -1.456E+03     [ attachment = -1.454E+03 ; regularity = -2.012E+00 ]
 &gt;&gt; Gradient at Termination: 155.29581141432877
 &gt;&gt; ABNORMAL:
-&gt;&gt; Estimation took: 04 seconds
+&gt;&gt; Estimation took: 03 seconds
 Deformetrica.__del__()
 source is ignored when pole ladder is used
 In exponential update, I am not flowing because I don&#39;t have any template points to flow
@@ -3366,7 +3173,7 @@ Defaulting geodesic tmin to 0.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-results/regression_example/registrations/sub_01/01-&gt;27
+results/regression_example/registrations/sub_01/01-&gt;26
 results/regression_example/registrations/sub_1001B/1001B-&gt;post4
 results/regression_example/registrations/sub_1004B/1004B-&gt;post6
 </pre></div></div>
@@ -3424,7 +3231,7 @@ results/regression_example/registrations/sub_1004B/1004B-&gt;post6
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-results/regression_example/parallel_shoot/sub_01/global(t01&gt;27)
+results/regression_example/parallel_shoot/sub_01/global(t01&gt;26)
 results/regression_example/parallel_shoot/sub_1001B/global(t1001B&gt;post4)
 results/regression_example/parallel_shoot/sub_1004B/global(t1004B&gt;post6)
 </pre></div></div>
@@ -3473,7 +3280,7 @@ results/regression_example/parallel_shoot/sub_1004B/global(t1004B&gt;post6)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(np.float64(1.1753921508789062), np.float64(1.1911087036132812))
+(np.float64(0.7183609008789062), np.float64(0.67523193359375))
 </pre></div></div>
 </div>
 </section>
@@ -3536,29 +3343,58 @@ PosixPath(&#39;results/regression_example/atlases/global/DeterministicAtlas__Est
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vel_week</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">subj_dict</span> <span class="ow">in</span> <span class="n">vel</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">session2week</span> <span class="o">=</span> <span class="n">csvs</span><span class="p">[</span><span class="n">subject_id</span><span class="p">][</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">]</span>
-    <span class="n">vel_week</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
-        <span class="n">key_step</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">session2week</span><span class="p">[</span><span class="n">session</span><span class="p">])</span>
-    <span class="p">)(</span><span class="n">vel</span><span class="p">[</span><span class="n">subject_id</span><span class="p">])</span>
-
-<span class="n">vel_ls</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">subj_id</span><span class="p">,</span> <span class="n">subj_vel</span> <span class="ow">in</span> <span class="n">vel_week</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">week</span><span class="p">,</span> <span class="n">vels</span> <span class="ow">in</span> <span class="n">subj_vel</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">vel_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="n">subj_id</span><span class="p">,</span>
-                <span class="s2">&quot;week&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">week</span><span class="p">),</span>
-                <span class="s2">&quot;vel&quot;</span><span class="p">:</span> <span class="n">vels</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session2week</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ppd</span><span class="o">.</span><span class="n">GroupByColumn</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+        <span class="n">ppd</span><span class="o">.</span><span class="n">IndexSetter</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="s2">&quot;sessionID&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vel_week</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+    <span class="n">step</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">values</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">RenameKeys</span><span class="p">(</span><span class="n">session2week</span><span class="p">[</span><span class="n">key</span><span class="p">])(</span><span class="n">values</span><span class="p">)),</span>
+    <span class="n">pass_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)(</span><span class="n">vel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vel_week</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+    <span class="n">step</span><span class="o">=</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">values</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+            <span class="n">key_step</span><span class="o">=</span><span class="k">lambda</span> <span class="n">session</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">session2week</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">session</span><span class="p">])</span>
+        <span class="p">)(</span><span class="n">values</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">pass_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)(</span><span class="n">vel</span><span class="p">)</span>
+
+<span class="n">vel_ls</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictToList</span><span class="p">([</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;week&quot;</span><span class="p">,</span> <span class="s2">&quot;vel&quot;</span><span class="p">])(</span><span class="n">vel_week</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vel_week</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
+    <span class="n">step</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">values</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">RenameKeys</span><span class="p">(</span><span class="n">session2week</span><span class="p">[</span><span class="n">key</span><span class="p">])(</span><span class="n">values</span><span class="p">)),</span>
+    <span class="n">pass_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)(</span><span class="n">vel</span><span class="p">)</span>
+
+<span class="n">vel_ls</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictToList</span><span class="p">([</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;week&quot;</span><span class="p">,</span> <span class="s2">&quot;vel&quot;</span><span class="p">])(</span><span class="n">vel_week</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">vel_ls</span><span class="p">)</span>
