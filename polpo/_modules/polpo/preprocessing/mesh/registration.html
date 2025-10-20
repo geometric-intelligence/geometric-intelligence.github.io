@@ -312,9 +312,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing.mesh.registration</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing._preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">PartiallyInitializedStep</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessingStep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">PointCloudAdapter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.point_cloud.registration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CorrespondenceBasedRigidAlignment</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing._pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvAlign</span>  <span class="c1"># noqa:F401</span>
@@ -346,24 +352,53 @@
 <div class="viewcode-block" id="RigidAlignment">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.registration.RigidAlignment.html#polpo.preprocessing.mesh.registration.RigidAlignment">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RigidAlignment</span><span class="p">(</span><span class="n">PartiallyInitializedStep</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">is_dict</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">known_correspondences</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_data2iter</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="n">Map</span>
+
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
 
         <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
             <span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">is_dict</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
 
                 <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">_Step</span><span class="p">(</span><span class="n">is_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">is_dict</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">known_correspondences</span><span class="p">:</span>
+            <span class="n">_Step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_known_correspondences</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_Step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_unknown_correspondences</span><span class="p">()</span>
 
-            <span class="k">return</span> <span class="n">Map</span><span class="p">(</span><span class="n">PvAlign</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">Step</span><span class="o">=</span><span class="n">_Step</span><span class="p">,</span> <span class="n">_target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">_data2iter</span><span class="o">=</span><span class="n">_data2iter</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">Step</span><span class="o">=</span><span class="n">_Step</span><span class="p">,</span> <span class="n">_target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">_is_dict</span><span class="o">=</span><span class="n">is_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_known_correspondences</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_Step</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">data2iter</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># TODO: implement similar to `register_vertices_attr`?</span>
+            <span class="n">template_faces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+            <span class="n">mesh2points</span><span class="p">,</span> <span class="n">points2mesh</span> <span class="o">=</span> <span class="n">PointCloudAdapter</span><span class="o">.</span><span class="n">build_pipes</span><span class="p">(</span><span class="n">template_faces</span><span class="p">)</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="n">PointCloudAdapter</span><span class="p">(</span>
+                <span class="n">CorrespondenceBasedRigidAlignment</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">mesh2points</span><span class="p">(</span><span class="n">target</span><span class="p">)),</span>
+                <span class="n">mesh2points</span><span class="p">,</span>
+                <span class="n">points2mesh</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">data2iter</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_Step</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_unknown_correspondences</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_Step</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">data2iter</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="n">PvAlign</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">data2iter</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_Step</span></div>
 
 </pre></div>
 
