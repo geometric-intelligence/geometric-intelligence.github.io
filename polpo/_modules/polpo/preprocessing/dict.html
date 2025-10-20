@@ -426,6 +426,23 @@
 
 
 
+<div class="viewcode-block" id="KeySorter">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.KeySorter.html#polpo.preprocessing.dict.KeySorter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">KeySorter</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sorter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sorter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sorter</span> <span class="o">=</span> <span class="n">sorter</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">sorted_keys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sorter</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sorted_keys</span><span class="p">}</span></div>
+
+
+
 <div class="viewcode-block" id="DictFilter">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.DictFilter.html#polpo.preprocessing.dict.DictFilter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DictFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
