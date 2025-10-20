@@ -379,15 +379,12 @@
 </pre></div>
 </div>
 </div>
-<section id="Volume-(enigma-meshes)">
-<h2>Volume (<code class="docutils literal notranslate"><span class="pre">enigma</span></code> meshes)<a class="headerlink" href="#Volume-(enigma-meshes)" title="Link to this heading">#</a></h2>
-<section id="Loading-data">
-<h3>Loading data<a class="headerlink" href="#Loading-data" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">structs</span> <span class="o">=</span> <span class="n">get_all_first_structs</span><span class="p">(</span><span class="n">include_brstem</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">DEBUG</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="n">structs</span> <span class="o">=</span> <span class="n">get_all_first_structs</span><span class="p">(</span><span class="n">include_brstem</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
     <span class="n">n_unique_structs</span> <span class="o">=</span> <span class="mi">2</span>
@@ -411,26 +408,9 @@
 [&#39;L_Accu&#39;, &#39;L_Amyg&#39;, &#39;L_Caud&#39;, &#39;L_Hipp&#39;, &#39;L_Pall&#39;, &#39;L_Puta&#39;, &#39;L_Thal&#39;, &#39;R_Accu&#39;, &#39;R_Amyg&#39;, &#39;R_Caud&#39;, &#39;R_Hipp&#39;, &#39;R_Pall&#39;, &#39;R_Puta&#39;, &#39;R_Thal&#39;]
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">DEBUG</span> <span class="k">else</span> <span class="kc">None</span>
-
-<span class="n">mesh_loader</span> <span class="o">=</span> <span class="n">MeshLoader</span><span class="p">(</span>
-    <span class="n">subject_subset</span><span class="o">=</span><span class="n">subject_subset</span><span class="p">,</span>
-    <span class="n">struct_subset</span><span class="o">=</span><span class="n">structs</span><span class="p">,</span>
-    <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;enigma&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">())</span>
-
-<span class="c1"># subject, struct, session</span>
-<span class="n">raw_meshes</span> <span class="o">=</span> <span class="n">mesh_loader</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<p>Loading tabular data.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">()</span>
@@ -448,7 +428,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictor_selector</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">GroupByColumn</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="n">as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span>
@@ -458,6 +438,30 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <span class="p">)</span>
 
 <span class="n">x_dict</span> <span class="o">=</span> <span class="n">predictor_selector</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Volume-(enigma-meshes)">
+<h2>Volume (<code class="docutils literal notranslate"><span class="pre">enigma</span></code> meshes)<a class="headerlink" href="#Volume-(enigma-meshes)" title="Link to this heading">#</a></h2>
+<section id="Loading-data">
+<h3>Loading data<a class="headerlink" href="#Loading-data" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_loader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshLoader</span><span class="p">(</span>
+        <span class="n">subject_subset</span><span class="o">=</span><span class="n">subject_subset</span><span class="p">,</span>
+        <span class="n">struct_subset</span><span class="o">=</span><span class="n">structs</span><span class="p">,</span>
+        <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;enigma&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">())</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">KeySorter</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1"># subject, struct, session</span>
+<span class="n">raw_meshes</span> <span class="o">=</span> <span class="n">mesh_loader</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -500,7 +504,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <section id="Plot-volumes">
 <h3>Plot volumes<a class="headerlink" href="#Plot-volumes" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset_pipe</span> <span class="o">=</span> <span class="p">(</span>
@@ -566,7 +570,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">meshes</span> <span class="ow">in</span> <span class="n">raw_meshes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -578,21 +582,35 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_13_0.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_13_0.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_0.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_0.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_13_1.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_13_1.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_1.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_2.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_3.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_3.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_13_2.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_13_2.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_4.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_14_4.png" />
 </div>
 </div>
 </section>
@@ -600,18 +618,21 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <section id="Volume-(fsl_first-meshes)">
 <h2>Volume (<code class="docutils literal notranslate"><span class="pre">fsl_first</span></code> meshes)<a class="headerlink" href="#Volume-(fsl_first-meshes)" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">DEBUG</span> <span class="k">else</span> <span class="kc">None</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># subject, struct, session</span>
+<span class="n">mesh_loader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshLoader</span><span class="p">(</span>
+        <span class="n">subject_subset</span><span class="o">=</span><span class="n">subject_subset</span><span class="p">,</span>
+        <span class="n">struct_subset</span><span class="o">=</span><span class="n">structs</span><span class="p">,</span>
+        <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;fsl&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">())</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">KeySorter</span><span class="p">()</span>
+<span class="p">)</span>
 
-<span class="c1"># subject, struct, session</span>
-<span class="n">mesh_loader</span> <span class="o">=</span> <span class="n">MeshLoader</span><span class="p">(</span>
-    <span class="n">subject_subset</span><span class="o">=</span><span class="n">subject_subset</span><span class="p">,</span>
-    <span class="n">struct_subset</span><span class="o">=</span><span class="n">structs</span><span class="p">,</span>
-    <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;fsl&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">())</span>
 
 <span class="n">raw_meshes</span> <span class="o">=</span> <span class="n">mesh_loader</span><span class="p">()</span>
 
@@ -624,7 +645,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">meshes</span> <span class="ow">in</span> <span class="n">raw_meshes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -636,21 +657,35 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_16_0.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_16_0.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_0.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_0.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_16_1.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_16_1.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_1.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_2.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_3.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_3.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_16_2.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_16_2.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_4.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_maternal_volume_17_4.png" />
 </div>
 </div>
 </section>
