@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=93df839b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -52,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
   </head>
   
   
@@ -130,14 +131,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -191,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -223,14 +220,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -299,7 +296,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Documentation</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
     
     
     <li class="breadcrumb-item"><a href="topobench.html" class="nav-link">topobench package</a></li>
@@ -330,118 +327,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting">
-<span id="topobench-transforms-liftings-graph2hypergraph-modularity-maximization-lifting-module"></span><h1>topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting module<a class="headerlink" href="#module-topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting" title="Link to this heading">#</a></h1>
-<p>This module implements the ModularityMaximizationLifting class.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.</span></span><span class="sig-name descname"><span class="pre">ModularityMaximizationLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_communities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.base.html#topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting" title="topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2HypergraphLifting</span></code></a></p>
-<p>Lifts graphs to hypergraph domain using modularity maximization and community detection.</p>
-<p>This method creates hyperedges based on the community structure of the graph and
-k-nearest neighbors within each community.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>num_communities</strong><span class="classifier">int, optional</span></dt><dd><p>The number of communities to detect. Default is 2.</p>
-</dd>
-<dt><strong>k_neighbors</strong><span class="classifier">int, optional</span></dt><dd><p>The number of nearest neighbors to consider within each community. Default is 3.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the base class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.detect_communities">
-<span class="sig-name descname"><span class="pre">detect_communities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.detect_communities" title="Link to this definition">#</a></dt>
-<dd><p>Detect communities using spectral clustering on the modularity matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>b</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The modularity matrix.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>The community assignments for each node.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.kmeans">
-<span class="sig-name descname"><span class="pre">kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.kmeans" title="Link to this definition">#</a></dt>
-<dd><p>Perform k-means clustering on the input data.</p>
-<p>Note: This implementation uses random initialization, so results may vary
-between runs even for the same input data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The input data to cluster.</p>
-</dd>
-<dt><strong>n_clusters</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to form.</p>
-</dd>
-<dt><strong>n_iterations</strong><span class="classifier">int, optional</span></dt><dd><p>The maximum number of iterations. Default is 100.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>The cluster assignments for each input point.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Lift the graph topology to a hypergraph based on community structure and k-nearest neighbors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input graph data.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>A dictionary containing the incidence matrix of the hypergraph, number of hyperedges,
-and the original node features.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.modularity_matrix">
-<span class="sig-name descname"><span class="pre">modularity_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.modularity_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Compute the modularity matrix B of the graph.</p>
-<p>B_ij = A_ij - (k_i * k_j) / (2m)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input graph data.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>The modularity matrix B.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="topobench-transforms-liftings-graph2hypergraph-modularity-maximization-lifting-module">
+<h1>topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting module<a class="headerlink" href="#topobench-transforms-liftings-graph2hypergraph-modularity-maximization-lifting-module" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -478,30 +365,6 @@ and the original node features.</p>
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting"><code class="docutils literal notranslate"><span class="pre">ModularityMaximizationLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.detect_communities"><code class="docutils literal notranslate"><span class="pre">ModularityMaximizationLifting.detect_communities()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.kmeans"><code class="docutils literal notranslate"><span class="pre">ModularityMaximizationLifting.kmeans()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">ModularityMaximizationLifting.lift_topology()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.ModularityMaximizationLifting.modularity_matrix"><code class="docutils literal notranslate"><span class="pre">ModularityMaximizationLifting.modularity_matrix()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

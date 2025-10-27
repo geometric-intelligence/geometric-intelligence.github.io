@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=93df839b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -52,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
   </head>
   
   
@@ -130,14 +131,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -191,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -223,14 +220,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -299,7 +296,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Documentation</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
     
     
     <li class="breadcrumb-item"><a href="topobench.html" class="nav-link">topobench package</a></li>
@@ -330,161 +327,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-topobench.transforms.liftings.graph2hypergraph.mapper_lifting">
-<span id="topobench-transforms-liftings-graph2hypergraph-mapper-lifting-module"></span><h1>topobench.transforms.liftings.graph2hypergraph.mapper_lifting module<a class="headerlink" href="#module-topobench.transforms.liftings.graph2hypergraph.mapper_lifting" title="Link to this heading">#</a></h1>
-<p>This module implements the MapperCover class.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperCover">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2hypergraph.mapper_lifting.</span></span><span class="sig-name descname"><span class="pre">MapperCover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperCover" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>The MapperCover class computes the cover used in constructing the Mapper for the MapperLifting class.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>resolution</strong><span class="classifier">int, optional</span></dt><dd><p>The number of intervals in the MapperCover. Default is 10.</p>
-</dd>
-<dt><strong>gain</strong><span class="classifier">float, optional</span></dt><dd><p>The proportion of overlap between consectutive intervals
-in the MapperCover and should be value between 0 and 0.5.
-Default is 0.3.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>cover_intervals</strong><span class="classifier">(resolution, 2) Tensor</span></dt><dd><p>A tensor containing each interval in the MapperCover.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperCover.fit_transform">
-<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filtered_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperCover.fit_transform" title="Link to this definition">#</a></dt>
-<dd><p>Construct an interval cover over filtered data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filtered_data</strong><span class="classifier">(n_sample, 1) Tensor</span></dt><dd><p>Filtered data to construct the Mapper cover.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>&lt; (n_sample, resolution) boolean Tensor.</dt><dd><p>Mask which identifies which data points are
-in each cover set. Covers which are empty
-are removed so output tensor has at most
-size (n_sample, resolution).</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2hypergraph.mapper_lifting.</span></span><span class="sig-name descname"><span class="pre">MapperLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'laplacian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.base.html#topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting" title="topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2HypergraphLifting</span></code></a></p>
-<p>Lift graphs to hypergraph domain using a Mapper construction for CC-pooling.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filter_attr</strong><span class="classifier">str, optional</span></dt><dd><p>Name of the filter functional to filter data to 1-dimensional subspace.
-The filter attribute can be “laplacican”, “svd”, “pca”, “feature_sum”,
-“position_sum”. You may also define your own filter_attr string if
-the filter_func parameter is defined.
-Default is “laplacian”.</p>
-</dd>
-<dt><strong>resolution</strong><span class="classifier">int, optional</span></dt><dd><p>The number of intervals to construct the MapperCover.
-Default is 10.</p>
-</dd>
-<dt><strong>gain</strong><span class="classifier">float, optional</span></dt><dd><p>The percentage of overlap between consectutive intervals
-in MapperCover and should be a value between 0 and 0.5.
-Default is 0.3.</p>
-</dd>
-<dt><strong>filter_func</strong><span class="classifier">object, optional</span></dt><dd><p>Filter function used for Mapper construction.
-Self defined lambda function or transform to filter data.
-Function must output an (n_sample, 1) Tensor.
-If filter_func is not None, user must define filter_attr
-as a string not already listed above.
-Default is None.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>filtered_data</strong><span class="classifier">dict</span></dt><dd><p>Filtered data used to compute the Mapper lifting.
-Dictionary is of the form
-{filter_attr: filter_func(data)}.</p>
-</dd>
-<dt><strong>cover</strong><span class="classifier">(k, resolution) boolean Tensor</span></dt><dd><p>Mask computed from the MapperCover class
-to compute the Mapper lifting with k &lt; n_sample.</p>
-</dd>
-<dt><strong>clusters</strong><span class="classifier">dict</span></dt><dd><p>Distinct connected components in each cover set
-computed after fitting the Mapper cover.
-Dictionary has integer keys and tuple values
-of the form (cover_set_i, nodes_in_cluster).
-Each cluster is a rank 2 hyperedge in the
-hypergraph.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>The following are common filter functions which can be called with
-filter_attr.</p>
-<p>1. “laplacian” : Converts data to an undirected graph and then applies the
-torch_geometric.transforms.AddLaplacianEigenvectorPE(k=1) transform and
-projects onto the smallest nonzero eigenvector.</p>
-<p>2. “svd” : Applies the torch_geometric.transforms.SVDFeatureReduction(out_channels=1)
-transform to the node feature matrix (ie. torch_geometric.Data.data.x)
-to project data to a 1-dimensional subspace.</p>
-<p>3. “feature_pca” : Applies torch.pca_lowrank(q=1) transform to node feature matrix
-(ie. torch_geometric.Data.data.x) and then projects to the 1st principal component.</p>
-<p>4. “position_pca” : Applies torch.pca_lowrank(q=1) transform to node position matrix
-(ie. torch_geometric.Data.data.pos) and then projects to the 1st principal component.</p>
-<p>5. “feature_sum” : Applies torch.sum(dim=1) to the node feature matrix in the graph
-(ie. torch_geometric.Data.data.x).</p>
-<p>6. “position_sum” : Applies torch.sum(dim=1) to the node position matrix in the graph
-(ie. torch_geometric.Data.data.pos).</p>
-<p>You may also construct your own filter_attr and filter_func:</p>
-<p>7. “my_filter_attr” : Name of a self defined function
-my_filter_func = lambda data : my_filter_func(data)
-where my_filter_func(data) outputs a (n_sample, 1) Tensor.</p>
-<p class="rubric">References</p>
-<div role="list" class="citation-list">
-<div class="citation" id="rd0fa00597f66-1" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<p>Hajij, M., Zamzmi, G., Papamarkou, T., Miolane, N., Guzmán-Sáenz,
-A., Ramamurthy, K. N., et al. (2022).
-Topological deep learning: Going beyond graph data.
-arXiv preprint arXiv:2206.00606.</p>
-</div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Lift the topology of a graph to hypergraph domain by Mapper on Graphs.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="topobench-transforms-liftings-graph2hypergraph-mapper-lifting-module">
+<h1>topobench.transforms.liftings.graph2hypergraph.mapper_lifting module<a class="headerlink" href="#topobench-transforms-liftings-graph2hypergraph-mapper-lifting-module" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -521,31 +365,6 @@ arXiv preprint arXiv:2206.00606.</p>
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperCover"><code class="docutils literal notranslate"><span class="pre">MapperCover</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperCover.fit_transform"><code class="docutils literal notranslate"><span class="pre">MapperCover.fit_transform()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperLifting"><code class="docutils literal notranslate"><span class="pre">MapperLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.mapper_lifting.MapperLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">MapperLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

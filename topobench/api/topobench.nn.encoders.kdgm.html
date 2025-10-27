@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=93df839b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -52,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
   </head>
   
   
@@ -130,14 +131,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -191,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -223,14 +220,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -299,7 +296,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Documentation</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
     
     
     <li class="breadcrumb-item"><a href="topobench.html" class="nav-link">topobench package</a></li>
@@ -327,139 +324,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-topobench.nn.encoders.kdgm">
-<span id="topobench-nn-encoders-kdgm-module"></span><h1>topobench.nn.encoders.kdgm module<a class="headerlink" href="#module-topobench.nn.encoders.kdgm" title="Link to this heading">#</a></h1>
-<p>KDGM module.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.encoders.kdgm.DGM_d">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.encoders.kdgm.</span></span><span class="sig-name descname"><span class="pre">DGM_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_enc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.kdgm.DGM_d" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>Distance Graph Matching (DGM) neural network module.</p>
-<p>This class implements a graph matching technique that learns to sample
-edges based on distance metrics in either Euclidean or Hyperbolic space.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>base_enc</strong><span class="classifier">nn.Module</span></dt><dd><p>Base encoder for transforming input features.</p>
-</dd>
-<dt><strong>embed_f</strong><span class="classifier">nn.Module</span></dt><dd><p>Embedding function for further feature transformation.</p>
-</dd>
-<dt><strong>k</strong><span class="classifier">int, optional</span></dt><dd><p>Number of edges to sample in each graph. Defaults to 5.</p>
-</dd>
-<dt><strong>distance</strong><span class="classifier">str, optional</span></dt><dd><p>Distance metric to use for edge sampling.
-Choices are ‘euclidean’ or ‘hyperbolic’.
-Defaults to ‘euclidean’.</p>
-</dd>
-<dt><strong>sparse</strong><span class="classifier">bool, optional</span></dt><dd><p>Flag to indicate sparse sampling strategy.
-Defaults to True.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.encoders.kdgm.DGM_d.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#topobench.nn.encoders.kdgm.DGM_d.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass of the Distance Graph Matching module.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor containing node features.</p>
-</dd>
-<dt><strong>batch</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Batch information for graph-level processing.</p>
-</dd>
-<dt><strong>fixedges</strong><span class="classifier">torch.Tensor, optional</span></dt><dd><p>Predefined edges to use instead of sampling.
-Defaults to None.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>tuple</dt><dd><p>A tuple containing four elements:
-- base_encoded_features (torch.Tensor)
-- embedded_features (torch.Tensor)
-- sampled_edges (torch.Tensor)
-- edge_sampling_log_probabilities (torch.Tensor)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.encoders.kdgm.DGM_d.sample_without_replacement">
-<span class="sig-name descname"><span class="pre">sample_without_replacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#topobench.nn.encoders.kdgm.DGM_d.sample_without_replacement" title="Link to this definition">#</a></dt>
-<dd><p>Sample edges without replacement using a temperature-scaled Gumbel-top-k method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>logits</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input logits representing edge weights or distances.
-Shape should be (n, n) where n is the number of nodes.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>tuple</dt><dd><p>A tuple containing two elements:
-- edges (torch.Tensor): Sampled edges without replacement
-- logprobs (torch.Tensor): Log probabilities of the sampled edges</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="topobench.nn.encoders.kdgm.pairwise_euclidean_distances">
-<span class="sig-prename descclassname"><span class="pre">topobench.nn.encoders.kdgm.</span></span><span class="sig-name descname"><span class="pre">pairwise_euclidean_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#topobench.nn.encoders.kdgm.pairwise_euclidean_distances" title="Link to this definition">#</a></dt>
-<dd><p>Compute pairwise Euclidean distances between points in a tensor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor of points. Each row represents a point in a multidimensional space.</p>
-</dd>
-<dt><strong>dim</strong><span class="classifier">int, optional</span></dt><dd><p>Dimension along which to compute the squared distances.
-Defaults to -1 (last dimension).</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>tuple</dt><dd><p>A tuple containing two elements:
-- dist (torch.Tensor): Squared pairwise Euclidean distances matrix
-- x (torch.Tensor): The original input tensor</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="topobench.nn.encoders.kdgm.pairwise_poincare_distances">
-<span class="sig-prename descclassname"><span class="pre">topobench.nn.encoders.kdgm.</span></span><span class="sig-name descname"><span class="pre">pairwise_poincare_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#topobench.nn.encoders.kdgm.pairwise_poincare_distances" title="Link to this definition">#</a></dt>
-<dd><p>Compute pairwise distances in the Poincarè disk model (Hyperbolic space).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor of points. Each row represents a point in a multidimensional space.</p>
-</dd>
-<dt><strong>dim</strong><span class="classifier">int, optional</span></dt><dd><p>Dimension along which to compute the squared distances.
-Defaults to -1 (last dimension).</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>tuple</dt><dd><p>A tuple containing two elements:
-- dist (torch.Tensor): Squared pairwise hyperbolic distances matrix
-- x (torch.Tensor): Normalized input tensor in the Poincarè disk</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="topobench-nn-encoders-kdgm-module">
+<h1>topobench.nn.encoders.kdgm module<a class="headerlink" href="#topobench-nn-encoders-kdgm-module" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -496,30 +362,6 @@ Defaults to -1 (last dimension).</p>
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.kdgm.DGM_d"><code class="docutils literal notranslate"><span class="pre">DGM_d</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.kdgm.DGM_d.forward"><code class="docutils literal notranslate"><span class="pre">DGM_d.forward()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.kdgm.DGM_d.sample_without_replacement"><code class="docutils literal notranslate"><span class="pre">DGM_d.sample_without_replacement()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.kdgm.pairwise_euclidean_distances"><code class="docutils literal notranslate"><span class="pre">pairwise_euclidean_distances()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.kdgm.pairwise_poincare_distances"><code class="docutils literal notranslate"><span class="pre">pairwise_poincare_distances()</span></code></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

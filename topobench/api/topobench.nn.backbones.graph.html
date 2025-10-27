@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=93df839b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -52,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
   </head>
   
   
@@ -130,14 +131,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -223,14 +224,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -299,7 +300,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Documentation</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
     
     
     <li class="breadcrumb-item"><a href="topobench.html" class="nav-link">topobench package</a></li>
@@ -327,426 +328,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-topobench.nn.backbones.graph">
-<span id="topobench-nn-backbones-graph-package"></span><h1>topobench.nn.backbones.graph package<a class="headerlink" href="#module-topobench.nn.backbones.graph" title="Link to this heading">#</a></h1>
-<p>Graph backbones with automated exports.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.GPSEncoder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">GPSEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'multihead'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_conv_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_edge_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redraw_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.GPSEncoder" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>GPS Encoder that can be used with the training framework.</p>
-<p>Uses the official PyTorch Geometric GPSConv implementation.
-This encoder combines local message passing with global attention mechanisms
-for powerful graph representation learning.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>input_dim</strong><span class="classifier">int</span></dt><dd><p>Dimension of input node features.</p>
-</dd>
-<dt><strong>hidden_dim</strong><span class="classifier">int</span></dt><dd><p>Dimension of hidden layers.</p>
-</dd>
-<dt><strong>num_layers</strong><span class="classifier">int, optional</span></dt><dd><p>Number of GPS layers. Default is 4.</p>
-</dd>
-<dt><strong>heads</strong><span class="classifier">int, optional</span></dt><dd><p>Number of attention heads in GPSConv layers. Default is 4.</p>
-</dd>
-<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate for GPSConv layers. Default is 0.1.</p>
-</dd>
-<dt><strong>attn_type</strong><span class="classifier">str, optional</span></dt><dd><p>Type of attention mechanism to use. Options are ‘multihead’, ‘performer’, etc.
-Default is ‘multihead’.</p>
-</dd>
-<dt><strong>local_conv_type</strong><span class="classifier">str, optional</span></dt><dd><p>Type of local message passing layer. Options are ‘gin’, ‘pna’, etc.
-Default is ‘gin’.</p>
-</dd>
-<dt><strong>use_edge_attr</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to use edge attributes in GPSConv layers. Default is False.</p>
-</dd>
-<dt><strong>redraw_interval</strong><span class="classifier">int or None, optional</span></dt><dd><p>Interval for redrawing random projections in Performer attention.
-If None, projections are not redrawn. Default is None.</p>
-</dd>
-<dt><strong>attn_kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments for the attention mechanism.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.GPSEncoder.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#topobench.nn.backbones.graph.GPSEncoder.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass of GPS encoder.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Node feature matrix of shape [num_nodes, input_dim].</p>
-</dd>
-<dt><strong>edge_index</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Edge indices of shape [2, num_edges].</p>
-</dd>
-<dt><strong>batch</strong><span class="classifier">torch.Tensor, optional</span></dt><dd><p>Batch vector assigning each node to a specific graph. Shape [num_nodes]. Default is None.</p>
-</dd>
-<dt><strong>edge_attr</strong><span class="classifier">torch.Tensor, optional</span></dt><dd><p>Edge feature matrix of shape [num_edges, edge_dim]. Default is None.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments (not used).</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Output node feature matrix of shape [num_nodes, hidden_dim].</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.GraphMLP">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">GraphMLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.GraphMLP" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>“Graph MLP backbone.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Number of input features.</p>
-</dd>
-<dt><strong>hidden_channels</strong><span class="classifier">int</span></dt><dd><p>Number of hidden units.</p>
-</dd>
-<dt><strong>order</strong><span class="classifier">int, optional</span></dt><dd><p>To compute order-th power of adj matrix (default: 1).</p>
-</dd>
-<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate (default: 0.0).</p>
-</dd>
-<dt><strong>**kwargs</strong></dt><dd><p>Additional arguments.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.GraphMLP.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.GraphMLP.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Output tensor.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGAT">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">IdentityGAT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGAT" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>Graph Attention Network (GAT) with identity activation function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Number of input features.</p>
-</dd>
-<dt><strong>hidden_channels</strong><span class="classifier">int</span></dt><dd><p>Number of hidden units.</p>
-</dd>
-<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>Number of output features.</p>
-</dd>
-<dt><strong>num_layers</strong><span class="classifier">int</span></dt><dd><p>Number of layers.</p>
-</dd>
-<dt><strong>norm</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>Normalization layer.</p>
-</dd>
-<dt><strong>heads</strong><span class="classifier">int, optional</span></dt><dd><p>Number of attention heads. Defaults to 1.</p>
-</dd>
-<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate. Defaults to 0.0.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGAT.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGAT.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input node features.</p>
-</dd>
-<dt><strong>edge_index</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Edge indices.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Output node features.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGCN">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">IdentityGCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGCN" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>Graph Convolutional Network (GCN) with identity activation function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Number of input features.</p>
-</dd>
-<dt><strong>hidden_channels</strong><span class="classifier">int</span></dt><dd><p>Number of hidden units.</p>
-</dd>
-<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>Number of output features.</p>
-</dd>
-<dt><strong>num_layers</strong><span class="classifier">int</span></dt><dd><p>Number of layers.</p>
-</dd>
-<dt><strong>norm</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>Normalization layer.</p>
-</dd>
-<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate. Defaults to 0.0.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGCN.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGCN.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input node features.</p>
-</dd>
-<dt><strong>edge_index</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Edge indices.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Output node features.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGIN">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">IdentityGIN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGIN" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>Graph Isomorphism Network (GIN) with identity activation function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Number of input features.</p>
-</dd>
-<dt><strong>hidden_channels</strong><span class="classifier">int</span></dt><dd><p>Number of hidden units.</p>
-</dd>
-<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>Number of output features.</p>
-</dd>
-<dt><strong>num_layers</strong><span class="classifier">int</span></dt><dd><p>Number of layers.</p>
-</dd>
-<dt><strong>norm</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>Normalization layer.</p>
-</dd>
-<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate. Defaults to 0.0.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGIN.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGIN.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input node features.</p>
-</dd>
-<dt><strong>edge_index</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Edge indices.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Output node features.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentitySAGE">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">IdentitySAGE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentitySAGE" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>GraphSAGE with identity activation function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Number of input features.</p>
-</dd>
-<dt><strong>hidden_channels</strong><span class="classifier">int</span></dt><dd><p>Number of hidden units.</p>
-</dd>
-<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>Number of output features.</p>
-</dd>
-<dt><strong>num_layers</strong><span class="classifier">int</span></dt><dd><p>Number of layers.</p>
-</dd>
-<dt><strong>norm</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>Normalization layer.</p>
-</dd>
-<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate. Defaults to 0.0.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentitySAGE.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentitySAGE.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input node features.</p>
-</dd>
-<dt><strong>edge_index</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Edge indices.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Output node features.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.Mlp">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">Mlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hid_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.Mlp" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>MLP module.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>input_dim</strong><span class="classifier">int</span></dt><dd><p>Input dimension.</p>
-</dd>
-<dt><strong>hid_dim</strong><span class="classifier">int</span></dt><dd><p>Hidden dimension.</p>
-</dd>
-<dt><strong>dropout</strong><span class="classifier">float</span></dt><dd><p>Dropout rate.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.Mlp.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.Mlp.forward" title="Link to this definition">#</a></dt>
-<dd><p>Forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Output tensor.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.RedrawProjection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.nn.backbones.graph.</span></span><span class="sig-name descname"><span class="pre">RedrawProjection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redraw_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.RedrawProjection" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Helper class to handle redrawing of random projections in Performer attention.</p>
-<p>This is crucial for maintaining the quality of the random feature approximation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>model</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>The model containing PerformerAttention modules.</p>
-</dd>
-<dt><strong>redraw_interval</strong><span class="classifier">int or None, optional</span></dt><dd><p>Interval for redrawing random projections. If None, projections are not redrawn. Default is None.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.nn.backbones.graph.RedrawProjection.redraw_projections">
-<span class="sig-name descname"><span class="pre">redraw_projections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.RedrawProjection.redraw_projections" title="Link to this definition">#</a></dt>
-<dd><p>Redraw random projections in PerformerAttention modules if needed.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>None</dt><dd><p>None.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="topobench-nn-backbones-graph-package">
+<h1>topobench.nn.backbones.graph package<a class="headerlink" href="#topobench-nn-backbones-graph-package" title="Link to this heading">#</a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.gps.html">topobench.nn.backbones.graph.gps module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.gps.html#topobench.nn.backbones.graph.gps.GPSEncoder"><code class="docutils literal notranslate"><span class="pre">GPSEncoder</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.gps.html#topobench.nn.backbones.graph.gps.GPSEncoder.forward"><code class="docutils literal notranslate"><span class="pre">GPSEncoder.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.gps.html#topobench.nn.backbones.graph.gps.RedrawProjection"><code class="docutils literal notranslate"><span class="pre">RedrawProjection</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.gps.html#topobench.nn.backbones.graph.gps.RedrawProjection.redraw_projections"><code class="docutils literal notranslate"><span class="pre">RedrawProjection.redraw_projections()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html">topobench.nn.backbones.graph.graph_mlp module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html#topobench.nn.backbones.graph.graph_mlp.GraphMLP"><code class="docutils literal notranslate"><span class="pre">GraphMLP</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html#topobench.nn.backbones.graph.graph_mlp.GraphMLP.forward"><code class="docutils literal notranslate"><span class="pre">GraphMLP.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html#topobench.nn.backbones.graph.graph_mlp.Mlp"><code class="docutils literal notranslate"><span class="pre">Mlp</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html#topobench.nn.backbones.graph.graph_mlp.Mlp.forward"><code class="docutils literal notranslate"><span class="pre">Mlp.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html#topobench.nn.backbones.graph.graph_mlp.get_feature_dis"><code class="docutils literal notranslate"><span class="pre">get_feature_dis()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html">topobench.nn.backbones.graph.identity_gnn module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentityGAT"><code class="docutils literal notranslate"><span class="pre">IdentityGAT</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentityGAT.forward"><code class="docutils literal notranslate"><span class="pre">IdentityGAT.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentityGCN"><code class="docutils literal notranslate"><span class="pre">IdentityGCN</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentityGCN.forward"><code class="docutils literal notranslate"><span class="pre">IdentityGCN.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentityGIN"><code class="docutils literal notranslate"><span class="pre">IdentityGIN</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentityGIN.forward"><code class="docutils literal notranslate"><span class="pre">IdentityGIN.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentitySAGE"><code class="docutils literal notranslate"><span class="pre">IdentitySAGE</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html#topobench.nn.backbones.graph.identity_gnn.IdentitySAGE.forward"><code class="docutils literal notranslate"><span class="pre">IdentitySAGE.forward()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.gps.html">topobench.nn.backbones.graph.gps module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html">topobench.nn.backbones.graph.graph_mlp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html">topobench.nn.backbones.graph.identity_gnn module</a></li>
 </ul>
 </div>
 </section>
@@ -799,38 +389,6 @@ If None, projections are not redrawn. Default is None.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.GPSEncoder"><code class="docutils literal notranslate"><span class="pre">GPSEncoder</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.GPSEncoder.forward"><code class="docutils literal notranslate"><span class="pre">GPSEncoder.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.GraphMLP"><code class="docutils literal notranslate"><span class="pre">GraphMLP</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.GraphMLP.forward"><code class="docutils literal notranslate"><span class="pre">GraphMLP.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentityGAT"><code class="docutils literal notranslate"><span class="pre">IdentityGAT</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentityGAT.forward"><code class="docutils literal notranslate"><span class="pre">IdentityGAT.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentityGCN"><code class="docutils literal notranslate"><span class="pre">IdentityGCN</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentityGCN.forward"><code class="docutils literal notranslate"><span class="pre">IdentityGCN.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentityGIN"><code class="docutils literal notranslate"><span class="pre">IdentityGIN</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentityGIN.forward"><code class="docutils literal notranslate"><span class="pre">IdentityGIN.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentitySAGE"><code class="docutils literal notranslate"><span class="pre">IdentitySAGE</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.IdentitySAGE.forward"><code class="docutils literal notranslate"><span class="pre">IdentitySAGE.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.Mlp"><code class="docutils literal notranslate"><span class="pre">Mlp</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.Mlp.forward"><code class="docutils literal notranslate"><span class="pre">Mlp.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.RedrawProjection"><code class="docutils literal notranslate"><span class="pre">RedrawProjection</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.RedrawProjection.redraw_projections"><code class="docutils literal notranslate"><span class="pre">RedrawProjection.redraw_projections()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

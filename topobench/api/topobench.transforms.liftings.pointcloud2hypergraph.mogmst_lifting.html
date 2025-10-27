@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=93df839b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -52,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
   </head>
   
   
@@ -130,14 +131,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -191,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -223,14 +220,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -299,7 +296,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Documentation</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
     
     
     <li class="breadcrumb-item"><a href="topobench.html" class="nav-link">topobench package</a></li>
@@ -330,73 +327,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting">
-<span id="topobench-transforms-liftings-pointcloud2hypergraph-mogmst-lifting-module"></span><h1>topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting module<a class="headerlink" href="#module-topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting" title="Link to this heading">#</a></h1>
-<p>Mixture of Gaussians and Minimum Spanning Tree (MoGMST) Lifting.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.</span></span><span class="sig-name descname"><span class="pre">MoGMSTLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting" title="topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a></p>
-<p>Lift a point cloud to a hypergraph.</p>
-<p>We find a Mixture of Gaussians and then create a Minimum Spanning Tree (MST) between the means of the Gaussians.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>min_components</strong><span class="classifier">int or None, optional</span></dt><dd><p>The minimum number of components for the Mixture of Gaussians model.
-It needs to be at least 1 (default: None).</p>
-</dd>
-<dt><strong>max_components</strong><span class="classifier">int or None, optional</span></dt><dd><p>The maximum number of components for the Mixture of Gaussians model.
-It needs to be greater or equal than min_components (default: None).</p>
-</dd>
-<dt><strong>random_state</strong><span class="classifier">int, optional</span></dt><dd><p>The random state for the Mixture of Gaussians model (default: None).</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.find_mog">
-<span class="sig-name descname"><span class="pre">find_mog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.find_mog" title="Link to this definition">#</a></dt>
-<dd><p>Find the best number of components for a Mixture of Gaussians model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to be fitted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>tuple[np.ndarray, int, np.ndarray]</dt><dd><p>The labels of the data, the number of components and the means of the components.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Lift the topology of a graph to a hypergraph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="topobench-transforms-liftings-pointcloud2hypergraph-mogmst-lifting-module">
+<h1>topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting module<a class="headerlink" href="#topobench-transforms-liftings-pointcloud2hypergraph-mogmst-lifting-module" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -433,28 +365,6 @@ It needs to be greater or equal than min_components (default: None).</p>
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.find_mog"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.find_mog()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

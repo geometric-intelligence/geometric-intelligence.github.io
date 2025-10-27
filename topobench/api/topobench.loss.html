@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=93df839b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -52,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
   </head>
   
   
@@ -130,14 +131,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -223,14 +224,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -299,7 +300,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Documentation</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
     
     
     <li class="breadcrumb-item"><a href="topobench.html" class="nav-link">topobench package</a></li>
@@ -326,7 +327,7 @@
 <p>This module implements the loss functions for the topobench package.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.loss.TBLoss">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.loss.</span></span><span class="sig-name descname"><span class="pre">TBLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modules_losses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.TBLoss" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TBLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modules_losses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.TBLoss" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.loss.base.html#topobench.loss.base.AbstractLoss" title="topobench.loss.base.AbstractLoss"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a></p>
 <p>Defines the default model loss for the given task.</p>
 <dl class="field-list simple">
@@ -340,8 +341,13 @@
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.TBLoss.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modules_losses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.TBLoss.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="topobench.loss.TBLoss.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch_geometric.data.Data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.TBLoss.forward" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.TBLoss.forward" title="Link to this definition">#</a></dt>
 <dd><p>Forward pass of the loss function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -369,6 +375,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="topobench.loss.dataset.html">topobench.loss.dataset package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topobench.loss.dataset.html#topobench.loss.dataset.DatasetLoss"><code class="docutils literal notranslate"><span class="pre">DatasetLoss</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.dataset.html#topobench.loss.dataset.DatasetLoss.__init__"><code class="docutils literal notranslate"><span class="pre">DatasetLoss.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.dataset.html#topobench.loss.dataset.DatasetLoss.forward"><code class="docutils literal notranslate"><span class="pre">DatasetLoss.forward()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.dataset.html#topobench.loss.dataset.DatasetLoss.forward_criterion"><code class="docutils literal notranslate"><span class="pre">DatasetLoss.forward_criterion()</span></code></a></li>
 </ul>
@@ -384,10 +391,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.loss.model.html">topobench.loss.model package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.DGMLoss"><code class="docutils literal notranslate"><span class="pre">DGMLoss</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.DGMLoss.__init__"><code class="docutils literal notranslate"><span class="pre">DGMLoss.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.DGMLoss.forward"><code class="docutils literal notranslate"><span class="pre">DGMLoss.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.GraphMLPLoss"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.GraphMLPLoss.__init__"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.GraphMLPLoss.forward"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss.forward()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.GraphMLPLoss.get_power_adj"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss.get_power_adj()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.model.html#topobench.loss.model.GraphMLPLoss.graph_mlp_contrast_loss"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss.graph_mlp_contrast_loss()</span></code></a></li>
@@ -415,6 +424,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="topobench.loss.base.html">topobench.loss.base module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topobench.loss.base.html#topobench.loss.base.AbstractLoss"><code class="docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.base.html#topobench.loss.base.AbstractLoss.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLoss.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.base.html#topobench.loss.base.AbstractLoss.forward"><code class="docutils literal notranslate"><span class="pre">AbstractLoss.forward()</span></code></a></li>
 </ul>
 </li>
@@ -422,6 +432,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.loss.loss.html">topobench.loss.loss module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topobench.loss.loss.html#topobench.loss.loss.TBLoss"><code class="docutils literal notranslate"><span class="pre">TBLoss</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.loss.loss.html#topobench.loss.loss.TBLoss.__init__"><code class="docutils literal notranslate"><span class="pre">TBLoss.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.loss.loss.html#topobench.loss.loss.TBLoss.forward"><code class="docutils literal notranslate"><span class="pre">TBLoss.forward()</span></code></a></li>
 </ul>
 </li>
@@ -480,6 +491,7 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.TBLoss"><code class="docutils literal notranslate"><span class="pre">TBLoss</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.TBLoss.__init__"><code class="docutils literal notranslate"><span class="pre">TBLoss.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.TBLoss.forward"><code class="docutils literal notranslate"><span class="pre">TBLoss.forward()</span></code></a></li>
 </ul>
 </li>

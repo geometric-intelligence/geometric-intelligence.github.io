@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=93df839b" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -52,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
   </head>
   
   
@@ -130,14 +131,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -191,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -223,14 +220,14 @@
     
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TAG-DS Topological Deep Learning Challenge 2025: Expanding the Data Landscape
+    TAG-DS TDL Challenge 2025
   </a>
 </li>
 
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    API Documentation
+    API Reference
   </a>
 </li>
 
@@ -299,7 +296,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Documentation</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API Reference</a></li>
     
     
     <li class="breadcrumb-item"><a href="topobench.html" class="nav-link">topobench package</a></li>
@@ -327,146 +324,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-topobench.transforms.data_manipulations.group_homophily">
-<span id="topobench-transforms-data-manipulations-group-homophily-module"></span><h1>topobench.transforms.data_manipulations.group_homophily module<a class="headerlink" href="#module-topobench.transforms.data_manipulations.group_homophily" title="Link to this heading">#</a></h1>
-<p>A transform that canculates group combinatorial homophily of the input hypergraph.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.data_manipulations.group_homophily.</span></span><span class="sig-name descname"><span class="pre">GroupCombinatorialHomophily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></p>
-<p>Calculates group combinatorial homophily of the input hypergraph.</p>
-<p>This transformation implements the methodology from the paper:
-“Combinatorial Characterizations and Impossibilities for Higher-order Homophily”.
-It computes homophily metrics for hypergraphs by analyzing the relationship between
-node labels within hyperedges.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional parameters for the transform.
-- top_k : int, default=3</p>
-<blockquote>
-<div><p>Number of top hyperedge cardinalities to analyze.</p>
-</div></blockquote>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Attributes<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>type</strong><span class="classifier">str</span></dt><dd><p>Identifier for the transform type.</p>
-</dd>
-<dt><strong>top_k</strong><span class="classifier">int</span></dt><dd><p>Number of top hyperedge cardinalities to analyze.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_D_matrix">
-<span class="sig-name descname"><span class="pre">calculate_D_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_cardinalities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_node_idxs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_D_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Calculate the degree matrices D and D_t for the hypergraph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>H</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Dense incidence matrix of the hypergraph.</p>
-</dd>
-<dt><strong>labels</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Node labels.</p>
-</dd>
-<dt><strong>he_cardinalities</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Cardinality of each hyperedge.</p>
-</dd>
-<dt><strong>unique_labels</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to their counts.</p>
-</dd>
-<dt><strong>class_node_idxs</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to node indices.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>tuple[torch.Tensor, torch.Tensor]</dt><dd><ul class="simple">
-<li><p>D_t_class : Type-t degree distribution matrix for each class</p></li>
-<li><p>D : Degree matrix counting same-label nodes in hyperedges</p></li>
-</ul>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_affinity_score">
-<span class="sig-name descname"><span class="pre">calculate_affinity_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_mod</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_affinity_score" title="Link to this definition">#</a></dt>
-<dd><p>Calculate affinity score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>n_nodes</strong><span class="classifier">int</span></dt><dd><p>Total number of nodes.</p>
-</dd>
-<dt><strong>X_mod</strong><span class="classifier">int</span></dt><dd><p>Total number of nodes in a class.</p>
-</dd>
-<dt><strong>t</strong><span class="classifier">int</span></dt><dd><p>Type-t degree.</p>
-</dd>
-<dt><strong>k</strong><span class="classifier">int</span></dt><dd><p>Max hyperedge cardinality.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>The affinity matrix.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_baseline_matrix">
-<span class="sig-name descname"><span class="pre">calculate_baseline_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">he_cardinalities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_node_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_nodes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_baseline_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Calculate the baseline affinity matrix for comparison.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>he_cardinalities</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Cardinality of each hyperedge.</p>
-</dd>
-<dt><strong>unique_labels</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to their counts.</p>
-</dd>
-<dt><strong>class_node_idxs</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to node indices.</p>
-</dd>
-<dt><strong>count_labels</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Count of nodes for each label.</p>
-</dd>
-<dt><strong>n_nodes</strong><span class="classifier">int</span></dt><dd><p>Total number of nodes in the hypergraph.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Baseline matrix containing expected affinity scores for each class
-and degree type.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.forward" title="Link to this definition">#</a></dt>
-<dd><p>Apply the transform to the input data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="topobench-transforms-data-manipulations-group-homophily-module">
+<h1>topobench.transforms.data_manipulations.group_homophily module<a class="headerlink" href="#topobench-transforms-data-manipulations-group-homophily-module" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -503,30 +362,6 @@ and degree type.</p>
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_D_matrix"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_D_matrix()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_affinity_score"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_affinity_score()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_baseline_matrix"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_baseline_matrix()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.forward"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.forward()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
