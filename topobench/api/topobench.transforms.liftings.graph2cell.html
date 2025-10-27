@@ -47,12 +47,12 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.transforms.liftings.graph2cell.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="topobench.transforms.liftings.graph2combinatorial package" href="topobench.transforms.liftings.graph2combinatorial.html" />
+    <link rel="next" title="topobench.transforms.liftings.graph2cell.base module" href="topobench.transforms.liftings.graph2cell.base.html" />
     <link rel="prev" title="topobench.transforms.liftings package" href="topobench.transforms.liftings.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:16:40 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 6:56:17 PM"/>
   </head>
   
   
@@ -327,195 +327,13 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-liftings-graph2cell-package">
-<h1>topobench.transforms.liftings.graph2cell package<a class="headerlink" href="#topobench-transforms-liftings-graph2cell-package" title="Link to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
-</section>
-<section id="module-topobench.transforms.liftings.graph2cell.base">
-<span id="topobench-transforms-liftings-graph2cell-base-module"></span><h2>topobench.transforms.liftings.graph2cell.base module<a class="headerlink" href="#module-topobench.transforms.liftings.graph2cell.base" title="Link to this heading">#</a></h2>
-<p>Abstract class for lifting graphs to cell complexes.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.base.</span></span><span class="sig-name descname"><span class="pre">Graph2CellLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.html#topobench.transforms.liftings.liftings.GraphLifting" title="topobench.transforms.liftings.liftings.GraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphLifting</span></code></a></p>
-<p>Abstract class for lifting graphs to cell complexes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>complex_dim</strong><span class="classifier">int, optional</span></dt><dd><p>The dimension of the cell complex to be generated. Default is 2.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-topobench.transforms.liftings.graph2cell.cycle_lifting">
-<span id="topobench-transforms-liftings-graph2cell-cycle-lifting-module"></span><h2>topobench.transforms.liftings.graph2cell.cycle_lifting module<a class="headerlink" href="#module-topobench.transforms.liftings.graph2cell.cycle_lifting" title="Link to this heading">#</a></h2>
-<p>This module implements the cycle lifting for graphs to cell complexes.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.cycle_lifting.</span></span><span class="sig-name descname"><span class="pre">CellCycleLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_cell_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></p>
-<p>Lift graphs to cell complexes.</p>
-<p>The algorithm creates 2-cells by identifying the cycles and considering them as 2-cells.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>max_cell_length</strong><span class="classifier">int, optional</span></dt><dd><p>The maximum length of the cycles to be lifted. Default is None.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Find the cycles of a graph and lifts them to 2-cells.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="module-topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting">
-<span id="topobench-transforms-liftings-graph2cell-discrete-configuration-complex-lifting-module"></span><h2>topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting module<a class="headerlink" href="#module-topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting" title="Link to this heading">#</a></h2>
-<p>This module implements the discrete configuratio complex lifting lifting for graphs to cell complexes.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.</span></span><span class="sig-name descname"><span class="pre">DiscreteConfigurationComplexLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_edge_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_aggregation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'concat'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></p>
-<p>Lift graphs to cell complexes.</p>
-<p>Lift graphs to cell complexes by generating the k-th discrete configuration complex D_k(G) of the graph. This is a cube complex, which is similar to a simplicial complex except each n-dimensional cell is homeomorphic to a n-dimensional cube rather than an n-dimensional simplex.</p>
-<p>The discrete configuration complex of order k consists of all sets of k unique edges or vertices of G, with the additional constraint that if an edge e is in a cell, then neither of the endpoints of e are in the cell. For examples of different graphs and their configuration complexes, see the tutorial.</p>
-<p>Note that since TopoNetx only supports cell complexes of dimension 2, if you generate a configuration complex of order k &gt; 2 this will only produce the 2-skeleton.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>k</strong><span class="classifier">int</span></dt><dd><p>The order of the configuration complex, i.e. the number of ‘agents’ in a single configuration.</p>
-</dd>
-<dt><strong>preserve_edge_attr</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to preserve edge attributes. Default is True.</p>
-</dd>
-<dt><strong>feature_aggregation</strong><span class="classifier">str, optional</span></dt><dd><p>For a k-agent configuration, the method by which the features are aggregated. Can be “mean”, “sum”, or “concat”. Default is “concat”.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional arguments for the class.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>The discrete configuration complex provides a way to model higher-order interactions in graphs, particularly useful for scenarios involving multiple agents or particles moving on a graph structure.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Data</span></span></span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.forward" title="Link to this definition">#</a></dt>
-<dd><p>Apply the full lifting (topology + features) to the input data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>torch_geometric.data.Data</dt><dd><p>The lifted data.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.lift_topology">
-<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.lift_topology" title="Link to this definition">#</a></dt>
-<dd><p>Generate the cubical complex of discrete graph configurations.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>The lifted topology.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.edge_cycle_to_vertex_cycle">
-<span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.</span></span><span class="sig-name descname"><span class="pre">edge_cycle_to_vertex_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_cycle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.edge_cycle_to_vertex_cycle" title="Link to this definition">#</a></dt>
-<dd><p>Take a cycle represented by a list of edges and returns a vertex representation: [(1, 2), (0, 1), (1, 2)] -&gt; [1, 2, 3].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>edge_cycle</strong><span class="classifier">list[list | tuple]</span></dt><dd><p>The cycle represented by a list of edges.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>list</dt><dd><p>The cycle represented by a list of vertices.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.generate_configuration_class">
-<span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.</span></span><span class="sig-name descname"><span class="pre">generate_configuration_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.5)"><span class="pre">Graph</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_aggregation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.generate_configuration_class" title="Link to this definition">#</a></dt>
-<dd><p>Factory for the Configuration class.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>graph</strong><span class="classifier">nx.Graph</span></dt><dd><p>The input graph.</p>
-</dd>
-<dt><strong>feature_aggregation</strong><span class="classifier">str</span></dt><dd><p>The method by which the features are aggregated.</p>
-</dd>
-<dt><strong>edge_features</strong><span class="classifier">bool</span></dt><dd><p>Whether edge features are present.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>Configuration</dt><dd><p>The Configuration.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-topobench.transforms.liftings.graph2cell">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-topobench.transforms.liftings.graph2cell" title="Link to this heading">#</a></h2>
+  <section id="module-topobench.transforms.liftings.graph2cell">
+<span id="topobench-transforms-liftings-graph2cell-package"></span><h1>topobench.transforms.liftings.graph2cell package<a class="headerlink" href="#module-topobench.transforms.liftings.graph2cell" title="Link to this heading">#</a></h1>
 <p>Graph2Cell liftings with automated exports.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.CellCycleLifting">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.</span></span><span class="sig-name descname"><span class="pre">CellCycleLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_cell_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.CellCycleLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.graph2cell.base.html#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></p>
 <p>Lift graphs to cell complexes.</p>
 <p>The algorithm creates 2-cells by identifying the cycles and considering them as 2-cells.</p>
 <dl class="field-list simple">
@@ -553,7 +371,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.</span></span><span class="sig-name descname"><span class="pre">DiscreteConfigurationComplexLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_edge_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_aggregation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'concat'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.graph2cell.base.html#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></p>
 <p>Lift graphs to cell complexes.</p>
 <p>Lift graphs to cell complexes by generating the k-th discrete configuration complex D_k(G) of the graph. This is a cube complex, which is similar to a simplicial complex except each n-dimensional cell is homeomorphic to a n-dimensional cube rather than an n-dimensional simplex.</p>
 <p>The discrete configuration complex of order k consists of all sets of k unique edges or vertices of G, with the additional constraint that if an edge e is in a cell, then neither of the endpoints of e are in the cell. For examples of different graphs and their configuration complexes, see the tutorial.</p>
@@ -619,7 +437,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.Graph2CellLifting">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">topobench.transforms.liftings.graph2cell.</span></span><span class="sig-name descname"><span class="pre">Graph2CellLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.Graph2CellLifting" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.html#topobench.transforms.liftings.liftings.GraphLifting" title="topobench.transforms.liftings.liftings.GraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphLifting</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.liftings.html#topobench.transforms.liftings.liftings.GraphLifting" title="topobench.transforms.liftings.liftings.GraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphLifting</span></code></a></p>
 <p>Abstract class for lifting graphs to cell complexes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -633,6 +451,33 @@
 </dl>
 </dd></dl>
 
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.base.html">topobench.transforms.liftings.graph2cell.base module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.base.html#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.cycle_lifting.html">topobench.transforms.liftings.graph2cell.cycle_lifting module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.cycle_lifting.html#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.cycle_lifting.html#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.html">topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.html#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.html#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.forward"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.html#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.html#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.edge_cycle_to_vertex_cycle"><code class="docutils literal notranslate"><span class="pre">edge_cycle_to_vertex_cycle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.html#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.generate_configuration_class"><code class="docutils literal notranslate"><span class="pre">generate_configuration_class()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 </section>
 
@@ -656,11 +501,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="topobench.transforms.liftings.graph2combinatorial.html"
+       href="topobench.transforms.liftings.graph2cell.base.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">topobench.transforms.liftings.graph2combinatorial package</p>
+        <p class="prev-next-title">topobench.transforms.liftings.graph2cell.base module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -683,41 +528,17 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.CellCycleLifting"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.CellCycleLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting.forward"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.Graph2CellLifting"><code class="docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-topobench.transforms.liftings.graph2cell.base">topobench.transforms.liftings.graph2cell.base module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-topobench.transforms.liftings.graph2cell.cycle_lifting">topobench.transforms.liftings.graph2cell.cycle_lifting module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting">topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.forward"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.forward()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.DiscreteConfigurationComplexLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.edge_cycle_to_vertex_cycle"><code class="docutils literal notranslate"><span class="pre">edge_cycle_to_vertex_cycle()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.generate_configuration_class"><code class="docutils literal notranslate"><span class="pre">generate_configuration_class()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-topobench.transforms.liftings.graph2cell">Module contents</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.CellCycleLifting"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.CellCycleLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">CellCycleLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting.forward"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.forward()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.DiscreteConfigurationComplexLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">DiscreteConfigurationComplexLifting.lift_topology()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.Graph2CellLifting"><code class="docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></li>
-</ul>
-</li>
 </ul>
   </nav></div>
 
