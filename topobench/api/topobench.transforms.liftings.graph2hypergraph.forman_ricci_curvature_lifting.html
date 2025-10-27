@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -327,8 +331,80 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-liftings-graph2hypergraph-forman-ricci-curvature-lifting-module">
-<h1>topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting module<a class="headerlink" href="#topobench-transforms-liftings-graph2hypergraph-forman-ricci-curvature-lifting-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting">
+<span id="topobench-transforms-liftings-graph2hypergraph-forman-ricci-curvature-lifting-module"></span><h1>topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting module<a class="headerlink" href="#module-topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting" title="Link to this heading">#</a></h1>
+<p>This module implements the HypergraphFormanRicciCurvatureLifting class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.Graph2HypergraphLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Graph2HypergraphLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.Graph2HypergraphLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.liftings.html#topobench.transforms.liftings.liftings.GraphLifting" title="topobench.transforms.liftings.liftings.GraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphLifting</span></code></a></p>
+<p>Abstract class for lifting graphs to hypergraphs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.Graph2HypergraphLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.Graph2HypergraphLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HypergraphFormanRicciCurvatureLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weighted'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantile'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'above'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.base.html#topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting" title="topobench.transforms.liftings.graph2hypergraph.base.Graph2HypergraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2HypergraphLifting</span></code></a></p>
+<p>Lift graphs to hypergraph domain using Forman-Ricci curvature based backbone estimation.</p>
+<p>This lifting identifies a network’s structure-preserving, coarse geometry, i.e. its backbones, which lend themselves specifically to model information flows across wide areas of the network via hyperedges. To identify this coarse geometry we apply Forman-Ricci curvature to the original graph. Forman-Ricci curvature defines an edge-based network characteristic that reveals properties of a graph’s community structure. In particular high absolute Forman-Ricci curvature exhibits a network’s backbone, a coarse, structure preserving graph geometry that forms connections between major communities, most suitable to form hyperedges. In addition, Forman-Ricci curvature was found to be especially useful for network analysis since its intuitive notion allows for efficient computation that scales to large networks sizes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>network_type</strong><span class="classifier">str, optional</span></dt><dd><p>Network type may be weighted or unweighted. Default is “weighted”.</p>
+</dd>
+<dt><strong>threshold_type</strong><span class="classifier">str, optional</span></dt><dd><p>Type of threshold (either based on quantile or absolute). Default is “quantile”.</p>
+</dd>
+<dt><strong>threshold_direction</strong><span class="classifier">str, optional</span></dt><dd><p>Direction whether to prune values above or below threshold. Default is “above”.</p>
+</dd>
+<dt><strong>threshold</strong><span class="classifier">float, optional</span></dt><dd><p>Absolute value or quantile to estimate cutoff threshold from Forman-Ricci curvature distribution to prune network and reveal backbone. Default is 0.1.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weighted'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantile'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'above'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting.lift_topology">
+<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting.lift_topology" title="Link to this definition">#</a></dt>
+<dd><p>Lift the topology of a graph to hypergraph domain using Forman-Ricci curvature based backbone estimation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The lifted topology.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -365,6 +441,32 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.Graph2HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">Graph2HypergraphLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.Graph2HypergraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">Graph2HypergraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting"><code class="docutils literal notranslate"><span class="pre">HypergraphFormanRicciCurvatureLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting.__init__"><code class="docutils literal notranslate"><span class="pre">HypergraphFormanRicciCurvatureLifting.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.HypergraphFormanRicciCurvatureLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">HypergraphFormanRicciCurvatureLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

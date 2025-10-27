@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -324,8 +328,128 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-nn-readouts-propagate-signal-down-module">
-<h1>topobench.nn.readouts.propagate_signal_down module<a class="headerlink" href="#topobench-nn-readouts-propagate-signal-down-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.nn.readouts.propagate_signal_down">
+<span id="topobench-nn-readouts-propagate-signal-down-module"></span><h1>topobench.nn.readouts.propagate_signal_down module<a class="headerlink" href="#module-topobench.nn.readouts.propagate_signal_down" title="Link to this heading">#</a></h1>
+<p>Readout layer that propagates the signal from cells of a certain order to the cells of the lower order.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractZeroCellReadOut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooling_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logits_linear_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Readout layer for GNNs that operates on the batch level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>hidden_dim</strong><span class="classifier">int</span></dt><dd><p>Hidden dimension of the GNN model.</p>
+</dd>
+<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>Number of output channels.</p>
+</dd>
+<dt><strong>task_level</strong><span class="classifier">str</span></dt><dd><p>Task level for readout layer. Either “graph” or “node”.</p>
+</dd>
+<dt><strong>pooling_type</strong><span class="classifier">str</span></dt><dd><p>Pooling type for readout layer. Either “max”, “sum” or “mean”.</p>
+</dd>
+<dt><strong>logits_linear_layer</strong><span class="classifier">bool</span></dt><dd><p>Whether to use a linear layer for getting the final logits.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooling_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logits_linear_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.compute_logits">
+<span class="sig-name descname"><span class="pre">compute_logits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.compute_logits" title="Link to this definition">#</a></dt>
+<dd><p>Compute logits based on the readout layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Node embeddings.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Batch index tensor.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Logits tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.readouts.propagate_signal_down.PropagateSignalDown">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PropagateSignalDown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.propagate_signal_down.PropagateSignalDown" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.readouts.base.html#topobench.nn.readouts.base.AbstractZeroCellReadOut" title="topobench.nn.readouts.base.AbstractZeroCellReadOut"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut</span></code></a></p>
+<p>Propagate signal down readout layer.</p>
+<p>This readout layer propagates the signal from cells of a certain order to the cells of the lower order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments. It should contain the following keys:
+- num_cell_dimensions (int): Highest order of cells considered by the model.
+- self.hidden_dim (int): Dimension of the cells representations.
+- readout_name (str): Readout name.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.propagate_signal_down.PropagateSignalDown.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.propagate_signal_down.PropagateSignalDown.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.propagate_signal_down.PropagateSignalDown.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.propagate_signal_down.PropagateSignalDown.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of the propagate signal down readout layer.</p>
+<p>The layer takes the embeddings of the cells of a certain order and applies a convolutional layer to them. Layer normalization is then applied to the features. The output is concatenated with the initial embeddings of the cells and the result is projected with the use of a linear layer to the dimensions of the cells of lower rank. The process is repeated until the nodes embeddings, which are the cells of rank 0, are reached.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the updated model output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -362,6 +486,34 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.compute_logits"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.compute_logits()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.propagate_signal_down.AbstractZeroCellReadOut.forward"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.propagate_signal_down.PropagateSignalDown"><code class="docutils literal notranslate"><span class="pre">PropagateSignalDown</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.propagate_signal_down.PropagateSignalDown.__init__"><code class="docutils literal notranslate"><span class="pre">PropagateSignalDown.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.propagate_signal_down.PropagateSignalDown.forward"><code class="docutils literal notranslate"><span class="pre">PropagateSignalDown.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

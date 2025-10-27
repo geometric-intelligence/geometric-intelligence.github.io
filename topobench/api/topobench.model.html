@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -322,13 +322,402 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-model-package">
-<h1>topobench.model package<a class="headerlink" href="#topobench-model-package" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.model">
+<span id="topobench-model-package"></span><h1>topobench.model package<a class="headerlink" href="#module-topobench.model" title="Link to this heading">#</a></h1>
+<p>TB model module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.model.TBModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TBModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backbone_wrapper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.run.html#topobench.run.LightningModule" title="lightning.pytorch.core.module.LightningModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">LightningModule</span></code></a></p>
+<p>A <cite>LightningModule</cite> to define a network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>backbone</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>The backbone model to train.</p>
+</dd>
+<dt><strong>readout</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>The readout class.</p>
+</dd>
+<dt><strong>loss</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>The loss class.</p>
+</dd>
+<dt><strong>backbone_wrapper</strong><span class="classifier">torch.nn.Module, optional</span></dt><dd><p>The backbone wrapper class (default: None).</p>
+</dd>
+<dt><strong>feature_encoder</strong><span class="classifier">torch.nn.Module, optional</span></dt><dd><p>The feature encoder (default: None).</p>
+</dd>
+<dt><strong>evaluator</strong><span class="classifier">Any, optional</span></dt><dd><p>The evaluator class (default: None).</p>
+</dd>
+<dt><strong>optimizer</strong><span class="classifier">Any, optional</span></dt><dd><p>The optimizer class (default: None).</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">Any</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backbone_wrapper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.configure_optimizers">
+<span class="sig-name descname"><span class="pre">configure_optimizers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.configure_optimizers" title="Link to this definition">#</a></dt>
+<dd><p>Configure optimizers and learning-rate schedulers.</p>
+<p>Choose what optimizers and learning-rate schedulers to use in your
+optimization. Normally you’d need one. But in the case of GANs or
+similar you might have multiple.</p>
+<p class="rubric">Examples</p>
+<p><a class="reference external" href="https://lightning.ai/docs/pytorch/latest/common/lightning_module.html#configure-optimizers">https://lightning.ai/docs/pytorch/latest/common/lightning_module.html#configure-optimizers</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>dict:</dt><dd><p>A dict containing the configured optimizers and learning-rate schedulers to be used for training.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.forward" title="Link to this definition">#</a></dt>
+<dd><p>Perform a forward pass through the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the model output, which includes the logits and other relevant information.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.log_metrics">
+<span class="sig-name descname"><span class="pre">log_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.log_metrics" title="Link to this definition">#</a></dt>
+<dd><p>Log metrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mode</strong><span class="classifier">str, optional</span></dt><dd><p>The mode of the model, either “train”, “val”, or “test” (default: None).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.model_step">
+<span class="sig-name descname"><span class="pre">model_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.model_step" title="Link to this definition">#</a></dt>
+<dd><p>Perform a single model step on a batch of data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the model output and the loss.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.on_test_epoch_end">
+<span class="sig-name descname"><span class="pre">on_test_epoch_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.on_test_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>Lightning hook that is called when a test epoch ends.</p>
+<p>This hook is used to log the test metrics.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.on_test_epoch_start">
+<span class="sig-name descname"><span class="pre">on_test_epoch_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.on_test_epoch_start" title="Link to this definition">#</a></dt>
+<dd><p>Lightning hook that is called when a test epoch begins.</p>
+<p>This hook is used to reset the test metrics.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.on_train_epoch_end">
+<span class="sig-name descname"><span class="pre">on_train_epoch_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.on_train_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>Lightning hook that is called when a train epoch ends.</p>
+<p>This hook is used to log the train metrics.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.on_train_epoch_start">
+<span class="sig-name descname"><span class="pre">on_train_epoch_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.on_train_epoch_start" title="Link to this definition">#</a></dt>
+<dd><p>Lightning hook that is called when a train epoch begins.</p>
+<p>This hook is used to reset the train metrics.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.on_val_epoch_start">
+<span class="sig-name descname"><span class="pre">on_val_epoch_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.on_val_epoch_start" title="Link to this definition">#</a></dt>
+<dd><p>Lightning hook that is called when a validation epoch begins.</p>
+<p>This hook is used to reset the validation metrics.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.on_validation_epoch_end">
+<span class="sig-name descname"><span class="pre">on_validation_epoch_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.on_validation_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>Lightning hook that is called when a validation epoch ends.</p>
+<p>This hook is used to log the validation metrics.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.on_validation_epoch_start">
+<span class="sig-name descname"><span class="pre">on_validation_epoch_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.on_validation_epoch_start" title="Link to this definition">#</a></dt>
+<dd><p>Hook called when a validation epoch begins.</p>
+<p>According pytorch lightning documentation this hook is called at the
+beginning of the validation epoch.</p>
+<p><a class="reference external" href="https://lightning.ai/docs/pytorch/stable/common/lightning_module.html#hooks">https://lightning.ai/docs/pytorch/stable/common/lightning_module.html#hooks</a></p>
+<p>Note that the validation step is within the train epoch. Hence here we have to log the train metrics
+before we reset the evaluator to start the validation loop.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.process_outputs">
+<span class="sig-name descname"><span class="pre">process_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.process_outputs" title="Link to this definition">#</a></dt>
+<dd><p>Handle model outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the updated model output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.setup" title="Link to this definition">#</a></dt>
+<dd><p>Hook to call torch.compile.</p>
+<p>Lightning hook that is called at the beginning of fit (train +
+validate), validate, test, or predict.</p>
+<p>This is a good hook when you need to build models dynamically or adjust
+something about them. This hook is called on every process when using
+DDP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>stage</strong><span class="classifier">str</span></dt><dd><p>Either “fit”, “validate”, “test”, or “predict”.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.test_step">
+<span class="sig-name descname"><span class="pre">test_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.test_step" title="Link to this definition">#</a></dt>
+<dd><p>Perform a single test step on a batch of data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+<dt><strong>batch_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the current batch.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.training_step">
+<span class="sig-name descname"><span class="pre">training_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.training_step" title="Link to this definition">#</a></dt>
+<dd><p>Perform a single training step on a batch of data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+<dt><strong>batch_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the current batch.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>A tensor of losses between model predictions and targets.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.model.TBModel.validation_step">
+<span class="sig-name descname"><span class="pre">validation_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.model.TBModel.validation_step" title="Link to this definition">#</a></dt>
+<dd><p>Perform a single validation step on a batch of data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+<dt><strong>batch_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the current batch.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.model.model.html">topobench.model.model module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.model.model.html">topobench.model.model module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Any"><code class="docutils literal notranslate"><span class="pre">Any</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.connected_components"><code class="docutils literal notranslate"><span class="pre">Data.connected_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.debug"><code class="docutils literal notranslate"><span class="pre">Data.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.edge_subgraph"><code class="docutils literal notranslate"><span class="pre">Data.edge_subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.from_dict"><code class="docutils literal notranslate"><span class="pre">Data.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.get_all_edge_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_edge_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.get_all_tensor_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_tensor_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.is_edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_edge_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.is_node_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_node_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.stores_as"><code class="docutils literal notranslate"><span class="pre">Data.stores_as()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.subgraph"><code class="docutils literal notranslate"><span class="pre">Data.subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.to_dict"><code class="docutils literal notranslate"><span class="pre">Data.to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.to_heterogeneous"><code class="docutils literal notranslate"><span class="pre">Data.to_heterogeneous()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.to_namedtuple"><code class="docutils literal notranslate"><span class="pre">Data.to_namedtuple()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.update"><code class="docutils literal notranslate"><span class="pre">Data.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.validate"><code class="docutils literal notranslate"><span class="pre">Data.validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.batch"><code class="docutils literal notranslate"><span class="pre">Data.batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.edge_attr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.edge_index"><code class="docutils literal notranslate"><span class="pre">Data.edge_index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.edge_stores"><code class="docutils literal notranslate"><span class="pre">Data.edge_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.edge_weight"><code class="docutils literal notranslate"><span class="pre">Data.edge_weight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.face"><code class="docutils literal notranslate"><span class="pre">Data.face</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.node_stores"><code class="docutils literal notranslate"><span class="pre">Data.node_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.num_edge_features"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.num_edge_types"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.num_faces"><code class="docutils literal notranslate"><span class="pre">Data.num_faces</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.num_features"><code class="docutils literal notranslate"><span class="pre">Data.num_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.num_node_features"><code class="docutils literal notranslate"><span class="pre">Data.num_node_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.num_node_types"><code class="docutils literal notranslate"><span class="pre">Data.num_node_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.num_nodes"><code class="docutils literal notranslate"><span class="pre">Data.num_nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.pos"><code class="docutils literal notranslate"><span class="pre">Data.pos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.stores"><code class="docutils literal notranslate"><span class="pre">Data.stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.time"><code class="docutils literal notranslate"><span class="pre">Data.time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.x"><code class="docutils literal notranslate"><span class="pre">Data.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.Data.y"><code class="docutils literal notranslate"><span class="pre">Data.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule"><code class="docutils literal notranslate"><span class="pre">LightningModule</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.__init__"><code class="docutils literal notranslate"><span class="pre">LightningModule.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.all_gather"><code class="docutils literal notranslate"><span class="pre">LightningModule.all_gather()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.backward"><code class="docutils literal notranslate"><span class="pre">LightningModule.backward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.clip_gradients"><code class="docutils literal notranslate"><span class="pre">LightningModule.clip_gradients()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.configure_callbacks"><code class="docutils literal notranslate"><span class="pre">LightningModule.configure_callbacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.configure_gradient_clipping"><code class="docutils literal notranslate"><span class="pre">LightningModule.configure_gradient_clipping()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.configure_optimizers"><code class="docutils literal notranslate"><span class="pre">LightningModule.configure_optimizers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.forward"><code class="docutils literal notranslate"><span class="pre">LightningModule.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.freeze"><code class="docutils literal notranslate"><span class="pre">LightningModule.freeze()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.load_from_checkpoint"><code class="docutils literal notranslate"><span class="pre">LightningModule.load_from_checkpoint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.log"><code class="docutils literal notranslate"><span class="pre">LightningModule.log()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.log_dict"><code class="docutils literal notranslate"><span class="pre">LightningModule.log_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.lr_scheduler_step"><code class="docutils literal notranslate"><span class="pre">LightningModule.lr_scheduler_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.lr_schedulers"><code class="docutils literal notranslate"><span class="pre">LightningModule.lr_schedulers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.manual_backward"><code class="docutils literal notranslate"><span class="pre">LightningModule.manual_backward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.optimizer_step"><code class="docutils literal notranslate"><span class="pre">LightningModule.optimizer_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.optimizer_zero_grad"><code class="docutils literal notranslate"><span class="pre">LightningModule.optimizer_zero_grad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.optimizers"><code class="docutils literal notranslate"><span class="pre">LightningModule.optimizers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.predict_step"><code class="docutils literal notranslate"><span class="pre">LightningModule.predict_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.print"><code class="docutils literal notranslate"><span class="pre">LightningModule.print()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.test_step"><code class="docutils literal notranslate"><span class="pre">LightningModule.test_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.to_onnx"><code class="docutils literal notranslate"><span class="pre">LightningModule.to_onnx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.to_torchscript"><code class="docutils literal notranslate"><span class="pre">LightningModule.to_torchscript()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.toggle_optimizer"><code class="docutils literal notranslate"><span class="pre">LightningModule.toggle_optimizer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.training_step"><code class="docutils literal notranslate"><span class="pre">LightningModule.training_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.unfreeze"><code class="docutils literal notranslate"><span class="pre">LightningModule.unfreeze()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.untoggle_optimizer"><code class="docutils literal notranslate"><span class="pre">LightningModule.untoggle_optimizer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.validation_step"><code class="docutils literal notranslate"><span class="pre">LightningModule.validation_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.CHECKPOINT_HYPER_PARAMS_KEY"><code class="docutils literal notranslate"><span class="pre">LightningModule.CHECKPOINT_HYPER_PARAMS_KEY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.CHECKPOINT_HYPER_PARAMS_NAME"><code class="docutils literal notranslate"><span class="pre">LightningModule.CHECKPOINT_HYPER_PARAMS_NAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.CHECKPOINT_HYPER_PARAMS_TYPE"><code class="docutils literal notranslate"><span class="pre">LightningModule.CHECKPOINT_HYPER_PARAMS_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.automatic_optimization"><code class="docutils literal notranslate"><span class="pre">LightningModule.automatic_optimization</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.current_epoch"><code class="docutils literal notranslate"><span class="pre">LightningModule.current_epoch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.device_mesh"><code class="docutils literal notranslate"><span class="pre">LightningModule.device_mesh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.example_input_array"><code class="docutils literal notranslate"><span class="pre">LightningModule.example_input_array</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.fabric"><code class="docutils literal notranslate"><span class="pre">LightningModule.fabric</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.global_rank"><code class="docutils literal notranslate"><span class="pre">LightningModule.global_rank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.global_step"><code class="docutils literal notranslate"><span class="pre">LightningModule.global_step</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.local_rank"><code class="docutils literal notranslate"><span class="pre">LightningModule.local_rank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.logger"><code class="docutils literal notranslate"><span class="pre">LightningModule.logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.loggers"><code class="docutils literal notranslate"><span class="pre">LightningModule.loggers</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.on_gpu"><code class="docutils literal notranslate"><span class="pre">LightningModule.on_gpu</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.strict_loading"><code class="docutils literal notranslate"><span class="pre">LightningModule.strict_loading</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.LightningModule.trainer"><code class="docutils literal notranslate"><span class="pre">LightningModule.trainer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.MeanMetric"><code class="docutils literal notranslate"><span class="pre">MeanMetric</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.MeanMetric.__init__"><code class="docutils literal notranslate"><span class="pre">MeanMetric.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.MeanMetric.compute"><code class="docutils literal notranslate"><span class="pre">MeanMetric.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.MeanMetric.plot"><code class="docutils literal notranslate"><span class="pre">MeanMetric.plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.MeanMetric.update"><code class="docutils literal notranslate"><span class="pre">MeanMetric.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.MeanMetric.mean_value"><code class="docutils literal notranslate"><span class="pre">MeanMetric.mean_value</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.MeanMetric.weight"><code class="docutils literal notranslate"><span class="pre">MeanMetric.weight</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel"><code class="docutils literal notranslate"><span class="pre">TBModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.__init__"><code class="docutils literal notranslate"><span class="pre">TBModel.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.configure_optimizers"><code class="docutils literal notranslate"><span class="pre">TBModel.configure_optimizers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.forward"><code class="docutils literal notranslate"><span class="pre">TBModel.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.log_metrics"><code class="docutils literal notranslate"><span class="pre">TBModel.log_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.model_step"><code class="docutils literal notranslate"><span class="pre">TBModel.model_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.on_test_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.on_test_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.on_train_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.on_val_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_val_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.on_validation_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.process_outputs"><code class="docutils literal notranslate"><span class="pre">TBModel.process_outputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.setup"><code class="docutils literal notranslate"><span class="pre">TBModel.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.test_step"><code class="docutils literal notranslate"><span class="pre">TBModel.test_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.training_step"><code class="docutils literal notranslate"><span class="pre">TBModel.training_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.model.model.html#topobench.model.model.TBModel.validation_step"><code class="docutils literal notranslate"><span class="pre">TBModel.validation_step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -381,6 +770,26 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel"><code class="docutils literal notranslate"><span class="pre">TBModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.__init__"><code class="docutils literal notranslate"><span class="pre">TBModel.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.configure_optimizers"><code class="docutils literal notranslate"><span class="pre">TBModel.configure_optimizers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.forward"><code class="docutils literal notranslate"><span class="pre">TBModel.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.log_metrics"><code class="docutils literal notranslate"><span class="pre">TBModel.log_metrics()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.model_step"><code class="docutils literal notranslate"><span class="pre">TBModel.model_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.on_test_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.on_test_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_test_epoch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.on_train_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_train_epoch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.on_val_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_val_epoch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.on_validation_epoch_start"><code class="docutils literal notranslate"><span class="pre">TBModel.on_validation_epoch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.process_outputs"><code class="docutils literal notranslate"><span class="pre">TBModel.process_outputs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.setup"><code class="docutils literal notranslate"><span class="pre">TBModel.setup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.test_step"><code class="docutils literal notranslate"><span class="pre">TBModel.test_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.training_step"><code class="docutils literal notranslate"><span class="pre">TBModel.training_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.model.TBModel.validation_step"><code class="docutils literal notranslate"><span class="pre">TBModel.validation_step()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

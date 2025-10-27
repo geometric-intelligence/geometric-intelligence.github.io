@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -325,44 +325,854 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-data-loaders-package">
-<h1>topobench.data.loaders package<a class="headerlink" href="#topobench-data-loaders-package" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.data.loaders">
+<span id="topobench-data-loaders-package"></span><h1>topobench.data.loaders package<a class="headerlink" href="#module-topobench.data.loaders" title="Link to this heading">#</a></h1>
+<p>Init file for load module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.AbstractLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.AbstractLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.optimizer.base.html#topobench.optimizer.base.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Abstract class that provides an interface to load data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.AbstractLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.AbstractLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.AbstractLoader.get_data_dir">
+<span class="sig-name descname"><span class="pre">get_data_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.AbstractLoader.get_data_dir" title="Link to this definition">#</a></dt>
+<dd><p>Get the data directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Path</dt><dd><p>The path to the dataset directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.AbstractLoader.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.AbstractLoader.load" title="Link to this definition">#</a></dt>
+<dd><p>Load data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple[torch_geometric.data.Data, str]</dt><dd><p>Tuple containing the loaded data and the data directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.AbstractLoader.load_dataset">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.AbstractLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load data into a dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Union[torch_geometric.data.Dataset, torch.utils.data.Dataset]</dt><dd><p>The loaded dataset, which could be a PyG or PyTorch dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>NotImplementedError</dt><dd><p>If the method is not implemented.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.CitationHypergraphDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CitationHypergraphDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.CitationHypergraphDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load Citation Hypergraph dataset with configurable parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>other relevant parameters</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.CitationHypergraphDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.CitationHypergraphDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.CitationHypergraphDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.CitationHypergraphDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load the Citation Hypergraph dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>CitationHypergraphDataset</dt><dd><p>The loaded Citation Hypergraph dataset with the appropriate <cite>data_dir</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.GeometricShapesDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeometricShapesDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.GeometricShapesDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load GeometricShapes dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.GeometricShapesDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.GeometricShapesDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.GeometricShapesDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.GeometricShapesDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load GeometricShapes dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Dataset</dt><dd><p>The loaded GeometricShapes dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.HeterophilousGraphDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HeterophilousGraphDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.HeterophilousGraphDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load Heterophilous Graph datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>data_type: Type of the dataset (e.g., “heterophilous”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.HeterophilousGraphDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.HeterophilousGraphDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.HeterophilousGraphDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.HeterophilousGraphDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load Heterophilous Graph dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Dataset</dt><dd><p>The loaded Heterophilous Graph dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.HypergraphDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HypergraphDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.HypergraphDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load Citation Hypergraph dataset with configurable parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>other relevant parameters</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.HypergraphDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.HypergraphDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.HypergraphDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.HypergraphDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load the Citation Hypergraph dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>HypergraphDataset</dt><dd><p>The loaded Citation Hypergraph dataset with the appropriate <cite>data_dir</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.MantraSimplicialDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MantraSimplicialDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.MantraSimplicialDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load Mantra dataset with configurable parameters.</p>
+<blockquote>
+<div><p>Note: for the simplicial datasets it is necessary to include DatasetLoader into the name of the class!</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>other relevant parameters</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.MantraSimplicialDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.MantraSimplicialDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.MantraSimplicialDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.MantraSimplicialDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load the Citation Hypergraph dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments for dataset initialization.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>CitationHypergraphDataset</dt><dd><p>The loaded Citation Hypergraph dataset with the appropriate <cite>data_dir</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.ManualGraphDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ManualGraphDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.ManualGraphDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load manually provided graph datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>data_dir: Root directory for data</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.ManualGraphDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.ManualGraphDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.ManualGraphDatasetLoader.get_data_dir">
+<span class="sig-name descname"><span class="pre">get_data_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.ManualGraphDatasetLoader.get_data_dir" title="Link to this definition">#</a></dt>
+<dd><p>Get the data directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Path</dt><dd><p>The path to the dataset directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.ManualGraphDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.ManualGraphDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load the manual graph dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataloadDataset</dt><dd><p>The dataset object containing the manually loaded graph.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.MoleculeDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MoleculeDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.MoleculeDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load molecule datasets (ZINC and AQSOL) with predefined splits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>data_type: Type of the dataset (e.g., “molecule”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.MoleculeDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.MoleculeDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.MoleculeDatasetLoader.get_data_dir">
+<span class="sig-name descname"><span class="pre">get_data_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.MoleculeDatasetLoader.get_data_dir" title="Link to this definition">#</a></dt>
+<dd><p>Get the data directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Path</dt><dd><p>The path to the dataset directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.MoleculeDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.MoleculeDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load the molecule dataset with predefined splits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Dataset</dt><dd><p>The combined dataset with predefined splits.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.OGBGDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OGBGDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.OGBGDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load molecule datasets (molhiv, molpcba, ppa) with predefined splits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>data_type: Type of the dataset (e.g., “molecule”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.OGBGDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.OGBGDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.OGBGDatasetLoader.get_data_dir">
+<span class="sig-name descname"><span class="pre">get_data_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.OGBGDatasetLoader.get_data_dir" title="Link to this definition">#</a></dt>
+<dd><p>Get the data directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Path</dt><dd><p>The path to the dataset directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.OGBGDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.OGBGDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load the molecule dataset with predefined splits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Dataset</dt><dd><p>The combined dataset with predefined splits.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.PlanetoidDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PlanetoidDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.PlanetoidDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load PLANETOID datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>data_type: Type of the dataset (e.g., “cocitation”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.PlanetoidDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.PlanetoidDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.PlanetoidDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.PlanetoidDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load Planetoid dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Dataset</dt><dd><p>The loaded Planetoid dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.TUDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TUDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.TUDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load TU datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>data_type: Type of the dataset (e.g., “graph_classification”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.TUDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.TUDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.TUDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.TUDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load TU dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Dataset</dt><dd><p>The loaded TU dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.USCountyDemosDatasetLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">USCountyDemosDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.USCountyDemosDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load US County Demos dataset with configurable year and task variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>year: Year of the dataset (if applicable)</p></li>
+<li><p>task_variable: Task variable for the dataset</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.USCountyDemosDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.USCountyDemosDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.USCountyDemosDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.USCountyDemosDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load the US County Demos dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>USCountyDemosDataset</dt><dd><p>The loaded US County Demos dataset with the appropriate <cite>data_dir</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.html">topobench.data.loaders.graph package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.HeterophilousGraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.HeterophilousGraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.HeterophilousGraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.MantraSimplicialDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.MantraSimplicialDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.MantraSimplicialDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.ManualGraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.ManualGraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.ManualGraphDatasetLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader.get_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.ManualGraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.MoleculeDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.MoleculeDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.MoleculeDatasetLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader.get_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.MoleculeDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.OGBGDatasetLoader"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.OGBGDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.OGBGDatasetLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader.get_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.OGBGDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.PlanetoidDatasetLoader"><code class="docutils literal notranslate"><span class="pre">PlanetoidDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.PlanetoidDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">PlanetoidDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.PlanetoidDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">PlanetoidDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.TUDatasetLoader"><code class="docutils literal notranslate"><span class="pre">TUDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.TUDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">TUDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.TUDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">TUDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.USCountyDemosDatasetLoader"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.USCountyDemosDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.html#topobench.data.loaders.graph.USCountyDemosDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html">topobench.data.loaders.graph.hetero_datasets module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.mantra_dataset.html">topobench.data.loaders.graph.mantra_dataset module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html">topobench.data.loaders.graph.manual_graph_dataset_loader module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html">topobench.data.loaders.graph.modecule_datasets module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html">topobench.data.loaders.graph.ogbg_datasets module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html">topobench.data.loaders.graph.planetoid_datasets module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html">topobench.data.loaders.graph.tu_datasets module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html">topobench.data.loaders.graph.us_county_demos_dataset_loader module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html">topobench.data.loaders.graph.hetero_datasets module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html#topobench.data.loaders.graph.hetero_datasets.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html#topobench.data.loaders.graph.hetero_datasets.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html#topobench.data.loaders.graph.hetero_datasets.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html#topobench.data.loaders.graph.hetero_datasets.HeterophilousGraphDataset"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html#topobench.data.loaders.graph.hetero_datasets.HeterophilousGraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.mantra_dataset.html">topobench.data.loaders.graph.mantra_dataset module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.mantra_dataset.html#topobench.data.loaders.graph.mantra_dataset.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.mantra_dataset.html#topobench.data.loaders.graph.mantra_dataset.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.mantra_dataset.html#topobench.data.loaders.graph.mantra_dataset.MantraDataset"><code class="docutils literal notranslate"><span class="pre">MantraDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.mantra_dataset.html#topobench.data.loaders.graph.mantra_dataset.MantraSimplicialDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html">topobench.data.loaders.graph.manual_graph_dataset_loader module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html#topobench.data.loaders.graph.manual_graph_dataset_loader.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html#topobench.data.loaders.graph.manual_graph_dataset_loader.Any"><code class="docutils literal notranslate"><span class="pre">Any</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html#topobench.data.loaders.graph.manual_graph_dataset_loader.DataloadDataset"><code class="docutils literal notranslate"><span class="pre">DataloadDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html#topobench.data.loaders.graph.manual_graph_dataset_loader.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html#topobench.data.loaders.graph.manual_graph_dataset_loader.ManualGraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html#topobench.data.loaders.graph.manual_graph_dataset_loader.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html#topobench.data.loaders.graph.manual_graph_dataset_loader.load_manual_graph"><code class="docutils literal notranslate"><span class="pre">load_manual_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html">topobench.data.loaders.graph.modecule_datasets module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html#topobench.data.loaders.graph.modecule_datasets.AQSOL"><code class="docutils literal notranslate"><span class="pre">AQSOL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html#topobench.data.loaders.graph.modecule_datasets.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html#topobench.data.loaders.graph.modecule_datasets.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html#topobench.data.loaders.graph.modecule_datasets.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html#topobench.data.loaders.graph.modecule_datasets.MoleculeDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html#topobench.data.loaders.graph.modecule_datasets.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html#topobench.data.loaders.graph.modecule_datasets.ZINC"><code class="docutils literal notranslate"><span class="pre">ZINC</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html">topobench.data.loaders.graph.ogbg_datasets module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html#topobench.data.loaders.graph.ogbg_datasets.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html#topobench.data.loaders.graph.ogbg_datasets.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html#topobench.data.loaders.graph.ogbg_datasets.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html#topobench.data.loaders.graph.ogbg_datasets.OGBGDatasetLoader"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html#topobench.data.loaders.graph.ogbg_datasets.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html#topobench.data.loaders.graph.ogbg_datasets.PygGraphPropPredDataset"><code class="docutils literal notranslate"><span class="pre">PygGraphPropPredDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html">topobench.data.loaders.graph.planetoid_datasets module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html#topobench.data.loaders.graph.planetoid_datasets.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html#topobench.data.loaders.graph.planetoid_datasets.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html#topobench.data.loaders.graph.planetoid_datasets.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html#topobench.data.loaders.graph.planetoid_datasets.Planetoid"><code class="docutils literal notranslate"><span class="pre">Planetoid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html#topobench.data.loaders.graph.planetoid_datasets.PlanetoidDatasetLoader"><code class="docutils literal notranslate"><span class="pre">PlanetoidDatasetLoader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html">topobench.data.loaders.graph.tu_datasets module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html#topobench.data.loaders.graph.tu_datasets.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html#topobench.data.loaders.graph.tu_datasets.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html#topobench.data.loaders.graph.tu_datasets.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html#topobench.data.loaders.graph.tu_datasets.TUDataset"><code class="docutils literal notranslate"><span class="pre">TUDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html#topobench.data.loaders.graph.tu_datasets.TUDatasetLoader"><code class="docutils literal notranslate"><span class="pre">TUDatasetLoader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html">topobench.data.loaders.graph.us_county_demos_dataset_loader module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html#topobench.data.loaders.graph.us_county_demos_dataset_loader.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html#topobench.data.loaders.graph.us_county_demos_dataset_loader.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html#topobench.data.loaders.graph.us_county_demos_dataset_loader.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html#topobench.data.loaders.graph.us_county_demos_dataset_loader.USCountyDemosDataset"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html#topobench.data.loaders.graph.us_county_demos_dataset_loader.USCountyDemosDatasetLoader"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDatasetLoader</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.hypergraph.html">topobench.data.loaders.hypergraph package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.hypergraph.html#topobench.data.loaders.hypergraph.CitationHypergraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.html#topobench.data.loaders.hypergraph.CitationHypergraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.html#topobench.data.loaders.hypergraph.CitationHypergraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.hypergraph.html#topobench.data.loaders.hypergraph.HypergraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">HypergraphDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.html#topobench.data.loaders.hypergraph.HypergraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">HypergraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.html#topobench.data.loaders.hypergraph.HypergraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">HypergraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.hypergraph.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.html">topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.hypergraph_dataset_loader.html">topobench.data.loaders.hypergraph.hypergraph_dataset_loader module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.html">topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.CitationHypergraphDataset"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.CitationHypergraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDatasetLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.hypergraph.hypergraph_dataset_loader.html">topobench.data.loaders.hypergraph.hypergraph_dataset_loader module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.hypergraph_dataset_loader.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.hypergraph_dataset_loader.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.hypergraph_dataset_loader.HypergraphDataset"><code class="docutils literal notranslate"><span class="pre">HypergraphDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.hypergraph.hypergraph_dataset_loader.html#topobench.data.loaders.hypergraph.hypergraph_dataset_loader.HypergraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">HypergraphDatasetLoader</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.pointcloud.html">topobench.data.loaders.pointcloud package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.pointcloud.html#topobench.data.loaders.pointcloud.GeometricShapesDatasetLoader"><code class="docutils literal notranslate"><span class="pre">GeometricShapesDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.pointcloud.html#topobench.data.loaders.pointcloud.GeometricShapesDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">GeometricShapesDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.pointcloud.html#topobench.data.loaders.pointcloud.GeometricShapesDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">GeometricShapesDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.pointcloud.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html">topobench.data.loaders.pointcloud.geometric_shapes module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html">topobench.data.loaders.pointcloud.geometric_shapes module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html#topobench.data.loaders.pointcloud.geometric_shapes.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html#topobench.data.loaders.pointcloud.geometric_shapes.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html#topobench.data.loaders.pointcloud.geometric_shapes.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html#topobench.data.loaders.pointcloud.geometric_shapes.GeometricShapes"><code class="docutils literal notranslate"><span class="pre">GeometricShapes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html#topobench.data.loaders.pointcloud.geometric_shapes.GeometricShapesDatasetLoader"><code class="docutils literal notranslate"><span class="pre">GeometricShapesDatasetLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html#topobench.data.loaders.pointcloud.geometric_shapes.rename_pos_to_x"><code class="docutils literal notranslate"><span class="pre">rename_pos_to_x()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.simplicial.html">topobench.data.loaders.simplicial package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.simplicial.html#topobench.data.loaders.simplicial.MantraSimplicialDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.simplicial.html#topobench.data.loaders.simplicial.MantraSimplicialDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.simplicial.html#topobench.data.loaders.simplicial.MantraSimplicialDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.simplicial.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.simplicial.mantra_dataset_loader.html">topobench.data.loaders.simplicial.mantra_dataset_loader module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.simplicial.mantra_dataset_loader.html">topobench.data.loaders.simplicial.mantra_dataset_loader module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.simplicial.mantra_dataset_loader.html#topobench.data.loaders.simplicial.mantra_dataset_loader.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.simplicial.mantra_dataset_loader.html#topobench.data.loaders.simplicial.mantra_dataset_loader.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.simplicial.mantra_dataset_loader.html#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraDataset"><code class="docutils literal notranslate"><span class="pre">MantraDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.data.loaders.simplicial.mantra_dataset_loader.html#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -374,7 +1184,71 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.base.html">topobench.data.loaders.base module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.base.html">topobench.data.loaders.base module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.ABC"><code class="docutils literal notranslate"><span class="pre">ABC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.get_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader.load"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.__init__"><code class="docutils literal notranslate"><span class="pre">DictConfig.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.copy"><code class="docutils literal notranslate"><span class="pre">DictConfig.copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.get"><code class="docutils literal notranslate"><span class="pre">DictConfig.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.items"><code class="docutils literal notranslate"><span class="pre">DictConfig.items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.items_ex"><code class="docutils literal notranslate"><span class="pre">DictConfig.items_ex()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.keys"><code class="docutils literal notranslate"><span class="pre">DictConfig.keys()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.pop"><code class="docutils literal notranslate"><span class="pre">DictConfig.pop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.DictConfig.setdefault"><code class="docutils literal notranslate"><span class="pre">DictConfig.setdefault()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.absolute"><code class="docutils literal notranslate"><span class="pre">Path.absolute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.chmod"><code class="docutils literal notranslate"><span class="pre">Path.chmod()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.cwd"><code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.exists"><code class="docutils literal notranslate"><span class="pre">Path.exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.expanduser"><code class="docutils literal notranslate"><span class="pre">Path.expanduser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.glob"><code class="docutils literal notranslate"><span class="pre">Path.glob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.group"><code class="docutils literal notranslate"><span class="pre">Path.group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.hardlink_to"><code class="docutils literal notranslate"><span class="pre">Path.hardlink_to()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.home"><code class="docutils literal notranslate"><span class="pre">Path.home()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_block_device"><code class="docutils literal notranslate"><span class="pre">Path.is_block_device()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_char_device"><code class="docutils literal notranslate"><span class="pre">Path.is_char_device()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_dir"><code class="docutils literal notranslate"><span class="pre">Path.is_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_fifo"><code class="docutils literal notranslate"><span class="pre">Path.is_fifo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_file"><code class="docutils literal notranslate"><span class="pre">Path.is_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_mount"><code class="docutils literal notranslate"><span class="pre">Path.is_mount()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_socket"><code class="docutils literal notranslate"><span class="pre">Path.is_socket()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.is_symlink"><code class="docutils literal notranslate"><span class="pre">Path.is_symlink()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.iterdir"><code class="docutils literal notranslate"><span class="pre">Path.iterdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.lchmod"><code class="docutils literal notranslate"><span class="pre">Path.lchmod()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.link_to"><code class="docutils literal notranslate"><span class="pre">Path.link_to()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.lstat"><code class="docutils literal notranslate"><span class="pre">Path.lstat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.mkdir"><code class="docutils literal notranslate"><span class="pre">Path.mkdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.open"><code class="docutils literal notranslate"><span class="pre">Path.open()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.owner"><code class="docutils literal notranslate"><span class="pre">Path.owner()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.read_bytes"><code class="docutils literal notranslate"><span class="pre">Path.read_bytes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.read_text"><code class="docutils literal notranslate"><span class="pre">Path.read_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.readlink"><code class="docutils literal notranslate"><span class="pre">Path.readlink()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.rename"><code class="docutils literal notranslate"><span class="pre">Path.rename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.replace"><code class="docutils literal notranslate"><span class="pre">Path.replace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.resolve"><code class="docutils literal notranslate"><span class="pre">Path.resolve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.rglob"><code class="docutils literal notranslate"><span class="pre">Path.rglob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.rmdir"><code class="docutils literal notranslate"><span class="pre">Path.rmdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.samefile"><code class="docutils literal notranslate"><span class="pre">Path.samefile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.stat"><code class="docutils literal notranslate"><span class="pre">Path.stat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.symlink_to"><code class="docutils literal notranslate"><span class="pre">Path.symlink_to()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.touch"><code class="docutils literal notranslate"><span class="pre">Path.touch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.unlink"><code class="docutils literal notranslate"><span class="pre">Path.unlink()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.write_bytes"><code class="docutils literal notranslate"><span class="pre">Path.write_bytes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.Path.write_text"><code class="docutils literal notranslate"><span class="pre">Path.write_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.abstractmethod"><code class="docutils literal notranslate"><span class="pre">abstractmethod()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -427,6 +1301,71 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.AbstractLoader.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.AbstractLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.get_data_dir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.AbstractLoader.load"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.load()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.AbstractLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.CitationHypergraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.CitationHypergraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.CitationHypergraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">CitationHypergraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.GeometricShapesDatasetLoader"><code class="docutils literal notranslate"><span class="pre">GeometricShapesDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.GeometricShapesDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">GeometricShapesDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.GeometricShapesDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">GeometricShapesDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.HeterophilousGraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.HeterophilousGraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.HeterophilousGraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.HypergraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">HypergraphDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.HypergraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">HypergraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.HypergraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">HypergraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.MantraSimplicialDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.MantraSimplicialDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.MantraSimplicialDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.ManualGraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.ManualGraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.ManualGraphDatasetLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader.get_data_dir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.ManualGraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">ManualGraphDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.MoleculeDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.MoleculeDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.MoleculeDatasetLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader.get_data_dir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.MoleculeDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">MoleculeDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.OGBGDatasetLoader"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.OGBGDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.OGBGDatasetLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader.get_data_dir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.OGBGDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">OGBGDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.PlanetoidDatasetLoader"><code class="docutils literal notranslate"><span class="pre">PlanetoidDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.PlanetoidDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">PlanetoidDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.PlanetoidDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">PlanetoidDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.TUDatasetLoader"><code class="docutils literal notranslate"><span class="pre">TUDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.TUDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">TUDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.TUDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">TUDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.USCountyDemosDatasetLoader"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.USCountyDemosDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.USCountyDemosDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">USCountyDemosDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>

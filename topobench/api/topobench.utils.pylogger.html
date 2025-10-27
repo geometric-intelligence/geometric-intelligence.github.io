@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -321,8 +325,112 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-utils-pylogger-module">
-<h1>topobench.utils.pylogger module<a class="headerlink" href="#topobench-utils-pylogger-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.utils.pylogger">
+<span id="topobench-utils-pylogger-module"></span><h1>topobench.utils.pylogger module<a class="headerlink" href="#module-topobench.utils.pylogger" title="Link to this heading">#</a></h1>
+<p>A multi-GPU-friendly python command line logger.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.Mapping">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Mapping</span></span><a class="headerlink" href="#topobench.utils.pylogger.Mapping" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Collection" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a></p>
+<p>A Mapping is a generic container for associating key/value
+pairs.</p>
+<p>This class provides concrete generic implementations of all
+methods except for __getitem__, __iter__, and __len__.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.Mapping.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="optional">]</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">D[k]</span> <span class="pre">if</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">D,</span> <span class="pre">else</span> <span class="pre">d.</span>&#160; <span class="pre">d</span> <span class="pre">defaults</span> <span class="pre">to</span> <span class="pre">None.</span></span></span><a class="headerlink" href="#topobench.utils.pylogger.Mapping.get" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.Mapping.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set-like</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">items</span></span></span><a class="headerlink" href="#topobench.utils.pylogger.Mapping.items" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.Mapping.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set-like</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">keys</span></span></span><a class="headerlink" href="#topobench.utils.pylogger.Mapping.keys" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.Mapping.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">an</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">values</span></span></span><a class="headerlink" href="#topobench.utils.pylogger.Mapping.values" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.RankedLogger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RankedLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'topobench.utils.pylogger'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank_zero_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.pylogger.RankedLogger" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.LoggerAdapter" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggerAdapter</span></code></a></p>
+<p>Initialize a multi-GPU-friendly python command line logger.</p>
+<p>The logger logs on all processes with their rank prefixed in the log message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str, optional</span></dt><dd><p>The name of the logger, by default __name__.</p>
+</dd>
+<dt><strong>rank_zero_only</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to force all logs to only occur on the rank zero process (default: False).</p>
+</dd>
+<dt><strong>extra</strong><span class="classifier">Mapping[str, object], optional</span></dt><dd><p>A dict-like object which provides contextual information. See <cite>logging.LoggerAdapter</cite> for more information (default: None).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.RankedLogger.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'topobench.utils.pylogger'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank_zero_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.pylogger.RankedLogger.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize the adapter with a logger and a dict-like object which
+provides contextual information. This constructor signature allows
+easy stacking of LoggerAdapters, if so desired.</p>
+<p>You can effectively pass keyword arguments as shown in the
+following example:</p>
+<p>adapter = LoggerAdapter(someLogger, dict(p1=v1, p2=”v2”))</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.RankedLogger.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.pylogger.RankedLogger.log" title="Link to this definition">#</a></dt>
+<dd><p>Delegate a log call to the underlying logger.</p>
+<p>The function first prefixes the message with the rank of the process it’s being logged from and then logs the message. If <cite>‘rank’</cite> is provided, then the log will only occur on that rank/process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>level</strong><span class="classifier">int</span></dt><dd><p>The level to log at. Look at <cite>logging.__init__.py</cite> for more information.</p>
+</dd>
+<dt><strong>msg</strong><span class="classifier">str</span></dt><dd><p>The message to log.</p>
+</dd>
+<dt><strong>rank</strong><span class="classifier">int, optional</span></dt><dd><p>The rank to log at (default: None).</p>
+</dd>
+<dt><strong>*args</strong><span class="classifier">Any</span></dt><dd><p>Additional args to pass to the underlying logging function.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">Any</span></dt><dd><p>Any additional keyword args to pass to the underlying logging function.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.rank_prefixed_message">
+<span class="sig-name descname"><span class="pre">rank_prefixed_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.pylogger.rank_prefixed_message" title="Link to this definition">#</a></dt>
+<dd><p>Add a prefix with the rank to a message.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.pylogger.rank_zero_only">
+<span class="sig-name descname"><span class="pre">rank_zero_only</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.pylogger.rank_zero_only" title="Link to this definition">#</a></dt>
+<dd><p>Wrap a function to call internal function only in rank zero.</p>
+<p>Function that can be used as a decorator to enable a function/method being called only on global rank 0.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -359,6 +467,37 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.Mapping"><code class="docutils literal notranslate"><span class="pre">Mapping</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.Mapping.get"><code class="docutils literal notranslate"><span class="pre">Mapping.get()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.Mapping.items"><code class="docutils literal notranslate"><span class="pre">Mapping.items()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.Mapping.keys"><code class="docutils literal notranslate"><span class="pre">Mapping.keys()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.Mapping.values"><code class="docutils literal notranslate"><span class="pre">Mapping.values()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.RankedLogger"><code class="docutils literal notranslate"><span class="pre">RankedLogger</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.RankedLogger.__init__"><code class="docutils literal notranslate"><span class="pre">RankedLogger.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.RankedLogger.log"><code class="docutils literal notranslate"><span class="pre">RankedLogger.log()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.rank_prefixed_message"><code class="docutils literal notranslate"><span class="pre">rank_prefixed_message()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.pylogger.rank_zero_only"><code class="docutils literal notranslate"><span class="pre">rank_zero_only()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

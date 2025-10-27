@@ -44,6 +44,8 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/topobench.nn.encoders.all_cell_encoder';</script>
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.nn.encoders.all_cell_encoder.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +194,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -324,8 +330,198 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-nn-encoders-all-cell-encoder-module">
-<h1>topobench.nn.encoders.all_cell_encoder module<a class="headerlink" href="#topobench-nn-encoders-all-cell-encoder-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.nn.encoders.all_cell_encoder">
+<span id="topobench-nn-encoders-all-cell-encoder-module"></span><h1>topobench.nn.encoders.all_cell_encoder module<a class="headerlink" href="#module-topobench.nn.encoders.all_cell_encoder" title="Link to this heading">#</a></h1>
+<p>Class to apply BaseEncoder to the features of higher order structures.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractFeatureEncoder</span></span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Abstract class to define a custom feature encoder.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of the feature encoder model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Input data object which should contain x features.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AllCellFeatureEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.encoders.base.html#topobench.nn.encoders.base.AbstractFeatureEncoder" title="topobench.nn.encoders.base.AbstractFeatureEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractFeatureEncoder</span></code></a></p>
+<p>Encoder class to apply BaseEncoder.</p>
+<p>The BaseEncoder is applied to the features of higher order
+structures. The class creates a BaseEncoder for each dimension specified in
+selected_dimensions. Then during the forward pass, the BaseEncoders are
+applied to the features of the corresponding dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">list[int]</span></dt><dd><p>Input dimensions for the features.</p>
+</dd>
+<dt><strong>out_channels</strong><span class="classifier">list[int]</span></dt><dd><p>Output dimensions for the features.</p>
+</dd>
+<dt><strong>proj_dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout for the BaseEncoders (default: 0).</p>
+</dd>
+<dt><strong>selected_dimensions</strong><span class="classifier">list[int], optional</span></dt><dd><p>List of indexes to apply the BaseEncoders to (default: None).</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<p>The method applies the BaseEncoders to the features of the selected_dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Input data object which should contain x_{i} features for each i in the selected_dimensions.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Output data object with updated x_{i} features.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.BaseEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BaseEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.BaseEncoder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Base encoder class used by AllCellFeatureEncoder.</p>
+<p>This class uses two linear layers with GraphNorm, Relu activation function, and dropout between the two layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Dimension of input features.</p>
+</dd>
+<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>Dimensions of output features.</p>
+</dd>
+<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Percentage of channels to discard between the two linear layers (default: 0).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.BaseEncoder.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.BaseEncoder.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.BaseEncoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.BaseEncoder.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of the encoder.</p>
+<p>It applies two linear layers with GraphNorm, Relu activation function, and dropout between the two layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor of dimensions [N, in_channels].</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The batch vector which assigns each element to a specific example.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output tensor of shape [N, out_channels].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.GraphNorm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphNorm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Applies graph normalization over individual graphs as described in the
+<a class="reference external" href="https://arxiv.org/abs/2009.03294">“GraphNorm: A Principled Approach to Accelerating Graph Neural Network
+Training”</a> paper.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}^{\prime}_i = \frac{\mathbf{x} - \alpha \odot
+\textrm{E}[\mathbf{x}]}
+{\sqrt{\textrm{Var}[\mathbf{x} - \alpha \odot \textrm{E}[\mathbf{x}]]
++ \epsilon}} \odot \gamma + \beta\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> denotes parameters that learn how much information
+to keep in the mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Size of each input sample.</p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – A value added to the denominator for numerical
+stability. (default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">1e-5</span></code>)</p></li>
+<li><p><strong>device</strong> (<em>torch.device</em><em>, </em><em>optional</em>) – The device to use for the module.
+(default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.GraphNorm.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.GraphNorm.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – The source tensor.</p></li>
+<li><p><strong>batch</strong> (<em>torch.Tensor</em><em>, </em><em>optional</em>) – The batch vector
+<span class="math notranslate nohighlight">\(\mathbf{b} \in {\{ 0, \ldots, B-1\}}^N\)</span>, which assigns
+each element to a specific example. (default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The number of examples <span class="math notranslate nohighlight">\(B\)</span>.
+Automatically calculated if not given. (default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.all_cell_encoder.GraphNorm.reset_parameters">
+<span class="sig-name descname"><span class="pre">reset_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm.reset_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Resets all learnable parameters of the module.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -362,6 +558,44 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder"><code class="docutils literal notranslate"><span class="pre">AbstractFeatureEncoder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractFeatureEncoder.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.AbstractFeatureEncoder.forward"><code class="docutils literal notranslate"><span class="pre">AbstractFeatureEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder"><code class="docutils literal notranslate"><span class="pre">AllCellFeatureEncoder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">AllCellFeatureEncoder.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.AllCellFeatureEncoder.forward"><code class="docutils literal notranslate"><span class="pre">AllCellFeatureEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.BaseEncoder"><code class="docutils literal notranslate"><span class="pre">BaseEncoder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.BaseEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">BaseEncoder.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.BaseEncoder.forward"><code class="docutils literal notranslate"><span class="pre">BaseEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm"><code class="docutils literal notranslate"><span class="pre">GraphNorm</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm.__init__"><code class="docutils literal notranslate"><span class="pre">GraphNorm.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm.forward"><code class="docutils literal notranslate"><span class="pre">GraphNorm.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.all_cell_encoder.GraphNorm.reset_parameters"><code class="docutils literal notranslate"><span class="pre">GraphNorm.reset_parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

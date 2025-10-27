@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -331,6 +331,186 @@
   <section id="module-topobench.data.utils.split_utils">
 <span id="topobench-data-utils-split-utils-module"></span><h1>topobench.data.utils.split_utils module<a class="headerlink" href="#module-topobench.data.utils.split_utils" title="Link to this heading">#</a></h1>
 <p>Split utilities.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.utils.split_utils.DataloadDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataloadDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_lst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.DataloadDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html#topobench.data.loaders.pointcloud.geometric_shapes.Dataset" title="torch_geometric.data.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a></p>
+<p>Custom dataset to return all the values added to the dataset object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_lst</strong><span class="classifier">list[torch_geometric.data.Data]</span></dt><dd><p>List of torch_geometric.data.Data objects.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.utils.split_utils.DataloadDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_lst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.DataloadDataset.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.utils.split_utils.DataloadDataset.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.DataloadDataset.get" title="Link to this definition">#</a></dt>
+<dd><p>Get data object from data list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>idx</strong><span class="classifier">int</span></dt><dd><p>Index of the data object to get.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple</dt><dd><p>Tuple containing a list of all the values for the data and the corresponding keys.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.utils.split_utils.DataloadDataset.len">
+<span class="sig-name descname"><span class="pre">len</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.DataloadDataset.len" title="Link to this definition">#</a></dt>
+<dd><p>Return the length of the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>Length of the dataset.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.utils.split_utils.StratifiedKFold">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StratifiedKFold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_splits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.StratifiedKFold" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseKFold</span></code></p>
+<p>Class-wise stratified K-Fold cross-validator.</p>
+<p>Provides train/test indices to split data in train/test sets.</p>
+<p>This cross-validation object is a variation of KFold that returns
+stratified folds. The folds are made by preserving the percentage of
+samples for each class in <cite>y</cite> in a binary or multiclass classification
+setting.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<p>For visualisation of cross-validation behaviour and
+comparison between common scikit-learn split methods
+refer to <span class="xref std std-ref">sphx_glr_auto_examples_model_selection_plot_cv_indices.py</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Stratification on the class label solves an engineering problem rather
+than a statistical one. See <span class="xref std std-ref">stratification</span> for more details.</p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>n_splits</strong><span class="classifier">int, default=5</span></dt><dd><p>Number of folds. Must be at least 2.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span><code class="docutils literal notranslate"><span class="pre">n_splits</span></code> default value changed from 3 to 5.</p>
+</div>
+</dd>
+<dt><strong>shuffle</strong><span class="classifier">bool, default=False</span></dt><dd><p>Whether to shuffle each class’s samples before splitting into batches.
+Note that the samples within each split will not be shuffled.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, RandomState instance or None, default=None</span></dt><dd><p>When <cite>shuffle</cite> is True, <cite>random_state</cite> affects the ordering of the
+indices, which controls the randomness of each fold for each class.
+Otherwise, leave <cite>random_state</cite> as <cite>None</cite>.
+Pass an int for reproducible output across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">RepeatedStratifiedKFold</span></code></dt><dd><p>Repeats Stratified K-Fold n times.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The implementation is designed to:</p>
+<ul class="simple">
+<li><p>Generate test sets such that all contain the same distribution of
+classes, or as close as possible.</p></li>
+<li><p>Be invariant to class label: relabelling <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">[&quot;Happy&quot;,</span> <span class="pre">&quot;Sad&quot;]</span></code> to
+<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">0]</span></code> should not change the indices generated.</p></li>
+<li><p>Preserve order dependencies in the dataset ordering, when
+<code class="docutils literal notranslate"><span class="pre">shuffle=False</span></code>: all samples from class k in some test set were
+contiguous in y, or separated in y by samples from classes other than k.</p></li>
+<li><p>Generate test sets where the smallest and largest differ by at most one
+sample.</p></li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The previous implementation did not follow the last constraint.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">skf</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">skf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">skf</span><span class="p">)</span>
+<span class="go">StratifiedKFold(n_splits=2, random_state=None, shuffle=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">skf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fold </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Train: index=</span><span class="si">{</span><span class="n">train_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Test:  index=</span><span class="si">{</span><span class="n">test_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">Fold 0:</span>
+<span class="go">  Train: index=[1 3]</span>
+<span class="go">  Test:  index=[0 2]</span>
+<span class="go">Fold 1:</span>
+<span class="go">  Train: index=[0 2]</span>
+<span class="go">  Test:  index=[1 3]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.utils.split_utils.StratifiedKFold.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_splits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.StratifiedKFold.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.utils.split_utils.StratifiedKFold.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.StratifiedKFold.split" title="Link to this definition">#</a></dt>
+<dd><p>Generate indices to split data into training and test set.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>X</strong><span class="classifier">array-like of shape (n_samples, n_features)</span></dt><dd><p>Training data, where <cite>n_samples</cite> is the number of samples
+and <cite>n_features</cite> is the number of features.</p>
+<p>Note that providing <code class="docutils literal notranslate"><span class="pre">y</span></code> is sufficient to generate the splits and
+hence <code class="docutils literal notranslate"><span class="pre">np.zeros(n_samples)</span></code> may be used as a placeholder for
+<code class="docutils literal notranslate"><span class="pre">X</span></code> instead of actual training data.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">array-like of shape (n_samples,)</span></dt><dd><p>The target variable for supervised learning problems.
+Stratification is done based on the y labels.</p>
+</dd>
+<dt><strong>groups</strong><span class="classifier">object</span></dt><dd><p>Always ignored, exists for compatibility.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>train</strong><span class="classifier">ndarray</span></dt><dd><p>The training set indices for that split.</p>
+</dd>
+<dt><strong>test</strong><span class="classifier">ndarray</span></dt><dd><p>The testing set indices for that split.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Randomized CV splitters may return different results for each call of
+split. You can make the results identical by setting <cite>random_state</cite>
+to an integer.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.split_utils.assign_train_val_test_mask_to_graphs">
 <span class="sig-name descname"><span class="pre">assign_train_val_test_mask_to_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.split_utils.assign_train_val_test_mask_to_graphs" title="Link to this definition">#</a></dt>
@@ -523,6 +703,17 @@ split file for the subsequent runs.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.DataloadDataset"><code class="docutils literal notranslate"><span class="pre">DataloadDataset</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.DataloadDataset.__init__"><code class="docutils literal notranslate"><span class="pre">DataloadDataset.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.DataloadDataset.get"><code class="docutils literal notranslate"><span class="pre">DataloadDataset.get()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.DataloadDataset.len"><code class="docutils literal notranslate"><span class="pre">DataloadDataset.len()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.StratifiedKFold"><code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.StratifiedKFold.__init__"><code class="docutils literal notranslate"><span class="pre">StratifiedKFold.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.StratifiedKFold.split"><code class="docutils literal notranslate"><span class="pre">StratifiedKFold.split()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.assign_train_val_test_mask_to_graphs"><code class="docutils literal notranslate"><span class="pre">assign_train_val_test_mask_to_graphs()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.k_fold_split"><code class="docutils literal notranslate"><span class="pre">k_fold_split()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.split_utils.load_coauthorship_hypergraph_splits"><code class="docutils literal notranslate"><span class="pre">load_coauthorship_hypergraph_splits()</span></code></a></li>

@@ -44,6 +44,8 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/index';</script>
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/index.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -318,322 +320,199 @@
                   
   <section id="api-reference">
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
-<p>This section contains the complete API documentation for the TopoBench package.
-The documentation is automatically generated from the source code and organized
-into logical categories for easy navigation.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>TopoBench provides a comprehensive framework for topological deep learning, including:</p>
-<ul class="simple">
-<li><p><strong>Core</strong>: Core TopoBench functionality and main entry points</p></li>
-<li><p><strong>Data Loading &amp; Datasets</strong>: Dataset loaders for different topological domains</p></li>
-<li><p><strong>Neural Network Architectures</strong>: Neural network backbones, encoders, readouts, and wrappers</p></li>
-<li><p><strong>Transformations &amp; Liftings</strong>: Data transformations and topological lifting operations</p></li>
-<li><p><strong>Training &amp; Evaluation</strong>: Loss functions, optimizers, metrics, and evaluation tools</p></li>
-<li><p><strong>Utilities</strong>: Helper functions and utility modules</p></li>
-</ul>
+<p>Welcome to the TopoBench API documentation. This section provides detailed
+documentation for all modules, classes, and functions in the TopoBench package.</p>
+<p>The documentation is organized following the package structure for easy navigation.</p>
+<section id="package-overview">
+<h2>Package Overview<a class="headerlink" href="#package-overview" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt><a class="reference internal" href="topobench.html"><span class="doc">topobench package</span></a> - <strong>Core Package</strong></dt><dd><p>Main TopoBench package and entry points
+(1 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.callbacks.html"><span class="doc">topobench.callbacks package</span></a> - <strong>Callbacks</strong></dt><dd><p>Training callbacks for monitoring and control
+(1 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.data.html"><span class="doc">topobench.data package</span></a> - <strong>Data</strong></dt><dd><p>Dataset loading, preprocessing, and utilities
+(29 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.dataloader.html"><span class="doc">topobench.dataloader package</span></a> - <strong>Data Loaders</strong></dt><dd><p>Data loading utilities and batch processing
+(3 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.evaluator.html"><span class="doc">topobench.evaluator package</span></a> - <strong>Evaluators</strong></dt><dd><p>Model evaluation metrics and tools
+(4 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.loss.html"><span class="doc">topobench.loss package</span></a> - <strong>Loss Functions</strong></dt><dd><p>Loss functions for training topological models
+(7 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.model.html"><span class="doc">topobench.model package</span></a> - <strong>Models</strong></dt><dd><p>Model definitions and architectures
+(1 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.nn.html"><span class="doc">topobench.nn package</span></a> - <strong>Neural Networks</strong></dt><dd><p>Neural network components: backbones, encoders, readouts, and wrappers
+(48 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.optimizer.html"><span class="doc">topobench.optimizer package</span></a> - <strong>Optimizers</strong></dt><dd><p>Optimization algorithms and schedulers
+(2 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.transforms.html"><span class="doc">topobench.transforms package</span></a> - <strong>Transformations</strong></dt><dd><p>Data transformations and topological lifting operations
+(68 submodules)</p>
+</dd>
+<dt><a class="reference internal" href="topobench.utils.html"><span class="doc">topobench.utils package</span></a> - <strong>Utilities</strong></dt><dd><p>Helper functions and utility modules
+(6 submodules)</p>
+</dd>
+</dl>
 </section>
-<section id="core">
-<h2>Core<a class="headerlink" href="#core" title="Link to this heading">#</a></h2>
-<p>Core TopoBench functionality and main entry points</p>
+<section id="detailed-documentation">
+<h2>Detailed Documentation<a class="headerlink" href="#detailed-documentation" title="Link to this heading">#</a></h2>
+<section id="core-package">
+<h3>Core Package<a class="headerlink" href="#core-package" title="Link to this heading">#</a></h3>
+<p>Main TopoBench package and entry points</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.html">topobench package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.callbacks.html">topobench.callbacks package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.html">topobench.data package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.evaluator.html">topobench.evaluator package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.html">topobench.loss package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.model.html">topobench.model package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.html">topobench.nn package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.optimizer.html">topobench.optimizer package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.run.html">topobench.run module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.html">topobench package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.html#topobench.initialize_hydra"><code class="docutils literal notranslate"><span class="pre">initialize_hydra()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.html#submodules">Submodules</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
-<section id="data-loading-datasets">
-<h2>Data Loading &amp; Datasets<a class="headerlink" href="#data-loading-datasets" title="Link to this heading">#</a></h2>
-<p>Dataset loaders for different topological domains</p>
+<section id="callbacks">
+<h3>Callbacks<a class="headerlink" href="#callbacks" title="Link to this heading">#</a></h3>
+<p>Training callbacks for monitoring and control</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.dataloader.html">topobench.dataloader package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.callbacks.html">topobench.callbacks package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.html#submodules">Submodules</a></li>
+</ul>
+</li>
 </ul>
 </div>
+</section>
 <section id="data">
 <h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<p>Dataset loading, preprocessing, and utilities</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.datasets.html">topobench.data.datasets package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.datasets.citation_hypergaph_dataset.html">topobench.data.datasets.citation_hypergaph_dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.datasets.hypergraph_datasets.html">topobench.data.datasets.hypergraph_datasets module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.datasets.mantra_dataset.html">topobench.data.datasets.mantra_dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.datasets.us_county_demos_dataset.html">topobench.data.datasets.us_county_demos_dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.html">topobench.data.loaders package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.base.html">topobench.data.loaders.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.html">topobench.data.loaders.graph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html">topobench.data.loaders.graph.hetero_datasets module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.mantra_dataset.html">topobench.data.loaders.graph.mantra_dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.manual_graph_dataset_loader.html">topobench.data.loaders.graph.manual_graph_dataset_loader module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.modecule_datasets.html">topobench.data.loaders.graph.modecule_datasets module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.ogbg_datasets.html">topobench.data.loaders.graph.ogbg_datasets module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.planetoid_datasets.html">topobench.data.loaders.graph.planetoid_datasets module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.tu_datasets.html">topobench.data.loaders.graph.tu_datasets module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.us_county_demos_dataset_loader.html">topobench.data.loaders.graph.us_county_demos_dataset_loader module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.hypergraph.html">topobench.data.loaders.hypergraph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader.html">topobench.data.loaders.hypergraph.citation_hypergraph_dataset_loader module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.hypergraph.hypergraph_dataset_loader.html">topobench.data.loaders.hypergraph.hypergraph_dataset_loader module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.pointcloud.html">topobench.data.loaders.pointcloud package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.pointcloud.geometric_shapes.html">topobench.data.loaders.pointcloud.geometric_shapes module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.simplicial.html">topobench.data.loaders.simplicial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.simplicial.mantra_dataset_loader.html">topobench.data.loaders.simplicial.mantra_dataset_loader module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.preprocessor.html">topobench.data.preprocessor package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.preprocessor.preprocessor.html">topobench.data.preprocessor.preprocessor module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.data.html">topobench.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
-<section id="dataloader">
-<h3>Dataloader<a class="headerlink" href="#dataloader" title="Link to this heading">#</a></h3>
+<section id="data-loaders">
+<h3>Data Loaders<a class="headerlink" href="#data-loaders" title="Link to this heading">#</a></h3>
+<p>Data loading utilities and batch processing</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.dataloader.dataload_dataset.html">topobench.dataloader.dataload_dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.dataloader.dataloader.html">topobench.dataloader.dataloader module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.dataloader.utils.html">topobench.dataloader.utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.dataloader.html">topobench.dataloader package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.DataloadDataset"><code class="docutils literal notranslate"><span class="pre">DataloadDataset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#topobench.dataloader.TBDataloader"><code class="docutils literal notranslate"><span class="pre">TBDataloader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.dataloader.html#submodules">Submodules</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
-</section>
-<section id="neural-network-architectures">
-<h2>Neural Network Architectures<a class="headerlink" href="#neural-network-architectures" title="Link to this heading">#</a></h2>
-<p>Neural network backbones, encoders, readouts, and wrappers</p>
-<section id="loss">
-<h3>Loss<a class="headerlink" href="#loss" title="Link to this heading">#</a></h3>
+<section id="evaluators">
+<h3>Evaluators<a class="headerlink" href="#evaluators" title="Link to this heading">#</a></h3>
+<p>Model evaluation metrics and tools</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.model.DGMLoss.html">topobench.loss.model.DGMLoss module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.model.GraphMLPLoss.html">topobench.loss.model.GraphMLPLoss module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.evaluator.html">topobench.evaluator package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.AbstractEvaluator"><code class="docutils literal notranslate"><span class="pre">AbstractEvaluator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#topobench.evaluator.TBEvaluator"><code class="docutils literal notranslate"><span class="pre">TBEvaluator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.evaluator.html#submodules">Submodules</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
-<section id="model">
-<h3>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h3>
+<section id="loss-functions">
+<h3>Loss Functions<a class="headerlink" href="#loss-functions" title="Link to this heading">#</a></h3>
+<p>Loss functions for training topological models</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.model.model.html">topobench.model.model module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.loss.html">topobench.loss package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#topobench.loss.TBLoss"><code class="docutils literal notranslate"><span class="pre">TBLoss</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.loss.html#submodules">Submodules</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
-<section id="nn">
-<h3>Nn<a class="headerlink" href="#nn" title="Link to this heading">#</a></h3>
+<section id="models">
+<h3>Models<a class="headerlink" href="#models" title="Link to this heading">#</a></h3>
+<p>Model definitions and architectures</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.html">topobench.nn.backbones package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.cell.html">topobench.nn.backbones.cell package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html">topobench.nn.backbones.cell.cccn module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html">topobench.nn.backbones.combinatorial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.combinatorial.gccn.html">topobench.nn.backbones.combinatorial.gccn module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.combinatorial.gccn_onehasse.html">topobench.nn.backbones.combinatorial.gccn_onehasse module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.html">topobench.nn.backbones.graph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.gps.html">topobench.nn.backbones.graph.gps module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.graph_mlp.html">topobench.nn.backbones.graph.graph_mlp module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.identity_gnn.html">topobench.nn.backbones.graph.identity_gnn module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.hypergraph.html">topobench.nn.backbones.hypergraph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.hypergraph.edgnn.html">topobench.nn.backbones.hypergraph.edgnn module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.non_relational.html">topobench.nn.backbones.non_relational package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.non_relational.mlp.html">topobench.nn.backbones.non_relational.mlp module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.simplicial.html">topobench.nn.backbones.simplicial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.simplicial.sccnn.html">topobench.nn.backbones.simplicial.sccnn module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.encoders.html">topobench.nn.encoders package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.encoders.all_cell_encoder.html">topobench.nn.encoders.all_cell_encoder module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.encoders.base.html">topobench.nn.encoders.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.encoders.dgm_encoder.html">topobench.nn.encoders.dgm_encoder module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.encoders.flat_encoder.html">topobench.nn.encoders.flat_encoder module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.encoders.kdgm.html">topobench.nn.encoders.kdgm module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.readouts.html">topobench.nn.readouts package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.readouts.base.html">topobench.nn.readouts.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.readouts.identical.html">topobench.nn.readouts.identical module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.readouts.mlp_readout.html">topobench.nn.readouts.mlp_readout module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.readouts.propagate_signal_down.html">topobench.nn.readouts.propagate_signal_down module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.html">topobench.nn.wrappers package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.base.html">topobench.nn.wrappers.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.cell.html">topobench.nn.wrappers.cell package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.cell.can_wrapper.html">topobench.nn.wrappers.cell.can_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.cell.cccn_wrapper.html">topobench.nn.wrappers.cell.cccn_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.cell.ccxn_wrapper.html">topobench.nn.wrappers.cell.ccxn_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.cell.cwn_wrapper.html">topobench.nn.wrappers.cell.cwn_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html">topobench.nn.wrappers.combinatorial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.tune_wrapper.html">topobench.nn.wrappers.combinatorial.tune_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.graph.html">topobench.nn.wrappers.graph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.graph.gnn_wrapper.html">topobench.nn.wrappers.graph.gnn_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.graph.graph_mlp_wrapper.html">topobench.nn.wrappers.graph.graph_mlp_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.hypergraph.html">topobench.nn.wrappers.hypergraph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.hypergraph.hypergraph_wrapper.html">topobench.nn.wrappers.hypergraph.hypergraph_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.pointcloud.html">topobench.nn.wrappers.pointcloud package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.pointcloud.pointcloud_wrapper.html">topobench.nn.wrappers.pointcloud.pointcloud_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.simplicial.html">topobench.nn.wrappers.simplicial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.simplicial.san_wrapper.html">topobench.nn.wrappers.simplicial.san_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.simplicial.sccn_wrapper.html">topobench.nn.wrappers.simplicial.sccn_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.simplicial.sccnn_wrapper.html">topobench.nn.wrappers.simplicial.sccnn_wrapper module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.simplicial.scn_wrapper.html">topobench.nn.wrappers.simplicial.scn_wrapper module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.model.html">topobench.model package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.html#topobench.model.TBModel"><code class="docutils literal notranslate"><span class="pre">TBModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.model.html#submodules">Submodules</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
+<section id="neural-networks">
+<h3>Neural Networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h3>
+<p>Neural network components: backbones, encoders, readouts, and wrappers</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.html">topobench.nn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
-<section id="transformations-liftings">
-<h2>Transformations &amp; Liftings<a class="headerlink" href="#transformations-liftings" title="Link to this heading">#</a></h2>
+<section id="optimizers">
+<h3>Optimizers<a class="headerlink" href="#optimizers" title="Link to this heading">#</a></h3>
+<p>Optimization algorithms and schedulers</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topobench.optimizer.html">topobench.optimizer package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.optimizer.html#topobench.optimizer.TBOptimizer"><code class="docutils literal notranslate"><span class="pre">TBOptimizer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.optimizer.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="transformations">
+<h3>Transformations<a class="headerlink" href="#transformations" title="Link to this heading">#</a></h3>
 <p>Data transformations and topological lifting operations</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.html">topobench.transforms package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.html">topobench.transforms package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.html#submodules">Submodules</a></li>
+</ul>
+</li>
 </ul>
 </div>
-<section id="transforms">
-<h3>Transforms<a class="headerlink" href="#transforms" title="Link to this heading">#</a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.html">topobench.transforms.data_manipulations package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html">topobench.transforms.data_manipulations.calculate_simplicial_curvature module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.equal_gaus_features.html">topobench.transforms.data_manipulations.equal_gaus_features module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html">topobench.transforms.data_manipulations.group_homophily module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.identity_transform.html">topobench.transforms.data_manipulations.identity_transform module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_knn_connectivity.html">topobench.transforms.data_manipulations.infere_knn_connectivity module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_radius_connectivity.html">topobench.transforms.data_manipulations.infere_radius_connectivity module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html">topobench.transforms.data_manipulations.keep_only_connected_component module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_selected_data_fields.html">topobench.transforms.data_manipulations.keep_selected_data_fields module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html">topobench.transforms.data_manipulations.laplacian_encodings module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.mp_homophily.html">topobench.transforms.data_manipulations.mp_homophily module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.node_degrees.html">topobench.transforms.data_manipulations.node_degrees module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.node_features_to_float.html">topobench.transforms.data_manipulations.node_features_to_float module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.one_hot_degree_features.html">topobench.transforms.data_manipulations.one_hot_degree_features module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html">topobench.transforms.data_manipulations.positional_and_structural_encodings module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html">topobench.transforms.data_manipulations.random_walk_encodings module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html">topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_transform.html">topobench.transforms.data_transform module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.html">topobench.transforms.feature_liftings package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.concatenation.html">topobench.transforms.feature_liftings.concatenation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.identity.html">topobench.transforms.feature_liftings.identity module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.projection_sum.html">topobench.transforms.feature_liftings.projection_sum module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.set.html">topobench.transforms.feature_liftings.set module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.html">topobench.transforms.liftings package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.base.html">topobench.transforms.liftings.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.html">topobench.transforms.liftings.graph2cell package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.base.html">topobench.transforms.liftings.graph2cell.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.cycle_lifting.html">topobench.transforms.liftings.graph2cell.cycle_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting.html">topobench.transforms.liftings.graph2cell.discrete_configuration_complex_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2combinatorial.html">topobench.transforms.liftings.graph2combinatorial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2combinatorial.base.html">topobench.transforms.liftings.graph2combinatorial.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2combinatorial.graph_induced_cc.html">topobench.transforms.liftings.graph2combinatorial.graph_induced_cc module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.html">topobench.transforms.liftings.graph2hypergraph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.base.html">topobench.transforms.liftings.graph2hypergraph.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.expander_graph_lifting.html">topobench.transforms.liftings.graph2hypergraph.expander_graph_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting.html">topobench.transforms.liftings.graph2hypergraph.forman_ricci_curvature_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.kernel_lifting.html">topobench.transforms.liftings.graph2hypergraph.kernel_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.khop_lifting.html">topobench.transforms.liftings.graph2hypergraph.khop_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.knn_lifting.html">topobench.transforms.liftings.graph2hypergraph.knn_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.mapper_lifting.html">topobench.transforms.liftings.graph2hypergraph.mapper_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting.html">topobench.transforms.liftings.graph2hypergraph.modularity_maximization_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.html">topobench.transforms.liftings.graph2simplicial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.base.html">topobench.transforms.liftings.graph2simplicial.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.clique_lifting.html">topobench.transforms.liftings.graph2simplicial.clique_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.dnd_lifting.html">topobench.transforms.liftings.graph2simplicial.dnd_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.eccentricity_lifting.html">topobench.transforms.liftings.graph2simplicial.eccentricity_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.graph_induced_lifting.html">topobench.transforms.liftings.graph2simplicial.graph_induced_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.khop_lifting.html">topobench.transforms.liftings.graph2simplicial.khop_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.latentclique_lifting.html">topobench.transforms.liftings.graph2simplicial.latentclique_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.line_lifting.html">topobench.transforms.liftings.graph2simplicial.line_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.neighborhood_complex_lifting.html">topobench.transforms.liftings.graph2simplicial.neighborhood_complex_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.graph2simplicial.vietoris_rips_lifting.html">topobench.transforms.liftings.graph2simplicial.vietoris_rips_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.hypergraph2combinatorial.html">topobench.transforms.liftings.hypergraph2combinatorial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.hypergraph2combinatorial.base.html">topobench.transforms.liftings.hypergraph2combinatorial.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.hypergraph2combinatorial.universal_strict_lifting.html">topobench.transforms.liftings.hypergraph2combinatorial.universal_strict_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.liftings.html">topobench.transforms.liftings.liftings module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.html">topobench.transforms.liftings.pointcloud2hypergraph package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html">topobench.transforms.liftings.pointcloud2hypergraph.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2simplicial.html">topobench.transforms.liftings.pointcloud2simplicial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2simplicial.alpha_complex_lifting.html">topobench.transforms.liftings.pointcloud2simplicial.alpha_complex_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2simplicial.base.html">topobench.transforms.liftings.pointcloud2simplicial.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2simplicial.random_flag_complex.html">topobench.transforms.liftings.pointcloud2simplicial.random_flag_complex module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.html">topobench.transforms.liftings.simplicial2combinatorial package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html">topobench.transforms.liftings.simplicial2combinatorial.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html">topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting module</a></li>
-</ul>
-</div>
-</section>
-</section>
-<section id="training-evaluation">
-<h2>Training &amp; Evaluation<a class="headerlink" href="#training-evaluation" title="Link to this heading">#</a></h2>
-<p>Loss functions, optimizers, metrics, and evaluation tools</p>
-<section id="callbacks">
-<h3>Callbacks<a class="headerlink" href="#callbacks" title="Link to this heading">#</a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.callbacks.timer_callback.html">topobench.callbacks.timer_callback module</a></li>
-</ul>
-</div>
-</section>
-<section id="evaluator">
-<h3>Evaluator<a class="headerlink" href="#evaluator" title="Link to this heading">#</a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.evaluator.base.html">topobench.evaluator.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.evaluator.evaluator.html">topobench.evaluator.evaluator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.evaluator.metrics.html">topobench.evaluator.metrics package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.evaluator.metrics.example.html">topobench.evaluator.metrics.example module</a></li>
-</ul>
-</div>
-</section>
-<section id="id1">
-<h3>Loss<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.base.html">topobench.loss.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.dataset.html">topobench.loss.dataset package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.dataset.DatasetLoss.html">topobench.loss.dataset.DatasetLoss module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.loss.html">topobench.loss.loss module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.loss.model.html">topobench.loss.model package</a></li>
-</ul>
-</div>
-</section>
-<section id="optimizer">
-<h3>Optimizer<a class="headerlink" href="#optimizer" title="Link to this heading">#</a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.optimizer.base.html">topobench.optimizer.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.optimizer.optimizer.html">topobench.optimizer.optimizer module</a></li>
-</ul>
-</div>
-</section>
 </section>
 <section id="utilities">
-<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h2>
+<h3>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h3>
 <p>Helper functions and utility modules</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.utils.html">topobench.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.utils.html">topobench.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.RankedLogger"><code class="docutils literal notranslate"><span class="pre">RankedLogger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.enforce_tags"><code class="docutils literal notranslate"><span class="pre">enforce_tags()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.extras"><code class="docutils literal notranslate"><span class="pre">extras()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.get_metric_value"><code class="docutils literal notranslate"><span class="pre">get_metric_value()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.instantiate_callbacks"><code class="docutils literal notranslate"><span class="pre">instantiate_callbacks()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.instantiate_loggers"><code class="docutils literal notranslate"><span class="pre">instantiate_loggers()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.log_hyperparameters"><code class="docutils literal notranslate"><span class="pre">log_hyperparameters()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.print_config_tree"><code class="docutils literal notranslate"><span class="pre">print_config_tree()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#topobench.utils.task_wrapper"><code class="docutils literal notranslate"><span class="pre">task_wrapper()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.utils.html#submodules">Submodules</a></li>
 </ul>
-</div>
-<section id="id2">
-<h3>Data<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.utils.html">topobench.data.utils package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.utils.io_utils.html">topobench.data.utils.io_utils module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.utils.split_utils.html">topobench.data.utils.split_utils module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.data.utils.utils.html">topobench.data.utils.utils module</a></li>
-</ul>
-</div>
-</section>
-<section id="utils">
-<h3>Utils<a class="headerlink" href="#utils" title="Link to this heading">#</a></h3>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.utils.config_resolvers.html">topobench.utils.config_resolvers module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.utils.instantiators.html">topobench.utils.instantiators module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.utils.logging_utils.html">topobench.utils.logging_utils module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.utils.pylogger.html">topobench.utils.pylogger module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.utils.rich_utils.html">topobench.utils.rich_utils module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.utils.utils.html">topobench.utils.utils module</a></li>
+</li>
 </ul>
 </div>
 </section>
@@ -687,33 +566,19 @@ into logical categories for easy navigation.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core">Core</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-datasets">Data Loading &amp; Datasets</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataloader">Dataloader</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-architectures">Neural Network Architectures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss">Loss</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nn">Nn</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations-liftings">Transformations &amp; Liftings</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transforms">Transforms</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-evaluation">Training &amp; Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-overview">Package Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-documentation">Detailed Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-package">Core Package</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">Callbacks</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluator">Evaluator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Loss</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer">Optimizer</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities">Utilities</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utils">Utils</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loaders">Data Loaders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluators">Evaluators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">Loss Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizers">Optimizers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities">Utilities</a></li>
 </ul>
 </li>
 </ul>

@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -332,6 +332,34 @@
 <span id="topobench-loss-model-graphmlploss-module"></span><h1>topobench.loss.model.GraphMLPLoss module<a class="headerlink" href="#module-topobench.loss.model.GraphMLPLoss" title="Link to this heading">#</a></h1>
 <p>Graph MLP loss function.</p>
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.loss.model.GraphMLPLoss.AbstractLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractLoss</span></span><a class="headerlink" href="#topobench.loss.model.GraphMLPLoss.AbstractLoss" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.optimizer.base.html#topobench.optimizer.base.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Abstract class for the loss class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.model.GraphMLPLoss.AbstractLoss.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.model.GraphMLPLoss.AbstractLoss.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.model.GraphMLPLoss.AbstractLoss.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.model.GraphMLPLoss.AbstractLoss.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.loss.model.GraphMLPLoss.GraphMLPLoss">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphMLPLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r_adj_power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.model.GraphMLPLoss.GraphMLPLoss" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.loss.base.html#topobench.loss.base.AbstractLoss" title="topobench.loss.base.AbstractLoss"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a></p>
@@ -468,6 +496,11 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.model.GraphMLPLoss.AbstractLoss"><code class="docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.model.GraphMLPLoss.AbstractLoss.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLoss.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.model.GraphMLPLoss.AbstractLoss.forward"><code class="docutils literal notranslate"><span class="pre">AbstractLoss.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.model.GraphMLPLoss.GraphMLPLoss"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.model.GraphMLPLoss.GraphMLPLoss.__init__"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.model.GraphMLPLoss.GraphMLPLoss.forward"><code class="docutils literal notranslate"><span class="pre">GraphMLPLoss.forward()</span></code></a></li>

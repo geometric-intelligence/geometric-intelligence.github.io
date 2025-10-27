@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -327,8 +331,238 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-nn-backbones-simplicial-sccnn-module">
-<h1>topobench.nn.backbones.simplicial.sccnn module<a class="headerlink" href="#topobench-nn-backbones-simplicial-sccnn-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.nn.backbones.simplicial.sccnn">
+<span id="topobench-nn-backbones-simplicial-sccnn-module"></span><h1>topobench.nn.backbones.simplicial.sccnn module<a class="headerlink" href="#module-topobench.nn.backbones.simplicial.sccnn" title="Link to this heading">#</a></h1>
+<p>Implementation of the Simplicial Complex Convolutional Neural Network (SCCNN) for complex classification.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.Parameter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.Parameter" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+<p>A kind of Tensor that is to be considered a module parameter.</p>
+<p>Parameters are <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code> subclasses, that have a
+very special property when used with <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> s - when they’re
+assigned as Module attributes they are automatically added to the list of
+its parameters, and will appear e.g. in <code class="xref py py-meth docutils literal notranslate"><span class="pre">parameters()</span></code> iterator.
+Assigning a Tensor doesn’t have such effect. This is because one might
+want to cache some temporary state, like last hidden state of the RNN, in
+the model. If there was no such class as <a class="reference internal" href="#topobench.nn.backbones.simplicial.sccnn.Parameter" title="topobench.nn.backbones.simplicial.sccnn.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a>, these
+temporaries would get registered too.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Tensor</em>) – parameter tensor.</p></li>
+<li><p><strong>requires_grad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – if the parameter requires gradient. Note that
+the torch.no_grad() context does NOT affect the default behavior of
+Parameter creation–the Parameter will still have <cite>requires_grad=True</cite> in
+<code class="xref py py-class docutils literal notranslate"><span class="pre">no_grad</span></code> mode. See <span class="xref std std-ref">locally-disable-grad-doc</span> for more
+details. Default: <cite>True</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNCustom">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SCCNNCustom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNCustom" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>SCCNN implementation for complex classification.</p>
+<p>Note: In this task, we can consider the output on any order of simplices for the
+classification task, which of course can be amended by a readout layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels_all</strong><span class="classifier">tuple of int</span></dt><dd><p>Dimension of input features on (nodes, edges, faces).</p>
+</dd>
+<dt><strong>hidden_channels_all</strong><span class="classifier">tuple of int</span></dt><dd><p>Dimension of features of hidden layers on (nodes, edges, faces).</p>
+</dd>
+<dt><strong>conv_order</strong><span class="classifier">int</span></dt><dd><p>Order of convolutions, we consider the same order for all convolutions.</p>
+</dd>
+<dt><strong>sc_order</strong><span class="classifier">int</span></dt><dd><p>Order of simplicial complex.</p>
+</dd>
+<dt><strong>aggr_norm</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to normalize the aggregation (default: False).</p>
+</dd>
+<dt><strong>update_func</strong><span class="classifier">str, optional</span></dt><dd><p>Update function for the simplicial complex convolution (default: None).</p>
+</dd>
+<dt><strong>n_layers</strong><span class="classifier">int, optional</span></dt><dd><p>Number of layers (default: 2).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNCustom.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNCustom.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNCustom.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">laplacian_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incidence_all</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNCustom.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x_all</strong><span class="classifier">tuple(tensors)</span></dt><dd><p>Tuple of feature tensors (node, edge, face).</p>
+</dd>
+<dt><strong>laplacian_all</strong><span class="classifier">tuple(tensors)</span></dt><dd><p>Tuple of Laplacian tensors (graph laplacian L0, down edge laplacian L1_d, upper edge laplacian L1_u, face laplacian L2).</p>
+</dd>
+<dt><strong>incidence_all</strong><span class="classifier">tuple(tensors)</span></dt><dd><p>Tuple of order 1 and 2 incidence matrices.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple(tensors)</dt><dd><p>Tuple of final hidden state tensors (node, edge, face).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNLayer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SCCNNLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xavier_normal'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Layer of a Simplicial Complex Convolutional Neural Network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">tuple of int</span></dt><dd><p>Dimensions of input features on nodes, edges, and faces.</p>
+</dd>
+<dt><strong>out_channels</strong><span class="classifier">tuple of int</span></dt><dd><p>Dimensions of output features on nodes, edges, and faces.</p>
+</dd>
+<dt><strong>conv_order</strong><span class="classifier">int</span></dt><dd><p>Convolution order of the simplicial filters.</p>
+</dd>
+<dt><strong>sc_order</strong><span class="classifier">int</span></dt><dd><p>SC order.</p>
+</dd>
+<dt><strong>aggr_norm</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to normalize the aggregated message by the neighborhood size (default: False).</p>
+</dd>
+<dt><strong>update_func</strong><span class="classifier">str, optional</span></dt><dd><p>Activation function used in aggregation layers (default: None).</p>
+</dd>
+<dt><strong>initialization</strong><span class="classifier">str, optional</span></dt><dd><p>Initialization method for the weights (default: “xavier_normal”).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xavier_normal'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.aggr_norm_func">
+<span class="sig-name descname"><span class="pre">aggr_norm_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conv_operator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.aggr_norm_func" title="Link to this definition">#</a></dt>
+<dd><p>Perform aggregation normalization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>conv_operator</strong><span class="classifier">torch.sparse</span></dt><dd><p>Convolution operator.</p>
+</dd>
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Feature tensor.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Normalized feature tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.chebyshev_conv">
+<span class="sig-name descname"><span class="pre">chebyshev_conv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conv_operator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.chebyshev_conv" title="Link to this definition">#</a></dt>
+<dd><p>Perform Chebyshev convolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>conv_operator</strong><span class="classifier">torch.sparse</span></dt><dd><p>Convolution operator.</p>
+</dd>
+<dt><strong>conv_order</strong><span class="classifier">int</span></dt><dd><p>Order of the convolution.</p>
+</dd>
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Feature tensor.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">laplacian_all</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incidence_all</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x_all</strong><span class="classifier">tuple of tensors</span></dt><dd><p>Tuple of input feature tensors (node, edge, face).</p>
+</dd>
+<dt><strong>laplacian_all</strong><span class="classifier">tuple of tensors</span></dt><dd><p>Tuple of Laplacian tensors (graph laplacian L0, down edge laplacian L1_d, upper edge laplacian L1_u, face laplacian L2).</p>
+</dd>
+<dt><strong>incidence_all</strong><span class="classifier">tuple of tensors</span></dt><dd><p>Tuple of order 1 and 2 incidence matrices.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output tensor for each 0-cell.</p>
+</dd>
+<dt>torch.Tensor</dt><dd><p>Output tensor for each 1-cell.</p>
+</dd>
+<dt>torch.Tensor</dt><dd><p>Output tensor for each 2-cell.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.reset_parameters">
+<span class="sig-name descname"><span class="pre">reset_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.414</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.reset_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Reset learnable parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>gain</strong><span class="classifier">float</span></dt><dd><p>Gain for the weight initialization.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.update" title="Link to this definition">#</a></dt>
+<dd><p>Update embeddings on each cell (step 4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Updated tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -365,6 +599,38 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.Parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNCustom"><code class="docutils literal notranslate"><span class="pre">SCCNNCustom</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNCustom.__init__"><code class="docutils literal notranslate"><span class="pre">SCCNNCustom.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNCustom.forward"><code class="docutils literal notranslate"><span class="pre">SCCNNCustom.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer"><code class="docutils literal notranslate"><span class="pre">SCCNNLayer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.__init__"><code class="docutils literal notranslate"><span class="pre">SCCNNLayer.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.aggr_norm_func"><code class="docutils literal notranslate"><span class="pre">SCCNNLayer.aggr_norm_func()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.chebyshev_conv"><code class="docutils literal notranslate"><span class="pre">SCCNNLayer.chebyshev_conv()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.forward"><code class="docutils literal notranslate"><span class="pre">SCCNNLayer.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.reset_parameters"><code class="docutils literal notranslate"><span class="pre">SCCNNLayer.reset_parameters()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.simplicial.sccnn.SCCNNLayer.update"><code class="docutils literal notranslate"><span class="pre">SCCNNLayer.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -321,8 +325,94 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-optimizer-optimizer-module">
-<h1>topobench.optimizer.optimizer module<a class="headerlink" href="#topobench-optimizer-optimizer-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.optimizer.optimizer">
+<span id="topobench-optimizer-optimizer-module"></span><h1>topobench.optimizer.optimizer module<a class="headerlink" href="#module-topobench.optimizer.optimizer" title="Link to this heading">#</a></h1>
+<p>Optimizer class responsible of managing both optimizer and scheduler.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.optimizer.optimizer.AbstractOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractOptimizer</span></span><a class="headerlink" href="#topobench.optimizer.optimizer.AbstractOptimizer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.optimizer.base.html#topobench.optimizer.base.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Abstract class for the optimizer manager class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.optimizer.optimizer.AbstractOptimizer.configure_optimizer">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">configure_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.optimizer.optimizer.AbstractOptimizer.configure_optimizer" title="Link to this definition">#</a></dt>
+<dd><p>Configure the optimizer and scheduler.</p>
+<p>Act as a wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_parameters</strong><span class="classifier">dict</span></dt><dd><p>The model parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.optimizer.optimizer.Any">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Any</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.optimizer.optimizer.Any" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Special type indicating an unconstrained type.</p>
+<ul class="simple">
+<li><p>Any is compatible with every type.</p></li>
+<li><p>Any assumed to have all methods.</p></li>
+<li><p>All values assumed to be instances of Any.</p></li>
+</ul>
+<p>Note that all the above statements are true from the point of view of
+static type checkers. At runtime, Any should not be used with instance
+checks.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.optimizer.optimizer.TBOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TBOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.optimizer.optimizer.TBOptimizer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.optimizer.base.html#topobench.optimizer.base.AbstractOptimizer" title="topobench.optimizer.base.AbstractOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOptimizer</span></code></a></p>
+<p>Optimizer class that manage both optimizer and scheduler, fully compatible with <cite>torch.optim</cite> classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>optimizer_id</strong><span class="classifier">str</span></dt><dd><p>Name of the torch optimizer class to be used.</p>
+</dd>
+<dt><strong>parameters</strong><span class="classifier">dict</span></dt><dd><p>Parameters to be passed to the optimizer.</p>
+</dd>
+<dt><strong>scheduler</strong><span class="classifier">dict, optional</span></dt><dd><p>Scheduler id and parameters to be used. Default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.optimizer.optimizer.TBOptimizer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.optimizer.optimizer.TBOptimizer.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.optimizer.optimizer.TBOptimizer.configure_optimizer">
+<span class="sig-name descname"><span class="pre">configure_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.optimizer.optimizer.TBOptimizer.configure_optimizer" title="Link to this definition">#</a></dt>
+<dd><p>Configure the optimizer and scheduler.</p>
+<p>Act as a wrapper to provide the LightningTrainer module the required config dict
+when it calls <cite>TBModel</cite>’s <cite>configure_optimizers()</cite> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_parameters</strong><span class="classifier">dict</span></dt><dd><p>The model parameters.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The optimizer and scheduler configuration.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -359,6 +449,33 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.optimizer.optimizer.AbstractOptimizer"><code class="docutils literal notranslate"><span class="pre">AbstractOptimizer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.optimizer.optimizer.AbstractOptimizer.configure_optimizer"><code class="docutils literal notranslate"><span class="pre">AbstractOptimizer.configure_optimizer()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.optimizer.optimizer.Any"><code class="docutils literal notranslate"><span class="pre">Any</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.optimizer.optimizer.TBOptimizer"><code class="docutils literal notranslate"><span class="pre">TBOptimizer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.optimizer.optimizer.TBOptimizer.__init__"><code class="docutils literal notranslate"><span class="pre">TBOptimizer.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.optimizer.optimizer.TBOptimizer.configure_optimizer"><code class="docutils literal notranslate"><span class="pre">TBOptimizer.configure_optimizer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

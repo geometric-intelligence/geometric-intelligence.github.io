@@ -44,6 +44,8 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/topobench.transforms.liftings.liftings';</script>
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.transforms.liftings.liftings.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +194,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -324,8 +330,299 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-liftings-liftings-module">
-<h1>topobench.transforms.liftings.liftings module<a class="headerlink" href="#topobench-transforms-liftings-liftings-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.transforms.liftings.liftings">
+<span id="topobench-transforms-liftings-liftings-module"></span><h1>topobench.transforms.liftings.liftings module<a class="headerlink" href="#module-topobench.transforms.liftings.liftings" title="Link to this heading">#</a></h1>
+<p>This module implements the abstract classes for lifting graphs.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.AbstractLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.AbstractLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Abstract class for topological liftings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feature_lifting</strong><span class="classifier">str, optional</span></dt><dd><p>The feature lifting method to be used. Default is ‘ProjectionSum’.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.AbstractLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.AbstractLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.AbstractLifting.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.AbstractLifting.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the full lifting (topology + features) to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The lifted data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.AbstractLifting.lift_topology">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.AbstractLifting.lift_topology" title="Link to this definition">#</a></dt>
+<dd><p>Lift the topology of a graph to higher-order topological domains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The lifted topology.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.CellComplexLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellComplexLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.CellComplexLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.base.html#topobench.transforms.liftings.base.AbstractLifting" title="topobench.transforms.liftings.base.AbstractLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLifting</span></code></a></p>
+<p>Abstract class for lifting cell complexes to other domains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feature_lifting</strong><span class="classifier">str, optional</span></dt><dd><p>The feature lifting method to be used. Default is ‘ProjectionSum’.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.CellComplexLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.CellComplexLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.CombinatorialLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CombinatorialLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.CombinatorialLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.base.html#topobench.transforms.liftings.base.AbstractLifting" title="topobench.transforms.liftings.base.AbstractLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLifting</span></code></a></p>
+<p>Abstract class for lifting combinatorial complexes to other domains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feature_lifting</strong><span class="classifier">str, optional</span></dt><dd><p>The feature lifting method to be used. Default is ‘ProjectionSum’.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.CombinatorialLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.CombinatorialLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.GraphLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_edge_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.GraphLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.base.html#topobench.transforms.liftings.base.AbstractLifting" title="topobench.transforms.liftings.base.AbstractLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLifting</span></code></a></p>
+<p>Abstract class for lifting graph topologies to other domains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feature_lifting</strong><span class="classifier">str, optional</span></dt><dd><p>The feature lifting method to be used. Default is ‘ProjectionSum’.</p>
+</dd>
+<dt><strong>preserve_edge_attr</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to preserve edge attributes. Default is False.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.GraphLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_edge_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.GraphLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.HypergraphLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HypergraphLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.HypergraphLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.base.html#topobench.transforms.liftings.base.AbstractLifting" title="topobench.transforms.liftings.base.AbstractLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLifting</span></code></a></p>
+<p>Abstract class for lifting hypergraphs to other domains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feature_lifting</strong><span class="classifier">str, optional</span></dt><dd><p>The feature lifting method to be used. Default is ‘ProjectionSum’.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.HypergraphLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.HypergraphLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.PointCloudLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PointCloudLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.PointCloudLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.base.html#topobench.transforms.liftings.base.AbstractLifting" title="topobench.transforms.liftings.base.AbstractLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLifting</span></code></a></p>
+<p>Abstract class for lifting point clouds to other topological domains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feature_lifting</strong><span class="classifier">str, optional</span></dt><dd><p>The feature lifting method to be used. Default is ‘ProjectionSum’.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.PointCloudLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.PointCloudLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.SimplicialLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SimplicialLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.SimplicialLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.base.html#topobench.transforms.liftings.base.AbstractLifting" title="topobench.transforms.liftings.base.AbstractLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLifting</span></code></a></p>
+<p>Abstract class for lifting simplicial complexes to other domains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>feature_lifting</strong><span class="classifier">str, optional</span></dt><dd><p>The feature lifting method to be used. Default is ‘ProjectionSum’.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.SimplicialLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_lifting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ProjectionSum'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.SimplicialLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.is_undirected">
+<span class="sig-name descname"><span class="pre">is_undirected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.is_undirected" title="Link to this definition">#</a></dt>
+<dd><p>Returns <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> if the graph given by <code class="xref py py-attr docutils literal notranslate"><span class="pre">edge_index</span></code> is
+undirected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_index</strong> (<em>LongTensor</em>) – The edge indices.</p></li>
+<li><p><strong>edge_attr</strong> (<em>Tensor</em><em> or </em><em>List</em><em>[</em><em>Tensor</em><em>]</em><em>, </em><em>optional</em>) – Edge weights or multi-
+dimensional edge features.
+If given as a list, will check for equivalence in all its entries.
+(default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+<li><p><strong>num_nodes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The number of nodes, <em>i.e.</em>
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">max(edge_index)</span> <span class="pre">+</span> <span class="pre">1</span></code>. (default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_undirected</span><span class="p">(</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_undirected</span><span class="p">(</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.liftings.to_undirected">
+<span class="sig-name descname"><span class="pre">to_undirected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'???'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.liftings.to_undirected" title="Link to this definition">#</a></dt>
+<dd><p>Converts the graph given by <code class="xref py py-attr docutils literal notranslate"><span class="pre">edge_index</span></code> to an undirected graph
+such that <span class="math notranslate nohighlight">\((j,i) \in \mathcal{E}\)</span> for every edge <span class="math notranslate nohighlight">\((i,j) \in
+\mathcal{E}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_index</strong> (<em>LongTensor</em>) – The edge indices.</p></li>
+<li><p><strong>edge_attr</strong> (<em>Tensor</em><em> or </em><em>List</em><em>[</em><em>Tensor</em><em>]</em><em>, </em><em>optional</em>) – Edge weights or multi-
+dimensional edge features.
+If given as a list, will remove duplicates for all its entries.
+(default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+<li><p><strong>num_nodes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The number of nodes, <em>i.e.</em>
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">max(edge_index)</span> <span class="pre">+</span> <span class="pre">1</span></code>. (default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+<li><p><strong>reduce</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – The reduce operation to use for merging edge
+features (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;add&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;min&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code>,
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;mul&quot;</span></code>). (default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;add&quot;</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LongTensor</span></code> if <code class="xref py py-attr docutils literal notranslate"><span class="pre">edge_attr</span></code> is not passed, else
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">LongTensor</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Optional[Tensor]</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">List[Tensor]]</span></code>)</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>From <a href="#id1"><span class="problematic" id="id2">:pyg:`PyG &gt;= 2.3.0`</span></a> onwards, this function will always return a
+tuple whenever <code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_attr</span></code> is passed as an argument (even in case
+it is set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>).</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_undirected</span><span class="p">(</span><span class="n">edge_index</span><span class="p">)</span>
+<span class="go">tensor([[0, 1, 1, 2],</span>
+<span class="go">        [1, 0, 2, 1]])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edge_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge_weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_undirected</span><span class="p">(</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">edge_weight</span><span class="p">)</span>
+<span class="go">(tensor([[0, 1, 1, 2],</span>
+<span class="go">        [1, 0, 2, 1]]),</span>
+<span class="go">tensor([2., 2., 1., 1.]))</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use &#39;mean&#39; operation to merge edge features</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">to_undirected</span><span class="p">(</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+<span class="go">(tensor([[0, 1, 1, 2],</span>
+<span class="go">        [1, 0, 2, 1]]),</span>
+<span class="go">tensor([1., 1., 1., 1.]))</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -362,6 +659,55 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.AbstractLifting"><code class="docutils literal notranslate"><span class="pre">AbstractLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.AbstractLifting.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLifting.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.AbstractLifting.forward"><code class="docutils literal notranslate"><span class="pre">AbstractLifting.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.AbstractLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">AbstractLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.CellComplexLifting"><code class="docutils literal notranslate"><span class="pre">CellComplexLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.CellComplexLifting.__init__"><code class="docutils literal notranslate"><span class="pre">CellComplexLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.CombinatorialLifting"><code class="docutils literal notranslate"><span class="pre">CombinatorialLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.CombinatorialLifting.__init__"><code class="docutils literal notranslate"><span class="pre">CombinatorialLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.GraphLifting"><code class="docutils literal notranslate"><span class="pre">GraphLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.GraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">GraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">HypergraphLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.HypergraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">HypergraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.PointCloudLifting"><code class="docutils literal notranslate"><span class="pre">PointCloudLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.PointCloudLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointCloudLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.SimplicialLifting"><code class="docutils literal notranslate"><span class="pre">SimplicialLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.SimplicialLifting.__init__"><code class="docutils literal notranslate"><span class="pre">SimplicialLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.is_undirected"><code class="docutils literal notranslate"><span class="pre">is_undirected()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.liftings.to_undirected"><code class="docutils literal notranslate"><span class="pre">to_undirected()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

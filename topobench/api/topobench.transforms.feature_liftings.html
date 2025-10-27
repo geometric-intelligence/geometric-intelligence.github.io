@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -325,16 +325,268 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-feature-liftings-package">
-<h1>topobench.transforms.feature_liftings package<a class="headerlink" href="#topobench-transforms-feature-liftings-package" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.transforms.feature_liftings">
+<span id="topobench-transforms-feature-liftings-package"></span><h1>topobench.transforms.feature_liftings package<a class="headerlink" href="#module-topobench.transforms.feature_liftings" title="Link to this heading">#</a></h1>
+<p>Feature lifting transforms with automated exports.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Concatenation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Concatenation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Concatenation" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Lift r-cell features to r+1-cells by concatenation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Concatenation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Concatenation.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Concatenation.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Concatenation.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the lifting to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data | dict</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data | dict</dt><dd><p>The lifted data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Concatenation.lift_features">
+<span class="sig-name descname"><span class="pre">lift_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Concatenation.lift_features" title="Link to this definition">#</a></dt>
+<dd><p>Concatenate r-cell features to obtain r+1-cell features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data | dict</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data | dict</dt><dd><p>The lifted data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Identity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Identity" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>An identity transform that does nothing to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Identity.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Identity.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Identity.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Identity.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The same data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.ProjectionSum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProjectionSum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.ProjectionSum" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Lift r-cell features to r+1-cells by projection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.ProjectionSum.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.ProjectionSum.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.ProjectionSum.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.ProjectionSum.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the lifting to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data | dict</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data | dict</dt><dd><p>The lifted data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.ProjectionSum.lift_features">
+<span class="sig-name descname"><span class="pre">lift_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.ProjectionSum.lift_features" title="Link to this definition">#</a></dt>
+<dd><p>Project r-cell features of a graph to r+1-cell structures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data | dict</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data | dict</dt><dd><p>The data with the lifted features.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Set">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Set" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Lift r-cell features to r+1-cells by set operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Set.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Set.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Set.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Set.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the lifting to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data | dict</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data | dict</dt><dd><p>The lifted data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.feature_liftings.Set.lift_features">
+<span class="sig-name descname"><span class="pre">lift_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.feature_liftings.Set.lift_features" title="Link to this definition">#</a></dt>
+<dd><p>Concatenate r-cell features to r+1-cell structures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data | dict</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data | dict</dt><dd><p>The lifted data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.concatenation.html">topobench.transforms.feature_liftings.concatenation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.identity.html">topobench.transforms.feature_liftings.identity module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.projection_sum.html">topobench.transforms.feature_liftings.projection_sum module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.set.html">topobench.transforms.feature_liftings.set module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.concatenation.html">topobench.transforms.feature_liftings.concatenation module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.feature_liftings.concatenation.html#topobench.transforms.feature_liftings.concatenation.Concatenation"><code class="docutils literal notranslate"><span class="pre">Concatenation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.concatenation.html#topobench.transforms.feature_liftings.concatenation.Concatenation.__init__"><code class="docutils literal notranslate"><span class="pre">Concatenation.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.concatenation.html#topobench.transforms.feature_liftings.concatenation.Concatenation.forward"><code class="docutils literal notranslate"><span class="pre">Concatenation.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.concatenation.html#topobench.transforms.feature_liftings.concatenation.Concatenation.lift_features"><code class="docutils literal notranslate"><span class="pre">Concatenation.lift_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.identity.html">topobench.transforms.feature_liftings.identity module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.feature_liftings.identity.html#topobench.transforms.feature_liftings.identity.Identity"><code class="docutils literal notranslate"><span class="pre">Identity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.identity.html#topobench.transforms.feature_liftings.identity.Identity.__init__"><code class="docutils literal notranslate"><span class="pre">Identity.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.identity.html#topobench.transforms.feature_liftings.identity.Identity.forward"><code class="docutils literal notranslate"><span class="pre">Identity.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.projection_sum.html">topobench.transforms.feature_liftings.projection_sum module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.feature_liftings.projection_sum.html#topobench.transforms.feature_liftings.projection_sum.ProjectionSum"><code class="docutils literal notranslate"><span class="pre">ProjectionSum</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.projection_sum.html#topobench.transforms.feature_liftings.projection_sum.ProjectionSum.__init__"><code class="docutils literal notranslate"><span class="pre">ProjectionSum.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.projection_sum.html#topobench.transforms.feature_liftings.projection_sum.ProjectionSum.forward"><code class="docutils literal notranslate"><span class="pre">ProjectionSum.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.projection_sum.html#topobench.transforms.feature_liftings.projection_sum.ProjectionSum.lift_features"><code class="docutils literal notranslate"><span class="pre">ProjectionSum.lift_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.feature_liftings.set.html">topobench.transforms.feature_liftings.set module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.feature_liftings.set.html#topobench.transforms.feature_liftings.set.Set"><code class="docutils literal notranslate"><span class="pre">Set</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.set.html#topobench.transforms.feature_liftings.set.Set.__init__"><code class="docutils literal notranslate"><span class="pre">Set.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.set.html#topobench.transforms.feature_liftings.set.Set.forward"><code class="docutils literal notranslate"><span class="pre">Set.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.feature_liftings.set.html#topobench.transforms.feature_liftings.set.Set.lift_features"><code class="docutils literal notranslate"><span class="pre">Set.lift_features()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -387,6 +639,29 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Concatenation"><code class="docutils literal notranslate"><span class="pre">Concatenation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Concatenation.__init__"><code class="docutils literal notranslate"><span class="pre">Concatenation.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Concatenation.forward"><code class="docutils literal notranslate"><span class="pre">Concatenation.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Concatenation.lift_features"><code class="docutils literal notranslate"><span class="pre">Concatenation.lift_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Identity"><code class="docutils literal notranslate"><span class="pre">Identity</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Identity.__init__"><code class="docutils literal notranslate"><span class="pre">Identity.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Identity.forward"><code class="docutils literal notranslate"><span class="pre">Identity.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.ProjectionSum"><code class="docutils literal notranslate"><span class="pre">ProjectionSum</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.ProjectionSum.__init__"><code class="docutils literal notranslate"><span class="pre">ProjectionSum.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.ProjectionSum.forward"><code class="docutils literal notranslate"><span class="pre">ProjectionSum.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.ProjectionSum.lift_features"><code class="docutils literal notranslate"><span class="pre">ProjectionSum.lift_features()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Set"><code class="docutils literal notranslate"><span class="pre">Set</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Set.__init__"><code class="docutils literal notranslate"><span class="pre">Set.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Set.forward"><code class="docutils literal notranslate"><span class="pre">Set.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.feature_liftings.Set.lift_features"><code class="docutils literal notranslate"><span class="pre">Set.lift_features()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

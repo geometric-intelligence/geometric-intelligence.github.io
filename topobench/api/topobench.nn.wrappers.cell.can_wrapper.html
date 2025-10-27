@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -327,8 +331,103 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-nn-wrappers-cell-can-wrapper-module">
-<h1>topobench.nn.wrappers.cell.can_wrapper module<a class="headerlink" href="#topobench-nn-wrappers-cell-can-wrapper-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.nn.wrappers.cell.can_wrapper">
+<span id="topobench-nn-wrappers-cell-can-wrapper-module"></span><h1>topobench.nn.wrappers.cell.can_wrapper module<a class="headerlink" href="#module-topobench.nn.wrappers.cell.can_wrapper" title="Link to this heading">#</a></h1>
+<p>CAN wrapper module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.optimizer.base.html#topobench.optimizer.base.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Abstract class that provides an interface to handle the network output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>backbone</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>Backbone model.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments for the class. It should contain the following keys:
+- out_channels (int): Number of output channels.
+- num_cell_dimensions (int): Number of cell dimensions.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass for the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.residual_connection">
+<span class="sig-name descname"><span class="pre">residual_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.residual_connection" title="Link to this definition">#</a></dt>
+<dd><p>Residual connection for the model.</p>
+<p>This method sums, for the embeddings of the cells of any rank, the
+output of the model with the input embeddings and applies layer
+normalization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the updated model output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.cell.can_wrapper.CANWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CANWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.cell.can_wrapper.CANWrapper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.wrappers.base.html#topobench.nn.wrappers.base.AbstractWrapper" title="topobench.nn.wrappers.base.AbstractWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractWrapper</span></code></a></p>
+<p>Wrapper for the CAN model.</p>
+<p>This wrapper defines the forward pass of the model. The CAN model returns
+the embeddings of the cells of rank 1. The embeddings of the cells of rank
+0 are computed as the sum of the embeddings of the cells of rank 1
+connected to them.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.cell.can_wrapper.CANWrapper.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.cell.can_wrapper.CANWrapper.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass for the CAN wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the updated model output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -365,6 +464,33 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper"><code class="docutils literal notranslate"><span class="pre">AbstractWrapper</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractWrapper.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.forward"><code class="docutils literal notranslate"><span class="pre">AbstractWrapper.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.cell.can_wrapper.AbstractWrapper.residual_connection"><code class="docutils literal notranslate"><span class="pre">AbstractWrapper.residual_connection()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.cell.can_wrapper.CANWrapper"><code class="docutils literal notranslate"><span class="pre">CANWrapper</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.cell.can_wrapper.CANWrapper.forward"><code class="docutils literal notranslate"><span class="pre">CANWrapper.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

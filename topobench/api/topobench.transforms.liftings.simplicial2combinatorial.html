@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -328,14 +328,212 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-liftings-simplicial2combinatorial-package">
-<h1>topobench.transforms.liftings.simplicial2combinatorial package<a class="headerlink" href="#topobench-transforms-liftings-simplicial2combinatorial-package" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.transforms.liftings.simplicial2combinatorial">
+<span id="topobench-transforms-liftings-simplicial2combinatorial-package"></span><h1>topobench.transforms.liftings.simplicial2combinatorial package<a class="headerlink" href="#module-topobench.transforms.liftings.simplicial2combinatorial" title="Link to this heading">#</a></h1>
+<p>Simplicial2Combinatorial liftings with automated exports.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CofaceCCLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html#topobench.transforms.liftings.simplicial2combinatorial.base.Simplicial2CombinatorialLifting" title="topobench.transforms.liftings.simplicial2combinatorial.base.Simplicial2CombinatorialLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simplicial2CombinatorialLifting</span></code></a></p>
+<p>The CofaceCCLifting class.</p>
+<p>This class lifts a simplicial complex to a combinatorial complex
+by using the coface relation between the simplicial cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>The keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The updated lifted data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.get_lower_cells">
+<span class="sig-name descname"><span class="pre">get_lower_cells</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.get_lower_cells" title="Link to this definition">#</a></dt>
+<dd><p>Get the lower cells of the complex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>The list of lower cells.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.lift_topology">
+<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.lift_topology" title="Link to this definition">#</a></dt>
+<dd><p>Lift the simplicial topology to a combinatorial complex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The lifted connectivity dict.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.simplicial2combinatorial.Simplicial2CombinatorialLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Simplicial2CombinatorialLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.simplicial2combinatorial.Simplicial2CombinatorialLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.liftings.html#topobench.transforms.liftings.liftings.SimplicialLifting" title="topobench.transforms.liftings.liftings.SimplicialLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimplicialLifting</span></code></a></p>
+<p>Abstract class for lifting graphs to combinatorial complexes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optiona””l</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.simplicial2combinatorial.Simplicial2CombinatorialLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.simplicial2combinatorial.Simplicial2CombinatorialLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html">topobench.transforms.liftings.simplicial2combinatorial.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html">topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html">topobench.transforms.liftings.simplicial2combinatorial.base module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html#topobench.transforms.liftings.simplicial2combinatorial.base.Simplicial2CombinatorialLifting"><code class="docutils literal notranslate"><span class="pre">Simplicial2CombinatorialLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html#topobench.transforms.liftings.simplicial2combinatorial.base.Simplicial2CombinatorialLifting.__init__"><code class="docutils literal notranslate"><span class="pre">Simplicial2CombinatorialLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html#topobench.transforms.liftings.simplicial2combinatorial.base.SimplicialLifting"><code class="docutils literal notranslate"><span class="pre">SimplicialLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.base.html#topobench.transforms.liftings.simplicial2combinatorial.base.SimplicialLifting.__init__"><code class="docutils literal notranslate"><span class="pre">SimplicialLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html">topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CofaceCCLifting"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CofaceCCLifting.__init__"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CofaceCCLifting.forward"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CofaceCCLifting.get_lower_cells"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.get_lower_cells()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CofaceCCLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.__init__"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.add_cell"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.add_cell()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.add_cells_from"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.add_cells_from()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.add_node"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.add_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.adjacency_matrix"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.adjacency_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.clone"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.clone()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.coadjacency_matrix"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.coadjacency_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.dirac_operator_matrix"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.dirac_operator_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.get_cell_attributes"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.get_cell_attributes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.get_node_attributes"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.get_node_attributes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.incidence_matrix"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.incidence_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.number_of_cells"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.number_of_cells()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.number_of_nodes"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.number_of_nodes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.order"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.remove_cell"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.remove_cell()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.remove_cells"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.remove_cells()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.remove_node"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.remove_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.remove_nodes"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.remove_nodes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.remove_singletons"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.remove_singletons()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.set_cell_attributes"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.set_cell_attributes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.singletons"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.singletons()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.skeleton"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.skeleton()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.cells"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.cells</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.nodes"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.CombinatorialComplex.shape"><code class="docutils literal notranslate"><span class="pre">CombinatorialComplex.shape</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.connected_components"><code class="docutils literal notranslate"><span class="pre">Data.connected_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.debug"><code class="docutils literal notranslate"><span class="pre">Data.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.edge_subgraph"><code class="docutils literal notranslate"><span class="pre">Data.edge_subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.from_dict"><code class="docutils literal notranslate"><span class="pre">Data.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.get_all_edge_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_edge_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.get_all_tensor_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_tensor_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.is_edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_edge_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.is_node_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_node_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.stores_as"><code class="docutils literal notranslate"><span class="pre">Data.stores_as()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.subgraph"><code class="docutils literal notranslate"><span class="pre">Data.subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.to_dict"><code class="docutils literal notranslate"><span class="pre">Data.to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.to_heterogeneous"><code class="docutils literal notranslate"><span class="pre">Data.to_heterogeneous()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.to_namedtuple"><code class="docutils literal notranslate"><span class="pre">Data.to_namedtuple()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.update"><code class="docutils literal notranslate"><span class="pre">Data.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.validate"><code class="docutils literal notranslate"><span class="pre">Data.validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.batch"><code class="docutils literal notranslate"><span class="pre">Data.batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.edge_attr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.edge_index"><code class="docutils literal notranslate"><span class="pre">Data.edge_index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.edge_stores"><code class="docutils literal notranslate"><span class="pre">Data.edge_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.edge_weight"><code class="docutils literal notranslate"><span class="pre">Data.edge_weight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.face"><code class="docutils literal notranslate"><span class="pre">Data.face</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.node_stores"><code class="docutils literal notranslate"><span class="pre">Data.node_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.num_edge_features"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.num_edge_types"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.num_faces"><code class="docutils literal notranslate"><span class="pre">Data.num_faces</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.num_features"><code class="docutils literal notranslate"><span class="pre">Data.num_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.num_node_features"><code class="docutils literal notranslate"><span class="pre">Data.num_node_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.num_node_types"><code class="docutils literal notranslate"><span class="pre">Data.num_node_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.num_nodes"><code class="docutils literal notranslate"><span class="pre">Data.num_nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.pos"><code class="docutils literal notranslate"><span class="pre">Data.pos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.stores"><code class="docutils literal notranslate"><span class="pre">Data.stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.time"><code class="docutils literal notranslate"><span class="pre">Data.time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.x"><code class="docutils literal notranslate"><span class="pre">Data.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Data.y"><code class="docutils literal notranslate"><span class="pre">Data.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.HyperEdge"><code class="docutils literal notranslate"><span class="pre">HyperEdge</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.HyperEdge.__init__"><code class="docutils literal notranslate"><span class="pre">HyperEdge.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.HyperEdge.rank"><code class="docutils literal notranslate"><span class="pre">HyperEdge.rank</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Simplicial2CombinatorialLifting"><code class="docutils literal notranslate"><span class="pre">Simplicial2CombinatorialLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.Simplicial2CombinatorialLifting.__init__"><code class="docutils literal notranslate"><span class="pre">Simplicial2CombinatorialLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.html#topobench.transforms.liftings.simplicial2combinatorial.coface_cc_lifting.get_combinatorial_complex_connectivity"><code class="docutils literal notranslate"><span class="pre">get_combinatorial_complex_connectivity()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -388,6 +586,17 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.__init__"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.forward"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.get_lower_cells"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.get_lower_cells()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.simplicial2combinatorial.CofaceCCLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">CofaceCCLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.simplicial2combinatorial.Simplicial2CombinatorialLifting"><code class="docutils literal notranslate"><span class="pre">Simplicial2CombinatorialLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.simplicial2combinatorial.Simplicial2CombinatorialLifting.__init__"><code class="docutils literal notranslate"><span class="pre">Simplicial2CombinatorialLifting.__init__()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

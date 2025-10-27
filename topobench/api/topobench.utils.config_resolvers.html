@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -321,8 +325,279 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-utils-config-resolvers-module">
-<h1>topobench.utils.config_resolvers module<a class="headerlink" href="#topobench-utils-config-resolvers-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.utils.config_resolvers">
+<span id="topobench-utils-config-resolvers-module"></span><h1>topobench.utils.config_resolvers module<a class="headerlink" href="#module-topobench.utils.config_resolvers" title="Link to this heading">#</a></h1>
+<p>Configuration resolvers for the topobench package.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.check_pses_in_transforms">
+<span class="sig-name descname"><span class="pre">check_pses_in_transforms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.check_pses_in_transforms" title="Link to this definition">#</a></dt>
+<dd><p>Check if there are positional or structural encodings in the transforms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>transforms</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameters for the transforms.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if there are positional or structural encodings, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_default_metrics">
+<span class="sig-name descname"><span class="pre">get_default_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_default_metrics" title="Link to this definition">#</a></dt>
+<dd><p>Get default metrics for a given task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>Task, either “classification” or “regression”.</p>
+</dd>
+<dt><strong>metrics</strong><span class="classifier">list, optional</span></dt><dd><p>List of metrics to be used. If None, the default metrics will be used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>List of default metrics.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the task is invalid.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_default_trainer">
+<span class="sig-name descname"><span class="pre">get_default_trainer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_default_trainer" title="Link to this definition">#</a></dt>
+<dd><p>Get default trainer configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Default trainer configuration file name.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_default_transform">
+<span class="sig-name descname"><span class="pre">get_default_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_default_transform" title="Link to this definition">#</a></dt>
+<dd><p>Get default transform for a given data domain and model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dataset</strong><span class="classifier">str</span></dt><dd><p>Dataset name. Should be in the format “data_domain/name”.</p>
+</dd>
+<dt><strong>model</strong><span class="classifier">str</span></dt><dd><p>Model name. Should be in the format “model_domain/name”.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Default transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_flattened_channels">
+<span class="sig-name descname"><span class="pre">get_flattened_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_flattened_channels" title="Link to this definition">#</a></dt>
+<dd><p>Get the output dimension of flattening a feature matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>num_nodes</strong><span class="classifier">int</span></dt><dd><p>Hidden dimension for the first layer.</p>
+</dd>
+<dt><strong>channels</strong><span class="classifier">int</span></dt><dd><p>Channel dimension.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Flatenned cchannels dimension.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_monitor_metric">
+<span class="sig-name descname"><span class="pre">get_monitor_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_monitor_metric" title="Link to this definition">#</a></dt>
+<dd><p>Get monitor metric for a given task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>Task, either “classification” or “regression”.</p>
+</dd>
+<dt><strong>metric</strong><span class="classifier">str</span></dt><dd><p>Name of the metric function.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Monitor metric.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the task is invalid.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_monitor_mode">
+<span class="sig-name descname"><span class="pre">get_monitor_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_monitor_mode" title="Link to this definition">#</a></dt>
+<dd><p>Get monitor mode for a given task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>Task, either “classification” or “regression”.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Monitor mode, either “max” or “min”.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the task is invalid.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_non_relational_out_channels">
+<span class="sig-name descname"><span class="pre">get_non_relational_out_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_non_relational_out_channels" title="Link to this definition">#</a></dt>
+<dd><p>Get the output dimension for a non-relational model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>num_nodes</strong><span class="classifier">int</span></dt><dd><p>Number of nodes in the input graph.</p>
+</dd>
+<dt><strong>channels</strong><span class="classifier">int</span></dt><dd><p>Channel dimension.</p>
+</dd>
+<dt><strong>task_level</strong><span class="classifier">int</span></dt><dd><p>Task level for the model.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Output dimension.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_required_lifting">
+<span class="sig-name descname"><span class="pre">get_required_lifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_required_lifting" title="Link to this definition">#</a></dt>
+<dd><p>Get required transform for a given data domain and model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_domain</strong><span class="classifier">str</span></dt><dd><p>Dataset domain.</p>
+</dd>
+<dt><strong>model</strong><span class="classifier">str</span></dt><dd><p>Model name. Should be in the format “model_domain/name”.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Required transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_in_channels">
+<span class="sig-name descname"><span class="pre">infer_in_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_in_channels" title="Link to this definition">#</a></dt>
+<dd><p>Infer the number of input channels for a given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dataset</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameters for the dataset.</p>
+</dd>
+<dt><strong>transforms</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameters for the transforms.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>List with dimensions of the input channels.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_num_cell_dimensions">
+<span class="sig-name descname"><span class="pre">infer_num_cell_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected_dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_num_cell_dimensions" title="Link to this definition">#</a></dt>
+<dd><p>Infer the length of a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>selected_dimensions</strong><span class="classifier">list</span></dt><dd><p>List of selected dimensions. If not None it will be used to infer the length.</p>
+</dd>
+<dt><strong>in_channels</strong><span class="classifier">list</span></dt><dd><p>List of input channels. If selected_dimensions is None, this list will be used to infer the length.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Length of the input list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_topotune_num_cell_dimensions">
+<span class="sig-name descname"><span class="pre">infer_topotune_num_cell_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighborhoods</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_topotune_num_cell_dimensions" title="Link to this definition">#</a></dt>
+<dd><p>Infer the length of a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>neighborhoods</strong><span class="classifier">list</span></dt><dd><p>List of neighborhoods.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Length of the input list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -359,6 +634,35 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.check_pses_in_transforms"><code class="docutils literal notranslate"><span class="pre">check_pses_in_transforms()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_default_metrics"><code class="docutils literal notranslate"><span class="pre">get_default_metrics()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_default_trainer"><code class="docutils literal notranslate"><span class="pre">get_default_trainer()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_default_transform"><code class="docutils literal notranslate"><span class="pre">get_default_transform()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_flattened_channels"><code class="docutils literal notranslate"><span class="pre">get_flattened_channels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_monitor_metric"><code class="docutils literal notranslate"><span class="pre">get_monitor_metric()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_monitor_mode"><code class="docutils literal notranslate"><span class="pre">get_monitor_mode()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_non_relational_out_channels"><code class="docutils literal notranslate"><span class="pre">get_non_relational_out_channels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_required_lifting"><code class="docutils literal notranslate"><span class="pre">get_required_lifting()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_in_channels"><code class="docutils literal notranslate"><span class="pre">infer_in_channels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_num_cell_dimensions"><code class="docutils literal notranslate"><span class="pre">infer_num_cell_dimensions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_topotune_num_cell_dimensions"><code class="docutils literal notranslate"><span class="pre">infer_topotune_num_cell_dimensions()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

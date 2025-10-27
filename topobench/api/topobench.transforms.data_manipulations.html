@@ -44,6 +44,8 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/topobench.transforms.data_manipulations';</script>
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.transforms.data_manipulations.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -325,28 +327,1184 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-data-manipulations-package">
-<h1>topobench.transforms.data_manipulations package<a class="headerlink" href="#topobench-transforms-data-manipulations-package" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.transforms.data_manipulations">
+<span id="topobench-transforms-data-manipulations-package"></span><h1>topobench.transforms.data_manipulations package<a class="headerlink" href="#module-topobench.transforms.data_manipulations" title="Link to this heading">#</a></h1>
+<p>Data manipulations module with automated exports.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CalculateSimplicialCurvature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CalculateSimplicialCurvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>A transform that calculates the simplicial curvature of the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CalculateSimplicialCurvature.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CalculateSimplicialCurvature.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CalculateSimplicialCurvature.one_cell_curvature">
+<span class="sig-name descname"><span class="pre">one_cell_curvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.one_cell_curvature" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the one cell curvature of the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Data with the one cell curvature.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CalculateSimplicialCurvature.two_cell_curvature">
+<span class="sig-name descname"><span class="pre">two_cell_curvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.two_cell_curvature" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the two cell curvature of the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Data with the two cell curvature.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CalculateSimplicialCurvature.zero_cell_curvature">
+<span class="sig-name descname"><span class="pre">zero_cell_curvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.zero_cell_curvature" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the zero cell curvature of the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Data with the zero cell curvature.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CombinedPSEs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CombinedPSEs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encodings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CombinedPSEs" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Combined PSEs transform.</p>
+<p>Applies one or more pre-defined positional or structural encoding transforms
+(LapPE, RWSE) to a graph, storing their outputs and optionally
+concatenating them to <cite>data.x</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>encodings</strong><span class="classifier">list of str</span></dt><dd><p>List of structural encodings to apply. Supported values are
+“LapPE” for Laplacian Positional Encoding and “RWSE” for
+Random Walk Structural Encoding.</p>
+</dd>
+<dt><strong>parameters</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional parameters for the encoding transforms.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CombinedPSEs.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encodings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CombinedPSEs.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.CombinedPSEs.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.CombinedPSEs.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data with added structural encodings.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.EqualGausFeatures">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EqualGausFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.EqualGausFeatures" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>A transform that generates equal Gaussian features for all nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class. It should contain the following keys:
+- mean (float): The mean of the Gaussian distribution.
+- std (float): The standard deviation of the Gaussian distribution.
+- num_features (int): The number of features to generate.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.EqualGausFeatures.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.EqualGausFeatures.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.EqualGausFeatures.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.EqualGausFeatures.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.GroupCombinatorialHomophily">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GroupCombinatorialHomophily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Calculates group combinatorial homophily of the input hypergraph.</p>
+<p>This transformation implements the methodology from the paper:
+“Combinatorial Characterizations and Impossibilities for Higher-order Homophily”.
+It computes homophily metrics for hypergraphs by analyzing the relationship between
+node labels within hyperedges.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional parameters for the transform.
+- top_k : int, default=3</p>
+<blockquote>
+<div><p>Number of top hyperedge cardinalities to analyze.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>type</strong><span class="classifier">str</span></dt><dd><p>Identifier for the transform type.</p>
+</dd>
+<dt><strong>top_k</strong><span class="classifier">int</span></dt><dd><p>Number of top hyperedge cardinalities to analyze.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.GroupCombinatorialHomophily.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_D_matrix">
+<span class="sig-name descname"><span class="pre">calculate_D_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_cardinalities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_node_idxs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_D_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the degree matrices D and D_t for the hypergraph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>H</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Dense incidence matrix of the hypergraph.</p>
+</dd>
+<dt><strong>labels</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Node labels.</p>
+</dd>
+<dt><strong>he_cardinalities</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Cardinality of each hyperedge.</p>
+</dd>
+<dt><strong>unique_labels</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to their counts.</p>
+</dd>
+<dt><strong>class_node_idxs</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to node indices.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple[torch.Tensor, torch.Tensor]</dt><dd><ul class="simple">
+<li><p>D_t_class : Type-t degree distribution matrix for each class</p></li>
+<li><p>D : Degree matrix counting same-label nodes in hyperedges</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_affinity_score">
+<span class="sig-name descname"><span class="pre">calculate_affinity_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_mod</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_affinity_score" title="Link to this definition">#</a></dt>
+<dd><p>Calculate affinity score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n_nodes</strong><span class="classifier">int</span></dt><dd><p>Total number of nodes.</p>
+</dd>
+<dt><strong>X_mod</strong><span class="classifier">int</span></dt><dd><p>Total number of nodes in a class.</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">int</span></dt><dd><p>Type-t degree.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int</span></dt><dd><p>Max hyperedge cardinality.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>The affinity matrix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_baseline_matrix">
+<span class="sig-name descname"><span class="pre">calculate_baseline_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">he_cardinalities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_node_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_nodes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_baseline_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the baseline affinity matrix for comparison.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>he_cardinalities</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Cardinality of each hyperedge.</p>
+</dd>
+<dt><strong>unique_labels</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to their counts.</p>
+</dd>
+<dt><strong>class_node_idxs</strong><span class="classifier">dict</span></dt><dd><p>Dictionary mapping labels to node indices.</p>
+</dd>
+<dt><strong>count_labels</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Count of nodes for each label.</p>
+</dd>
+<dt><strong>n_nodes</strong><span class="classifier">int</span></dt><dd><p>Total number of nodes in the hypergraph.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Baseline matrix containing expected affinity scores for each class
+and degree type.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.GroupCombinatorialHomophily.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.IdentityTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IdentityTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.IdentityTransform" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>An identity transform that does nothing to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.IdentityTransform.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.IdentityTransform.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.IdentityTransform.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.IdentityTransform.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The same data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.InfereKNNConnectivity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InfereKNNConnectivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.InfereKNNConnectivity" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Transform to infer point cloud connectivity.</p>
+<p>The transform generates the k-nearest neighbor connectivity of the input point cloud.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.InfereKNNConnectivity.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.InfereKNNConnectivity.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.InfereKNNConnectivity.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.InfereKNNConnectivity.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.InfereRadiusConnectivity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InfereRadiusConnectivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.InfereRadiusConnectivity" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Class to infer point cloud connectivity.</p>
+<p>The transform generates the radius connectivity of the input point cloud.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.InfereRadiusConnectivity.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.InfereRadiusConnectivity.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.InfereRadiusConnectivity.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.InfereRadiusConnectivity.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.KeepOnlyConnectedComponent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">KeepOnlyConnectedComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.KeepOnlyConnectedComponent" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Class to keep only the largest connected components of the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.KeepOnlyConnectedComponent.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.KeepOnlyConnectedComponent.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.KeepOnlyConnectedComponent.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.KeepOnlyConnectedComponent.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.KeepSelectedDataFields">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">KeepSelectedDataFields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.KeepSelectedDataFields" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>A transform that keeps only the selected fields of the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.KeepSelectedDataFields.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.KeepSelectedDataFields.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.KeepSelectedDataFields.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.KeepSelectedDataFields.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.LapPE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LapPE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_eigenvalues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.LapPE" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Laplacian Positional Encoding (LapPE) transform.</p>
+<p>This computes the smallest eigenvectors of the normalized Laplacian
+matrix and appends them as node features (structural encodings).
+Optionally pads to a fixed dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>max_pe_dim</strong><span class="classifier">int</span></dt><dd><p>Maximum number of eigenvectors to use (dimensionality of the encoding).</p>
+</dd>
+<dt><strong>include_eigenvalues</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates eigenvalues alongside eigenvectors.
+Shape then becomes <code class="docutils literal notranslate"><span class="pre">[num_nodes,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">max_pe_dim]</span></code>. Default is False.</p>
+</dd>
+<dt><strong>include_first</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, removes eigenvectors corresponding to (near-)zero eigenvalues
+(constant eigenvector in connected graphs). Default is False.</p>
+</dd>
+<dt><strong>concat_to_x</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates the encodings with existing node features in
+<code class="docutils literal notranslate"><span class="pre">data.x</span></code>. If <code class="docutils literal notranslate"><span class="pre">data.x</span></code> is None, creates it. Default is True.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments (not used).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.LapPE.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_eigenvalues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.LapPE.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.LapPE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.LapPE.forward" title="Link to this definition">#</a></dt>
+<dd><p>Compute the Laplacian positional encodings for the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">Data</span></dt><dd><p>Input graph data object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Data</dt><dd><p>Graph data object with Laplacian positional encodings added.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.MessagePassingHomophily">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MessagePassingHomophily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.MessagePassingHomophily" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Calculates message passing homophily of the input data.</p>
+<p>This transformation implements the methodology from the paper:
+“Hypergraph Neural Networks through the Lens of Message Passing: A Common Perspective to Homophily and Architecture Design”.
+It computes homophily metrics for hypergraphs by analyzing the relationship between
+node labels within hyperedges.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional parameters for the transform.
+- top_k : int, default=3</p>
+<blockquote>
+<div><p>Number of top hyperedge cardinalities to analyze.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>type</strong><span class="classifier">str</span></dt><dd><p>Identifier for the transform type.</p>
+</dd>
+<dt><strong>top_k</strong><span class="classifier">int</span></dt><dd><p>Number of top hyperedge cardinalities to analyze.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.MessagePassingHomophily.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.MessagePassingHomophily.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.MessagePassingHomophily.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.MessagePassingHomophily.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.NodeDegrees">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NodeDegrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.NodeDegrees" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>A transform that calculates the node degrees of the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.NodeDegrees.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.NodeDegrees.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.NodeDegrees.calculate_node_degrees">
+<span class="sig-name descname"><span class="pre">calculate_node_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.NodeDegrees.calculate_node_degrees" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the node degrees of the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+<dt><strong>field</strong><span class="classifier">str</span></dt><dd><p>The field to calculate the node degrees.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.NodeDegrees.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.NodeDegrees.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.NodeFeaturesToFloat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NodeFeaturesToFloat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.NodeFeaturesToFloat" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>A transform that converts the node features of the input graph to float.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.NodeFeaturesToFloat.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.NodeFeaturesToFloat.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.NodeFeaturesToFloat.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.NodeFeaturesToFloat.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.OneHotDegreeFeatures">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OneHotDegreeFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Class for one hot degree features transform.</p>
+<p>A transform that adds the node degree as one hot encodings to the node features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>max_degree</strong><span class="classifier">int</span></dt><dd><p>The maximum degree of the graph.</p>
+</dd>
+<dt><strong>degrees_fields</strong><span class="classifier">str</span></dt><dd><p>The field containing the node degrees.</p>
+</dd>
+<dt><strong>features_fields</strong><span class="classifier">str</span></dt><dd><p>The field containing the node features.</p>
+</dd>
+<dt><strong>cat</strong><span class="classifier">bool, optional</span></dt><dd><p>If set to <cite>True</cite>, the one hot encodings are concatenated to the node
+features (default: False).</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.OneHotDegreeFeatures.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.OneHotDegreeFeatures.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RWSE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RWSE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RWSE" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Random Walk Structural Encoding (RWSE) transform.</p>
+<p>Computes return probabilities of random walks of length 1..K
+for each node in the graph, and appends them as structural
+encodings to node features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>max_pe_dim</strong><span class="classifier">int</span></dt><dd><p>Maximum walk length (number of RWSE dimensions).</p>
+</dd>
+<dt><strong>concat_to_x</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates the encodings with existing node
+features in <code class="docutils literal notranslate"><span class="pre">data.x</span></code>. If <code class="docutils literal notranslate"><span class="pre">data.x</span></code> is None, creates it.
+Default is True.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments (not used).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RWSE.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RWSE.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RWSE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RWSE.forward" title="Link to this definition">#</a></dt>
+<dd><p>Compute the RWSE for the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">Data</span></dt><dd><p>Input graph data object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Data</dt><dd><p>Graph data object with RWSE added.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RedefineSimplicialNeighbourhoods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>An transform that redifines simplicial complex neighbourhood.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The same data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html">topobench.transforms.data_manipulations.calculate_simplicial_curvature module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.equal_gaus_features.html">topobench.transforms.data_manipulations.equal_gaus_features module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html">topobench.transforms.data_manipulations.group_homophily module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.identity_transform.html">topobench.transforms.data_manipulations.identity_transform module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_knn_connectivity.html">topobench.transforms.data_manipulations.infere_knn_connectivity module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_radius_connectivity.html">topobench.transforms.data_manipulations.infere_radius_connectivity module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html">topobench.transforms.data_manipulations.keep_only_connected_component module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_selected_data_fields.html">topobench.transforms.data_manipulations.keep_selected_data_fields module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html">topobench.transforms.data_manipulations.laplacian_encodings module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.mp_homophily.html">topobench.transforms.data_manipulations.mp_homophily module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.node_degrees.html">topobench.transforms.data_manipulations.node_degrees module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.node_features_to_float.html">topobench.transforms.data_manipulations.node_features_to_float module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.one_hot_degree_features.html">topobench.transforms.data_manipulations.one_hot_degree_features module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html">topobench.transforms.data_manipulations.positional_and_structural_encodings module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html">topobench.transforms.data_manipulations.random_walk_encodings module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html">topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html">topobench.transforms.data_manipulations.calculate_simplicial_curvature module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html#topobench.transforms.data_manipulations.calculate_simplicial_curvature.CalculateSimplicialCurvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html#topobench.transforms.data_manipulations.calculate_simplicial_curvature.CalculateSimplicialCurvature.__init__"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html#topobench.transforms.data_manipulations.calculate_simplicial_curvature.CalculateSimplicialCurvature.forward"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html#topobench.transforms.data_manipulations.calculate_simplicial_curvature.CalculateSimplicialCurvature.one_cell_curvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.one_cell_curvature()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html#topobench.transforms.data_manipulations.calculate_simplicial_curvature.CalculateSimplicialCurvature.two_cell_curvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.two_cell_curvature()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.calculate_simplicial_curvature.html#topobench.transforms.data_manipulations.calculate_simplicial_curvature.CalculateSimplicialCurvature.zero_cell_curvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.zero_cell_curvature()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.equal_gaus_features.html">topobench.transforms.data_manipulations.equal_gaus_features module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.equal_gaus_features.html#topobench.transforms.data_manipulations.equal_gaus_features.EqualGausFeatures"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.equal_gaus_features.html#topobench.transforms.data_manipulations.equal_gaus_features.EqualGausFeatures.__init__"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.equal_gaus_features.html#topobench.transforms.data_manipulations.equal_gaus_features.EqualGausFeatures.forward"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html">topobench.transforms.data_manipulations.group_homophily module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.__init__"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_D_matrix"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_D_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_affinity_score"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_affinity_score()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.calculate_baseline_matrix"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_baseline_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html#topobench.transforms.data_manipulations.group_homophily.GroupCombinatorialHomophily.forward"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.group_homophily.html#topobench.transforms.data_manipulations.group_homophily.comb"><code class="docutils literal notranslate"><span class="pre">comb()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.identity_transform.html">topobench.transforms.data_manipulations.identity_transform module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.identity_transform.html#topobench.transforms.data_manipulations.identity_transform.IdentityTransform"><code class="docutils literal notranslate"><span class="pre">IdentityTransform</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.identity_transform.html#topobench.transforms.data_manipulations.identity_transform.IdentityTransform.__init__"><code class="docutils literal notranslate"><span class="pre">IdentityTransform.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.identity_transform.html#topobench.transforms.data_manipulations.identity_transform.IdentityTransform.forward"><code class="docutils literal notranslate"><span class="pre">IdentityTransform.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_knn_connectivity.html">topobench.transforms.data_manipulations.infere_knn_connectivity module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_knn_connectivity.html#topobench.transforms.data_manipulations.infere_knn_connectivity.InfereKNNConnectivity"><code class="docutils literal notranslate"><span class="pre">InfereKNNConnectivity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_knn_connectivity.html#topobench.transforms.data_manipulations.infere_knn_connectivity.InfereKNNConnectivity.__init__"><code class="docutils literal notranslate"><span class="pre">InfereKNNConnectivity.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_knn_connectivity.html#topobench.transforms.data_manipulations.infere_knn_connectivity.InfereKNNConnectivity.forward"><code class="docutils literal notranslate"><span class="pre">InfereKNNConnectivity.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_knn_connectivity.html#topobench.transforms.data_manipulations.infere_knn_connectivity.knn_graph"><code class="docutils literal notranslate"><span class="pre">knn_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_radius_connectivity.html">topobench.transforms.data_manipulations.infere_radius_connectivity module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_radius_connectivity.html#topobench.transforms.data_manipulations.infere_radius_connectivity.InfereRadiusConnectivity"><code class="docutils literal notranslate"><span class="pre">InfereRadiusConnectivity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_radius_connectivity.html#topobench.transforms.data_manipulations.infere_radius_connectivity.InfereRadiusConnectivity.__init__"><code class="docutils literal notranslate"><span class="pre">InfereRadiusConnectivity.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_radius_connectivity.html#topobench.transforms.data_manipulations.infere_radius_connectivity.InfereRadiusConnectivity.forward"><code class="docutils literal notranslate"><span class="pre">InfereRadiusConnectivity.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.infere_radius_connectivity.html#topobench.transforms.data_manipulations.infere_radius_connectivity.radius_graph"><code class="docutils literal notranslate"><span class="pre">radius_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html">topobench.transforms.data_manipulations.keep_only_connected_component module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.__init__"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.forward"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents"><code class="docutils literal notranslate"><span class="pre">LargestConnectedComponents</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.__init__"><code class="docutils literal notranslate"><span class="pre">LargestConnectedComponents.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_only_connected_component.html#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.forward"><code class="docutils literal notranslate"><span class="pre">LargestConnectedComponents.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_selected_data_fields.html">topobench.transforms.data_manipulations.keep_selected_data_fields module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_selected_data_fields.html#topobench.transforms.data_manipulations.keep_selected_data_fields.KeepSelectedDataFields"><code class="docutils literal notranslate"><span class="pre">KeepSelectedDataFields</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_selected_data_fields.html#topobench.transforms.data_manipulations.keep_selected_data_fields.KeepSelectedDataFields.__init__"><code class="docutils literal notranslate"><span class="pre">KeepSelectedDataFields.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.keep_selected_data_fields.html#topobench.transforms.data_manipulations.keep_selected_data_fields.KeepSelectedDataFields.forward"><code class="docutils literal notranslate"><span class="pre">KeepSelectedDataFields.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html">topobench.transforms.data_manipulations.laplacian_encodings module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.BaseTransform"><code class="docutils literal notranslate"><span class="pre">BaseTransform</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.BaseTransform.forward"><code class="docutils literal notranslate"><span class="pre">BaseTransform.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.connected_components"><code class="docutils literal notranslate"><span class="pre">Data.connected_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.debug"><code class="docutils literal notranslate"><span class="pre">Data.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.edge_subgraph"><code class="docutils literal notranslate"><span class="pre">Data.edge_subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.from_dict"><code class="docutils literal notranslate"><span class="pre">Data.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.get_all_edge_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_edge_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.get_all_tensor_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_tensor_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.is_edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_edge_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.is_node_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_node_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.stores_as"><code class="docutils literal notranslate"><span class="pre">Data.stores_as()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.subgraph"><code class="docutils literal notranslate"><span class="pre">Data.subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.to_dict"><code class="docutils literal notranslate"><span class="pre">Data.to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.to_heterogeneous"><code class="docutils literal notranslate"><span class="pre">Data.to_heterogeneous()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.to_namedtuple"><code class="docutils literal notranslate"><span class="pre">Data.to_namedtuple()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.update"><code class="docutils literal notranslate"><span class="pre">Data.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.validate"><code class="docutils literal notranslate"><span class="pre">Data.validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.batch"><code class="docutils literal notranslate"><span class="pre">Data.batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.edge_attr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.edge_index"><code class="docutils literal notranslate"><span class="pre">Data.edge_index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.edge_stores"><code class="docutils literal notranslate"><span class="pre">Data.edge_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.edge_weight"><code class="docutils literal notranslate"><span class="pre">Data.edge_weight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.face"><code class="docutils literal notranslate"><span class="pre">Data.face</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.node_stores"><code class="docutils literal notranslate"><span class="pre">Data.node_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.num_edge_features"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.num_edge_types"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.num_faces"><code class="docutils literal notranslate"><span class="pre">Data.num_faces</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.num_features"><code class="docutils literal notranslate"><span class="pre">Data.num_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.num_node_features"><code class="docutils literal notranslate"><span class="pre">Data.num_node_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.num_node_types"><code class="docutils literal notranslate"><span class="pre">Data.num_node_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.num_nodes"><code class="docutils literal notranslate"><span class="pre">Data.num_nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.pos"><code class="docutils literal notranslate"><span class="pre">Data.pos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.stores"><code class="docutils literal notranslate"><span class="pre">Data.stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.time"><code class="docutils literal notranslate"><span class="pre">Data.time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.x"><code class="docutils literal notranslate"><span class="pre">Data.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.Data.y"><code class="docutils literal notranslate"><span class="pre">Data.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.LapPE"><code class="docutils literal notranslate"><span class="pre">LapPE</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.LapPE.__init__"><code class="docutils literal notranslate"><span class="pre">LapPE.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.LapPE.forward"><code class="docutils literal notranslate"><span class="pre">LapPE.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.eigsh"><code class="docutils literal notranslate"><span class="pre">eigsh()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.get_laplacian"><code class="docutils literal notranslate"><span class="pre">get_laplacian()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.laplacian_encodings.html#topobench.transforms.data_manipulations.laplacian_encodings.to_scipy_sparse_matrix"><code class="docutils literal notranslate"><span class="pre">to_scipy_sparse_matrix()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.mp_homophily.html">topobench.transforms.data_manipulations.mp_homophily module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.mp_homophily.html#topobench.transforms.data_manipulations.mp_homophily.MessagePassingHomophily"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.mp_homophily.html#topobench.transforms.data_manipulations.mp_homophily.MessagePassingHomophily.__init__"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.mp_homophily.html#topobench.transforms.data_manipulations.mp_homophily.MessagePassingHomophily.forward"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.node_degrees.html">topobench.transforms.data_manipulations.node_degrees module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.node_degrees.html#topobench.transforms.data_manipulations.node_degrees.NodeDegrees"><code class="docutils literal notranslate"><span class="pre">NodeDegrees</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.node_degrees.html#topobench.transforms.data_manipulations.node_degrees.NodeDegrees.__init__"><code class="docutils literal notranslate"><span class="pre">NodeDegrees.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.node_degrees.html#topobench.transforms.data_manipulations.node_degrees.NodeDegrees.calculate_node_degrees"><code class="docutils literal notranslate"><span class="pre">NodeDegrees.calculate_node_degrees()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.node_degrees.html#topobench.transforms.data_manipulations.node_degrees.NodeDegrees.forward"><code class="docutils literal notranslate"><span class="pre">NodeDegrees.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.node_features_to_float.html">topobench.transforms.data_manipulations.node_features_to_float module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.node_features_to_float.html#topobench.transforms.data_manipulations.node_features_to_float.NodeFeaturesToFloat"><code class="docutils literal notranslate"><span class="pre">NodeFeaturesToFloat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.node_features_to_float.html#topobench.transforms.data_manipulations.node_features_to_float.NodeFeaturesToFloat.__init__"><code class="docutils literal notranslate"><span class="pre">NodeFeaturesToFloat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.node_features_to_float.html#topobench.transforms.data_manipulations.node_features_to_float.NodeFeaturesToFloat.forward"><code class="docutils literal notranslate"><span class="pre">NodeFeaturesToFloat.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.one_hot_degree_features.html">topobench.transforms.data_manipulations.one_hot_degree_features module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.one_hot_degree_features.html#topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.one_hot_degree_features.html#topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures.__init__"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.one_hot_degree_features.html#topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures.forward"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.one_hot_degree_features.html#topobench.transforms.data_manipulations.one_hot_degree_features.one_hot"><code class="docutils literal notranslate"><span class="pre">one_hot()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html">topobench.transforms.data_manipulations.positional_and_structural_encodings module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.BaseTransform"><code class="docutils literal notranslate"><span class="pre">BaseTransform</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.BaseTransform.forward"><code class="docutils literal notranslate"><span class="pre">BaseTransform.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.CombinedPSEs"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.CombinedPSEs.__init__"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.CombinedPSEs.forward"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.connected_components"><code class="docutils literal notranslate"><span class="pre">Data.connected_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.debug"><code class="docutils literal notranslate"><span class="pre">Data.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.edge_subgraph"><code class="docutils literal notranslate"><span class="pre">Data.edge_subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.from_dict"><code class="docutils literal notranslate"><span class="pre">Data.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.get_all_edge_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_edge_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.get_all_tensor_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_tensor_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.is_edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_edge_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.is_node_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_node_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.stores_as"><code class="docutils literal notranslate"><span class="pre">Data.stores_as()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.subgraph"><code class="docutils literal notranslate"><span class="pre">Data.subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.to_dict"><code class="docutils literal notranslate"><span class="pre">Data.to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.to_heterogeneous"><code class="docutils literal notranslate"><span class="pre">Data.to_heterogeneous()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.to_namedtuple"><code class="docutils literal notranslate"><span class="pre">Data.to_namedtuple()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.update"><code class="docutils literal notranslate"><span class="pre">Data.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.validate"><code class="docutils literal notranslate"><span class="pre">Data.validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.batch"><code class="docutils literal notranslate"><span class="pre">Data.batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.edge_attr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.edge_index"><code class="docutils literal notranslate"><span class="pre">Data.edge_index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.edge_stores"><code class="docutils literal notranslate"><span class="pre">Data.edge_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.edge_weight"><code class="docutils literal notranslate"><span class="pre">Data.edge_weight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.face"><code class="docutils literal notranslate"><span class="pre">Data.face</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.node_stores"><code class="docutils literal notranslate"><span class="pre">Data.node_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.num_edge_features"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.num_edge_types"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.num_faces"><code class="docutils literal notranslate"><span class="pre">Data.num_faces</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.num_features"><code class="docutils literal notranslate"><span class="pre">Data.num_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.num_node_features"><code class="docutils literal notranslate"><span class="pre">Data.num_node_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.num_node_types"><code class="docutils literal notranslate"><span class="pre">Data.num_node_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.num_nodes"><code class="docutils literal notranslate"><span class="pre">Data.num_nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.pos"><code class="docutils literal notranslate"><span class="pre">Data.pos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.stores"><code class="docutils literal notranslate"><span class="pre">Data.stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.time"><code class="docutils literal notranslate"><span class="pre">Data.time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.x"><code class="docutils literal notranslate"><span class="pre">Data.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html#topobench.transforms.data_manipulations.positional_and_structural_encodings.Data.y"><code class="docutils literal notranslate"><span class="pre">Data.y</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html">topobench.transforms.data_manipulations.random_walk_encodings module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform"><code class="docutils literal notranslate"><span class="pre">BaseTransform</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform.forward"><code class="docutils literal notranslate"><span class="pre">BaseTransform.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.connected_components"><code class="docutils literal notranslate"><span class="pre">Data.connected_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.debug"><code class="docutils literal notranslate"><span class="pre">Data.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.edge_subgraph"><code class="docutils literal notranslate"><span class="pre">Data.edge_subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.from_dict"><code class="docutils literal notranslate"><span class="pre">Data.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.get_all_edge_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_edge_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.get_all_tensor_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_tensor_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.is_edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_edge_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.is_node_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_node_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.stores_as"><code class="docutils literal notranslate"><span class="pre">Data.stores_as()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.subgraph"><code class="docutils literal notranslate"><span class="pre">Data.subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.to_dict"><code class="docutils literal notranslate"><span class="pre">Data.to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.to_heterogeneous"><code class="docutils literal notranslate"><span class="pre">Data.to_heterogeneous()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.to_namedtuple"><code class="docutils literal notranslate"><span class="pre">Data.to_namedtuple()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.update"><code class="docutils literal notranslate"><span class="pre">Data.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.validate"><code class="docutils literal notranslate"><span class="pre">Data.validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.batch"><code class="docutils literal notranslate"><span class="pre">Data.batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.edge_attr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.edge_index"><code class="docutils literal notranslate"><span class="pre">Data.edge_index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.edge_stores"><code class="docutils literal notranslate"><span class="pre">Data.edge_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.edge_weight"><code class="docutils literal notranslate"><span class="pre">Data.edge_weight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.face"><code class="docutils literal notranslate"><span class="pre">Data.face</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.node_stores"><code class="docutils literal notranslate"><span class="pre">Data.node_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.num_edge_features"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.num_edge_types"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.num_faces"><code class="docutils literal notranslate"><span class="pre">Data.num_faces</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.num_features"><code class="docutils literal notranslate"><span class="pre">Data.num_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.num_node_features"><code class="docutils literal notranslate"><span class="pre">Data.num_node_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.num_node_types"><code class="docutils literal notranslate"><span class="pre">Data.num_node_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.num_nodes"><code class="docutils literal notranslate"><span class="pre">Data.num_nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.pos"><code class="docutils literal notranslate"><span class="pre">Data.pos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.stores"><code class="docutils literal notranslate"><span class="pre">Data.stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.time"><code class="docutils literal notranslate"><span class="pre">Data.time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.x"><code class="docutils literal notranslate"><span class="pre">Data.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.Data.y"><code class="docutils literal notranslate"><span class="pre">Data.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.RWSE"><code class="docutils literal notranslate"><span class="pre">RWSE</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.RWSE.__init__"><code class="docutils literal notranslate"><span class="pre">RWSE.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.RWSE.forward"><code class="docutils literal notranslate"><span class="pre">RWSE.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.degree"><code class="docutils literal notranslate"><span class="pre">degree()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html">topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html#topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.RedefineSimplicialNeighbourhoods"><code class="docutils literal notranslate"><span class="pre">RedefineSimplicialNeighbourhoods</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html#topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.RedefineSimplicialNeighbourhoods.__init__"><code class="docutils literal notranslate"><span class="pre">RedefineSimplicialNeighbourhoods.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html#topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.RedefineSimplicialNeighbourhoods.forward"><code class="docutils literal notranslate"><span class="pre">RedefineSimplicialNeighbourhoods.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html#topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.data2simplicial"><code class="docutils literal notranslate"><span class="pre">data2simplicial()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html#topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.get_complex_connectivity"><code class="docutils literal notranslate"><span class="pre">get_complex_connectivity()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -399,6 +1557,93 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.__init__"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.forward"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.one_cell_curvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.one_cell_curvature()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.two_cell_curvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.two_cell_curvature()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CalculateSimplicialCurvature.zero_cell_curvature"><code class="docutils literal notranslate"><span class="pre">CalculateSimplicialCurvature.zero_cell_curvature()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CombinedPSEs"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CombinedPSEs.__init__"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.CombinedPSEs.forward"><code class="docutils literal notranslate"><span class="pre">CombinedPSEs.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.EqualGausFeatures"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.EqualGausFeatures.__init__"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.EqualGausFeatures.forward"><code class="docutils literal notranslate"><span class="pre">EqualGausFeatures.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.__init__"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_D_matrix"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_D_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_affinity_score"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_affinity_score()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.calculate_baseline_matrix"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.calculate_baseline_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.GroupCombinatorialHomophily.forward"><code class="docutils literal notranslate"><span class="pre">GroupCombinatorialHomophily.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.IdentityTransform"><code class="docutils literal notranslate"><span class="pre">IdentityTransform</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.IdentityTransform.__init__"><code class="docutils literal notranslate"><span class="pre">IdentityTransform.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.IdentityTransform.forward"><code class="docutils literal notranslate"><span class="pre">IdentityTransform.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.InfereKNNConnectivity"><code class="docutils literal notranslate"><span class="pre">InfereKNNConnectivity</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.InfereKNNConnectivity.__init__"><code class="docutils literal notranslate"><span class="pre">InfereKNNConnectivity.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.InfereKNNConnectivity.forward"><code class="docutils literal notranslate"><span class="pre">InfereKNNConnectivity.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.InfereRadiusConnectivity"><code class="docutils literal notranslate"><span class="pre">InfereRadiusConnectivity</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.InfereRadiusConnectivity.__init__"><code class="docutils literal notranslate"><span class="pre">InfereRadiusConnectivity.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.InfereRadiusConnectivity.forward"><code class="docutils literal notranslate"><span class="pre">InfereRadiusConnectivity.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.KeepOnlyConnectedComponent"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.KeepOnlyConnectedComponent.__init__"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.KeepOnlyConnectedComponent.forward"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.KeepSelectedDataFields"><code class="docutils literal notranslate"><span class="pre">KeepSelectedDataFields</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.KeepSelectedDataFields.__init__"><code class="docutils literal notranslate"><span class="pre">KeepSelectedDataFields.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.KeepSelectedDataFields.forward"><code class="docutils literal notranslate"><span class="pre">KeepSelectedDataFields.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.LapPE"><code class="docutils literal notranslate"><span class="pre">LapPE</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.LapPE.__init__"><code class="docutils literal notranslate"><span class="pre">LapPE.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.LapPE.forward"><code class="docutils literal notranslate"><span class="pre">LapPE.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.MessagePassingHomophily"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.MessagePassingHomophily.__init__"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.MessagePassingHomophily.forward"><code class="docutils literal notranslate"><span class="pre">MessagePassingHomophily.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.NodeDegrees"><code class="docutils literal notranslate"><span class="pre">NodeDegrees</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.NodeDegrees.__init__"><code class="docutils literal notranslate"><span class="pre">NodeDegrees.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.NodeDegrees.calculate_node_degrees"><code class="docutils literal notranslate"><span class="pre">NodeDegrees.calculate_node_degrees()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.NodeDegrees.forward"><code class="docutils literal notranslate"><span class="pre">NodeDegrees.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.NodeFeaturesToFloat"><code class="docutils literal notranslate"><span class="pre">NodeFeaturesToFloat</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.NodeFeaturesToFloat.__init__"><code class="docutils literal notranslate"><span class="pre">NodeFeaturesToFloat.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.NodeFeaturesToFloat.forward"><code class="docutils literal notranslate"><span class="pre">NodeFeaturesToFloat.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures.__init__"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.OneHotDegreeFeatures.forward"><code class="docutils literal notranslate"><span class="pre">OneHotDegreeFeatures.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RWSE"><code class="docutils literal notranslate"><span class="pre">RWSE</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RWSE.__init__"><code class="docutils literal notranslate"><span class="pre">RWSE.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RWSE.forward"><code class="docutils literal notranslate"><span class="pre">RWSE.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods"><code class="docutils literal notranslate"><span class="pre">RedefineSimplicialNeighbourhoods</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods.__init__"><code class="docutils literal notranslate"><span class="pre">RedefineSimplicialNeighbourhoods.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.RedefineSimplicialNeighbourhoods.forward"><code class="docutils literal notranslate"><span class="pre">RedefineSimplicialNeighbourhoods.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

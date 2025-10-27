@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -329,6 +329,98 @@
 <span id="topobench-loss-loss-module"></span><h1>topobench.loss.loss module<a class="headerlink" href="#module-topobench.loss.loss" title="Link to this heading">#</a></h1>
 <p>Loss module for the topobench package.</p>
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.loss.loss.AbstractLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbstractLoss</span></span><a class="headerlink" href="#topobench.loss.loss.AbstractLoss" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.optimizer.base.html#topobench.optimizer.base.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Abstract class for the loss class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.loss.AbstractLoss.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.loss.AbstractLoss.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.loss.AbstractLoss.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.loss.AbstractLoss.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.loss.loss.DatasetLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DatasetLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_loss</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.loss.DatasetLoss" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.loss.base.html#topobench.loss.base.AbstractLoss" title="topobench.loss.base.AbstractLoss"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a></p>
+<p>Defines the default model loss for the given task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dataset_loss</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the dataset loss information.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.loss.DatasetLoss.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_loss</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.loss.DatasetLoss.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.loss.DatasetLoss.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.loss.DatasetLoss.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of the loss function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the model output with the loss.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.loss.loss.DatasetLoss.forward_criterion">
+<span class="sig-name descname"><span class="pre">forward_criterion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logits</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.loss.DatasetLoss.forward_criterion" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of the loss function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>logits</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Model predictions.</p>
+</dd>
+<dt><strong>target</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Ground truth labels.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Loss value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.loss.loss.TBLoss">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TBLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modules_losses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.loss.loss.TBLoss" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.loss.base.html#topobench.loss.base.AbstractLoss" title="topobench.loss.base.AbstractLoss"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a></p>
@@ -421,6 +513,17 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.AbstractLoss"><code class="docutils literal notranslate"><span class="pre">AbstractLoss</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.AbstractLoss.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLoss.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.AbstractLoss.forward"><code class="docutils literal notranslate"><span class="pre">AbstractLoss.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.DatasetLoss"><code class="docutils literal notranslate"><span class="pre">DatasetLoss</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.DatasetLoss.__init__"><code class="docutils literal notranslate"><span class="pre">DatasetLoss.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.DatasetLoss.forward"><code class="docutils literal notranslate"><span class="pre">DatasetLoss.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.DatasetLoss.forward_criterion"><code class="docutils literal notranslate"><span class="pre">DatasetLoss.forward_criterion()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.TBLoss"><code class="docutils literal notranslate"><span class="pre">TBLoss</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.TBLoss.__init__"><code class="docutils literal notranslate"><span class="pre">TBLoss.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.loss.loss.TBLoss.forward"><code class="docutils literal notranslate"><span class="pre">TBLoss.forward()</span></code></a></li>

@@ -44,6 +44,8 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/topobench.nn.backbones.cell';</script>
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.nn.backbones.cell.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -328,13 +330,132 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-nn-backbones-cell-package">
-<h1>topobench.nn.backbones.cell package<a class="headerlink" href="#topobench-nn-backbones-cell-package" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.nn.backbones.cell">
+<span id="topobench-nn-backbones-cell-package"></span><h1>topobench.nn.backbones.cell package<a class="headerlink" href="#module-topobench.nn.backbones.cell" title="Link to this heading">#</a></h1>
+<p>Cell backbones with automated exports.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.cell.CCCN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CCCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.cell.CCCN" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>CCCN model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Number of input channels.</p>
+</dd>
+<dt><strong>n_layers</strong><span class="classifier">int, optional</span></dt><dd><p>Number of layers (default: 2).</p>
+</dd>
+<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate (default: 0).</p>
+</dd>
+<dt><strong>last_act</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, the last activation function is applied (default: False).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.cell.CCCN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.cell.CCCN.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.cell.CCCN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ld</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lu</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.cell.CCCN.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor.</p>
+</dd>
+<dt><strong>Ld</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Domain adjacency matrix.</p>
+</dd>
+<dt><strong>Lu</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Label adjacency matrix.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.cell.CW">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F_out</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.cell.CW" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Layer of the CCCN model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>F_in</strong><span class="classifier">int</span></dt><dd><p>Number of input channels.</p>
+</dd>
+<dt><strong>F_out</strong><span class="classifier">int</span></dt><dd><p>Number of output channels.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.cell.CW.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F_out</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.cell.CW.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.cell.CW.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ld</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.cell.CW.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>xe</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor.</p>
+</dd>
+<dt><strong>Lu</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Domain adjacency matrix.</p>
+</dd>
+<dt><strong>Ld</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Label adjacency matrix.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html">topobench.nn.backbones.cell.cccn module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html">topobench.nn.backbones.cell.cccn module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.CCCN"><code class="docutils literal notranslate"><span class="pre">CCCN</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.CCCN.__init__"><code class="docutils literal notranslate"><span class="pre">CCCN.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.CCCN.forward"><code class="docutils literal notranslate"><span class="pre">CCCN.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.CW"><code class="docutils literal notranslate"><span class="pre">CW</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.CW.__init__"><code class="docutils literal notranslate"><span class="pre">CW.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.CW.forward"><code class="docutils literal notranslate"><span class="pre">CW.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.GCNConv"><code class="docutils literal notranslate"><span class="pre">GCNConv</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.GCNConv.__init__"><code class="docutils literal notranslate"><span class="pre">GCNConv.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.GCNConv.forward"><code class="docutils literal notranslate"><span class="pre">GCNConv.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.GCNConv.message"><code class="docutils literal notranslate"><span class="pre">GCNConv.message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.GCNConv.message_and_aggregate"><code class="docutils literal notranslate"><span class="pre">GCNConv.message_and_aggregate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.cell.cccn.html#topobench.nn.backbones.cell.cccn.GCNConv.reset_parameters"><code class="docutils literal notranslate"><span class="pre">GCNConv.reset_parameters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -387,6 +508,16 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.cell.CCCN"><code class="docutils literal notranslate"><span class="pre">CCCN</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.cell.CCCN.__init__"><code class="docutils literal notranslate"><span class="pre">CCCN.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.cell.CCCN.forward"><code class="docutils literal notranslate"><span class="pre">CCCN.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.cell.CW"><code class="docutils literal notranslate"><span class="pre">CW</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.cell.CW.__init__"><code class="docutils literal notranslate"><span class="pre">CW.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.cell.CW.forward"><code class="docutils literal notranslate"><span class="pre">CW.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

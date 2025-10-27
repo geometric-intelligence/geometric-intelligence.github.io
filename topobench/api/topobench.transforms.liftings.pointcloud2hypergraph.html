@@ -44,6 +44,8 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/topobench.transforms.liftings.pointcloud2hypergraph';</script>
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.transforms.liftings.pointcloud2hypergraph.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,7 +55,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -328,16 +330,256 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-liftings-pointcloud2hypergraph-package">
-<h1>topobench.transforms.liftings.pointcloud2hypergraph package<a class="headerlink" href="#topobench-transforms-liftings-pointcloud2hypergraph-package" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.transforms.liftings.pointcloud2hypergraph">
+<span id="topobench-transforms-liftings-pointcloud2hypergraph-package"></span><h1>topobench.transforms.liftings.pointcloud2hypergraph package<a class="headerlink" href="#module-topobench.transforms.liftings.pointcloud2hypergraph" title="Link to this heading">#</a></h1>
+<p>PointCloud2Hypergraph liftings with automated exports.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MoGMSTLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting" title="topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a></p>
+<p>Lift a point cloud to a hypergraph.</p>
+<p>We find a Mixture of Gaussians and then create a Minimum Spanning Tree (MST) between the means of the Gaussians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>min_components</strong><span class="classifier">int or None, optional</span></dt><dd><p>The minimum number of components for the Mixture of Gaussians model.
+It needs to be at least 1 (default: None).</p>
+</dd>
+<dt><strong>max_components</strong><span class="classifier">int or None, optional</span></dt><dd><p>The maximum number of components for the Mixture of Gaussians model.
+It needs to be greater or equal than min_components (default: None).</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, optional</span></dt><dd><p>The random state for the Mixture of Gaussians model (default: None).</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.find_mog">
+<span class="sig-name descname"><span class="pre">find_mog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.find_mog" title="Link to this definition">#</a></dt>
+<dd><p>Find the best number of components for a Mixture of Gaussians model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">np.ndarray</span></dt><dd><p>The input data to be fitted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple[np.ndarray, int, np.ndarray]</dt><dd><p>The labels of the data, the number of components and the means of the components.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.lift_topology">
+<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.lift_topology" title="Link to this definition">#</a></dt>
+<dd><p>Lift the topology of a graph to a hypergraph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The lifted topology.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.PointCloud2HypergraphLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PointCloud2HypergraphLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointCloud2HypergraphLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.liftings.html#topobench.transforms.liftings.liftings.PointCloudLifting" title="topobench.transforms.liftings.liftings.PointCloudLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointCloudLifting</span></code></a></p>
+<p>Abstract class for lifting pointclouds to hypergraphs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.PointCloud2HypergraphLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointCloud2HypergraphLifting.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PointNetLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampling_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_radius</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting" title="topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a></p>
+<p>Lift a point cloud to a hypergraph.</p>
+<p>This is inspired by Qi et al. “PointNet++: Deep Hierarchical Feature Learning on Point Sets
+in a Metric Space” (NeurIPS 2027). This means building approximately equidistantly-spaced clusters of points via farthest point
+sampling and radius queries. Each of these clusters constitutes a hyperedge which is used for set abstraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sampling_ratio</strong><span class="classifier">float</span></dt><dd><p>The sub-sampling ratio for farthest point sampling.</p>
+</dd>
+<dt><strong>cluster_radius</strong><span class="classifier">float</span></dt><dd><p>The radius of the clusters w.r.t. the sub-sampled points.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampling_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_radius</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting.lift_topology">
+<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting.lift_topology" title="Link to this definition">#</a></dt>
+<dd><p>Lift the topology of a graph to an expander hypergraph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The lifted topology.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VoronoiLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">support_ratio</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting" title="topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a></p>
+<p>Lifts pointcloud to Farthest-point Voronoi graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>support_ratio</strong><span class="classifier">float</span></dt><dd><p>Ratio of points to sample with FPS to form voronoi support set.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments for the class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">support_ratio</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting.lift_topology">
+<span class="sig-name descname"><span class="pre">lift_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting.lift_topology" title="Link to this definition">#</a></dt>
+<dd><p>Lift pointcloud to voronoi graph induced by Farthest Point Sampling (FPS) support set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data to be lifted.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The lifted topology.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html">topobench.transforms.liftings.pointcloud2hypergraph.base module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html">topobench.transforms.liftings.pointcloud2hypergraph.base module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloud2HypergraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloudLifting"><code class="docutils literal notranslate"><span class="pre">PointCloudLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.base.html#topobench.transforms.liftings.pointcloud2hypergraph.base.PointCloudLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointCloudLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.GaussianMixture"><code class="docutils literal notranslate"><span class="pre">GaussianMixture</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.GaussianMixture.__init__"><code class="docutils literal notranslate"><span class="pre">GaussianMixture.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.GaussianMixture.aic"><code class="docutils literal notranslate"><span class="pre">GaussianMixture.aic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.GaussianMixture.bic"><code class="docutils literal notranslate"><span class="pre">GaussianMixture.bic()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.__init__"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.find_mog"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.find_mog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.MoGMSTLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.PointCloud2HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.PointCloud2HypergraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.from_numpy_array"><code class="docutils literal notranslate"><span class="pre">from_numpy_array()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.minimum_spanning_tree"><code class="docutils literal notranslate"><span class="pre">minimum_spanning_tree()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.mogmst_lifting.pairwise_distances"><code class="docutils literal notranslate"><span class="pre">pairwise_distances()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.PointCloud2HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.PointCloud2HypergraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.PointNetLifting"><code class="docutils literal notranslate"><span class="pre">PointNetLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.PointNetLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointNetLifting.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.PointNetLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">PointNetLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.fps"><code class="docutils literal notranslate"><span class="pre">fps()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.pointnet_lifting.radius"><code class="docutils literal notranslate"><span class="pre">radius()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html">topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.PointCloud2HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.PointCloud2HypergraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.VoronoiLifting"><code class="docutils literal notranslate"><span class="pre">VoronoiLifting</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.VoronoiLifting.__init__"><code class="docutils literal notranslate"><span class="pre">VoronoiLifting.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.VoronoiLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">VoronoiLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.fps"><code class="docutils literal notranslate"><span class="pre">fps()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.html#topobench.transforms.liftings.pointcloud2hypergraph.voronoi_lifting.knn"><code class="docutils literal notranslate"><span class="pre">knn()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -390,6 +632,26 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.__init__"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.find_mog"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.find_mog()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.MoGMSTLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">MoGMSTLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointCloud2HypergraphLifting"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointCloud2HypergraphLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointCloud2HypergraphLifting.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting"><code class="docutils literal notranslate"><span class="pre">PointNetLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting.__init__"><code class="docutils literal notranslate"><span class="pre">PointNetLifting.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.PointNetLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">PointNetLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting"><code class="docutils literal notranslate"><span class="pre">VoronoiLifting</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting.__init__"><code class="docutils literal notranslate"><span class="pre">VoronoiLifting.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.pointcloud2hypergraph.VoronoiLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">VoronoiLifting.lift_topology()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

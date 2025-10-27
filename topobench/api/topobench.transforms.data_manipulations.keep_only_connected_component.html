@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 27, 2025, 7:55:29 PM"/>
+    <meta name="docbuild:last-update" content="Oct 27, 2025, 10:47:55 PM"/>
   </head>
   
   
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -324,8 +328,87 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="topobench-transforms-data-manipulations-keep-only-connected-component-module">
-<h1>topobench.transforms.data_manipulations.keep_only_connected_component module<a class="headerlink" href="#topobench-transforms-data-manipulations-keep-only-connected-component-module" title="Link to this heading">#</a></h1>
+  <section id="module-topobench.transforms.data_manipulations.keep_only_connected_component">
+<span id="topobench-transforms-data-manipulations-keep-only-connected-component-module"></span><h1>topobench.transforms.data_manipulations.keep_only_connected_component module<a class="headerlink" href="#module-topobench.transforms.data_manipulations.keep_only_connected_component" title="Link to this heading">#</a></h1>
+<p>KeepOnlyConnectedComponent class definition.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">KeepOnlyConnectedComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Class to keep only the largest connected components of the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Parameters for the base transform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.forward" title="Link to this definition">#</a></dt>
+<dd><p>Apply the transform to the input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>The input data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>The transformed data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LargestConnectedComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weak'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<p>Selects the subgraph that corresponds to the
+largest connected components in the graph
+(functional name: <code class="xref py py-obj docutils literal notranslate"><span class="pre">largest_connected_components</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_components</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – Number of largest components to keep
+(default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Type of connection to use for directed
+graphs, can be either <code class="xref py py-obj docutils literal notranslate"><span class="pre">'strong'</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">'weak'</span></code>.
+Nodes <cite>i</cite> and <cite>j</cite> are strongly connected if a path
+exists both from <cite>i</cite> to <cite>j</cite> and from <cite>j</cite> to <cite>i</cite>. A directed graph
+is weakly connected if replacing all of its directed edges with
+undirected edges produces a connected (undirected) graph.
+(default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">'weak'</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weak'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.forward" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -362,6 +445,33 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.__init__"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.keep_only_connected_component.KeepOnlyConnectedComponent.forward"><code class="docutils literal notranslate"><span class="pre">KeepOnlyConnectedComponent.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents"><code class="docutils literal notranslate"><span class="pre">LargestConnectedComponents</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.__init__"><code class="docutils literal notranslate"><span class="pre">LargestConnectedComponents.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.data_manipulations.keep_only_connected_component.LargestConnectedComponents.forward"><code class="docutils literal notranslate"><span class="pre">LargestConnectedComponents.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
