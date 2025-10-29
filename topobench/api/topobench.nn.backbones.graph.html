@@ -50,12 +50,12 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.nn.backbones.graph.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="topobench.nn.backbones.graph.gps module" href="topobench.nn.backbones.graph.gps.html" />
+    <link rel="next" title="topobench.nn.backbones.graph.nsd_utils package" href="topobench.nn.backbones.graph.nsd_utils.html" />
     <link rel="prev" title="topobench.nn.backbones.combinatorial.gccn_onehasse module" href="topobench.nn.backbones.combinatorial.gccn_onehasse.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 29, 2025, 5:43:38 AM"/>
+    <meta name="docbuild:last-update" content="Oct 29, 2025, 11:42:18 PM"/>
   </head>
   
   
@@ -336,7 +336,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.GPSEncoder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GPSEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multihead'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_conv_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_edge_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redraw_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.GPSEncoder" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>GPS Encoder that can be used with the training framework.</p>
 <p>Uses the official PyTorch Geometric GPSConv implementation.
 This encoder combines local message passing with global attention mechanisms
@@ -411,7 +411,7 @@ If None, projections are not redrawn. Default is None.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.GraphMLP">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphMLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.GraphMLP" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>“Graph MLP backbone.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -460,7 +460,7 @@ If None, projections are not redrawn. Default is None.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGAT">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IdentityGAT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGAT" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>Graph Attention Network (GAT) with identity activation function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -515,7 +515,7 @@ If None, projections are not redrawn. Default is None.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGCN">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IdentityGCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGCN" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>Graph Convolutional Network (GCN) with identity activation function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -568,7 +568,7 @@ If None, projections are not redrawn. Default is None.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentityGIN">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IdentityGIN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentityGIN" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>Graph Isomorphism Network (GIN) with identity activation function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -621,7 +621,7 @@ If None, projections are not redrawn. Default is None.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.IdentitySAGE">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IdentitySAGE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.IdentitySAGE" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>GraphSAGE with identity activation function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -674,7 +674,7 @@ If None, projections are not redrawn. Default is None.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.Mlp">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Mlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hid_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.Mlp" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>MLP module.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -708,6 +708,98 @@ If None, projections are not redrawn. Default is None.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>torch.Tensor</dt><dd><p>Output tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.graph.NSDEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NSDEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheaf_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'diag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheaf_act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tanh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cayley'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.NSDEncoder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<p>Neural Sheaf Diffusion Encoder that can be used with the training framework.</p>
+<p>This encoder learns representations using sheaf structure with node and edge stalks
+communicating via transport maps / restriction maps. Supports three types of sheaf
+structures: diagonal, bundle, and general.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>input_dim</strong><span class="classifier">int</span></dt><dd><p>Dimension of input node features.</p>
+</dd>
+<dt><strong>hidden_dim</strong><span class="classifier">int</span></dt><dd><p>Dimension of hidden layers. Must be divisible by d.</p>
+</dd>
+<dt><strong>num_layers</strong><span class="classifier">int, optional</span></dt><dd><p>Number of sheaf diffusion layers. Default is 2.</p>
+</dd>
+<dt><strong>sheaf_type</strong><span class="classifier">str, optional</span></dt><dd><p>Type of sheaf structure. Options are ‘diag’, ‘bundle’, or ‘general’.
+Default is ‘diag’.</p>
+</dd>
+<dt><strong>d</strong><span class="classifier">int, optional</span></dt><dd><p>Dimension of the stalk space. For ‘diag’, d &gt;= 1. For ‘bundle’ and ‘general’, d &gt; 1.
+Default is 2.</p>
+</dd>
+<dt><strong>dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate for hidden layers. Default is 0.1.</p>
+</dd>
+<dt><strong>input_dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout rate for input layer. Default is 0.1.</p>
+</dd>
+<dt><strong>device</strong><span class="classifier">str, optional</span></dt><dd><p>Device to run the model on (‘cpu’ or ‘cuda’). Default is ‘cpu’.</p>
+</dd>
+<dt><strong>sheaf_act</strong><span class="classifier">str, optional</span></dt><dd><p>Activation function for sheaf learning. Options are ‘tanh’, ‘elu’, ‘id’.
+Default is ‘tanh’.</p>
+</dd>
+<dt><strong>orth</strong><span class="classifier">str, optional</span></dt><dd><p>Orthogonalization method for bundle sheaf type. Options are ‘cayley’ or ‘matrix_exp’.
+Default is ‘cayley’.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments (not used).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.graph.NSDEncoder.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheaf_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'diag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheaf_act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tanh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cayley'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.NSDEncoder.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.graph.NSDEncoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.NSDEncoder.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of Neural Sheaf Diffusion encoder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Node feature matrix of shape [num_nodes, input_dim].</p>
+</dd>
+<dt><strong>edge_index</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Edge indices of shape [2, num_edges]. Will be automatically converted to undirected.</p>
+</dd>
+<dt><strong>edge_attr</strong><span class="classifier">torch.Tensor, optional</span></dt><dd><p>Edge feature matrix (not used). Default is None.</p>
+</dd>
+<dt><strong>edge_weight</strong><span class="classifier">torch.Tensor, optional</span></dt><dd><p>Edge weights (not used). Default is None.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch.Tensor, optional</span></dt><dd><p>Batch vector assigning each node to a specific graph (not used). Default is None.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments (not used).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output node feature matrix of shape [num_nodes, hidden_dim].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.graph.NSDEncoder.get_sheaf_model">
+<span class="sig-name descname"><span class="pre">get_sheaf_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.NSDEncoder.get_sheaf_model" title="Link to this definition">#</a></dt>
+<dd><p>Get the underlying sheaf model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>SheafDiffusion</dt><dd><p>The sheaf diffusion model instance.</p>
 </dd>
 </dl>
 </dd>
@@ -755,6 +847,65 @@ If None, projections are not redrawn. Default is None.</p>
 
 </dd></dl>
 
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.html">topobench.nn.backbones.graph.nsd_utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html">topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.DiagLaplacianBuilder"><code class="docutils literal notranslate"><span class="pre">DiagLaplacianBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.GeneralLaplacianBuilder"><code class="docutils literal notranslate"><span class="pre">GeneralLaplacianBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.InductiveDiscreteBundleSheafDiffusion"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteBundleSheafDiffusion</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.InductiveDiscreteDiagSheafDiffusion"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteDiagSheafDiffusion</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.InductiveDiscreteGeneralSheafDiffusion"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteGeneralSheafDiffusion</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.LocalConcatSheafLearner"><code class="docutils literal notranslate"><span class="pre">LocalConcatSheafLearner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.NormConnectionLaplacianBuilder"><code class="docutils literal notranslate"><span class="pre">NormConnectionLaplacianBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.html#topobench.nn.backbones.graph.nsd_utils.inductive_discrete_models.SheafDiffusion"><code class="docutils literal notranslate"><span class="pre">SheafDiffusion</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplace.html">topobench.nn.backbones.graph.nsd_utils.laplace module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplace.html#topobench.nn.backbones.graph.nsd_utils.laplace.compute_learnable_diag_laplacian_indices"><code class="docutils literal notranslate"><span class="pre">compute_learnable_diag_laplacian_indices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplace.html#topobench.nn.backbones.graph.nsd_utils.laplace.compute_learnable_laplacian_indices"><code class="docutils literal notranslate"><span class="pre">compute_learnable_laplacian_indices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplace.html#topobench.nn.backbones.graph.nsd_utils.laplace.compute_left_right_map_index"><code class="docutils literal notranslate"><span class="pre">compute_left_right_map_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplace.html#topobench.nn.backbones.graph.nsd_utils.laplace.mergesp"><code class="docutils literal notranslate"><span class="pre">mergesp()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html">topobench.nn.backbones.graph.nsd_utils.laplacian_builders module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.DiagLaplacianBuilder"><code class="docutils literal notranslate"><span class="pre">DiagLaplacianBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.GeneralLaplacianBuilder"><code class="docutils literal notranslate"><span class="pre">GeneralLaplacianBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.LaplacianBuilder"><code class="docutils literal notranslate"><span class="pre">LaplacianBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.NormConnectionLaplacianBuilder"><code class="docutils literal notranslate"><span class="pre">NormConnectionLaplacianBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.Orthogonal"><code class="docutils literal notranslate"><span class="pre">Orthogonal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.compute_learnable_diag_laplacian_indices"><code class="docutils literal notranslate"><span class="pre">compute_learnable_diag_laplacian_indices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.compute_learnable_laplacian_indices"><code class="docutils literal notranslate"><span class="pre">compute_learnable_laplacian_indices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.compute_left_right_map_index"><code class="docutils literal notranslate"><span class="pre">compute_left_right_map_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.degree"><code class="docutils literal notranslate"><span class="pre">degree()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.mergesp"><code class="docutils literal notranslate"><span class="pre">mergesp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.laplacian_builders.html#topobench.nn.backbones.graph.nsd_utils.laplacian_builders.scatter_add"><code class="docutils literal notranslate"><span class="pre">scatter_add()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.orthogonal.html">topobench.nn.backbones.graph.nsd_utils.orthogonal module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.orthogonal.html#topobench.nn.backbones.graph.nsd_utils.orthogonal.Orthogonal"><code class="docutils literal notranslate"><span class="pre">Orthogonal</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.sheaf_base.html">topobench.nn.backbones.graph.nsd_utils.sheaf_base module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.sheaf_base.html#topobench.nn.backbones.graph.nsd_utils.sheaf_base.SheafDiffusion"><code class="docutils literal notranslate"><span class="pre">SheafDiffusion</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.sheaf_models.html">topobench.nn.backbones.graph.nsd_utils.sheaf_models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.sheaf_models.html#topobench.nn.backbones.graph.nsd_utils.sheaf_models.LocalConcatSheafLearner"><code class="docutils literal notranslate"><span class="pre">LocalConcatSheafLearner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.sheaf_models.html#topobench.nn.backbones.graph.nsd_utils.sheaf_models.SheafLearner"><code class="docutils literal notranslate"><span class="pre">SheafLearner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.graph.nsd_utils.sheaf_models.html#topobench.nn.backbones.graph.nsd_utils.sheaf_models.abstractmethod"><code class="docutils literal notranslate"><span class="pre">abstractmethod()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
@@ -894,6 +1045,88 @@ If None, projections are not redrawn. Default is None.</p>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html">topobench.nn.backbones.graph.nsd module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteBundleSheafDiffusion"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteBundleSheafDiffusion</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteBundleSheafDiffusion.__init__"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteBundleSheafDiffusion.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteBundleSheafDiffusion.forward"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteBundleSheafDiffusion.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteBundleSheafDiffusion.get_param_size"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteBundleSheafDiffusion.get_param_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteBundleSheafDiffusion.left_right_linear"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteBundleSheafDiffusion.left_right_linear()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteDiagSheafDiffusion"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteDiagSheafDiffusion</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteDiagSheafDiffusion.__init__"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteDiagSheafDiffusion.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteDiagSheafDiffusion.forward"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteDiagSheafDiffusion.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteGeneralSheafDiffusion"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteGeneralSheafDiffusion</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteGeneralSheafDiffusion.__init__"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteGeneralSheafDiffusion.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteGeneralSheafDiffusion.forward"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteGeneralSheafDiffusion.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.InductiveDiscreteGeneralSheafDiffusion.left_right_linear"><code class="docutils literal notranslate"><span class="pre">InductiveDiscreteGeneralSheafDiffusion.left_right_linear()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.__init__"><code class="docutils literal notranslate"><span class="pre">Module.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.add_module"><code class="docutils literal notranslate"><span class="pre">Module.add_module()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.apply"><code class="docutils literal notranslate"><span class="pre">Module.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.bfloat16"><code class="docutils literal notranslate"><span class="pre">Module.bfloat16()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.buffers"><code class="docutils literal notranslate"><span class="pre">Module.buffers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.children"><code class="docutils literal notranslate"><span class="pre">Module.children()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.compile"><code class="docutils literal notranslate"><span class="pre">Module.compile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.cpu"><code class="docutils literal notranslate"><span class="pre">Module.cpu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.cuda"><code class="docutils literal notranslate"><span class="pre">Module.cuda()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.double"><code class="docutils literal notranslate"><span class="pre">Module.double()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.eval"><code class="docutils literal notranslate"><span class="pre">Module.eval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.extra_repr"><code class="docutils literal notranslate"><span class="pre">Module.extra_repr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.float"><code class="docutils literal notranslate"><span class="pre">Module.float()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.forward"><code class="docutils literal notranslate"><span class="pre">Module.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.get_buffer"><code class="docutils literal notranslate"><span class="pre">Module.get_buffer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.get_extra_state"><code class="docutils literal notranslate"><span class="pre">Module.get_extra_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.get_parameter"><code class="docutils literal notranslate"><span class="pre">Module.get_parameter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.get_submodule"><code class="docutils literal notranslate"><span class="pre">Module.get_submodule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.half"><code class="docutils literal notranslate"><span class="pre">Module.half()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.ipu"><code class="docutils literal notranslate"><span class="pre">Module.ipu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.load_state_dict"><code class="docutils literal notranslate"><span class="pre">Module.load_state_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.modules"><code class="docutils literal notranslate"><span class="pre">Module.modules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.named_buffers"><code class="docutils literal notranslate"><span class="pre">Module.named_buffers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.named_children"><code class="docutils literal notranslate"><span class="pre">Module.named_children()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.named_modules"><code class="docutils literal notranslate"><span class="pre">Module.named_modules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.named_parameters"><code class="docutils literal notranslate"><span class="pre">Module.named_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.parameters"><code class="docutils literal notranslate"><span class="pre">Module.parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_backward_hook"><code class="docutils literal notranslate"><span class="pre">Module.register_backward_hook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_buffer"><code class="docutils literal notranslate"><span class="pre">Module.register_buffer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_forward_hook"><code class="docutils literal notranslate"><span class="pre">Module.register_forward_hook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_forward_pre_hook"><code class="docutils literal notranslate"><span class="pre">Module.register_forward_pre_hook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_full_backward_hook"><code class="docutils literal notranslate"><span class="pre">Module.register_full_backward_hook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_full_backward_pre_hook"><code class="docutils literal notranslate"><span class="pre">Module.register_full_backward_pre_hook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_load_state_dict_post_hook"><code class="docutils literal notranslate"><span class="pre">Module.register_load_state_dict_post_hook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_module"><code class="docutils literal notranslate"><span class="pre">Module.register_module()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_parameter"><code class="docutils literal notranslate"><span class="pre">Module.register_parameter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.register_state_dict_pre_hook"><code class="docutils literal notranslate"><span class="pre">Module.register_state_dict_pre_hook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.requires_grad_"><code class="docutils literal notranslate"><span class="pre">Module.requires_grad_()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.set_extra_state"><code class="docutils literal notranslate"><span class="pre">Module.set_extra_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.share_memory"><code class="docutils literal notranslate"><span class="pre">Module.share_memory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.state_dict"><code class="docutils literal notranslate"><span class="pre">Module.state_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.to"><code class="docutils literal notranslate"><span class="pre">Module.to()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.to_empty"><code class="docutils literal notranslate"><span class="pre">Module.to_empty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.train"><code class="docutils literal notranslate"><span class="pre">Module.train()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.type"><code class="docutils literal notranslate"><span class="pre">Module.type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.xpu"><code class="docutils literal notranslate"><span class="pre">Module.xpu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.zero_grad"><code class="docutils literal notranslate"><span class="pre">Module.zero_grad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.T_destination"><code class="docutils literal notranslate"><span class="pre">Module.T_destination</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.call_super_init"><code class="docutils literal notranslate"><span class="pre">Module.call_super_init</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.dump_patches"><code class="docutils literal notranslate"><span class="pre">Module.dump_patches</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module.training"><code class="docutils literal notranslate"><span class="pre">Module.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.NSDEncoder"><code class="docutils literal notranslate"><span class="pre">NSDEncoder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.NSDEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">NSDEncoder.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.NSDEncoder.forward"><code class="docutils literal notranslate"><span class="pre">NSDEncoder.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.NSDEncoder.get_sheaf_model"><code class="docutils literal notranslate"><span class="pre">NSDEncoder.get_sheaf_model()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.to_undirected"><code class="docutils literal notranslate"><span class="pre">to_undirected()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -919,11 +1152,11 @@ If None, projections are not redrawn. Default is None.</p>
       </div>
     </a>
     <a class="right-next"
-       href="topobench.nn.backbones.graph.gps.html"
+       href="topobench.nn.backbones.graph.nsd_utils.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">topobench.nn.backbones.graph.gps module</p>
+        <p class="prev-next-title">topobench.nn.backbones.graph.nsd_utils package</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -981,11 +1214,18 @@ If None, projections are not redrawn. Default is None.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.Mlp.forward"><code class="docutils literal notranslate"><span class="pre">Mlp.forward()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.NSDEncoder"><code class="docutils literal notranslate"><span class="pre">NSDEncoder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.NSDEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">NSDEncoder.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.NSDEncoder.forward"><code class="docutils literal notranslate"><span class="pre">NSDEncoder.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.NSDEncoder.get_sheaf_model"><code class="docutils literal notranslate"><span class="pre">NSDEncoder.get_sheaf_model()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.RedrawProjection"><code class="docutils literal notranslate"><span class="pre">RedrawProjection</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.RedrawProjection.__init__"><code class="docutils literal notranslate"><span class="pre">RedrawProjection.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.graph.RedrawProjection.redraw_projections"><code class="docutils literal notranslate"><span class="pre">RedrawProjection.redraw_projections()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>

@@ -51,11 +51,11 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="topobench.nn.backbones.graph.graph_mlp module" href="topobench.nn.backbones.graph.graph_mlp.html" />
-    <link rel="prev" title="topobench.nn.backbones.graph package" href="topobench.nn.backbones.graph.html" />
+    <link rel="prev" title="topobench.nn.backbones.graph.nsd_utils.sheaf_models module" href="topobench.nn.backbones.graph.nsd_utils.sheaf_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 29, 2025, 5:43:38 AM"/>
+    <meta name="docbuild:last-update" content="Oct 29, 2025, 11:42:18 PM"/>
   </head>
   
   
@@ -453,7 +453,7 @@ or a <code class="xref py py-obj docutils literal notranslate"><span class="pre"
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.gps.GPSConv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GPSConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'batch_norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multihead'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.gps.GPSConv" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>The general, powerful, scalable (GPS) graph transformer layer from the
 <a class="reference external" href="https://arxiv.org/abs/2205.12454">“Recipe for a General, Powerful, Scalable Graph Transformer”</a> paper.</p>
 <p>The GPS layer is based on a 3-part recipe:</p>
@@ -522,7 +522,7 @@ attention layer. (default: <a class="reference external" href="https://docs.pyth
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.gps.GPSEncoder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GPSEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multihead'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_conv_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_edge_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redraw_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.gps.GPSEncoder" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>GPS Encoder that can be used with the training framework.</p>
 <p>Uses the official PyTorch Geometric GPSConv implementation.
 This encoder combines local message passing with global attention mechanisms
@@ -721,7 +721,7 @@ respective nodes <span class="math notranslate nohighlight">\(i\)</span> and <sp
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.backbones.graph.gps.PerformerAttention">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PerformerAttention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ReLU()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qkv_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attn_out_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.graph.gps.PerformerAttention" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>The linear scaled attention mechanism from the
 <a class="reference external" href="https://arxiv.org/abs/2009.14794">“Rethinking Attention with Performers”</a> paper.</p>
 <dl class="field-list simple">
@@ -831,12 +831,12 @@ examples to improve overall approximation of attention.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="topobench.nn.backbones.graph.html"
+       href="topobench.nn.backbones.graph.nsd_utils.sheaf_models.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">topobench.nn.backbones.graph package</p>
+        <p class="prev-next-title">topobench.nn.backbones.graph.nsd_utils.sheaf_models module</p>
       </div>
     </a>
     <a class="right-next"
