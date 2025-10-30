@@ -48,12 +48,12 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.callbacks.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="topobench.callbacks.timer_callback module" href="topobench.callbacks.timer_callback.html" />
+    <link rel="next" title="topobench.callbacks.best_epoch_metrics module" href="topobench.callbacks.best_epoch_metrics.html" />
     <link rel="prev" title="topobench package" href="topobench.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 29, 2025, 11:42:18 PM"/>
+    <meta name="docbuild:last-update" content="Oct 30, 2025, 12:28:25 AM"/>
   </head>
   
   
@@ -324,11 +324,387 @@
                   
   <section id="module-topobench.callbacks">
 <span id="topobench-callbacks-package"></span><h1>topobench.callbacks package<a class="headerlink" href="#module-topobench.callbacks" title="Link to this heading">#</a></h1>
-<p>TopoBench: A library for benchmarking of topological models.</p>
+<p>Callbacks for training, validation, and testing stages.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.callbacks.BestEpochMetricsCallback">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BestEpochMetricsCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monitor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.BestEpochMetricsCallback" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.utils.instantiators.html#topobench.utils.instantiators.Callback" title="lightning.pytorch.callbacks.callback.Callback"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callback</span></code></a></p>
+<p>Tracks all metrics at the epoch when the monitored metric is best.</p>
+<p>This callback captures both training and validation metrics from the same epoch
+where the monitored metric (e.g., val/loss) achieves its best value. Unlike
+tracking the best value for each metric independently, this ensures all metrics
+are from the same checkpoint/epoch.</p>
+<p>The metrics are logged with the prefix ‘best_epoch/’ to distinguish them from
+the running metrics and independent best metrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>monitor</strong><span class="classifier">str</span></dt><dd><p>The metric to monitor (e.g., “val/loss”).</p>
+</dd>
+<dt><strong>mode</strong><span class="classifier">str, optional</span></dt><dd><p>Whether to minimize (“min”) or maximize (“max”) the monitored metric (default: “min”).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>If validation loss is the monitored metric and reaches its minimum at epoch 42,
+this callback will log:
+- best_epoch/train/loss
+- best_epoch/train/accuracy
+- best_epoch/val/loss
+- best_epoch/val/accuracy
+- best_epoch/val/f1
+etc., all from epoch 42.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.BestEpochMetricsCallback.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monitor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.BestEpochMetricsCallback.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.BestEpochMetricsCallback.on_train_end">
+<span class="sig-name descname"><span class="pre">on_train_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.BestEpochMetricsCallback.on_train_end" title="Link to this definition">#</a></dt>
+<dd><p>Log the best model checkpoint path and metadata at the end of training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>trainer</strong><span class="classifier">Trainer</span></dt><dd><p>The PyTorch Lightning trainer.</p>
+</dd>
+<dt><strong>pl_module</strong><span class="classifier">LightningModule</span></dt><dd><p>The PyTorch Lightning module being trained.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.BestEpochMetricsCallback.on_train_epoch_end">
+<span class="sig-name descname"><span class="pre">on_train_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.BestEpochMetricsCallback.on_train_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>Capture training metrics at the end of training phase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>trainer</strong><span class="classifier">Trainer</span></dt><dd><p>The PyTorch Lightning trainer.</p>
+</dd>
+<dt><strong>pl_module</strong><span class="classifier">LightningModule</span></dt><dd><p>The PyTorch Lightning module being trained.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.BestEpochMetricsCallback.on_train_start">
+<span class="sig-name descname"><span class="pre">on_train_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.BestEpochMetricsCallback.on_train_start" title="Link to this definition">#</a></dt>
+<dd><p>Find and store reference to ModelCheckpoint callback for checkpoint path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>trainer</strong><span class="classifier">Trainer</span></dt><dd><p>The PyTorch Lightning trainer.</p>
+</dd>
+<dt><strong>pl_module</strong><span class="classifier">LightningModule</span></dt><dd><p>The PyTorch Lightning module being trained.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.BestEpochMetricsCallback.on_validation_epoch_end">
+<span class="sig-name descname"><span class="pre">on_validation_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.BestEpochMetricsCallback.on_validation_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>Check if this is the best epoch and capture all metrics if so.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>trainer</strong><span class="classifier">Trainer</span></dt><dd><p>The PyTorch Lightning trainer.</p>
+</dd>
+<dt><strong>pl_module</strong><span class="classifier">LightningModule</span></dt><dd><p>The PyTorch Lightning module being trained.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PipelineTimer</span></span><a class="headerlink" href="#topobench.callbacks.PipelineTimer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.utils.instantiators.html#topobench.utils.instantiators.Callback" title="lightning.pytorch.callbacks.callback.Callback"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callback</span></code></a></p>
+<p>Measures and logs average execution times of training, validation, and testing stages.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize dictionaries to store accumulated times and counts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_test_batch_end">
+<span class="sig-name descname"><span class="pre">on_test_batch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_test_batch_end" title="Link to this definition">#</a></dt>
+<dd><p>End timing a test batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_test_batch_start">
+<span class="sig-name descname"><span class="pre">on_test_batch_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_test_batch_start" title="Link to this definition">#</a></dt>
+<dd><p>Start timing a test batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_test_epoch_end">
+<span class="sig-name descname"><span class="pre">on_test_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_test_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>End timing a test epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_test_epoch_start">
+<span class="sig-name descname"><span class="pre">on_test_epoch_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_test_epoch_start" title="Link to this definition">#</a></dt>
+<dd><p>Start timing a test epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_train_batch_end">
+<span class="sig-name descname"><span class="pre">on_train_batch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_train_batch_end" title="Link to this definition">#</a></dt>
+<dd><p>End timing a training batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_train_batch_start">
+<span class="sig-name descname"><span class="pre">on_train_batch_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_train_batch_start" title="Link to this definition">#</a></dt>
+<dd><p>Start timing a training batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_train_end">
+<span class="sig-name descname"><span class="pre">on_train_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_train_end" title="Link to this definition">#</a></dt>
+<dd><p>Log the average times at the end of training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>trainer</strong><span class="classifier">object</span></dt><dd><p>The PyTorch Lightning trainer instance used for logging.</p>
+</dd>
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_train_epoch_end">
+<span class="sig-name descname"><span class="pre">on_train_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_train_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>End timing a training epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_train_epoch_start">
+<span class="sig-name descname"><span class="pre">on_train_epoch_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_train_epoch_start" title="Link to this definition">#</a></dt>
+<dd><p>Start timing a training epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_validation_batch_end">
+<span class="sig-name descname"><span class="pre">on_validation_batch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_validation_batch_end" title="Link to this definition">#</a></dt>
+<dd><p>End timing a validation batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_validation_batch_start">
+<span class="sig-name descname"><span class="pre">on_validation_batch_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_validation_batch_start" title="Link to this definition">#</a></dt>
+<dd><p>Start timing a validation batch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_validation_epoch_end">
+<span class="sig-name descname"><span class="pre">on_validation_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_validation_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>End timing a validation epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.callbacks.PipelineTimer.on_validation_epoch_start">
+<span class="sig-name descname"><span class="pre">on_validation_epoch_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.callbacks.PipelineTimer.on_validation_epoch_start" title="Link to this definition">#</a></dt>
+<dd><p>Start timing a validation epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">tuple</span></dt><dd><p>Additional arguments passed by the trainer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html">topobench.callbacks.best_epoch_metrics module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.BestEpochMetricsCallback"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.BestEpochMetricsCallback.__init__"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.BestEpochMetricsCallback.on_train_end"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_train_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.BestEpochMetricsCallback.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_train_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.BestEpochMetricsCallback.on_train_start"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_train_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.BestEpochMetricsCallback.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_validation_epoch_end()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback"><code class="docutils literal notranslate"><span class="pre">Callback</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.load_state_dict"><code class="docutils literal notranslate"><span class="pre">Callback.load_state_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_after_backward"><code class="docutils literal notranslate"><span class="pre">Callback.on_after_backward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_before_backward"><code class="docutils literal notranslate"><span class="pre">Callback.on_before_backward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_before_optimizer_step"><code class="docutils literal notranslate"><span class="pre">Callback.on_before_optimizer_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_before_zero_grad"><code class="docutils literal notranslate"><span class="pre">Callback.on_before_zero_grad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_exception"><code class="docutils literal notranslate"><span class="pre">Callback.on_exception()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_fit_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_fit_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_fit_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_fit_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_load_checkpoint"><code class="docutils literal notranslate"><span class="pre">Callback.on_load_checkpoint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_predict_batch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_predict_batch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_predict_batch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_predict_batch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_predict_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_predict_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_predict_epoch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_predict_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_predict_epoch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_predict_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_predict_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_predict_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_sanity_check_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_sanity_check_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_sanity_check_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_sanity_check_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_save_checkpoint"><code class="docutils literal notranslate"><span class="pre">Callback.on_save_checkpoint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_test_batch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_test_batch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_test_batch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_test_batch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_test_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_test_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_test_epoch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_test_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_test_epoch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_test_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_test_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_test_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_train_batch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_train_batch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_train_batch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_train_batch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_train_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_train_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_train_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_train_epoch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_train_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_train_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_train_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_validation_batch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_validation_batch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_validation_batch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_validation_batch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_validation_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_validation_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">Callback.on_validation_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_validation_epoch_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_validation_epoch_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.on_validation_start"><code class="docutils literal notranslate"><span class="pre">Callback.on_validation_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.setup"><code class="docutils literal notranslate"><span class="pre">Callback.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.state_dict"><code class="docutils literal notranslate"><span class="pre">Callback.state_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.teardown"><code class="docutils literal notranslate"><span class="pre">Callback.teardown()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.Callback.state_key"><code class="docutils literal notranslate"><span class="pre">Callback.state_key</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.__init__"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.check_monitor_top_k"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.check_monitor_top_k()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.file_exists"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.file_exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.format_checkpoint_name"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.format_checkpoint_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.load_state_dict"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.load_state_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.on_train_batch_end"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_train_batch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_train_epoch_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.on_train_start"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_train_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.on_validation_end"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_validation_end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.setup"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.state_dict"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.state_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.to_yaml"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.to_yaml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.CHECKPOINT_EQUALS_CHAR"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.CHECKPOINT_EQUALS_CHAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.CHECKPOINT_JOIN_CHAR"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.CHECKPOINT_JOIN_CHAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.CHECKPOINT_NAME_LAST"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.CHECKPOINT_NAME_LAST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.FILE_EXTENSION"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.FILE_EXTENSION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.STARTING_VERSION"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.STARTING_VERSION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.every_n_epochs"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.every_n_epochs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint.state_key"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.state_key</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.callbacks.timer_callback.html">topobench.callbacks.timer_callback module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topobench.callbacks.timer_callback.html#topobench.callbacks.timer_callback.PipelineTimer"><code class="docutils literal notranslate"><span class="pre">PipelineTimer</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="topobench.callbacks.timer_callback.html#topobench.callbacks.timer_callback.PipelineTimer.__init__"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.__init__()</span></code></a></li>
@@ -374,11 +750,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="topobench.callbacks.timer_callback.html"
+       href="topobench.callbacks.best_epoch_metrics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">topobench.callbacks.timer_callback module</p>
+        <p class="prev-next-title">topobench.callbacks.best_epoch_metrics module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -401,6 +777,31 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.BestEpochMetricsCallback"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.BestEpochMetricsCallback.__init__"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.BestEpochMetricsCallback.on_train_end"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_train_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.BestEpochMetricsCallback.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_train_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.BestEpochMetricsCallback.on_train_start"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_train_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.BestEpochMetricsCallback.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">BestEpochMetricsCallback.on_validation_epoch_end()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer"><code class="docutils literal notranslate"><span class="pre">PipelineTimer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.__init__"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_test_batch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_batch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_test_batch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_batch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_test_epoch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_test_epoch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_test_epoch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_train_batch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_batch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_train_batch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_batch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_train_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_train_epoch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_train_epoch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_validation_batch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_batch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_validation_batch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_batch_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_validation_epoch_end"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.callbacks.PipelineTimer.on_validation_epoch_start"><code class="docutils literal notranslate"><span class="pre">PipelineTimer.on_validation_epoch_start()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 </ul>
   </nav></div>
