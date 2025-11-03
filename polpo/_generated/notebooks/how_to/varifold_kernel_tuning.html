@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to select a mesh subset? &#8212; polpo latest documentation</title>
+    <title>How to automatically select the varifold kernel? &#8212; polpo latest documentation</title>
   
   
   
@@ -45,12 +45,12 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/notebooks/how_to/hipp_substructures';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/notebooks/how_to/hipp_substructures.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/notebooks/how_to/varifold_kernel_tuning';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/notebooks/how_to/varifold_kernel_tuning.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="LDDMM: how to estimate a deterministic atlas?" href="lddmm_deterministic_atlas.html" />
-    <link rel="prev" title="How-tos" href="../../../how_to.html" />
+    <link rel="next" title="How to visualize MRI data?" href="viz_mri.html" />
+    <link rel="prev" title="How to do multiple structures mesh-valued regression?" href="multimesh_valued_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -192,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -270,7 +266,7 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to select a mesh subset?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_deterministic_atlas.html">LDDMM: how to estimate a deterministic atlas?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_pls.html">LDDMM: PLS regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
@@ -289,7 +285,7 @@
 <li class="toctree-l1"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="varifold_kernel_tuning.html">How to automatically select the varifold kernel?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to automatically select the varifold kernel?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="viz_mri.html">How to visualize MRI data?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data loading</span></p>
@@ -299,14 +295,14 @@
 <li class="toctree-l1"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mesh</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="mesh_rigid_alignment.html">How to perform rigid alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to select a mesh subset?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI</span></p>
 <ul class="nav bd-sidenav">
@@ -373,7 +369,7 @@
     
     <li class="breadcrumb-item"><a href="../../../how_to.html" class="nav-link">How-tos</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to select a mesh subset?</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to automatically select the varifold kernel?</span></li>
   </ul>
 </nav>
 </div>
@@ -390,27 +386,19 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="How-to-select-a-mesh-subset?">
-<h1>How to select a mesh subset?<a class="headerlink" href="#How-to-select-a-mesh-subset?" title="Link to this heading">#</a></h1>
-<p>This notebook shows how to select a subset of a mesh that is encoded by a color.</p>
+  <section id="How-to-automatically-select-the-varifold-kernel?">
+<h1>How to automatically select the varifold kernel?<a class="headerlink" href="#How-to-automatically-select-the-varifold-kernel?" title="Link to this heading">#</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.pilot</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">ASHS_STRUCTS</span><span class="p">,</span>
-    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
-    <span class="n">MeshExtractorFromSegmentedMesh</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.surface</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSurface</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.varifold.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">SigmaBisecSearch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.jacobs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshLoader</span>
 </pre></div>
 </div>
 </div>
@@ -419,166 +407,83 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[KeOps] Warning : cuda was detected, but driver API could not be initialized. Switching to cpu only.
+[KeOps] Warning : CUDA was detected, but driver API could not be initialized. Switching to CPU only.
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_subset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">))</span>
 
-<span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
-    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<section id="Mesh-from-MRI">
-<h2>Mesh from MRI<a class="headerlink" href="#Mesh-from-MRI" title="Link to this heading">#</a></h2>
-<p>Following <a class="reference internal" href="mri2mesh.html"><span class="doc">How to get a mesh from an MRI image?</span></a>, we get a <code class="docutils literal notranslate"><span class="pre">pv.PolyData</span></code> object representing the hippocampus.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SESSION_ID</span> <span class="o">=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path2image</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">],</span> <span class="n">as_image</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
+<span class="n">mesh_loader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MeshLoader</span><span class="p">(</span>
+        <span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">],</span>
+        <span class="n">struct_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;L_Hipp&quot;</span><span class="p">],</span>
+        <span class="n">session_subset</span><span class="o">=</span><span class="p">[</span><span class="n">session_subset</span><span class="p">],</span>
+        <span class="n">derivative</span><span class="o">=</span><span class="s2">&quot;enigma&quot;</span><span class="p">,</span>
+        <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">(</span><span class="n">nested</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">PvSurface</span>
 <span class="p">)</span>
 
-<span class="n">img2mesh</span> <span class="o">=</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">path2image</span><span class="p">()</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">mesh_loader</span><span class="p">()</span>
 
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">img2mesh</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">session_subset</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
 </div>
-<div class="output_area stderr docutils container">
+<div class="output_area docutils container">
 <div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/derivatives/segmentations&#39;).
+np.int64(18)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">pl</span><span class="o">.</span><span class="n">show_axes</span><span class="p">()</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../_images/_generated_notebooks_how_to_hipp_substructures_8_0.png" src="../../../_images/_generated_notebooks_how_to_hipp_substructures_8_0.png" />
-</div>
-</div>
-</section>
-<section id="Select-a-substructure-(from-a-segmented-mesh)">
-<h2>Select a substructure (from a segmented mesh)<a class="headerlink" href="#Select-a-substructure-(from-a-segmented-mesh)" title="Link to this heading">#</a></h2>
-<p>Substructures are encoded by colors. In this particular case, the encoding is generated by <a class="reference external" href="https://www.nitrc.org/projects/ashs">ASHS</a>.</p>
-<p>We now create a preprocessing step that selects the cells of the mesh with the given color.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh2struct_mesh</span> <span class="o">=</span> <span class="n">MeshExtractorFromSegmentedMesh</span><span class="p">(</span><span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">)</span>
-
-<span class="n">meshes</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span>
-    <span class="n">Map</span><span class="p">(</span><span class="n">mesh2struct_mesh</span><span class="p">),</span> <span class="n">key_sorter</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ASHS_STRUCTS</span><span class="p">)</span>
-<span class="p">)(</span><span class="n">ASHS_STRUCTS</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_cols</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">struct_name</span><span class="p">,</span> <span class="n">substructure</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">putils</span><span class="o">.</span><span class="n">plot_index_to_shape</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
-
-    <span class="n">pl</span><span class="o">.</span><span class="n">show_axes</span><span class="p">()</span>
-    <span class="n">substructure</span><span class="o">.</span><span class="n">clear_data</span><span class="p">()</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">substructure</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="n">struct_name</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../_images/_generated_notebooks_how_to_hipp_substructures_12_0.png" src="../../../_images/_generated_notebooks_how_to_hipp_substructures_12_0.png" />
-</div>
-</div>
-<p>Any mesh preprocessing step can now be applied to each substructure.</p>
-</section>
-<section id="Select-a-substructure-(from-a-segmented-image)">
-<h2>Select a substructure (from a segmented image)<a class="headerlink" href="#Select-a-substructure-(from-a-segmented-image)" title="Link to this heading">#</a></h2>
-<p>If the original mesh comes from a segmented image, a substructure can also be directly extracted from the image, as shown <a class="reference internal" href="mri2mesh.html"><span class="doc">here</span></a>.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img2mesh</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span>
-        <span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">,</span>
-        <span class="n">return_colors</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ref_value</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">SigmaBisecSearch</span><span class="p">(</span>
+    <span class="n">ref_value</span><span class="o">=</span><span class="n">ref_value</span><span class="p">,</span>
+    <span class="n">decimator</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">meshes</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">HashWithIncoming</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span><span class="n">img2mesh</span><span class="p">),</span> <span class="n">key_sorter</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ASHS_STRUCTS</span><span class="p">))(</span>
-    <span class="n">ASHS_STRUCTS</span>
-<span class="p">)</span>
+<span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">mesh</span><span class="p">])</span>
+
+<span class="n">grid_search</span><span class="o">.</span><span class="n">sigma_</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">sdist_</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(np.float64(3.212804326367738), np.float64(0.09214785741642118))
+</pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_cols</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">),</span> <span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">struct_name</span><span class="p">,</span> <span class="n">substructure</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">meshes</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">putils</span><span class="o">.</span><span class="n">plot_index_to_shape</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">grid_search</span><span class="o">.</span><span class="n">grid_</span><span class="p">,</span>
+    <span class="n">grid_search</span><span class="o">.</span><span class="n">sdists_</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">sigma_</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">sdist_</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">ref_value</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="n">x_min</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">x_max</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
 
-    <span class="n">pl</span><span class="o">.</span><span class="n">show_axes</span><span class="p">()</span>
-    <span class="n">substructure</span><span class="o">.</span><span class="n">clear_data</span><span class="p">()</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">substructure</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="n">struct_name</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\sigma$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\Sigma d_i$&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -586,10 +491,9 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_generated_notebooks_how_to_hipp_substructures_17_0.png" src="../../../_images/_generated_notebooks_how_to_hipp_substructures_17_0.png" />
+<img alt="../../../_images/_generated_notebooks_how_to_varifold_kernel_tuning_4_0.png" src="../../../_images/_generated_notebooks_how_to_varifold_kernel_tuning_4_0.png" />
 </div>
 </div>
-</section>
 </section>
 
 
@@ -602,26 +506,6 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Mesh-from-MRI">Mesh from MRI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Select-a-substructure-(from-a-segmented-mesh)">Select a substructure (from a segmented mesh)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Select-a-substructure-(from-a-segmented-image)">Select a substructure (from a segmented image)</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
