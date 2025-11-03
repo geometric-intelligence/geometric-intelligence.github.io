@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to automatically select the varifold kernel? &#8212; polpo latest documentation</title>
+    <title>How to automatically select the varifold kernel using a decimation-based approach? &#8212; polpo latest documentation</title>
   
   
   
@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="How to visualize MRI data?" href="viz_mri.html" />
-    <link rel="prev" title="How to do multiple structures mesh-valued regression?" href="multimesh_valued_regression.html" />
+    <link rel="prev" title="How to select the varifold kernel using characteristic lengths?" href="varifold_kernel_charlen.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -285,7 +289,9 @@
 <li class="toctree-l1"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to automatically select the varifold kernel?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="varifold_kernel_charlen.html">How to select the varifold kernel using characteristic lengths?</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to automatically select the varifold kernel using a decimation-based approach?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="viz_mri.html">How to visualize MRI data?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data loading</span></p>
@@ -326,6 +332,12 @@
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regression.html">LDDMM: how to do regression?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_transport_abc.html">LDDMM: parallel transport</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Varifold</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="varifold_kernel_charlen.html">How to select the varifold kernel using characteristic lengths?</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to automatically select the varifold kernel using a decimation-based approach?</a></li>
 </ul>
 </div>
 </nav></div>
@@ -369,7 +381,7 @@
     
     <li class="breadcrumb-item"><a href="../../../how_to.html" class="nav-link">How-tos</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to automatically select the varifold kernel?</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to automatically select the varifold kernel using a decimation-based approach?</span></li>
   </ul>
 </nav>
 </div>
@@ -386,8 +398,9 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="How-to-automatically-select-the-varifold-kernel?">
-<h1>How to automatically select the varifold kernel?<a class="headerlink" href="#How-to-automatically-select-the-varifold-kernel?" title="Link to this heading">#</a></h1>
+  <section id="How-to-automatically-select-the-varifold-kernel-using-a-decimation-based-approach?">
+<h1>How to automatically select the varifold kernel using a decimation-based approach?<a class="headerlink" href="#How-to-automatically-select-the-varifold-kernel-using-a-decimation-based-approach?" title="Link to this heading">#</a></h1>
+<p>This method <a class="reference external" href="../analysis/varifold_decimation.ipynb">depends on the characteristic length</a> of the mesh and should probably be avoided. (See <a class="reference internal" href="varifold_kernel_charlen.html"><span class="doc">How to select the varifold kernel using characteristic lengths?</span></a> for an alternative.)</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -440,7 +453,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-np.int64(18)
+np.int64(23)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -465,7 +478,7 @@ np.int64(18)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(np.float64(3.212804326367738), np.float64(0.09214785741642118))
+(np.float64(3.5560032577461733), np.float64(0.11462390940141631))
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -494,6 +507,13 @@ np.int64(18)
 <img alt="../../../_images/_generated_notebooks_how_to_varifold_kernel_tuning_4_0.png" src="../../../_images/_generated_notebooks_how_to_varifold_kernel_tuning_4_0.png" />
 </div>
 </div>
+<section id="Further-reading">
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="../examples/varifold_decimation.ipynb">Impact of decimation in the automatic selection of the varifold kernel width</a></p></li>
+<li><p><a class="reference internal" href="varifold_kernel_charlen.html"><span class="doc">How to select the varifold kernel using characteristic lengths?</span></a></p></li>
+</ul>
+</section>
 </section>
 
 
@@ -506,6 +526,24 @@ np.int64(18)
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
