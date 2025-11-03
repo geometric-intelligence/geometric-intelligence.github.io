@@ -335,21 +335,20 @@
                   
   <section id="Consistency-of-varifold-kernel-selection-procedure">
 <h1>Consistency of varifold kernel selection procedure<a class="headerlink" href="#Consistency-of-varifold-kernel-selection-procedure" title="Link to this heading">#</a></h1>
-<p>TODO: split into 2 notebooks</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.surface</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSurface</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.varifold.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">SigmaBisecSearch</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyplot</span><span class="w"> </span><span class="kn">import</span> <span class="n">grouped_barplot</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">IdentityStep</span><span class="p">,</span> <span class="n">BranchingPipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">BranchingPipeline</span><span class="p">,</span> <span class="n">IdentityStep</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.jacobs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeshLoader</span><span class="p">,</span> <span class="n">get_subject_ids</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.decimation</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvDecimate</span>
 </pre></div>
@@ -362,14 +361,6 @@
 <div class="highlight"><pre>
 [KeOps] Warning : CUDA was detected, but driver API could not be initialized. Switching to CPU only.
 </pre></div></div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: parallelize computations</span>
-</pre></div>
-</div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -513,7 +504,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_12_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_12_0.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_10_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_10_0.png" />
 </div>
 </div>
 <section id="Computations">
@@ -692,6 +683,56 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_23_3.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>2 meshes<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">sigmas_</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Struct&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
 <img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_25_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_25_0.png" />
 </div>
 </div>
@@ -717,13 +758,13 @@
 </div>
 </div>
 </section>
-<section id="id3">
-<h3>2 meshes<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>3 meshes<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
     <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
@@ -767,16 +808,16 @@
 </div>
 </div>
 </section>
-<section id="id4">
-<h3>3 meshes<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>All<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">,</span> <span class="n">show_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
@@ -817,56 +858,6 @@
 </div>
 </div>
 </section>
-<section id="id5">
-<h3>All<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">sigmas_</span> <span class="o">=</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
-
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">,</span> <span class="n">show_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Struct&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_0.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_1.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_2.png" />
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_31_3.png" />
-</div>
-</div>
-</section>
 </section>
 <section id="Per-subject:-structure,-target-reduction">
 <h2>Per subject: structure, target reduction<a class="headerlink" href="#Per-subject:-structure,-target-reduction" title="Link to this heading">#</a></h2>
@@ -877,6 +868,58 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
+    <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Reduc&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_32_3.png" />
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>2 meshes<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
     <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
@@ -922,13 +965,13 @@
 </div>
 </div>
 </section>
-<section id="id7">
-<h3>2 meshes<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="id8">
+<h3>3 meshes<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
     <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
@@ -974,18 +1017,18 @@
 </div>
 </div>
 </section>
-<section id="id8">
-<h3>3 meshes<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h3>All<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
     <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">,</span> <span class="n">show_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
@@ -1026,58 +1069,6 @@
 </div>
 </div>
 </section>
-<section id="id9">
-<h3>All<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">subject_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">sigmas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
-    <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
-
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">,</span> <span class="n">show_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Reduc&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subject_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_0.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_1.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_2.png" />
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_40_3.png" />
-</div>
-</div>
-</section>
 </section>
 <section id="Per-target-reduction:-subject,-structure">
 <h2>Per target reduction: subject, structure<a class="headerlink" href="#Per-target-reduction:-subject,-structure" title="Link to this heading">#</a></h2>
@@ -1088,6 +1079,56 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()))(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Reduc&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">group_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_41_3.png" />
+</div>
+</div>
+</section>
+<section id="id11">
+<h3>2 meshes<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()))(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
     <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
@@ -1131,13 +1172,13 @@
 </div>
 </div>
 </section>
-<section id="id11">
-<h3>2 meshes<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="id12">
+<h3>3 meshes<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()))(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
     <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
@@ -1181,16 +1222,16 @@
 </div>
 </div>
 </section>
-<section id="id12">
-<h3>3 meshes<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<section id="id13">
+<h3>All<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()))(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">,</span> <span class="n">show_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
@@ -1231,14 +1272,19 @@
 </div>
 </div>
 </section>
-<section id="id13">
-<h3>All<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+</section>
+<section id="Per-target-reduction:-structure,-subject">
+<h2>Per target reduction: structure, subject<a class="headerlink" href="#Per-target-reduction:-structure,-subject" title="Link to this heading">#</a></h2>
+<section id="id14">
+<h3>1 mesh<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">()))(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
+    <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
     <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
 
@@ -1256,41 +1302,38 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_0.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_0.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_1.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_1.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_2.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_2.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_49_3.png" />
+<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_50_3.png" />
 </div>
 </div>
 </section>
-</section>
-<section id="Per-target-reduction:-structure,-subject">
-<h2>Per target reduction: structure, subject<a class="headerlink" href="#Per-target-reduction:-structure,-subject" title="Link to this heading">#</a></h2>
-<section id="id14">
-<h3>1 mesh<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<section id="id15">
+<h3>2 meshes<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
     <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
@@ -1336,13 +1379,13 @@
 </div>
 </div>
 </section>
-<section id="id15">
-<h3>2 meshes<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<section id="id16">
+<h3>3 meshes<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
     <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
@@ -1388,18 +1431,18 @@
 </div>
 </div>
 </section>
-<section id="id16">
-<h3>3 meshes<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<section id="id17">
+<h3>All<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
     <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
 
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">,</span> <span class="n">show_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
@@ -1437,58 +1480,6 @@
 </div>
 <div class="output_area docutils container">
 <img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_56_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_56_3.png" />
-</div>
-</div>
-</section>
-<section id="id17">
-<h3>All<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">decimation_sigmas</span> <span class="ow">in</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()(</span><span class="n">sigmas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">sigmas_</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictSwapper</span><span class="p">()</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">NestedDictMap</span><span class="p">(</span><span class="n">ppdict</span><span class="o">.</span><span class="n">DictToValuesList</span><span class="p">())</span>
-    <span class="p">)(</span><span class="n">decimation_sigmas</span><span class="p">)</span>
-
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">grouped_barplot</span><span class="p">(</span><span class="n">sigmas_</span><span class="p">,</span> <span class="n">show_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Target reduction&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
-
-    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Reduc&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">group_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_0.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_0.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_1.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_1.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_2.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_2.png" />
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_3.png" src="../../../../_images/_generated_notebooks_pregnancy_methods_varifold_kernel_58_3.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
