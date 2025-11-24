@@ -272,9 +272,13 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="decimation_charlen.html">How much decimation is too much?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: influence of control points location</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_data_attachment.html">LDDMM: importance of the data attachment term</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regularisation.html">LDDMM: influence of regularisation</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_time_points.html">LDDMM: influence of time points</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="mri_left_right.html">Identify left-right swap in brain segmentation data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="varifold_decimation.html">Impact of decimation in the automatic selection of the varifold kernel width using a decimation-based approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="varifold_decimation_charlen.html">Pairwise distances between different parametrizations of the same shape</a></li>
@@ -284,9 +288,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LDDMM</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: influence of control points location</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regularisation.html">LDDMM: influence of regularisation</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_time_points.html">LDDMM: influence of time points</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_data_attachment.html">LDDMM: importance of the data attachment term</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Varifold</span></p>
 <ul class="nav bd-sidenav">
@@ -379,9 +387,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.surface</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSurface</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.varifold.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">SigmaFromLengths</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesColoredPlotter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.deformetrica</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_two_random_maternal_meshes</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.deformetrica</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_two_random_meshes</span>
 </pre></div>
 </div>
 </div>
@@ -427,9 +433,10 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">get_two_random_maternal_meshes</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">get_two_random_meshes</span><span class="p">(</span>
     <span class="n">OUTPUTS_DIR</span><span class="p">,</span>
     <span class="n">mesh_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">),</span>
+    <span class="n">target_reduction</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -441,7 +448,7 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">VIZ</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
     <span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
         <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 
     <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -472,7 +479,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-np.float64(6.06101655960083)
+np.float64(5.589180490389398)
 </pre></div></div>
 </div>
 <p>Following <a class="reference external" href="./lddmm_register_mesh_template.ipynb">LDDMM: how to register a mesh to a template?</a>.</p>
@@ -627,9 +634,9 @@ np.float64(6.06101655960083)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;uniform&#39;: np.float64(7.016889882369205),
- &#39;vertices_full&#39;: np.float64(7.6863466583309314),
- &#39;vertices_random&#39;: np.float64(7.743314489473239)}
+{&#39;uniform&#39;: np.float64(3.8427535440006966),
+ &#39;vertices_full&#39;: np.float64(3.9352090397352595),
+ &#39;vertices_random&#39;: np.float64(4.156589211729441)}
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -714,6 +721,14 @@ np.float64(6.06101655960083)
 <p>Conclusion: uniform grid is at least as good as other naive control points selection strategy.</p>
 </section>
 </section>
+<section id="Further-reading">
+<h1>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="lddmm_data_attachment.html"><span class="doc">LDDMM: importance of the data attachment term</span></a></p></li>
+<li><p><a class="reference internal" href="lddmm_regularisation.html"><span class="doc">LDDMM: influence of regularisation</span></a></p></li>
+<li><p><a class="reference internal" href="lddmm_time_points.html"><span class="doc">LDDMM: influence of time points</span></a></p></li>
+</ul>
+</section>
 
 
                 </article>
@@ -738,8 +753,13 @@ np.float64(6.06101655960083)
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LDDMM: influence of control points location</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Comparison">Comparison</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>

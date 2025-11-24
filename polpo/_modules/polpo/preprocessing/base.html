@@ -380,6 +380,14 @@
 
 
 
+<div class="viewcode-block" id="IdentityStep">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mesh.adapter.IdentityStep.html#polpo.preprocessing.IdentityStep">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IdentityStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+
 <div class="viewcode-block" id="Pipeline">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mesh.adapter.Pipeline.html#polpo.preprocessing.Pipeline">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Pipeline</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">):</span>
@@ -404,6 +412,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span></div>
 
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ignore_other</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">IdentityStep</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;steps&quot;</span><span class="p">):</span>
@@ -411,7 +425,8 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">steps</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_other</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+                <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
 
@@ -422,7 +437,8 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">steps</span> <span class="o">=</span> <span class="n">other</span> <span class="o">+</span> <span class="n">steps</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">steps</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span><span class="p">]</span> <span class="o">+</span> <span class="n">steps</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_other</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+                <span class="n">steps</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span><span class="p">]</span> <span class="o">+</span> <span class="n">steps</span>
 
         <span class="k">return</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span></div>
 

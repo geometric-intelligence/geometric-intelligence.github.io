@@ -192,6 +192,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -268,9 +272,13 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="decimation_charlen.html">How much decimation is too much?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_control_points.html">LDDMM: influence of control points location</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_data_attachment.html">LDDMM: importance of the data attachment term</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regularisation.html">LDDMM: influence of regularisation</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: influence of time points</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="mri_left_right.html">Identify left-right swap in brain segmentation data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="varifold_decimation.html">Impact of decimation in the automatic selection of the varifold kernel width using a decimation-based approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="varifold_decimation_charlen.html">Pairwise distances between different parametrizations of the same shape</a></li>
@@ -280,9 +288,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LDDMM</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lddmm_control_points.html">LDDMM: influence of control points location</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regularisation.html">LDDMM: influence of regularisation</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: influence of time points</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="lddmm_data_attachment.html">LDDMM: importance of the data attachment term</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Varifold</span></p>
 <ul class="nav bd-sidenav">
@@ -375,9 +387,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.surface</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvSurface</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.varifold.tuning</span><span class="w"> </span><span class="kn">import</span> <span class="n">SigmaFromLengths</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesColoredPlotter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.deformetrica</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_two_random_maternal_meshes</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.deformetrica</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_two_random_meshes</span>
 </pre></div>
 </div>
 </div>
@@ -393,7 +403,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RECOMPUTE</span> <span class="o">=</span> <span class="kc">False</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RECOMPUTE</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">VIZ</span> <span class="o">=</span> <span class="mi">1</span>
@@ -423,9 +433,10 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">get_two_random_maternal_meshes</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">get_two_random_meshes</span><span class="p">(</span>
     <span class="n">OUTPUTS_DIR</span><span class="p">,</span>
     <span class="n">mesh_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">),</span>
+    <span class="n">target_reduction</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -468,11 +479,11 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-np.float64(6.222092151641846)
+np.float64(5.529757953771692)
 </pre></div></div>
 </div>
 <p>Following <a class="reference external" href="./lddmm_register_mesh_template.ipynb">LDDMM: how to register a mesh to a template?</a>.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
@@ -509,6 +520,119 @@ np.float64(6.222092151641846)
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Logger has been set to: INFO
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 4.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: /home/luisfpereira/.polpo/results/lddmm_time_points_L_Hipp/registration/10/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 420 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.455E+02     [ attachment = -5.988E+01 ; regularity = -8.561E+01 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -1.155E+02     [ attachment = -2.750E+01 ; regularity = -8.801E+01 ]
+
+------------------------------------- Iteration: 60 -------------------------------------
+&gt;&gt; Log-likelihood = -1.079E+02     [ attachment = -2.309E+01 ; regularity = -8.478E+01 ]
+
+------------------------------------- Iteration: 80 -------------------------------------
+&gt;&gt; Log-likelihood = -1.039E+02     [ attachment = -1.975E+01 ; regularity = -8.418E+01 ]
+&gt;&gt; Log-likelihood = -1.039E+02     [ attachment = -1.972E+01 ; regularity = -8.418E+01 ]
+
+------------------------------------- Iteration: 100 -------------------------------------
+&gt;&gt; Log-likelihood = -1.011E+02     [ attachment = -1.719E+01 ; regularity = -8.395E+01 ]
+
+------------------------------------- Iteration: 120 -------------------------------------
+&gt;&gt; Log-likelihood = -9.865E+01     [ attachment = -1.569E+01 ; regularity = -8.296E+01 ]
+&gt;&gt; Gradient at Termination: 117.64593375481836
+&gt;&gt; CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH
+&gt;&gt; Estimation took: 01 minutes and 59 seconds
+Logger has been set to: INFO
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 4.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: /home/luisfpereira/.polpo/results/lddmm_time_points_L_Hipp/registration/20/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 420 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.443E+02     [ attachment = -5.881E+01 ; regularity = -8.547E+01 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -1.149E+02     [ attachment = -2.731E+01 ; regularity = -8.762E+01 ]
+
+------------------------------------- Iteration: 60 -------------------------------------
+&gt;&gt; Log-likelihood = -1.075E+02     [ attachment = -2.162E+01 ; regularity = -8.591E+01 ]
+
+------------------------------------- Iteration: 80 -------------------------------------
+&gt;&gt; Log-likelihood = -1.037E+02     [ attachment = -1.956E+01 ; regularity = -8.413E+01 ]
+
+------------------------------------- Iteration: 100 -------------------------------------
+&gt;&gt; Log-likelihood = -1.008E+02     [ attachment = -1.706E+01 ; regularity = -8.374E+01 ]
+
+------------------------------------- Iteration: 120 -------------------------------------
+&gt;&gt; Log-likelihood = -9.845E+01     [ attachment = -1.581E+01 ; regularity = -8.263E+01 ]
+
+------------------------------------- Iteration: 140 -------------------------------------
+&gt;&gt; Log-likelihood = -9.665E+01     [ attachment = -1.594E+01 ; regularity = -8.071E+01 ]
+&gt;&gt; Gradient at Termination: 82.66245518188731
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 02 minutes and 42 seconds
+Logger has been set to: INFO
+&gt;&gt; No initial CP spacing given: using diffeo kernel width of 4.0
+OMP_NUM_THREADS was not found in environment variables. An automatic value will be set.
+OMP_NUM_THREADS will be set to 10
+context has already been set
+&gt;&gt; No specified state-file. By default, Deformetrica state will by saved in file: /home/luisfpereira/.polpo/results/lddmm_time_points_L_Hipp/registration/50/deformetrica-state.p.
+&gt;&gt; Using a Sobolev gradient for the template data with the ScipyLBFGS estimator memory length being larger than 1. Beware: that can be tricky.
+&gt;&gt; Set of 420 control points defined.
+&gt;&gt; Momenta initialized to zero, for 1 subjects.
+&gt;&gt; Started estimator: ScipyOptimize
+
+&gt;&gt; Scipy optimization method: L-BFGS-B
+
+------------------------------------- Iteration: 1 -------------------------------------
+
+------------------------------------- Iteration: 20 -------------------------------------
+&gt;&gt; Log-likelihood = -1.447E+02     [ attachment = -5.962E+01 ; regularity = -8.510E+01 ]
+
+------------------------------------- Iteration: 40 -------------------------------------
+&gt;&gt; Log-likelihood = -1.155E+02     [ attachment = -2.762E+01 ; regularity = -8.789E+01 ]
+
+------------------------------------- Iteration: 60 -------------------------------------
+&gt;&gt; Log-likelihood = -1.076E+02     [ attachment = -2.206E+01 ; regularity = -8.552E+01 ]
+
+------------------------------------- Iteration: 80 -------------------------------------
+&gt;&gt; Log-likelihood = -1.037E+02     [ attachment = -1.925E+01 ; regularity = -8.442E+01 ]
+
+------------------------------------- Iteration: 100 -------------------------------------
+&gt;&gt; Log-likelihood = -1.009E+02     [ attachment = -1.709E+01 ; regularity = -8.382E+01 ]
+&gt;&gt; Gradient at Termination: 86.49747456255216
+&gt;&gt; ABNORMAL:
+&gt;&gt; Estimation took: 03 minutes and 08 seconds
+</pre></div></div>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -537,7 +661,7 @@ np.float64(6.222092151641846)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">meshes</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
@@ -550,18 +674,18 @@ np.float64(6.222092151641846)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{10: np.float64(4.361805517439311),
- 20: np.float64(4.816243472895335),
- 50: np.float64(4.77851510780397)}
+{10: np.float64(4.000095767754359),
+ 20: np.float64(3.997204971592177),
+ 50: np.float64(4.027821485068969)}
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">VIZ</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -607,7 +731,7 @@ np.float64(6.222092151641846)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -637,6 +761,14 @@ np.float64(6.222092151641846)
 </div>
 </div>
 </section>
+<section id="Further-reading">
+<h1>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="lddmm_control_points.html"><span class="doc">LDDMM: influence of control points location</span></a></p></li>
+<li><p><a class="reference internal" href="lddmm_data_attachment.html"><span class="doc">LDDMM: importance of the data attachment term</span></a></p></li>
+<li><p><a class="reference internal" href="lddmm_regularisation.html"><span class="doc">LDDMM: influence of regularisation</span></a></p></li>
+</ul>
+</section>
 
 
                 </article>
@@ -648,6 +780,26 @@ np.float64(6.222092151641846)
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LDDMM: influence of time points</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
