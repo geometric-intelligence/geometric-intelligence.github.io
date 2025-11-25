@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to get a mesh from an MRI image? &#8212; polpo latest documentation</title>
+    <title>How to compute the Euclidean distance between meshes in correspondence? &#8212; polpo latest documentation</title>
   
   
   
@@ -45,12 +45,12 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/notebooks/how_to/mri2mesh';</script>
-    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/notebooks/how_to/mri2mesh.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/notebooks/how_to/mesh_euclidean';</script>
+    <link rel="canonical" href="https://geometric-intelligence.github.io/polpo/_generated/notebooks/how_to/mesh_euclidean.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="How to do multiple structures mesh-valued regression?" href="multimesh_valued_regression.html" />
-    <link rel="prev" title="How to visualize meshes with overlay?" href="mesh_viz_compare.html" />
+    <link rel="next" title="How to compute the distance between meshes with unknown correspondences with functional maps?" href="mesh_fmap.html" />
+    <link rel="prev" title="How to perform dimensionality reduction on a mesh?" href="mesh_dim_reduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
@@ -192,10 +192,6 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -285,12 +281,12 @@
 <li class="toctree-l1"><a class="reference internal" href="load_server_data.html">How to download data from the server?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maternal_sessions_gif.html">How to create a gif showing how the brain substructures change over time?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mesh_euclidean.html">How to compute the Euclidean distance between meshes in correspondence?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to compute the Euclidean distance between meshes in correspondence?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_fmap.html">How to compute the distance between meshes with unknown correspondences with functional maps?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_rigid_alignment.html">How to perform rigid alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="regression_across_subjects_using_velocities.html">LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</a></li>
 
@@ -306,18 +302,18 @@
 <li class="toctree-l1"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mesh</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="mesh_rigid_alignment.html">How to perform rigid alignment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_valued_regression.html">How to do mesh-valued regression?</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to get a mesh from an MRI image?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_dim_reduction.html">How to perform dimensionality reduction on a mesh?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mesh_viz_compare.html">How to visualize meshes with overlay?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to get a mesh from an MRI image?</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mri2mesh.html">How to get a mesh from an MRI image?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="viz_mri.html">How to visualize MRI data?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Maternal</span></p>
@@ -328,8 +324,8 @@
 <li class="toctree-l1"><a class="reference internal" href="multimesh_valued_regression.html">How to do multiple structures mesh-valued regression?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Euclidean</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="mesh_euclidean.html">How to compute the Euclidean distance between meshes in correspondence?</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to compute the Euclidean distance between meshes in correspondence?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LDDMM</span></p>
 <ul class="nav bd-sidenav">
@@ -395,7 +391,7 @@
     
     <li class="breadcrumb-item"><a href="../../../how_to.html" class="nav-link">How-tos</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to get a mesh from an MRI image?</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">How to compute the Euclidean distance between meshes in correspondence?</span></li>
   </ul>
 </nav>
 </div>
@@ -412,24 +408,24 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="How-to-get-a-mesh-from-an-MRI-image?">
-<h1>How to get a mesh from an MRI image?<a class="headerlink" href="#How-to-get-a-mesh-from-an-MRI-image?" title="Link to this heading">#</a></h1>
+  <section id="How-to-compute-the-Euclidean-distance-between-meshes-in-correspondence?">
+<h1>How to compute the Euclidean distance between meshes in correspondence?<a class="headerlink" href="#How-to-compute-the-Euclidean-distance-between-meshes-in-correspondence?" title="Link to this heading">#</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.pilot</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">,</span>
-    <span class="n">MriLoader</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DiscreteSurfaces</span><span class="p">,</span>
+    <span class="n">L2SurfacesMetric</span><span class="p">,</span>
+    <span class="n">PullbackMetric</span><span class="p">,</span>
+    <span class="n">SurfacesSpace</span><span class="p">,</span>
+    <span class="n">vertices_to_array</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">PvFromData</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mri</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">,</span>
-    <span class="n">SkimageMarchingCubes</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.qoi</span><span class="w"> </span><span class="kn">import</span> <span class="n">centroid2farthest_vertex</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesColoredPlotter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.load.pregnancy.random</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_two_random_meshes</span>
 </pre></div>
 </div>
 </div>
@@ -438,7 +434,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[KeOps] Warning : cuda was detected, but driver API could not be initialized. Switching to cpu only.
+[KeOps] Warning : CUDA was detected, but driver API could not be initialized. Switching to CPU only.
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -446,20 +442,23 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">VIZ</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
     <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<section id="Loading-data">
-<h2>Loading data<a class="headerlink" href="#Loading-data" title="Link to this heading">#</a></h2>
-<p>Following <a class="reference internal" href="viz_mri.html"><span class="doc">How to visualize MRI data?</span></a>, we start by <a class="reference internal" href="load_figshare_data.html"><span class="doc">getting the image data</span></a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SESSION_ID</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes</span> <span class="o">=</span> <span class="n">get_two_random_meshes</span><span class="p">(</span>
+    <span class="n">target_reduction</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">as_pv_surface</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">mesh_a</span><span class="p">,</span> <span class="n">mesh_b</span> <span class="o">=</span> <span class="n">meshes</span>
 </pre></div>
 </div>
 </div>
@@ -467,127 +466,71 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">MriLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">],</span> <span class="n">as_image</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">VIZ</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes</span><span class="p">:</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+    <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_fdata</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_space</span> <span class="o">=</span> <span class="n">DiscreteSurfaces</span><span class="p">(</span><span class="n">mesh_a</span><span class="o">.</span><span class="n">faces</span><span class="p">,</span> <span class="n">equip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">equip_with_metric</span><span class="p">(</span>
+    <span class="n">L2SurfacesMetric</span>
+<span class="p">)</span>
+
+<span class="n">space</span> <span class="o">=</span> <span class="n">SurfacesSpace</span><span class="p">()</span><span class="o">.</span><span class="n">equip_with_metric</span><span class="p">(</span>
+    <span class="n">PullbackMetric</span><span class="p">,</span>
+    <span class="n">forward_map</span><span class="o">=</span><span class="n">vertices_to_array</span><span class="p">,</span>
+    <span class="n">image_space</span><span class="o">=</span><span class="n">image_space</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/raw/mri&#39;).
-</pre></div></div>
-</div>
-</section>
-<section id="Marching-cubes">
-<h2>Marching cubes<a class="headerlink" href="#Marching-cubes" title="Link to this heading">#</a></h2>
-<p>We now use <a class="reference external" href="https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.marching_cubes">marching cubes</a> and transform the output to <a class="reference external" href="https://docs.pyvista.org/api/core/_autosummary/pyvista.polydata">pyvista.PolyData</a> for visualization.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh_from_image</span> <span class="o">=</span> <span class="n">SkimageMarchingCubes</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">space</span><span class="o">.</span><span class="n">metric</span><span class="o">.</span><span class="n">squared_dist</span><span class="p">(</span><span class="n">mesh_a</span><span class="p">,</span> <span class="n">mesh_b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+np.float64(3.5032395713595936)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="p">(</span><span class="n">mesh_from_image</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">())(</span><span class="n">img_fdata</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="Visualization">
-<h2>Visualization<a class="headerlink" href="#Visualization" title="Link to this heading">#</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">VIZ</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">ref_dist</span> <span class="o">=</span> <span class="n">centroid2farthest_vertex</span><span class="p">([</span><span class="n">mesh_a</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">pl</span><span class="o">.</span><span class="n">show_axes</span><span class="p">()</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../_images/_generated_notebooks_how_to_mri2mesh_13_0.png" src="../../../_images/_generated_notebooks_how_to_mri2mesh_13_0.png" />
-</div>
-</div>
-</section>
-<section id="Segmented-data">
-<h2>Segmented data<a class="headerlink" href="#Segmented-data" title="Link to this heading">#</a></h2>
-<p>Load the segmented data.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">HippocampalSubfieldsSegmentationsLoader</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">SESSION_ID</span><span class="p">],</span> <span class="n">as_image</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">ExtractUniqueKey</span><span class="p">()</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_fdata</span> <span class="o">=</span> <span class="n">pipe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-INFO: Data has already been downloaded... using cached file (&#39;/home/luisfpereira/.herbrain/data/pregnancy/derivatives/segmentations&#39;).
-</pre></div></div>
-</div>
-<p>The process changes only slightly when the data is segmented. (NB: <code class="docutils literal notranslate"><span class="pre">encoding</span></code> informs about the tool used for segmentation, which matters to map ids to tool ids and colors.)</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img2mesh</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span>
-        <span class="n">return_colors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">,</span>
+    <span class="n">pl</span> <span class="o">=</span> <span class="n">RegisteredMeshesColoredPlotter</span><span class="p">()</span>
+
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh_b</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_meshes</span><span class="p">(</span>
+        <span class="n">mesh_a</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span>
+        <span class="n">mesh_b</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span>
+        <span class="n">ref_dist</span><span class="o">=</span><span class="n">ref_dist</span><span class="p">,</span>
+        <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">opacity</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;vertex diffs / ref&quot;</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
-<span class="p">)</span>
 
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">img2mesh</span><span class="p">(</span><span class="n">img_fdata</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">pl</span><span class="o">.</span><span class="n">show_axes</span><span class="p">()</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -595,51 +538,9 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/_generated_notebooks_how_to_mri2mesh_20_0.png" src="../../../_images/_generated_notebooks_how_to_mri2mesh_20_0.png" />
+<img alt="../../../_images/_generated_notebooks_how_to_mesh_euclidean_7_0.png" src="../../../_images/_generated_notebooks_how_to_mesh_euclidean_7_0.png" />
 </div>
 </div>
-<p>For example, we can select a particular subfield of the hippocampus.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img2mesh</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span>
-        <span class="n">struct_id</span><span class="o">=</span><span class="s2">&quot;PostHipp&quot;</span><span class="p">,</span> <span class="n">return_colors</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span>
-    <span class="p">)</span>
-    <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
-<span class="p">)</span>
-
-<span class="n">mesh</span> <span class="o">=</span> <span class="n">img2mesh</span><span class="p">(</span><span class="n">img_fdata</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">pl</span><span class="o">.</span><span class="n">show_axes</span><span class="p">()</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../../_images/_generated_notebooks_how_to_mri2mesh_23_0.png" src="../../../_images/_generated_notebooks_how_to_mri2mesh_23_0.png" />
-</div>
-</div>
-</section>
-<section id="Further-reading">
-<h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="hipp_substructures.html"><span class="doc">How to select a mesh subset?</span></a></p></li>
-</ul>
-</section>
 </section>
 
 
@@ -652,28 +553,6 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-data">Loading data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Marching-cubes">Marching cubes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualization">Visualization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Segmented-data">Segmented data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Further-reading">Further reading</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
