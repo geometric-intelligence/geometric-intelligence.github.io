@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Oct 30, 2025, 12:28:25 AM"/>
+    <meta name="docbuild:last-update" content="Dec 16, 2025, 7:01:48 PM"/>
   </head>
   
   
@@ -336,7 +336,7 @@
 <p>This module implements the cycle lifting for graphs to cell complexes.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellComplex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellComplex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://pyt-team.github.io/toponetx/api/generated/toponetx.Complex.html#toponetx.Complex" title="(in TopoNetX vlatest)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Complex</span></code></a></p>
 <p>Class representing a cell complex.</p>
 <p>A cell complex is a mathematical structure that is built up from simple building blocks called cells.
@@ -439,6 +439,65 @@ from them.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CC</span><span class="o">.</span><span class="n">is_regular</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.from_trimesh">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_trimesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.from_trimesh" title="Link to this definition">#</a></dt>
+<dd><p>Convert from trimesh object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mesh</strong><span class="classifier">trimesh.Trimesh</span></dt><dd><p>A trimesh object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>CellComplex</dt><dd><p>The cell complex generated from the trimesh provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">trimesh</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">Trimesh</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">vertices</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">faces</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">process</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CC</span> <span class="o">=</span> <span class="n">tnx</span><span class="o">.</span><span class="n">CellComplex</span><span class="o">.</span><span class="n">from_trimesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CC</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;position&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.load_mesh">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.load_mesh" title="Link to this definition">#</a></dt>
+<dd><p>Load a mesh.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str or pathlib.Path</span></dt><dd><p>The file path of the data to be loaded.</p>
+</dd>
+<dt><strong>process</strong><span class="classifier">bool, default=False</span></dt><dd><p>Whether trimesh should process the mesh before loading it.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>CellComplex</dt><dd><p>The cell complex corresponding to the mesh.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>file supported : obj, off, glb</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CC</span> <span class="o">=</span> <span class="n">tnx</span><span class="o">.</span><span class="n">CellComplex</span><span class="o">.</span><span class="n">load_mesh</span><span class="p">(</span><span class="s2">&quot;bunny.obj&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.__init__" title="Link to this definition">#</a></dt>
@@ -843,37 +902,6 @@ Only returned if <cite>index</cite> is True.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.from_trimesh">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_trimesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.from_trimesh" title="Link to this definition">#</a></dt>
-<dd><p>Convert from trimesh object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>mesh</strong><span class="classifier">trimesh.Trimesh</span></dt><dd><p>A trimesh object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>CellComplex</dt><dd><p>The cell complex generated from the trimesh provided.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">trimesh</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">Trimesh</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">vertices</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
-<span class="gp">... </span>    <span class="n">faces</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span>
-<span class="gp">... </span>    <span class="n">process</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CC</span> <span class="o">=</span> <span class="n">tnx</span><span class="o">.</span><span class="n">CellComplex</span><span class="o">.</span><span class="n">from_trimesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CC</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;position&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.get_cell_attributes">
 <span class="sig-name descname"><span class="pre">get_cell_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.get_cell_attributes" title="Link to this definition">#</a></dt>
 <dd><p>Get node attributes from graph.</p>
@@ -1228,34 +1256,6 @@ If False, missing edges will be ignored.</p>
 </dl>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.load_mesh">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.load_mesh" title="Link to this definition">#</a></dt>
-<dd><p>Load a mesh.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str or pathlib.Path</span></dt><dd><p>The file path of the data to be loaded.</p>
-</dd>
-<dt><strong>process</strong><span class="classifier">bool, default=False</span></dt><dd><p>Whether trimesh should process the mesh before loading it.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>CellComplex</dt><dd><p>The cell complex corresponding to the mesh.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>file supported : obj, off, glb</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CC</span> <span class="o">=</span> <span class="n">tnx</span><span class="o">.</span><span class="n">CellComplex</span><span class="o">.</span><span class="n">load_mesh</span><span class="p">(</span><span class="s2">&quot;bunny.obj&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2003,7 +2003,7 @@ cells of this complex. Only returned if <cite>index</cite> is True.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.cells">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cells</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://pyt-team.github.io/toponetx/api/generated/toponetx.CellView.html#toponetx.CellView" title="(in TopoNetX vlatest)"><span class="pre">CellView</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.cells" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cells</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://pyt-team.github.io/toponetx/api/generated/toponetx.CellView.html#toponetx.CellView" title="(in TopoNetX vlatest)"><span class="pre">CellView</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.cells" title="Link to this definition">#</a></dt>
 <dd><p>Return cells.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2017,7 +2017,7 @@ cells of this complex. Only returned if <cite>index</cite> is True.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.dim">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.dim" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.dim" title="Link to this definition">#</a></dt>
 <dd><p>Return maximum dimension.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2031,7 +2031,7 @@ cells of this complex. Only returned if <cite>index</cite> is True.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.edges">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">edges</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">EdgeView</span></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.edges" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">edges</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">EdgeView</span></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.edges" title="Link to this definition">#</a></dt>
 <dd><p>Return edges.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2045,7 +2045,7 @@ cells of this complex. Only returned if <cite>index</cite> is True.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.is_regular">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_regular</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.is_regular" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_regular</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.is_regular" title="Link to this definition">#</a></dt>
 <dd><p>Check the regularity condition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2070,7 +2070,7 @@ cells of this complex. Only returned if <cite>index</cite> is True.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.maxdim">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maxdim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.maxdim" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maxdim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.maxdim" title="Link to this definition">#</a></dt>
 <dd><p>Return maximum dimension.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2084,7 +2084,7 @@ cells of this complex. Only returned if <cite>index</cite> is True.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.nodes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NodeView</span></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.nodes" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NodeView</span></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.nodes" title="Link to this definition">#</a></dt>
 <dd><p>Return nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2098,7 +2098,7 @@ cells of this complex. Only returned if <cite>index</cite> is True.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.shape">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.shape" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.shape" title="Link to this definition">#</a></dt>
 <dd><p>Return shape.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2115,7 +2115,7 @@ nodes, edges, and cells of the Cell Complex respectively.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellCycleLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_cell_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellCycleLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_cell_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellCycleLifting" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.graph2cell.base.html#topobench.transforms.liftings.graph2cell.base.Graph2CellLifting" title="topobench.transforms.liftings.graph2cell.base.Graph2CellLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph2CellLifting</span></code></a></p>
 <p>Lift graphs to cell complexes.</p>
 <p>The algorithm creates 2-cells by identifying the cycles and considering them as 2-cells.</p>
@@ -2158,7 +2158,7 @@ nodes, edges, and cells of the Cell Complex respectively.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.liftings.graph2cell.cycle_lifting.Graph2CellLifting">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Graph2CellLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.Graph2CellLifting" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Graph2CellLifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.Graph2CellLifting" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.transforms.liftings.liftings.html#topobench.transforms.liftings.liftings.GraphLifting" title="topobench.transforms.liftings.liftings.GraphLifting"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphLifting</span></code></a></p>
 <p>Abstract class for lifting graphs to cell complexes.</p>
 <dl class="field-list simple">
@@ -2228,6 +2228,8 @@ nodes, edges, and cells of the Cell Complex respectively.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex"><code class="docutils literal notranslate"><span class="pre">CellComplex</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.from_trimesh"><code class="docutils literal notranslate"><span class="pre">CellComplex.from_trimesh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.load_mesh"><code class="docutils literal notranslate"><span class="pre">CellComplex.load_mesh()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.__init__"><code class="docutils literal notranslate"><span class="pre">CellComplex.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.add_cell"><code class="docutils literal notranslate"><span class="pre">CellComplex.add_cell()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.add_cells_from"><code class="docutils literal notranslate"><span class="pre">CellComplex.add_cells_from()</span></code></a></li>
@@ -2245,7 +2247,6 @@ nodes, edges, and cells of the Cell Complex respectively.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.down_laplacian_matrix"><code class="docutils literal notranslate"><span class="pre">CellComplex.down_laplacian_matrix()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.euler_characterisitics"><code class="docutils literal notranslate"><span class="pre">CellComplex.euler_characterisitics()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.from_networkx_graph"><code class="docutils literal notranslate"><span class="pre">CellComplex.from_networkx_graph()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.from_trimesh"><code class="docutils literal notranslate"><span class="pre">CellComplex.from_trimesh()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.get_cell_attributes"><code class="docutils literal notranslate"><span class="pre">CellComplex.get_cell_attributes()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.get_cell_data"><code class="docutils literal notranslate"><span class="pre">CellComplex.get_cell_data()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.get_edge_attributes"><code class="docutils literal notranslate"><span class="pre">CellComplex.get_edge_attributes()</span></code></a></li>
@@ -2256,7 +2257,6 @@ nodes, edges, and cells of the Cell Complex respectively.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.incidence_matrix"><code class="docutils literal notranslate"><span class="pre">CellComplex.incidence_matrix()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.is_connected"><code class="docutils literal notranslate"><span class="pre">CellComplex.is_connected()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.is_insertable_cycle"><code class="docutils literal notranslate"><span class="pre">CellComplex.is_insertable_cycle()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.load_mesh"><code class="docutils literal notranslate"><span class="pre">CellComplex.load_mesh()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.neighbors"><code class="docutils literal notranslate"><span class="pre">CellComplex.neighbors()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.node_to_all_cell_adjacnecy_matrix"><code class="docutils literal notranslate"><span class="pre">CellComplex.node_to_all_cell_adjacnecy_matrix()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2cell.cycle_lifting.CellComplex.node_to_all_cell_incidence_matrix"><code class="docutils literal notranslate"><span class="pre">CellComplex.node_to_all_cell_incidence_matrix()</span></code></a></li>
@@ -2340,7 +2340,7 @@ nodes, edges, and cells of the Cell Complex respectively.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>
