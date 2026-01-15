@@ -185,6 +185,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -351,8 +355,8 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.preprocessing.dict</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ppdict</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
@@ -373,12 +377,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictMeshWriter</span><span class="p">,</span> <span class="n">PvReader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidAlignment</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.str</span><span class="w"> </span><span class="kn">import</span> <span class="n">TryToInt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.protocol.pt_to_global</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.protocol.pt_to_global</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">VectorTransport</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.protocol.pt_to_global.euclidean</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">EuclideanGlobalTemplateFinder</span><span class="p">,</span>
     <span class="n">EuclideanTemplateFinder</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polpo.protocol.pt_to_global.pregnancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StageKeysDatasetFilter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgglomerativeClustering</span><span class="p">,</span> <span class="n">SpectralClustering</span>
 </pre></div>
 </div>
 </div>
@@ -398,9 +403,6 @@
 <span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="c1"># TODO: check need for this</span>
-<span class="n">EXTRA</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># whether to do extra computations (potentially time consuming)</span>
-
 <span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
     <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
 </pre></div>
@@ -412,7 +414,9 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: can still improve folder structure</span>
 <span class="c1"># TODO: rename? e.g. atlas -&gt; pre-atlas</span>
-<span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;regression_example_euclidean_2&quot;</span>
+
+<span class="c1"># TODO:</span>
+<span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">putils</span><span class="o">.</span><span class="n">get_results_path</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;regression_example_euclidean&quot;</span>
 
 <span class="n">ATLAS_DIR</span> <span class="o">=</span> <span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;atlases&quot;</span>
 <span class="n">MESHES_DIR</span> <span class="o">=</span> <span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;meshes&quot;</span>
@@ -433,7 +437,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_ids</span> <span class="o">=</span> <span class="n">get_subject_ids</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_male</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_ids</span> <span class="o">=</span> <span class="n">get_subject_ids</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_male</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">subject_ids</span>
 </pre></div>
@@ -445,7 +449,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&#39;01&#39;, &#39;1001B&#39;, &#39;1004B&#39;]
+[&#39;01&#39;, &#39;1001B&#39;, &#39;1004B&#39;, &#39;1009B&#39;, &#39;2004B&#39;]
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -493,6 +497,8 @@ Number of meshes for:
   -subject 01: 26
   -subject 1001B: 14
   -subject 1004B: 22
+  -subject 1009B: 10
+  -subject 2004B: 26
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -573,7 +579,9 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
     <span class="n">template_finder</span><span class="o">=</span><span class="n">EuclideanTemplateFinder</span><span class="p">(</span><span class="n">space</span><span class="p">),</span>
     <span class="n">global_template_finder</span><span class="o">=</span><span class="n">EuclideanGlobalTemplateFinder</span><span class="p">(</span><span class="n">space</span><span class="p">),</span>
     <span class="n">local_space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span>
-    <span class="n">dataset_filter_for_templates</span><span class="o">=</span><span class="n">StageKeysDatasetFilter</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+    <span class="c1"># dataset_filter_for_templates=StageKeysDatasetFilter(df),</span>
+    <span class="n">dataset_filter_for_templates</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+    <span class="n">vector_transport</span><span class="o">=</span><span class="n">VectorTransport</span><span class="p">(</span><span class="n">space</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -592,7 +600,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;polpo.protocol.pt_to_global._pt_to_global.Protocol at 0x72ec33901a90&gt;
+&lt;polpo.protocol.pt_to_global._pt_to_global.Protocol at 0x709026f234a0&gt;
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -711,13 +719,163 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_1.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_1.png" />
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_2.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_2.png" />
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_3.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_3.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_4.png" src="../../../../_images/_generated_notebooks_pregnancy_maternal_brain_project_global_euclidean_euclidean_euclidean_16_4.png" />
+</div>
+</div>
+<section id="Is-it-possible-to-cluster-the-meshes-by-subject?">
+<h2>Is it possible to cluster the meshes by subject?<a class="headerlink" href="#Is-it-possible-to-cluster-the-meshes-by-subject?" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: move this analysis to local space</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ac_estimators</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;ac-</span><span class="si">{</span><span class="n">linkage</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">AgglomerativeClustering</span><span class="p">(</span>
+            <span class="n">n_clusters</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">subject_ids</span><span class="p">),</span>
+            <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;precomputed&quot;</span><span class="p">,</span>
+            <span class="n">linkage</span><span class="o">=</span><span class="n">linkage</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">linkage</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;complete&quot;</span><span class="p">,</span> <span class="s2">&quot;average&quot;</span><span class="p">,</span> <span class="s2">&quot;single&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">estimator</span> <span class="ow">in</span> <span class="n">ac_estimators</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimator</span> <span class="o">=</span> <span class="n">SpectralClustering</span><span class="p">(</span>
+    <span class="n">n_clusters</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">subject_ids</span><span class="p">),</span>
+    <span class="n">affinity</span><span class="o">=</span><span class="s2">&quot;precomputed&quot;</span><span class="p">,</span>
+    <span class="n">assign_labels</span><span class="o">=</span><span class="s2">&quot;kmeans&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">spectral_estimators</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">):</span>
+    <span class="n">affinity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">dists</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">spectral_estimators</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;spectral-</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">__sklearn_clone__</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">affinity_matrix</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimators</span> <span class="o">=</span> <span class="n">ac_estimators</span> <span class="o">|</span> <span class="n">spectral_estimators</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_meshes_subj</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span> <span class="k">for</span> <span class="n">meshes</span> <span class="ow">in</span> <span class="n">global_meshes</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">estimator</span> <span class="ow">in</span> <span class="n">estimators</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">increment</span> <span class="ow">in</span> <span class="n">n_meshes_subj</span><span class="p">:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">increment</span>
+        <span class="n">labels_subj</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">labels_</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+
+        <span class="n">most_common</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels_subj</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">labels_subj</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">labels_subj</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">most_common</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">labels_subj</span><span class="o">==</span><span class="n">most_common</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">labels_subj</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ac-complete
+[4 1 1 0 0 0 1 1 0 1 4 4 1 0 3 0 4 1 1 1 1 1 0 3 3 0], 1, 11/26
+[1 1 1 1 3 1 4 3 0 4 3 3 0 0], 1, 5/14
+[1 1 1 0 4 1 4 1 4 3 1 3 2 3 0 3 0 2 3 3 3 1], 1, 7/22
+[3 1 1 3 1 1 1 1 1 0], 1, 7/10
+[1 3 4 0 3 1 1 0 4 1 1 1 3 3 1 1 1 0 1 3 0 3 1 1 1 1], 1, 14/26
+
+ac-average
+[0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3], 0, 24/26
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0], 0, 14/14
+[0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 1 0 0 0 0], 0, 20/22
+[0 0 0 0 0 0 0 0 0 0], 0, 10/10
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0], 0, 26/26
+
+ac-single
+[0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0], 0, 25/26
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0], 0, 14/14
+[0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 2 0 0 0 1], 0, 19/22
+[0 0 0 0 0 0 0 0 0 0], 0, 10/10
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0], 0, 26/26
+
+spectral-0.1
+[0 3 3 4 4 4 0 4 0 1 1 3 1 1 2 1 0 0 1 2 1 0 1 2 2 1], 1, 9/26
+[3 4 2 1 2 1 0 0 1 0 2 2 1 1], 1, 5/14
+[3 3 3 1 3 1 3 3 3 2 3 2 0 2 1 2 1 2 2 2 2 3], 3, 9/22
+[2 1 1 0 3 3 2 1 2 4], 1, 3/10
+[1 2 1 1 2 0 2 4 3 2 2 0 3 2 1 1 1 0 1 2 0 2 1 0 0 0], 1, 8/26
+
+spectral-1.0
+[1 4 4 4 4 4 3 4 4 0 1 1 0 0 2 0 1 3 0 2 0 1 0 2 2 0], 0, 8/26
+[1 4 4 1 2 0 1 2 0 1 2 2 0 0], 0, 4/14
+[1 4 4 0 1 0 1 1 1 2 1 2 3 2 0 2 0 3 2 2 2 1], 1, 7/22
+[2 0 0 1 1 1 2 0 2 4], 0, 3/10
+[0 2 1 0 2 1 4 4 1 2 2 3 4 2 0 0 0 3 0 2 3 2 0 3 3 3], 0, 7/26
+
+spectral-10.0
+[3 0 0 2 0 4 0 2 0 0 3 3 0 2 2 0 0 0 0 2 0 0 2 3 2 2], 0, 13/26
+[0 0 2 0 2 0 3 2 4 0 2 2 2 4], 2, 6/14
+[0 0 0 4 3 0 3 0 3 2 0 2 1 2 4 3 4 4 3 2 2 0], 0, 7/22
+[2 0 0 0 0 0 2 0 2 2], 0, 6/10
+[0 2 3 0 2 0 2 2 3 2 2 0 3 3 0 0 0 4 0 2 4 2 0 4 4 4], 0, 9/26
+
+</pre></div></div>
+</div>
+</section>
 </section>
 
 
@@ -730,6 +888,24 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Is-it-possible-to-cluster-the-meshes-by-subject?">Is it possible to cluster the meshes by subject?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
