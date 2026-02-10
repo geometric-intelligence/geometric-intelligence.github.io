@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Dec 16, 2025, 7:01:48 PM"/>
+    <meta name="docbuild:last-update" content="Feb 10, 2026, 10:31:09 PM"/>
   </head>
   
   
@@ -875,7 +875,7 @@ to clip by value, and <code class="docutils literal notranslate"><span class="pr
 called, the list or a callback returned here will be merged with the list of callbacks passed to the Trainer’s
 <code class="docutils literal notranslate"><span class="pre">callbacks</span></code> argument. If a callback returned here has the same type as one or several callbacks already
 present in the Trainer’s callbacks list, it will take priority and replace them. In addition, Lightning will
-make sure <a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a> callbacks run last.</p>
+make sure <a class="reference internal" href="#topobench.run.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a> callbacks run last.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A callback or a list of callbacks which will extend the list of callbacks in the Trainer.</p>
@@ -1914,7 +1914,7 @@ return type is interpreted as follows:</p>
 <dd><p>Called after model checkpoint callback saves a new checkpoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>checkpoint_callback</strong> (<a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><em>ModelCheckpoint</em></a>) – the model checkpoint callback instance</p>
+<dd class="field-odd"><p><strong>checkpoint_callback</strong> (<a class="reference internal" href="#topobench.run.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><em>ModelCheckpoint</em></a>) – the model checkpoint callback instance</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1924,6 +1924,366 @@ return type is interpreted as follows:</p>
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.Logger.save_dir" title="Link to this definition">#</a></dt>
 <dd><p>Return the root directory where experiment logs get saved, or <cite>None</cite> if the logger does not save data
 locally.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ModelCheckpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monitor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_top_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_weights_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_insert_metric_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_train_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_time_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_on_train_epoch_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_version_counter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Checkpoint</span></code></p>
+<p>Save the model periodically by monitoring a quantity. Every metric logged with
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code> or <code class="xref py py-meth docutils literal notranslate"><span class="pre">log_dict()</span></code> is
+a candidate for the monitor key. For more information, see <span class="xref std std-ref">checkpointing</span>.</p>
+<p>After training finishes, use <code class="xref py py-attr docutils literal notranslate"><span class="pre">best_model_path</span></code> to retrieve the path to the
+best checkpoint file and <a class="reference internal" href="#topobench.run.ModelCheckpoint.best_model_score" title="topobench.run.ModelCheckpoint.best_model_score"><code class="xref py py-attr docutils literal notranslate"><span class="pre">best_model_score</span></code></a> to retrieve its score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dirpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><a class="reference internal" href="topobench.utils.rich_utils.html#topobench.utils.rich_utils.Path" title="pathlib.Path"><em>Path</em></a><em> | </em><em>None</em>) – <p>directory to save the model file.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># custom path</span>
+<span class="c1"># saves a file like: my/path/epoch=0-step=10.ckpt</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, dirpath is <code class="docutils literal notranslate"><span class="pre">None</span></code> and will be set at runtime to the location
+specified by <a class="reference internal" href="#topobench.run.Trainer" title="lightning.pytorch.trainer.trainer.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>’s
+<a href="#id1"><span class="problematic" id="id2">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.default_root_dir`</span></a> argument,
+and if the Trainer uses a logger, the path will also contain logger name and version.</p>
+</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – <p>checkpoint filename. Can contain named formatting options to be auto-filled.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># save any arbitrary metrics like `val_loss`, etc. in name</span>
+<span class="c1"># saves a file like: my/path/epoch=2-val_loss=0.02-other_metric=0.03.ckpt</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+<span class="o">...</span>     <span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path&#39;</span><span class="p">,</span>
+<span class="o">...</span>     <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">-</span><span class="si">{other_metric:.2f}</span><span class="s1">&#39;</span>
+<span class="o">...</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, filename is <code class="docutils literal notranslate"><span class="pre">None</span></code> and will be set to <code class="docutils literal notranslate"><span class="pre">'{epoch}-{step}'</span></code>, where “epoch” and “step” match
+the number of finished epoch and optimizer steps respectively.</p>
+</p></li>
+<li><p><strong>monitor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – quantity to monitor. By default it is <code class="docutils literal notranslate"><span class="pre">None</span></code> which saves a checkpoint only for the last epoch.</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – verbosity mode. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>save_last</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><em>Literal</em></a><em>[</em><em>'link'</em><em>] </em><em>| </em><em>None</em>) – When <code class="docutils literal notranslate"><span class="pre">True</span></code>, saves a <cite>last.ckpt</cite> copy whenever a checkpoint file gets saved. Can be set to
+<code class="docutils literal notranslate"><span class="pre">'link'</span></code> on a local filesystem to create a symbolic link. This allows accessing the latest checkpoint
+in a deterministic manner. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>save_top_k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – if <code class="docutils literal notranslate"><span class="pre">save_top_k</span> <span class="pre">==</span> <span class="pre">k</span></code>,
+the best k models according to the quantity monitored will be saved.
+If <code class="docutils literal notranslate"><span class="pre">save_top_k</span> <span class="pre">==</span> <span class="pre">0</span></code>, no models are saved.
+If <code class="docutils literal notranslate"><span class="pre">save_top_k</span> <span class="pre">==</span> <span class="pre">-1</span></code>, all models are saved.
+Please note that the monitors are checked every <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span></code> epochs.
+If <code class="docutils literal notranslate"><span class="pre">save_top_k</span> <span class="pre">&gt;=</span> <span class="pre">2</span></code> and the callback is called multiple times inside an epoch, and the filename remains
+unchanged, the name of the saved file will be appended with a version count starting with <code class="docutils literal notranslate"><span class="pre">v1</span></code> to avoid
+collisions unless <code class="docutils literal notranslate"><span class="pre">enable_version_counter</span></code> is set to False. The version counter is unrelated to the top-k
+ranking of the checkpoint, and we recommend formatting the filename to include the monitored metric to avoid
+collisions.</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – one of {min, max}.
+If <code class="docutils literal notranslate"><span class="pre">save_top_k</span> <span class="pre">!=</span> <span class="pre">0</span></code>, the decision to overwrite the current save file is made
+based on either the maximization or the minimization of the monitored quantity.
+For <code class="docutils literal notranslate"><span class="pre">'val_acc'</span></code>, this should be <code class="docutils literal notranslate"><span class="pre">'max'</span></code>, for <code class="docutils literal notranslate"><span class="pre">'val_loss'</span></code> this should be <code class="docutils literal notranslate"><span class="pre">'min'</span></code>, etc.</p></li>
+<li><p><strong>auto_insert_metric_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – When <code class="docutils literal notranslate"><span class="pre">True</span></code>, the checkpoints filenames will contain the metric name.
+For example, <code class="docutils literal notranslate"><span class="pre">filename='checkpoint_{epoch:02d}-{acc:02.0f}</span></code> with epoch <code class="docutils literal notranslate"><span class="pre">1</span></code> and acc <code class="docutils literal notranslate"><span class="pre">1.12</span></code> will resolve
+to <code class="docutils literal notranslate"><span class="pre">checkpoint_epoch=01-acc=01.ckpt</span></code>. Is useful to set it to <code class="docutils literal notranslate"><span class="pre">False</span></code> when metric names contain <code class="docutils literal notranslate"><span class="pre">/</span></code>
+as this will result in extra folders.
+For example, <code class="docutils literal notranslate"><span class="pre">filename='epoch={epoch}-step={step}-val_acc={val/acc:.2f}',</span> <span class="pre">auto_insert_metric_name=False</span></code></p></li>
+<li><p><strong>save_weights_only</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, then only the model’s weights will be
+saved. Otherwise, the optimizer states, lr-scheduler states, etc are added in the checkpoint too.</p></li>
+<li><p><strong>every_n_train_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> | </em><em>None</em>) – Number of training steps between checkpoints.
+If <code class="docutils literal notranslate"><span class="pre">every_n_train_steps</span> <span class="pre">==</span> <span class="pre">None</span> <span class="pre">or</span> <span class="pre">every_n_train_steps</span> <span class="pre">==</span> <span class="pre">0</span></code>, we skip saving during training.
+To disable, set <code class="docutils literal notranslate"><span class="pre">every_n_train_steps</span> <span class="pre">=</span> <span class="pre">0</span></code>. This value must be <code class="docutils literal notranslate"><span class="pre">None</span></code> or non-negative.
+This must be mutually exclusive with <code class="docutils literal notranslate"><span class="pre">train_time_interval</span></code> and <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span></code>.</p></li>
+<li><p><strong>train_time_interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.14)"><em>timedelta</em></a><em> | </em><em>None</em>) – Checkpoints are monitored at the specified time interval.
+For all practical purposes, this cannot be smaller than the amount
+of time it takes to process a single training batch. This is not
+guaranteed to execute at the exact time specified, but should be close.
+This must be mutually exclusive with <code class="docutils literal notranslate"><span class="pre">every_n_train_steps</span></code> and <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span></code>.</p></li>
+<li><p><strong>every_n_epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> | </em><em>None</em>) – Number of epochs between checkpoints.
+This value must be <code class="docutils literal notranslate"><span class="pre">None</span></code> or non-negative.
+To disable saving top-k checkpoints, set <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span> <span class="pre">=</span> <span class="pre">0</span></code>.
+This argument does not impact the saving of <code class="docutils literal notranslate"><span class="pre">save_last=True</span></code> checkpoints.
+If all of <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span></code>, <code class="docutils literal notranslate"><span class="pre">every_n_train_steps</span></code> and
+<code class="docutils literal notranslate"><span class="pre">train_time_interval</span></code> are <code class="docutils literal notranslate"><span class="pre">None</span></code>, we save a checkpoint at the end of every epoch
+(equivalent to <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span> <span class="pre">=</span> <span class="pre">1</span></code>).
+If <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span> <span class="pre">==</span> <span class="pre">None</span></code> and either <code class="docutils literal notranslate"><span class="pre">every_n_train_steps</span> <span class="pre">!=</span> <span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">train_time_interval</span> <span class="pre">!=</span> <span class="pre">None</span></code>,
+saving at the end of each epoch is disabled
+(equivalent to <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span> <span class="pre">=</span> <span class="pre">0</span></code>).
+This must be mutually exclusive with <code class="docutils literal notranslate"><span class="pre">every_n_train_steps</span></code> and <code class="docutils literal notranslate"><span class="pre">train_time_interval</span></code>.
+Setting both <code class="docutils literal notranslate"><span class="pre">ModelCheckpoint(...,</span> <span class="pre">every_n_epochs=V,</span> <span class="pre">save_on_train_epoch_end=False)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Trainer(max_epochs=N,</span> <span class="pre">check_val_every_n_epoch=M)</span></code>
+will only save checkpoints at epochs 0 &lt; E &lt;= N
+where both values for <code class="docutils literal notranslate"><span class="pre">every_n_epochs</span></code> and <code class="docutils literal notranslate"><span class="pre">check_val_every_n_epoch</span></code> evenly divide E.</p></li>
+<li><p><strong>save_on_train_epoch_end</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>) – Whether to run checkpointing at the end of the training epoch.
+If this is <code class="docutils literal notranslate"><span class="pre">False</span></code>, then the check runs at the end of the validation.</p></li>
+<li><p><strong>enable_version_counter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to append a version to the existing file name.
+If this is <code class="docutils literal notranslate"><span class="pre">False</span></code>, then the checkpoint files will be overwritten.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For extra customization, ModelCheckpoint includes the following attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CHECKPOINT_JOIN_CHAR</span> <span class="pre">=</span> <span class="pre">&quot;-&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHECKPOINT_EQUALS_CHAR</span> <span class="pre">=</span> <span class="pre">&quot;=&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHECKPOINT_NAME_LAST</span> <span class="pre">=</span> <span class="pre">&quot;last&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FILE_EXTENSION</span> <span class="pre">=</span> <span class="pre">&quot;.ckpt&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STARTING_VERSION</span> <span class="pre">=</span> <span class="pre">1</span></code></p></li>
+</ul>
+<p>For example, you can change the default last checkpoint name by doing
+<code class="docutils literal notranslate"><span class="pre">checkpoint_callback.CHECKPOINT_NAME_LAST</span> <span class="pre">=</span> <span class="pre">&quot;{epoch}-last&quot;</span></code></p>
+<p>If you want to checkpoint every N hours, every M train batches, and/or every K val epochs,
+then you should create multiple <code class="docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code> callbacks.</p>
+<p>If the checkpoint’s <code class="docutils literal notranslate"><span class="pre">dirpath</span></code> changed from what it was before while resuming the training,
+only <code class="docutils literal notranslate"><span class="pre">best_model_path</span></code> will be reloaded and a warning will be issued.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>MisconfigurationException</strong> – If <code class="docutils literal notranslate"><span class="pre">save_top_k</span></code> is smaller than <code class="docutils literal notranslate"><span class="pre">-1</span></code>,
+    if <code class="docutils literal notranslate"><span class="pre">monitor</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">save_top_k</span></code> is none of <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">-1</span></code>, and <code class="docutils literal notranslate"><span class="pre">0</span></code>, or
+    if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is none of <code class="docutils literal notranslate"><span class="pre">&quot;min&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">trainer.save_checkpoint</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+
+<span class="go"># saves checkpoints to &#39;my/path/&#39; at every epoch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_callback</span><span class="p">])</span>
+
+<span class="go"># save epoch and val_loss in name</span>
+<span class="go"># saves a file like: my/path/sample-mnist-epoch=02-val_loss=0.32.ckpt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;sample-mnist-</span><span class="si">{epoch:02d}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+
+<span class="go"># save epoch and val_loss in name, but specify the formatting yourself (e.g. to avoid problems with Tensorboard</span>
+<span class="go"># or Neptune, due to the presence of characters like &#39;=&#39; or &#39;/&#39;)</span>
+<span class="go"># saves a file like: my/path/sample-mnist-epoch02-val_loss0.32.ckpt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val/loss&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;sample-mnist-epoch</span><span class="si">{epoch:02d}</span><span class="s1">-val_loss{val/loss:.2f}&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">auto_insert_metric_name</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">... </span><span class="p">)</span>
+
+<span class="go"># retrieve the best checkpoint after training</span>
+<span class="go">checkpoint_callback = ModelCheckpoint(dirpath=&#39;my/path/&#39;)</span>
+<span class="go">trainer = Trainer(callbacks=[checkpoint_callback])</span>
+<span class="go">model = ...</span>
+<span class="go">trainer.fit(model)</span>
+<span class="go">checkpoint_callback.best_model_path</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Saving and restoring multiple checkpoint callbacks at the same time is supported under variation in the
+following arguments:</p>
+<p><em>monitor, mode, every_n_train_steps, every_n_epochs, train_time_interval</em></p>
+<p>Read more: <span class="xref std std-ref">Persisting Callback State</span></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monitor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_top_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_weights_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_insert_metric_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_train_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_time_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every_n_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_on_train_epoch_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_version_counter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.check_monitor_top_k">
+<span class="sig-name descname"><span class="pre">check_monitor_top_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.check_monitor_top_k" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.file_exists">
+<span class="sig-name descname"><span class="pre">file_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.file_exists" title="Link to this definition">#</a></dt>
+<dd><p>Checks if a file exists on rank 0 and broadcasts the result to all other ranks, preventing the internal
+state to diverge between ranks.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.format_checkpoint_name">
+<span class="sig-name descname"><span class="pre">format_checkpoint_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.format_checkpoint_name" title="Link to this definition">#</a></dt>
+<dd><p>Generate a filename according to the defined template.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tmpdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
+<span class="go">&#39;epoch=0.ckpt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch:03d}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">5</span><span class="p">)))</span>
+<span class="go">&#39;epoch=005.ckpt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">val_loss</span><span class="o">=</span><span class="mf">0.123456</span><span class="p">)))</span>
+<span class="go">&#39;epoch=2-val_loss=0.12.ckpt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">val_loss</span><span class="o">=</span><span class="mf">0.12</span><span class="p">),</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch:d}</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="go">&#39;epoch=2.ckpt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;epoch=</span><span class="si">{epoch}</span><span class="s1">-validation_loss=</span><span class="si">{val_loss:.2f}</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">auto_insert_metric_name</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">val_loss</span><span class="o">=</span><span class="mf">0.123456</span><span class="p">)))</span>
+<span class="go">&#39;epoch=2-validation_loss=0.12.ckpt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{missing:d}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">({}))</span>
+<span class="go">&#39;missing=0.ckpt&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{step}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
+<span class="go">&#39;step=0.ckpt&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.load_state_dict">
+<span class="sig-name descname"><span class="pre">load_state_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.load_state_dict" title="Link to this definition">#</a></dt>
+<dd><p>Called when loading a checkpoint, implement to reload callback state given callback’s <code class="docutils literal notranslate"><span class="pre">state_dict</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a><em>]</em>) – the callback state returned by <code class="docutils literal notranslate"><span class="pre">state_dict</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.on_train_batch_end">
+<span class="sig-name descname"><span class="pre">on_train_batch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.on_train_batch_end" title="Link to this definition">#</a></dt>
+<dd><p>Save checkpoint on train batch end if we meet the criteria for <cite>every_n_train_steps</cite></p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.on_train_epoch_end">
+<span class="sig-name descname"><span class="pre">on_train_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.on_train_epoch_end" title="Link to this definition">#</a></dt>
+<dd><p>Save a checkpoint at the end of the training epoch.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.on_train_start">
+<span class="sig-name descname"><span class="pre">on_train_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.on_train_start" title="Link to this definition">#</a></dt>
+<dd><p>Called when the train begins.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.on_validation_end">
+<span class="sig-name descname"><span class="pre">on_validation_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.on_validation_end" title="Link to this definition">#</a></dt>
+<dd><p>Save a checkpoint at the end of the validation stage.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.setup" title="Link to this definition">#</a></dt>
+<dd><p>Called when fit, validate, test, predict, or tune begins.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.state_dict">
+<span class="sig-name descname"><span class="pre">state_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.state_dict" title="Link to this definition">#</a></dt>
+<dd><p>Called when saving a checkpoint, implement to generate callback’s <code class="docutils literal notranslate"><span class="pre">state_dict</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing callback state.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>, <a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.to_yaml">
+<span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.ModelCheckpoint.to_yaml" title="Link to this definition">#</a></dt>
+<dd><p>Saves the <cite>best_k_models</cite> dict containing the checkpoint paths with the corresponding scores to a YAML
+file.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.CHECKPOINT_EQUALS_CHAR">
+<span class="sig-name descname"><span class="pre">CHECKPOINT_EQUALS_CHAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'='</span></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.CHECKPOINT_EQUALS_CHAR" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.CHECKPOINT_JOIN_CHAR">
+<span class="sig-name descname"><span class="pre">CHECKPOINT_JOIN_CHAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'-'</span></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.CHECKPOINT_JOIN_CHAR" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.CHECKPOINT_NAME_LAST">
+<span class="sig-name descname"><span class="pre">CHECKPOINT_NAME_LAST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'last'</span></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.CHECKPOINT_NAME_LAST" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.FILE_EXTENSION">
+<span class="sig-name descname"><span class="pre">FILE_EXTENSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.ckpt'</span></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.FILE_EXTENSION" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.STARTING_VERSION">
+<span class="sig-name descname"><span class="pre">STARTING_VERSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.STARTING_VERSION" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.best_k_models">
+<span class="sig-name descname"><span class="pre">best_k_models</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.best_k_models" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.best_model_score">
+<span class="sig-name descname"><span class="pre">best_model_score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.best_model_score" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.current_score">
+<span class="sig-name descname"><span class="pre">current_score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.current_score" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.dirpath">
+<span class="sig-name descname"><span class="pre">dirpath</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="topobench.utils.rich_utils.html#topobench.utils.rich_utils.Path" title="pathlib.Path"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.dirpath" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.every_n_epochs">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">every_n_epochs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.every_n_epochs" title="Link to this definition">#</a></dt>
+<dd><p>!! processed by numpydoc !!</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.kth_value">
+<span class="sig-name descname"><span class="pre">kth_value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tensor</span></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.kth_value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.run.ModelCheckpoint.state_key">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">state_key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#topobench.run.ModelCheckpoint.state_key" title="Link to this definition">#</a></dt>
+<dd><p>Identifier for the state of the callback.</p>
+<p>Used to store and retrieve a callback’s state from the checkpoint dictionary by
+<code class="docutils literal notranslate"><span class="pre">checkpoint[&quot;callbacks&quot;][state_key]</span></code>. Implementations of a callback need to provide a unique state key if 1)
+the callback has state and 2) it is desired to maintain the state of multiple instances of that callback.</p>
 </dd></dl>
 
 </dd></dl>
@@ -2386,6 +2746,285 @@ into the destination, False to replace the destination.</p></li>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.run.Path">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.PurePath" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePath</span></code></a></p>
+<p>PurePath subclass that can make system calls.</p>
+<p>Path represents a filesystem path but unlike PurePath, also offers
+methods to do system calls on path objects. Depending on your system,
+instantiating a Path will return either a PosixPath or a WindowsPath
+object. You can also instantiate a PosixPath or WindowsPath directly,
+but cannot instantiate a WindowsPath on a POSIX system or vice versa.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.cwd">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.cwd" title="Link to this definition">#</a></dt>
+<dd><p>Return a new path pointing to the current working directory
+(as returned by os.getcwd()).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.home">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.home" title="Link to this definition">#</a></dt>
+<dd><p>Return a new path pointing to the user’s home directory (as
+returned by os.path.expanduser(‘~’)).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.absolute">
+<span class="sig-name descname"><span class="pre">absolute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.absolute" title="Link to this definition">#</a></dt>
+<dd><p>Return an absolute version of this path by prepending the current
+working directory. No normalization or symlink resolution is performed.</p>
+<p>Use resolve() to get the canonical path to a file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.chmod">
+<span class="sig-name descname"><span class="pre">chmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_symlinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.chmod" title="Link to this definition">#</a></dt>
+<dd><p>Change the permissions of the path, like os.chmod().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.exists">
+<span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.exists" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path exists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.expanduser">
+<span class="sig-name descname"><span class="pre">expanduser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.expanduser" title="Link to this definition">#</a></dt>
+<dd><p>Return a new path with expanded ~ and ~user constructs
+(as returned by os.path.expanduser)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.glob">
+<span class="sig-name descname"><span class="pre">glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.glob" title="Link to this definition">#</a></dt>
+<dd><p>Iterate over this subtree and yield all existing files (of any
+kind, including directories) matching the given relative pattern.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.group">
+<span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.group" title="Link to this definition">#</a></dt>
+<dd><p>Return the group name of the file gid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.hardlink_to">
+<span class="sig-name descname"><span class="pre">hardlink_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.hardlink_to" title="Link to this definition">#</a></dt>
+<dd><p>Make this path a hard link pointing to the same file as <em>target</em>.</p>
+<p>Note the order of arguments (self, target) is the reverse of os.link’s.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_block_device">
+<span class="sig-name descname"><span class="pre">is_block_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_block_device" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a block device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_char_device">
+<span class="sig-name descname"><span class="pre">is_char_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_char_device" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a character device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_dir">
+<span class="sig-name descname"><span class="pre">is_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_dir" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a directory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_fifo">
+<span class="sig-name descname"><span class="pre">is_fifo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_fifo" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a FIFO.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_file">
+<span class="sig-name descname"><span class="pre">is_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_file" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a regular file (also True for symlinks pointing
+to regular files).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_mount">
+<span class="sig-name descname"><span class="pre">is_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_mount" title="Link to this definition">#</a></dt>
+<dd><p>Check if this path is a POSIX mount point</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_socket">
+<span class="sig-name descname"><span class="pre">is_socket</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_socket" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a socket.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.is_symlink">
+<span class="sig-name descname"><span class="pre">is_symlink</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.is_symlink" title="Link to this definition">#</a></dt>
+<dd><p>Whether this path is a symbolic link.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.iterdir">
+<span class="sig-name descname"><span class="pre">iterdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.iterdir" title="Link to this definition">#</a></dt>
+<dd><p>Iterate over the files in this directory.  Does not yield any
+result for the special paths ‘.’ and ‘..’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.lchmod">
+<span class="sig-name descname"><span class="pre">lchmod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.lchmod" title="Link to this definition">#</a></dt>
+<dd><p>Like chmod(), except if the path points to a symlink, the symlink’s
+permissions are changed, rather than its target’s.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.link_to">
+<span class="sig-name descname"><span class="pre">link_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.link_to" title="Link to this definition">#</a></dt>
+<dd><p>Make the target path a hard link pointing to this path.</p>
+<p>Note this function does not make this path a hard link to <em>target</em>,
+despite the implication of the function and argument names. The order
+of arguments (target, link) is the reverse of Path.symlink_to, but
+matches that of os.link.</p>
+<p>Deprecated since Python 3.10 and scheduled for removal in Python 3.12.
+Use <cite>hardlink_to()</cite> instead.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.lstat">
+<span class="sig-name descname"><span class="pre">lstat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.lstat" title="Link to this definition">#</a></dt>
+<dd><p>Like stat(), except if the path points to a symlink, the symlink’s
+status information is returned, rather than its target’s.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.mkdir">
+<span class="sig-name descname"><span class="pre">mkdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">511</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exist_ok</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.mkdir" title="Link to this definition">#</a></dt>
+<dd><p>Create a new directory at this given path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffering</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.open" title="Link to this definition">#</a></dt>
+<dd><p>Open the file pointed by this path and return a file object, as
+the built-in open() function does.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.owner" title="Link to this definition">#</a></dt>
+<dd><p>Return the login name of the file owner.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.read_bytes">
+<span class="sig-name descname"><span class="pre">read_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.read_bytes" title="Link to this definition">#</a></dt>
+<dd><p>Open the file in bytes mode, read it, and close the file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.read_text">
+<span class="sig-name descname"><span class="pre">read_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.read_text" title="Link to this definition">#</a></dt>
+<dd><p>Open the file in text mode, read it, and close the file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.readlink">
+<span class="sig-name descname"><span class="pre">readlink</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.readlink" title="Link to this definition">#</a></dt>
+<dd><p>Return the path to which the symbolic link points.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.rename">
+<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.rename" title="Link to this definition">#</a></dt>
+<dd><p>Rename this path to the target path.</p>
+<p>The target path may be absolute or relative. Relative paths are
+interpreted relative to the current working directory, <em>not</em> the
+directory of the Path object.</p>
+<p>Returns the new Path instance pointing to the target path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.replace">
+<span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.replace" title="Link to this definition">#</a></dt>
+<dd><p>Rename this path to the target path, overwriting if that path exists.</p>
+<p>The target path may be absolute or relative. Relative paths are
+interpreted relative to the current working directory, <em>not</em> the
+directory of the Path object.</p>
+<p>Returns the new Path instance pointing to the target path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.resolve">
+<span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.resolve" title="Link to this definition">#</a></dt>
+<dd><p>Make the path absolute, resolving all symlinks on the way and also
+normalizing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.rglob">
+<span class="sig-name descname"><span class="pre">rglob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.rglob" title="Link to this definition">#</a></dt>
+<dd><p>Recursively yield all existing files (of any kind, including
+directories) matching the given relative pattern, anywhere in
+this subtree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.rmdir">
+<span class="sig-name descname"><span class="pre">rmdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.rmdir" title="Link to this definition">#</a></dt>
+<dd><p>Remove this directory.  The directory must be empty.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.samefile">
+<span class="sig-name descname"><span class="pre">samefile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.samefile" title="Link to this definition">#</a></dt>
+<dd><p>Return whether other_path is the same or not as this file
+(as returned by os.path.samefile()).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.stat">
+<span class="sig-name descname"><span class="pre">stat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_symlinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.stat" title="Link to this definition">#</a></dt>
+<dd><p>Return the result of the stat() system call on this path, like
+os.stat() does.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.symlink_to">
+<span class="sig-name descname"><span class="pre">symlink_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_is_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.symlink_to" title="Link to this definition">#</a></dt>
+<dd><p>Make this path a symlink pointing to the target path.
+Note the order of arguments (link, target) is the reverse of os.symlink.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.touch">
+<span class="sig-name descname"><span class="pre">touch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">438</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exist_ok</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.touch" title="Link to this definition">#</a></dt>
+<dd><p>Create this file with the given access mode, if it doesn’t exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.unlink">
+<span class="sig-name descname"><span class="pre">unlink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">missing_ok</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.unlink" title="Link to this definition">#</a></dt>
+<dd><p>Remove this file or link.
+If the path is a directory, use rmdir() instead.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.write_bytes">
+<span class="sig-name descname"><span class="pre">write_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.write_bytes" title="Link to this definition">#</a></dt>
+<dd><p>Open the file in bytes mode, write to it, and close the file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.Path.write_text">
+<span class="sig-name descname"><span class="pre">write_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.Path.write_text" title="Link to this definition">#</a></dt>
+<dd><p>Open the file in text mode, write to it, and close the file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.run.PreProcessor">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PreProcessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.PreProcessor" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.data.datasets.us_county_demos_dataset.html#topobench.data.datasets.us_county_demos_dataset.InMemoryDataset" title="torch_geometric.data.in_memory_dataset.InMemoryDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">InMemoryDataset</span></code></a></p>
@@ -2784,7 +3423,7 @@ Default: <code class="docutils literal notranslate"><span class="pre">2</span></
 Default: <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p></li>
 <li><p><strong>enable_checkpointing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, enable checkpointing.
 It will configure a default ModelCheckpoint callback if there is no user-defined ModelCheckpoint in
-<a href="#id1"><span class="problematic" id="id2">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.callbacks`</span></a>.
+<a href="#id3"><span class="problematic" id="id4">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.callbacks`</span></a>.
 Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>enable_progress_bar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>) – Whether to enable to progress bar by default.
 Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
@@ -2803,7 +3442,7 @@ Set to <code class="docutils literal notranslate"><span class="pre">&quot;warn&q
 that don’t support deterministic mode. If not set, defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 <li><p><strong>benchmark</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>) – The value (<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>) to set <code class="docutils literal notranslate"><span class="pre">torch.backends.cudnn.benchmark</span></code> to.
 The value for <code class="docutils literal notranslate"><span class="pre">torch.backends.cudnn.benchmark</span></code> set in the current session will be used
-(<code class="docutils literal notranslate"><span class="pre">False</span></code> if not manually set). If <a href="#id3"><span class="problematic" id="id4">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.deterministic`</span></a>
+(<code class="docutils literal notranslate"><span class="pre">False</span></code> if not manually set). If <a href="#id5"><span class="problematic" id="id6">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.deterministic`</span></a>
 is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, this will default to <code class="docutils literal notranslate"><span class="pre">False</span></code>. Override to manually set a different value.
 Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 <li><p><strong>inference_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to use <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code> or <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.no_grad()</span></code> during
@@ -2822,15 +3461,15 @@ Default: <code class="docutils literal notranslate"><span class="pre">False</spa
 <li><p><strong>barebones</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to run in “barebones mode”, where all features that may impact raw speed are
 disabled. This is meant for analyzing the Trainer overhead and is discouraged during regular training
 runs. The following features are deactivated:
-<a href="#id5"><span class="problematic" id="id6">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.enable_checkpointing`</span></a>,
-<a href="#id7"><span class="problematic" id="id8">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.logger`</span></a>,
-<a href="#id9"><span class="problematic" id="id10">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.enable_progress_bar`</span></a>,
-<a href="#id11"><span class="problematic" id="id12">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.log_every_n_steps`</span></a>,
-<a href="#id13"><span class="problematic" id="id14">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.enable_model_summary`</span></a>,
-<a href="#id15"><span class="problematic" id="id16">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.num_sanity_val_steps`</span></a>,
-<a href="#id17"><span class="problematic" id="id18">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.fast_dev_run`</span></a>,
-<a href="#id19"><span class="problematic" id="id20">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.detect_anomaly`</span></a>,
-<a href="#id21"><span class="problematic" id="id22">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.profiler`</span></a>,
+<a href="#id7"><span class="problematic" id="id8">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.enable_checkpointing`</span></a>,
+<a href="#id9"><span class="problematic" id="id10">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.logger`</span></a>,
+<a href="#id11"><span class="problematic" id="id12">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.enable_progress_bar`</span></a>,
+<a href="#id13"><span class="problematic" id="id14">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.log_every_n_steps`</span></a>,
+<a href="#id15"><span class="problematic" id="id16">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.enable_model_summary`</span></a>,
+<a href="#id17"><span class="problematic" id="id18">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.num_sanity_val_steps`</span></a>,
+<a href="#id19"><span class="problematic" id="id20">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.fast_dev_run`</span></a>,
+<a href="#id21"><span class="problematic" id="id22">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.detect_anomaly`</span></a>,
+<a href="#id23"><span class="problematic" id="id24">:paramref:`~lightning.pytorch.trainer.trainer.Trainer.profiler`</span></a>,
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code>,
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">log_dict()</span></code>.</p></li>
 <li><p><strong>plugins</strong> (<em>Precision</em><em> | </em><em>ClusterEnvironment</em><em> | </em><em>CheckpointIO</em><em> | </em><em>LayerSync</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><em>Precision</em><em> | </em><em>ClusterEnvironment</em><em> | </em><em>CheckpointIO</em><em> | </em><em>LayerSync</em><em>] </em><em>| </em><em>None</em>) – Plugins allow modification of core behavior like ddp and amp, and enable custom lightning plugins.
@@ -3076,14 +3715,14 @@ The length of the list corresponds to the number of validation dataloaders used.
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.run.Trainer.checkpoint_callback">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkpoint_callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Checkpoint</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.Trainer.checkpoint_callback" title="Link to this definition">#</a></dt>
-<dd><p>The first <a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a> callback in the
+<dd><p>The first <a class="reference internal" href="#topobench.run.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a> callback in the
 Trainer.callbacks list, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it doesn’t exist.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="topobench.run.Trainer.checkpoint_callbacks">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkpoint_callbacks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Checkpoint</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#topobench.run.Trainer.checkpoint_callbacks" title="Link to this definition">#</a></dt>
-<dd><p>A list of all instances of <a class="reference internal" href="topobench.callbacks.best_epoch_metrics.html#topobench.callbacks.best_epoch_metrics.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a> found in
+<dd><p>A list of all instances of <a class="reference internal" href="#topobench.run.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a> found in
 the Trainer.callbacks list.</p>
 </dd></dl>
 
@@ -3237,7 +3876,7 @@ up your training dataloader, if it hasn’t been set up already.</p>
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logged_metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#topobench.run.Trainer.logged_metrics" title="Link to this definition">#</a></dt>
 <dd><p>The metrics sent to the loggers.</p>
 <p>This includes metrics logged via <code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code> with the
-<a href="#id23"><span class="problematic" id="id24">:paramref:`~lightning.pytorch.core.LightningModule.log.logger`</span></a> argument set.</p>
+<a href="#id25"><span class="problematic" id="id26">:paramref:`~lightning.pytorch.core.LightningModule.log.logger`</span></a> argument set.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -3384,7 +4023,7 @@ Trainer.callbacks list, or <code class="docutils literal notranslate"><span clas
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">progress_bar_metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#topobench.run.Trainer.progress_bar_metrics" title="Link to this definition">#</a></dt>
 <dd><p>The metrics sent to the progress bar.</p>
 <p>This includes metrics logged via <code class="xref py py-meth docutils literal notranslate"><span class="pre">log()</span></code> with the
-<a href="#id25"><span class="problematic" id="id26">:paramref:`~lightning.pytorch.core.LightningModule.log.prog_bar`</span></a> argument set.</p>
+<a href="#id27"><span class="problematic" id="id28">:paramref:`~lightning.pytorch.core.LightningModule.log.prog_bar`</span></a> argument set.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -3453,6 +4092,427 @@ Trainer.callbacks list, or <code class="docutils literal notranslate"><span clas
 <dt class="sig sig-object py" id="topobench.run.Trainer.world_size">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">world_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#topobench.run.Trainer.world_size" title="Link to this definition">#</a></dt>
 <dd><p>!! processed by numpydoc !!</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">WandbLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anonymous</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.utils.instantiators.html#topobench.utils.instantiators.Logger" title="lightning.pytorch.loggers.logger.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a></p>
+<p>Log using <a class="reference external" href="https://docs.wandb.ai/integrations/lightning">Weights and Biases</a>.</p>
+<p><strong>Installation and set-up</strong></p>
+<p>Install with pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>wandb
+</pre></div>
+</div>
+<p>Create a <cite>WandbLogger</cite> instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.loggers</span><span class="w"> </span><span class="kn">import</span> <span class="n">WandbLogger</span>
+
+<span class="n">wandb_logger</span> <span class="o">=</span> <span class="n">WandbLogger</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MNIST&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pass the logger instance to the <cite>Trainer</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">wandb_logger</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A new W&amp;B run will be created when training starts if you have not created one manually before with <cite>wandb.init()</cite>.</p>
+<p><strong>Log metrics</strong></p>
+<p>Log from <code class="xref py py-class docutils literal notranslate"><span class="pre">LightningModule</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LitModule</span><span class="p">(</span><span class="n">LightningModule</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">training_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;train/loss&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use directly wandb module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">({</span><span class="s2">&quot;train/loss&quot;</span><span class="p">:</span> <span class="n">loss</span><span class="p">})</span>
+</pre></div>
+</div>
+<p><strong>Log hyper-parameters</strong></p>
+<p>Save <code class="xref py py-class docutils literal notranslate"><span class="pre">LightningModule</span></code> parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LitModule</span><span class="p">(</span><span class="n">LightningModule</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_hyperparameters</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Add other config parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add one parameter</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># add multiple parameters</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key1</span><span class="p">:</span> <span class="n">val1</span><span class="p">,</span> <span class="n">key2</span><span class="p">:</span> <span class="n">val2</span><span class="p">})</span>
+
+<span class="c1"># use directly wandb module</span>
+<span class="n">wandb</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="n">wandb</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Log gradients, parameters and model topology</strong></p>
+<p>Call the <cite>watch</cite> method for automatically tracking gradients:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># log gradients and model topology</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># log gradients, parameter histogram and model topology</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># change log frequency of gradients and parameters (100 steps by default)</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">log_freq</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># do not log graph (in case of errors)</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">log_graph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>watch</cite> method adds hooks to the model which can be removed at the end of training:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wandb_logger</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">unwatch</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Log model checkpoints</strong></p>
+<p>Log model checkpoints at the end of training:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wandb_logger</span> <span class="o">=</span> <span class="n">WandbLogger</span><span class="p">(</span><span class="n">log_model</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Log model checkpoints as they get created during training:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wandb_logger</span> <span class="o">=</span> <span class="n">WandbLogger</span><span class="p">(</span><span class="n">log_model</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Custom checkpointing can be set up through <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># log model only if `val_accuracy` increases</span>
+<span class="n">wandb_logger</span> <span class="o">=</span> <span class="n">WandbLogger</span><span class="p">(</span><span class="n">log_model</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">wandb_logger</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_callback</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><cite>latest</cite> and <cite>best</cite> aliases are automatically set to easily retrieve a model checkpoint:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># reference can be retrieved in artifacts panel</span>
+<span class="c1"># &quot;VERSION&quot; can be a version (ex: &quot;v2&quot;) or an alias (&quot;latest or &quot;best&quot;)</span>
+<span class="n">checkpoint_reference</span> <span class="o">=</span> <span class="s2">&quot;USER/PROJECT/MODEL-RUN_ID:VERSION&quot;</span>
+
+<span class="c1"># download checkpoint locally (if not already cached)</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;MNIST&quot;</span><span class="p">)</span>
+<span class="n">artifact</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">use_artifact</span><span class="p">(</span><span class="n">checkpoint_reference</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+<span class="n">artifact_dir</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+
+<span class="c1"># load checkpoint</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LitModule</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">artifact_dir</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;model.ckpt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Log media</strong></p>
+<p>Log text with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># using columns and data</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="s2">&quot;prediction&quot;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;cheese&quot;</span><span class="p">,</span> <span class="s2">&quot;english&quot;</span><span class="p">,</span> <span class="s2">&quot;english&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;fromage&quot;</span><span class="p">,</span> <span class="s2">&quot;french&quot;</span><span class="p">,</span> <span class="s2">&quot;spanish&quot;</span><span class="p">]]</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">log_text</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># using a pandas DataFrame</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">log_text</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">dataframe</span><span class="o">=</span><span class="n">my_dataframe</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Log images with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># using tensors, numpy arrays or PIL images</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">log_image</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">])</span>
+
+<span class="c1"># adding captions</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">log_image</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">],</span> <span class="n">caption</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tree&quot;</span><span class="p">,</span> <span class="s2">&quot;person&quot;</span><span class="p">])</span>
+
+<span class="c1"># using file path</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">log_image</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;img_1.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;img_2.jpg&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>More arguments can be passed for logging segmentation masks and bounding boxes. Refer to
+<a class="reference external" href="https://docs.wandb.ai/guides/track/log/media#image-overlays">Image Overlays documentation</a>.</p>
+<p><strong>Log Tables</strong></p>
+<p><a class="reference external" href="https://docs.wandb.ai/guides/tables/visualize-tables">W&amp;B Tables</a> can be used to log,
+query and analyze tabular data.</p>
+<p>They support any type of media (text, image, video, audio, molecule, html, etc) and are great for storing,
+understanding and sharing any form of data, from datasets to model predictions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;caption&quot;</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;sound&quot;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;cheese&quot;</span><span class="p">,</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">img_1</span><span class="p">),</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">snd_1</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">img_2</span><span class="p">),</span> <span class="n">wandb</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">snd_2</span><span class="p">)]]</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">log_table</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Downloading and Using Artifacts</strong></p>
+<p>To download an artifact without starting a run, call the <code class="docutils literal notranslate"><span class="pre">download_artifact</span></code>
+function on the class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.loggers</span><span class="w"> </span><span class="kn">import</span> <span class="n">WandbLogger</span>
+
+<span class="n">artifact_dir</span> <span class="o">=</span> <span class="n">WandbLogger</span><span class="o">.</span><span class="n">download_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="s2">&quot;path/to/artifact&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To download an artifact and link it to an ongoing run call the <code class="docutils literal notranslate"><span class="pre">download_artifact</span></code>
+function on the logger instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyModule</span><span class="p">(</span><span class="n">LightningModule</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">any_lightning_module_function_or_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">download_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="s2">&quot;path/to/artifact&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To link an artifact from a previous run you can use <code class="docutils literal notranslate"><span class="pre">use_artifact</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.loggers</span><span class="w"> </span><span class="kn">import</span> <span class="n">WandbLogger</span>
+
+<span class="n">wandb_logger</span> <span class="o">=</span> <span class="n">WandbLogger</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;my_project&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_run&quot;</span><span class="p">)</span>
+<span class="n">wandb_logger</span><span class="o">.</span><span class="n">use_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="o">=</span><span class="s2">&quot;path/to/artifact&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://wandb.me/lightning">Demo in Google Colab</a> with hyperparameter search and model logging</p></li>
+<li><p><a class="reference external" href="https://docs.wandb.ai/integrations/lightning">W&amp;B Documentation</a></p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – Display name for the run.</p></li>
+<li><p><strong>save_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><a class="reference internal" href="topobench.utils.rich_utils.html#topobench.utils.rich_utils.Path" title="pathlib.Path"><em>Path</em></a>) – Path where data is saved.</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – Sets the version, mainly used to resume a previous run.</p></li>
+<li><p><strong>offline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Run offline (data can be streamed later to wandb servers).</p></li>
+<li><p><strong>dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><a class="reference internal" href="topobench.utils.rich_utils.html#topobench.utils.rich_utils.Path" title="pathlib.Path"><em>Path</em></a><em> | </em><em>None</em>) – Same as save_dir.</p></li>
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – Same as version.</p></li>
+<li><p><strong>anonymous</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>) – Enables or explicitly disables anonymous logging.</p></li>
+<li><p><strong>project</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – The name of the project to which this run will belong. If not set, the environment variable
+<cite>WANDB_PROJECT</cite> will be used as a fallback. If both are not set, it defaults to <code class="docutils literal notranslate"><span class="pre">'lightning_logs'</span></code>.</p></li>
+<li><p><strong>log_model</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><em>Literal</em></a><em>[</em><em>'all'</em><em>] </em><em>| </em><em>bool</em>) – <p>Log checkpoints created by <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code>
+as W&amp;B artifacts. <cite>latest</cite> and <cite>best</cite> aliases are automatically set.</p>
+<ul>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">log_model</span> <span class="pre">==</span> <span class="pre">'all'</span></code>, checkpoints are logged during training.</p></li>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">log_model</span> <span class="pre">==</span> <span class="pre">True</span></code>, checkpoints are logged at the end of training, except when
+<a href="#id29"><span class="problematic" id="id30">:paramref:`~lightning.pytorch.callbacks.ModelCheckpoint.save_top_k`</span></a> <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">-1</span></code>
+which also logs every checkpoint during training.</p></li>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">log_model</span> <span class="pre">==</span> <span class="pre">False</span></code> (default), no checkpoint is logged.</p></li>
+</ul>
+</p></li>
+<li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – A string to put at the beginning of metric keys.</p></li>
+<li><p><strong>experiment</strong> (<em>Run</em><em> | </em><em>RunDisabled</em><em> | </em><em>None</em>) – WandB experiment object. Automatically set when creating a run.</p></li>
+<li><p><strong>checkpoint_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – Name of the model checkpoint artifact being logged.</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a>) – Arguments passed to <code class="xref py py-func docutils literal notranslate"><span class="pre">wandb.init()</span></code> like <cite>entity</cite>, <cite>group</cite>, <cite>tags</cite>, etc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ModuleNotFoundError" title="(in Python v3.14)"><strong>ModuleNotFoundError</strong></a> – If required WandB package is not installed on the device.</p></li>
+<li><p><strong>MisconfigurationException</strong> – If both <code class="docutils literal notranslate"><span class="pre">log_model</span></code> and <code class="docutils literal notranslate"><span class="pre">offline</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.download_artifact">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">download_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artifact</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artifact_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_artifact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.download_artifact" title="Link to this definition">#</a></dt>
+<dd><p>Downloads an artifact from the wandb server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>artifact</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The path of the artifact to download.</p></li>
+<li><p><strong>save_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><a class="reference internal" href="topobench.utils.rich_utils.html#topobench.utils.rich_utils.Path" title="pathlib.Path"><em>Path</em></a><em> | </em><em>None</em>) – The directory to save the artifact to.</p></li>
+<li><p><strong>artifact_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – The type of artifact to download.</p></li>
+<li><p><strong>use_artifact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>) – Whether to add an edge between the artifact graph.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The path to the downloaded artifact.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anonymous</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.after_save_checkpoint">
+<span class="sig-name descname"><span class="pre">after_save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_callback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.after_save_checkpoint" title="Link to this definition">#</a></dt>
+<dd><p>Called after model checkpoint callback saves a new checkpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>checkpoint_callback</strong> (<a class="reference internal" href="#topobench.run.ModelCheckpoint" title="lightning.pytorch.callbacks.model_checkpoint.ModelCheckpoint"><em>ModelCheckpoint</em></a>) – the model checkpoint callback instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.finalize" title="Link to this definition">#</a></dt>
+<dd><p>Do any processing that is necessary to finalize an experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Status that the experiment finished with (e.g. success, failed, aborted)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.log_audio">
+<span class="sig-name descname"><span class="pre">log_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audios</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.log_audio" title="Link to this definition">#</a></dt>
+<dd><p>Log audios (numpy arrays, or file paths).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The key to be used for logging the audio files</p></li>
+<li><p><strong>audios</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a><em>]</em>) – The list of audio file paths, or numpy arrays to be logged</p></li>
+<li><p><strong>step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> | </em><em>None</em>) – The step number to be used for logging the audio files</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a>) – Optional kwargs are lists passed to each <code class="docutils literal notranslate"><span class="pre">Wandb.Audio</span></code> instance (ex: caption, sample_rate).</p></li>
+</ul>
+</dd>
+</dl>
+<p>Optional kwargs are lists passed to each audio (ex: caption, sample_rate).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.log_hyperparams">
+<span class="sig-name descname"><span class="pre">log_hyperparams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.log_hyperparams" title="Link to this definition">#</a></dt>
+<dd><p>Record hyperparameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace" title="(in Python v3.14)"><em>Namespace</em></a>) – <a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a> or <cite>Dict</cite> containing the hyperparameters</p></li>
+<li><p><strong>args</strong> – Optional positional arguments, depends on the specific logger being used</p></li>
+<li><p><strong>kwargs</strong> – Optional keyword arguments, depends on the specific logger being used</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.log_image">
+<span class="sig-name descname"><span class="pre">log_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.log_image" title="Link to this definition">#</a></dt>
+<dd><p>Log images (tensors, numpy arrays, PIL Images or file paths).</p>
+<p>Optional kwargs are lists passed to each image (ex: caption, masks, boxes).</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.log_metrics">
+<span class="sig-name descname"><span class="pre">log_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.log_metrics" title="Link to this definition">#</a></dt>
+<dd><p>Records metrics. This method logs metrics as soon as it received them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metrics</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.14)"><em>Mapping</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Dictionary with metric names as keys and measured quantities as values</p></li>
+<li><p><strong>step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> | </em><em>None</em>) – Step number at which the metrics should be recorded</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.log_table">
+<span class="sig-name descname"><span class="pre">log_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.log_table" title="Link to this definition">#</a></dt>
+<dd><p>Log a Table containing any object type (text, image, audio, video, molecule, html, etc).</p>
+<p>Can be defined either with <cite>columns</cite> and <cite>data</cite> or with <cite>dataframe</cite>.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.log_text">
+<span class="sig-name descname"><span class="pre">log_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.log_text" title="Link to this definition">#</a></dt>
+<dd><p>Log text as a Table.</p>
+<p>Can be defined either with <cite>columns</cite> and <cite>data</cite> or with <cite>dataframe</cite>.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.log_video">
+<span class="sig-name descname"><span class="pre">log_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">videos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.log_video" title="Link to this definition">#</a></dt>
+<dd><p>Log videos (numpy arrays, or file paths).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The key to be used for logging the video files</p></li>
+<li><p><strong>videos</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a><em>]</em>) – The list of video file paths, or numpy arrays to be logged</p></li>
+<li><p><strong>step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> | </em><em>None</em>) – The step number to be used for logging the video files</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference internal" href="topobench.utils.utils.html#topobench.utils.utils.Any" title="typing.Any"><em>Any</em></a>) – Optional kwargs are lists passed to each Wandb.Video instance (ex: caption, fps, format).</p></li>
+</ul>
+</dd>
+</dl>
+<p>Optional kwargs are lists passed to each video (ex: caption, fps, format).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.use_artifact">
+<span class="sig-name descname"><span class="pre">use_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artifact</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artifact_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.use_artifact" title="Link to this definition">#</a></dt>
+<dd><p>Logs to the wandb dashboard that the mentioned artifact is used by the run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>artifact</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The path of the artifact.</p></li>
+<li><p><strong>artifact_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – The type of artifact being used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wandb Artifact object for the artifact.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Artifact</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.watch">
+<span class="sig-name descname"><span class="pre">watch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gradients'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.WandbLogger.watch" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.LOGGER_JOIN_CHAR">
+<span class="sig-name descname"><span class="pre">LOGGER_JOIN_CHAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'-'</span></em><a class="headerlink" href="#topobench.run.WandbLogger.LOGGER_JOIN_CHAR" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.experiment">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">experiment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Run</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">RunDisabled</span></em><a class="headerlink" href="#topobench.run.WandbLogger.experiment" title="Link to this definition">#</a></dt>
+<dd><p>Actual wandb object. To use wandb features in your <code class="xref py py-class docutils literal notranslate"><span class="pre">LightningModule</span></code> do the
+following.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">python</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>self.logger.experiment.some_wandb_function()</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.WandbLogger.name" title="Link to this definition">#</a></dt>
+<dd><p>The project name of this experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the project the current experiment belongs to. This name is not the same as <cite>wandb.Run</cite>’s
+name. To access wandb’s internal experiment name, use <code class="docutils literal notranslate"><span class="pre">logger.experiment.name</span></code> instead.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.save_dir">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.WandbLogger.save_dir" title="Link to this definition">#</a></dt>
+<dd><p>Gets the save directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The path to the save directory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="topobench.run.WandbLogger.version">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#topobench.run.WandbLogger.version" title="Link to this definition">#</a></dt>
+<dd><p>Gets the id of the experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The id of the experiment if the experiment exists else the id given to the constructor.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -3883,6 +4943,34 @@ Trainer.callbacks list, or <code class="docutils literal notranslate"><span clas
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.run.rerun_best_model_checkpoint">
+<span class="sig-name descname"><span class="pre">rerun_best_model_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datamodule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.rerun_best_model_checkpoint" title="Link to this definition">#</a></dt>
+<dd><p>Rerun the best model checkpoint on validation and test datasets to log final metrics.</p>
+<p>This function iterates through the callbacks to locate the <cite>ModelCheckpoint</cite>, loads the
+best model weights, and runs a test pass on both the validation and test dataloaders.
+Metrics are logged with <cite>val_best_rerun/</cite> and <cite>test_best_rerun/</cite> prefixes to ensure
+metrics reflect the best model state rather than the final epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>checkpoint_model</strong><span class="classifier">LightningModule</span></dt><dd><p>The model instance to load weights into.</p>
+</dd>
+<dt><strong>cfg</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration composed by Hydra.</p>
+</dd>
+<dt><strong>datamodule</strong><span class="classifier">LightningModule</span></dt><dd><p>The data module providing <cite>val_dataloader</cite> and <cite>test_dataloader</cite>.</p>
+</dd>
+<dt><strong>device</strong><span class="classifier">torch.device</span></dt><dd><p>The target device (CPU/GPU) for the model.</p>
+</dd>
+<dt><strong>callbacks</strong><span class="classifier">list[Callback]</span></dt><dd><p>A list of callbacks to search for the <cite>ModelCheckpoint</cite>.</p>
+</dd>
+<dt><strong>logger</strong><span class="classifier">list[Logger]</span></dt><dd><p>A list of loggers (e.g., WandbLogger) to record the re-run metrics.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.run.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.run.run" title="Link to this definition">#</a></dt>
 <dd><p>Wrapper function that executes the task function.</p>
@@ -3912,14 +5000,14 @@ Trainer.callbacks list, or <code class="docutils literal notranslate"><span clas
 - mark the run as failed with a dedicated file in the <cite>logs/</cite> folder (so we can find and rerun it later).
 - etc. (adjust depending on your needs).</p>
 <p>Example:
-<a href="#id27"><span class="problematic" id="id28">``</span></a>`
+<a href="#id31"><span class="problematic" id="id32">``</span></a>`
 &#64;utils.task_wrapper
 def train(cfg: DictConfig) -&gt; Tuple[Dict[str, Any], Dict[str, Any]]:</p>
 <blockquote>
 <div><p>…
 return metric_dict, object_dict</p>
 </div></blockquote>
-<p><a href="#id29"><span class="problematic" id="id30">``</span></a><a href="#id31"><span class="problematic" id="id32">`</span></a></p>
+<p><a href="#id33"><span class="problematic" id="id34">``</span></a><a href="#id35"><span class="problematic" id="id36">`</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -4095,6 +5183,33 @@ return metric_dict, object_dict</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Logger.save_dir"><code class="docutils literal notranslate"><span class="pre">Logger.save_dir</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.__init__"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.check_monitor_top_k"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.check_monitor_top_k()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.file_exists"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.file_exists()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.format_checkpoint_name"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.format_checkpoint_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.load_state_dict"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.load_state_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.on_train_batch_end"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_train_batch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.on_train_epoch_end"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_train_epoch_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.on_train_start"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_train_start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.on_validation_end"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.on_validation_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.setup"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.setup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.state_dict"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.state_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.to_yaml"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.to_yaml()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.CHECKPOINT_EQUALS_CHAR"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.CHECKPOINT_EQUALS_CHAR</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.CHECKPOINT_JOIN_CHAR"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.CHECKPOINT_JOIN_CHAR</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.CHECKPOINT_NAME_LAST"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.CHECKPOINT_NAME_LAST</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.FILE_EXTENSION"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.FILE_EXTENSION</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.STARTING_VERSION"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.STARTING_VERSION</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.best_k_models"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.best_k_models</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.best_model_score"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.best_model_score</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.current_score"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.current_score</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.dirpath"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.dirpath</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.every_n_epochs"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.every_n_epochs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.kth_value"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.kth_value</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.ModelCheckpoint.state_key"><code class="docutils literal notranslate"><span class="pre">ModelCheckpoint.state_key</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.OmegaConf"><code class="docutils literal notranslate"><span class="pre">OmegaConf</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.OmegaConf.clear_resolver"><code class="docutils literal notranslate"><span class="pre">OmegaConf.clear_resolver()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.OmegaConf.has_resolver"><code class="docutils literal notranslate"><span class="pre">OmegaConf.has_resolver()</span></code></a></li>
@@ -4133,6 +5248,48 @@ return metric_dict, object_dict</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.OmegaConf.unsafe_merge"><code class="docutils literal notranslate"><span class="pre">OmegaConf.unsafe_merge()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.OmegaConf.update"><code class="docutils literal notranslate"><span class="pre">OmegaConf.update()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.OmegaConf.__init__"><code class="docutils literal notranslate"><span class="pre">OmegaConf.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.cwd"><code class="docutils literal notranslate"><span class="pre">Path.cwd()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.home"><code class="docutils literal notranslate"><span class="pre">Path.home()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.absolute"><code class="docutils literal notranslate"><span class="pre">Path.absolute()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.chmod"><code class="docutils literal notranslate"><span class="pre">Path.chmod()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.exists"><code class="docutils literal notranslate"><span class="pre">Path.exists()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.expanduser"><code class="docutils literal notranslate"><span class="pre">Path.expanduser()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.glob"><code class="docutils literal notranslate"><span class="pre">Path.glob()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.group"><code class="docutils literal notranslate"><span class="pre">Path.group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.hardlink_to"><code class="docutils literal notranslate"><span class="pre">Path.hardlink_to()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_block_device"><code class="docutils literal notranslate"><span class="pre">Path.is_block_device()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_char_device"><code class="docutils literal notranslate"><span class="pre">Path.is_char_device()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_dir"><code class="docutils literal notranslate"><span class="pre">Path.is_dir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_fifo"><code class="docutils literal notranslate"><span class="pre">Path.is_fifo()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_file"><code class="docutils literal notranslate"><span class="pre">Path.is_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_mount"><code class="docutils literal notranslate"><span class="pre">Path.is_mount()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_socket"><code class="docutils literal notranslate"><span class="pre">Path.is_socket()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.is_symlink"><code class="docutils literal notranslate"><span class="pre">Path.is_symlink()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.iterdir"><code class="docutils literal notranslate"><span class="pre">Path.iterdir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.lchmod"><code class="docutils literal notranslate"><span class="pre">Path.lchmod()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.link_to"><code class="docutils literal notranslate"><span class="pre">Path.link_to()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.lstat"><code class="docutils literal notranslate"><span class="pre">Path.lstat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.mkdir"><code class="docutils literal notranslate"><span class="pre">Path.mkdir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.open"><code class="docutils literal notranslate"><span class="pre">Path.open()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.owner"><code class="docutils literal notranslate"><span class="pre">Path.owner()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.read_bytes"><code class="docutils literal notranslate"><span class="pre">Path.read_bytes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.read_text"><code class="docutils literal notranslate"><span class="pre">Path.read_text()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.readlink"><code class="docutils literal notranslate"><span class="pre">Path.readlink()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.rename"><code class="docutils literal notranslate"><span class="pre">Path.rename()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.replace"><code class="docutils literal notranslate"><span class="pre">Path.replace()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.resolve"><code class="docutils literal notranslate"><span class="pre">Path.resolve()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.rglob"><code class="docutils literal notranslate"><span class="pre">Path.rglob()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.rmdir"><code class="docutils literal notranslate"><span class="pre">Path.rmdir()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.samefile"><code class="docutils literal notranslate"><span class="pre">Path.samefile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.stat"><code class="docutils literal notranslate"><span class="pre">Path.stat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.symlink_to"><code class="docutils literal notranslate"><span class="pre">Path.symlink_to()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.touch"><code class="docutils literal notranslate"><span class="pre">Path.touch()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.unlink"><code class="docutils literal notranslate"><span class="pre">Path.unlink()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.write_bytes"><code class="docutils literal notranslate"><span class="pre">Path.write_bytes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Path.write_text"><code class="docutils literal notranslate"><span class="pre">Path.write_text()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.PreProcessor"><code class="docutils literal notranslate"><span class="pre">PreProcessor</span></code></a><ul class="nav section-nav flex-column">
@@ -4233,6 +5390,27 @@ return metric_dict, object_dict</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.Trainer.world_size"><code class="docutils literal notranslate"><span class="pre">Trainer.world_size</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger"><code class="docutils literal notranslate"><span class="pre">WandbLogger</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.download_artifact"><code class="docutils literal notranslate"><span class="pre">WandbLogger.download_artifact()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.__init__"><code class="docutils literal notranslate"><span class="pre">WandbLogger.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.after_save_checkpoint"><code class="docutils literal notranslate"><span class="pre">WandbLogger.after_save_checkpoint()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.finalize"><code class="docutils literal notranslate"><span class="pre">WandbLogger.finalize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.log_audio"><code class="docutils literal notranslate"><span class="pre">WandbLogger.log_audio()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.log_hyperparams"><code class="docutils literal notranslate"><span class="pre">WandbLogger.log_hyperparams()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.log_image"><code class="docutils literal notranslate"><span class="pre">WandbLogger.log_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.log_metrics"><code class="docutils literal notranslate"><span class="pre">WandbLogger.log_metrics()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.log_table"><code class="docutils literal notranslate"><span class="pre">WandbLogger.log_table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.log_text"><code class="docutils literal notranslate"><span class="pre">WandbLogger.log_text()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.log_video"><code class="docutils literal notranslate"><span class="pre">WandbLogger.log_video()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.use_artifact"><code class="docutils literal notranslate"><span class="pre">WandbLogger.use_artifact()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.watch"><code class="docutils literal notranslate"><span class="pre">WandbLogger.watch()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.LOGGER_JOIN_CHAR"><code class="docutils literal notranslate"><span class="pre">WandbLogger.LOGGER_JOIN_CHAR</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.experiment"><code class="docutils literal notranslate"><span class="pre">WandbLogger.experiment</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.name"><code class="docutils literal notranslate"><span class="pre">WandbLogger.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.save_dir"><code class="docutils literal notranslate"><span class="pre">WandbLogger.save_dir</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.WandbLogger.version"><code class="docutils literal notranslate"><span class="pre">WandbLogger.version</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.count_number_of_parameters"><code class="docutils literal notranslate"><span class="pre">count_number_of_parameters()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.extras"><code class="docutils literal notranslate"><span class="pre">extras()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.get_default_metrics"><code class="docutils literal notranslate"><span class="pre">get_default_metrics()</span></code></a></li>
@@ -4252,6 +5430,7 @@ return metric_dict, object_dict</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.instantiate_loggers"><code class="docutils literal notranslate"><span class="pre">instantiate_loggers()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.log_hyperparameters"><code class="docutils literal notranslate"><span class="pre">log_hyperparameters()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.rerun_best_model_checkpoint"><code class="docutils literal notranslate"><span class="pre">rerun_best_model_checkpoint()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.run.task_wrapper"><code class="docutils literal notranslate"><span class="pre">task_wrapper()</span></code></a></li>
 </ul>
