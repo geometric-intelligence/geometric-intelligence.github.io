@@ -53,7 +53,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Feb 10, 2026, 10:31:09 PM"/>
+    <meta name="docbuild:last-update" content="Mar 13, 2026, 10:09:12 PM"/>
   </head>
   
   
@@ -830,8 +830,9 @@ into the destination, False to replace the destination.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="topobench.utils.logging_utils.rank_zero_only">
 <span class="sig-name descname"><span class="pre">rank_zero_only</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.logging_utils.rank_zero_only" title="Link to this definition">#</a></dt>
-<dd><p>Wrap a function to call internal function only in rank zero.</p>
-<p>Function that can be used as a decorator to enable a function/method being called only on global rank 0.</p>
+<dd><p>Decorator to run the wrapped function only on global rank 0.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">rank_zero_only.rank</span></code> before use. On non-zero ranks, the function is skipped and the provided
+<code class="docutils literal notranslate"><span class="pre">default</span></code> is returned (or <code class="docutils literal notranslate"><span class="pre">None</span></code> if not given).</p>
 <dl class="field-list simple">
 </dl>
 </dd></dl>
