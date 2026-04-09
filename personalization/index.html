@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
@@ -146,7 +147,7 @@
           <div class="columns is-centered">
             <div class="column is-10">
               <figure>
-                <img src="static/images/figure1.pdf" alt="Impact of personalization on prediction and explanation: some groups benefit, others are harmed."/>
+                <img src="static/images/figure1.png" alt="Impact of personalization on prediction and explanation: some groups benefit, others are harmed."/>
                 <figcaption class="has-text-centered" style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
                   <strong>Figure 1:</strong> Impact of personalization on prediction and explanation: some groups benefit, others are harmed.
                 </figcaption>
@@ -168,7 +169,7 @@
           <div class="columns is-centered">
             <div class="column is-10">
               <figure>
-                <img src="static/images/figure2.pdf" alt="Testing personalization for prediction and explanation depends on the learning task."/>
+                <img src="static/images/figure2.png" alt="Testing personalization for prediction and explanation depends on the learning task."/>
                 <figcaption class="has-text-centered" style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
                   <strong>Figure 2:</strong> Testing personalization for prediction and explanation depends on the learning task. 
                   Lower bound on the probability of error with respect to number of personal attributes, for dataset sizes 
@@ -206,7 +207,7 @@
           <div class="columns is-centered">
             <div class="column is-10">
               <figure>
-                <img src="static/images/figure3.pdf" alt="Summary of the steps to test the Benefit of Personalization for prediction and explanation."/>
+                <img src="static/images/figure3.png" alt="Summary of the steps to test the Benefit of Personalization for prediction and explanation."/>
                 <figcaption class="has-text-centered" style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
                   <strong>Figure 3:</strong> Summary of the steps to test the Benefit of Personalization (BoP) for prediction and explanation.
                 </figcaption>
@@ -218,7 +219,7 @@
           <div class="columns is-centered">
             <div class="column is-10">
               <figure>
-                <img src="static/images/figure4.pdf" alt="Lower bound of probability of error vs epsilon on MIMIC-III."/>
+                <img src="static/images/figure4.png" alt="Lower bound of probability of error vs epsilon on MIMIC-III."/>
                 <figcaption class="has-text-centered" style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
                   <strong>Figure 4:</strong> Lower bound of P<sub>e</sub> vs. ε on MIMIC-III: classification (A) and regression 
                   with Laplace (green) and Gaussian (blue) models for the individual BoPs (B). At ε = 0.002, testing personalization 
@@ -233,6 +234,219 @@
     </div>
   </div>
 </section>
+
+<!-- Interactive Lower Bound Explorer -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Interactive Lower Bound Explorer</h2>
+        <div class="content has-text-justified">
+          <p>
+            Explore how the lower bound on the probability of error P<sub>e</sub> for the Benefit of Personalization (BoP)
+            hypothesis test depends on dataset size N, the minimum desired benefit ε, the number of personal attributes k,
+            and the assumed distribution of individual BoPs.
+            Values above the <strong>P<sub>e</sub> = 0.25</strong> threshold indicate that reliable testing is statistically infeasible.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+
+        <!-- Controls -->
+        <div class="box" style="background: white;">
+          <div class="columns is-multiline is-vcentered">
+
+            <div class="column is-one-quarter">
+              <div class="field">
+                <label class="label">Distribution</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="dist-select" onchange="updatePePlot()">
+                      <option value="categorical">Classification</option>
+                      <option value="normal">Gaussian</option>
+                      <option value="laplace">Laplace</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="help" id="dist-help">Categorical individual BoP (0-1 loss)</p>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="field">
+                <label class="label">N (samples)</label>
+                <div class="control">
+                  <input class="input" type="number" id="n-input" value="1000" min="1" step="100" oninput="updatePePlot()">
+                </div>
+                <p class="help">Total dataset size</p>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="field">
+                <label class="label">ε (min. benefit)</label>
+                <div class="control">
+                  <input class="input" type="number" id="epsilon-input" value="0.01" min="0.0001" step="0.001" oninput="updatePePlot()">
+                </div>
+                <p class="help">Minimum improvement to detect</p>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div id="sigma-field">
+                <div class="field">
+                  <label class="label" id="spread-label">σ (std. deviation)</label>
+                  <div class="control">
+                    <input class="input" type="number" id="spread-input" value="1" min="0.0001" step="0.01" oninput="updatePePlot()">
+                  </div>
+                  <p class="help" id="spread-help">Spread of individual BoPs</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Plot -->
+        <div id="pe-plot" style="width:100%; height:420px;"></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function lowerBoundCategorical(k, N, epsilon) {
+    const d = Math.pow(2, k);
+    const m = N / d;
+    const base = 1 + epsilon * epsilon;
+    // Use log to avoid overflow: base^m = exp(m * log(base))
+    const logInner = m * Math.log(base);
+    const inner = Math.exp(Math.min(logInner, 700)) - 1;
+    if (inner <= 0) return 0.5;
+    const term = Math.sqrt(inner) / (2 * Math.sqrt(d));
+    return Math.max(0, Math.min(0.5, 0.5 * (1 - term)));
+  }
+
+  function lowerBoundNormal(k, N, epsilon, sigma) {
+    const d = Math.pow(2, k);
+    const m = N / d;
+    const exponent = Math.min((m * epsilon * epsilon) / (sigma * sigma), 700);
+    const inner = Math.exp(exponent) - 1;
+    if (inner <= 0) return 0.5;
+    const term = Math.sqrt(inner) / (2 * Math.sqrt(d));
+    return Math.max(0, Math.min(0.5, 0.5 * (1 - term)));
+  }
+
+  function lowerBoundLaplace(k, N, epsilon, b) {
+    const d = Math.pow(2, k);
+    const m = N / d;
+    const exponent = Math.min((m * epsilon) / b, 700);
+    const inner = Math.exp(exponent) - 1;
+    if (inner <= 0) return 0.5;
+    const term = Math.sqrt(inner) / (2 * Math.sqrt(d));
+    return Math.max(0, Math.min(0.5, 0.5 * (1 - term)));
+  }
+
+  function updatePePlot() {
+    const dist    = document.getElementById('dist-select').value;
+    const N       = Math.max(1, parseFloat(document.getElementById('n-input').value) || 1000);
+    const epsilon = Math.max(1e-6, parseFloat(document.getElementById('epsilon-input').value) || 0.01);
+    const spread  = Math.max(1e-6, parseFloat(document.getElementById('spread-input').value) || 1);
+
+    // Update labels and help text
+    const labelEl = document.getElementById('spread-label');
+    const helpEl  = document.getElementById('spread-help');
+    const distHelp = document.getElementById('dist-help');
+    const spreadField = document.getElementById('sigma-field');
+
+    if (dist === 'categorical') {
+      spreadField.style.opacity = '0.35';
+      spreadField.style.pointerEvents = 'none';
+      distHelp.textContent = 'Categorical individual BoP (e.g. 0-1 loss)';
+    } else if (dist === 'normal') {
+      spreadField.style.opacity = '1';
+      spreadField.style.pointerEvents = '';
+      labelEl.textContent = 'σ (std. deviation)';
+      helpEl.textContent = 'Spread of individual BoPs';
+      distHelp.textContent = 'Gaussian individual BoP (e.g. regression MSE)';
+    } else {
+      spreadField.style.opacity = '1';
+      spreadField.style.pointerEvents = '';
+      labelEl.textContent = 'b (scale)';
+      helpEl.textContent = 'Scale of individual BoPs';
+      distHelp.textContent = 'Laplace individual BoP (e.g. regression MSE)';
+    }
+
+    const kValues = Array.from({length: 21}, (_, i) => i);
+    const peValues = kValues.map(k => {
+      if (dist === 'categorical') return lowerBoundCategorical(k, N, epsilon);
+      if (dist === 'normal')      return lowerBoundNormal(k, N, epsilon, spread);
+      return lowerBoundLaplace(k, N, epsilon, spread);
+    });
+
+    const colorMap = { categorical: '#e88b00', normal: '#2373c4', laplace: '#2a7a2a' };
+    const dashMap  = { categorical: 'dash',    normal: 'solid',   laplace: 'solid'  };
+    const color    = colorMap[dist];
+
+    const spreadLabel = dist === 'normal' ? `σ = ${spread}` : (dist === 'laplace' ? `b = ${spread}` : '');
+    const traceName   = dist === 'categorical'
+      ? `Classification  (N = ${N}, ε = ${epsilon})`
+      : dist === 'normal'
+        ? `Gaussian  (N = ${N}, ε = ${epsilon}, ${spreadLabel})`
+        : `Laplace  (N = ${N}, ε = ${epsilon}, ${spreadLabel})`;
+
+    const traces = [
+      {
+        x: kValues, y: peValues,
+        type: 'scatter', mode: 'lines+markers',
+        name: traceName,
+        line:   { color, width: 2.5, dash: dashMap[dist] },
+        marker: { size: 7, color, symbol: 'circle' }
+      },
+      {
+        x: [0, 20], y: [0.25, 0.25],
+        type: 'scatter', mode: 'lines',
+        name: 'Unreliable testing (P<sub>e</sub> = 0.25)',
+        line: { color: '#333', width: 1.5, dash: 'dot' },
+        hoverinfo: 'skip'
+      },
+      {
+        x: [0, 20], y: [0.5, 0.5],
+        type: 'scatter', mode: 'lines',
+        name: 'Random guessing (P<sub>e</sub> = 0.5)',
+        line: { color: '#999', width: 1, dash: 'dot' },
+        hoverinfo: 'skip'
+      }
+    ];
+
+    const layout = {
+      xaxis: {
+        title: { text: 'Number of personal attributes k', font: { size: 14 } },
+        range: [-0.3, 20.3], tickmode: 'linear', dtick: 5,
+        gridcolor: '#ddd', zeroline: false
+      },
+      yaxis: {
+        title: { text: 'Lower bound on P<sub>e</sub>', font: { size: 14 } },
+        range: [-0.02, 0.52], gridcolor: '#ddd', zeroline: false
+      },
+      legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: 1.18, font: { size: 12 } },
+      margin: { t: 60, b: 55, l: 65, r: 20 },
+      paper_bgcolor: 'white',
+      plot_bgcolor: '#fafafa',
+      font: { family: 'Georgia, serif', size: 13 },
+      hovermode: 'x unified'
+    };
+
+    Plotly.react('pe-plot', traces, layout, { responsive: true, displayModeBar: false });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', updatePePlot);
+</script>
 
 <!-- Paper Embed -->
 <section class="hero is-small is-light">
