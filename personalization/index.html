@@ -35,7 +35,10 @@
       tex: {
         inlineMath: [['$', '$']],
         displayMath: [['$$', '$$']],
-        macros: { operatorname: ['{\\operatorname{#1}}', 1] }
+        macros: {
+          GBoP: '\\text{G-BoP}',
+          BoP:  '\\text{BoP}'
+        }
       },
       options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
     };
@@ -121,7 +124,7 @@
 </section>
 
 <!-- Abstract -->
-<section class="section hero is-light">
+<section class="section hero is-light" id="abstract">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -139,7 +142,7 @@
 <!-- ══════════════════════════════════════════════════════
      KEY FINDINGS
 ═══════════════════════════════════════════════════════ -->
-<section class="section hero is-light">
+<section class="section hero is-light" id="key-findings">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -184,7 +187,7 @@
 <!-- ══════════════════════════════════════════════════════
      THEORETICAL FINDINGS
 ═══════════════════════════════════════════════════════ -->
-<section class="section hero">
+<section class="section hero" id="theoretical">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -197,7 +200,7 @@
         <div class="content has-text-justified">
 
           <p>
-            This section provides the first formal analysis showing that personalization's effect on prediction does
+            This paper provides the first formal analysis showing that personalization's effect on prediction does
             <em>not</em> determine its effect on explainability, highlighting the need to evaluate both.
             A common intuition in machine learning is that if personalization improves prediction, it should also improve
             the quality of explanations derived from the model. Despite its prevalence, this presumed connection between
@@ -207,7 +210,7 @@
             We consider a generic model $h_0 : \mathcal{X} \to \mathcal{Y}$ and a personalized model
             $h_p : \mathcal{X} \times \mathcal{S} \to \mathcal{Y}$, and measure the
             <em>Group Benefit of Personalization</em>
-            $\operatorname{G\text{-}BoP}(h_0, h_p, s) = C(h_0, s) - C(h_p, s)$
+            $\GBoP(h_0, h_p, s) = C(h_0, s) - C(h_p, s)$
             for each group $s \in \mathcal{S}$, where a positive value indicates the personalized model
             performs better. We write $\gamma_P$ and $\gamma_X$ for the worst-case group benefit over
             prediction and explanation, respectively.
@@ -215,7 +218,7 @@
 
           <!-- Figure 1 -->
           <div class="columns is-centered" style="margin: 1.5rem 0;">
-            <div class="column is-10">
+            <div class="column is-6">
               <figure>
                 <img src="static/images/figure1.png"
                      alt="Impact of personalization on prediction and explanation: some groups benefit, others are harmed."
@@ -253,8 +256,8 @@
               Consider a loan approval model using credit score, income, and debt-to-income ratio.
               Adding a personal feature—"pre-approved by another bank"—that is strongly correlated with existing
               features may leave predictions unchanged. However, an explainer might now assign most importance to
-              this new feature because it provides a clearer justification. Thus $\operatorname{G\text{-}BoP}_P = 0$
-              but $\operatorname{G\text{-}BoP}_X > 0$ for each group.
+              this new feature because it provides a clearer justification. Thus $\GBoP_P = 0$
+              but $\GBoP_X > 0$ for each group.
             </p>
           </div>
 
@@ -297,9 +300,9 @@
             <p>
               There exists a data distribution $P_{\mathbf{X}, \mathbf{S}, \mathbf{Y}}$ such that the Bayes optimal
               classifiers $h_0$ and $h_p$ satisfy
-              $\operatorname{G\text{-}BoP}_{P}(h_0, h_p, s) = 0$ (measured by 0-1 loss) for all groups $s$,
-              but some groups have $\operatorname{G\text{-}BoP}_{X}(h_0, h_p, s) > 0$ while others have
-              $\operatorname{G\text{-}BoP}_{X}(h_0, h_p, s) < 0$ (measured by sufficiency and incomprehensiveness).
+              $\GBoP_{P}(h_0, h_p, s) = 0$ (measured by 0-1 loss) for all groups $s$,
+              but some groups have $\GBoP_{X}(h_0, h_p, s) > 0$ while others have
+              $\GBoP_{X}(h_0, h_p, s) < 0$ (measured by sufficiency and incomprehensiveness).
             </p>
           </div>
 
@@ -326,9 +329,9 @@
                 + \alpha_{t+1} \mathbf{S}_1 + \cdots + \alpha_{t+k} \mathbf{S}_k + \epsilon,$$
               where $\mathbf{X}_1, \ldots, \mathbf{X}_t$ and $\mathbf{S}_1, \ldots, \mathbf{S}_k$ are independent
               and $\epsilon$ is independent noise. If for $s \in \mathcal{S}$:
-              $$\operatorname{G\text{-}BoP}_{\text{suff}}(h_0, h_p, s)
-                = \operatorname{G\text{-}BoP}_{\text{incomp}}(h_0, h_p, s) = 0,$$
-              then $\operatorname{G\text{-}BoP}_P(h_0, h_p, s) = 0$. Consequently, if this holds for all groups
+              $$\GBoP_{\text{suff}}(h_0, h_p, s)
+                = \GBoP_{\text{incomp}}(h_0, h_p, s) = 0,$$
+              then $\GBoP_P(h_0, h_p, s) = 0$. Consequently, if this holds for all groups
               $s$, then $\gamma_P = 0$.
             </p>
           </div>
@@ -337,9 +340,9 @@
             <p class="block-label">Corollary 4.5</p>
             <p>
               Under the assumptions of Theorem 4.4, if for some $s \in \mathcal{S}$ we have
-              $\operatorname{G\text{-}BoP}_P(h_0, h_p, s) \neq 0$, then it also holds that
-              $\operatorname{G\text{-}BoP}_{\text{suff}}(h_0, h_p, s) \neq 0$ or
-              $\operatorname{G\text{-}BoP}_{\text{incomp}}(h_0, h_p, s) \neq 0$.
+              $\GBoP_P(h_0, h_p, s) \neq 0$, then it also holds that
+              $\GBoP_{\text{suff}}(h_0, h_p, s) \neq 0$ or
+              $\GBoP_{\text{incomp}}(h_0, h_p, s) \neq 0$.
               In other words, if personalization affects prediction, it must also affect explanation for at
               least one measure and one demographic group.
             </p>
@@ -360,7 +363,7 @@
 <!-- ══════════════════════════════════════════════════════
      THE FRAMEWORK
 ═══════════════════════════════════════════════════════ -->
-<section class="section hero is-light">
+<section class="section hero is-light" id="framework">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -405,22 +408,22 @@
             The figure below outlines the four-step procedure for applying the framework to any real dataset.
           </p>
 
-          <!-- Figure 3 -->
-          <div class="columns is-centered" style="margin: 1.5rem 0;">
-            <div class="column is-12">
-              <figure>
-                <img src="static/images/figure3.png"
-                     alt="Summary of the steps to test BoP for prediction and explanation."
-                     style="width:100%; border-radius:6px;"/>
-                <figcaption class="has-text-centered" style="margin-top:0.6rem; font-size:0.88rem; color:#555;">
-                  <strong>Figure 3.</strong> Four-step procedure to test the Benefit of Personalization (BoP)
-                  for prediction and explanation on a dataset.
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-
         </div>
+      </div>
+    </div>
+
+    <!-- Figure 3 — full container width -->
+    <div class="columns is-centered" style="margin: 1.5rem 0 0.5rem 0;">
+      <div class="column">
+        <figure>
+          <img src="static/images/figure3.png"
+               alt="Summary of the steps to test BoP for prediction and explanation."
+               style="width:100%; border-radius:6px; display:block; margin:auto;"/>
+          <figcaption class="has-text-centered" style="margin-top:0.6rem; font-size:0.88rem; color:#555;">
+            <strong>Figure 3.</strong> Four-step procedure to test the Benefit of Personalization (BoP)
+            for prediction and explanation on a dataset.
+          </figcaption>
+        </figure>
       </div>
     </div>
 
@@ -625,7 +628,7 @@
 <!-- ══════════════════════════════════════════════════════
      EXPERIMENTAL RESULTS
 ═══════════════════════════════════════════════════════ -->
-<section class="section hero">
+<section class="section hero" id="experiments">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -811,6 +814,58 @@
     </div>
   </div>
 </footer>
+
+<!-- "On this page" sidebar -->
+<nav class="page-toc" id="page-toc" aria-label="Page sections">
+  <p class="toc-heading">On this page</p>
+  <a href="#abstract"     class="toc-link">Abstract</a>
+  <a href="#key-findings" class="toc-link">Key Findings</a>
+  <a href="#theoretical"  class="toc-link">Theoretical Findings</a>
+  <a href="#framework"    class="toc-link">The Framework</a>
+  <a href="#experiments"  class="toc-link">Experiments</a>
+  <a href="#BibTeX"       class="toc-link">BibTeX</a>
+</nav>
+
+<script>
+  (function () {
+    const links    = document.querySelectorAll('.page-toc .toc-link');
+    const sectionIds = ['abstract','key-findings','theoretical','framework','experiments','BibTeX'];
+
+    function activate(id) {
+      links.forEach(l => {
+        if (l.getAttribute('href') === '#' + id) {
+          l.classList.add('toc-active');
+        } else {
+          l.classList.remove('toc-active');
+        }
+      });
+    }
+
+    // IntersectionObserver — fire when a section crosses the upper third of the viewport
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) activate(entry.target.id);
+      });
+    }, { rootMargin: '0px 0px -60% 0px', threshold: 0 });
+
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+
+    // Smooth scroll for sidebar links
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.getElementById(link.getAttribute('href').slice(1));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Activate first link by default
+    if (links.length) links[0].classList.add('toc-active');
+  })();
+</script>
 
 </body>
 </html>
