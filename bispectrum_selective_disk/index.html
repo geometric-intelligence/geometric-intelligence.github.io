@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="The selective disk bispectrum: a fast, invertible, rotation-invariant representation for image shape analysis, with application to multi-reference alignment."/>
+  <meta name="description" content="The selective disk bispectrum: an analytical rotation-invariant encoder built from irreducible representations—invertible, efficient, and interpretable compared to learned vision models."/>
   <title>The Selective Disk Bispectrum and Its Inversion</title>
   <style>
     :root {
@@ -168,6 +168,11 @@
       margin: 2.5rem 0;
     }
     p { margin: 0 0 1rem; }
+    ul.contributions {
+      margin: 0 0 1rem;
+      padding-left: 1.35rem;
+    }
+    ul.contributions li { margin-bottom: 0.5rem; }
   </style>
 </head>
 <body>
@@ -179,7 +184,7 @@
   <h1>The Selective Disk Bispectrum and Its Inversion, with Application to Multi-Reference Alignment</h1>
 
   <p class="byline">
-    Adele Myers¹, Nina Miolane¹
+    Adele Myers Lantow¹, Nina Miolane¹
     &nbsp;·&nbsp; ¹Geometric Intelligence Lab, University of California, Santa Barbara
   </p>
 
@@ -197,67 +202,100 @@
   <p class="links-note">Code available soon.</p>
 
   <div class="teaser">
-    <img src="figures/figure1.png" alt="Teaser: rotation-invariant shape representation and recovery"/>
-    <p class="caption">High-level view: a rotation-invariant representation of image shape that remains invertible, so you can recover structure in the image plane. Add <code>figures/figure1.png</code> to match a figure from the paper.</p>
+    <img src="figures/figure1.png" alt="Teaser: analytical rotation-invariant encoder from the disk bispectrum"/>
+    <p class="caption">Conceptual view: a <strong>rotation-invariant encoder</strong> defined by explicit transforms—not a trained network—so features are fast to compute and tied to clear harmonic structure. Add <code>figures/figure1.png</code> from the paper.</p>
   </div>
 
   <div class="pull-quote">
-    How can we learn from the shape of an object in an image while ignoring how it is rotated—yet still keep enough information to reconstruct and compare images? We introduce the selective disk bispectrum: a fast, rotation-invariant representation with an explicit inverse, aimed at practical learning and alignment on large image sets.
+    Modern vision systems learn powerful representations, but often at the cost of huge data and compute to discover invariances that could, in principle, be built in. <em>To what extent should invariance be learned, rather than encoded directly?</em> We propose the <strong>selective disk bispectrum</strong>: an analytical, rotation-invariant encoder—an explicit map from pixels to coefficients—with inversion, theory under noise, and strong empirical behavior next to today&rsquo;s large models.
   </div>
 
   <h2>What is the selective disk bispectrum?</h2>
 
   <p>
-    The <strong>selective disk bispectrum</strong> is a representation for <strong>2-D images</strong> that is invariant to how an object is rotated in the frame, while retaining the information needed for shape-focused analysis. It builds on ideas from the <strong>bispectrum</strong>, which has long been used as a translation-invariant descriptor for signals; here the focus is <strong>disk rotational invariance</strong> (invariance under rotations of the image) rather than translation. The &ldquo;selective&rdquo; part means we retain only the <strong>minimal set of coefficients</strong> required for faithful recovery of shape, rather than storing the full redundant set.
+    Think of it as a <strong>rotation-invariant encoder</strong> for <strong>2-D images</strong>: a fixed feature map that throws away global rotation while keeping the information needed for recognition and recovery. It is an <strong>analytical representation</strong>—specified by transforms and algebra, not by gradient descent—so it offers <strong>invariance by design</strong> rather than invariance discovered from data.
   </p>
 
   <p>
-    Unlike frozen or fine-tuned deep networks (for example <strong>group convolutions</strong>, <strong>DINO</strong>, <strong>EVA</strong>, or <strong>CLIP</strong>), this representation is an <strong>analytical map</strong> from pixels to coefficients: it is defined by explicit transforms, not learned from data. That makes it <strong>more interpretable</strong> than typical learned embeddings—you can inspect what each coefficient means in frequency and phase—and it avoids treating the representation as an opaque black box.
+    The construction builds on the <strong>bispectrum</strong>, a classical tool built from <strong>tensor products of irreducible representations (irreps)</strong>. Bispectral statistics form a class of <strong>complete invariants</strong> for the group action: they preserve information about the signal up to the symmetry (here, rotation), and they retain <strong>phase-sensitive, higher-order correlations</strong> that second-order spectra discard. Our focus is the <strong>disk</strong> setting—rotations in the plane—related to disk-harmonic and cryo-EM style formulations. The &ldquo;selective&rdquo; part means we keep a <strong>minimal subset of coefficients</strong> still sufficient for reconstruction, instead of the full redundant bispectrum.
+  </p>
+
+  <p>
+    This sits between two familiar paradigms. <strong>Learned</strong> encoders—CNNs and vision transformers, including <strong>DINO</strong>, <strong>CLIP</strong>, and <strong>EVA</strong>—fit parameters to data and can approximate irreps implicitly during training. <strong>Analytical</strong> descriptors—power spectra, classical bispectra, disk harmonics, Hu moments, SIFT—bake symmetries into the map. <strong>Group-equivariant</strong> networks bridge the two by putting symmetry into the architecture while still learning weights. The selective disk bispectrum is fully analytical: no learned convolutional trunk is required to obtain the invariant code.
   </p>
 
   <h2>Why does this matter?</h2>
 
   <p>
-    For many vision and shape tasks you want a representation that discards orientation but not shape. A useful descriptor should also be <strong>efficient on large datasets</strong> and, when possible, <strong>invertible</strong>, so you can map back to image space and interpret what the representation encodes. Extending bispectrum-style ideas to <strong>2-D rotational</strong> invariance on images had been held back by two issues: there was no <strong>invertible</strong> formulation for the disk bispectrum, and naive use involves <strong>cubic complexity</strong>. Prior disk-bispectrum approaches also could not practically support <strong>multi-reference alignment</strong> (aligning many noisy observations of the same underlying signal under unknown rotations)—a natural task for rotation-invariant pipelines.
+    State-of-the-art visual models trade scale for expressivity: many invariances and equivariances could be stated <em>a priori</em>, yet are left for the optimizer to find. Work in <strong>geometric deep learning</strong> emphasizes that building symmetry into representations can improve <strong>efficiency and generalization</strong>; the design goal is a map that is simultaneously <strong>informative</strong>, <strong>compact</strong>, and <strong>invariant</strong> to nuisance transforms like rotation.
   </p>
 
   <p>
-    On <strong>rotation-invariant classification</strong> benchmark datasets, the selective disk bispectrum achieves <strong>competitive accuracy</strong> relative to those learned baselines—<strong>group convolutions</strong>, <strong>DINO</strong>, <strong>EVA</strong>, and <strong>CLIP</strong>—while being <strong>much faster to compute</strong>. Together with the <strong>interpretability</strong> of an analytical map (as opposed to a representation tuned by gradient descent), it is a strong option when you need rotation invariance at scale without the cost and opacity of a large vision model.
+    Learned models must <strong>implicitly discover</strong> invariance when it is not hard-coded—often by approximating irreps across layers—which can inflate sample and compute needs. A complementary route is to <strong>construct features directly from irreps</strong>, so equivariance and invariance are explicit. The bispectrum is a canonical example: it aggregates global structure through <strong>structured algebraic interactions</strong> of irreps rather than stacking opaque nonlinear blocks, which can concentrate information in <strong>low-dimensional statistics</strong> and suggests favorable behavior in <strong>low signal-to-noise</strong> settings—unlike depth-wise propagation where signal is spread across many layers.
+  </p>
+
+  <p>
+    Prior bispectrum-based pipelines still face limits. Some variants (e.g. selective <em>group</em> bispectrum-style setups) lean on <strong>learned convolutional layers</strong>, which costs compute and can hurt robustness. The <strong>full</strong> bispectrum also contains many coefficients, a large fraction of which are dominated by noise and obscure the signal. The <strong>disk bispectrum</strong> from cryo-EM and related literature lacked a tractable, <strong>analytical inverse</strong> on images—blocking principled coefficient selection and efficient use as a drop-in encoder.
+  </p>
+
+  <p>
+    Empirically, on <strong>rotation-invariant classification</strong> benchmarks, the selective disk bispectrum is <strong>competitive with group convolutions, DINO, EVA, and CLIP</strong> while being <strong>much faster</strong> to compute, and remains <strong>interpretable</strong> because the map is closed-form rather than learned.
   </p>
 
   <figure>
-    <img src="figures/figure2.png" alt="Motivation: invariance versus recoverability"/>
-    <figcaption>Figure 1: Motivation—rotation invariance without losing recoverable shape information. Replace with a panel from the paper (e.g., problem setup or invariance illustration).</figcaption>
+    <img src="figures/figure2.png" alt="Motivation: learned versus analytical rotation invariance"/>
+    <figcaption>Figure 1: Motivation—why build rotation invariance into the encoder analytically. Replace with a figure from the paper.</figcaption>
   </figure>
 
   <h2>How does it work?</h2>
 
   <p>
-    We derive an <strong>explicit inverse</strong> for the disk bispectrum. Having a closed-form inverse means the representation is not a one-way hash of the image: you can reconstruct (up to the symmetries of the problem) from the bispectrum coefficients. That theoretical step enables a <strong>selective</strong> variant: keep only the coefficients needed for faithful shape recovery, improving practicality. Conceptually, think of the bispectrum as coupling frequency components in a way that is blind to global rotation; the inverse pins down which combinations of those coefficients determine the image content you care about.
+    We introduce the <strong>selective disk bispectrum</strong> as an analytical, rotation-invariant feature map on top of the disk bispectrum framework. The paper develops three main technical advances.
+  </p>
+
+  <p>
+    <strong>First—invertibility and selection.</strong> We derive the <strong>first analytical inversion</strong> of the disk bispectrum. That inverse identifies which coefficient combinations carry the signal and yields a <strong>minimal set of coefficients sufficient for reconstruction</strong>, turning an unwieldy full bispectrum into a practical encoder.
+  </p>
+
+  <p>
+    <strong>Second—noise.</strong> We analyze the <strong>mean and variance of bispectral coefficients under Gaussian noise</strong>. The selective rule removes a large share of <strong>noise-dominated</strong> terms; the resulting estimator stays close to the noiseless signal <strong>in expectation</strong> with <strong>reduced variance</strong> relative to retaining everything.
+  </p>
+
+  <p>
+    <strong>Third—scaling.</strong> Under this construction, <strong>signal-to-noise ratio scales linearly</strong> with the input noise level in the Gaussian setting we analyze—a sharp contrast with the degradation often seen as noise passes through deep learned encoders. Intuitively, the bispectrum pools information through fixed algebraic structure instead of learned depth.
   </p>
 
   <figure>
-    <img src="figures/figure3.png" alt="Method overview: disk bispectrum and selective inversion"/>
-    <figcaption>Figure 2: Method overview—the disk bispectrum, its inverse, and the selective coefficient set. Swap in your pipeline figure from the PDF.</figcaption>
+    <img src="figures/figure3.png" alt="Method overview: selective disk bispectrum and inversion"/>
+    <figcaption>Figure 2: Pipeline—disk bispectrum, analytical inverse, and selective coefficients. Use your method figure from the PDF.</figcaption>
   </figure>
 
   <p>
-    The paper makes this precise: the inverse is what unlocks both efficient selective storage and downstream tasks that need alignment and reconstruction, not just a rotation-invariant embedding.
+    Together, these pieces define a <strong>rotation-invariant encoder</strong> you can run as a deterministic front end: fixed irrep-based statistics, explicit inversion for analysis and alignment tasks, and a selection principle grounded in both reconstruction and noise.
   </p>
 
   <h2>What did we find?</h2>
 
   <p>
-    With the selective disk bispectrum and its inverse, we show that <strong>multi-reference alignment for rotated images</strong> becomes tractable in a regime where disk-bispectrum-based methods were previously impractical. We also demonstrate that the selective representation uses the <strong>minimal coefficients needed</strong> for faithful shape recovery, supporting the claim that the method is both theoretically grounded and practical for learning on rotation-invariant shape data. On rotation-invariant classification benchmarks, accuracy is <strong>competitive with group convolutions, DINO, EVA, and CLIP</strong>, with <strong>much faster</strong> feature extraction thanks to the closed-form analytic pipeline.
+    We validate the story in three directions: <strong>classification under controlled noise</strong>, <strong>multi-reference alignment</strong> (following classical bispectrum alignment frameworks), and <strong>agreement between theory and practice</strong> on robustness and SNR behavior.
   </p>
 
+  <ul class="contributions">
+    <li><strong>Analytical encoder.</strong> A rotation-invariant feature map from irreps—<strong>invariance by design</strong>—without learned convolutional layers in the bispectral core.</li>
+    <li><strong>Inversion.</strong> First analytical inverse of the disk bispectrum, enabling principled selection of a minimal reconstructing set.</li>
+    <li><strong>Noise theory.</strong> Mean and variance of coefficients under Gaussian noise; selection drops noise-dominated terms and improves concentration of the estimate.</li>
+    <li><strong>Benchmarks.</strong> Under noise corruption, strong performance relative to convolutional networks and large pretrained models (<strong>CLIP</strong>, <strong>DINO</strong>, <strong>EVA</strong>), e.g. on benchmarks such as <strong>MNIST</strong> in the paper&rsquo;s setting—alongside competitive rotation-invariant classification against <strong>group convolutions</strong> with <strong>much faster</strong> feature extraction.</li>
+    <li><strong>Multi-reference alignment.</strong> Applied to MRA to show predicted noise robustness translates to downstream inference.</li>
+    <li><strong>SNR scaling.</strong> Empirical identification of Gaussian-noise SNR scaling <strong>linear</strong> in the input noise level, consistent with the theory.</li>
+  </ul>
+
   <figure>
-    <img src="figures/figure4.png" alt="Results: multi-reference alignment or recovery"/>
-    <figcaption>Figure 3: Empirical results—e.g., alignment or reconstruction quality versus baselines. Use your main quantitative or qualitative figure from the paper.</figcaption>
+    <img src="figures/figure4.png" alt="Results: classification noise, alignment, or SNR curves"/>
+    <figcaption>Figure 3: Empirical results—classification under noise, alignment, or SNR. Use your main figure from the paper.</figcaption>
   </figure>
 
   <p>
-    The takeaway: the disk bispectrum can be used not only as an invariant descriptor but as part of an <strong>end-to-end pipeline</strong> where you align, learn, or visualize in image space, which was difficult before an invertible, selective formulation existed.
+    Overall, these results support a simple message: <strong>building irreducible structure and invariance directly into the encoder</strong> can be a powerful alternative to purely data-driven representations—especially when <strong>robustness</strong>, <strong>efficiency</strong>, and <strong>interpretability</strong> matter as much as raw accuracy.
   </p>
 
   <!--
