@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="The selective disk bispectrum: a fast, invertible, rotation-invariant representation for image shape analysis, with application to multi-reference alignment."/>
+  <title>The Selective Disk Bispectrum and Its Inversion</title>
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --muted: #555;
+      --light: #888;
+      --border: #e8e8e8;
+      --accent: #2c5f8a;
+      --accent-light: #eef4fa;
+      --bg-code: #f6f8fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+    .site-label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+    .site-label a { color: inherit; text-decoration: none; }
+    .site-label a:hover { text-decoration: underline; }
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.25;
+      margin: 0 0 0.75rem;
+      font-weight: 700;
+    }
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 2.75rem 0 0.6rem;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 1.75rem 0 0.4rem;
+    }
+    .byline {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .venue-tag {
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+    .links {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .links a {
+      padding: 0.35rem 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.825rem;
+    }
+    .links a:hover { background: #f5f5f5; }
+    .links .link-soon {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      font-size: 0.825rem;
+      color: var(--muted);
+      cursor: default;
+    }
+    .links-note {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: -1.5rem 0 2.5rem;
+    }
+    .teaser { margin: 0 0 2.5rem; text-align: center; }
+    .teaser img { max-width: 100%; border-radius: 6px; }
+    .teaser .caption {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.82rem;
+      color: var(--light);
+      margin-top: 0.6rem;
+      font-style: italic;
+    }
+    .pull-quote {
+      border-left: 4px solid var(--accent);
+      margin: 2rem 0;
+      padding: 0.75rem 1.25rem;
+      font-size: 1.15rem;
+      color: var(--accent);
+      font-style: italic;
+      line-height: 1.55;
+    }
+    figure { margin: 2rem 0; text-align: center; }
+    figure img { max-width: 100%; border-radius: 6px; }
+    figcaption {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.8rem;
+      color: var(--light);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      background: #000;
+    }
+    .video-wrapper iframe,
+    .video-wrapper video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+    .install {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      padding: 0.9rem 1.1rem;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.875rem;
+      margin: 0.75rem 0;
+      line-height: 1.7;
+    }
+    .install .prompt { color: #89b4fa; }
+    pre {
+      background: var(--bg-code);
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+    p { margin: 0 0 1rem; }
+  </style>
+</head>
+<body>
+
+  <div class="site-label">
+    <a href="https://geometric-intelligence.github.io">Geometric Intelligence Lab</a>
+  </div>
+
+  <h1>The Selective Disk Bispectrum and Its Inversion, with Application to Multi-Reference Alignment</h1>
+
+  <p class="byline">
+    Adele Myers¹, Nina Miolane¹
+    &nbsp;·&nbsp; ¹Geometric Intelligence Lab, University of California, Santa Barbara
+  </p>
+
+  <span class="venue-tag">arXiv:2511.19706 · November 2025</span>
+
+  <div class="links">
+    <a href="https://arxiv.org/abs/2511.19706">📄 Paper (arXiv)</a>
+    <a href="https://arxiv.org/pdf/2511.19706.pdf">📑 PDF</a>
+    <a href="https://arxiv.org/html/2511.19706v1">🌐 HTML (experimental)</a>
+    <span class="link-soon">💻 Code</span>
+    <span class="link-soon">📓 Tutorial notebook</span>
+    <span class="link-soon">📦 PyPI</span>
+    <span class="link-soon">🖼️ Poster</span>
+  </div>
+  <p class="links-note">Code available soon.</p>
+
+  <div class="teaser">
+    <img src="figures/figure1.png" alt="Teaser: rotation-invariant shape representation and recovery"/>
+    <p class="caption">High-level view: a rotation-invariant representation of image shape that remains invertible, so you can recover structure in the image plane. Add <code>figures/figure1.png</code> to match a figure from the paper.</p>
+  </div>
+
+  <div class="pull-quote">
+    How can we learn from the shape of an object in an image while ignoring how it is rotated—yet still keep enough information to reconstruct and compare images? We introduce the selective disk bispectrum: a fast, rotation-invariant representation with an explicit inverse, aimed at practical learning and alignment on large image sets.
+  </div>
+
+  <h2>What is the selective disk bispectrum?</h2>
+
+  <p>
+    The <strong>selective disk bispectrum</strong> is a representation for <strong>2-D images</strong> that is invariant to how an object is rotated in the frame, while retaining the information needed for shape-focused analysis. It builds on ideas from the <strong>bispectrum</strong>, which has long been used as a translation-invariant descriptor for signals; here the focus is <strong>disk rotational invariance</strong> (invariance under rotations of the image) rather than translation. The &ldquo;selective&rdquo; part means we retain only the <strong>minimal set of coefficients</strong> required for faithful recovery of shape, rather than storing the full redundant set.
+  </p>
+
+  <p>
+    Unlike frozen or fine-tuned deep networks (for example <strong>group convolutions</strong>, <strong>DINO</strong>, <strong>EVA</strong>, or <strong>CLIP</strong>), this representation is an <strong>analytical map</strong> from pixels to coefficients: it is defined by explicit transforms, not learned from data. That makes it <strong>more interpretable</strong> than typical learned embeddings—you can inspect what each coefficient means in frequency and phase—and it avoids treating the representation as an opaque black box.
+  </p>
+
+  <h2>Why does this matter?</h2>
+
+  <p>
+    For many vision and shape tasks you want a representation that discards orientation but not shape. A useful descriptor should also be <strong>efficient on large datasets</strong> and, when possible, <strong>invertible</strong>, so you can map back to image space and interpret what the representation encodes. Extending bispectrum-style ideas to <strong>2-D rotational</strong> invariance on images had been held back by two issues: there was no <strong>invertible</strong> formulation for the disk bispectrum, and naive use involves <strong>cubic complexity</strong>. Prior disk-bispectrum approaches also could not practically support <strong>multi-reference alignment</strong> (aligning many noisy observations of the same underlying signal under unknown rotations)—a natural task for rotation-invariant pipelines.
+  </p>
+
+  <p>
+    On <strong>rotation-invariant classification</strong> benchmark datasets, the selective disk bispectrum achieves <strong>competitive accuracy</strong> relative to those learned baselines—<strong>group convolutions</strong>, <strong>DINO</strong>, <strong>EVA</strong>, and <strong>CLIP</strong>—while being <strong>much faster to compute</strong>. Together with the <strong>interpretability</strong> of an analytical map (as opposed to a representation tuned by gradient descent), it is a strong option when you need rotation invariance at scale without the cost and opacity of a large vision model.
+  </p>
+
+  <figure>
+    <img src="figures/figure2.png" alt="Motivation: invariance versus recoverability"/>
+    <figcaption>Figure 1: Motivation—rotation invariance without losing recoverable shape information. Replace with a panel from the paper (e.g., problem setup or invariance illustration).</figcaption>
+  </figure>
+
+  <h2>How does it work?</h2>
+
+  <p>
+    We derive an <strong>explicit inverse</strong> for the disk bispectrum. Having a closed-form inverse means the representation is not a one-way hash of the image: you can reconstruct (up to the symmetries of the problem) from the bispectrum coefficients. That theoretical step enables a <strong>selective</strong> variant: keep only the coefficients needed for faithful shape recovery, improving practicality. Conceptually, think of the bispectrum as coupling frequency components in a way that is blind to global rotation; the inverse pins down which combinations of those coefficients determine the image content you care about.
+  </p>
+
+  <figure>
+    <img src="figures/figure3.png" alt="Method overview: disk bispectrum and selective inversion"/>
+    <figcaption>Figure 2: Method overview—the disk bispectrum, its inverse, and the selective coefficient set. Swap in your pipeline figure from the PDF.</figcaption>
+  </figure>
+
+  <p>
+    The paper makes this precise: the inverse is what unlocks both efficient selective storage and downstream tasks that need alignment and reconstruction, not just a rotation-invariant embedding.
+  </p>
+
+  <h2>What did we find?</h2>
+
+  <p>
+    With the selective disk bispectrum and its inverse, we show that <strong>multi-reference alignment for rotated images</strong> becomes tractable in a regime where disk-bispectrum-based methods were previously impractical. We also demonstrate that the selective representation uses the <strong>minimal coefficients needed</strong> for faithful shape recovery, supporting the claim that the method is both theoretically grounded and practical for learning on rotation-invariant shape data. On rotation-invariant classification benchmarks, accuracy is <strong>competitive with group convolutions, DINO, EVA, and CLIP</strong>, with <strong>much faster</strong> feature extraction thanks to the closed-form analytic pipeline.
+  </p>
+
+  <figure>
+    <img src="figures/figure4.png" alt="Results: multi-reference alignment or recovery"/>
+    <figcaption>Figure 3: Empirical results—e.g., alignment or reconstruction quality versus baselines. Use your main quantitative or qualitative figure from the paper.</figcaption>
+  </figure>
+
+  <p>
+    The takeaway: the disk bispectrum can be used not only as an invariant descriptor but as part of an <strong>end-to-end pipeline</strong> where you align, learn, or visualize in image space, which was difficult before an invertible, selective formulation existed.
+  </p>
+
+  <!--
+  <h2>See it in action</h2>
+  <div class="video-wrapper">
+    <iframe
+      src="https://www.youtube.com/embed/VIDEO_ID"
+      title="Project demo"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+  -->
+
+  <!--
+  <h2>See it in action</h2>
+  <div class="video-wrapper">
+    <video controls>
+      <source src="figures/demo.mp4" type="video/mp4"/>
+    </video>
+  </div>
+  -->
+
+  <h2>How to get started</h2>
+
+  <p>
+    Definitions, algorithms, and proofs are in the paper—read the
+    <a href="https://arxiv.org/pdf/2511.19706.pdf">PDF on arXiv</a>
+    or the
+    <a href="https://arxiv.org/html/2511.19706v1">HTML full text</a>
+    for full detail. <strong>Code available soon.</strong> The Colab tutorial, install commands, and quick start below are placeholders for when the release is public.
+  </p>
+
+  <p>
+    The easiest way to try this project will be our Colab tutorial (code available soon), which will run entirely in the browser. To use it in your own code:
+  </p>
+
+  <h3>Install</h3>
+  <div class="install">
+    <span class="prompt">$</span> pip install your-package-name
+  </div>
+  <p>Or install from source:</p>
+  <div class="install">
+    <span class="prompt">$</span> git clone https://github.com/your-org/your-repo.git<br>
+    <span class="prompt">$</span> cd your-repo &amp;&amp; pip install -e .
+  </div>
+
+  <h3>Quick start</h3>
+  <pre># Placeholder — code available soon
+import your_package as yp
+
+data    = yp.datasets.load_example()
+model   = yp.Model(config="default")
+results = model.fit(data)
+print(results.summary())
+  </pre>
+
+  <hr>
+
+  <h2>Citation</h2>
+  <pre>@article{myers2025selective,
+  title   = {The Selective Disk Bispectrum and Its Inversion, with Application to Multi-Reference Alignment},
+  author  = {Myers, Adele and Miolane, Nina},
+  journal = {arXiv preprint arXiv:2511.19706},
+  year    = {2025}
+}</pre>
+
+</body>
+</html>
