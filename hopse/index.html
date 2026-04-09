@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HOPSE: Scalable Higher-Order Positional and Structural Encoder for Combinatorial Representations — a message-passing-free framework for Topological Deep Learning.">
+  <meta name="keywords" content="HOPSE, topological deep learning, combinatorial complexes, positional encodings, structural encodings, Hasse graph, scalable TDL, graph neural networks">
+  <meta name="author" content="Geometric Intelligence Lab">
+
+  <title>HOPSE — Higher-Order Positional &amp; Structural Encoder</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HOPSE — Higher-Order Positional & Structural Encoder">
+  <meta property="og:description" content="A message-passing-free framework that achieves up to 7× speedups over HOMP-based models while matching state-of-the-art performance in Topological Deep Learning.">
+  <meta property="og:url" content="https://geometric-intelligence.github.io/hopse/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HOPSE — Higher-Order Positional & Structural Encoder">
+  <meta name="twitter:description" content="Scalable higher-order encodings for combinatorial representations, free of message passing layers.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+
+<!-- ============================================================
+     HERO — Dark immersive header with animated topology SVG
+     ============================================================ -->
+<section class="hero-hopse" id="top">
+
+  <!-- Animated SVG Background -->
+  <svg class="hero-bg-canvas" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
+    <defs>
+      <radialGradient id="glow-purple" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="glow-teal" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#14B8A6" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="blur-sm"><feGaussianBlur stdDeviation="1.5"/></filter>
+    </defs>
+
+    <!-- Background glow blobs -->
+    <circle cx="350" cy="300" r="220" fill="url(#glow-purple)" opacity="0.15" class="hero-node" style="animation-duration:10s"/>
+    <circle cx="1100" cy="500" r="180" fill="url(#glow-teal)" opacity="0.12" class="hero-node" style="animation-duration:12s"/>
+
+    <!-- Faces (2-cells) — translucent triangles -->
+    <polygon points="200,180 330,120 260,280" fill="#8B5CF6" opacity="0.06" class="hero-face" style="animation-delay:0.5s"/>
+    <polygon points="900,600 1040,520 980,700" fill="#14B8A6" opacity="0.05" class="hero-face" style="animation-delay:1s"/>
+    <polygon points="1150,150 1300,200 1220,320" fill="#6C3CE1" opacity="0.05" class="hero-face" style="animation-delay:0.2s"/>
+    <polygon points="500,650 650,580 600,750" fill="#2DD4BF" opacity="0.04" class="hero-face" style="animation-delay:1.5s"/>
+    <polygon points="100,550 230,500 170,640" fill="#8B5CF6" opacity="0.04" class="hero-face" style="animation-delay:0.8s"/>
+    <polygon points="720,100 860,50 810,200" fill="#14B8A6" opacity="0.04" class="hero-face" style="animation-delay:1.2s"/>
+
+    <!-- Edges (1-cells) — glowing lines -->
+    <line x1="200" y1="180" x2="330" y2="120" stroke="#8B5CF6" stroke-width="1" opacity="0.15" class="hero-edge" filter="url(#blur-sm)"/>
+    <line x1="330" y1="120" x2="260" y2="280" stroke="#8B5CF6" stroke-width="1" opacity="0.12" class="hero-edge" style="animation-delay:0.5s"/>
+    <line x1="260" y1="280" x2="200" y2="180" stroke="#8B5CF6" stroke-width="1" opacity="0.12" class="hero-edge" style="animation-delay:1s"/>
+    <line x1="900" y1="600" x2="1040" y2="520" stroke="#14B8A6" stroke-width="1" opacity="0.12" class="hero-edge" style="animation-delay:0.3s"/>
+    <line x1="1040" y1="520" x2="980" y2="700" stroke="#14B8A6" stroke-width="1" opacity="0.10" class="hero-edge" style="animation-delay:0.7s"/>
+    <line x1="980" y1="700" x2="900" y2="600" stroke="#14B8A6" stroke-width="1" opacity="0.10" class="hero-edge" style="animation-delay:1.2s"/>
+    <line x1="1150" y1="150" x2="1300" y2="200" stroke="#6C3CE1" stroke-width="1" opacity="0.10" class="hero-edge" style="animation-delay:0.4s"/>
+    <line x1="1300" y1="200" x2="1220" y2="320" stroke="#6C3CE1" stroke-width="1" opacity="0.08" class="hero-edge" style="animation-delay:0.9s"/>
+    <line x1="500" y1="650" x2="650" y2="580" stroke="#2DD4BF" stroke-width="1" opacity="0.08" class="hero-edge" style="animation-delay:0.6s"/>
+    <line x1="650" y1="580" x2="600" y2="750" stroke="#2DD4BF" stroke-width="1" opacity="0.06" class="hero-edge"/>
+
+    <!-- Extra long-range edges for network feel -->
+    <line x1="260" y1="280" x2="500" y2="650" stroke="#A78BFA" stroke-width="0.5" opacity="0.06" class="hero-edge" style="animation-delay:2s"/>
+    <line x1="330" y1="120" x2="720" y2="100" stroke="#A78BFA" stroke-width="0.5" opacity="0.05" class="hero-edge" style="animation-delay:2.5s"/>
+    <line x1="1040" y1="520" x2="1220" y2="320" stroke="#5EEAD4" stroke-width="0.5" opacity="0.05" class="hero-edge" style="animation-delay:1.8s"/>
+
+    <!-- Nodes (0-cells) — bright dots -->
+    <circle cx="200" cy="180" r="3" fill="#C4B5FD" class="hero-node" style="animation-duration:6s"/>
+    <circle cx="330" cy="120" r="2.5" fill="#C4B5FD" class="hero-node" style="animation-duration:7s"/>
+    <circle cx="260" cy="280" r="3" fill="#C4B5FD" class="hero-node" style="animation-duration:8s"/>
+    <circle cx="900" cy="600" r="3" fill="#5EEAD4" class="hero-node" style="animation-duration:7s"/>
+    <circle cx="1040" cy="520" r="2.5" fill="#5EEAD4" class="hero-node" style="animation-duration:6s"/>
+    <circle cx="980" cy="700" r="2" fill="#5EEAD4" class="hero-node" style="animation-duration:9s"/>
+    <circle cx="1150" cy="150" r="2.5" fill="#C4B5FD" class="hero-node" style="animation-duration:8s"/>
+    <circle cx="1300" cy="200" r="2" fill="#C4B5FD" class="hero-node" style="animation-duration:7s"/>
+    <circle cx="1220" cy="320" r="3" fill="#C4B5FD" class="hero-node" style="animation-duration:6s"/>
+    <circle cx="500" cy="650" r="2" fill="#5EEAD4" class="hero-node" style="animation-duration:9s"/>
+    <circle cx="650" cy="580" r="2.5" fill="#5EEAD4" class="hero-node" style="animation-duration:7s"/>
+    <circle cx="600" cy="750" r="2" fill="#5EEAD4" class="hero-node" style="animation-duration:8s"/>
+    <circle cx="100" cy="550" r="2" fill="#C4B5FD" class="hero-node" style="animation-duration:10s"/>
+    <circle cx="230" cy="500" r="2.5" fill="#C4B5FD" class="hero-node" style="animation-duration:6s"/>
+    <circle cx="170" cy="640" r="2" fill="#C4B5FD" class="hero-node" style="animation-duration:8s"/>
+    <circle cx="720" cy="100" r="2.5" fill="#5EEAD4" class="hero-node" style="animation-duration:7s"/>
+    <circle cx="860" cy="50" r="2" fill="#5EEAD4" class="hero-node" style="animation-duration:9s"/>
+    <circle cx="810" cy="200" r="3" fill="#5EEAD4" class="hero-node" style="animation-duration:6s"/>
+
+    <!-- Scattered dust particles -->
+    <circle cx="450" cy="350" r="1" fill="#C4B5FD" opacity="0.3" class="hero-node" style="animation-duration:11s"/>
+    <circle cx="780" cy="420" r="1" fill="#5EEAD4" opacity="0.25" class="hero-node" style="animation-duration:13s"/>
+    <circle cx="1350" cy="650" r="1.2" fill="#C4B5FD" opacity="0.2" class="hero-node" style="animation-duration:10s"/>
+    <circle cx="60" cy="380" r="1" fill="#5EEAD4" opacity="0.2" class="hero-node" style="animation-duration:12s"/>
+    <circle cx="690" cy="780" r="1" fill="#C4B5FD" opacity="0.2" class="hero-node" style="animation-duration:14s"/>
+  </svg>
+
+  <!-- Hero Content -->
+  <div class="hero-content">
+    <div class="hero-badge">NeurIPS 2026 · Under Review</div>
+
+    <h1 class="hero-title">HOPSE</h1>
+    <p class="hero-subtitle">
+      <strong style="color:rgba(255,255,255,0.9);">Higher-Order Positional and Structural Encoder</strong><br>
+      Scalable encodings for combinatorial representations — free of message passing layers.
+    </p>
+
+    <p class="hero-authors">Anonymous Author(s)</p>
+    <p class="hero-affiliations">Affiliation withheld for anonymous review</p>
+
+    <div class="hero-buttons">
+      <a href="#" class="btn btn-primary" title="Coming soon">
+        <i class="fas fa-file-alt"></i> Paper
+      </a>
+      <a href="#" class="btn btn-ghost" title="Coming soon">
+        <i class="fab fa-github"></i> Code
+      </a>
+      <a href="https://geometric-intelligence.github.io/topobench/" class="btn btn-ghost">
+        <i class="fas fa-chart-bar"></i> TopoBench
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABSTRACT
+     ============================================================ -->
+<section class="content-section" id="abstract">
+  <div class="section-inner reveal">
+    <span class="section-label">Abstract</span>
+    <div class="abstract-box">
+      <button class="abstract-toggle" aria-expanded="true">
+        <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+        <span>Abstract</span>
+      </button>
+      <div class="abstract-text">
+        While Graph Neural Networks (GNNs) have proven highly effective at modeling relational data, pairwise connections cannot fully capture multi-way relationships naturally present in complex real-world systems. In response to this, Topological Deep Learning (TDL) leverages more general combinatorial representations &mdash;such as simplicial or cellular complexes&mdash; to accommodate higher-order interactions. Existing TDL methods often extend GNNs through Higher-Order Message Passing (HOMP), but face critical scalability challenges due to (i)&nbsp;a combinatorial explosion of message-passing routes, and (ii)&nbsp;significant complexity overhead from the propagation mechanism. To overcome these limitations, we propose <strong>HOPSE</strong> (Higher-Order Positional and Structural Encoder), a framework <em>free of message passing layers</em> that uses Hasse graph decompositions to derive efficient and expressive encodings over arbitrary higher-order domains. Notably, HOPSE scales <em>linearly</em> with dataset size while preserving expressive power and permutation equivariance. Experiments on molecular, expressivity and topological benchmarks show that HOPSE matches or surpasses state-of-the-art performance while achieving up to <strong>7&times; speedups</strong> over HOMP-based models, opening a new path for scalable TDL.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     WHY HOPSE? — Three feature cards
+     ============================================================ -->
+<section class="content-section alt-bg" id="features">
+  <div class="section-inner">
+    <span class="section-label reveal">Key Advantages</span>
+    <h2 class="section-heading reveal">Why HOPSE?</h2>
+    <p class="section-desc reveal">
+      Existing Topological Neural Networks suffer from a combinatorial explosion of message-passing routes &mdash; for a complex of dimension&nbsp;R, the number of routes scales as (R+1)!&middot;(R+1)<sup>R</sup>. HOPSE sidesteps this entirely.
+    </p>
+
+    <div class="features-grid reveal-children">
+      <div class="feature-card">
+        <div class="feature-icon purple">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3>No Message Passing</h3>
+        <p>
+          All structure-dependent computations are offloaded to a one-time preprocessing step via Hasse graph decompositions. Training uses only lightweight MLPs &mdash; no iterative message propagation.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon teal">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Linear Scaling</h3>
+        <p>
+          Complexity scales as O(LK&nbsp;&Sigma;&nbsp;N<sub>r</sub>&nbsp;D<sub>r</sub>) &mdash; linear in the number of cells. This enables up to <strong>7&times; speedups</strong> over HOMP-based models like GCCN and SCCNN.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon mixed">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Theoretical Guarantees</h3>
+        <p>
+          Provably more expressive than the CCWL isomorphism test (Theorem&nbsp;4.1) while preserving cell permutation equivariance (Theorem&nbsp;4.2) &mdash; without message passing during training.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PIPELINE — Animated step-by-step diagram
+     ============================================================ -->
+<section class="content-section" id="pipeline">
+  <div class="section-inner">
+    <span class="section-label reveal">Method</span>
+    <h2 class="section-heading reveal">The HOPSE Pipeline</h2>
+    <p class="section-desc reveal">
+      Given a combinatorial complex T and a set of neighborhood functions N<sub>C</sub>, HOPSE follows a 6-step pipeline that cleanly separates preprocessing from training.
+    </p>
+
+    <div class="pipeline-wrapper reveal">
+      <!-- Phase labels -->
+      <div class="pipeline-phases">
+        <div class="phase-label preprocessing">Preprocessing</div>
+        <div class="phase-label training">Training</div>
+      </div>
+
+      <!-- Steps -->
+      <div class="pipeline">
+        <!-- Step A -->
+        <div class="pipeline-step">
+          <div class="step-letter">A</div>
+          <div class="step-icon-area">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="14,40 28,12 42,40" stroke="#8B5CF6" stroke-width="2" fill="#8B5CF6" fill-opacity="0.1"/>
+              <circle cx="14" cy="40" r="4" fill="#8B5CF6"/>
+              <circle cx="28" cy="12" r="4" fill="#8B5CF6"/>
+              <circle cx="42" cy="40" r="4" fill="#8B5CF6"/>
+              <line x1="28" y1="28" x2="18" y2="28" stroke="#14B8A6" stroke-width="1.5" stroke-dasharray="3 2"/>
+              <line x1="28" y1="28" x2="38" y2="28" stroke="#14B8A6" stroke-width="1.5" stroke-dasharray="3 2"/>
+            </svg>
+          </div>
+          <h4>Hasse Graph<br>Decomposition</h4>
+          <p>Decompose T into multi-attributed Hasse graphs {J<sub>N</sub>}</p>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+
+        <!-- Step B -->
+        <div class="pipeline-step">
+          <div class="step-letter">B</div>
+          <div class="step-icon-area">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="16" width="40" height="28" rx="4" stroke="#8B5CF6" stroke-width="2" fill="#8B5CF6" fill-opacity="0.06"/>
+              <text x="28" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#8B5CF6" font-family="serif">G</text>
+              <circle cx="16" cy="10" r="3" fill="#14B8A6"/>
+              <circle cx="28" cy="8" r="3" fill="#14B8A6"/>
+              <circle cx="40" cy="10" r="3" fill="#14B8A6"/>
+              <line x1="16" y1="13" x2="16" y2="16" stroke="#14B8A6" stroke-width="1.5"/>
+              <line x1="28" y1="11" x2="28" y2="16" stroke="#14B8A6" stroke-width="1.5"/>
+              <line x1="40" y1="13" x2="40" y2="16" stroke="#14B8A6" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h4>Compute PSEs</h4>
+          <p>Extract positional &amp; structural encodings for each Hasse graph</p>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+
+        <!-- Step C -->
+        <div class="pipeline-step">
+          <div class="step-letter">C</div>
+          <div class="step-icon-area">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="18" height="30" rx="3" stroke="#8B5CF6" stroke-width="1.5" fill="#8B5CF6" fill-opacity="0.06"/>
+              <rect x="32" y="14" width="18" height="30" rx="3" stroke="#14B8A6" stroke-width="1.5" fill="#14B8A6" fill-opacity="0.06"/>
+              <path d="M24 29 L32 29" stroke="#6C3CE1" stroke-width="2" marker-end="url(#arrowhead)"/>
+              <text x="15" y="33" text-anchor="middle" font-size="9" fill="#8B5CF6" font-weight="600">ψ</text>
+              <text x="41" y="33" text-anchor="middle" font-size="9" fill="#14B8A6" font-weight="600">X</text>
+            </svg>
+          </div>
+          <h4>Rank-wise<br>Aggregation</h4>
+          <p>Aggregate encodings by target rank using ψ<sub>k</sub>(·)</p>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+
+        <!-- Step D -->
+        <div class="pipeline-step">
+          <div class="step-letter">D</div>
+          <div class="step-icon-area">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="18" width="22" height="24" rx="4" stroke="#8B5CF6" stroke-width="1.5" fill="#8B5CF6" fill-opacity="0.08"/>
+              <rect x="30" y="18" width="22" height="24" rx="4" stroke="#14B8A6" stroke-width="1.5" fill="#14B8A6" fill-opacity="0.08"/>
+              <text x="15" y="34" text-anchor="middle" font-size="8" fill="#8B5CF6" font-weight="600">f<tspan font-size="6" dy="2">r,k</tspan></text>
+              <text x="41" y="34" text-anchor="middle" font-size="8" fill="#14B8A6" font-weight="600">ε<tspan font-size="6" dy="2">r</tspan></text>
+              <text x="15" y="12" text-anchor="middle" font-size="7" fill="#6b7280">PSEs</text>
+              <text x="41" y="12" text-anchor="middle" font-size="7" fill="#6b7280">Features</text>
+            </svg>
+          </div>
+          <h4>Embed<br>Cells</h4>
+          <p>Project PSEs and initial features via learnable MLPs</p>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+
+        <!-- Step E -->
+        <div class="pipeline-step">
+          <div class="step-letter">E</div>
+          <div class="step-icon-area">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="14" width="40" height="32" rx="5" stroke="#6C3CE1" stroke-width="2" fill="#6C3CE1" fill-opacity="0.06"/>
+              <text x="28" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="#6C3CE1" font-family="serif">Θ<tspan font-size="8" dy="4">r</tspan></text>
+            </svg>
+          </div>
+          <h4>Learn<br>Representations</h4>
+          <p>Integrate structure &amp; features via Θ<sub>r</sub>(·) to get H<sub>r</sub></p>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+
+        <!-- Step F -->
+        <div class="pipeline-step">
+          <div class="step-letter">F</div>
+          <div class="step-icon-area">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="18" stroke="#14B8A6" stroke-width="2" fill="#14B8A6" fill-opacity="0.08"/>
+              <text x="28" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#14B8A6" font-family="serif">φ</text>
+            </svg>
+          </div>
+          <h4>Task-Specific<br>Readout</h4>
+          <p>Combine all H<sub>r</sub> for the downstream task</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Equation -->
+    <div class="equation-block reveal">
+      HOPSE(T) &nbsp;=&nbsp; φ( H<sub>0</sub>, H<sub>1</sub>, &hellip;, H<sub>R</sub> ) &nbsp;&nbsp;where&nbsp;&nbsp; H<sub>r</sub> = Θ<sub>r</sub>( Ẑ<sub>r</sub>, X̂<sub>r,1</sub>, &hellip;, X̂<sub>r,K</sub> )
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     KEY CONCEPTS — Combinatorial Complexes & Variants
+     ============================================================ -->
+<section class="content-section alt-bg" id="concepts">
+  <div class="section-inner">
+    <span class="section-label reveal">Background</span>
+    <h2 class="section-heading reveal">Key Concepts</h2>
+
+    <div class="concept-grid">
+      <!-- Combinatorial Complex -->
+      <div class="concept-card reveal">
+        <div class="concept-svg-wrapper">
+          <svg width="260" height="180" viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Face (2-cell) -->
+            <polygon points="70,140 130,30 190,140" fill="#8B5CF6" fill-opacity="0.12" stroke="#8B5CF6" stroke-width="1.5"/>
+            <!-- Another face -->
+            <polygon points="130,30 190,140 240,60" fill="#14B8A6" fill-opacity="0.1" stroke="#14B8A6" stroke-width="1.5"/>
+            <!-- Edges (1-cells) -->
+            <line x1="70" y1="140" x2="130" y2="30" stroke="#8B5CF6" stroke-width="2"/>
+            <line x1="130" y1="30" x2="190" y2="140" stroke="#8B5CF6" stroke-width="2"/>
+            <line x1="190" y1="140" x2="70" y2="140" stroke="#8B5CF6" stroke-width="2"/>
+            <line x1="130" y1="30" x2="240" y2="60" stroke="#14B8A6" stroke-width="2"/>
+            <line x1="240" y1="60" x2="190" y2="140" stroke="#14B8A6" stroke-width="2"/>
+            <line x1="70" y1="140" x2="20" y2="100" stroke="#A78BFA" stroke-width="1.5"/>
+            <!-- Nodes (0-cells) -->
+            <circle cx="70" cy="140" r="6" fill="#6C3CE1"/>
+            <circle cx="130" cy="30" r="6" fill="#6C3CE1"/>
+            <circle cx="190" cy="140" r="6" fill="#6C3CE1"/>
+            <circle cx="240" cy="60" r="6" fill="#0D9488"/>
+            <circle cx="20" cy="100" r="5" fill="#A78BFA"/>
+            <!-- Labels -->
+            <text x="18" y="85" font-size="9" fill="#6b7280" text-anchor="middle">0-cell</text>
+            <text x="130" y="98" font-size="9" fill="#6b7280" text-anchor="middle">2-cell</text>
+            <text x="83" y="68" font-size="9" fill="#6b7280" text-anchor="start">1-cell</text>
+          </svg>
+        </div>
+        <h3>Combinatorial Complexes</h3>
+        <p>
+          A combinatorial complex T&nbsp;=&nbsp;(V,&nbsp;C,&nbsp;rk) consists of <strong>cells</strong> organized by rank: nodes (0-cells), edges (1-cells), faces (2-cells), and higher. Neighborhood functions &mdash; adjacencies A<sub>t,s</sub> and incidences I<sub>s&rarr;t</sub> &mdash; define how cells of different ranks interact.
+        </p>
+      </div>
+
+      <!-- Hasse Graph Decomposition -->
+      <div class="concept-card reveal">
+        <div class="concept-svg-wrapper">
+          <svg width="260" height="180" viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Graph 1: A_{0,1} -->
+            <rect x="5" y="8" width="75" height="165" rx="6" fill="#8B5CF6" fill-opacity="0.04" stroke="#8B5CF6" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="42" y="26" font-size="8" fill="#8B5CF6" text-anchor="middle" font-weight="600">A<tspan font-size="6">0,1</tspan></text>
+            <line x1="22" y1="70" x2="62" y2="50" stroke="#C4B5FD" stroke-width="1.5"/>
+            <line x1="22" y1="70" x2="42" y2="110" stroke="#C4B5FD" stroke-width="1.5"/>
+            <line x1="62" y1="50" x2="42" y2="110" stroke="#C4B5FD" stroke-width="1.5"/>
+            <line x1="42" y1="110" x2="32" y2="150" stroke="#C4B5FD" stroke-width="1.5"/>
+            <circle cx="22" cy="70" r="4" fill="#8B5CF6"/>
+            <circle cx="62" cy="50" r="4" fill="#8B5CF6"/>
+            <circle cx="42" cy="110" r="4" fill="#8B5CF6"/>
+            <circle cx="32" cy="150" r="4" fill="#8B5CF6"/>
+
+            <!-- Graph 2: I_{0→1} -->
+            <rect x="93" y="8" width="75" height="165" rx="6" fill="#14B8A6" fill-opacity="0.04" stroke="#14B8A6" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="130" y="26" font-size="8" fill="#14B8A6" text-anchor="middle" font-weight="600">I<tspan font-size="6">0→1</tspan></text>
+            <circle cx="110" cy="55" r="4" fill="#8B5CF6"/>
+            <circle cx="150" cy="55" r="4" fill="#8B5CF6"/>
+            <circle cx="130" cy="95" r="4" fill="#8B5CF6"/>
+            <rect x="115" y="125" width="30" height="8" rx="2" fill="#14B8A6" fill-opacity="0.3" stroke="#14B8A6" stroke-width="1"/>
+            <rect x="115" y="145" width="30" height="8" rx="2" fill="#14B8A6" fill-opacity="0.3" stroke="#14B8A6" stroke-width="1"/>
+            <line x1="110" y1="59" x2="120" y2="125" stroke="#14B8A6" stroke-width="1" stroke-dasharray="2 2"/>
+            <line x1="150" y1="59" x2="140" y2="125" stroke="#14B8A6" stroke-width="1" stroke-dasharray="2 2"/>
+            <line x1="130" y1="99" x2="130" y2="145" stroke="#14B8A6" stroke-width="1" stroke-dasharray="2 2"/>
+
+            <!-- Graph 3: I_{2→1} -->
+            <rect x="181" y="8" width="75" height="165" rx="6" fill="#6C3CE1" fill-opacity="0.04" stroke="#6C3CE1" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="218" y="26" font-size="8" fill="#6C3CE1" text-anchor="middle" font-weight="600">I<tspan font-size="6">2→1</tspan></text>
+            <polygon points="205,60 235,60 220,90" fill="#6C3CE1" fill-opacity="0.12" stroke="#6C3CE1" stroke-width="1"/>
+            <rect x="198" y="115" width="16" height="6" rx="1.5" fill="#14B8A6" fill-opacity="0.4" stroke="#14B8A6" stroke-width="0.8"/>
+            <rect x="222" y="115" width="16" height="6" rx="1.5" fill="#14B8A6" fill-opacity="0.4" stroke="#14B8A6" stroke-width="0.8"/>
+            <rect x="210" y="140" width="16" height="6" rx="1.5" fill="#14B8A6" fill-opacity="0.4" stroke="#14B8A6" stroke-width="0.8"/>
+            <line x1="215" y1="90" x2="206" y2="115" stroke="#6C3CE1" stroke-width="1" stroke-dasharray="2 2"/>
+            <line x1="225" y1="90" x2="230" y2="115" stroke="#6C3CE1" stroke-width="1" stroke-dasharray="2 2"/>
+            <line x1="220" y1="90" x2="218" y2="140" stroke="#6C3CE1" stroke-width="1" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+        <h3>Hasse Graph Decomposition</h3>
+        <p>
+          Each neighborhood function N induces a <strong>strictly augmented Hasse graph</strong> G<sub>N</sub>. HOPSE treats each Hasse graph as an independent component, enabling efficient application of established graph PSE techniques to higher-order domains.
+        </p>
+      </div>
+    </div>
+
+    <!-- HOPSE-M vs HOPSE-G -->
+    <h3 class="section-heading reveal" style="font-size:1.5rem; margin-top:3rem;">Two Realizations</h3>
+    <div class="variant-grid reveal-children">
+      <div class="variant-card variant-m">
+        <span class="variant-badge">HOPSE-M</span>
+        <h3>Manual Encodings</h3>
+        <p>Hand-crafted graph-theoretical positional and structural encodings applied to each Hasse graph:</p>
+        <ul>
+          <li>Laplacian Eigenvectors (LapPE)</li>
+          <li>Random Walk Structural Encodings (RWSE)</li>
+          <li>Heat Kernel Signatures (HKdiagSE)</li>
+          <li>Electrostatic Potential Encodings (ElstaticPE)</li>
+        </ul>
+      </div>
+      <div class="variant-card variant-g">
+        <span class="variant-badge">HOPSE-G</span>
+        <h3>Pretrained GPSE</h3>
+        <p>Leverages the pretrained <strong>GPSE</strong> network to encode structural and positional information in a single pass:</p>
+        <ul>
+          <li>Single learned encoder g<sub>1</sub> = GPSE(·)</li>
+          <li>Avoids costly eigendecomposition</li>
+          <li>Especially scalable for large complexes</li>
+          <li>Uses random noise initialization</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     RESULTS — Performance tables, speed chart, expressivity
+     ============================================================ -->
+<section class="content-section" id="results">
+  <div class="section-inner">
+    <span class="section-label reveal">Experiments</span>
+    <h2 class="section-heading reveal">Results</h2>
+    <p class="section-desc reveal">
+      Evaluated across molecular benchmarks (MUTAG, PROTEINS, NCI1, NCI109, ZINC), topological tasks (MANTRA), and expressivity tests (CSL) under the standardized TopoBench protocol.
+    </p>
+
+    <!-- Tabs -->
+    <div class="results-tabs reveal">
+      <button class="tab-btn active" data-tab="panel-perf">Benchmark Performance</button>
+      <button class="tab-btn" data-tab="panel-speed">Training Speed</button>
+      <button class="tab-btn" data-tab="panel-csl">Expressivity (CSL)</button>
+    </div>
+
+    <!-- Panel: Benchmark Performance -->
+    <div id="panel-perf" class="results-panel active reveal">
+      <div class="perf-table-wrapper">
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>MUTAG ↑</th>
+              <th>PROTEINS ↑</th>
+              <th>NCI1 ↑</th>
+              <th>NCI109 ↑</th>
+              <th>ZINC ↓</th>
+              <th>NAME ↑</th>
+              <th>ORIENT ↑</th>
+              <th>β<sub>1</sub> ↑</th>
+              <th>β<sub>2</sub> ↑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Graph baselines -->
+            <tr class="group-header"><td colspan="10">Graph</td></tr>
+            <tr><td>GCN</td><td>69.79</td><td>75.70</td><td>72.86</td><td>72.20</td><td>0.62</td><td>42.14</td><td>47.94</td><td>46.86</td><td>0.00</td></tr>
+            <tr><td>GAT</td><td>72.77</td><td>76.34</td><td>75.00</td><td>73.80</td><td>0.61</td><td>18.09</td><td>47.94</td><td>7.45</td><td>0.00</td></tr>
+            <tr><td>GIN</td><td>79.57</td><td>75.20</td><td>74.26</td><td>74.42</td><td>0.57</td><td>76.14</td><td>56.28</td><td>88.13</td><td>0.93</td></tr>
+
+            <!-- Simplicial baselines -->
+            <tr class="group-header"><td colspan="10">Simplicial</td></tr>
+            <tr><td>SCN</td><td>73.62</td><td>75.27</td><td>74.49</td><td>75.70</td><td>0.53</td><td>79.48</td><td>69.55</td><td>76.45</td><td>5.45</td></tr>
+            <tr><td>SCCNN</td><td>76.17</td><td>74.19</td><td class="best">76.60</td><td class="best">77.12</td><td>0.36</td><td class="best">95.08</td><td class="best">86.29</td><td>90.20</td><td>65.82</td></tr>
+            <tr><td>SaNN</td><td>79.57</td><td>75.05</td><td>68.75</td><td>68.17</td><td>0.55</td><td>81.76</td><td>61.65</td><td>88.46</td><td>39.22</td></tr>
+            <tr><td>GCCN</td><td>85.96</td><td>74.91</td><td>76.85</td><td>75.76</td><td class="best">0.35</td><td>86.76</td><td>76.60</td><td>84.20</td><td>41.82</td></tr>
+
+            <!-- Ours (simplicial) -->
+            <tr class="ours"><td>HOPSE-M</td><td class="best">86.38</td><td>75.13</td><td class="best">77.35</td><td>76.34</td><td>0.39</td><td>91.50</td><td>80.68</td><td class="best">90.26</td><td class="best">71.69</td></tr>
+            <tr class="ours"><td>HOPSE-G</td><td>85.53</td><td class="best">76.27</td><td class="best">77.70</td><td>76.36</td><td>0.43</td><td>81.75</td><td>62.17</td><td>88.28</td><td>35.37</td></tr>
+
+            <!-- Cell baselines -->
+            <tr class="group-header"><td colspan="10">Cell</td></tr>
+            <tr><td>CCCN</td><td>77.02</td><td>73.33</td><td>76.67</td><td>75.35</td><td>0.34</td><td colspan="4" style="color:var(--text-light);">&mdash;</td></tr>
+            <tr><td>CWN</td><td>80.43</td><td>76.13</td><td>73.93</td><td>73.80</td><td>0.34</td><td colspan="4" style="color:var(--text-light);">&mdash;</td></tr>
+            <tr><td>GCCN</td><td>86.38</td><td>74.41</td><td>78.23</td><td>77.19</td><td class="best">0.19</td><td colspan="4" style="color:var(--text-light);">&mdash;</td></tr>
+
+            <!-- Ours (cell) -->
+            <tr class="ours"><td>HOPSE-M</td><td class="best">88.09</td><td class="best">76.99</td><td>78.09</td><td>77.27</td><td>0.25</td><td colspan="4" style="color:var(--text-light);">&mdash;</td></tr>
+            <tr class="ours"><td>HOPSE-G</td><td class="best">88.09</td><td>76.42</td><td class="best">79.07</td><td class="best">77.81</td><td>0.21</td><td colspan="4" style="color:var(--text-light);">&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:0.75rem; font-size:0.78rem; color:var(--text-light);">
+        <strong>Bold</strong> = best in domain. Results from the standardized TopoBench evaluation protocol.
+      </p>
+    </div>
+
+    <!-- Panel: Training Speed -->
+    <div id="panel-speed" class="results-panel">
+      <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:0.5rem;">End-to-End Training Time — NCI1 (Simplicial)</h3>
+      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1.5rem;">
+        Total training runtime in seconds. HOPSE-G achieves a <strong>7&times; speedup</strong> over GCCN while also delivering better accuracy.
+      </p>
+
+      <div class="speed-chart">
+        <div class="speed-row">
+          <span class="speed-label">GCCN</span>
+          <div class="speed-bar-track">
+            <div class="speed-bar baseline" data-width="100%"></div>
+          </div>
+          <span class="speed-value">904s</span>
+        </div>
+        <div class="speed-row">
+          <span class="speed-label">SCCNN</span>
+          <div class="speed-bar-track">
+            <div class="speed-bar baseline" data-width="34%"></div>
+          </div>
+          <span class="speed-value">307s</span>
+        </div>
+        <div class="speed-row">
+          <span class="speed-label">SCN</span>
+          <div class="speed-bar-track">
+            <div class="speed-bar baseline" data-width="30.5%"></div>
+          </div>
+          <span class="speed-value">276s</span>
+        </div>
+        <div class="speed-row">
+          <span class="speed-label">SaNN</span>
+          <div class="speed-bar-track">
+            <div class="speed-bar baseline" data-width="27.6%"></div>
+          </div>
+          <span class="speed-value">250s</span>
+        </div>
+        <div class="speed-row">
+          <span class="speed-label ours-label">HOPSE-M</span>
+          <div class="speed-bar-track">
+            <div class="speed-bar ours-bar" data-width="18.1%"></div>
+          </div>
+          <span class="speed-value ours-value">164s</span>
+        </div>
+        <div class="speed-row">
+          <span class="speed-label ours-label">HOPSE-G</span>
+          <div class="speed-bar-track">
+            <div class="speed-bar ours-bar" data-width="14.4%"></div>
+          </div>
+          <span class="speed-value ours-value">130s</span>
+        </div>
+      </div>
+      <p class="speed-caption">Preprocessing time not included. NCI1 dataset, simplicial domain.</p>
+    </div>
+
+    <!-- Panel: CSL Expressivity -->
+    <div id="panel-csl" class="results-panel">
+      <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:0.5rem;">Expressivity — CSL Dataset</h3>
+      <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1.5rem;">
+        The Circular Skip Link (CSL) dataset tests a model's ability to distinguish non-isomorphic graphs that standard MP-GNNs cannot tell apart. <strong>HOPSE-M achieves perfect classification</strong>.
+      </p>
+
+      <div class="perf-table-wrapper">
+        <table class="expressivity-table">
+          <thead>
+            <tr><th>Model</th><th>Mean ↑</th><th>Max</th><th>Min</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>MP-GNNs</td><td>10.00</td><td>10.00</td><td>10.00</td></tr>
+            <tr><td>MP-GNNs + LapPE</td><td class="perfect">100.00</td><td class="perfect">100.00</td><td class="perfect">100.00</td></tr>
+            <tr><td>SaNN</td><td>26.00</td><td>33.33</td><td>20.00</td></tr>
+            <tr><td>SCCNN</td><td>25.33</td><td>33.33</td><td>16.67</td></tr>
+            <tr><td>GCCN</td><td>52.78</td><td>100.00</td><td>3.33</td></tr>
+            <tr><td>CIN</td><td class="perfect">100.00</td><td class="perfect">100.00</td><td>97.98</td></tr>
+            <tr><td>3WL-GNN</td><td>97.80</td><td>100.00</td><td>30.00</td></tr>
+            <tr class="ours"><td>HOPSE-M (Ours)</td><td class="perfect">100.00</td><td class="perfect">100.00</td><td class="perfect">100.00</td></tr>
+            <tr class="ours"><td>HOPSE-G (Ours)</td><td>98.00</td><td class="perfect">100.00</td><td>90.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CITATION
+     ============================================================ -->
+<section class="content-section alt-bg" id="citation">
+  <div class="section-inner">
+    <span class="section-label reveal">Reference</span>
+    <h2 class="section-heading reveal">Citation</h2>
+    <p class="section-desc reveal">If you find this work useful, please cite:</p>
+
+    <div class="bibtex-container reveal">
+      <button class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
+      <pre class="bibtex-code">@inproceedings{anonymous2026hopse,
+  title     = {HOPSE: Scalable Higher-Order Positional and Structural
+               Encoder for Combinatorial Representations},
+  author    = {Anonymous},
+  booktitle = {Submitted to the 40th Conference on Neural Information
+               Processing Systems (NeurIPS 2026)},
+  year      = {2026},
+  note      = {Under review}
+}</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <p>
+    HOPSE &middot; <a href="https://geometric-intelligence.github.io/">Geometric Intelligence Lab</a>
+  </p>
+  <p style="margin-top:0.5rem;">
+    Website template inspired by the
+    <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+  </p>
+</footer>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="static/js/fontawesome.all.min.js"></script>
+<script src="static/js/index.js"></script>
+
+</body>
+</html>
