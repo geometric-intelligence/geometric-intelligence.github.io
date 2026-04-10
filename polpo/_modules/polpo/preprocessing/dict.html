@@ -553,9 +553,9 @@
 
 
 
-<div class="viewcode-block" id="ExtractRandomKey">
-<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ExtractRandomKey.html#polpo.preprocessing.dict.ExtractRandomKey">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExtractRandomKey</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
+<div class="viewcode-block" id="ExtractRandomValue">
+<a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.ExtractRandomValue.html#polpo.preprocessing.dict.ExtractRandomValue">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExtractRandomValue</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
 
@@ -793,7 +793,10 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.RenameKeys.html#polpo.preprocessing.dict.RenameKeys">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RenameKeys</span><span class="p">(</span><span class="n">SerialDictMap</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_map</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">key_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">key</span><span class="p">)))</span></div>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key_map</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">key_map</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">key_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">key_step</span><span class="o">=</span><span class="n">key_map</span><span class="p">)</span></div>
 
 
 
