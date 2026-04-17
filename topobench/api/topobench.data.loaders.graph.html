@@ -49,12 +49,12 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.data.loaders.graph.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="topobench.data.loaders.graph.hetero_datasets module" href="topobench.data.loaders.graph.hetero_datasets.html" />
+    <link rel="next" title="topobench.data.loaders.graph.graph_universe_loader module" href="topobench.data.loaders.graph.graph_universe_loader.html" />
     <link rel="prev" title="topobench.data.loaders package" href="topobench.data.loaders.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Apr 17, 2026, 7:40:38 PM"/>
+    <meta name="docbuild:last-update" content="Apr 17, 2026, 11:34:44 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -336,6 +336,75 @@
   <section id="module-topobench.data.loaders.graph">
 <span id="topobench-data-loaders-graph-package"></span><h1>topobench.data.loaders.graph package<a class="headerlink" href="#module-topobench.data.loaders.graph" title="Link to this heading">#</a></h1>
 <p>Init file for graph load module with automated loader discovery.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.GraphUniverseDatasetLoader">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphUniverseDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.base.html#topobench.data.loaders.base.AbstractLoader" title="topobench.data.loaders.base.AbstractLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a></p>
+<p>Load Graph Universe datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>parameters</strong><span class="classifier">DictConfig</span></dt><dd><dl class="simple">
+<dt>Configuration parameters containing:</dt><dd><ul class="simple">
+<li><p>data_dir: Root directory for data</p></li>
+<li><p>data_name: Name of the dataset</p></li>
+<li><p>data_type: Type of the dataset (e.g., “graph_classification”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.GraphUniverseDatasetLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.GraphUniverseDatasetLoader.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader.load" title="Link to this definition">#</a></dt>
+<dd><p>Load data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple[torch_geometric.data.Data, str]</dt><dd><p>Tuple containing the loaded data and the data directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.GraphUniverseDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Load Graph Universe dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Dataset</dt><dd><p>The loaded Graph Universe dataset.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.data.loaders.graph.HeterophilousGraphDatasetLoader">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HeterophilousGraphDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.HeterophilousGraphDatasetLoader" title="Link to this definition">#</a></dt>
@@ -779,6 +848,109 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html">topobench.data.loaders.graph.graph_universe_loader module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.AbstractLoader.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.AbstractLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.get_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.AbstractLoader.load"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.AbstractLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.from_dict"><code class="docutils literal notranslate"><span class="pre">Data.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.connected_components"><code class="docutils literal notranslate"><span class="pre">Data.connected_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.debug"><code class="docutils literal notranslate"><span class="pre">Data.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.edge_subgraph"><code class="docutils literal notranslate"><span class="pre">Data.edge_subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.get_all_edge_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_edge_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.get_all_tensor_attrs"><code class="docutils literal notranslate"><span class="pre">Data.get_all_tensor_attrs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.is_edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_edge_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.is_node_attr"><code class="docutils literal notranslate"><span class="pre">Data.is_node_attr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.stores_as"><code class="docutils literal notranslate"><span class="pre">Data.stores_as()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.subgraph"><code class="docutils literal notranslate"><span class="pre">Data.subgraph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.to_dict"><code class="docutils literal notranslate"><span class="pre">Data.to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.to_heterogeneous"><code class="docutils literal notranslate"><span class="pre">Data.to_heterogeneous()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.to_namedtuple"><code class="docutils literal notranslate"><span class="pre">Data.to_namedtuple()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.update"><code class="docutils literal notranslate"><span class="pre">Data.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.validate"><code class="docutils literal notranslate"><span class="pre">Data.validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.batch"><code class="docutils literal notranslate"><span class="pre">Data.batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.edge_attr"><code class="docutils literal notranslate"><span class="pre">Data.edge_attr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.edge_index"><code class="docutils literal notranslate"><span class="pre">Data.edge_index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.edge_stores"><code class="docutils literal notranslate"><span class="pre">Data.edge_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.edge_weight"><code class="docutils literal notranslate"><span class="pre">Data.edge_weight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.face"><code class="docutils literal notranslate"><span class="pre">Data.face</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.node_stores"><code class="docutils literal notranslate"><span class="pre">Data.node_stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.num_edge_features"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.num_edge_types"><code class="docutils literal notranslate"><span class="pre">Data.num_edge_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.num_faces"><code class="docutils literal notranslate"><span class="pre">Data.num_faces</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.num_features"><code class="docutils literal notranslate"><span class="pre">Data.num_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.num_node_features"><code class="docutils literal notranslate"><span class="pre">Data.num_node_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.num_node_types"><code class="docutils literal notranslate"><span class="pre">Data.num_node_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.num_nodes"><code class="docutils literal notranslate"><span class="pre">Data.num_nodes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.pos"><code class="docutils literal notranslate"><span class="pre">Data.pos</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.stores"><code class="docutils literal notranslate"><span class="pre">Data.stores</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.time"><code class="docutils literal notranslate"><span class="pre">Data.time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.x"><code class="docutils literal notranslate"><span class="pre">Data.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Data.y"><code class="docutils literal notranslate"><span class="pre">Data.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.__init__"><code class="docutils literal notranslate"><span class="pre">Dataset.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.download"><code class="docutils literal notranslate"><span class="pre">Dataset.download()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.get"><code class="docutils literal notranslate"><span class="pre">Dataset.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.get_summary"><code class="docutils literal notranslate"><span class="pre">Dataset.get_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.index_select"><code class="docutils literal notranslate"><span class="pre">Dataset.index_select()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.indices"><code class="docutils literal notranslate"><span class="pre">Dataset.indices()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.len"><code class="docutils literal notranslate"><span class="pre">Dataset.len()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.print_summary"><code class="docutils literal notranslate"><span class="pre">Dataset.print_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.process"><code class="docutils literal notranslate"><span class="pre">Dataset.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.shuffle"><code class="docutils literal notranslate"><span class="pre">Dataset.shuffle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.to_datapipe"><code class="docutils literal notranslate"><span class="pre">Dataset.to_datapipe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.has_download"><code class="docutils literal notranslate"><span class="pre">Dataset.has_download</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.has_process"><code class="docutils literal notranslate"><span class="pre">Dataset.has_process</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.num_classes"><code class="docutils literal notranslate"><span class="pre">Dataset.num_classes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.num_edge_features"><code class="docutils literal notranslate"><span class="pre">Dataset.num_edge_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.num_features"><code class="docutils literal notranslate"><span class="pre">Dataset.num_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.num_node_features"><code class="docutils literal notranslate"><span class="pre">Dataset.num_node_features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.processed_dir"><code class="docutils literal notranslate"><span class="pre">Dataset.processed_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.processed_file_names"><code class="docutils literal notranslate"><span class="pre">Dataset.processed_file_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.processed_paths"><code class="docutils literal notranslate"><span class="pre">Dataset.processed_paths</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.raw_dir"><code class="docutils literal notranslate"><span class="pre">Dataset.raw_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.raw_file_names"><code class="docutils literal notranslate"><span class="pre">Dataset.raw_file_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.Dataset.raw_paths"><code class="docutils literal notranslate"><span class="pre">Dataset.raw_paths</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig"><code class="docutils literal notranslate"><span class="pre">DictConfig</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.__init__"><code class="docutils literal notranslate"><span class="pre">DictConfig.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.copy"><code class="docutils literal notranslate"><span class="pre">DictConfig.copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.get"><code class="docutils literal notranslate"><span class="pre">DictConfig.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.items"><code class="docutils literal notranslate"><span class="pre">DictConfig.items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.items_ex"><code class="docutils literal notranslate"><span class="pre">DictConfig.items_ex()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.keys"><code class="docutils literal notranslate"><span class="pre">DictConfig.keys()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.pop"><code class="docutils literal notranslate"><span class="pre">DictConfig.pop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.DictConfig.setdefault"><code class="docutils literal notranslate"><span class="pre">DictConfig.setdefault()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.__init__"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.download"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.download()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.get_data_dir"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.get_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.get_dataset_dir"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.get_dataset_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.process"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.processed_dir"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.processed_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.processed_file_names"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.processed_file_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.raw_dir"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.raw_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDataset.raw_file_names"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDataset.raw_file_names</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDatasetLoader"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDatasetLoader.load"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.graph_universe_loader.html#topobench.data.loaders.graph.graph_universe_loader.GraphUniverseDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html">topobench.data.loaders.graph.hetero_datasets module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html#topobench.data.loaders.graph.hetero_datasets.AbstractLoader"><code class="docutils literal notranslate"><span class="pre">AbstractLoader</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="topobench.data.loaders.graph.hetero_datasets.html#topobench.data.loaders.graph.hetero_datasets.AbstractLoader.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractLoader.__init__()</span></code></a></li>
@@ -1420,11 +1592,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="topobench.data.loaders.graph.hetero_datasets.html"
+       href="topobench.data.loaders.graph.graph_universe_loader.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">topobench.data.loaders.graph.hetero_datasets module</p>
+        <p class="prev-next-title">topobench.data.loaders.graph.graph_universe_loader module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1447,6 +1619,12 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader.load"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader.load()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.GraphUniverseDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">GraphUniverseDatasetLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.HeterophilousGraphDatasetLoader"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.HeterophilousGraphDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.HeterophilousGraphDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">HeterophilousGraphDatasetLoader.load_dataset()</span></code></a></li>
