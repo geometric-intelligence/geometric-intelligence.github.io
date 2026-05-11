@@ -991,5 +991,7 @@ domains <https://arxiv.org/pdf/2402.02441>`__
    :maxdepth: 2
 
    tdl-challenge/index
+   tdl-challenge-2026/index
+   tdl-challenge-2025/index
    api/index
    contributing/index
