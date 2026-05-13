@@ -1,9 +1,11 @@
 TDL Challenge 2026
 -------------------
 
-Welcome to the **Topological Deep Learning Challenge 2026: Bridging the Gap**, sponsored by `Arlequin AI <https://www.arlq.ai/>`__ and `New Theory <https://www.newtheory.ai/>`__, and hosted at the second `Topology, Algebra, and Geometry in Data Science (TAG-DS) Conference <https://www.tagds.com/events/tag-ds-2026>`__.
+Welcome to the **Topological Deep Learning Challenge 2026: Bridging the Gap**, 
+sponsored by `Arlequin AI <https://www.arlq.ai/>`__ and `New Theory <https://www.newtheory.ai/>`__, 
+and hosted at the second `Topology, Algebra, and Geometry in Data Science (TAG-DS) Conference <https://www.tagds.com/events/tag-ds-2026>`__.
 
-*Organizers:* Guillermo Bernardez, Lev Telyatnikov, Mathilde Papillon, Marco Montagna, Louisa Cornelis, Louis Van Langendonck, Olga Fink, Nina Miolane.
+*Organizers:* Guillermo Bernárdez, Lev Telyatnikov, Mathilde Papillon, Marco Montagna, Louisa Cornelis, Louis Van Langendonck, Olga Fink, Nina Miolane.
 
 .. seealso::
    Link to the challenge repository: `<https://github.com/geometric-intelligence/TopoBench>`__.
@@ -49,11 +51,6 @@ formulate data-driven answers to long-standing scientific questions:
 - **The Topological Component:** Under what specific data regimes and
   controlled environments do TDL models consistently provide unique
   capabilities over standard SOTA GNN approaches (if any)?
-
-.. Note: an alternative, more historical motivation draft (mentioning the
-   2023/2024/2025 editions and the "evolution of relational learning") is
-   available in the source Google Doc as "Iteration 1". Swap it in here if
-   preferred.
 
 
 Description of the Challenge
@@ -113,8 +110,8 @@ PMLR through Topology, Algebra, and Geometry in Machine Learning/Data Science
 🏆 **Cash prizes**: Two winning teams (one per track) will be announced at
 TAG-DS 2026 during the Awards Ceremony.
 
-- 💰 **Track 1 (GNNs) winner:** $1,000 USD (sponsored by `New Theory <https://www.newtheory.ai/>`__).
-- 💰 **Track 2 (TNNs) winner:** $1,000 USD (sponsored by `New Theory <https://www.newtheory.ai/>`__).
+- 💰 **Track 1 (GNNs) winner:** $1,000 USD (sponsored by `Arlequin AI <https://www.arlq.ai/>`__ and `New Theory <https://www.newtheory.ai/>`__).
+- 💰 **Track 2 (TNNs) winner:** $1,000 USD (sponsored by `Arlequin AI <https://www.arlq.ai/>`__ and `New Theory <https://www.newtheory.ai/>`__).
 
 🌴 **Research internship — Geometric Intelligence Lab, UCSB (USA):**
 A team, pending evaluation results and interest, will be invited for a visit
@@ -416,7 +413,7 @@ Organizers and Sponsors
 
 .. rst-class:: text-center
 
-|logo_tagds_2026|
+|logo_arlq|
 |logo_new_theory|
 |logo_gil|
 |logo_imos|
