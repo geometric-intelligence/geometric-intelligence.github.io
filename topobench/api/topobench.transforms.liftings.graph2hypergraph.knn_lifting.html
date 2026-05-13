@@ -44,6 +44,8 @@
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/topobench.transforms.liftings.graph2hypergraph.knn_lifting';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.transforms.liftings.graph2hypergraph.knn_lifting.html" />
@@ -54,7 +56,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 11, 2026, 8:28:06 PM"/>
+    <meta name="docbuild:last-update" content="May 13, 2026, 8:58:03 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -137,22 +139,15 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TDL Challenge
-  </a>
-</li>
-
-
-<li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge-2026/index.html">
-    TAG-DS TDL Challenge 2026
+    TDL Challenge 2026
   </a>
 </li>
 
 
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge-2025/index.html">
-    TAG-DS TDL Challenge 2025
+    TDL Challenge 2025
   </a>
 </li>
 
@@ -244,22 +239,15 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../tdl-challenge/index.html">
-    TDL Challenge
-  </a>
-</li>
-
-
-<li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge-2026/index.html">
-    TAG-DS TDL Challenge 2026
+    TDL Challenge 2026
   </a>
 </li>
 
 
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../tdl-challenge-2025/index.html">
-    TAG-DS TDL Challenge 2025
+    TDL Challenge 2025
   </a>
 </li>
 
@@ -441,6 +429,49 @@
 
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.transforms.liftings.graph2hypergraph.knn_lifting.knn_graph">
+<span class="sig-name descname"><span class="pre">knn_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'source_to_target'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cosine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.liftings.graph2hypergraph.knn_lifting.knn_graph" title="Link to this definition">#</a></dt>
+<dd><p>Computes graph edges to the nearest <code class="xref py py-obj docutils literal notranslate"><span class="pre">k</span></code> points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>) – Node feature matrix
+<span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{N \times F}\)</span>.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The number of neighbors.</p></li>
+<li><p><strong>batch</strong> (<em>LongTensor</em><em>, </em><em>optional</em>) – Batch vector
+<span class="math notranslate nohighlight">\(\mathbf{b} \in {\{ 0, \ldots, B-1\}}^N\)</span>, which assigns each
+node to a specific example. <code class="xref py py-obj docutils literal notranslate"><span class="pre">batch</span></code> needs to be sorted.
+(default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+<li><p><strong>loop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, the graph will contain
+self-loops. (default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>)</p></li>
+<li><p><strong>flow</strong> (<em>string</em><em>, </em><em>optional</em>) – The flow direction when used in combination
+with message passing (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;source_to_target&quot;</span></code> or
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;target_to_source&quot;</span></code>). (default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;source_to_target&quot;</span></code>)</p></li>
+<li><p><strong>cosine</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, will use the Cosine
+distance instead of Euclidean distance to find nearest neighbors.
+(default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>)</p></li>
+<li><p><strong>num_workers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Number of workers to use for computation. Has no
+effect in case <code class="xref py py-obj docutils literal notranslate"><span class="pre">batch</span></code> is not <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, or the input lies
+on the GPU. (default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The number of examples <span class="math notranslate nohighlight">\(B\)</span>.
+Automatically calculated if not given. (default: <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LongTensor</span></code></p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">knn_graph</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">edge_index</span> <span class="o">=</span> <span class="n">knn_graph</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -499,6 +530,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.knn_lifting.HypergraphKNNLifting.lift_topology"><code class="docutils literal notranslate"><span class="pre">HypergraphKNNLifting.lift_topology()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.transforms.liftings.graph2hypergraph.knn_lifting.knn_graph"><code class="docutils literal notranslate"><span class="pre">knn_graph()</span></code></a></li>
 </ul>
   </nav></div>
 
