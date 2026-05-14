@@ -181,7 +181,7 @@ Guidelines
   - Fill out the registration form before the deadline.
   - Ensure the PR passes all integration tests for the TopoBench and
     GraphUniverse evaluation pipeline.
-  - Tag the PR with the appropriate category (one of:
+  - Tag the PR with the appropriate track (one of:
     ``track-1-gnn``, ``track-2-tnn``).
   - Respect all code, documentation, and submission requirements.
   - Run the official evaluation pipeline on the provided GraphUniverse
@@ -422,6 +422,58 @@ Questions
 
 Feel free to contact the organizers at
 `topological.intelligence@gmail.com <mailto:topological.intelligence@gmail.com>`__.
+
+
+Related References
+------------------
+
+The following is a non-exhaustive list of recent architectures that would be
+good candidates for implementation in this challenge.
+
+Track 1: GNNs
+~~~~~~~~~~~~~
+
+- **Bundle Neural Networks (BuNN)**
+
+  | Paper: `<https://arxiv.org/pdf/2405.15540>`__
+  | Code: `<https://github.com/jacobbamb/BuNN>`__
+
+- **Neural Sheaf Diffusion**
+
+  | Paper: `<https://arxiv.org/pdf/2202.04579>`__
+  | Code: `<https://github.com/twitter-research/neural-sheaf-diffusion>`__
+
+- **Sheaf Neural Networks with Connection Laplacians**
+
+  | Paper: `<https://arxiv.org/pdf/2206.08702>`__
+
+- **Graph Foundation Models**
+
+  | Survey: `<https://arxiv.org/pdf/2505.15116>`__
+  | Repository: `<https://github.com/Zehong-Wang/Awesome-Foundation-Models-on-Graphs>`__
+
+Track 2: TNNs
+~~~~~~~~~~~~~
+
+- **Topological Equivariant Networks**
+
+  | Paper: `<https://arxiv.org/pdf/2405.15429>`__
+  | Code: `<https://github.com/NSAPH-Projects/topological-equivariant-networks>`__
+
+- **TopNets**
+
+  | Paper: `<https://arxiv.org/pdf/2406.03164>`__
+  | Code: `<https://github.com/Aalto-QuML/TopNets>`__
+
+- **AirTNN**
+
+  | Paper: `<https://arxiv.org/pdf/2502.10070>`__
+  | Code: `<https://github.com/SimoneFiorellino/AirTNN>`__
+
+- **DirSNN**
+
+  | Paper: `<https://arxiv.org/pdf/2409.08389>`__
+  | Code: `<https://github.com/ManuelLecha/DirSNN>`__
 
 
 Organizers and Sponsors
