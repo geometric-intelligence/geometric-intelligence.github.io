@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 13, 2026, 11:42:57 PM"/>
+    <meta name="docbuild:last-update" content="May 14, 2026, 12:14:39 AM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -345,7 +345,7 @@ and hosted at the second <a class="reference external" href="https://www.tagds.c
 <p><em>Organizers:</em> Guillermo Bernárdez, Lev Telyatnikov, Mathilde Papillon, Marco Montagna, Louisa Cornelis, Louis Van Langendonck, Olga Fink, Nina Miolane.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>Link to the challenge repository: <a class="github reference external" href="https://github.com/geometric-intelligence/TopoBench">geometric-intelligence/TopoBench</a>.</p>
+<p>Link to the challenge repository: <a class="reference external" href="https://github.com/geometric-intelligence/TopoBench">geometric-intelligence/TopoBench</a>.</p>
 </div>
 </section>
 <section id="motivation">
@@ -433,8 +433,11 @@ PMLR through Topology, Algebra, and Geometry in Machine Learning/Data Science
 <p>🏆 <strong>Cash prizes</strong>: Two winning teams (one per track) will be announced at
 TAG-DS 2026 during the Awards Ceremony.</p>
 <ul class="simple">
-<li><p>💰 <strong>Track 1 (GNNs) winner:</strong> $1,000 USD (sponsored by <a class="reference external" href="https://www.arlq.ai/">Arlequin AI</a> and <a class="reference external" href="https://www.newtheory.ai/">New Theory</a>).</p></li>
-<li><p>💰 <strong>Track 2 (TNNs) winner:</strong> $1,000 USD (sponsored by <a class="reference external" href="https://www.arlq.ai/">Arlequin AI</a> and <a class="reference external" href="https://www.newtheory.ai/">New Theory</a>).</p></li>
+<li><p>💰 <strong>Track 1 (GNNs):</strong> 1st place $1,000 USD, 2nd place $400 USD (sponsored by <a class="reference external" href="https://www.newtheory.ai/">New Theory</a>).</p></li>
+<li><p>💰 <strong>Track 2 (TNNs):</strong> 1st place $1,000 USD, 2nd place $400 USD (sponsored by <a class="reference external" href="https://www.arlq.ai/">Arlequin AI</a>).</p></li>
+<li><p>💰 <strong>Honorable mentions:</strong> $700 USD split across other outstanding submissions (additional evaluation notebook
+with further benchmarking, particularly challenging implementations, participants who submit multiple
+high-quality submissions, etc).</p></li>
 </ul>
 <p>🌴 <strong>Research internship — Geometric Intelligence Lab, UCSB (USA):</strong>
 A team, pending evaluation results and interest, will be invited for a visit
@@ -552,10 +555,8 @@ consideration.</p></li>
 <p>A submission consists of a <strong>Pull Request (PR)</strong> to <strong>TopoBench</strong>. The PR
 title must follow this format:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Track:</span> <span class="pre">[Track1|Track2];</span>&#160; <span class="pre">Team</span> <span class="pre">name:</span> <span class="pre">&lt;team</span> <span class="pre">name&gt;;</span>&#160; <span class="pre">Model:</span> <span class="pre">&lt;Model</span> <span class="pre">Name&gt;</span></code></p>
-<p>Submissions may implement models already proposed in the literature or
-<strong>novel architectures</strong>. For novel models, neither the challenge nor its
-related publications will prevent you from publishing your own work — you
-retain full credit for your contribution.</p>
+<p>Submissions must implement models already proposed in the literature and must cite the associated
+publication or pre-print in the PR description.</p>
 <section id="core-requirements-both-tracks">
 <h2>Core Requirements (Both Tracks)<a class="headerlink" href="#core-requirements-both-tracks" title="Link to this heading">#</a></h2>
 <ol class="arabic">
@@ -578,6 +579,14 @@ retain full credit for your contribution.</p>
 <code class="docutils literal notranslate"><span class="pre">backbone</span></code>, <code class="docutils literal notranslate"><span class="pre">backbone_wrapper</span></code>, and <code class="docutils literal notranslate"><span class="pre">readout</span></code>. Use an existing config
 (e.g., <code class="docutils literal notranslate"><span class="pre">configs/model/graph/gcn.yaml</span></code> for Track 1,
 <code class="docutils literal notranslate"><span class="pre">configs/model/simplicial/sccnn.yaml</span></code> for Track 2) as a template.</p>
+</li>
+<li><p><strong>Results as Produced by Provided Notebook — Required</strong></p>
+<p>For the first time this year, we are providing a lightweight benchmarking task to compare all
+submitted models. Run the provided Jupyter Notebook on your model at:</p>
+<p><code class="docutils literal notranslate"><span class="pre">TopoBench/2026_tdl_challenge/run_evaluation.ipynb</span></code></p>
+<p>This will automatically produce a <code class="docutils literal notranslate"><span class="pre">results.json</span></code> file containing your model’s results and
+computational complexity on the provided tasks. Your PR must include this results file. If you do
+not have access to any GPU resource, please reach out to the challenge organizers for help.</p>
 </li>
 </ol>
 </section>
@@ -681,14 +690,14 @@ closest analog.</p>
 <h1>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h1>
 <section id="award-categories">
 <h2>Award Categories<a class="headerlink" href="#award-categories" title="Link to this heading">#</a></h2>
-<p>One winning submission will be crowned per track:</p>
+<p>The top two submissions per track will be awarded cash prizes:</p>
 <ul class="simple">
-<li><p><strong>Track 1:</strong> Best <strong>GNN model</strong> implementation</p></li>
-<li><p><strong>Track 2:</strong> Best <strong>TNN model</strong> implementation</p></li>
+<li><p><strong>Track 1:</strong> Best and second best <strong>GNN model</strong> implementations</p></li>
+<li><p><strong>Track 2:</strong> Best and second best <strong>TNN model</strong> implementations</p></li>
 </ul>
 <p>Additionally, <strong>two teams</strong> will be selected for <strong>invited visits</strong> across
 both tracks based on overall quality, level of difficulty, and impact of
-contribution. <strong>Honorable mentions</strong> may also be awarded.</p>
+contribution. <strong>Honorable mentions</strong> will also be awarded and, for the first time this year, be given cash prizes.</p>
 </section>
 <section id="evaluation-procedure">
 <h2>Evaluation Procedure<a class="headerlink" href="#evaluation-procedure" title="Link to this heading">#</a></h2>
@@ -696,11 +705,15 @@ contribution. <strong>Honorable mentions</strong> may also be awarded.</p>
 <strong>Condorcet method</strong> to select the best submission in each track.</p>
 <p>Evaluation criteria include:</p>
 <ul class="simple">
-<li><p><strong>Correctness:</strong> Does the submission implement the model correctly? Is it
-reasonable and well-defined?</p></li>
+<li><p><strong>Correctness:</strong> Does the submission correctly implement the SOTA model as it is described in the
+literature? Modifications to respect TopoBench computational requirements are allowed.</p></li>
 <li><p><strong>Code quality:</strong> How readable and clean is the implementation? How well
-does the submission respect the requirements?</p></li>
-<li><p><strong>Documentation &amp; tests:</strong> Are docstrings clear? Are unit tests robust?</p></li>
+does the submission respect the requirements (unit tests, memory usage, and so on)?</p></li>
+<li><p><strong>Benchmark on GraphUniverse datasets:</strong> Is the model correctly benchmarked on the GraphUniverse
+datasets as provided? Does the model produce reasonable results?</p></li>
+<li><p><strong>Documentation &amp; tests:</strong> Do the docstrings clearly describe the code? Do the docstrings make
+explicit references to the original equations in the paper/preprint associated to the model, and/or
+the original model implementation? Are unit tests robust?</p></li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>

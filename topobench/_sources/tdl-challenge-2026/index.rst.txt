@@ -8,7 +8,7 @@ and hosted at the second `Topology, Algebra, and Geometry in Data Science (TAG-D
 *Organizers:* Guillermo Bernárdez, Lev Telyatnikov, Mathilde Papillon, Marco Montagna, Louisa Cornelis, Louis Van Langendonck, Olga Fink, Nina Miolane.
 
 .. seealso::
-   Link to the challenge repository: `<https://github.com/geometric-intelligence/TopoBench>`__.
+   Link to the challenge repository: `geometric-intelligence/TopoBench <https://github.com/geometric-intelligence/TopoBench>`__.
 
 
 Motivation
@@ -110,8 +110,11 @@ PMLR through Topology, Algebra, and Geometry in Machine Learning/Data Science
 🏆 **Cash prizes**: Two winning teams (one per track) will be announced at
 TAG-DS 2026 during the Awards Ceremony.
 
-- 💰 **Track 1 (GNNs) winner:** $1,000 USD (sponsored by `Arlequin AI <https://www.arlq.ai/>`__ and `New Theory <https://www.newtheory.ai/>`__).
-- 💰 **Track 2 (TNNs) winner:** $1,000 USD (sponsored by `Arlequin AI <https://www.arlq.ai/>`__ and `New Theory <https://www.newtheory.ai/>`__).
+- 💰 **Track 1 (GNNs):** 1st place $1,000 USD, 2nd place $400 USD (sponsored by `New Theory <https://www.newtheory.ai/>`__).
+- 💰 **Track 2 (TNNs):** 1st place $1,000 USD, 2nd place $400 USD (sponsored by `Arlequin AI <https://www.arlq.ai/>`__).
+- 💰 **Honorable mentions:** $700 USD split across other outstanding submissions (additional evaluation notebook
+  with further benchmarking, particularly challenging implementations, participants who submit multiple
+  high-quality submissions, etc).
 
 🌴 **Research internship — Geometric Intelligence Lab, UCSB (USA):**
 A team, pending evaluation results and interest, will be invited for a visit
@@ -228,10 +231,8 @@ title must follow this format:
 
 ``Track: [Track1|Track2];  Team name: <team name>;  Model: <Model Name>``
 
-Submissions may implement models already proposed in the literature or
-**novel architectures**. For novel models, neither the challenge nor its
-related publications will prevent you from publishing your own work — you
-retain full credit for your contribution.
+Submissions must implement models already proposed in the literature and must cite the associated
+publication or pre-print in the PR description.
 
 Core Requirements (Both Tracks)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -260,6 +261,17 @@ Core Requirements (Both Tracks)
    ``backbone``, ``backbone_wrapper``, and ``readout``. Use an existing config
    (e.g., ``configs/model/graph/gcn.yaml`` for Track 1,
    ``configs/model/simplicial/sccnn.yaml`` for Track 2) as a template.
+
+3. **Results as Produced by Provided Notebook — Required**
+
+   For the first time this year, we are providing a lightweight benchmarking task to compare all
+   submitted models. Run the provided Jupyter Notebook on your model at:
+
+   ``TopoBench/2026_tdl_challenge/run_evaluation.ipynb``
+
+   This will automatically produce a ``results.json`` file containing your model's results and
+   computational complexity on the provided tasks. Your PR must include this results file. If you do
+   not have access to any GPU resource, please reach out to the challenge organizers for help.
 
 Optional Components
 ~~~~~~~~~~~~~~~~~~~
@@ -367,14 +379,14 @@ Evaluation
 Award Categories
 ~~~~~~~~~~~~~~~~
 
-One winning submission will be crowned per track:
+The top two submissions per track will be awarded cash prizes:
 
-- **Track 1:** Best **GNN model** implementation
-- **Track 2:** Best **TNN model** implementation
+- **Track 1:** Best and second best **GNN model** implementations
+- **Track 2:** Best and second best **TNN model** implementations
 
 Additionally, **two teams** will be selected for **invited visits** across
 both tracks based on overall quality, level of difficulty, and impact of
-contribution. **Honorable mentions** may also be awarded.
+contribution. **Honorable mentions** will also be awarded and, for the first time this year, be given cash prizes.
 
 Evaluation Procedure
 ~~~~~~~~~~~~~~~~~~~~
@@ -384,11 +396,15 @@ A panel of TopoBench maintainers and collaborators will vote using the
 
 Evaluation criteria include:
 
-- **Correctness:** Does the submission implement the model correctly? Is it
-  reasonable and well-defined?
+- **Correctness:** Does the submission correctly implement the SOTA model as it is described in the
+  literature? Modifications to respect TopoBench computational requirements are allowed.
 - **Code quality:** How readable and clean is the implementation? How well
-  does the submission respect the requirements?
-- **Documentation & tests:** Are docstrings clear? Are unit tests robust?
+  does the submission respect the requirements (unit tests, memory usage, and so on)?
+- **Benchmark on GraphUniverse datasets:** Is the model correctly benchmarked on the GraphUniverse
+  datasets as provided? Does the model produce reasonable results?
+- **Documentation & tests:** Do the docstrings clearly describe the code? Do the docstrings make
+  explicit references to the original equations in the paper/preprint associated to the model, and/or
+  the original model implementation? Are unit tests robust?
 
 .. important::
    These criteria do **not** reward final model performance on the dataset.
