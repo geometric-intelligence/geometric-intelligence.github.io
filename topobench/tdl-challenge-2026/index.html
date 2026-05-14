@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 14, 2026, 12:28:51 AM"/>
+    <meta name="docbuild:last-update" content="May 14, 2026, 8:46:08 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -361,16 +361,12 @@ of work studies the interplay between standard message-passing and higher-order
 representations. Yet, the broader geometric deep learning field still lacks a
 unified, side-by-side comparison.</p>
 <p>The <strong>2026 TDL Challenge: Bridging the Gap</strong> sets out to unite these worlds.
-Rather than treating topological tools as an isolated ecosystem, this year’s
-challenge invites researchers from both communities to collaboratively map the
-frontier of relational learning. We invite participants to contribute and
-implement recent <strong>State-of-the-Art (SOTA)</strong> models across two dedicated
+We invite participants to contribute and implement recent <strong>State-of-the-Art (SOTA)</strong> models across two dedicated
 tracks: <strong>Track 1</strong> for GNNs, and <strong>Track 2</strong> for TNNs.</p>
 <p>For the first time, the TDL Challenge will go beyond implementation to feature
 a rigorous <strong>performance analysis</strong> of the submitted models. To achieve a
 truly objective comparison, both tracks will be evaluated through a shared
-pipeline powered by <strong>TopoBench</strong> and <strong>GraphUniverse</strong>. By leveraging
-GraphUniverse’s framework for generating controlled synthetic graphs, models
+pipeline powered by <strong>TopoBench</strong> <a class="reference external" href="https://openreview.net/forum?id=07sTzyEVtY">[Telyatnikov et al. 2025]</a> and <strong>GraphUniverse</strong> <a class="reference external" href="https://openreview.net/pdf?id=jRWxvQnqUt">[Van Langendonck et al. 2026]</a>. By leveraging GraphUniverse’s framework for generating controlled synthetic graphs, models
 will be tested against specific structural properties. This will allow both
 communities to gain insight on how different architectures from both domains
 handle varying degrees of homophily, heterophily, and complex degree
@@ -389,23 +385,21 @@ capabilities over standard SOTA GNN approaches (if any)?</p></li>
 <section id="description-of-the-challenge">
 <h1>Description of the Challenge<a class="headerlink" href="#description-of-the-challenge" title="Link to this heading">#</a></h1>
 <p>We propose that participants implement <strong>recent, SOTA message-passing models</strong>
-from either the GNN or TDL literature. The core objective is to move beyond
-standard leaderboard metrics and rigorously evaluate how these different
+from either the GNN or TDL literature. The core objective is to rigorously evaluate how these different
 architectures behave under specific, controlled topological conditions.</p>
 <p>To achieve this, participants will integrate their models into the
 <strong>TopoBench</strong> ecosystem and evaluate them using <strong>synthetic datasets generated
 by GraphUniverse</strong>. By leveraging this framework, participants will conduct a
 performance analysis that tests their implemented models against strict,
 predefined graph properties—such as varying homophily/heterophily ratios and
-complex degree distributions.</p>
+complex degree distributions. We will publish a leaderboard on this website for results to be tracked live.</p>
 <p><strong>Embracing Modularity.</strong> Beyond just the core message-passing backbone, we
 strongly encourage participants to take full advantage of TopoBench’s modular
 architecture. For example, if your chosen SOTA model relies on a novel
 <strong>feature encoder</strong>, a specialized <strong>readout mechanism</strong>, or a custom <strong>loss
 function</strong>, you can seamlessly integrate these components into the pipeline.
-Beyond ensuring faithful implementations of complex architectures, this will
-help enrich the TopoBench ecosystem with highly reusable modules for future
-research across both communities.</p>
+This will help enrich the TopoBench ecosystem with highly reusable modules for future
+research across both communities. Note that no minimum training performance is required and the top-performing model might not necessarily win (see Evaluation Criteria).</p>
 <p>To foster fair and structured comparison, the challenge is divided into two
 distinct tracks:</p>
 <section id="track-1-graph-neural-networks-gnns">
@@ -480,7 +474,7 @@ continue modifying their PRs until this time.</p>
 </section>
 <section id="guidelines">
 <h1>Guidelines<a class="headerlink" href="#guidelines" title="Link to this heading">#</a></h1>
-<ul>
+<ul class="simple">
 <li><p><strong>Eligibility:</strong> Participation is free and open to all. However, for legal
 reasons, individuals affiliated with institutions that appear in the sections
 of the
@@ -499,27 +493,19 @@ to see which architectures are already being implemented in each track. We
 encourage a diverse representation of recent SOTA models, so please check
 open PRs to avoid duplicating efforts.</p></li>
 <li><p><strong>Submission:</strong> For a submission to be valid, teams must:</p>
-<ul class="simple">
+<ul>
 <li><p>Submit a valid PR before the deadline.</p></li>
 <li><p>Fill out the registration form before the deadline.</p></li>
 <li><p>Ensure the PR passes all integration tests for the TopoBench and
 GraphUniverse evaluation pipeline.</p></li>
 <li><p>Tag the PR with the appropriate track (one of:
 <code class="docutils literal notranslate"><span class="pre">track-1-gnn</span></code>, <code class="docutils literal notranslate"><span class="pre">track-2-tnn</span></code>).</p></li>
-<li><p>Respect all code, documentation, and submission requirements.</p></li>
-<li><p>Run the official evaluation pipeline on the provided GraphUniverse
-settings and report the results in the PR. <em>[Exact evaluation procedure
-TBD — see TODO below.]</em></p></li>
+<li><p>Respect all code, documentation, and submission requirements. Note: no minimum training performance is required.</p></li>
+<li><p>Run the official GraphUniverse Jupyter Notebook on the implemented model and include the automatically generated results file in the PR.</p></li>
 </ul>
-<div class="warning admonition">
-<p class="admonition-title">TODO</p>
-<p>Replace the <strong>Run Evaluation</strong> bullet above with the finalized evaluation
-procedure (exact GraphUniverse settings, reporting format, evaluation
-notebook reference).</p>
-</div>
 </li>
 <li><p><strong>Model Implementations:</strong></p>
-<ul class="simple">
+<ul>
 <li><p>Each PR may contain <strong>at most one</strong> core model architecture.</p></li>
 <li><p>If a model supports multiple significant variants or parameter
 configurations, the PR should include <strong>separate configuration files</strong> for
@@ -527,7 +513,7 @@ each variant to ensure proper integration with the evaluation pipeline.</p></li>
 </ul>
 </li>
 <li><p><strong>Teams:</strong></p>
-<ul class="simple">
+<ul>
 <li><p>Teams are allowed, with a <strong>maximum of 2 members</strong>. (If you wish to form a
 larger team, please contact the organizers — see the <em>Questions</em> section —
 for discussion and approval.)</p></li>
@@ -539,7 +525,7 @@ for <strong>each PR</strong>.</p></li>
 </ul>
 </li>
 <li><p><strong>Early submissions:</strong></p>
-<ul class="simple">
+<ul>
 <li><p>We strongly encourage participants to submit PRs early. This allows ample
 time to resolve potential integration issues with the synthetic evaluation
 datasets.</p></li>
