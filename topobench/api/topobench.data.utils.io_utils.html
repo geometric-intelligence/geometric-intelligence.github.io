@@ -56,7 +56,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -2256,6 +2256,26 @@ can be used.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.utils.io_utils.from_sparse">
+<span class="sig-name descname"><span class="pre">from_sparse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.io_utils.from_sparse" title="Link to this definition">#</a></dt>
+<dd><p>Convert sparse input data directly to torch sparse coo format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">scipy.sparse._csc.csc_matrix</span></dt><dd><p>Input n_dimensional data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.sparse_coo, same shape as data</dt><dd><p>input data converted to tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.io_utils.get_complex_connectivity">
 <span class="sig-name descname"><span class="pre">get_complex_connectivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">complex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighborhoods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.io_utils.get_complex_connectivity" title="Link to this definition">#</a></dt>
 <dd><p>Get the connectivity matrices for the complex.</p>
@@ -2379,7 +2399,7 @@ If true, errors raise a ValueError exception.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="topobench.data.utils.io_utils.read_ndim_manifolds">
-<span class="sig-name descname"><span class="pre">read_ndim_manifolds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'betti_numbers'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_as_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.io_utils.read_ndim_manifolds" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read_ndim_manifolds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'betti_numbers'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighborhoods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.utils.io_utils.read_ndim_manifolds" title="Link to this definition">#</a></dt>
 <dd><p>Load MANTRA dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2391,9 +2411,11 @@ If true, errors raise a ValueError exception.</p>
 <dt><strong>y_val</strong><span class="classifier">str, optional</span></dt><dd><p>The triangulation information to use as label. Can be one of [‘betti_numbers’, ‘torsion_coefficients’,
 ‘name’, ‘genus’, ‘orientable’] (default: “orientable”).</p>
 </dd>
-<dt><strong>slice</strong><span class="classifier">int, optional</span></dt><dd><p>Slice of the dataset to load. If None, load the entire dataset (default: None). Used for testing.</p>
+<dt><strong>neighborhoods</strong><span class="classifier">list of str, optional</span></dt><dd><p>The connectivity to consider when building the simplicial complex (default: None, which means all).</p>
 </dd>
-<dt><strong>load_as_graph</strong><span class="classifier">bool</span></dt><dd><p>Load mantra dataset as graph. Useful when arbitrary graph lifting need to be used.</p>
+<dt><strong>signed</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to consider signed incidence matrices (default: True).</p>
+</dd>
+<dt><strong>slice</strong><span class="classifier">int, optional</span></dt><dd><p>Slice of the dataset to load. If None, load the entire dataset (default: None). Used for testing.</p>
 </dd>
 </dl>
 </dd>
@@ -2594,6 +2616,7 @@ path or query.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.io_utils.coalesce"><code class="docutils literal notranslate"><span class="pre">coalesce()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.io_utils.download_file_from_drive"><code class="docutils literal notranslate"><span class="pre">download_file_from_drive()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.io_utils.download_file_from_link"><code class="docutils literal notranslate"><span class="pre">download_file_from_link()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.io_utils.from_sparse"><code class="docutils literal notranslate"><span class="pre">from_sparse()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.io_utils.get_complex_connectivity"><code class="docutils literal notranslate"><span class="pre">get_complex_connectivity()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.io_utils.get_file_id_from_url"><code class="docutils literal notranslate"><span class="pre">get_file_id_from_url()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.utils.io_utils.load_hypergraph_content_dataset"><code class="docutils literal notranslate"><span class="pre">load_hypergraph_content_dataset()</span></code></a></li>

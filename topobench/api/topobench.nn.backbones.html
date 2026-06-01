@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -737,6 +737,144 @@ If None, projections are not redrawn. Default is None.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>torch.Tensor</dt><dd><p>Output tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.HOPSE">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HOPSE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.HOPSE" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<p>HOPSE model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">tuple of int or int</span></dt><dd><p>Dimension of the hidden layers.</p>
+</dd>
+<dt><strong>hidden_channels</strong><span class="classifier">int</span></dt><dd><p>Dimension of the output layer.</p>
+</dd>
+<dt><strong>update_func</strong><span class="classifier">str</span></dt><dd><p>Update function.</p>
+</dd>
+<dt><strong>complex_dim</strong><span class="classifier">int</span></dt><dd><p>Dimension of the complex.</p>
+</dd>
+<dt><strong>max_hop</strong><span class="classifier">int</span></dt><dd><p>Number of hops.</p>
+</dd>
+<dt><strong>n_layers</strong><span class="classifier">int</span></dt><dd><p>Number of layers.</p>
+</dd>
+<dt><strong>layer_norm</strong><span class="classifier">bool, optional</span></dt><dd><p>Wether to perform layer normalization.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.HOPSE.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.HOPSE.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.HOPSE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.HOPSE.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">tuple(tuple(torch.Tensor))</span></dt><dd><p>Tuple of tuple containing the input tensors for each simplex.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple(tuple(torch.Tensor))</dt><dd><p>Tuple of tuples of final hidden state tensors.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.backbones.HOPSELayer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HOPSELayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xavier_uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.HOPSELayer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.graph.nsd.html#topobench.nn.backbones.graph.nsd.Module" title="torch.nn.modules.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
+<p>One layer in the HOPSE model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">int</span></dt><dd><p>Number of input channels.</p>
+</dd>
+<dt><strong>out_channels</strong><span class="classifier">int</span></dt><dd><p>Number of output channels.</p>
+</dd>
+<dt><strong>max_hop</strong><span class="classifier">int</span></dt><dd><p>Number of hop representations to consider.</p>
+</dd>
+<dt><strong>aggr_norm</strong><span class="classifier">bool</span></dt><dd><p>Whether to perform aggregation normalization.</p>
+</dd>
+<dt><strong>update_func</strong><span class="classifier">str</span></dt><dd><p>Update function.</p>
+</dd>
+<dt><strong>initialization</strong><span class="classifier">str</span></dt><dd><p>Initialization method.</p>
+</dd>
+<dt><strong>layer_norm</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to apply layer normalization (default: True).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.HOPSELayer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xavier_uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.HOPSELayer.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.HOPSELayer.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_all</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.HOPSELayer.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x_all</strong><span class="classifier">Dict[Int, torch.Tensor]</span></dt><dd><p>Dictionary of tensors where each simplex dimension (node, edge, face) represents a key, 0-indexed.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Output tensors for each 0-cell.</p>
+</dd>
+<dt>torch.Tensor</dt><dd><p>Output tensors for each 1-cell.</p>
+</dd>
+<dt>torch.Tensor</dt><dd><p>Output tensors for each 2-cell.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.backbones.HOPSELayer.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.backbones.HOPSELayer.update" title="Link to this definition">#</a></dt>
+<dd><p>Update embeddings on each cell (step 4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Input tensor.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Updated tensor.</p>
 </dd>
 </dl>
 </dd>
@@ -2085,6 +2223,17 @@ Default: sum.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html">topobench.nn.backbones.combinatorial package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.HOPSE"><code class="docutils literal notranslate"><span class="pre">HOPSE</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.HOPSE.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSE.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.HOPSE.forward"><code class="docutils literal notranslate"><span class="pre">HOPSE.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.HOPSELayer"><code class="docutils literal notranslate"><span class="pre">HOPSELayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.HOPSELayer.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSELayer.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.HOPSELayer.forward"><code class="docutils literal notranslate"><span class="pre">HOPSELayer.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.HOPSELayer.update"><code class="docutils literal notranslate"><span class="pre">HOPSELayer.update()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.TopoTune"><code class="docutils literal notranslate"><span class="pre">TopoTune</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.TopoTune.__init__"><code class="docutils literal notranslate"><span class="pre">TopoTune.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.html#topobench.nn.backbones.combinatorial.TopoTune.aggregate_inter_nbhd"><code class="docutils literal notranslate"><span class="pre">TopoTune.aggregate_inter_nbhd()</span></code></a></li>
@@ -2120,6 +2269,11 @@ Default: sum.</p>
 <li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.combinatorial.gccn_onehasse.html#topobench.nn.backbones.combinatorial.gccn_onehasse.TopoTune_OneHasse"><code class="docutils literal notranslate"><span class="pre">TopoTune_OneHasse</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.combinatorial.gccn_onehasse.html#topobench.nn.backbones.combinatorial.gccn_onehasse.get_activation"><code class="docutils literal notranslate"><span class="pre">get_activation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.combinatorial.gccn_onehasse.html#topobench.nn.backbones.combinatorial.gccn_onehasse.get_routes_from_neighborhoods"><code class="docutils literal notranslate"><span class="pre">get_routes_from_neighborhoods()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.backbones.combinatorial.hopse.html">topobench.nn.backbones.combinatorial.hopse module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.combinatorial.hopse.html#topobench.nn.backbones.combinatorial.hopse.HOPSE"><code class="docutils literal notranslate"><span class="pre">HOPSE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.backbones.combinatorial.hopse.html#topobench.nn.backbones.combinatorial.hopse.HOPSELayer"><code class="docutils literal notranslate"><span class="pre">HOPSELayer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -2403,6 +2557,17 @@ Default: sum.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.GraphMLP"><code class="docutils literal notranslate"><span class="pre">GraphMLP</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.GraphMLP.__init__"><code class="docutils literal notranslate"><span class="pre">GraphMLP.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.GraphMLP.forward"><code class="docutils literal notranslate"><span class="pre">GraphMLP.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.HOPSE"><code class="docutils literal notranslate"><span class="pre">HOPSE</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.HOPSE.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSE.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.HOPSE.forward"><code class="docutils literal notranslate"><span class="pre">HOPSE.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.HOPSELayer"><code class="docutils literal notranslate"><span class="pre">HOPSELayer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.HOPSELayer.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSELayer.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.HOPSELayer.forward"><code class="docutils literal notranslate"><span class="pre">HOPSELayer.forward()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.HOPSELayer.update"><code class="docutils literal notranslate"><span class="pre">HOPSELayer.update()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.backbones.IdentityGAT"><code class="docutils literal notranslate"><span class="pre">IdentityGAT</span></code></a><ul class="nav section-nav flex-column">

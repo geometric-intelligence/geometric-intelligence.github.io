@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -733,14 +733,18 @@ will be filtered based on the signature of the individual metric.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>The task type. It can be either “classification” or “regression”.</p>
+<dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>The task type. It can be “classification”, “regression”, “multilabel classification”,
+or “multioutput classification”.</p>
 </dd>
 <dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments for the class. The arguments depend on the task.
 In “classification” scenario, the following arguments are expected:
 - num_classes (int): The number of classes.
 - metrics (list[str]): A list of classification metrics to be computed.
 In “regression” scenario, the following arguments are expected:
-- metrics (list[str]): A list of regression metrics to be computed.</p>
+- metrics (list[str]): A list of regression metrics to be computed.
+In “multi_output_classification” scenario (e.g., Betti numbers), the following are expected:
+- num_output_dimbers (list[int]): List of number of classes for each output.
+- metrics (list[str]): A list of metrics with suffixes (e.g., “accuracy_0”, “f1_1”).</p>
 </dd>
 </dl>
 </dd>

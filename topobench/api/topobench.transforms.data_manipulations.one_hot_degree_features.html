@@ -49,12 +49,12 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.transforms.data_manipulations.one_hot_degree_features.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="topobench.transforms.data_manipulations.positional_and_structural_encodings module" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html" />
+    <link rel="next" title="topobench.transforms.data_manipulations.ppr_feature_encodings module" href="topobench.transforms.data_manipulations.ppr_feature_encodings.html" />
     <link rel="prev" title="topobench.transforms.data_manipulations.node_features_to_float module" href="topobench.transforms.data_manipulations.node_features_to_float.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -382,8 +382,8 @@
 <p>One hot degree features transform.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OneHotDegreeFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.random_walk_encodings.html#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OneHotDegreeFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.sheaf_connlap_encodings.html#topobench.transforms.data_manipulations.sheaf_connlap_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
 <p>Class for one hot degree features transform.</p>
 <p>A transform that adds the node degree as one hot encodings to the node features.</p>
 <dl class="field-list simple">
@@ -391,9 +391,9 @@
 <dd class="field-odd"><dl class="simple">
 <dt><strong>max_degree</strong><span class="classifier">int</span></dt><dd><p>The maximum degree of the graph.</p>
 </dd>
-<dt><strong>degrees_fields</strong><span class="classifier">str</span></dt><dd><p>The field containing the node degrees.</p>
+<dt><strong>degrees_field</strong><span class="classifier">str</span></dt><dd><p>The field containing the node degrees.</p>
 </dd>
-<dt><strong>features_fields</strong><span class="classifier">str</span></dt><dd><p>The field containing the node features.</p>
+<dt><strong>features_field</strong><span class="classifier">str</span></dt><dd><p>The field containing the node features.</p>
 </dd>
 <dt><strong>cat</strong><span class="classifier">bool, optional</span></dt><dd><p>If set to <cite>True</cite>, the one hot encodings are concatenated to the node
 features (default: False).</p>
@@ -405,7 +405,7 @@ features (default: False).</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.one_hot_degree_features.OneHotDegreeFeatures.__init__" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 </dl>
 </dd></dl>
@@ -481,11 +481,11 @@ than the largest class value in the input tensor.
       </div>
     </a>
     <a class="right-next"
-       href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html"
+       href="topobench.transforms.data_manipulations.ppr_feature_encodings.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">topobench.transforms.data_manipulations.positional_and_structural_encodings module</p>
+        <p class="prev-next-title">topobench.transforms.data_manipulations.ppr_feature_encodings module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

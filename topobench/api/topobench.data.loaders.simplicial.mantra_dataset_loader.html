@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -529,7 +529,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.data.loaders.simplicial.mantra_dataset_loader.MantraDataset">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MantraDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraDataset" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="topobench.data.datasets.us_county_demos_dataset.html#topobench.data.datasets.us_county_demos_dataset.InMemoryDataset" title="torch_geometric.data.in_memory_dataset.InMemoryDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">InMemoryDataset</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="topobench.data.loaders.graph.adme_datasets.html#topobench.data.loaders.graph.adme_datasets.InMemoryDataset" title="torch_geometric.data.in_memory_dataset.InMemoryDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">InMemoryDataset</span></code></a></p>
 <p>Dataset class for MANTRA manifold dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -692,9 +692,9 @@ the preprocessed data to the appropriate location.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load_dataset">
-<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
-<dd><p>Load the Citation Hypergraph dataset.</p>
+<dt class="sig sig-object py" id="topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load" title="Link to this definition">#</a></dt>
+<dd><p>Load the Mantra dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -704,13 +704,33 @@ the preprocessed data to the appropriate location.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>CitationHypergraphDataset</dt><dd><p>The loaded Citation Hypergraph dataset with the appropriate <cite>data_dir</cite>.</p>
+<dt>MantraDataset</dt><dd><p>The loaded Mantra dataset with the appropriate <cite>data_dir</cite>.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt>RuntimeError</dt><dd><p>If dataset loading fails.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Initialize the Mantra dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments for dataset initialization.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>MantraDataset</dt><dd><p>The initialized dataset instance.</p>
 </dd>
 </dl>
 </dd>
@@ -802,6 +822,7 @@ the preprocessed data to the appropriate location.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.load()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.simplicial.mantra_dataset_loader.MantraSimplicialDatasetLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">MantraSimplicialDatasetLoader.load_dataset()</span></code></a></li>
 </ul>
 </li>

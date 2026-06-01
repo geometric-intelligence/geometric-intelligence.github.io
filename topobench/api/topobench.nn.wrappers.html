@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -619,6 +619,50 @@ the embeddings of the cells of rank 0.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.HOPSEWrapper">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HOPSEWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.HOPSEWrapper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.wrappers.base.html#topobench.nn.wrappers.base.AbstractWrapper" title="topobench.nn.wrappers.base.AbstractWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractWrapper</span></code></a></p>
+<p>Wrapper for the HOPSE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>backbone</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>Backbone model.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments for the class. It should contain the following keys:
+- out_channels (int): Number of output channels.
+- num_cell_dimensions (int): Number of cell dimensions.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.HOPSEWrapper.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.HOPSEWrapper.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.wrappers.HOPSEWrapper.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.HOPSEWrapper.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass of the HOPSE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>batch</strong><span class="classifier">Dict</span></dt><dd><p>Dictionary containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.wrappers.HypergraphWrapper">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HypergraphWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.wrappers.HypergraphWrapper" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.nn.wrappers.base.html#topobench.nn.wrappers.base.AbstractWrapper" title="topobench.nn.wrappers.base.AbstractWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractWrapper</span></code></a></p>
@@ -890,11 +934,21 @@ the embeddings of the cells of rank 0, 1, and 2.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html">topobench.nn.wrappers.combinatorial package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html#topobench.nn.wrappers.combinatorial.HOPSEWrapper"><code class="docutils literal notranslate"><span class="pre">HOPSEWrapper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html#topobench.nn.wrappers.combinatorial.HOPSEWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSEWrapper.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html#topobench.nn.wrappers.combinatorial.HOPSEWrapper.forward"><code class="docutils literal notranslate"><span class="pre">HOPSEWrapper.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html#topobench.nn.wrappers.combinatorial.TuneWrapper"><code class="docutils literal notranslate"><span class="pre">TuneWrapper</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html#topobench.nn.wrappers.combinatorial.TuneWrapper.forward"><code class="docutils literal notranslate"><span class="pre">TuneWrapper.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.hopse_wrapper.html">topobench.nn.wrappers.combinatorial.hopse_wrapper module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.hopse_wrapper.html#topobench.nn.wrappers.combinatorial.hopse_wrapper.AbstractWrapper"><code class="docutils literal notranslate"><span class="pre">AbstractWrapper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.hopse_wrapper.html#topobench.nn.wrappers.combinatorial.hopse_wrapper.HOPSEWrapper"><code class="docutils literal notranslate"><span class="pre">HOPSEWrapper</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.tune_wrapper.html">topobench.nn.wrappers.combinatorial.tune_wrapper module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.tune_wrapper.html#topobench.nn.wrappers.combinatorial.tune_wrapper.AbstractWrapper"><code class="docutils literal notranslate"><span class="pre">AbstractWrapper</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="topobench.nn.wrappers.combinatorial.tune_wrapper.html#topobench.nn.wrappers.combinatorial.tune_wrapper.TuneWrapper"><code class="docutils literal notranslate"><span class="pre">TuneWrapper</span></code></a></li>
@@ -1099,6 +1153,11 @@ the embeddings of the cells of rank 0, 1, and 2.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.GraphMLPWrapper"><code class="docutils literal notranslate"><span class="pre">GraphMLPWrapper</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.GraphMLPWrapper.forward"><code class="docutils literal notranslate"><span class="pre">GraphMLPWrapper.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.HOPSEWrapper"><code class="docutils literal notranslate"><span class="pre">HOPSEWrapper</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.HOPSEWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSEWrapper.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.HOPSEWrapper.forward"><code class="docutils literal notranslate"><span class="pre">HOPSEWrapper.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.wrappers.HypergraphWrapper"><code class="docutils literal notranslate"><span class="pre">HypergraphWrapper</span></code></a><ul class="nav section-nav flex-column">

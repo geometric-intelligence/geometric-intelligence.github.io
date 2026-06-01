@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -449,6 +449,76 @@
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.readouts.HOPSEReadout">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HOPSEReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.HOPSEReadout" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.readouts.base.html#topobench.nn.readouts.base.AbstractZeroCellReadOut" title="topobench.nn.readouts.base.AbstractZeroCellReadOut"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut</span></code></a></p>
+<p>Readout function for the HOPSE model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional keyword arguments. It should contain the following keys:
+- complex_dim (int): Dimension of the simplicial complex.
+- max_hop (int): Maximum hop neighbourhood to consider.
+- hidden_dim_1 (int):  Dimension of the embeddings.
+- out_channels (int): Number of classes.
+- pooling_type (str): Type of pooling operationg</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.HOPSEReadout.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.HOPSEReadout.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.HOPSEReadout.compute_logits">
+<span class="sig-name descname"><span class="pre">compute_logits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.HOPSEReadout.compute_logits" title="Link to this definition">#</a></dt>
+<dd><p>Compute logits based on the readout layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Node embeddings.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch.Tensor</span></dt><dd><p>Batch index tensor.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch.Tensor</dt><dd><p>Logits tensor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.readouts.HOPSEReadout.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.HOPSEReadout.forward" title="Link to this definition">#</a></dt>
+<dd><p>Readout logic based on model_output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_out</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing the model output.</p>
+</dd>
+<dt><strong>batch</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Batch object containing the batched domain data.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary containing the updated model output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="topobench.nn.readouts.MLPReadout">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MLPReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooling_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_act_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.readouts.MLPReadout" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="topobench.nn.backbones.non_relational.mlp.html#topobench.nn.backbones.non_relational.mlp.MLP" title="topobench.nn.backbones.non_relational.mlp.MLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">MLP</span></code></a></p>
@@ -624,6 +694,22 @@
 <li class="toctree-l2"><a class="reference internal" href="topobench.nn.readouts.base.html#topobench.nn.readouts.base.scatter"><code class="docutils literal notranslate"><span class="pre">scatter()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.readouts.hopse.html">topobench.nn.readouts.hopse module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.AbstractZeroCellReadOut"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.AbstractZeroCellReadOut.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.AbstractZeroCellReadOut.compute_logits"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.compute_logits()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.AbstractZeroCellReadOut.forward"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.HOPSEReadout"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.HOPSEReadout.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.HOPSEReadout.compute_logits"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout.compute_logits()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.HOPSEReadout.forward"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.readouts.hopse.html#topobench.nn.readouts.hopse.scatter"><code class="docutils literal notranslate"><span class="pre">scatter()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="topobench.nn.readouts.identical.html">topobench.nn.readouts.identical module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="topobench.nn.readouts.identical.html#topobench.nn.readouts.identical.AbstractZeroCellReadOut"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="topobench.nn.readouts.identical.html#topobench.nn.readouts.identical.AbstractZeroCellReadOut.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.__init__()</span></code></a></li>
@@ -718,6 +804,12 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.AbstractZeroCellReadOut.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.AbstractZeroCellReadOut.compute_logits"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.compute_logits()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.AbstractZeroCellReadOut.forward"><code class="docutils literal notranslate"><span class="pre">AbstractZeroCellReadOut.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.HOPSEReadout"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.HOPSEReadout.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.HOPSEReadout.compute_logits"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout.compute_logits()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.HOPSEReadout.forward"><code class="docutils literal notranslate"><span class="pre">HOPSEReadout.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.readouts.MLPReadout"><code class="docutils literal notranslate"><span class="pre">MLPReadout</span></code></a><ul class="nav section-nav flex-column">

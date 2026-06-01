@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -834,6 +834,54 @@ into the destination, False to replace the destination.</p></li>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.defaultdict">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">defaultdict</span></span><a class="headerlink" href="#topobench.utils.config_resolvers.defaultdict" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<p>defaultdict(default_factory=None, /, […]) –&gt; dict with default factory</p>
+<p>The default factory is called without arguments to produce
+a new value when a key is not present, in __getitem__ only.
+A defaultdict compares equal to a dict with the same items.
+All remaining arguments are treated the same as if they were
+passed to the dict constructor, including keyword arguments.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.defaultdict.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.defaultdict.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.defaultdict.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">shallow</span> <span class="pre">copy</span> <span class="pre">of</span> <span class="pre">D.</span></span></span><a class="headerlink" href="#topobench.utils.config_resolvers.defaultdict.copy" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.defaultdict.default_factory">
+<span class="sig-name descname"><span class="pre">default_factory</span></span><a class="headerlink" href="#topobench.utils.config_resolvers.defaultdict.default_factory" title="Link to this definition">#</a></dt>
+<dd><p>Factory for default value called by __missing__().</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.check_fes_in_transforms">
+<span class="sig-name descname"><span class="pre">check_fes_in_transforms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.check_fes_in_transforms" title="Link to this definition">#</a></dt>
+<dd><p>Check if there are feature encodings in the transforms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>transforms</strong><span class="classifier">DictConfig</span></dt><dd><p>Configuration parameters for the transforms.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Count of the number of features added by the encodings.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="topobench.utils.config_resolvers.check_pses_in_transforms">
 <span class="sig-name descname"><span class="pre">check_pses_in_transforms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.check_pses_in_transforms" title="Link to this definition">#</a></dt>
@@ -847,7 +895,7 @@ into the destination, False to replace the destination.</p></li>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>bool</dt><dd><p>True if there are positional or structural encodings, False otherwise.</p>
+<dt>int</dt><dd><p>Count of the number of features added by the encodings.</p>
 </dd>
 </dl>
 </dd>
@@ -883,13 +931,37 @@ into the destination, False to replace the destination.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_all_encoding_dimensions">
+<span class="sig-name descname"><span class="pre">get_all_encoding_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encodings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_all_encoding_dimensions" title="Link to this definition">#</a></dt>
+<dd><p>Get dimensions of all encodings (PSEs and FEs) in order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>encodings</strong><span class="classifier">list</span></dt><dd><p>List of all encodings (both PSEs and FEs).</p>
+</dd>
+<dt><strong>parameters</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of parameters for all encodings.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>List with dimensions of all encodings in the same order as input.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_default_metrics">
-<span class="sig-name descname"><span class="pre">get_default_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_default_metrics" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_default_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_default_metrics" title="Link to this definition">#</a></dt>
 <dd><p>Get default metrics for a given task.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>task</strong><span class="classifier">str</span></dt><dd><p>Task, either “classification” or “regression”.</p>
+</dd>
+<dt><strong>num_classes</strong><span class="classifier">int</span></dt><dd><p>Number of classes, relevant for multilabel and multioutput tasks.</p>
 </dd>
 <dt><strong>metrics</strong><span class="classifier">list, optional</span></dt><dd><p>List of metrics to be used. If None, the default metrics will be used.</p>
 </dd>
@@ -947,6 +1019,28 @@ into the destination, False to replace the destination.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_fes_dimensions">
+<span class="sig-name descname"><span class="pre">get_fes_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encodings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_fes_dimensions" title="Link to this definition">#</a></dt>
+<dd><p>Get dimensions of feature encodings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>encodings</strong><span class="classifier">list</span></dt><dd><p>List of feature encodings.</p>
+</dd>
+<dt><strong>parameters</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of parameters for the feature encodings.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>List with dimensions of the feature encodings.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_flattened_channels">
 <span class="sig-name descname"><span class="pre">get_flattened_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_flattened_channels" title="Link to this definition">#</a></dt>
 <dd><p>Get the output dimension of flattening a feature matrix.</p>
@@ -962,6 +1056,28 @@ into the destination, False to replace the destination.</p></li>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>int</dt><dd><p>Flatenned cchannels dimension.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_list_element">
+<span class="sig-name descname"><span class="pre">get_list_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_list_element" title="Link to this definition">#</a></dt>
+<dd><p>Get element of a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>list</strong><span class="classifier">list</span></dt><dd><p>List of elements.</p>
+</dd>
+<dt><strong>index</strong><span class="classifier">int</span></dt><dd><p>Index of the element to get.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>any</dt><dd><p>Element of the list.</p>
 </dd>
 </dl>
 </dd>
@@ -1047,6 +1163,29 @@ into the destination, False to replace the destination.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_pse_dimensions">
+<span class="sig-name descname"><span class="pre">get_pse_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encodings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_pse_dimensions" title="Link to this definition">#</a></dt>
+<dd><p>Get dimensions of positional or structural encodings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>encodings</strong><span class="classifier">list</span></dt><dd><p>List of positional or structural encodings.</p>
+</dd>
+<dt><strong>parameters</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of parameters for the positional or structural encodings, which should
+contain the key “parameters” with the parameters for each encoding.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>List with dimensions of the positional or structural encodings.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_required_lifting">
 <span class="sig-name descname"><span class="pre">get_required_lifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_required_lifting" title="Link to this definition">#</a></dt>
 <dd><p>Get required transform for a given data domain and model.</p>
@@ -1069,6 +1208,27 @@ into the destination, False to replace the destination.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.get_routes_from_neighborhoods">
+<span class="sig-name descname"><span class="pre">get_routes_from_neighborhoods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighborhoods</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.get_routes_from_neighborhoods" title="Link to this definition">#</a></dt>
+<dd><p>Get the routes from the neighborhoods.</p>
+<p>Combination of src_rank, dst_rank. ex: [[0, 0], [1, 0], [1, 1], [1, 1], [2, 1]].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>neighborhoods</strong><span class="classifier">list</span></dt><dd><p>List of neighborhoods of interest.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>List of routes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_in_channels">
 <span class="sig-name descname"><span class="pre">infer_in_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_in_channels" title="Link to this definition">#</a></dt>
 <dd><p>Infer the number of input channels for a given dataset.</p>
@@ -1084,6 +1244,110 @@ into the destination, False to replace the destination.</p></li>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>list</dt><dd><p>List with dimensions of the input channels.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_in_hasse_graph_agg_dim">
+<span class="sig-name descname"><span class="pre">infer_in_hasse_graph_agg_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighborhoods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_pses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_hidden_graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_hidden_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_edge_attr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_in_hasse_graph_agg_dim" title="Link to this definition">#</a></dt>
+<dd><p>Compute which input dimensions need to changed based on if they are the output of a neighborhood.</p>
+<p>Set the list of dimensions as outputs to the hasse graph as a GNN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>neighborhoods</strong><span class="classifier">List[str]</span></dt><dd><p>List of strings representing the neighborhood.</p>
+</dd>
+<dt><strong>dim_pses</strong><span class="classifier">List[int]</span></dt><dd><p>List of dimensions of the positional or structural encodings.</p>
+</dd>
+<dt><strong>complex_dim</strong><span class="classifier">int</span></dt><dd><p>Maximum dimension of the complex.</p>
+</dd>
+<dt><strong>max_hop</strong><span class="classifier">int</span></dt><dd><p>Maximum number of hops (counting the intial features).</p>
+</dd>
+<dt><strong>dim_in</strong><span class="classifier">int</span></dt><dd><p>The dataset feature input dimension.</p>
+</dd>
+<dt><strong>dim_hidden_graph</strong><span class="classifier">int</span></dt><dd><p>The output hidden dimension of the GNN over the Hasse Graph aggregation.</p>
+</dd>
+<dt><strong>dim_hidden_node</strong><span class="classifier">int</span></dt><dd><p>The output hidden dimension of the GNN over the Hasse Graph for each node.</p>
+</dd>
+<dt><strong>copy_initial</strong><span class="classifier">bool</span></dt><dd><p>If the initial features should be copied as the 0-th hop.</p>
+</dd>
+<dt><strong>use_edge_attr</strong><span class="classifier">bool</span></dt><dd><p>If the edge attributes are used as features in the 1-cells and should be considered for channel inference.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>np.ndarray</dt><dd><p>A 2D array where.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_in_khop_feature_dim">
+<span class="sig-name descname"><span class="pre">infer_in_khop_feature_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_in_khop_feature_dim" title="Link to this definition">#</a></dt>
+<dd><p>Infer the dimension of the feature vector in the SANN k-hop model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dataset_in_channels</strong><span class="classifier">np.ndarray</span></dt><dd><p>1D array of input channels for the dataset.</p>
+</dd>
+<dt><strong>max_hop</strong><span class="classifier">int</span></dt><dd><p>Maximum hop distance.</p>
+</dd>
+<dt><strong>complex_dim</strong><span class="classifier">int, optional</span></dt><dd><p>Number of cell ranks processed by the transform. When provided,
+<code class="docutils literal notranslate"><span class="pre">dataset_in_channels</span></code> is truncated to this length so the
+recursive formula only considers ranks that actually appear in
+the k-hop feature computation.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Dimension of the feature vector in the SANN k-hop model.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_list_length">
+<span class="sig-name descname"><span class="pre">infer_list_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_list_length" title="Link to this definition">#</a></dt>
+<dd><p>Infer the length of a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>list</strong><span class="classifier">list</span></dt><dd><p>List.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Length of the input list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.infer_list_length_plus_one">
+<span class="sig-name descname"><span class="pre">infer_list_length_plus_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.infer_list_length_plus_one" title="Link to this definition">#</a></dt>
+<dd><p>Infer the length of a list plus one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>list</strong><span class="classifier">list</span></dt><dd><p>List.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>Length of the input list plus one.</p>
 </dd>
 </dl>
 </dd>
@@ -1138,6 +1402,28 @@ into the destination, False to replace the destination.</p></li>
 <dd><p>Register all custom OmegaConf resolvers.</p>
 <p>This centralizes resolver registration to avoid duplication across modules. Should be called
 before Hydra initialization in any script that uses configs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.utils.config_resolvers.set_preserve_edge_attr">
+<span class="sig-name descname"><span class="pre">set_preserve_edge_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.utils.config_resolvers.set_preserve_edge_attr" title="Link to this definition">#</a></dt>
+<dd><p>Set the preserve_edge_attr parameter of datasets depending on the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model_name</strong><span class="classifier">str</span></dt><dd><p>Model name.</p>
+</dd>
+<dt><strong>default</strong><span class="classifier">bool, optional</span></dt><dd><p>Default value for the parameter. Defaults to True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>Default if the model can preserve edge attributes, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -1229,20 +1515,37 @@ before Hydra initialization in any script that uses configs.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.OmegaConf.__init__"><code class="docutils literal notranslate"><span class="pre">OmegaConf.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.defaultdict"><code class="docutils literal notranslate"><span class="pre">defaultdict</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.defaultdict.__init__"><code class="docutils literal notranslate"><span class="pre">defaultdict.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.defaultdict.copy"><code class="docutils literal notranslate"><span class="pre">defaultdict.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.defaultdict.default_factory"><code class="docutils literal notranslate"><span class="pre">defaultdict.default_factory</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.check_fes_in_transforms"><code class="docutils literal notranslate"><span class="pre">check_fes_in_transforms()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.check_pses_in_transforms"><code class="docutils literal notranslate"><span class="pre">check_pses_in_transforms()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.define_task_level"><code class="docutils literal notranslate"><span class="pre">define_task_level()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_all_encoding_dimensions"><code class="docutils literal notranslate"><span class="pre">get_all_encoding_dimensions()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_default_metrics"><code class="docutils literal notranslate"><span class="pre">get_default_metrics()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_default_trainer"><code class="docutils literal notranslate"><span class="pre">get_default_trainer()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_default_transform"><code class="docutils literal notranslate"><span class="pre">get_default_transform()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_fes_dimensions"><code class="docutils literal notranslate"><span class="pre">get_fes_dimensions()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_flattened_channels"><code class="docutils literal notranslate"><span class="pre">get_flattened_channels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_list_element"><code class="docutils literal notranslate"><span class="pre">get_list_element()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_monitor_metric"><code class="docutils literal notranslate"><span class="pre">get_monitor_metric()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_monitor_mode"><code class="docutils literal notranslate"><span class="pre">get_monitor_mode()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_non_relational_out_channels"><code class="docutils literal notranslate"><span class="pre">get_non_relational_out_channels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_pse_dimensions"><code class="docutils literal notranslate"><span class="pre">get_pse_dimensions()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_required_lifting"><code class="docutils literal notranslate"><span class="pre">get_required_lifting()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.get_routes_from_neighborhoods"><code class="docutils literal notranslate"><span class="pre">get_routes_from_neighborhoods()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_in_channels"><code class="docutils literal notranslate"><span class="pre">infer_in_channels()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_in_hasse_graph_agg_dim"><code class="docutils literal notranslate"><span class="pre">infer_in_hasse_graph_agg_dim()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_in_khop_feature_dim"><code class="docutils literal notranslate"><span class="pre">infer_in_khop_feature_dim()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_list_length"><code class="docutils literal notranslate"><span class="pre">infer_list_length()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_list_length_plus_one"><code class="docutils literal notranslate"><span class="pre">infer_list_length_plus_one()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_num_cell_dimensions"><code class="docutils literal notranslate"><span class="pre">infer_num_cell_dimensions()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.infer_topotune_num_cell_dimensions"><code class="docutils literal notranslate"><span class="pre">infer_topotune_num_cell_dimensions()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.register_all_resolvers"><code class="docutils literal notranslate"><span class="pre">register_all_resolvers()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.utils.config_resolvers.set_preserve_edge_attr"><code class="docutils literal notranslate"><span class="pre">set_preserve_edge_attr()</span></code></a></li>
 </ul>
   </nav></div>
 

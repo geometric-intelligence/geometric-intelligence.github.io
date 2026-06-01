@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -532,6 +532,71 @@ applied to the features of the corresponding dimensions.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.nn.encoders.HOPSEFeatureEncoder">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HOPSEFeatureEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_atom_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_bond_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse_pse2cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.HOPSEFeatureEncoder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.nn.encoders.base.html#topobench.nn.encoders.base.AbstractFeatureEncoder" title="topobench.nn.encoders.base.AbstractFeatureEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractFeatureEncoder</span></code></a></p>
+<p>Encoder class to apply SimpleEncoder.</p>
+<p>The SimpleEncoder is applied to the features of each cell
+according to a simple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_channels</strong><span class="classifier">list[list[int]]</span></dt><dd><p>Input dimensions for the features.</p>
+</dd>
+<dt><strong>out_channels</strong><span class="classifier">list[int]</span></dt><dd><p>Output dimensions for the features.</p>
+</dd>
+<dt><strong>proj_dropout</strong><span class="classifier">float, optional</span></dt><dd><p>Dropout for the BaseEncoders (default: 0).</p>
+</dd>
+<dt><strong>selected_dimensions</strong><span class="classifier">list[int], optional</span></dt><dd><p>List of indexes to apply the BaseEncoders to (default: None).</p>
+</dd>
+<dt><strong>max_hop</strong><span class="classifier">list[int], optional</span></dt><dd><p>List of indexes to apply the BaseEncoders to in terms of hops (default: None).</p>
+</dd>
+<dt><strong>batch_norm</strong><span class="classifier">bool, optional</span></dt><dd><p>Wether to apply batch normalizaiton when encoding (default: False).</p>
+</dd>
+<dt><strong>use_atom_encoder</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, replace the encoder for dimension 0 / hop 0 with an OGB
+<code class="docutils literal notranslate"><span class="pre">AtomEncoder</span></code> (default: False).</p>
+</dd>
+<dt><strong>use_bond_encoder</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, replace the encoder for dimension 1 / hop 0 with an OGB
+<code class="docutils literal notranslate"><span class="pre">BondEncoder</span></code> (default: False).</p>
+</dd>
+<dt><strong>fuse_pse2cell</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenate and linearly project per-hop PSE encodings back
+into the cell features after encoding (default: False).</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.HOPSEFeatureEncoder.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_hop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_atom_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_bond_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuse_pse2cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.HOPSEFeatureEncoder.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.nn.encoders.HOPSEFeatureEncoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.nn.encoders.HOPSEFeatureEncoder.forward" title="Link to this definition">#</a></dt>
+<dd><p>Forward pass.</p>
+<p>The method applies the BaseEncoders to the features of the selected_dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Input data object which should contain x_{i} features for each i in the selected_dimensions.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>torch_geometric.data.Data</dt><dd><p>Output data object with updated x_{i} features.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
@@ -602,6 +667,49 @@ applied to the features of the corresponding dimensions.</p>
 <li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.flat_encoder.html#topobench.nn.encoders.flat_encoder.FlatEncoder"><code class="docutils literal notranslate"><span class="pre">FlatEncoder</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.flat_encoder.html#topobench.nn.encoders.flat_encoder.FlatEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">FlatEncoder.__init__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.flat_encoder.html#topobench.nn.encoders.flat_encoder.FlatEncoder.forward"><code class="docutils literal notranslate"><span class="pre">FlatEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html">topobench.nn.encoders.hopse_encoder module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.AbstractFeatureEncoder"><code class="docutils literal notranslate"><span class="pre">AbstractFeatureEncoder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.AbstractFeatureEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractFeatureEncoder.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.AbstractFeatureEncoder.forward"><code class="docutils literal notranslate"><span class="pre">AbstractFeatureEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.AtomEncoder"><code class="docutils literal notranslate"><span class="pre">AtomEncoder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.AtomEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">AtomEncoder.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.AtomEncoder.forward"><code class="docutils literal notranslate"><span class="pre">AtomEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.BondEncoder"><code class="docutils literal notranslate"><span class="pre">BondEncoder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.BondEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">BondEncoder.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.BondEncoder.forward"><code class="docutils literal notranslate"><span class="pre">BondEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.HOPSEFeatureEncoder"><code class="docutils literal notranslate"><span class="pre">HOPSEFeatureEncoder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.HOPSEFeatureEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSEFeatureEncoder.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.HOPSEFeatureEncoder.forward"><code class="docutils literal notranslate"><span class="pre">HOPSEFeatureEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP"><code class="docutils literal notranslate"><span class="pre">MLP</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP.__init__"><code class="docutils literal notranslate"><span class="pre">MLP.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP.forward"><code class="docutils literal notranslate"><span class="pre">MLP.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP.reset_parameters"><code class="docutils literal notranslate"><span class="pre">MLP.reset_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP.in_channels"><code class="docutils literal notranslate"><span class="pre">MLP.in_channels</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP.num_layers"><code class="docutils literal notranslate"><span class="pre">MLP.num_layers</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP.out_channels"><code class="docutils literal notranslate"><span class="pre">MLP.out_channels</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.MLP.supports_norm_batch"><code class="docutils literal notranslate"><span class="pre">MLP.supports_norm_batch</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.SimpleAtomEncoder"><code class="docutils literal notranslate"><span class="pre">SimpleAtomEncoder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.SimpleAtomEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">SimpleAtomEncoder.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.SimpleAtomEncoder.forward"><code class="docutils literal notranslate"><span class="pre">SimpleAtomEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.SimpleBondEncoder"><code class="docutils literal notranslate"><span class="pre">SimpleBondEncoder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.SimpleBondEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">SimpleBondEncoder.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="topobench.nn.encoders.hopse_encoder.html#topobench.nn.encoders.hopse_encoder.SimpleBondEncoder.forward"><code class="docutils literal notranslate"><span class="pre">SimpleBondEncoder.forward()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -682,6 +790,11 @@ applied to the features of the corresponding dimensions.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.FlatEncoder"><code class="docutils literal notranslate"><span class="pre">FlatEncoder</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.FlatEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">FlatEncoder.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.FlatEncoder.forward"><code class="docutils literal notranslate"><span class="pre">FlatEncoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.HOPSEFeatureEncoder"><code class="docutils literal notranslate"><span class="pre">HOPSEFeatureEncoder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.HOPSEFeatureEncoder.__init__"><code class="docutils literal notranslate"><span class="pre">HOPSEFeatureEncoder.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.nn.encoders.HOPSEFeatureEncoder.forward"><code class="docutils literal notranslate"><span class="pre">HOPSEFeatureEncoder.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>

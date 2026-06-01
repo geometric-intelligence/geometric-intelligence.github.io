@@ -49,12 +49,12 @@
     <link rel="canonical" href="https://geometric-intelligence.github.io/topobench/api/topobench.transforms.data_manipulations.random_walk_encodings.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods module" href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html" />
-    <link rel="prev" title="topobench.transforms.data_manipulations.positional_and_structural_encodings module" href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html" />
+    <link rel="next" title="topobench.transforms.data_manipulations.rename_fields module" href="topobench.transforms.data_manipulations.rename_fields.html" />
+    <link rel="prev" title="topobench.transforms.data_manipulations.precompute_khop_features module" href="topobench.transforms.data_manipulations.precompute_khop_features.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="May 29, 2026, 6:16:20 PM"/>
+    <meta name="docbuild:last-update" content="Jun 1, 2026, 11:52:10 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -780,20 +780,28 @@ You will be given a warning that requests you to do so.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.transforms.data_manipulations.random_walk_encodings.RWSE">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RWSE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.random_walk_encodings.RWSE" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#topobench.transforms.data_manipulations.random_walk_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RWSE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'batched'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.random_walk_encodings.RWSE" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="topobench.transforms.data_manipulations.sheaf_connlap_encodings.html#topobench.transforms.data_manipulations.sheaf_connlap_encodings.BaseTransform" title="torch_geometric.transforms.base_transform.BaseTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransform</span></code></a></p>
 <p>Random Walk Structural Encoding (RWSE) transform.</p>
-<p>Computes return probabilities of random walks of length 1..K
-for each node in the graph, and appends them as structural
-encodings to node features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>max_pe_dim</strong><span class="classifier">int</span></dt><dd><p>Maximum walk length (number of RWSE dimensions).</p>
 </dd>
-<dt><strong>concat_to_x</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates the encodings with existing node
-features in <code class="docutils literal notranslate"><span class="pre">data.x</span></code>. If <code class="docutils literal notranslate"><span class="pre">data.x</span></code> is None, creates it.
+<dt><strong>concat_to_x</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, concatenates the encodings with existing node features.
 Default is True.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">str, optional</span></dt><dd><p>Computation method: “dense”, “sparse”, or “batched”.
+“dense” uses standard matrix multiplication (Memory intensive).
+“sparse” uses pure sparse matrix multiplication (Fastest, moderate memory).
+“batched” uses indicator diffusion (Memory-bounded, slightly slower).
+Default is “sparse”.</p>
+</dd>
+<dt><strong>batch_size</strong><span class="classifier">int, optional</span></dt><dd><p>Number of nodes to process simultaneously when using the “batched” method.
+Lower values use less memory but take slightly longer. Default is 2048.</p>
+</dd>
+<dt><strong>debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, runs all methods, catches OOM errors, and prints a detailed
+timing and peak VRAM memory footprint report. Default is False.</p>
 </dd>
 <dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Additional arguments (not used).</p>
 </dd>
@@ -802,7 +810,7 @@ Default is True.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="topobench.transforms.data_manipulations.random_walk_encodings.RWSE.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.random_walk_encodings.RWSE.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_pe_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_to_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'batched'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.transforms.data_manipulations.random_walk_encodings.RWSE.__init__" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 </dl>
 </dd></dl>
@@ -814,13 +822,13 @@ Default is True.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">Data</span></dt><dd><p>Input graph data object.</p>
+<dt><strong>data</strong><span class="classifier">torch_geometric.data.Data</span></dt><dd><p>Input graph data object.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>Data</dt><dd><p>Graph data object with RWSE added.</p>
+<dt>torch_geometric.data.Data</dt><dd><p>Graph data object with RWSE added to <code class="docutils literal notranslate"><span class="pre">data.x</span></code> or <code class="docutils literal notranslate"><span class="pre">data.RWSE</span></code>.</p>
 </dd>
 </dl>
 </dd>
@@ -869,20 +877,20 @@ returned tensor.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="topobench.transforms.data_manipulations.positional_and_structural_encodings.html"
+       href="topobench.transforms.data_manipulations.precompute_khop_features.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">topobench.transforms.data_manipulations.positional_and_structural_encodings module</p>
+        <p class="prev-next-title">topobench.transforms.data_manipulations.precompute_khop_features module</p>
       </div>
     </a>
     <a class="right-next"
-       href="topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods.html"
+       href="topobench.transforms.data_manipulations.rename_fields.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">topobench.transforms.data_manipulations.redefine_simplicial_neighbourhoods module</p>
+        <p class="prev-next-title">topobench.transforms.data_manipulations.rename_fields module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
