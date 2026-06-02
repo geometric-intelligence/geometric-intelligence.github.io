@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Jun 2, 2026, 1:14:22 AM"/>
+    <meta name="docbuild:last-update" content="Jun 2, 2026, 1:33:49 AM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -383,6 +383,46 @@
   <section id="module-topobench.data.loaders.graph.adme_datasets">
 <span id="topobench-data-loaders-graph-adme-datasets-module"></span><h1>topobench.data.loaders.graph.adme_datasets module<a class="headerlink" href="#module-topobench.data.loaders.graph.adme_datasets" title="Link to this heading">#</a></h1>
 <p>Loaders for TDC (Therapeutics Data Commons) ADME datasets with SMILES to graph conversion.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.adme_datasets.ADME">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ADME</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.adme_datasets.ADME" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code></p>
+<p>Data loader class to load datasets in ADME task. More info: <a class="reference external" href="https://tdcommons.ai/single_pred_tasks/adme/">https://tdcommons.ai/single_pred_tasks/adme/</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the dataset name.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – The path to save the data file, defaults to ‘./data’</p></li>
+<li><p><strong>label_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – For multi-label dataset, specify the label name, defaults to None</p></li>
+<li><p><strong>print_stats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to print basic statistics of the dataset, defaults to False</p></li>
+<li><p><strong>convert_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Automatic conversion of SMILES to other molecular formats in MolConvert class. Stored as separate column in dataframe, defaults to None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.adme_datasets.ADME.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.adme_datasets.ADME.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Create ADME dataloader object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.adme_datasets.ADME.get_approved_set">
+<span class="sig-name descname"><span class="pre">get_approved_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.adme_datasets.ADME.get_approved_set" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.adme_datasets.ADME.get_other_species">
+<span class="sig-name descname"><span class="pre">get_other_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.adme_datasets.ADME.get_other_species" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.adme_datasets.ADME.harmonize">
+<span class="sig-name descname"><span class="pre">harmonize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.adme_datasets.ADME.harmonize" title="Link to this definition">#</a></dt>
+<dd><p>Removing duplicated experimental readouts.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="topobench.data.loaders.graph.adme_datasets.ADMEDatasetLoader">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ADMEDatasetLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.adme_datasets.ADMEDatasetLoader" title="Link to this definition">#</a></dt>
@@ -1435,6 +1475,14 @@ If the path is a directory, use rmdir() instead.</p>
 
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="topobench.data.loaders.graph.adme_datasets.smiles2graph">
+<span class="sig-name descname"><span class="pre">smiles2graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#topobench.data.loaders.graph.adme_datasets.smiles2graph" title="Link to this definition">#</a></dt>
+<dd><p>Converts SMILES string to graph Data object
+:input: SMILES string (str)
+:return: graph object</p>
+</dd></dl>
+
 </section>
 
 
@@ -1484,6 +1532,13 @@ If the path is a directory, use rmdir() instead.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADME"><code class="docutils literal notranslate"><span class="pre">ADME</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADME.__init__"><code class="docutils literal notranslate"><span class="pre">ADME.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADME.get_approved_set"><code class="docutils literal notranslate"><span class="pre">ADME.get_approved_set()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADME.get_other_species"><code class="docutils literal notranslate"><span class="pre">ADME.get_other_species()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADME.harmonize"><code class="docutils literal notranslate"><span class="pre">ADME.harmonize()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADMEDatasetLoader"><code class="docutils literal notranslate"><span class="pre">ADMEDatasetLoader</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADMEDatasetLoader.__init__"><code class="docutils literal notranslate"><span class="pre">ADMEDatasetLoader.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.ADMEDatasetLoader.get_data_dir"><code class="docutils literal notranslate"><span class="pre">ADMEDatasetLoader.get_data_dir()</span></code></a></li>
@@ -1606,6 +1661,7 @@ If the path is a directory, use rmdir() instead.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.Path.write_text"><code class="docutils literal notranslate"><span class="pre">Path.write_text()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topobench.data.loaders.graph.adme_datasets.smiles2graph"><code class="docutils literal notranslate"><span class="pre">smiles2graph()</span></code></a></li>
 </ul>
   </nav></div>
 
