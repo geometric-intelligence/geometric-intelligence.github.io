@@ -304,13 +304,10 @@
 <li class="toctree-l1"><a class="reference internal" href="deformetrica_transport_abc.html">LDDMM: parallel transport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hipp_substructures.html">How to select a mesh subset?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_deformation_kernel_tuning.html">LDDMM: how to select the deformation kernel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lddmm_deterministic_atlas.html">LDDMM: how to estimate a deterministic atlas?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_pls.html">LDDMM: PLS regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regression.html">LDDMM: how to do regression?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_shape_geodesic.html">LDDMM: parallel transporting face motion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lddmm_transport_abc.html">LDDMM: parallel transport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_velocity.html">LDDMM: compute velocity and reconstruct parametrization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="load_csv.html">How to load a csv file?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="load_figshare_data.html">How to download data from figshare?</a></li>
@@ -370,11 +367,8 @@
 <li class="toctree-l1"><a class="reference internal" href="lddmm_shape_geodesic.html">LDDMM: parallel transporting face motion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deformetrica_transport_abc.html">LDDMM: parallel transport</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LDDMM: how to estimate a deterministic atlas?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lddmm_register_mesh_template.html">LDDMM: how to register a mesh to a template?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regression_viz.html">LDDMM: how to visualize regression results?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_regression.html">LDDMM: how to do regression?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lddmm_deterministic_atlas.html">LDDMM: how to estimate a deterministic atlas?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lddmm_transport_abc.html">LDDMM: parallel transport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_velocity.html">LDDMM: compute velocity and reconstruct parametrization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lddmm_deformation_kernel_tuning.html">LDDMM: how to select the deformation kernel</a></li>
 </ul>
@@ -462,15 +456,15 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">polpo.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">putils</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.deformetrica</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesGifPlotter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidAlignment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.surface_mesh.deformetrica</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DeterministicAtlasDir</span><span class="p">,</span>
     <span class="n">FrechetMean</span><span class="p">,</span>
     <span class="n">LddmmMetric</span><span class="p">,</span>
     <span class="n">Point</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.mesh.generation.blob</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_blob</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.plot.pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredMeshesGifPlotter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.preprocessing.mesh.registration</span><span class="w"> </span><span class="kn">import</span> <span class="n">RigidAlignment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polpo.surface_mesh.generation.blob</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_blob</span>
 </pre></div>
 </div>
 </div>
@@ -616,7 +610,11 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">Point</span><span class="p">(</span><span class="n">id_</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">pv_surface</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span> <span class="n">dirname</span><span class="o">=</span><span class="n">metric</span><span class="o">.</span><span class="n">meshes_dir</span><span class="p">)</span>
+    <span class="n">Point</span><span class="p">(</span>
+        <span class="n">id_</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+        <span class="n">pv_surface</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
+        <span class="n">dirname</span><span class="o">=</span><span class="n">metric</span><span class="o">.</span><span class="n">dir_config</span><span class="o">.</span><span class="n">meshes_dir</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
 <span class="p">]</span>
 </pre></div>
@@ -642,7 +640,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;polpo.mesh.deformetrica.geometry.FrechetMean at 0x73b968d48530&gt;
+&lt;polpo.surface_mesh.deformetrica.learning.FrechetMean at 0x7bf7b714be60&gt;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -783,8 +781,8 @@
 <h2>Further reading<a class="headerlink" href="#Further-reading" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="deformetrica_register_mesh_template.html"><span class="doc">LDDMM: how to register a mesh to a template?</span></a></p></li>
+<li><p><a class="reference internal" href="deformetrica_transport_abc.html"><span class="doc">LDDMM: parallel transport</span></a></p></li>
 <li><p><a class="reference internal" href="lddmm_regression.html"><span class="doc">LDDMM: how to do regression?</span></a></p></li>
-<li><p><a class="reference external" href="./lddmm_regression_across_subjects.ipynb">LDDMM: how To Bring Deformations from Subject-Specific Atlases Into the Tangent Space at the Global Atlas</a></p></li>
 </ul>
 </section>
 </section>
