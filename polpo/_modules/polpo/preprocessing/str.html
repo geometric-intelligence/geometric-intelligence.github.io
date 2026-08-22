@@ -333,7 +333,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing.str</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Preprocessing steps involving strings.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Preprocessing steps involving strings."""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
@@ -350,23 +350,23 @@
 <div class="viewcode-block" id="DigitFinder">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.DigitFinder.html#polpo.preprocessing.str.DigitFinder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DigitFinder</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find digits in a strings.</span>
+<span class="w">    </span><span class="sd">"""Find digits in a strings.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    index : int</span>
 <span class="sd">        Which index to pick in case of multiple</span>
 <span class="sd">        digit sets are expected to be found.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d+&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\d+"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -375,7 +375,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">digits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">digits</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">])</span></div>
 
@@ -398,7 +398,7 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.StartsWith.html#polpo.preprocessing.str.StartsWith">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StartsWith</span><span class="p">(</span><span class="n">MethodApplier</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;startswith&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"startswith"</span><span class="p">)</span></div>
 
 
 
@@ -406,7 +406,7 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.EndsWith.html#polpo.preprocessing.str.EndsWith">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EndsWith</span><span class="p">(</span><span class="n">MethodApplier</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;endswith&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"endswith"</span><span class="p">)</span></div>
 
 
 
@@ -420,13 +420,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">negate</span> <span class="o">=</span> <span class="n">negate</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        membership : bool</span>
 <span class="sd">            Membership or lack of it (depending on negate) for all items.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">out</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">:</span>
             <span class="k">return</span> <span class="ow">not</span> <span class="n">out</span>

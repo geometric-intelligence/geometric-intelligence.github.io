@@ -502,11 +502,11 @@ W1014 14:47:58.272000 63549 site-packages/torch/utils/cpp_extension.py:118] No C
 <span class="n">TEMPLATE_SESSION</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">TARGET_SESSION</span> <span class="o">=</span> <span class="mi">14</span>
 
-<span class="n">STRUCT_NAME</span> <span class="o">=</span> <span class="s2">&quot;PostHipp&quot;</span>
+<span class="n">STRUCT_NAME</span> <span class="o">=</span> <span class="s2">"PostHipp"</span>
 
-<span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;regression_</span><span class="si">{</span><span class="n">STRUCT_NAME</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="n">REGISTRATION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;registration&quot;</span>
-<span class="n">REGRESSION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">&quot;spline_regression&quot;</span>
+<span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"results"</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"regression_</span><span class="si">{</span><span class="n">STRUCT_NAME</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+<span class="n">REGISTRATION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">"registration"</span>
+<span class="n">REGRESSION_DIR</span> <span class="o">=</span> <span class="n">OUTPUTS_DIR</span> <span class="o">/</span> <span class="s2">"spline_regression"</span>
 
 
 <span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">RECOMPUTE</span><span class="p">:</span>
@@ -523,10 +523,10 @@ W1014 14:47:58.272000 63549 site-packages/torch/utils/cpp_extension.py:118] No C
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">],</span> <span class="n">index_by_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"01"</span><span class="p">],</span> <span class="n">index_by_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">prep_pipe</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">)</span>
+    <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">"gestWeek"</span><span class="p">)</span>
     <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">SeriesToDict</span><span class="p">()</span>
     <span class="o">+</span> <span class="n">DictFilter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">T_MIN</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">T_MAX</span><span class="p">)</span>
 <span class="p">)</span>
@@ -571,13 +571,13 @@ dict_keys([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
 
 <span class="k">if</span> <span class="n">struct_from_image</span><span class="p">:</span>
     <span class="n">img2mesh</span> <span class="o">=</span> <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span>
-        <span class="n">struct_id</span><span class="o">=</span><span class="n">STRUCT_NAME</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span>
+        <span class="n">struct_id</span><span class="o">=</span><span class="n">STRUCT_NAME</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"ashs"</span>
     <span class="p">)</span> <span class="o">+</span> <span class="n">PvFromData</span><span class="p">(</span><span class="n">keep_colors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">img2mesh</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">struct_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span>
+        <span class="n">MeshExtractorFromSegmentedImage</span><span class="p">(</span><span class="n">struct_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"ashs"</span><span class="p">)</span>
         <span class="o">+</span> <span class="n">PvFromData</span><span class="p">()</span>
-        <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedMesh</span><span class="p">(</span><span class="n">struct_id</span><span class="o">=</span><span class="n">STRUCT_NAME</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;ashs&quot;</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">MeshExtractorFromSegmentedMesh</span><span class="p">(</span><span class="n">struct_id</span><span class="o">=</span><span class="n">STRUCT_NAME</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"ashs"</span><span class="p">)</span>
     <span class="p">)</span>
 
 <span class="n">pipe</span> <span class="o">=</span> <span class="n">path2img</span> <span class="o">+</span> <span class="n">ppdict</span><span class="o">.</span><span class="n">DictMap</span><span class="p">(</span><span class="n">img2mesh</span><span class="p">)</span>
@@ -640,7 +640,7 @@ dict_keys([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes_writer</span> <span class="o">=</span> <span class="n">DictMeshWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">OUTPUTS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;vtk&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshes_writer</span> <span class="o">=</span> <span class="n">DictMeshWriter</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">OUTPUTS_DIR</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">"vtk"</span><span class="p">)</span>
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">meshes_writer</span><span class="p">(</span><span class="n">meshes</span><span class="p">)</span>
 </pre></div>
@@ -708,7 +708,7 @@ dict_keys([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
     <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
     <span class="n">freeze_control_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">attachment_kernel_width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
-    <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;varifold&quot;</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s2">"varifold"</span><span class="p">,</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -768,7 +768,7 @@ PosixPath(&#39;results/regression_posthipp/mesh_3.vtk&#39;)
         <span class="n">targets</span><span class="o">=</span><span class="n">mesh_filenames</span><span class="p">,</span>
         <span class="n">output_dir</span><span class="o">=</span><span class="n">REGRESSION_DIR</span><span class="p">,</span>
         <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span>
-        <span class="n">subject_id</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">],</span>
+        <span class="n">subject_id</span><span class="o">=</span><span class="p">[</span><span class="s2">""</span><span class="p">],</span>
         <span class="n">t0</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">times</span><span class="p">),</span>
         <span class="n">target_weights</span><span class="o">=</span><span class="n">target_weights</span><span class="p">,</span>
         <span class="n">initial_control_points</span><span class="o">=</span><span class="n">initial_control_points</span><span class="p">,</span>

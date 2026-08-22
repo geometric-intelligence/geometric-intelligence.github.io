@@ -475,8 +475,8 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;atlas_example&quot;</span>
-<span class="n">ATLAS_DIR</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;atlas&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"results"</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"atlas_example"</span>
+<span class="n">ATLAS_DIR</span> <span class="o">=</span> <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">"atlas"</span>
 </pre></div>
 </div>
 </div>
@@ -506,7 +506,7 @@ No CUDA runtime is found, using CUDA_HOME=&#39;/usr&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;01&quot;</span><span class="p">],</span> <span class="n">index_by_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"01"</span><span class="p">],</span> <span class="n">index_by_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)()</span>
 </pre></div>
 </div>
 </div>
@@ -522,7 +522,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnToDict</span><span class="p">(</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnToDict</span><span class="p">(</span><span class="s2">"gestWeek"</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -577,7 +577,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_res_train</span> <span class="o">=</span> <span class="n">collect_eval_results</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">unnest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">outer_key</span><span class="o">=</span><span class="s2">&quot;obj_regr&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_res_train</span> <span class="o">=</span> <span class="n">collect_eval_results</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">unnest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">outer_key</span><span class="o">=</span><span class="s2">"obj_regr"</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">eval_res_train</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 </pre></div>
@@ -621,7 +621,7 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_res_test</span> <span class="o">=</span> <span class="n">collect_eval_results</span><span class="p">(</span>
-    <span class="n">model</span><span class="p">,</span> <span class="n">unnest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">outer_key</span><span class="o">=</span><span class="s2">&quot;obj_regr&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">unnest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">outer_key</span><span class="o">=</span><span class="s2">"obj_regr"</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">eval_res_test</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>

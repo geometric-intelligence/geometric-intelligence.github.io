@@ -488,7 +488,7 @@
 <span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
-    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
+    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">"static"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -496,7 +496,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">putils</span><span class="o">.</span><span class="n">get_results_path</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;deterministic_atlas_blob_example&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUTS_DIR</span> <span class="o">=</span> <span class="n">putils</span><span class="o">.</span><span class="n">get_results_path</span><span class="p">()</span> <span class="o">/</span> <span class="s2">"deterministic_atlas_blob_example"</span>
 
 <span class="k">if</span> <span class="n">OUTPUTS_DIR</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">RECOMPUTE</span><span class="p">:</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">OUTPUTS_DIR</span><span class="p">)</span>
@@ -596,7 +596,7 @@
     <span class="n">regularisation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
     <span class="n">freeze_control_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;varifold&quot;</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s2">"varifold"</span><span class="p">,</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">,</span>
     <span class="n">attachment_kernel_width</span><span class="o">=</span><span class="n">bump_amp</span><span class="p">,</span>
 <span class="p">)</span>
@@ -630,7 +630,7 @@
     <span class="n">initial_step_size</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">atlas_id</span><span class="o">=</span><span class="s2">&quot;atlas&quot;</span><span class="p">)</span>
+<span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">atlas_id</span><span class="o">=</span><span class="s2">"atlas"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -660,17 +660,17 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">border</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">atlas_dir</span><span class="o">.</span><span class="n">points</span><span class="p">:</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
 
 <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span>
     <span class="n">atlas</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span>
     <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;atlas&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"atlas"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">pl</span><span class="o">.</span><span class="n">add_points</span><span class="p">(</span><span class="n">atlas_dir</span><span class="o">.</span><span class="n">control_points</span><span class="p">()</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_points</span><span class="p">(</span><span class="n">atlas_dir</span><span class="o">.</span><span class="n">control_points</span><span class="p">()</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">)</span>
 <span class="n">pl</span><span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
 
 
@@ -697,13 +697,13 @@
         <span class="n">reconstructed</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span>
         <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;rec&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">"rec"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span>
         <span class="n">point</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span>
         <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">"target"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
@@ -745,7 +745,7 @@
     <span class="n">flow_meshes</span> <span class="o">=</span> <span class="p">[</span><span class="n">pt</span><span class="o">.</span><span class="n">as_pv</span><span class="p">()</span> <span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="n">flow</span><span class="p">]</span>
 
     <span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">as_pv</span><span class="p">(),</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;atlas-&gt;</span><span class="si">{</span><span class="n">point</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"atlas-&gt;</span><span class="si">{</span><span class="n">point</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">pl</span><span class="o">.</span><span class="n">add_meshes</span><span class="p">(</span><span class="n">flow_meshes</span><span class="p">)</span>
 

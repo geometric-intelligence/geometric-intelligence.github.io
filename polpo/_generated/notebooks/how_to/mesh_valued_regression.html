@@ -485,7 +485,7 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STATIC_VIZ</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">if</span> <span class="n">STATIC_VIZ</span><span class="p">:</span>
-    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
+    <span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">"static"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -495,11 +495,11 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">"01"</span>
 
 <span class="n">file_finder</span> <span class="o">=</span> <span class="n">MeshLoader</span><span class="p">(</span>
     <span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span>
-    <span class="n">struct_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;L_Hipp&quot;</span><span class="p">],</span>
+    <span class="n">struct_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"L_Hipp"</span><span class="p">],</span>
     <span class="n">as_mesh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -519,7 +519,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;01&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">"01"</span>
 
 <span class="n">pipe</span> <span class="o">=</span> <span class="n">TabularDataLoader</span><span class="p">(</span><span class="n">subject_subset</span><span class="o">=</span><span class="p">[</span><span class="n">subject_id</span><span class="p">],</span> <span class="n">index_by_session</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -540,10 +540,10 @@ INFO: Data has already been downloaded... using cached file (&#39;/home/luisfper
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_selector</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfIsInFilter</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;post&quot;</span><span class="p">],</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_selector</span> <span class="o">=</span> <span class="n">ppd</span><span class="o">.</span><span class="n">DfIsInFilter</span><span class="p">(</span><span class="s2">"stage"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"post"</span><span class="p">],</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">predictor_selector</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">session_selector</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">&quot;gestWeek&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">SeriesToDict</span><span class="p">()</span>
+    <span class="n">session_selector</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">ColumnsSelector</span><span class="p">(</span><span class="s2">"gestWeek"</span><span class="p">)</span> <span class="o">+</span> <span class="n">ppd</span><span class="o">.</span><span class="n">SeriesToDict</span><span class="p">()</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1628,7 +1628,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span class="n">y_true</span> <span class="o">=</span> <span class="n">objs2y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">meshes_</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">objs2y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">meshes_pred</span><span class="p">)</span>
 
-<span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s2">&quot;raw_values&quot;</span><span class="p">)</span>
+<span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s2">"raw_values"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1645,7 +1645,7 @@ array([0.04356305, 0.00644153, 0.24583461, 0.00145247])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s2">&quot;uniform_average&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">multioutput</span><span class="o">=</span><span class="s2">"uniform_average"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1669,7 +1669,7 @@ array([0.04356305, 0.00644153, 0.24583461, 0.00145247])
 <span class="n">r2_score</span><span class="p">(</span>
     <span class="n">meshes2flatvertices</span><span class="p">(</span><span class="n">meshes_</span><span class="p">),</span>
     <span class="n">meshes2flatvertices</span><span class="p">(</span><span class="n">meshes_pred</span><span class="p">),</span>
-    <span class="n">multioutput</span><span class="o">=</span><span class="s2">&quot;uniform_average&quot;</span><span class="p">,</span>
+    <span class="n">multioutput</span><span class="o">=</span><span class="s2">"uniform_average"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1693,9 +1693,9 @@ array([0.04356305, 0.00644153, 0.24583461, 0.00145247])
 <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">index</span> <span class="o">//</span> <span class="mi">2</span><span class="p">][</span><span class="n">index</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="p">[:,</span> <span class="n">index</span><span class="p">])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Comp </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Comp </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Gestational week&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Gestational week"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -1750,8 +1750,8 @@ array([0.04356305, 0.00644153, 0.24583461, 0.00145247])
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">volumes</span> <span class="o">=</span> <span class="p">[</span><span class="n">mesh</span><span class="o">.</span><span class="n">volume</span> <span class="k">for</span> <span class="n">mesh</span> <span class="ow">in</span> <span class="n">meshes_pred</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_pred</span><span class="p">,</span> <span class="n">volumes</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Gestational week&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Volume&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Gestational week"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Volume"</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>

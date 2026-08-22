@@ -479,7 +479,7 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsqueezable!&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unsqueezable!"</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">data</span>
 
@@ -742,7 +742,7 @@
 <div class="viewcode-block" id="PartiallyInitializedStep">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.mesh.registration.PartiallyInitializedStep.html#polpo.preprocessing.PartiallyInitializedStep">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PartiallyInitializedStep</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate a step based on data.</span>
+<span class="w">    </span><span class="sd">"""Instantiate a step based on data.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -750,7 +750,7 @@
 <span class="sd">        Step to be instantiated.</span>
 <span class="sd">    pass_data : bool</span>
 <span class="sd">        Whether to pass that to callable after instantiation.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Step</span><span class="p">,</span> <span class="n">pass_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -760,7 +760,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">instantiate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">dependent_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="n">dependent_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"_"</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dependent_keys</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -807,7 +807,7 @@
 <div class="viewcode-block" id="Eval">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Eval.html#polpo.preprocessing.Eval">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Eval</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate string.</span>
+<span class="w">    </span><span class="sd">"""Evaluate string.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -815,7 +815,7 @@
 <span class="sd">        String expression to be evaluated.</span>
 <span class="sd">    imports : list[str]</span>
 <span class="sd">        Imports required to evaluate string.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">imports</span><span class="o">=</span><span class="p">()):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -824,8 +824,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_locals_from_imports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imports</span><span class="p">):</span>
         <span class="n">locals_</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">import_</span> <span class="ow">in</span> <span class="n">imports</span><span class="p">:</span>
-            <span class="n">import_ls</span> <span class="o">=</span> <span class="n">import_</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
-            <span class="n">module_name</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">import_ls</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">import_ls</span> <span class="o">=</span> <span class="n">import_</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">import_ls</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">obj_name</span> <span class="o">=</span> <span class="n">import_ls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="n">obj_name</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
@@ -842,23 +842,23 @@
 <div class="viewcode-block" id="EvalFromImport">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.EvalFromImport.html#polpo.preprocessing.EvalFromImport">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EvalFromImport</span><span class="p">(</span><span class="n">Eval</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate imported function.</span>
+<span class="w">    </span><span class="sd">"""Evaluate imported function.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    import_: str</span>
 <span class="sd">        Import of function to evaluate.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">import_</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="n">import_</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">imports</span><span class="o">=</span><span class="p">[</span><span class="n">import_</span><span class="p">])</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="n">import_</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">imports</span><span class="o">=</span><span class="p">[</span><span class="n">import_</span><span class="p">])</span></div>
 
 
 
 <div class="viewcode-block" id="Lambda">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Lambda.html#polpo.preprocessing.Lambda">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Lambda</span><span class="p">(</span><span class="n">Eval</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate lambda function.</span>
+<span class="w">    </span><span class="sd">"""Evaluate lambda function.</span>
 
 <span class="sd">    Syntax sugar for `Eval` where `string` is a lambda function.</span>
 
@@ -870,11 +870,11 @@
 <span class="sd">        Expression of lambda function.</span>
 <span class="sd">    imports : list[str]</span>
 <span class="sd">        Imports required to evaluate string.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">imports</span><span class="o">=</span><span class="p">()):</span>
-        <span class="n">args_str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-        <span class="n">lambda_</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;lambda </span><span class="si">{</span><span class="n">args_str</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">args_str</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">lambda_</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"lambda </span><span class="si">{</span><span class="n">args_str</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s2">"</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">lambda_</span><span class="p">,</span> <span class="n">imports</span><span class="p">)</span></div>
 
 
@@ -882,20 +882,20 @@
 <div class="viewcode-block" id="Constant">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.Constant.html#polpo.preprocessing.Constant">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Constant</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Constant.</span>
+<span class="w">    </span><span class="sd">"""Constant.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    value : any</span>
 <span class="sd">        Constant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -905,7 +905,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        constant : any</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span></div>
 
 
@@ -913,7 +913,7 @@
 <div class="viewcode-block" id="Contains">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.Contains.html#polpo.preprocessing.Contains">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Contains</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if an item is in a collection.</span>
+<span class="w">    </span><span class="sd">"""Check if an item is in a collection.</span>
 
 <span class="sd">    Examples include substring in string,</span>
 <span class="sd">    item in list, key in dict.</span>
@@ -923,7 +923,7 @@
 <span class="sd">    item : object</span>
 <span class="sd">    negate : bool</span>
 <span class="sd">        Whether to negate predicate.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -931,7 +931,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">negate</span> <span class="o">=</span> <span class="n">negate</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -941,7 +941,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        membership : bool</span>
 <span class="sd">            Membership or lack of it (depending on negate).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="ow">in</span> <span class="n">collection</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">:</span>
             <span class="k">return</span> <span class="ow">not</span> <span class="n">out</span>
@@ -953,7 +953,7 @@
 <div class="viewcode-block" id="ContainsAll">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.ContainsAll.html#polpo.preprocessing.ContainsAll">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ContainsAll</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a subset of items in a collection.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check if a subset of items in a collection."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -961,7 +961,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">negate</span> <span class="o">=</span> <span class="n">negate</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -971,7 +971,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        membership : bool</span>
 <span class="sd">            Membership or lack of it (depending on negate) for all items.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">out</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="n">collection</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">:</span>
             <span class="k">return</span> <span class="ow">not</span> <span class="n">out</span>
@@ -984,7 +984,7 @@
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.ContainsAny.html#polpo.preprocessing.ContainsAny">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ContainsAny</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
     <span class="c1"># TODO: update docstrings</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if subset of items in a collection.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check if subset of items in a collection."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -992,13 +992,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">negate</span> <span class="o">=</span> <span class="n">negate</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        membership : bool</span>
 <span class="sd">            Membership or lack of it (depending on negate) for all items.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">out</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="n">collection</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">:</span>
             <span class="k">return</span> <span class="ow">not</span> <span class="n">out</span>
@@ -1010,13 +1010,13 @@
 <div class="viewcode-block" id="MethodApplier">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.str.MethodApplier.html#polpo.preprocessing.MethodApplier">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MethodApplier</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Applies a named method with preset args and kwargs.</span>
+<span class="w">    </span><span class="sd">"""Applies a named method with preset args and kwargs.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    method : str</span>
 <span class="sd">        Named method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1025,7 +1025,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1034,7 +1034,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">)(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
@@ -1042,13 +1042,13 @@
 <div class="viewcode-block" id="FunctionCaller">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.dict.FunctionCaller.html#polpo.preprocessing.FunctionCaller">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FunctionCaller</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calls a function with preset kwargs.</span>
+<span class="w">    </span><span class="sd">"""Calls a function with preset kwargs.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    func : callable</span>
 <span class="sd">        Function.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1128,12 +1128,12 @@
 <div class="viewcode-block" id="GroupBy">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.GroupBy.html#polpo.preprocessing.GroupBy">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GroupBy</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Group data.</span>
+<span class="w">    </span><span class="sd">"""Group data.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    datum2group : callable</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datum2group</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1154,14 +1154,14 @@
 <div class="viewcode-block" id="FilteredGroupBy">
 <a class="viewcode-back" href="../../../_generated/classes/polpo.preprocessing.FilteredGroupBy.html#polpo.preprocessing.FilteredGroupBy">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FilteredGroupBy</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Group data.</span>
+<span class="w">    </span><span class="sd">"""Group data.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    datum2group : callable</span>
 <span class="sd">    subset : set</span>
 <span class="sd">        Keys not belonging to ``subset`` are filtered out.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datum2group</span><span class="p">,</span> <span class="n">subset</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>

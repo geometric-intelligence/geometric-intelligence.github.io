@@ -333,7 +333,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for polpo.preprocessing.mesh.conversion</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Mesh type conversion.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Mesh type conversion."""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
@@ -388,10 +388,10 @@
 <div class="viewcode-block" id="ToVertices">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.ToVertices.html#polpo.preprocessing.mesh.conversion.ToVertices">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ToVertices</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get mesh vertices.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get mesh vertices."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -402,8 +402,8 @@
 <span class="sd">        -------</span>
 <span class="sd">        vertices : array-like</span>
 <span class="sd">            Mesh vertices.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">attr</span> <span class="o">=</span> <span class="n">VERTICES_ATTR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">),</span> <span class="s2">&quot;vertices&quot;</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="n">VERTICES_ATTR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">),</span> <span class="s2">"vertices"</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span></div>
 
 
@@ -411,10 +411,10 @@
 <div class="viewcode-block" id="ToFaces">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.ToFaces.html#polpo.preprocessing.mesh.conversion.ToFaces">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ToFaces</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get mesh faces.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get mesh faces."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -425,7 +425,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        faces : array-like</span>
 <span class="sd">            Mesh faces.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">mesh</span><span class="o">.</span><span class="n">faces</span></div>
 
 
@@ -433,27 +433,27 @@
 <div class="viewcode-block" id="FromCombinatorialStructure">
 <a class="viewcode-back" href="../../../../_generated/classes/polpo.preprocessing.mesh.conversion.FromCombinatorialStructure.html#polpo.preprocessing.mesh.conversion.FromCombinatorialStructure">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FromCombinatorialStructure</span><span class="p">(</span><span class="n">PreprocessingStep</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get mesh from combinatorial structure.</span>
+<span class="w">    </span><span class="sd">"""Get mesh from combinatorial structure.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    mesh : Mesh</span>
 <span class="sd">        Mesh containing combinatorial structure.</span>
 <span class="sd">        If None, must be supplied at apply.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span> <span class="o">=</span> <span class="n">mesh</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply step.</span>
+<span class="w">        </span><span class="sd">"""Apply step.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        mesh : Mesh</span>
 <span class="sd">            Mesh with new vertices but same combinatorial structure.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">mesh</span><span class="p">,</span> <span class="n">vertices</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
@@ -462,7 +462,7 @@
 
         <span class="n">mesh</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
 
-        <span class="n">vertices_attr</span> <span class="o">=</span> <span class="n">VERTICES_ATTR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">),</span> <span class="s2">&quot;vertices&quot;</span><span class="p">)</span>
+        <span class="n">vertices_attr</span> <span class="o">=</span> <span class="n">VERTICES_ATTR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">mesh</span><span class="p">),</span> <span class="s2">"vertices"</span><span class="p">)</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">vertices_attr</span><span class="p">,</span> <span class="n">vertices</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">mesh</span></div>
