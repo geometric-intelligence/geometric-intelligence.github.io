@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=46d7c157" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -54,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="latest" />
-    <meta name="docbuild:last-update" content="Aug 13, 2026, 9:49:35 AM"/>
+    <meta name="docbuild:last-update" content="Aug 26, 2026, 5:45:11 PM"/>
   
     
     <script src="../_static/searchtools.js"></script>
@@ -744,7 +744,7 @@ loss returned from <code class="docutils literal notranslate"><span class="pre">
     <span class="k">def</span><span class="w"> </span><span class="nf">on_train_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trainer</span><span class="p">,</span> <span class="n">pl_module</span><span class="p">):</span>
         <span class="c1"># do something with all training_step outputs, for example:</span>
         <span class="n">epoch_mean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">pl_module</span><span class="o">.</span><span class="n">training_step_outputs</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-        <span class="n">pl_module</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;training_epoch_mean&quot;</span><span class="p">,</span> <span class="n">epoch_mean</span><span class="p">)</span>
+        <span class="n">pl_module</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"training_epoch_mean"</span><span class="p">,</span> <span class="n">epoch_mean</span><span class="p">)</span>
         <span class="c1"># free up the memory</span>
         <span class="n">pl_module</span><span class="o">.</span><span class="n">training_step_outputs</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
@@ -874,7 +874,7 @@ best checkpoint file and <code class="xref py py-attr docutils literal notransla
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># custom path</span>
 <span class="c1"># saves a file like: my/path/epoch=0-step=10.ckpt</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="s1">'my/path/'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>By default, dirpath is <code class="docutils literal notranslate"><span class="pre">None</span></code> and will be set at runtime to the location
@@ -887,8 +887,8 @@ and if the Trainer uses a logger, the path will also contain logger name and ver
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># save any arbitrary metrics like `val_loss`, etc. in name</span>
 <span class="c1"># saves a file like: my/path/epoch=2-val_loss=0.02-other_metric=0.03.ckpt</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
-<span class="o">...</span>     <span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path&#39;</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">-</span><span class="si">{other_metric:.2f}</span><span class="s1">&#39;</span>
+<span class="o">...</span>     <span class="n">dirpath</span><span class="o">=</span><span class="s1">'my/path'</span><span class="p">,</span>
+<span class="o">...</span>     <span class="n">filename</span><span class="o">=</span><span class="s1">'</span><span class="si">{epoch}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">-</span><span class="si">{other_metric:.2f}</span><span class="s1">'</span>
 <span class="o">...</span> <span class="p">)</span>
 </pre></div>
 </div>
@@ -983,30 +983,30 @@ only <code class="docutils literal notranslate"><span class="pre">best_model_pat
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelCheckpoint</span>
 
-<span class="go"># saves checkpoints to &#39;my/path/&#39; at every epoch</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">)</span>
+<span class="go"># saves checkpoints to 'my/path/' at every epoch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="s1">'my/path/'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_callback</span><span class="p">])</span>
 
 <span class="go"># save epoch and val_loss in name</span>
 <span class="go"># saves a file like: my/path/sample-mnist-epoch=02-val_loss=0.32.ckpt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;sample-mnist-</span><span class="si">{epoch:02d}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">&#39;</span>
+<span class="gp">... </span>    <span class="n">monitor</span><span class="o">=</span><span class="s1">'val_loss'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">dirpath</span><span class="o">=</span><span class="s1">'my/path/'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">filename</span><span class="o">=</span><span class="s1">'sample-mnist-</span><span class="si">{epoch:02d}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">'</span>
 <span class="gp">... </span><span class="p">)</span>
 
 <span class="go"># save epoch and val_loss in name, but specify the formatting yourself (e.g. to avoid problems with Tensorboard</span>
-<span class="go"># or Neptune, due to the presence of characters like &#39;=&#39; or &#39;/&#39;)</span>
+<span class="go"># or Neptune, due to the presence of characters like '=' or '/')</span>
 <span class="go"># saves a file like: my/path/sample-mnist-epoch02-val_loss0.32.ckpt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val/loss&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;my/path/&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;sample-mnist-epoch</span><span class="si">{epoch:02d}</span><span class="s1">-val_loss{val/loss:.2f}&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">monitor</span><span class="o">=</span><span class="s1">'val/loss'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">dirpath</span><span class="o">=</span><span class="s1">'my/path/'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">filename</span><span class="o">=</span><span class="s1">'sample-mnist-epoch</span><span class="si">{epoch:02d}</span><span class="s1">-val_loss{val/loss:.2f}'</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">auto_insert_metric_name</span><span class="o">=</span><span class="kc">False</span>
 <span class="gp">... </span><span class="p">)</span>
 
 <span class="go"># retrieve the best checkpoint after training</span>
-<span class="go">checkpoint_callback = ModelCheckpoint(dirpath=&#39;my/path/&#39;)</span>
+<span class="go">checkpoint_callback = ModelCheckpoint(dirpath='my/path/')</span>
 <span class="go">trainer = Trainer(callbacks=[checkpoint_callback])</span>
 <span class="go">model = ...</span>
 <span class="go">trainer.fit(model)</span>
@@ -1049,28 +1049,28 @@ state to diverge between ranks.</p>
 <dd><p>Generate a filename according to the defined template.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tmpdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'</span><span class="si">{epoch}</span><span class="s1">'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
-<span class="go">&#39;epoch=0.ckpt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch:03d}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">'epoch=0.ckpt'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'</span><span class="si">{epoch:03d}</span><span class="s1">'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">5</span><span class="p">)))</span>
-<span class="go">&#39;epoch=005.ckpt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">'epoch=005.ckpt'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'</span><span class="si">{epoch}</span><span class="s1">-</span><span class="si">{val_loss:.2f}</span><span class="s1">'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">val_loss</span><span class="o">=</span><span class="mf">0.123456</span><span class="p">)))</span>
-<span class="go">&#39;epoch=2-val_loss=0.12.ckpt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">val_loss</span><span class="o">=</span><span class="mf">0.12</span><span class="p">),</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{epoch:d}</span><span class="s1">&#39;</span><span class="p">))</span>
-<span class="go">&#39;epoch=2.ckpt&#39;</span>
+<span class="go">'epoch=2-val_loss=0.12.ckpt'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">val_loss</span><span class="o">=</span><span class="mf">0.12</span><span class="p">),</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'</span><span class="si">{epoch:d}</span><span class="s1">'</span><span class="p">))</span>
+<span class="go">'epoch=2.ckpt'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span>
-<span class="gp">... </span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;epoch=</span><span class="si">{epoch}</span><span class="s1">-validation_loss=</span><span class="si">{val_loss:.2f}</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">filename</span><span class="o">=</span><span class="s1">'epoch=</span><span class="si">{epoch}</span><span class="s1">-validation_loss=</span><span class="si">{val_loss:.2f}</span><span class="s1">'</span><span class="p">,</span>
 <span class="gp">... </span><span class="n">auto_insert_metric_name</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">val_loss</span><span class="o">=</span><span class="mf">0.123456</span><span class="p">)))</span>
-<span class="go">&#39;epoch=2-validation_loss=0.12.ckpt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{missing:d}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">'epoch=2-validation_loss=0.12.ckpt'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">'</span><span class="si">{missing:d}</span><span class="s1">'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">({}))</span>
-<span class="go">&#39;missing=0.ckpt&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{step}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">'missing=0.ckpt'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ckpt</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'</span><span class="si">{step}</span><span class="s1">'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ckpt</span><span class="o">.</span><span class="n">format_checkpoint_name</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
-<span class="go">&#39;step=0.ckpt&#39;</span>
+<span class="go">'step=0.ckpt'</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -1331,8 +1331,8 @@ the callback has state and 2) it is desired to maintain the state of multiple in
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1366,7 +1366,7 @@ the callback has state and 2) it is desired to maintain the state of multiple in
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>
